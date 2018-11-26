@@ -1,0 +1,23 @@
+{
+  "name": "tyk-ui",
+  "version": "1.0.0",
+  "description": "Tyk UI - ui reusable components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TykTechnologies/tyk-ui.git"
+  },
+  "keywords": [
+    "ui",
+    "components"
+  ],
+  "author": "Tyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TykTechnologies/tyk-ui/issues"
+  },
+  "homepage": "https://github.com/TykTechnologies/tyk-ui#readme"
+}
