@@ -1,0 +1,48 @@
+@import '../../../common/sass/index';
+@import './variables';
+@import './mixins';
+
+.tyk-button {
+  border: none;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  background-color: transparent;
+
+  @include button-size(
+    $padding-y-button-md,
+    $padding-x-button-md,
+    text-scale('md'),
+    $line-height-button-md,
+    $button-border-radius
+  )
+
+  &--sm {
+    @include button-size(
+      $padding-y-button-sm,
+      $padding-x-button-sm,
+      text-scale('xs'),
+      $line-height-button-sm,
+      $button-border-radius
+    )
+  }
+  &--md {
+    @include button-size(
+      $padding-y-button-md,
+      $padding-x-button-md,
+      text-scale('md'),
+      $line-height-button-md,
+      $button-border-radius
+    )
+  }
+  &--lg {
+    @include button-size(
+      $padding-y-button-lg,
+      $padding-x-button-lg,
+      text-scale('lg'),
+      $line-height-button-lg,
+      $button-border-radius
+    )
+  }
+}

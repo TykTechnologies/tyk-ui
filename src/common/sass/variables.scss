@@ -1,0 +1,86 @@
+$theme-colors: (
+  'primary': (
+    'base': #368493,
+    'light': #109EAE,
+    'dark': #1B3E4F
+  ),
+  'success': (
+    'base': #00D9BA,
+    'light': #bdded3,
+    'dark': #05C7B6
+  ),
+  'info': (
+    'base': #82BBC6,
+    'light': #D3EBEF
+  ),
+  'danger': (
+    'base': #E8244F,
+    'light': #FF6C7E,
+    'dark': #C9234D
+  ),
+  'foreground': (
+    'base': #393939,
+    'light': #5a5a68,
+    'dark': #161B20,
+    'extra-dark': #0A0D10
+  ),
+  'background': (
+    'base': #E1E1E1,
+    'light': #F0F0F0,
+    'dark': #D2D2D2
+  )
+);
+
+$contrast-colors: (
+  'dark': (
+    'primary': rgb(255, 255, 255),
+    'secondary': rgba(255, 255, 255, .70),
+    'disabled': rgba(255, 255, 255, .5),
+    'hint': rgba(255, 255, 255, .12)
+  ),
+  'light': (
+    'primary': rgba(0, 0, 0, .87),
+    'secondary': rgba(0, 0, 0, .54),
+    'disabled': rgba(0, 0, 0, .38),
+    'hint': rgba(0, 0, 0, .12)
+  ),
+);
+
+$base-font-size: 16px;
+$base-line-height: 1.25 * $base-font-size;
+
+$text-settings: (
+  'xs': (
+    font-size: 10px,
+    line-height: $base-line-height
+  ),
+  'sm': (
+    font-size: 12px,
+    line-height: $base-line-height
+  ),
+  'base': (
+    font-size: 14px,
+    line-height: $base-line-height
+  ),
+  'md': (
+    font-size: 16px,
+    line-height: $base-line-height * 2
+  ),
+  'lg': (
+    font-size: 20px,
+    line-height: $base-line-height * 2
+  ),
+  'xl': (
+    font-size: 24px,
+    line-height: $base-line-height * 2
+  )
+);
+
+$spacing: (
+  'xs': 6px,
+  'sm': 8px,
+  'base': 12px,
+  'md': 14px,
+  'lg': 18px,
+  'xl': 22px
+)
