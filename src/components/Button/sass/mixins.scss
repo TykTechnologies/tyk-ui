@@ -4,3 +4,39 @@
   line-height: $line-height;
   border-radius: $border-radius;
 }
+
+@mixin button-variant(
+  $background,
+  $border: transparent,
+  $color: white,
+  $hover-background: darken($background, 7.5%),
+  $hover-border: darken($border, 10%),
+  $active-background: darken($background, 10%),
+  $active-border: darken($border, 12.5%)
+) {
+  background-color: $background;
+  border-color: $border;
+  color: $color;
+
+  &:hover {
+    background-color: $hover-background;
+  }
+}
+
+@mixin button-variant-outline(
+  $border,
+  $hover-color: white,
+  $hover-background: $border,
+  $hover-border: $border,
+  $active-background: darken($border, 10%),
+  $active-border: darken($border, 12.5%)
+) {
+  border: 1px solid $border;
+  background-color: white;
+  color: $border;
+
+  &:hover {
+    background-color: $border;
+    color: $hover-color;
+  }
+}

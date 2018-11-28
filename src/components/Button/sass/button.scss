@@ -3,12 +3,18 @@
 @import './mixins';
 
 .tyk-button {
+  background-color: transparent;
   border: none;
+  cursor: pointer;
   display: inline-block;
   text-align: center;
-  vertical-align: middle;
+  transition: all .2s linear;
   user-select: none;
-  background-color: transparent;
+  vertical-align: middle;
+
+  &:focus {
+    outline: none;
+  }
 
   @include button-size(
     $padding-y-button-md,
@@ -17,6 +23,73 @@
     $line-height-button-md,
     $button-border-radius
   )
+
+  &--primary {
+    @include button-variant(
+      theme-color('primary', 'base')
+    )
+
+    &-outline {
+      @include button-variant-outline(
+        theme-color('primary', 'base')
+      )
+    }
+  }
+  &--success {
+    @include button-variant(
+      theme-color('success', 'base')
+    )
+
+    &-outline {
+      @include button-variant-outline(
+        theme-color('success', 'base')
+      )
+    }
+  }
+  &--danger {
+    @include button-variant(
+      theme-color('danger', 'base')
+    )
+
+    &-outline {
+      @include button-variant-outline(
+        theme-color('danger', 'base')
+      )
+    }
+  }
+  &--warning {
+    @include button-variant(
+      theme-color('warning', 'base')
+    )
+
+    &-outline {
+      @include button-variant-outline(
+        theme-color('warning', 'base')
+      )
+    }
+  }
+  &--info {
+    @include button-variant(
+      theme-color('info', 'base')
+    )
+
+    &-outline {
+      @include button-variant-outline(
+        theme-color('info', 'base')
+      )
+    }
+  }
+  &--default {
+    @include button-variant(
+      theme-color('foreground', 'light')
+    )
+
+    &-outline {
+      @include button-variant-outline(
+        theme-color('foreground', 'light')
+      )
+    }
+  }
 
   &--sm {
     @include button-size(
