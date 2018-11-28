@@ -31,12 +31,32 @@
   $active-background: darken($border, 10%),
   $active-border: darken($border, 12.5%)
 ) {
-  border: 1px solid $border;
+  border: 2px solid $border;
   background-color: white;
   color: $border;
 
   &:hover {
     background-color: $border;
     color: $hover-color;
+  }
+}
+
+@mixin button-variant-gradient ($left-color, $right-color, $color: white) {
+  border-image: linear-gradient(to right, $left-color, $right-color, $left-color) 0 round;
+  background: transparent linear-gradient(to right, $left-color, $right-color, $left-color);
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-position: 0 0;
+  color: $color;
+
+  &:hover,
+  &:active,
+  &:active:focus {
+    border-image: linear-gradient(to right, $left-color, $right-color, $left-color) 0 round;
+    background: transparent linear-gradient(to right, $left-color, $right-color, $left-color);
+    background-position: 100% 0;
+    background-size: 200% auto;
+    background-clip: border-box;
   }
 }

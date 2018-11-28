@@ -25,8 +25,20 @@ module.exports = {
 	        use: [
 	          "style-loader",
 	          "css-loader",
+						"postcss-loader",
 	          "sass-loader"
 	        ]
+	      },
+	      {
+	        test: /\.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+	        exclude: /node_modules/,
+	        use: {
+	          loader: 'file-loader',
+	          options: {
+	            name: '[name].[ext]',
+	            outputPath: 'fonts/'
+	          }
+	        }
 	      }
 			],
 		},

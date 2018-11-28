@@ -7,7 +7,9 @@
   border: none;
   cursor: pointer;
   display: inline-block;
+  font-family: 'robotomedium';
   text-align: center;
+  text-transform: uppercase;
   transition: all .2s linear;
   user-select: none;
   vertical-align: middle;
@@ -19,7 +21,7 @@
   @include button-size(
     $padding-y-button-md,
     $padding-x-button-md,
-    text-scale('md'),
+    text-scale('sm'),
     $line-height-button-md,
     $button-border-radius
   )
@@ -34,6 +36,13 @@
         theme-color('primary', 'base')
       )
     }
+
+    &-gradient {
+      @include button-variant-gradient(
+        theme-color('primary', 'base'),
+        theme-color('primary', 'dark')
+      )
+    }
   }
   &--success {
     @include button-variant(
@@ -43,6 +52,13 @@
     &-outline {
       @include button-variant-outline(
         theme-color('success', 'base')
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        theme-color('success', 'base'),
+        theme-color('success', 'dark')
       )
     }
   }
@@ -56,6 +72,13 @@
         theme-color('danger', 'base')
       )
     }
+
+    &-gradient {
+      @include button-variant-gradient(
+        theme-color('danger', 'base'),
+        theme-color('danger', 'dark')
+      )
+    }
   }
   &--warning {
     @include button-variant(
@@ -65,6 +88,14 @@
     &-outline {
       @include button-variant-outline(
         theme-color('warning', 'base')
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        theme-color('warning', 'light'),
+        theme-color('warning', 'base'),
+        theme-color('foreground', 'base-dark')
       )
     }
   }
@@ -78,6 +109,14 @@
         theme-color('info', 'base')
       )
     }
+
+    &-gradient {
+      @include button-variant-gradient(
+        theme-color('info', 'light'),
+        theme-color('info', 'base'),
+        theme-color('foreground', 'base-dark')
+      )
+    }
   }
   &--default {
     @include button-variant(
@@ -87,6 +126,13 @@
     &-outline {
       @include button-variant-outline(
         theme-color('foreground', 'light')
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        theme-color('foreground', 'base'),
+        theme-color('foreground', 'base-dark')
       )
     }
   }
@@ -104,7 +150,7 @@
     @include button-size(
       $padding-y-button-md,
       $padding-x-button-md,
-      text-scale('md'),
+      text-scale('sm'),
       $line-height-button-md,
       $button-border-radius
     )
@@ -113,7 +159,7 @@
     @include button-size(
       $padding-y-button-lg,
       $padding-x-button-lg,
-      text-scale('lg'),
+      text-scale('md'),
       $line-height-button-lg,
       $button-border-radius
     )

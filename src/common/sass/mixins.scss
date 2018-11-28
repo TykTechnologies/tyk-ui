@@ -24,3 +24,13 @@
   font-size: text-scale($level);
   line-height: line-height($level);
 }
+
+@mixin font-face($font-family, $url) {
+	@font-face {
+		font-family: '#{$font-family}';
+		src: url('#{$url}.woff2') format('woff2'),
+		     url('#{$url}.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+}
