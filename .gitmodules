@@ -1,0 +1,6 @@
+[submodule "styleguide/tyk-ui-styleguide"]
+	path = styleguide/tyk-ui-styleguide
+	url = git@github.com:TykTechnologies/tyk-ui-styleguide.git
+[submodule "tyk-ui-styleguide"]
+	path = tyk-ui-styleguide
+	url = git@github.com:TykTechnologies/tyk-ui-styleguide.git

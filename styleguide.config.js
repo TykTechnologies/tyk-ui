@@ -7,6 +7,7 @@ module.exports = {
 		url: 'https://github.com/styleguidist/react-styleguidist',
 	},
 	version,
+	styleguideDir: 'tyk-ui-styleguide',
 	webpackConfig: {
 		module: {
 			rules: [
