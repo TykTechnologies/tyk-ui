@@ -5,13 +5,18 @@ module.exports = {
 	defaultExample: true,
 	version,
 	styleguideDir: 'tyk-ui-styleguide',
+	components: 'src/components/**/index.js',
+	ignore: [
+		'**/components/Collapsible/index.js'
+	],
 	webpackConfig: {
 		module: {
 			rules: [
 				{
 					test: /\.js?$/,
-					exclude: /node_modules|index\.js/,
+					exclude: /node_modules/,
 					loader: 'babel-loader',
+        	options: { babelrcRoots: ['.', '../'] }
 				},
 				{
 					test: /\.css$/,

@@ -48,11 +48,11 @@ export default class Button extends Component {
     * Describes the size of the button (sm, md, lg). Default one is md
     */
     size: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     theme: ''
-  }
+  };
 
   getCssClasses() {
     const {

@@ -1,3 +1,7 @@
 @import './variables';
 @import './mixins';
 @import './fonts';
+
+html, body {
+  font-size: text-scale('base');
+}
