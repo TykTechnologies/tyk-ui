@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { Icon } from '../../Icon';
 import '../sass/button.scss';
 /**
  * Tyk button component.
@@ -83,6 +84,16 @@ export default class Button extends Component {
     return cssClasses.join(' ');
   }
 
+  getButtonIcon(position) {
+    const { iconType, iconPosition } = this.props;
+
+    return (
+      (iconType && iconPosition === position)
+        ? <Icon type={ iconType }></Icon>
+        : null
+    );
+  }
+
   render() {
     const {
       id,
@@ -103,7 +114,9 @@ export default class Button extends Component {
               href={ href }
               type={ type }
             >
+              { this.getButtonIcon('left') }
               { this.props.children }
+              { this.getButtonIcon('right') }
             </a>
           : <button
               id={ id }
@@ -112,7 +125,9 @@ export default class Button extends Component {
               onClick={ onClick }
               type={ type }
             >
+              { this.getButtonIcon('left') }
               { this.props.children && <span>{ this.props.children }</span> }
+              { this.getButtonIcon('right') }
             </button>
       }
       </Fragment>

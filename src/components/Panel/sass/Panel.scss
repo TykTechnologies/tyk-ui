@@ -71,7 +71,7 @@ $font-path: '../../../common/fonts/';
 
   &.collapsable {
     cursor: pointer;
-    padding-right: 48px;
+    padding-right: $padding-x-right-panel-collapsable;
   }
 
   .collapsable__arrow {
