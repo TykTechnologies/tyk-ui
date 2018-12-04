@@ -3,41 +3,41 @@ $font-path: '../../../common/fonts/';
 @import './variables';
 @import './mixins';
 
-.panel {
+.tyk-panel {
   border: none;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.10);
   margin-bottom: 20px;
   font-family: 'robotomedium';
 
-  .panel {
+  .tyk-panel {
     border: 1px solid theme-color('background', 'dark');
     box-shadow: none;
     -webkit-box-shadow: none;
   }
 
   &--primary {
-    .panel__header {
+    .tyk-panel__header {
       @include panel-variant(
         theme-color('primary', 'base')
       );
     }
   }
   &--success {
-    .panel__header {
+    .tyk-panel__header {
       @include panel-variant(
         theme-color('success', 'base')
       );
     }
   }
   &--danger {
-    .panel__header {
+    .tyk-panel__header {
       @include panel-variant(
         theme-color('danger', 'base')
       );
     }
   }
   &--warning {
-    .panel__header {
+    .tyk-panel__header {
       @include panel-variant(
         theme-color('warning', 'base')
       );
@@ -45,7 +45,7 @@ $font-path: '../../../common/fonts/';
   }
 }
 
-.panel__body {
+.tyk-panel__body {
   font-family: 'robotoregular';
   padding: $padding-panel-body;
   transition: all .2s;
@@ -55,7 +55,7 @@ $font-path: '../../../common/fonts/';
   }
 }
 
-.panel__header {
+.tyk-panel__header {
   font-family: "robotomedium";
   overflow: hidden;
   padding: $padding-y-panel-header $padding-x-panel-header;

@@ -1,0 +1,51 @@
+$font-path: '../../../common/fonts/';
+@import '../../../common/sass/index';
+
+.tyk-modal {
+  align-items: center;
+  pointer-events: none;
+
+  .tyk-panel {
+    border: 1px solid theme-color('background', 'dark');
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  &.opened {
+    display: flex;
+
+    .tyk-modal__dialog {
+      opacity: 0;
+      margin-top: -20%;
+      pointer-events: all;
+      transition: all .4s ease;
+    }
+  }
+
+  &.appear-enter-done {
+    .tyk-modal__dialog {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
+}
+
+.tyk-modal__backdrop {
+  background-color: theme-color('foreground', 'extra-dark');
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  &.opened {
+    display: block;
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+
+  &.fade-enter-done {
+    opacity: 0.5;
+  }
+}

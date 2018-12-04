@@ -16,7 +16,7 @@ export default class PanelBody extends Component {
 
   getCssClasses() {
     const { noPadding } = this.props;
-    let cssClasses = ['panel__body'];
+    let cssClasses = ['tyk-panel__body'];
 
     if(noPadding) {
       cssClasses.push('no-padding');

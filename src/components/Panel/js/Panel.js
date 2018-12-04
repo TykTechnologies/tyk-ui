@@ -26,8 +26,8 @@ export default class Panel extends Component {
 
   getCssClasses() {
     const { className, theme } = this.props;
-    let cssClasses = ['panel'];
-    let panelTheme = 'panel--' + (theme || 'default');
+    let cssClasses = ['tyk-panel'];
+    let panelTheme = 'tyk-panel--' + (theme || 'default');
 
     cssClasses.push(panelTheme);
 

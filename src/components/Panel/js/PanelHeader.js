@@ -15,7 +15,7 @@ export default class PanelHeader extends Component {
 
   getCssClasses(props) {
     const { className } = this.props;
-    let cssClasses = ['panel__header'];
+    let cssClasses = ['tyk-panel__header'];
 
     if(props.collapsable) {
       cssClasses.push('collapsable');
