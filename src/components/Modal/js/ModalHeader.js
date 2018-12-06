@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { Button } from '../../Button';
 import { ModalContext } from './Modal.js';
 
 export default class ModalHeader extends Component {
@@ -17,11 +18,10 @@ export default class ModalHeader extends Component {
       <ModalContext.Consumer>
         {
           (modalContext) => {
-
             return (
               <div className="tyk-modal__header">
-                <button type="button" className="close" onClick={ modalContext.closeModal }>&times;</button>
                 { this.props.children }
+                <Button onClick={ modalContext.closeModal } iconType="times" iconPosition="left" />
               </div>
             );
           }

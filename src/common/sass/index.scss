@@ -2,7 +2,14 @@
 @import './mixins';
 @import './fonts';
 @import './fontawesome';
+@import './typography';
+
+* {
+  box-sizing: border-box;
+}
 
 html, body {
+  color: $text-color;
   font-size: text-scale('base');
+  font-family: 'robotoregular';
 }

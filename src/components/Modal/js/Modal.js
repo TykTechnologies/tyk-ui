@@ -19,8 +19,7 @@ export default class Modal extends Component {
   };
 
   state = {
-    opened: this.props.opened || false,
-    shouldOpen: false
+    initialOpenedState: false
   };
 
   constructor(props) {
@@ -28,32 +27,8 @@ export default class Modal extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    let state = {};
-
-    if(nextProps.opened !== prevState.opened) {
-      state.opened = nextProps.opened;
-      state.shouldOpen = nextProps.opened;
-
-      return state;
-    }
-
-    return null;
-  }
-
-  componentDidMount() {
-    this.setState({
-      shouldOpen: this.props.opened
-    });
-  }
-
   closeModal() {
     const { onClose } = this.props;
-
-    this.setState({
-      opened: false,
-      shouldOpen: false
-    });
 
     if(onClose && typeof onClose === 'function') {
       onClose();
@@ -67,7 +42,7 @@ export default class Modal extends Component {
   }
 
   getCssClasses() {
-    const { opened } = this.state;
+    const { opened } = this.props;
     let cssClasses = ['tyk-modal'];
 
     if(opened) {
@@ -78,7 +53,7 @@ export default class Modal extends Component {
   }
 
   getBackdropCssClasses() {
-    const { opened } = this.state;
+    const { opened } = this.props;
     let cssClasses = ['tyk-modal__backdrop'];
 
     if(opened) {
@@ -89,15 +64,15 @@ export default class Modal extends Component {
   }
 
   render() {
-    const { opened, shouldOpen } = this.state;
-
+    const { opened } = this.props;
+    
     return (
       <Fragment>
         {
           ReactDOM.createPortal(
             <CSSTransition
-              in={ shouldOpen }
-              timeout={ 0 }
+              in={ opened }
+              timeout={ 100 }
               classNames="appear"
             >
               <div className={ this.getCssClasses() }>
@@ -105,7 +80,7 @@ export default class Modal extends Component {
                   <div className="tyk-modal__content">
                     <ModalContext.Provider
                       value={{
-                        opened: this.state.opened,
+                        opened,
                         closeModal: this.closeModal
                       }}
                     >
@@ -121,7 +96,7 @@ export default class Modal extends Component {
         {
           ReactDOM.createPortal(
             <CSSTransition
-              in={ shouldOpen }
+              in={ opened }
               timeout={ 100 }
               classNames="fade"
             >

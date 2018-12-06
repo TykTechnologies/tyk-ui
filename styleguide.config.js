@@ -5,7 +5,7 @@ module.exports = {
 	defaultExample: true,
 	version,
 	styleguideDir: 'tyk-ui-styleguide',
-	components: 'src/components/**/index.js',
+	components: ['src/components/**/index.js', 'src/components/**/examples.js'],
 	ignore: [
 		'**/components/Collapsible/index.js'
 	],

@@ -12,7 +12,7 @@ export default class ModalTitle extends Component {
 
   render() {
     return (
-      <h4 className="modal-title">
+      <h4 className="tyk-modal__title">
         { this.props.children }
       </h4>
     );

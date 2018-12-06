@@ -37,6 +37,8 @@ $theme-colors: (
   )
 );
 
+$text-color: #000018;
+
 $contrast-colors: (
   'dark': (
     'primary': rgb(255, 255, 255),
@@ -53,7 +55,7 @@ $contrast-colors: (
 );
 
 $base-font-size: 16px;
-$base-line-height: 1.25 * $base-font-size;
+$base-line-height: 1.2;
 
 $text-settings: (
   'xs': (
@@ -70,15 +72,19 @@ $text-settings: (
   ),
   'md': (
     font-size: 16px,
-    line-height: $base-line-height * 2
+    line-height: $base-line-height
   ),
   'lg': (
     font-size: 20px,
-    line-height: $base-line-height * 2
+    line-height: $base-line-height
   ),
   'xl': (
     font-size: 24px,
-    line-height: $base-line-height * 2
+    line-height: $base-line-height
+  ),
+  'xxl': (
+    font-size: 32px,
+    line-height: $base-line-height
   )
 );
 
@@ -88,5 +94,22 @@ $spacing: (
   'base': 12px,
   'md': 14px,
   'lg': 18px,
-  'xl': 22px
-)
+  'xl': 22px,
+  'xxl': 32px
+);
+
+$breakpoints: (
+    "phone": 400px,
+    "phone-wide": 480px,
+    "phablet": 560px,
+    "tablet-small": 640px,
+    "tablet": 768px,
+    "tablet-wide": 1024px,
+    "desktop": 1248px,
+    "desktop-wide": 1440px
+);
+
+$headings-margin-bottom: 15px;
+$headings-font-family: 'robotomedium';
+$headings-font-weight: 500 !default;
+$headings-line-height: $base-line-height !default;
