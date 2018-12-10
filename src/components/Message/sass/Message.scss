@@ -1,0 +1,37 @@
+$font-path: '../../../common/fonts/';
+@import '../../../common/sass/index';
+@import './mixins';
+
+.message {
+  border-radius: 3px;
+  margin-bottom: 20px;
+  padding: 20px;
+
+  &--info {
+    @include message-variant(
+      theme-color('info', 'light'),
+      theme-color('info', 'base')
+    );
+  }
+
+  &--success {
+    @include message-variant(
+      theme-color('success', 'light'),
+      theme-color('success', 'dark')
+    );
+  }
+
+  &--warning {
+    @include message-variant(
+      theme-color('warning', 'light'),
+      theme-color('warning', 'base')
+    );
+  }
+
+  &--danger {
+    @include message-variant(
+      theme-color('danger', 'extra-light'),
+      theme-color('danger', 'dark')
+    );
+  }
+}

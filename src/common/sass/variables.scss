@@ -16,6 +16,7 @@ $theme-colors: (
   ),
   'danger': (
     'base': #E8244F,
+    'extra-light': #F5CCD1,
     'light': #FF6C7E,
     'dark': #C9234D
   ),
@@ -98,16 +99,29 @@ $spacing: (
   'xxl': 32px
 );
 
+$grid-gutter: 20px !default;
+$grid-max-width: 1200px + ($grid-gutter * 2) !default;
+$grid-columns: 12 !default;
+
+$breakpoint-xs: 420px !default;
+$breakpoint-sm: 768px !default;
+$breakpoint-md: 1024px !default;
+$breakpoint-lg: 1248px !default;
+
 $breakpoints: (
-    "phone": 400px,
-    "phone-wide": 480px,
-    "phablet": 560px,
-    "tablet-small": 640px,
-    "tablet": 768px,
-    "tablet-wide": 1024px,
-    "desktop": 1248px,
-    "desktop-wide": 1440px
+  "xs": $breakpoint-xs,
+  "sm": $breakpoint-sm,
+  "md": $breakpoint-md,
+  "lg": $breakpoint-lg
 );
+
+$grid-breakpoints: (
+  'lg' '(min-width: ' + $breakpoint-lg + ')',
+  'md' '(min-width: ' + $breakpoint-md + ') and (max-width: ' + ($breakpoint-lg - 1) + ')',
+  'sm' '(min-width: ' + ($breakpoint-sm + 1) + ') and (max-width:' + ($breakpoint-md - 1) + ')',
+  'xs' '(max-width: ' + $breakpoint-sm + ')'
+) !default;
+
 
 $headings-margin-bottom: 15px;
 $headings-font-family: 'robotomedium';
