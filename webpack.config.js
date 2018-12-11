@@ -8,7 +8,8 @@ module.exports = {
   mode: "development",
   entry: {
     "index": path.resolve(__dirname, "./index"),
-    "components/Button": path.resolve(__dirname, "./src/components/Button")
+    "components/Button": path.resolve(__dirname, "./src/components/Button"),
+    "grid": path.resolve(__dirname, "./src/common/sass/grid.scss")
   },
   output: {
     path: path.resolve(__dirname, "./dist/"),

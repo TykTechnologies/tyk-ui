@@ -14,7 +14,8 @@
 .tyk-row {
   display: flex;
   box-sizing: border-box;
-  margin-left: -$grid-gutter;
+  margin-left: -$grid-gutter/2;
+  margin-right: -$grid-gutter/2;
   list-style: none;
   flex: 0 1 auto;
   flex-direction: row;
@@ -32,10 +33,13 @@
 .tyk-col {
   max-width: 100%;
   box-sizing: border-box;
-  padding-left: $grid-gutter;
+  flex-basis: 100%;
+  padding-left: $grid-gutter/2;
+  padding-right: $grid-gutter/2;
   flex: 0 0 auto;
   flex-grow: 1;
   flex-basis: 0;
+  width: 100%;
 
   .tyk-row--gutterless & {
     padding-left: 0;
@@ -69,8 +73,8 @@
 @each $breakpoint in $grid-breakpoints {
   $name: nth($breakpoint, 1);
   $declaration: nth($breakpoint, 2);
-
-  @media only screen and #{$declaration} {
+  @debug #{$declaration};
+  @media screen and #{$declaration} {
     @include grid-loop($name);
   }
 }
