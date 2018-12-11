@@ -73,7 +73,7 @@
 @each $breakpoint in $grid-breakpoints {
   $name: nth($breakpoint, 1);
   $declaration: nth($breakpoint, 2);
-  @debug #{$declaration};
+  
   @media screen and #{$declaration} {
     @include grid-loop($name);
   }
