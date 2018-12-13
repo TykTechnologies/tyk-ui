@@ -1,0 +1,12 @@
+$font-path: '../../../common/fonts/';
+@import '../../../common/sass/index';
+@import '~react-datetime/css/react-datetime.css';
+
+.tyk-form-group {
+  &.has-error {
+    > .rdt .tyk-form-control {
+      border: 2px solid theme-color('danger', 'light');
+      border-left: 10px solid theme-color('danger', 'dark');
+    }
+  }
+}

@@ -33,12 +33,11 @@
 .tyk-col {
   max-width: 100%;
   box-sizing: border-box;
+  flex: 0 0 auto;
+  flex-grow: 1;
   flex-basis: 100%;
   padding-left: $grid-gutter/2;
   padding-right: $grid-gutter/2;
-  flex: 0 0 auto;
-  flex-grow: 1;
-  flex-basis: 0;
   width: 100%;
 
   .tyk-row--gutterless & {
@@ -73,7 +72,7 @@
 @each $breakpoint in $grid-breakpoints {
   $name: nth($breakpoint, 1);
   $declaration: nth($breakpoint, 2);
-  
+
   @media screen and #{$declaration} {
     @include grid-loop($name);
   }
