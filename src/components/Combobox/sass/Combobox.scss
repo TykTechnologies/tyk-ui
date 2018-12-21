@@ -12,6 +12,7 @@ $font-path: '../../../common/fonts/';
 
   ul {
     list-style-type: none;
+    margin-top: 0;
     height: auto;
   }
 
@@ -91,6 +92,8 @@ $font-path: '../../../common/fonts/';
 .tyk-combobox__placeholder {
   align-items: center;
   display: flex;
+  overflow: hidden;
+  white-space: nowrap;
 
   > i {
     margin-left: auto;

@@ -1,13 +1,14 @@
 const { version } = require('./package');
 
 module.exports = {
-	components: 'src/components/**/[A-Z]*.js',
-	defaultExample: true,
+	defaultExample: false,
 	version,
 	styleguideDir: 'tyk-ui-styleguide',
 	components: ['src/components/**/index.js', 'src/components/**/examples.js'],
 	ignore: [
-		'**/components/Collapsible/index.js'
+		'**/components/Collapsible/index.js',
+		'**/components/Column/index.js',
+		'**/components/Row/index.js'
 	],
 	webpackConfig: {
 		module: {

@@ -1,0 +1,44 @@
+$font-path: '../../../common/fonts/';
+@import '../../../common/sass/index';
+@import './variables';
+
+.tyk-pagination {
+  display: flex;
+  list-style-type: none;
+
+  li {
+    align-items: center;
+    display: flex;
+  }
+
+  li:first-child a {
+    border-top-left-radius: $pagination-border-radius;
+    border-bottom-left-radius: $pagination-border-radius;
+  }
+
+  li:last-child a {
+    border-top-right-radius: $pagination-border-radius;
+    border-bottom-right-radius: $pagination-border-radius;
+  }
+
+  span {
+    margin: 0 10px;
+  }
+
+  a {
+    background: white;
+    border: 1px solid theme-color('background', 'dark');
+    cursor: pointer;
+    margin-left: -1px;
+    padding: $pagination-button-padding;
+
+    &:hover {
+      background-color: theme-color('background', 'light');
+    }
+  }
+
+  .active a {
+    background-color: theme-color('primary', 'base');
+    color: white;
+  }
+}
