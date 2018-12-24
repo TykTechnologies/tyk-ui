@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://TykUI/./src/components/Select/sass/Select.scss"],"names":[],"mappings":"AAAA;AACA;AACA,6BAA6B","file":"components/Select/js/Select.css","sourcesContent":[".tyk-select {\n  background: transparent url(fonts/arrow_down.svg) no-repeat calc(100% - 15px) center;\n  background-size: 15px 15px; }\n"],"sourceRoot":""}

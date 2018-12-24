@@ -1,0 +1,30 @@
+.tyk-pagination {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .tyk-pagination li {
+    align-items: center;
+    display: flex; }
+  .tyk-pagination li:first-child a {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px; }
+  .tyk-pagination li:last-child a {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px; }
+  .tyk-pagination span {
+    margin: 0 10px; }
+  .tyk-pagination a {
+    background: white;
+    border: 1px solid #D2D2D2;
+    cursor: pointer;
+    margin-left: -1px;
+    padding: 10px 15px; }
+    .tyk-pagination a:hover {
+      background-color: #F0F0F0; }
+  .tyk-pagination .active a {
+    background-color: #368493;
+    color: white; }
+
+
+/*# sourceMappingURL=Pagination.css.map*/

@@ -1,0 +1,23 @@
+.message {
+  border-radius: 3px;
+  margin-bottom: 20px;
+  padding: 20px; }
+  .message--info {
+    background-color: #D3EBEF;
+    border: 1px solid #82BBC6;
+    color: #000018; }
+  .message--success {
+    background-color: #bdded3;
+    border: 1px solid #05C7B6;
+    color: #000018; }
+  .message--warning {
+    background-color: #F3EFC2;
+    border: 1px solid #FEC789;
+    color: #000018; }
+  .message--danger {
+    background-color: #F5CCD1;
+    border: 1px solid #C9234D;
+    color: #000018; }
+
+
+/*# sourceMappingURL=Message.css.map*/

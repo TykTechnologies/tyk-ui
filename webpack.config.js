@@ -1,16 +1,29 @@
 const path = require('path');
+const glob = require('glob');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ExtractAppCSS = new MiniCssExtractPlugin({
   filename: '[name].css'
 });
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+function getEntries(pattern) {
+  const entries = {};
+
+  glob.sync(pattern).forEach((file) => {
+    let key = file.replace('src/', '').replace('.js', '');
+
+    entries[key] = path.join(__dirname, file);
+  });
+  return entries;
+}
+
+let entries = getEntries('src/components/**/js/*');
+console.log(entries);
+entries.index = path.resolve(__dirname, "src/index.js");
 
 module.exports = {
   mode: "development",
-  entry: {
-    "index": path.resolve(__dirname, "./index"),
-    "components/Button": path.resolve(__dirname, "./src/components/Button"),
-    "grid": path.resolve(__dirname, "./src/common/sass/grid.scss")
-  },
+  entry: entries,
   output: {
     path: path.resolve(__dirname, "./dist/"),
     filename: '[name].js',
@@ -54,6 +67,17 @@ module.exports = {
   plugins: [
     ExtractAppCSS
   ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          output: {
+            comments: false
+          }
+        }
+      })
+    ]
+  },
   devtool: "source-map",
   externals: ['react'],
   stats: "verbose"
