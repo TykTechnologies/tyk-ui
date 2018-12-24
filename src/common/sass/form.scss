@@ -71,3 +71,17 @@ select {
   border-radius: 0;
   -webkit-appearance: none;
 }
+
+.inline-form-wrapper {
+  align-items: center;
+  display: flex;
+  width: 100%;
+
+  .inline-form {
+    width: 100%;
+  }
+
+  > button {
+    margin-left: 10px;
+  }
+}

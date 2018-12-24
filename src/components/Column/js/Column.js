@@ -19,6 +19,7 @@ export default class Column extends PureComponent {
 
   getCssClasses() {
     const { className, offset, size } = this.props;
+    console.log(this.props.className, className);
     let colSize = size.split(' ');
     let colOffsets = offset ? offset.split(' ') : [];
 
@@ -29,12 +30,12 @@ export default class Column extends PureComponent {
       return 'tyk-col--' + offset;
     });
 
-    cssClasses.push('tyk-col');
-    cssClasses = cssClasses.concat(offsets || []);
-
     if(className) {
       cssClasses = cssClasses.concat(className.split(' '));
     }
+
+    cssClasses.push('tyk-col');
+    cssClasses = cssClasses.concat(offsets || []);
 
     return cssClasses.join(' ');
   }
@@ -43,7 +44,7 @@ export default class Column extends PureComponent {
     const { id } = this.props;
 
     return (
-      <div className={ this.getCssClasses() } { ...this.props } id={ id }>
+      <div className={ this.getCssClasses() } id={ id }>
         { this.props.children }
       </div>
     );

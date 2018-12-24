@@ -1,0 +1,45 @@
+$font-path: '../../../common/fonts/';
+@import '../../../common/sass/index';
+
+.tyk-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+
+  th {
+    color: theme-color('foreground', 'light');
+    font-size: text-scale('sm');
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  td, th {
+    padding: 10px;
+  }
+
+  tbody tr:nth-child(2n+1) {
+    background-color: theme-color('background', 'light');
+  }
+
+  tr td:first-child,
+  tr th:first-child {
+    padding-left: 25px;
+  }
+
+  tr td:last-child,
+  tr th:last-child {
+    padding-right: 25px;
+  }
+
+  .tyk-pagination {
+    padding: 20px 25px;
+
+    li:first-child {
+      margin-left: auto;
+    }
+  }
+}
+
+.tyk-table-search {
+  padding: 10px 25px 0 25px;
+}

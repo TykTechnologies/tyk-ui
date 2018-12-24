@@ -5,6 +5,8 @@ $font-path: '../../../common/fonts/';
 .tyk-pagination {
   display: flex;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 
   li {
     align-items: center;

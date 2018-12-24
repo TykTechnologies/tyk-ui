@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import TykInput from './Input.js';
+import Input from './Input';
 
 export default class FieldInput extends Component {
   constructor(props) {
