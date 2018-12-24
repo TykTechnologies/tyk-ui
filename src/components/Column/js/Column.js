@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import '../sass/Column.scss';
-
 export default class Column extends PureComponent {
   static propTypes = {
     className: PropTypes.string,

@@ -1,5 +1,5 @@
-$font-path: '../../../common/fonts/';
-@import '../../../common/sass/index';
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
 
 .tyk-table {
   border-collapse: collapse;
@@ -11,6 +11,12 @@ $font-path: '../../../common/fonts/';
     font-size: text-scale('sm');
     text-align: left;
     text-transform: uppercase;
+
+    .tyk-button {
+      background: none;
+      color: theme-color('foreground', 'light');
+      padding: 0;
+    }
   }
 
   td, th {

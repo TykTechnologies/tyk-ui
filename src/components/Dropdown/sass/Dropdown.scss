@@ -1,5 +1,5 @@
-$font-path: '../../../common/fonts/';
-@import '../../../common/sass/index';
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
 
 .tyk-dropdown {
   display: inline-block;
@@ -10,7 +10,7 @@ $font-path: '../../../common/fonts/';
 
   &.theme-list .tyk-button {
     background: white;
-    border-color: theme-color('background', 'dark');
+    border: 1px solid theme-color('background', 'dark');
     border-radius: 0;
     color: $text-color;
 

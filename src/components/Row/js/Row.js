@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import '../sass/Row.scss'
-
 export default class Row extends PureComponent {
   static propTypes = {
     children: PropTypes.oneOfType([

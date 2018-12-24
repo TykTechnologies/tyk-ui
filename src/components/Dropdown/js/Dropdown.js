@@ -22,7 +22,8 @@ export default class Dropdown extends Component {
     label: PropTypes.string,
     onClose: PropTypes.func,
     onSelect: PropTypes.func,
-    selectedItem: PropTypes.string
+    selectedItem: PropTypes.string,
+    stopButtonTextChange: PropTypes.bool
   };
 
   state = {
@@ -74,7 +75,7 @@ export default class Dropdown extends Component {
   }
 
   onSelectItem(itemId, itemProps) {
-    const { onSelect } = this.props;
+    const { stopButtonTextChange, onSelect } = this.props;
 
     this.setState({
       selectedItem: itemId,
@@ -170,10 +171,10 @@ export default class Dropdown extends Component {
   }
 
   getBtnTitle() {
-    const { btnTitle } = this.props;
+    const { btnTitle, stopButtonTextChange } = this.props;
     const { selectedItemProps } = this.state;
 
-    if(selectedItemProps && selectedItemProps.title) {
+    if(!stopButtonTextChange && selectedItemProps && selectedItemProps.title) {
       return selectedItemProps.title;
     }
 
