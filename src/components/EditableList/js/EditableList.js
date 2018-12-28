@@ -9,7 +9,6 @@ import EditableListForm from './EditableListForm';
 import { Column } from '../../Column';
 import { Icon } from '../../Icon';
 import { Row } from '../../Row';
-import '../sass/EditableList.scss';
 
 export default class EditableList extends Component {
   static propTypes = {

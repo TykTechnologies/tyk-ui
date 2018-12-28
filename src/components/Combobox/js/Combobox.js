@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import { Icon } from '../../Icon';
-import '../sass/Combobox.scss';
 
 const getStateSelectedValues = (multiple, tags, value) => {
   if(!value) {

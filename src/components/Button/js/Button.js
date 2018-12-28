@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { Icon } from '../../Icon';
-import '../sass/Button.scss';
 /**
  * Tyk button component.
  */

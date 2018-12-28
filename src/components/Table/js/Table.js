@@ -5,7 +5,6 @@ import { isCollection } from 'immutable';
 
 import { FieldPagination } from '../../Pagination';
 import { Form } from '../../Form';
-import '../sass/Table.scss';
 
 class Table extends Component {
   static propTypes = {

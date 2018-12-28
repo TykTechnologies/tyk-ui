@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import '../sass/Pagination.scss';
-
 const shouldShowPage = (currentNr, pageNr, totalNrOfPages) => {
   let basePageNr = 5;
   let minimumNrOfPages = 10;

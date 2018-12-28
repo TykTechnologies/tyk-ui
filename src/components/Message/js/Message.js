@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import '../sass/Message.scss';
-
 export default class Message extends Component {
   static propTypes = {
     theme: PropTypes.string,

@@ -1,8 +1,6 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-import '../sass/Panel.scss';
-
 const PortalContext = createContext();
 
 export default class Panel extends Component {

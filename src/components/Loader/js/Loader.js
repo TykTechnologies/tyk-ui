@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import '../sass/Loader.scss';
-
 export default class Loader extends Component {
   getCssClasses() {
     let cssClasses = ['loading'];

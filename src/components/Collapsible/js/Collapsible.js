@@ -2,8 +2,6 @@ import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 
-import '../sass/Collapsible.scss';
-
 export default class Collapsible extends Component {
   static propTypes = {
     children: PropTypes.oneOfType([

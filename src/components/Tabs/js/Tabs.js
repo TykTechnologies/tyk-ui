@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { Collapsible } from '../../Collapsible';
 import { Icon } from '../../Icon';
-import '../sass/Tabs.scss';
 
 export const TabsContext = createContext();
 

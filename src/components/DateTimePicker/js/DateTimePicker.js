@@ -3,7 +3,6 @@ import Datetime from 'react-datetime';
 import PropTypes from 'prop-types';
 
 import { Icon } from '../../Icon';
-import '../sass/DateTimePicker.scss';
 
 export default class DateTimePicker extends Component {
   static propTypes = {

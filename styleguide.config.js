@@ -35,6 +35,12 @@ module.exports = {
 	        use: [
 	          "style-loader",
 	          "css-loader",
+	          {
+	            loader: "resolve-url-loader",
+	            options: {
+	              debug: true
+	            }
+	          },
 	          "sass-loader?sourceMap"
 	        ]
 	      },

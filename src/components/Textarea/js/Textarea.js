@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import '../sass/Textarea.scss';
-
 export default class Textarea extends Component {
   static propTypes = {
     disabled: PropTypes.bool,

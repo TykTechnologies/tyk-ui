@@ -1,8 +1,6 @@
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import '../sass/ButtonGroup.scss';
-
 export default class ButtonGroup extends PureComponent {
   static propTypes = {
     label: PropTypes.string

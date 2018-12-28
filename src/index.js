@@ -25,3 +25,5 @@ export { default as FieldSelect } from './components/Select/js/FieldSelect';
 export { default as Table } from './components/Table/js/Table';
 export { default as Tabs } from './components/Tabs/js/Tabs';
 export { default as Textarea } from './components/Textarea/js/Textarea';
+
+import './common/sass/index.scss';

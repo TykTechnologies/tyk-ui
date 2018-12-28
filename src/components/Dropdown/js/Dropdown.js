@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import { Button } from '../../Button';
-import '../sass/Dropdown.scss';
 
 const DropdownContext = createContext();
 

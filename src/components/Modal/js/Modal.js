@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 
-import '../sass/Modal.scss';
 const ModalContext = createContext();
 
 export default class Modal extends Component {
@@ -65,7 +64,7 @@ export default class Modal extends Component {
 
   render() {
     const { opened } = this.props;
-    
+
     return (
       <Fragment>
         {
