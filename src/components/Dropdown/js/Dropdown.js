@@ -35,6 +35,7 @@ export default class Dropdown extends Component {
 
     this.dropdownRef = createRef();
     this.dropdownListRef = createRef();
+    this.dropdownButtonRef = createRef();
     this.onSelectItem = this.onSelectItem.bind(this);
     this.openDropdown = this.openDropdown.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -129,6 +130,10 @@ export default class Dropdown extends Component {
 
     dropdownEl.style.top = top + 'px';
     dropdownEl.style.left = left + 'px';
+
+    let buttonNode = ReactDOM.findDOMNode(this.dropdownButtonRef.current);
+    console.log(buttonNode.clientWidth);
+    dropdownEl.style.minWidth = buttonNode.clientWidth + 'px';
   }
 
   openDropdown() {
@@ -202,6 +207,7 @@ export default class Dropdown extends Component {
           iconPosition="right"
           size={ btnSize || 'md' }
           type="button"
+          ref={ this.dropdownButtonRef }
         >
           { this.getBtnTitle() }
         </Button>

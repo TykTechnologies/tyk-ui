@@ -7,17 +7,17 @@
   <Dropdown.Item
     key='1'
     eventKey='1'
-    title='First option'
+    title='First'
   />
   <Dropdown.Item
     key='2'
     eventKey='2'
-    title='Second option'
+    title='Second'
   />
   <Dropdown.Item
     key='3'
     eventKey='3'
-    title='Third option'
+    title='Third'
   />
 </Dropdown>
 ```

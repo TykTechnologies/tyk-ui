@@ -17,7 +17,6 @@ export default class Column extends PureComponent {
 
   getCssClasses() {
     const { className, offset, size } = this.props;
-    console.log(this.props.className, className);
     let colSize = size.split(' ');
     let colOffsets = offset ? offset.split(' ') : [];
 
