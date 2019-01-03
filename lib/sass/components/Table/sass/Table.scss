@@ -1,5 +1,6 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
+@import './variables';
 
 .tyk-table {
   border-collapse: collapse;
@@ -19,8 +20,12 @@
     }
   }
 
-  td, th {
-    padding: 10px;
+  th {
+    padding: $table-th-padding;
+  }
+
+  td {
+    padding: $table-td-padding;
   }
 
   tbody tr:nth-child(2n+1) {
@@ -29,16 +34,16 @@
 
   tr td:first-child,
   tr th:first-child {
-    padding-left: 25px;
+    padding-left: $table-first-last-padding;
   }
 
   tr td:last-child,
   tr th:last-child {
-    padding-right: 25px;
+    padding-right: $table-first-last-padding;
   }
 
   .tyk-pagination {
-    padding: 20px 25px;
+    padding: $table-pagination-padding;
 
     li:first-child {
       margin-left: auto;

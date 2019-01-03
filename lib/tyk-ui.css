@@ -5121,6 +5121,8 @@ select {
 
 .tyk-dropdown-menu {
   background: white;
+  border: #D2D2D2;
+  border-radius: 5px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.175);
   list-style-type: none;
   margin: 0;
@@ -5140,14 +5142,18 @@ select {
       top: 9px; }
 
 .tyk-dropdown-menu > li > a {
-  display: flex;
   cursor: pointer;
+  color: #000018;
+  display: flex;
   font-size: 12px;
   padding: 7px 24px;
   text-transform: uppercase;
   width: 100%; }
+  .tyk-dropdown-menu > li > a:hover {
+    text-decoration: none; }
   .tyk-dropdown-menu > li > a .badge {
     background: #000018;
+    color: white;
     font-size: 10px;
     margin-top: -4px;
     margin-left: 6px; }
@@ -5400,7 +5406,8 @@ select {
   left: 0;
   position: fixed;
   right: 0;
-  top: 0; }
+  top: 0;
+  z-index: 1079; }
   .tyk-modal__backdrop.opened {
     display: block;
     opacity: 0.5;
@@ -5459,6 +5466,7 @@ select {
     color: white; }
 
 .tyk-panel__body {
+  background-color: white;
   font-family: 'robotoregular';
   padding: 25px;
   transition: all .2s; }
@@ -5502,7 +5510,9 @@ select {
       background: none;
       color: #5a5a68;
       padding: 0; }
-  .tyk-table td, .tyk-table th {
+  .tyk-table th {
+    padding: 20px 10px; }
+  .tyk-table td {
     padding: 10px; }
   .tyk-table tbody tr:nth-child(2n+1) {
     background-color: #F0F0F0; }
