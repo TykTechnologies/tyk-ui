@@ -11,6 +11,7 @@ export { EditableList } from './components/EditableList';
 export { FieldEditableList } from './components/EditableList';
 export { Form } from './components/Form';
 export { Icon } from './components/Icon';
+export { InfoNote } from './components/InfoNote';
 export { Input } from './components/Input';
 export { FieldInput } from './components/Input';
 export { Loader } from './components/Loader';

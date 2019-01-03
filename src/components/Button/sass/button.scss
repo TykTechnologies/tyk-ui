@@ -28,6 +28,10 @@
     opacity: 0.7;
   }
 
+  &:hover {
+    text-decoration: none;
+  }
+
   &:focus {
     outline: none;
   }

@@ -14,9 +14,9 @@ export default class Message extends Component {
 
   getCssClasses() {
     const { theme, noMargin } = this.props;
-    let cssClasses = ['message'];
+    let cssClasses = ['tyk-message'];
 
-    cssClasses.push('message--' + (theme || 'info'));
+    cssClasses.push('tyk-message--' + (theme || 'info'));
 
     if(noMargin) {
       cssClasses.push('no-margin');

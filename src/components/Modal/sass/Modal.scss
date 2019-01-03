@@ -17,6 +17,11 @@
     -webkit-box-shadow: none;
   }
 
+  .tyk-modal__dialog {
+    opacity: 0;
+    transition: all .2s ease;
+  }
+
   &.opened {
     display: flex;
     z-index: 1080;
