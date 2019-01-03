@@ -296,6 +296,8 @@ td.rdtYear:hover {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%; }
+  .tyk-row.no-gutters {
+    margin: 0; }
   .tyk-row.tyk-row--gutterless {
     margin-left: 0; }
   .tyk-row.tyk-row--reverse {
@@ -4749,6 +4751,8 @@ select {
   .tyk-button.disabled {
     cursor: not-allowed;
     opacity: 0.7; }
+  .tyk-button:hover {
+    text-decoration: none; }
   .tyk-button:focus {
     outline: none; }
   .tyk-button--primary {
@@ -4756,7 +4760,8 @@ select {
     border-color: transparent;
     color: white; }
     .tyk-button--primary:hover {
-      background-color: #2c6b77; }
+      background-color: #2c6b77;
+      color: white; }
     .tyk-button--primary-outline {
       border: 2px solid #368493;
       background-color: white;
@@ -4796,7 +4801,8 @@ select {
     border-color: transparent;
     color: white; }
     .tyk-button--success:hover {
-      background-color: #00b399; }
+      background-color: #00b399;
+      color: white; }
     .tyk-button--success-outline {
       border: 2px solid #00D9BA;
       background-color: white;
@@ -4836,7 +4842,8 @@ select {
     border-color: transparent;
     color: white; }
     .tyk-button--danger:hover {
-      background-color: #d0163f; }
+      background-color: #d0163f;
+      color: white; }
     .tyk-button--danger-outline {
       border: 2px solid #E8244F;
       background-color: white;
@@ -4876,7 +4883,8 @@ select {
     border-color: transparent;
     color: #22272B; }
     .tyk-button--warning:hover {
-      background-color: #feb563; }
+      background-color: #feb563;
+      color: #22272B; }
     .tyk-button--warning-outline {
       border: 2px solid #FEC789;
       background-color: white;
@@ -4916,7 +4924,8 @@ select {
     border-color: transparent;
     color: white; }
     .tyk-button--info:hover {
-      background-color: #68adba; }
+      background-color: #68adba;
+      color: white; }
     .tyk-button--info-outline {
       border: 2px solid #82BBC6;
       background-color: white;
@@ -4956,7 +4965,8 @@ select {
     border-color: transparent;
     color: white; }
     .tyk-button--default:hover {
-      background-color: #484853; }
+      background-color: #484853;
+      color: white; }
     .tyk-button--default-outline {
       border: 2px solid #5a5a68;
       background-color: white;
@@ -5253,6 +5263,26 @@ select {
     flex-grow: 0;
     text-align: right; }
 
+.tyk-info-note {
+  border-radius: 0;
+  position: relative; }
+  .tyk-info-note p + p {
+    margin-top: 15px; }
+  .tyk-info-note:after {
+    content: '';
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent #82BBC6 transparent transparent;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0; }
+  .tyk-info-note .tyk-message {
+    border-radius: 0;
+    padding-top: 40px;
+    padding-bottom: 40px; }
+
 .loader-wrapper {
   min-height: 100px;
   position: relative; }
@@ -5305,23 +5335,23 @@ select {
   40% {
     transform: scale(1); } }
 
-.message {
+.tyk-message {
   border-radius: 3px;
   margin-bottom: 20px;
   padding: 20px; }
-  .message--info {
+  .tyk-message--info {
     background-color: #D3EBEF;
     border: 1px solid #82BBC6;
     color: #000018; }
-  .message--success {
+  .tyk-message--success {
     background-color: #bdded3;
     border: 1px solid #05C7B6;
     color: #000018; }
-  .message--warning {
+  .tyk-message--warning {
     background-color: #F3EFC2;
     border: 1px solid #FEC789;
     color: #000018; }
-  .message--danger {
+  .tyk-message--danger {
     background-color: #F5CCD1;
     border: 1px solid #C9234D;
     color: #000018; }
@@ -5339,6 +5369,9 @@ select {
     border: 1px solid #D2D2D2;
     box-shadow: none;
     -webkit-box-shadow: none; }
+  .tyk-modal .tyk-modal__dialog {
+    opacity: 0;
+    transition: all .2s ease; }
   .tyk-modal.opened {
     display: flex;
     z-index: 1080; }
