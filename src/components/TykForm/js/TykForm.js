@@ -17,7 +17,7 @@ export default class TykForm extends PureComponent {
     let cssClasses = [];
 
     if(this.props.type) {
-      cssClasses.push('form-' + this.props.type);
+      cssClasses.push('tyk-form-' + this.props.type);
     }
 
     return cssClasses.join(' ');
