@@ -1,0 +1,38 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+@import './variables';
+
+.tyk-tabs {
+  &--default {
+    > ul {
+      display: flex;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: scroll;
+
+      li {
+        display: flex;
+        white-space: nowrap;
+
+        &.active a,
+        a:hover {
+          border-bottom-color: theme-color('primary', 'base');
+        }
+
+        a {
+          border-bottom: 5px solid transparent;
+          cursor: pointer;
+          padding: $tab-button-padding;
+          transition: all .2s linear;
+        }
+      }
+    }
+  }
+}
+
+.tyk-tab {
+  &__content {
+    padding: $tabs-default-content-padding;
+  }
+}

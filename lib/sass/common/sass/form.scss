@@ -1,0 +1,87 @@
+@import 'variables';
+@import 'mixins';
+
+.tyk-form-group {
+  margin-bottom: $form-group-margin-bottom;
+
+  &.has-error > .tyk-form-control {
+    border: 2px solid theme-color('danger', 'light');
+    border-left: 10px solid theme-color('danger', 'dark');
+    outline: none;
+
+    &:focus {
+      border-left: 10px solid theme-color('danger', 'dark');
+      border-color: theme-color('danger', 'dark');
+      outline: none;
+    }
+  }
+}
+
+.tyk-form-control__error-message {
+  color: theme-color('danger', 'dark');
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+.tyk-input-group {
+  align-items: center;
+  display: flex;
+
+  &__addon {
+    background-color: theme-color('background', 'light');
+    border: 1px solid theme-color('background', 'dark');
+    height: $form-control-height;
+    padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
+
+    &:first-child {
+      border-right: 0;
+    }
+
+    &:last-child {
+      border-left: 0;
+    }
+  }
+}
+
+.tyk-form-control {
+  border: 1px solid theme-color('background', 'dark');
+  background-color: white;
+  color: $text-color;
+  display: block;
+  font-size: text-scale('base');
+  height: $form-control-height;
+  padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
+  transition: all .2s linear;
+  width: 100%;
+
+  &[disabled] {
+    background-color: theme-color('background', 'light');
+    cursor: not-allowed;
+  }
+
+  &__help-block {
+    color: $text-color;
+    font-style: italic;
+    font-size: text-scale('sm');
+    margin: 5px 0 0 0;
+  }
+}
+
+select {
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.inline-form-wrapper {
+  align-items: center;
+  display: flex;
+  width: 100%;
+
+  .inline-form {
+    width: 100%;
+  }
+
+  > button {
+    margin-left: 10px;
+  }
+}

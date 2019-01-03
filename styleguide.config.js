@@ -12,7 +12,7 @@ module.exports = {
 		'**/components/Row/index.js'
 	],
 	require: [
-    path.join(__dirname, 'src/common/sass/index.scss')
+    path.join(__dirname, 'src/index.scss')
   ],
 	webpackConfig: {
 		module: {

@@ -1,0 +1,80 @@
+@import 'variables';
+@import 'mixins';
+
+.container {
+  max-width: $grid-max-width;
+  margin: 0 auto;
+}
+
+.container,
+.container-fluid {
+  padding: 0 $grid-gutter;
+}
+
+.tyk-row {
+  display: flex;
+  box-sizing: border-box;
+  margin-left: -$grid-gutter/2;
+  margin-right: -$grid-gutter/2;
+  list-style: none;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+  &.tyk-row--gutterless {
+    margin-left: 0;
+  }
+
+  &.tyk-row--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.tyk-col {
+  max-width: 100%;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  flex-grow: 1;
+  flex-basis: 100%;
+  padding-left: $grid-gutter/2;
+  padding-right: $grid-gutter/2;
+  width: 100%;
+
+  .tyk-row--gutterless & {
+    padding-left: 0;
+  }
+
+  &.tyk-col--reverse {
+    flex-direction: column-reverse;
+  }
+
+  &.tyk-col--align-bottom {
+    align-self: flex-end;
+  }
+
+  &.tyk-col--align-top {
+    align-self: flex-start;
+  }
+
+  &.tyk-col--align-center {
+    align-self: center;
+  }
+
+  &.tyk-col--align-baseline {
+    align-self: baseline;
+  }
+
+  &.tyk-col--align-stretch {
+    align-self: stretch;
+  }
+}
+
+@each $breakpoint in $grid-breakpoints {
+  $name: nth($breakpoint, 1);
+  $declaration: nth($breakpoint, 2);
+
+  @media screen and #{$declaration} {
+    @include grid-loop($name);
+  }
+}

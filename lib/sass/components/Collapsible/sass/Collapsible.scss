@@ -1,0 +1,10 @@
+.collapse-exit,
+.collapse-exit-active,
+.collapse-exit-done {
+  height: 0px;
+}
+
+.collapse-wrapper {
+  overflow: hidden;
+  transition: all .2s;
+}

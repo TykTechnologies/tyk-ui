@@ -4,24 +4,26 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ExtractAppCSS = new MiniCssExtractPlugin({
   filename: '[name].css'
 });
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-function getEntries(pattern) {
-  const entries = {};
-
-  glob.sync(pattern).forEach((file) => {
-    let key = file.replace(/src\/components\/(.*)\/js\//g, '').replace('.js', '');
-    entries[key] = path.join(__dirname, file);
-  });
-  return entries;
-}
-
-let entries = getEntries('src/components/**/js/*.js');
+// function getEntries(pattern) {
+//   const entries = {};
+//
+//   glob.sync(pattern).forEach((file) => {
+//     let key = file.replace(/src\/components\/(.*)\/js\//g, '').replace('.js', '');
+//     entries[key] = path.join(__dirname, file);
+//   });
+//   return entries;
+// }
+//
+// let entries = getEntries('src/components/**/js/*.js');
+entries = {};
 entries['tyk-ui'] = path.resolve(__dirname, "src/index.js");
 entries.index = path.resolve(__dirname, "src/index.js");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: entries,
   output: {
     path: path.resolve(__dirname, "./lib/"),
@@ -91,7 +93,19 @@ module.exports = {
     ]
   },
   plugins: [
-    ExtractAppCSS
+    ExtractAppCSS,
+    new CopyWebpackPlugin([
+      {
+        from: 'src/**/*.scss',
+        to: 'sass/',
+        transformPath (targetPath, absolutePath) {
+          console.log('++++++++++', targetPath, absolutePath);
+          return targetPath.replace('src/', '');
+        }
+      }
+    ], {
+      debug: true
+    })
   ],
   optimization: {
     minimizer: [
@@ -106,20 +120,8 @@ module.exports = {
   },
   devtool: "source-map",
   externals: {
-    'react': {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react',
-      umd: 'react',
-    },
-    "react-dom": {
-      root: 'ReactDOM',
-      commonjs2: 'react-dom',
-      commonjs: 'react-dom',
-      amd: 'react-dom',
-      umd: 'react-dom',
-    },
+    'react': 'commonjs react',
+    "react-dom": 'react-dom',
     'moment': 'moment',
     'immutable': 'immutable'
   },

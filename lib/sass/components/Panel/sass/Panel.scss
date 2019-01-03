@@ -1,0 +1,87 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+@import './variables';
+@import './mixins';
+
+.tyk-panel {
+  border: none;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.10);
+  margin-bottom: 20px;
+  font-family: 'robotomedium';
+
+  .tyk-panel {
+    border: 1px solid theme-color('background', 'dark');
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  &--primary {
+    .tyk-panel__header {
+      @include panel-variant(
+        theme-color('primary', 'base')
+      );
+    }
+  }
+  &--success {
+    .tyk-panel__header {
+      @include panel-variant(
+        theme-color('success', 'base')
+      );
+    }
+  }
+  &--danger {
+    .tyk-panel__header {
+      @include panel-variant(
+        theme-color('danger', 'base')
+      );
+    }
+  }
+  &--warning {
+    .tyk-panel__header {
+      @include panel-variant(
+        theme-color('warning', 'base')
+      );
+    }
+  }
+}
+
+.tyk-panel__body {
+  font-family: 'robotoregular';
+  padding: $padding-panel-body;
+  transition: all .2s;
+
+  &.no-padding {
+    padding: 0;
+  }
+}
+
+.tyk-panel__header {
+  font-family: "robotomedium";
+  overflow: hidden;
+  padding: $padding-y-panel-header $padding-x-panel-header;
+  position: relative;
+
+  &h4 {
+    margin: 0;
+  }
+
+  ng-transclude {
+    vertical-align: middle;
+  }
+
+  &.collapsable {
+    cursor: pointer;
+    padding-right: $padding-x-right-panel-collapsable;
+  }
+
+  .collapsable__arrow {
+    position: absolute;
+    padding: 10px;
+    right: 10px;
+    top: calc(50% - 17px);
+
+    i {
+      float: left;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@function theme-color($key: 'primary', $variant: 'base') {
+  $map: map-get($theme-colors, $key);
+  @return map-get($map, $variant);
+}
+
+@function contrast($background: 'light', $type: 'primary') {
+  $map: map-get($contrast-colors, $background);
+  @return map-get($map, $type);
+}
+
+@mixin contrast($background: 'light', $type: 'primary') {
+  color: contrast($background, $type)
+}
+
+@function text-scale($level) {
+  @return map-get(map-get($text-settings, $level), 'font-size');
+}
+
+@function line-height($level) {
+  @return map-get(map-get($text-settings, $level), 'line-height');
+}
+
+@mixin text-setting($level) {
+  font-size: text-scale($level);
+  line-height: line-height($level);
+}
+
+@mixin font-face($font-family, $url) {
+	@font-face {
+		font-family: '#{$font-family}';
+		src: url('#{$url}.woff2') format('woff2'),
+		     url('#{$url}.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+}
+
+@mixin mq($width, $type: min) {
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+        @if $type == max {
+            $width: $width - 1px;
+        }
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}
+
+@mixin grid-loop($name) {
+  @for $i from 0 through $grid-columns {
+    .tyk-col--#{$name}-#{$i} {
+      flex-basis: percentage($i / $grid-columns);
+      max-width: percentage($i / $grid-columns);
+    }
+
+    .tyk-col--#{$name}-offset-#{$i} {
+      margin-left: percentage($i / $grid-columns);
+    }
+  }
+}
