@@ -59,6 +59,21 @@ select {
   .inline-form-wrapper > button {
     margin-left: 10px; }
 
+.tyk-checkbox,
+.tyk-radio {
+  align-items: center;
+  display: flex;
+  margin: 10px 0; }
+  .tyk-checkbox label,
+  .tyk-radio label {
+    font-weight: normal; }
+  .tyk-checkbox input,
+  .tyk-radio input {
+    margin: 0 5px 0 0; }
+  .tyk-checkbox--inline,
+  .tyk-radio--inline {
+    display: inline-flex; }
+
 /*!
  * https://github.com/YouCanBookMe/react-datetime
  */
@@ -4728,6 +4743,21 @@ select {
     width: 100%; }
   .inline-form-wrapper > button {
     margin-left: 10px; }
+
+.tyk-checkbox,
+.tyk-radio {
+  align-items: center;
+  display: flex;
+  margin: 10px 0; }
+  .tyk-checkbox label,
+  .tyk-radio label {
+    font-weight: normal; }
+  .tyk-checkbox input,
+  .tyk-radio input {
+    margin: 0 5px 0 0; }
+  .tyk-checkbox--inline,
+  .tyk-radio--inline {
+    display: inline-flex; }
 
 .tyk-button {
   background-color: transparent;

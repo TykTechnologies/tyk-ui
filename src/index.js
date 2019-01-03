@@ -1,5 +1,5 @@
 export { Button } from './components/Button';
-export { ButtonGroup } from './components/ButtonGroup';
+export { Checkbox } from './components/Checkbox';
 export { Column } from './components/Column';
 export { Combobox } from './components/Combobox';
 export { FieldCombobox } from './components/Combobox';
@@ -18,6 +18,7 @@ export { Loader } from './components/Loader';
 export { Message } from './components/Message';
 export { Modal } from './components/Modal';
 export { Pagination } from './components/Pagination';
+export { Radio } from './components/Radio';
 export { FieldPagination } from './components/Pagination';
 export { Panel } from './components/Panel';
 export { Row } from './components/Row';

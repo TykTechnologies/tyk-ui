@@ -85,3 +85,22 @@ select {
     margin-left: 10px;
   }
 }
+
+.tyk-checkbox,
+.tyk-radio {
+  align-items: center;
+  display: flex;
+  margin: 10px 0;
+
+  label {
+    font-weight: normal;
+  }
+
+  input {
+    margin: 0 5px 0 0;
+  }
+
+  &--inline {
+    display: inline-flex;
+  }
+}
