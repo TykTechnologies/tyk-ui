@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { isCollection } from 'immutable';
 
 import { FieldPagination } from '../../Pagination';
-import { TykForm } from '../../TykForm';
+import { Form } from '../../Form';
 
 class Table extends Component {
   static propTypes = {
@@ -60,7 +60,7 @@ class Table extends Component {
 
     return (
       <div className="tyk-table">
-        <TykForm
+        <Form
           onSubmit={ handleSubmit(this.handleTableSearch.bind(this)) }
         >
           { this.props.children }
@@ -70,7 +70,7 @@ class Table extends Component {
             onChange={ this.onPaginationChange }
             totalNrOfPages={ pages }
           />
-        </TykForm>
+        </Form>
       </div>
     );
   }

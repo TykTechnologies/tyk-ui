@@ -123,7 +123,8 @@ module.exports = {
     'react': 'commonjs react',
     "react-dom": 'react-dom',
     'moment': 'moment',
-    'immutable': 'immutable'
+    'immutable': 'immutable',
+    'redux-form/immutable': 'redux-form'
   },
   stats: "verbose"
 }

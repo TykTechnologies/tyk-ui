@@ -9,7 +9,7 @@ export { Dropdown } from './components/Dropdown';
 export { FieldDropdown } from './components/Dropdown';
 export { EditableList } from './components/EditableList';
 export { FieldEditableList } from './components/EditableList';
-export { TykForm } from './components/TykForm';
+export { Form } from './components/Form';
 export { Icon } from './components/Icon';
 export { InfoNote } from './components/InfoNote';
 export { Input } from './components/Input';
