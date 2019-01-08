@@ -1,23 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Input extends Component {
+export default class FileInput extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
     id: PropTypes.string,
     error: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool
-    ]),
-    inputGroupAddonLeft: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string
-    ]),
-    inputGroupAddonRight: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string
     ]),
     label: PropTypes.string,
     name: PropTypes.string,
@@ -62,46 +52,22 @@ export default class Input extends Component {
     }
   }
 
-  getAddon(content) {
-    return(
-      <div className="tyk-input-group__addon">
-        { content }
-      </div>
-    );
-  }
-
-  getInputGroupAddon() {
-    return (
-      <div className="tyk-input-group">
-        {
-          this.props.inputGroupAddonLeft
-            ? this.getAddon(this.props.inputGroupAddonLeft)
-            : null
-        }
-        { this.getInputComponent() }
-        {
-          this.props.inputGroupAddonRight
-            ? this.getAddon(this.props.inputGroupAddonRight)
-            : null
-        }
-      </div>
-    );
-  }
-
-  getInputComponent() {
-    const { isfield, onChange, ...rest } = this.props;
+  getFileInputComponent() {
+    const { accept, isfield, onChange, ...rest } = this.props;
 
     return (
       <input
+        accept={ accept }
         className="tyk-form-control"
         { ...rest }
         onChange={ this._handleOnChange }
         value={ (isfield) ? this.props.value : this.state.value }
+        type="file"
       />
     );
   }
 
-  getInputError() {
+  getFileInputError() {
     const { error } = this.props;
 
     return (error && error !== 'true' && error !=='false')
@@ -133,18 +99,14 @@ export default class Input extends Component {
               ? <label htmlFor={ this.props.id }>{ this.props.label }</label>
               : null
           }
-          {
-            this.props.inputGroupAddonLeft || this.props.inputGroupAddonRight
-              ? this.getInputGroupAddon()
-              : this.getInputComponent()
-          }
+          { this.getFileInputComponent() }
           {
             this.props.note
               ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
               : null
           }
         </div>
-        { this.getInputError() }
+        { this.getFileInputError() }
       </Fragment>
     );
   }

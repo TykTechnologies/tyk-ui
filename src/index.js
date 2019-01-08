@@ -9,7 +9,6 @@ export { Dropdown } from './components/Dropdown';
 export { FieldDropdown } from './components/Dropdown';
 export { EditableList } from './components/EditableList';
 export { FieldEditableList } from './components/EditableList';
-export { Form } from './components/Form';
 export { Icon } from './components/Icon';
 export { InfoNote } from './components/InfoNote';
 export { Input } from './components/Input';
@@ -24,7 +23,6 @@ export { Panel } from './components/Panel';
 export { Row } from './components/Row';
 export { Select } from './components/Select';
 export { FieldSelect } from './components/Select';
-export { Table } from './components/Table';
 export { Tabs } from './components/Tabs';
 export { Textarea } from './components/Textarea';
 
