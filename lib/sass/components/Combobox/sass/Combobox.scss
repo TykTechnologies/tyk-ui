@@ -3,7 +3,7 @@
 
 .tyk-combobox {
   &.disabled {
-    ul {
+    .tyk-form-control {
       background-color: theme-color('background', 'light');
       cursor: not-allowed;
     }
@@ -13,6 +13,19 @@
     list-style-type: none;
     margin-top: 0;
     height: auto;
+  }
+
+  > ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  > .tyk-form-control {
+    cursor: pointer;
+  }
+
+  > .tyk-form-control--with-tags {
+    cursor: auto;
   }
 
   .pill {
@@ -93,6 +106,7 @@
   display: flex;
   overflow: hidden;
   white-space: nowrap;
+  padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
 
   > i {
     margin-left: auto;

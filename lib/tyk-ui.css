@@ -4609,11 +4609,13 @@ h6 {
 
 .tyk-form-group {
   margin-bottom: 20px; }
-  .tyk-form-group.has-error > .tyk-form-control {
+  .tyk-form-group.has-error > .tyk-form-control,
+  .tyk-form-group.has-error .tyk-file-input__wrapper > .tyk-form-control {
     border: 2px solid #FF6C7E;
     border-left: 10px solid #C9234D;
     outline: none; }
-    .tyk-form-group.has-error > .tyk-form-control:focus {
+    .tyk-form-group.has-error > .tyk-form-control:focus,
+    .tyk-form-group.has-error .tyk-file-input__wrapper > .tyk-form-control:focus {
       border-left: 10px solid #C9234D;
       border-color: #C9234D;
       outline: none; }
@@ -5001,7 +5003,7 @@ select {
   overflow: hidden;
   transition: all .2s; }
 
-.tyk-combobox.disabled ul {
+.tyk-combobox.disabled .tyk-form-control {
   background-color: #F0F0F0;
   cursor: not-allowed; }
 
@@ -5009,6 +5011,16 @@ select {
   list-style-type: none;
   margin-top: 0;
   height: auto; }
+
+.tyk-combobox > ul {
+  margin: 0;
+  padding: 0; }
+
+.tyk-combobox > .tyk-form-control {
+  cursor: pointer; }
+
+.tyk-combobox > .tyk-form-control--with-tags {
+  cursor: auto; }
 
 .tyk-combobox .pill {
   background-color: #F0F0F0;
@@ -5060,7 +5072,8 @@ select {
   align-items: center;
   display: flex;
   overflow: hidden;
-  white-space: nowrap; }
+  white-space: nowrap;
+  padding: 10px 15px 10px 15px; }
   .tyk-combobox__placeholder > i {
     margin-left: auto; }
 
@@ -5216,6 +5229,19 @@ select {
   .editable-list-items .editable-list-item-controls {
     flex-grow: 0;
     text-align: right; }
+
+.editable-list-item__controls {
+  text-align: right; }
+
+.tyk-file-input__wrapper {
+  position: relative; }
+  .tyk-file-input__wrapper > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 12px; }
 
 .tyk-info-note {
   border-radius: 0;
