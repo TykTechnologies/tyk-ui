@@ -1,8 +1,13 @@
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
+/**
+ * Tyk button component.
+ */
 export default class ButtonGroup extends PureComponent {
   static propTypes = {
+    /**
+    * Label that will sit above the button group
+    */
     label: PropTypes.string
   };
 

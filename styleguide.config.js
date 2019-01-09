@@ -5,15 +5,39 @@ module.exports = {
 	defaultExample: false,
 	version,
 	styleguideDir: 'tyk-ui-styleguide',
-	components: ['src/components/**/index.js', 'src/components/**/examples.js'],
 	ignore: [
-		'**/components/Collapsible/index.js',
-		'**/components/Column/index.js',
-		'**/components/Row/index.js'
+		'**/components/Collapsible/**/*.js',
+		'**/components/Column/**/*.js',
+		'**/components/Combobox/**/FieldCombobox.js',
+		'**/components/DateTimePicker/**/FieldDatetimePicker.js',
+		'**/components/Dropdown/**/DropdownItem.js',
+		'**/components/Dropdown/**/FieldDropdown.js',
+		'**/components/EditableList/**/EditableListForm.js',
+		'**/components/EditableList/**/FieldEditableList.js',
+		'**/components/FileInput/**/FieldFileInput.js',
+		'**/components/Input/**/FieldInput.js',
+		'**/components/Modal/**/ModalBody.js',
+		'**/components/Modal/**/ModalFooter.js',
+		'**/components/Modal/**/ModalHeader.js',
+		'**/components/Modal/**/ModalTitle.js',
+		'**/components/Pagination/**/FieldPagination.js',
+		'**/components/Panel/**/PanelBody.js',
+		'**/components/Panel/**/PanelHeader.js',
+		'**/components/Select/**/FieldSelect.js',
+		'**/components/Row/**/*.js',
+		'**/components/Tabs/**/Tab.js'
 	],
+	getExampleFilename(componentPath) {
+		let path = componentPath.split('/');
+		let componentName = path[path.length-1];
+		let finameComponentPath = componentPath.replace('js/' + componentName, 'Readme.md');
+
+    return finameComponentPath;
+  },
 	require: [
     path.join(__dirname, 'src/index.scss')
   ],
+	resolver: require('react-docgen').resolver.findAllExportedComponentDefinitions,
 	webpackConfig: {
 		module: {
 			rules: [

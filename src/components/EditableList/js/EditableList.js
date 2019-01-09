@@ -12,6 +12,7 @@ import { Row } from '../../Row';
 
 export default class EditableList extends Component {
   static propTypes = {
+    addValueOnFieldChange: PropTypes.bool,
     error: PropTypes.string,
     config: PropTypes.object,
     onChange: PropTypes.func
@@ -286,7 +287,7 @@ export default class EditableList extends Component {
                   className="editable-list-item__controls"
                   style={{
                     display: 'block',
-                    width: buttonWidth + 15 + 'px'
+                    width: (config.displayType === 'inline') ? 'auto' : buttonWidth + 15 + 'px'
                   }}
                 >
                   <button disabled={ disabled } type="button" className="editable-list-action__button" onClick={ this.setItemEditMode.bind(this, index) }>
@@ -339,7 +340,7 @@ export default class EditableList extends Component {
               ? <div
                   className="editable-list__header"
                   style={{
-                    paddingRight: buttonWidth + 15 + 'px'
+                    paddingRight: (buttonWidth + 15) + 'px'
                   }}
                 >
                   <Row>
@@ -368,7 +369,7 @@ export default class EditableList extends Component {
   }
 
   render() {
-    const { config, error, disabled, label } = this.props;
+    const { addValueOnFieldChange, config, error, disabled, label } = this.props;
     const { buttonWidth, value } = this.state;
 
     return (
@@ -379,6 +380,7 @@ export default class EditableList extends Component {
             : null
         }
         <EditableListForm
+          addValueOnFieldChange={ addValueOnFieldChange }
           components={ config.components }
           buttonName={ config.formButtonTitle }
           buttonStyle={ config.formButtonStyle }

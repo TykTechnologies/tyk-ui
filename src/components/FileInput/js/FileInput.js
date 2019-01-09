@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { Icon } from '../../Icon';
+
 export default class FileInput extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
@@ -26,6 +28,7 @@ export default class FileInput extends Component {
     super(props);
 
     this._handleOnChange = this._handleOnChange.bind(this);
+    this.clearValue = this.clearValue.bind(this);
   }
 
   reset() {
@@ -37,9 +40,22 @@ export default class FileInput extends Component {
     });
   }
 
+  clearValue() {
+    const { onChange, isfield } = this.props;
+    
+    if(!isfield) {
+      this.setState({
+        value: ''
+      }, () => {
+        onChange('');
+      });
+    } else {
+      onChange('');
+    }
+  }
+
   _handleOnChange(e) {
     const { onChange, isfield } = this.props;
-
 
     if(!isfield) {
       this.setState({
@@ -54,16 +70,28 @@ export default class FileInput extends Component {
 
   getFileInputComponent() {
     const { accept, isfield, onChange, ...rest } = this.props;
+    let value = (isfield) ? this.props.value : this.state.value;
 
     return (
-      <input
-        accept={ accept }
-        className="tyk-form-control"
-        { ...rest }
-        onChange={ this._handleOnChange }
-        value={ (isfield) ? this.props.value : this.state.value }
-        type="file"
-      />
+      <div className="tyk-file-input__wrapper">
+        <input
+          accept={ accept }
+          className="tyk-form-control"
+          { ...rest }
+          onChange={ this._handleOnChange }
+          value={ value }
+          type="file"
+        />
+        {
+          value
+            ? <button
+                onClick={ this.clearValue }
+              >
+                <Icon type="times"/>
+              </button>
+            : null
+        }
+      </div>
     );
   }
 

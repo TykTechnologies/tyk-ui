@@ -8,6 +8,7 @@ import { Button } from '../../Button';
 
 export default class EditableListForm extends Component {
   static propTypes = {
+    addValueOnFieldChange: PropTypes.bool,
     noLabels: PropTypes.bool,
     buttonName: PropTypes.string,
     buttonStyle: PropTypes.string,
@@ -36,10 +37,11 @@ export default class EditableListForm extends Component {
   }
 
   componentDidMount() {
+    const { addValueOnFieldChange } = this.props;
     this.createRefs();
 
     if(this.props.getMainFormButtonWidth) {
-      this.props.getMainFormButtonWidth(this.submitButtonRef.current.clientWidth);
+      this.props.getMainFormButtonWidth(!addValueOnFieldChange ? this.submitButtonRef.current.clientWidth : 0);
     }
   }
 
@@ -126,6 +128,7 @@ export default class EditableListForm extends Component {
   }
 
   handleOnChange(component, index, value) {
+    const { addValueOnFieldChange } = this.props;
     let tempState = this.state;
 
     tempState = Object.assign({}, tempState, this.validateValue(value, component.props));
@@ -136,6 +139,11 @@ export default class EditableListForm extends Component {
 
     this.setState((previousState) => {
       return Object.assign({}, previousState, tempState);
+    }, () => {
+      console.log('aaaa', addValueOnFieldChange);
+      if(addValueOnFieldChange) {
+        this.submitForm();
+      }
     });
   }
 
@@ -166,7 +174,7 @@ export default class EditableListForm extends Component {
   submitForm() {
     const { errors, mainFormValue, refs } = this.state;
     const { errorPersist, onSubmit, validate, validationmessage, error } = this.props;
-
+    console.log(mainFormValue);
     if(errorPersist) {
       onSubmit(mainFormValue);
       this.resetForm();
@@ -230,7 +238,7 @@ export default class EditableListForm extends Component {
   }
 
   render() {
-    const { components, buttonName, buttonStyle, disabled, displayType, error } = this.props;
+    const { addValueOnFieldChange, components, buttonName, buttonStyle, disabled, displayType, error } = this.props;
     const { errors, mainError, refs } = this.state;
 
     return (
@@ -255,20 +263,24 @@ export default class EditableListForm extends Component {
               })
             }
           </Row>
-          <span
-            className={ this.getButtonClassName() }
-            ref={ this.submitButtonRef }
-          >
-            <Button
-              disabled={ this.hasMainFormErrors() }
-              onClick={ this.submitForm }
-              theme="default"
-              type="button"
-              size={ displayType === 'inline' ? 'sm' : 'md' }
-            >
-              { buttonName || 'ADD' }
-            </Button>
-          </span>
+          {
+            !addValueOnFieldChange
+              ? <span
+                  className={ this.getButtonClassName() }
+                  ref={ this.submitButtonRef }
+                >
+                  <Button
+                    disabled={ this.hasMainFormErrors() }
+                    onClick={ this.submitForm }
+                    theme="default"
+                    type="button"
+                    size={ displayType === 'inline' ? 'sm' : 'md' }
+                  >
+                    { buttonName || 'ADD' }
+                  </Button>
+                </span>
+              : null
+          }
         </div>
           {
             error || mainError

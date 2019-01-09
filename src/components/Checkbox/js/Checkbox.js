@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+/**
+ * Tyk Cechbox component.
+ */
 export default class Checkbox extends Component {
   static propTypes = {
     disabled: PropTypes.bool,

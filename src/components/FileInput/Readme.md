@@ -12,9 +12,9 @@
 
 <FileInput
   accept=".jpg"
-  multiple="true"
+  multiple={ true }
   error="Please fix the error"
-  label="This an FileInput with error"
+  label="Multiple file upload"
   name="input"
   note="Some helpful message to be displayed on this FileInput"
   placeholder="Please type something"

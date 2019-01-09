@@ -198,12 +198,16 @@ export default class Combobox extends Component {
   }
 
   handleListItemClick(index) {
-    let { tags } = this.props;
+    const { multiple, tags } = this.props;
 
     let methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';
     let tempState = Object.assign({}, tempState, this[methodName](index));
 
     this.setState((previousState) => {
+      if(!multiple && !tags) {
+        tempState.opened = false;
+      }
+
       return Object.assign({}, previousState, tempState);
     });
   }
@@ -511,7 +515,7 @@ export default class Combobox extends Component {
               : null
           }
           <ul
-            className="tyk-form-control"
+            className={ "tyk-form-control" + ((tags) ? ' tyk-form-control--with-tags' : '') }
             onClick={ this.focusInput }
             ref={ this.comboboxRef }
           >
