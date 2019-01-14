@@ -19,6 +19,7 @@ export { FieldInput } from './components/Input';
 export { Loader } from './components/Loader';
 export { Message } from './components/Message';
 export { Modal } from './components/Modal';
+export { Multiselect } from './components/Multiselect';
 export { Pagination } from './components/Pagination';
 export { Radio } from './components/Radio';
 export { FieldPagination } from './components/Pagination';

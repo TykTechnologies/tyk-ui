@@ -1,0 +1,54 @@
+.tyk-multiselect {
+  border: 1px solid theme-color('background', 'dark');
+  border-top: none;
+  align-items: top;
+  display: flex;
+  width: 100%;
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 -1px;
+    width: calc(50% + 1px);
+
+    &:last-child {
+      border-left: 1px solid theme-color('background', 'dark');
+      .tyk-form-group {
+        margin-left: -1px;
+        width: calc(100% + 2px);
+      }
+    }
+  }
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      border-bottom: 1px solid theme-color('background', 'dark');
+      display: flex;
+      padding: 10px 15px;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .tyk-form-group {
+    margin: 0;
+  }
+
+  .tyk-multiselect-item__controls {
+    margin-left: auto;
+
+    .tyk-button {
+      margin-right: 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

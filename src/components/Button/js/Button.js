@@ -31,6 +31,7 @@ export default class Button extends Component {
     */
     href: PropTypes.string,
     iconPosition: PropTypes.string, //left or right
+    iconOnly: PropTypes.bool,
     iconType: PropTypes.string,
     /**
     * Callback function, called when the button si clicked
@@ -58,6 +59,7 @@ export default class Button extends Component {
     const {
       iconType,
       iconPosition,
+      iconOnly,
       className,
       size,
       disabled,
@@ -70,7 +72,9 @@ export default class Button extends Component {
     let disabledClass = (disabled) ? 'disabled' : '';
     let displayClass = display || '';
     let themeClass = theme ? `tyk-button--${theme}` : '';
+    let iconOnlyClass = iconOnly ? 'tyk-button--icon-only' : '';
 
+    cssClasses.push(iconOnlyClass);
     cssClasses.push(themeClass);
     cssClasses.push(sizeClass);
     cssClasses.push(disabledClass);
@@ -86,8 +90,10 @@ export default class Button extends Component {
   getButtonIcon(position) {
     const { iconType, iconPosition } = this.props;
 
+    let iPos = iconPosition || 'left';
+
     return (
-      (iconType && iconPosition === position)
+      (iconType && iPos === position)
         ? <Icon type={ iconType }></Icon>
         : null
     );
