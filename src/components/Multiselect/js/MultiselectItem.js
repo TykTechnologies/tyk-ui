@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import MultiselectContext from './MultiselectContext';
 import { Button } from '../../Button';
+import { Collapsible } from '../../Collapsible';
+import { Loader } from '../../Loader';
 
 class MultiselectItem extends Component {
   static propTypes = {
@@ -39,24 +41,43 @@ class MultiselectItem extends Component {
             return (
               this.isInSearchValue(context.fieldsToSearchOn)
                 ? <li>
-                    <span>
-                      {
-                        context.itemDisplayTemplate
-                          ? context.itemDisplayTemplate(item)
-                          : JSON.stringify(item)
-                      }
-                    </span>
-                    <span className="tyk-multiselect-item__controls">
-                      <Button
-                        iconType={ itemType === 'normal' ? 'plus' : 'minus'}
-                        iconOnly={ true }
-                        onClick={ onChange.bind(null, item) }
-                      />
-                      <Button
-                        iconType="chevron-down"
-                        iconOnly={ true }
-                      />
-                    </span>
+                    <div>
+                      <span>
+                        {
+                          context.itemDisplayTemplate
+                            ? context.itemDisplayTemplate(item)
+                            : JSON.stringify(item)
+                        }
+                      </span>
+                      <span className="tyk-multiselect-item__controls">
+                        <Button
+                          iconType={ itemType === 'normal' ? 'plus' : 'minus'}
+                          iconOnly={ true }
+                          onClick={ onChange.bind(null, item) }
+                        />
+                        <Button
+                          iconType={ context.opened[item.id] ? "chevron-up" : "chevron-down" }
+                          iconOnly={ true }
+                          onClick={ context.onGetItemDetails.bind(context.parentContext, item) }
+                        />
+                      </span>
+                    </div>
+                    {
+                      item.details
+                        ? <Collapsible
+                            collapsed={ !context.opened[item.id] }
+                            className="tyk-multiselect-item__details"
+                          >
+                            {
+                              context.detailsDisplayTemplate
+                                ? context.detailsDisplayTemplate(item)
+                                : JSON.stringify(item.details)
+                            }
+                          </Collapsible>
+                        : context.opened[item.id]
+                            ? <Loader position="relative" />
+                            : null
+                    }
                   </li>
                 : null
             );

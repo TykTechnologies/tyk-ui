@@ -7,19 +7,33 @@ import MultiselectContext from './MultiselectContext';
 
 class Multiselect extends Component {
   static propTypes = {
+    customSearch: PropTypes.func,
+    entityName: PropTypes.string,
+    entityNamePlural: PropTypes.string,
     itemDisplayTemplate: PropTypes.func,
+    detailsDisplayTemplate: PropTypes.func,
     fieldsToSearchOn: PropTypes.array,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    getItemDetails: PropTypes.func,
+    itemsPageNumber: PropTypes.number,
+    itemsNrPages: PropTypes.number,
+    loadMoreItems: PropTypes.func
+  };
+
+  state = {
+    opened: {}
   };
 
   diffObjects(selectedItems, items) {
-    return items.filter((item) => {
+    let newItems = items.filter((item) => {
       let isCommon = selectedItems.filter((selectedItem) => {
         return selectedItem.id === item.id;
       }).length > 0;
 
       return !isCommon;
     });
+
+    return newItems;
   }
 
   itemsChange(allItems, item) {
@@ -28,7 +42,7 @@ class Multiselect extends Component {
 
     selectedItemsClone.unshift(item);
 
-    onChange(selectedItemsClone, allItems, item, 'added');
+    onChange(selectedItemsClone, item, 'added');
   }
 
   selectedItemsChange(selectedItems, item) {
@@ -37,35 +51,69 @@ class Multiselect extends Component {
 
     allItemsClone.unshift(item);
 
-    onChange(selectedItems, allItemsClone, item, 'removed');
+    onChange(selectedItems, item, 'removed');
+  }
+
+  onGetItemDetails(item) {
+    const { getItemDetails } = this.props;
+
+    this.setState((prevState) => {
+      prevState.opened[item.id] = !prevState.opened[item.id];
+
+      return prevState;
+    }, () => {
+      getItemDetails && getItemDetails(item);
+    });
   }
 
   render() {
     const {
+      customSearch,
+      entityName,
+      entityNamePlural,
       itemDisplayTemplate,
+      detailsDisplayTemplate,
       fieldsToSearchOn,
       items,
+      itemsPageNumber,
+      itemsNrPages,
+      loadMoreItems,
       onChange,
       selectedItems
     } = this.props;
+    const { opened } = this.state;
 
     return (
       <div className="tyk-multiselect">
         <MultiselectContext.Provider
           value={{
+            parentContext: this,
             itemDisplayTemplate,
-            fieldsToSearchOn
+            detailsDisplayTemplate,
+            fieldsToSearchOn,
+            onGetItemDetails: this.onGetItemDetails,
+            opened
           }}
         >
           <MultiselectPanel
+            inputPlaceholder={ `Search through selected ${ entityNamePlural }` }
+            noItemsMessage={ `Selected ${ entityNamePlural } will show here` }
             items={ selectedItems }
             onChange={ this.selectedItemsChange.bind(this) }
             panelType="selected"
           />
           <MultiselectPanel
-            customSearch={ onChange ? true : false }
+            inputPlaceholder={ `Search existing ${ entityNamePlural }` }
+            noItemsMessage={ `No ${ entityNamePlural } to display` }
+            entityNamePlural={ entityNamePlural }
+            customSearch={ customSearch ? true : false }
+            onCustomSearch={ customSearch }
             items={ this.diffObjects(selectedItems, items) }
             onChange={ this.itemsChange.bind(this) }
+            serverLoad={ loadMoreItems ? true : false }
+            loadMoreItems={ loadMoreItems }
+            itemsPageNumber={ itemsPageNumber }
+            itemsNrPages={ itemsNrPages }
             panelType="normal"
           />
         </MultiselectContext.Provider>

@@ -15,6 +15,7 @@ export { FieldEditableList } from './components/EditableList';
 export { Icon } from './components/Icon';
 export { InfoNote } from './components/InfoNote';
 export { Input } from './components/Input';
+export { InfiniteScroller } from './components/InfiniteScroller';
 export { FieldInput } from './components/Input';
 export { Loader } from './components/Loader';
 export { Message } from './components/Message';

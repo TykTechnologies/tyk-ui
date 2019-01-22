@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
 import { Input } from '../../Input';
+import { Message } from '../../Message';
+import { InfiniteScroller } from '../../InfiniteScroller';
 import MultiselectItem from './MultiselectItem';
 
 class MultiselectPanel extends Component {
   static propTypes = {
+    onCustomSearch: PropTypes.func,
     panelType: PropTypes.string,
     onChange: PropTypes.func,
-    items: PropTypes.array
+    items: PropTypes.array,
+    inputPlaceholder: PropTypes.string,
+    noItemsMessage: PropTypes.string
   };
 
   state = {
-    searchValue: '',
-    customSearch: PropTypes.bool
+    searchValue: ''
   };
 
   static propTypes = {
@@ -24,13 +28,20 @@ class MultiselectPanel extends Component {
   constructor(props) {
     super(props);
 
+    this.itemsListRef = createRef();
     this.searchOnChange = this.searchOnChange.bind(this);
   }
 
   searchOnChange(value) {
-    this.setState({
-      searchValue: value
-    });
+    const { onCustomSearch } = this.props;
+    
+    if(!onCustomSearch) {
+      this.setState({
+        searchValue: value
+      });
+    } else {
+      onCustomSearch(value);
+    }
   }
 
   itemChanged(item) {
@@ -44,25 +55,15 @@ class MultiselectPanel extends Component {
     onChange(cloneItems, item);
   }
 
-  render() {
-    const {
-      items,
-      customSearch,
-      panelType
-    } = this.props;
+  renderListItems() {
+    const { customSearch, items, panelType, serverLoad } = this.props;
     const { searchValue } = this.state;
 
     return (
-      <div className="tyk-multiselect__panel">
-        <Input
-          inputGroupAddonLeft={
-            <Icon type="search" />
-          }
-          name="search"
-          onChange={ this.searchOnChange }
-          value={ searchValue }
-        />
-        <ul className="tyk-multiselect__list">
+      <ul
+        className={ "tyk-multiselect__list" + ((!serverLoad) ? ' tyk-multiselect__list--scroll' : '') }
+        ref={ this.itemsListRef }
+      >
         {
           items.map((item, key) => {
             return (
@@ -76,7 +77,51 @@ class MultiselectPanel extends Component {
             );
           })
         }
-        </ul>
+      </ul>
+    );
+  }
+
+  render() {
+    const {
+      inputPlaceholder,
+      itemsPageNumber,
+      itemsNrPages,
+      noItemsMessage,
+      loadMoreItems,
+      items,
+      serverLoad
+    } = this.props;
+    const { searchValue } = this.state;
+
+    return (
+      <div className="tyk-multiselect__panel">
+        <Input
+          inputGroupAddonLeft={
+            <Icon type="search" />
+          }
+          name="search"
+          onChange={ this.searchOnChange }
+          placeholder={ inputPlaceholder }
+          value={ searchValue }
+        />
+        {
+          items.length
+            ? serverLoad
+                ? <InfiniteScroller
+                    refChild={ this.itemsListRef }
+                    hasMore={ itemsNrPages > itemsPageNumber }
+                    loadMore={ loadMoreItems }
+                    pageNumber={ itemsPageNumber }
+                  >
+                    { this.renderListItems() }
+                  </InfiniteScroller>
+                : this.renderListItems()
+            : <Message
+                theme="info"
+              >
+                { noItemsMessage }
+              </Message>
+        }
       </div>
     );
   }
