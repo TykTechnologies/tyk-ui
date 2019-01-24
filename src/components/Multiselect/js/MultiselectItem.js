@@ -54,6 +54,7 @@ class MultiselectItem extends Component {
                           iconType={ itemType === 'normal' ? 'plus' : 'minus'}
                           iconOnly={ true }
                           onClick={ onChange.bind(null, item) }
+                          disabled={ context.disabled  || (context.maxSelections && context.maxSelections === context.nrSelectedItems && itemType === 'normal') }
                         />
                         <Button
                           iconType={ context.opened[item.id] ? "chevron-up" : "chevron-down" }

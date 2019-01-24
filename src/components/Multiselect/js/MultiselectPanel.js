@@ -34,7 +34,7 @@ class MultiselectPanel extends Component {
 
   searchOnChange(value) {
     const { onCustomSearch } = this.props;
-    
+
     if(!onCustomSearch) {
       this.setState({
         searchValue: value

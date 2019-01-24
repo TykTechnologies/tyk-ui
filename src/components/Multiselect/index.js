@@ -1,4 +1,6 @@
 export { default as Multiselect } from './js/Multiselect';
+export { default as FieldMultiselect } from './js/FieldMultiselect';
+
 import React, { Component, Fragment } from 'react';
 
 export default class Test extends Component {
@@ -118,7 +120,7 @@ export default class Test extends Component {
         entityNamePlural="Certificates"
         fieldsToSearchOn={['name']}
         items={ items }
-        selectedItems={ selectedItems }
+        value={ selectedItems }
         onChange={this.onMultiselectChange.bind(this)}
         getItemDetails={ this.getItemDetails.bind(this) }
         itemDisplayTemplate={ this.itemDisplayTemplate }
@@ -127,6 +129,7 @@ export default class Test extends Component {
         itemsPageNumber={ page }
         itemsNrPages={ nrPages }
         customSearch={ this.customSearch.bind(this) }
+        maxSelections={ 3 }
       />
     );
   }
