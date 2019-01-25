@@ -1,0 +1,246 @@
+.tyk-toggle {
+  display: inline-flex;
+  font-family: 'robotoregular';
+  font-size: text-scale('sm');
+
+  &--disabled-true {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &__list {
+    background: theme-color('background', 'dark');
+    border-radius: 25px;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  &--primary &__list--single &__item--active {
+    @include button-variant(
+      theme-color('primary', 'base'),
+      transparent,
+      white,
+      theme-color('primary', 'base'),
+      transparent,
+      theme-color('primary', 'base')
+    )
+  }
+
+  &--success &__list--single &__item--active {
+    @include button-variant(
+      theme-color('success', 'base'),
+      transparent,
+      white,
+      theme-color('success', 'base'),
+      transparent,
+      theme-color('success', 'base')
+    )
+  }
+
+  &--danger &__list--single &__item--active {
+    @include button-variant(
+      theme-color('danger', 'base'),
+      transparent,
+      white,
+      theme-color('danger', 'base'),
+      transparent,
+      theme-color('danger', 'base')
+    )
+  }
+
+  &--warning &__list--single &__item--active {
+    @include button-variant(
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('foreground', 'base-dark'),
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('warning', 'base')
+    )
+  }
+
+  &--primary-gradient &__list--single &__item--active {
+    @include button-variant-gradient(
+      theme-color('primary', 'base'),
+      theme-color('primary', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--success-gradient &__list--single &__item--active {
+    @include button-variant-gradient(
+      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--danger-gradient &__list--single &__item--active {
+    @include button-variant-gradient(
+      theme-color('danger', 'base'),
+      theme-color('danger', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--warning-gradient &__list--single &__item--active {
+    @include button-variant-gradient(
+      theme-color('warning', 'light'),
+      theme-color('warning', 'base'),
+      theme-color('foreground', 'base-dark'),
+      false
+    )
+  }
+
+  &__item {
+    color: white;
+    z-index: 2;
+
+    &:first-child {
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+    }
+    &:last-child {
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+    }
+
+    input {
+      display: none;
+    }
+
+    label {
+      cursor: pointer;
+      padding: 7px 30px 7px 30px;
+      position: relative;
+      margin: 0;
+      transition: all .2s ease;
+
+      .tyk-toggle__list--single & {
+        padding-left: 45px;
+      }
+    }
+
+    .tyk-toggle__list--single &--active {
+      label {
+        padding-left: 30px;
+        padding-right: 45px;
+
+        .tyk-toggle__item-notch {
+          left: calc(100% - 27px);
+        }
+      }
+    }
+  }
+
+  &__item-notch {
+    border-radius: 25px;
+    bottom: 2px;
+    position: absolute;
+    transition: all .2s ease;
+    top: 2px;
+
+    &--single {
+      background: white;
+      left: 2px;
+      width: 25px;
+    }
+  }
+
+  &__notch {
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all .2s ease;
+    width: 100px;
+    z-index: 1;
+  }
+
+  &--primary &__notch {
+    @include button-variant(
+      theme-color('primary', 'base'),
+      transparent,
+      white,
+      theme-color('primary', 'base'),
+      transparent,
+      theme-color('primary', 'base')
+    )
+  }
+
+  &--success &__notch {
+    @include button-variant(
+      theme-color('success', 'base'),
+      transparent,
+      white,
+      theme-color('success', 'base'),
+      transparent,
+      theme-color('success', 'base')
+    )
+  }
+
+  &--danger &__notch {
+    @include button-variant(
+      theme-color('danger', 'base'),
+      transparent,
+      white,
+      theme-color('danger', 'base'),
+      transparent,
+      theme-color('danger', 'base')
+    )
+  }
+
+  &--warning &__notch {
+    @include button-variant(
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('foreground', 'base-dark'),
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('warning', 'base')
+    )
+  }
+
+  &--primary-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('primary', 'base'),
+      theme-color('primary', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--success-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--danger-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('danger', 'base'),
+      theme-color('danger', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--warning-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('warning', 'light'),
+      theme-color('warning', 'base'),
+      theme-color('foreground', 'base-dark'),
+      false
+    )
+  }
+}
