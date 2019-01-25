@@ -12,7 +12,7 @@
   $hover-background: darken($background, 7.5%),
   $hover-border: darken($border, 10%),
   $active-background: darken($background, 10%),
-  $active-border: darken($border, 12.5%)
+  $active-border: darken($border, 12.5%),
 ) {
   background-color: $background;
   border-color: $border;
@@ -51,7 +51,7 @@
   }
 }
 
-@mixin button-variant-gradient ($left-color, $right-color, $color: white) {
+@mixin button-variant-gradient ($left-color, $right-color, $color: white, $hover-enabled: true) {
   border-image: linear-gradient(to right, $left-color, $right-color, $left-color) 0 round;
   background: transparent linear-gradient(to right, $left-color, $right-color, $left-color);
   background-origin: border-box;
@@ -60,23 +60,25 @@
   background-position: 0 0;
   color: $color;
 
-  &:hover,
-  &:active,
-  &:active:focus {
-    border-image: linear-gradient(to right, $left-color, $right-color, $left-color) 0 round;
-    background: transparent linear-gradient(to right, $left-color, $right-color, $left-color);
-    background-position: 100% 0;
-    background-size: 200% auto;
-    background-clip: border-box;
-
-    &.disabled {
+  @if $hover-enabled {
+    &:hover,
+    &:active,
+    &:active:focus {
       border-image: linear-gradient(to right, $left-color, $right-color, $left-color) 0 round;
       background: transparent linear-gradient(to right, $left-color, $right-color, $left-color);
-      background-origin: border-box;
-      background-clip: border-box;
+      background-position: 100% 0;
       background-size: 200% auto;
-      background-position: 0 0;
-      color: $color;
+      background-clip: border-box;
+
+      &.disabled {
+        border-image: linear-gradient(to right, $left-color, $right-color, $left-color) 0 round;
+        background: transparent linear-gradient(to right, $left-color, $right-color, $left-color);
+        background-origin: border-box;
+        background-clip: border-box;
+        background-size: 200% auto;
+        background-position: 0 0;
+        color: $color;
+      }
     }
   }
 }

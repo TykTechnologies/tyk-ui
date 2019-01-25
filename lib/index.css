@@ -546,6 +546,12 @@ td.rdtYear:hover {
   font-weight: normal;
   font-style: normal; }
 
+@font-face {
+  font-family: "robotolight";
+  src: url(fonts/roboto-light-webfont.woff2) format("woff2"), url(fonts/roboto-light-webfont.woff) format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
 /*!
  * Font Awesome Free 5.5.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -4972,6 +4978,13 @@ select {
     font-size: 16px;
     line-height: 30px;
     border-radius: 20px; }
+  .tyk-button--icon-only {
+    border-radius: 3px;
+    padding: 0;
+    width: 24px; }
+    .tyk-button--icon-only:hover {
+      border-radius: 3px;
+      background-color: #F0F0F0; }
 
 .tyk-button-group__wrapper {
   display: inline-block;
@@ -5243,6 +5256,24 @@ select {
     right: 15px;
     top: 12px; }
 
+.tyk-infinite-scroller {
+  height: 100%;
+  overflow: hidden;
+  position: relative; }
+  .tyk-infinite-scroller .loading {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), white);
+    justify-content: center;
+    bottom: 0;
+    display: flex;
+    left: 0;
+    padding: 15px 0;
+    right: 0;
+    top: auto;
+    width: 100%; }
+  .tyk-infinite-scroller__wrapper {
+    height: 100%;
+    overflow-y: auto; }
+
 .tyk-info-note {
   border-radius: 0;
   position: relative; }
@@ -5428,6 +5459,70 @@ select {
   .tyk-modal__backdrop.fade-enter-done {
     opacity: 0.5; }
 
+.tyk-multiselect {
+  align-items: flex-start;
+  border: 1px solid #D2D2D2;
+  flex-wrap: wrap;
+  display: flex;
+  margin-bottom: 20px;
+  width: 100%; }
+  .tyk-multiselect.has-error {
+    border: 2px solid #FF6C7E; }
+  .tyk-multiselect__header {
+    background-color: #22272B;
+    color: white;
+    display: flex;
+    width: 100%; }
+    .tyk-multiselect__header > div {
+      padding: 10px 15px;
+      width: 50%; }
+  .tyk-multiselect__panel-wrapper {
+    display: flex;
+    flex: 1;
+    height: 265px;
+    width: 100%; }
+  .tyk-multiselect__panel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 -1px;
+    position: relative;
+    width: calc(50% + 1px); }
+    .tyk-multiselect__panel:last-child {
+      border-left: 1px solid #D2D2D2; }
+      .tyk-multiselect__panel:last-child .tyk-form-group {
+        margin-left: -1px;
+        width: calc(100% + 2px); }
+    .tyk-multiselect__panel .tyk-message {
+      margin: 20px 20px 0 20px; }
+  .tyk-multiselect__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; }
+    .tyk-multiselect__list--scroll {
+      height: 100%;
+      overflow-y: auto; }
+    .tyk-multiselect__list li {
+      border-bottom: 1px solid #D2D2D2;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 15px; }
+      .tyk-multiselect__list li > div {
+        align-items: start;
+        display: flex;
+        width: 100%; }
+      .tyk-multiselect__list li .loading {
+        justify-content: center; }
+      .tyk-multiselect__list li:last-child {
+        border-bottom: none; }
+  .tyk-multiselect .tyk-form-group {
+    margin: 0; }
+  .tyk-multiselect .tyk-multiselect-item__controls {
+    margin-left: auto; }
+    .tyk-multiselect .tyk-multiselect-item__controls .tyk-button {
+      margin-right: 5px; }
+      .tyk-multiselect .tyk-multiselect-item__controls .tyk-button:last-child {
+        margin-right: 0; }
+
 .tyk-pagination {
   display: flex;
   list-style-type: none;
@@ -5566,6 +5661,185 @@ select {
 
 textarea.tyk-form-control {
   height: auto; }
+
+.tyk-toggle {
+  display: inline-flex;
+  font-family: 'robotoregular';
+  font-size: 12px; }
+  .tyk-toggle--disabled-true {
+    cursor: not-allowed;
+    opacity: 0.7; }
+  .tyk-toggle__list {
+    background: #D2D2D2;
+    border-radius: 25px;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative; }
+  .tyk-toggle--primary .tyk-toggle__list--single .tyk-toggle__item--active {
+    background-color: #368493;
+    border-color: transparent;
+    color: white; }
+    .tyk-toggle--primary .tyk-toggle__list--single .tyk-toggle__item--active:hover {
+      background-color: #368493;
+      color: white; }
+  .tyk-toggle--success .tyk-toggle__list--single .tyk-toggle__item--active {
+    background-color: #00D9BA;
+    border-color: transparent;
+    color: white; }
+    .tyk-toggle--success .tyk-toggle__list--single .tyk-toggle__item--active:hover {
+      background-color: #00D9BA;
+      color: white; }
+  .tyk-toggle--danger .tyk-toggle__list--single .tyk-toggle__item--active {
+    background-color: #E8244F;
+    border-color: transparent;
+    color: white; }
+    .tyk-toggle--danger .tyk-toggle__list--single .tyk-toggle__item--active:hover {
+      background-color: #E8244F;
+      color: white; }
+  .tyk-toggle--warning .tyk-toggle__list--single .tyk-toggle__item--active {
+    background-color: #FEC789;
+    border-color: transparent;
+    color: #22272B; }
+    .tyk-toggle--warning .tyk-toggle__list--single .tyk-toggle__item--active:hover {
+      background-color: #FEC789;
+      color: #22272B; }
+  .tyk-toggle--primary-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
+    border-image: linear-gradient(to right, #368493, #1B3E4F, #368493) 0 round;
+    background: transparent linear-gradient(to right, #368493, #1B3E4F, #368493);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: white; }
+  .tyk-toggle--success-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
+    border-image: linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA) 0 round;
+    background: transparent linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: white; }
+  .tyk-toggle--danger-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
+    border-image: linear-gradient(to right, #E8244F, #C9234D, #E8244F) 0 round;
+    background: transparent linear-gradient(to right, #E8244F, #C9234D, #E8244F);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: white; }
+  .tyk-toggle--warning-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
+    border-image: linear-gradient(to right, #F3EFC2, #FEC789, #F3EFC2) 0 round;
+    background: transparent linear-gradient(to right, #F3EFC2, #FEC789, #F3EFC2);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: #22272B; }
+  .tyk-toggle__item {
+    color: white;
+    z-index: 2; }
+    .tyk-toggle__item:first-child {
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px; }
+    .tyk-toggle__item:last-child {
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px; }
+    .tyk-toggle__item input {
+      display: none; }
+    .tyk-toggle__item label {
+      cursor: pointer;
+      padding: 7px 30px 7px 30px;
+      position: relative;
+      margin: 0;
+      transition: all .2s ease; }
+      .tyk-toggle__list--single .tyk-toggle__item label {
+        padding-left: 45px; }
+    .tyk-toggle__list--single .tyk-toggle__item--active label {
+      padding-left: 30px;
+      padding-right: 45px; }
+      .tyk-toggle__list--single .tyk-toggle__item--active label .tyk-toggle__item-notch {
+        left: calc(100% - 27px); }
+  .tyk-toggle__item-notch {
+    border-radius: 25px;
+    bottom: 2px;
+    position: absolute;
+    transition: all .2s ease;
+    top: 2px; }
+    .tyk-toggle__item-notch--single {
+      background: white;
+      left: 2px;
+      width: 25px; }
+  .tyk-toggle__notch {
+    border-radius: 25px;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all .2s ease;
+    width: 100px;
+    z-index: 1; }
+  .tyk-toggle--primary .tyk-toggle__notch {
+    background-color: #368493;
+    border-color: transparent;
+    color: white; }
+    .tyk-toggle--primary .tyk-toggle__notch:hover {
+      background-color: #368493;
+      color: white; }
+  .tyk-toggle--success .tyk-toggle__notch {
+    background-color: #00D9BA;
+    border-color: transparent;
+    color: white; }
+    .tyk-toggle--success .tyk-toggle__notch:hover {
+      background-color: #00D9BA;
+      color: white; }
+  .tyk-toggle--danger .tyk-toggle__notch {
+    background-color: #E8244F;
+    border-color: transparent;
+    color: white; }
+    .tyk-toggle--danger .tyk-toggle__notch:hover {
+      background-color: #E8244F;
+      color: white; }
+  .tyk-toggle--warning .tyk-toggle__notch {
+    background-color: #FEC789;
+    border-color: transparent;
+    color: #22272B; }
+    .tyk-toggle--warning .tyk-toggle__notch:hover {
+      background-color: #FEC789;
+      color: #22272B; }
+  .tyk-toggle--primary-gradient .tyk-toggle__notch {
+    border-image: linear-gradient(to right, #368493, #1B3E4F, #368493) 0 round;
+    background: transparent linear-gradient(to right, #368493, #1B3E4F, #368493);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: white; }
+  .tyk-toggle--success-gradient .tyk-toggle__notch {
+    border-image: linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA) 0 round;
+    background: transparent linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: white; }
+  .tyk-toggle--danger-gradient .tyk-toggle__notch {
+    border-image: linear-gradient(to right, #E8244F, #C9234D, #E8244F) 0 round;
+    background: transparent linear-gradient(to right, #E8244F, #C9234D, #E8244F);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: white; }
+  .tyk-toggle--warning-gradient .tyk-toggle__notch {
+    border-image: linear-gradient(to right, #F3EFC2, #FEC789, #F3EFC2) 0 round;
+    background: transparent linear-gradient(to right, #F3EFC2, #FEC789, #F3EFC2);
+    background-origin: border-box;
+    background-clip: border-box;
+    background-size: 200% auto;
+    background-position: 0 0;
+    color: #22272B; }
 
 * {
   box-sizing: border-box; }

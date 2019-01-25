@@ -184,4 +184,15 @@
       $button-border-radius
     )
   }
+
+  &--icon-only {
+    border-radius: 3px;
+    padding: 0;
+    width: 24px;
+
+    &:hover {
+      border-radius: 3px;
+      background-color: theme-color('background', 'light');
+    }
+  }
 }
