@@ -21,7 +21,7 @@ export { Loader } from './components/Loader';
 export { Message } from './components/Message';
 export { Modal } from './components/Modal';
 export { Multiselect } from './components/Multiselect';
-export { FieldMultiselect } from './components/FieldMultiselect';
+export { FieldMultiselect } from './components/Multiselect';
 export { Pagination } from './components/Pagination';
 export { Radio } from './components/Radio';
 export { FieldPagination } from './components/Pagination';
@@ -32,6 +32,6 @@ export { FieldSelect } from './components/Select';
 export { Tabs } from './components/Tabs';
 export { Textarea } from './components/Textarea';
 export { Toggle } from './components/Toggle';
-export { FieldToggle } from './components/FieldToggle';
+export { FieldToggle } from './components/Toggle';
 
 import './index.scss';
