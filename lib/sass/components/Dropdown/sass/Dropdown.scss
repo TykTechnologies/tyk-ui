@@ -4,6 +4,12 @@
 .tyk-dropdown {
   display: inline-block;
 
+  + .tyk-button,
+  + .tyk-dropdown,
+  + .tyk-toggle {
+    margin-left: 10px
+  }
+
   label {
     display: block;
   }
@@ -35,6 +41,7 @@
   margin: 0;
   margin-top: 3px;
   padding: 0;
+  z-index: 1000;
 
   &.opened {
     display: flex;

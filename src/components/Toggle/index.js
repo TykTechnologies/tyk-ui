@@ -37,6 +37,7 @@ export default class TestToggle extends Component {
               value={ active }
               onChange={ this.toggleOnChange.bind(this) }
               theme="primary"
+              size="lg"
             >
               <Toggle.Item
                 label="Option"
@@ -59,6 +60,7 @@ export default class TestToggle extends Component {
               value={ active }
               onChange={ this.toggleOnChange.bind(this) }
               theme="danger"
+              size="sm"
             >
               <Toggle.Item
                 label="Option"
@@ -266,6 +268,7 @@ export default class TestToggle extends Component {
               onChange={ this.toggleMultipleOnChange.bind(this) }
               theme="danger-gradient"
               type="multiple"
+              size="sm"
             >
               <Toggle.Item
                 label="short"
@@ -288,6 +291,7 @@ export default class TestToggle extends Component {
               onChange={ this.toggleMultipleOnChange.bind(this) }
               theme="warning-gradient"
               type="multiple"
+              size="lg"
             >
               <Toggle.Item
                 label="short"

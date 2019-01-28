@@ -151,10 +151,14 @@ export default class Dropdown extends Component {
   }
 
   getWrapperCssClasses() {
-    const { btnGroup, btnGroupSize } = this.props;
+    const { btnGroup, btnGroupSize, className } = this.props;
     let cssClasses = ['tyk-dropdown'];
 
     cssClasses.push('theme-' + (this.props.btnTheme || 'default'));
+
+    if(className) {
+      cssClasses = cssClasses.concat(className.split(' '));
+    }
 
     if(btnGroup) {
       cssClasses.push('tyk-button-group');

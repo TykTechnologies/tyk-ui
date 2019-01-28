@@ -6,6 +6,7 @@
 .tyk-button {
   background-color: transparent;
   border: none;
+  color: white;
   cursor: pointer;
   display: inline-block;
   font-family: 'robotomedium';
@@ -14,6 +15,12 @@
   transition: all .2s linear;
   user-select: none;
   vertical-align: middle;
+
+  + .tyk-button,
+  + .tyk-dropdown,
+  + .tyk-toggle {
+    margin-left: 10px;
+  }
 
   span + i {
     margin-left: 10px;
@@ -29,6 +36,7 @@
   }
 
   &:hover {
+    color: white;
     text-decoration: none;
   }
 

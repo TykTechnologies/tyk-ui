@@ -3,6 +3,12 @@
   font-family: 'robotoregular';
   font-size: text-scale('sm');
 
+  + .tyk-button,
+  + .tyk-dropdown,
+  + .tyk-toggle {
+    margin-left: 10px
+  }
+
   &--disabled-true {
     cursor: not-allowed;
     opacity: 0.7;
@@ -117,7 +123,6 @@
 
     label {
       cursor: pointer;
-      padding: 7px 30px 7px 30px;
       position: relative;
       margin: 0;
       transition: all .2s ease;
@@ -133,9 +138,65 @@
         padding-right: 45px;
 
         .tyk-toggle__item-notch {
-          left: calc(100% - 27px);
+          left: calc(100% - 35px);
         }
       }
+    }
+  }
+
+  &--sm label {
+    @include button-size(
+      $padding-y-button-sm,
+      $padding-x-button-sm,
+      text-scale('xs'),
+      $line-height-button-sm,
+      $button-border-radius
+    )
+  }
+
+  &--sm &__list--single label {
+    padding-left: 35px;
+  }
+
+  &--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
+    padding-left: 20px;
+    padding-right: 35px;
+
+    .tyk-toggle__item-notch {
+      left: calc(100% - 27px);
+    }
+  }
+
+  &--md label {
+    @include button-size(
+      $padding-y-button-md,
+      $padding-x-button-md,
+      text-scale('sm'),
+      $line-height-button-md,
+      $button-border-radius
+    )
+  }
+
+  &--lg label {
+    @include button-size(
+      $padding-y-button-lg,
+      $padding-x-button-lg,
+      text-scale('md'),
+      $line-height-button-lg,
+      $button-border-radius
+    )
+  }
+
+  &--lg &__list--single label {
+    padding-left: 45px;
+  }
+
+  &--lg .tyk-toggle__list--single .tyk-toggle__item--active label {
+    padding-left: 30px;
+    padding-right: 45px;
+
+    .tyk-toggle__item-notch {
+      left: calc(100% - 43px);
     }
   }
 
@@ -149,8 +210,16 @@
     &--single {
       background: white;
       left: 2px;
-      width: 25px;
+      width: 32px;
     }
+  }
+
+  &--sm &__item-notch--single {
+    width: 24px;
+  }
+
+  &--lg &__item-notch--single {
+    width: 40px;
   }
 
   &__notch {

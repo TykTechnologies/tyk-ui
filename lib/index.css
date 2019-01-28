@@ -4694,6 +4694,7 @@ select {
 .tyk-button {
   background-color: transparent;
   border: none;
+  color: white;
   cursor: pointer;
   display: inline-block;
   font-family: 'robotomedium';
@@ -4706,6 +4707,10 @@ select {
   font-size: 12px;
   line-height: 24px;
   border-radius: 20px; }
+  .tyk-button + .tyk-button,
+  .tyk-button + .tyk-dropdown,
+  .tyk-button + .tyk-toggle {
+    margin-left: 10px; }
   .tyk-button span + i {
     margin-left: 10px; }
   .tyk-button i + span {
@@ -4714,6 +4719,7 @@ select {
     cursor: not-allowed;
     opacity: 0.7; }
   .tyk-button:hover {
+    color: white;
     text-decoration: none; }
   .tyk-button:focus {
     outline: none; }
@@ -5096,6 +5102,10 @@ select {
 
 .tyk-dropdown {
   display: inline-block; }
+  .tyk-dropdown + .tyk-button,
+  .tyk-dropdown + .tyk-dropdown,
+  .tyk-dropdown + .tyk-toggle {
+    margin-left: 10px; }
   .tyk-dropdown label {
     display: block; }
   .tyk-dropdown.theme-list .tyk-button {
@@ -5117,7 +5127,8 @@ select {
   list-style-type: none;
   margin: 0;
   margin-top: 3px;
-  padding: 0; }
+  padding: 0;
+  z-index: 1000; }
   .tyk-dropdown-menu.opened {
     display: flex;
     flex-direction: column;
@@ -5666,6 +5677,10 @@ textarea.tyk-form-control {
   display: inline-flex;
   font-family: 'robotoregular';
   font-size: 12px; }
+  .tyk-toggle + .tyk-button,
+  .tyk-toggle + .tyk-dropdown,
+  .tyk-toggle + .tyk-toggle {
+    margin-left: 10px; }
   .tyk-toggle--disabled-true {
     cursor: not-allowed;
     opacity: 0.7; }
@@ -5750,7 +5765,6 @@ textarea.tyk-form-control {
       display: none; }
     .tyk-toggle__item label {
       cursor: pointer;
-      padding: 7px 30px 7px 30px;
       position: relative;
       margin: 0;
       transition: all .2s ease; }
@@ -5760,7 +5774,36 @@ textarea.tyk-form-control {
       padding-left: 30px;
       padding-right: 45px; }
       .tyk-toggle__list--single .tyk-toggle__item--active label .tyk-toggle__item-notch {
-        left: calc(100% - 27px); }
+        left: calc(100% - 35px); }
+  .tyk-toggle--sm label {
+    padding: 4px 20px;
+    font-size: 10px;
+    line-height: 20px;
+    border-radius: 20px; }
+  .tyk-toggle--sm .tyk-toggle__list--single label {
+    padding-left: 35px; }
+  .tyk-toggle--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
+    padding-left: 20px;
+    padding-right: 35px; }
+    .tyk-toggle--sm .tyk-toggle__list--single .tyk-toggle__item--active label .tyk-toggle__item-notch {
+      left: calc(100% - 27px); }
+  .tyk-toggle--md label {
+    padding: 6px 30px;
+    font-size: 12px;
+    line-height: 24px;
+    border-radius: 20px; }
+  .tyk-toggle--lg label {
+    padding: 8px 30px;
+    font-size: 16px;
+    line-height: 30px;
+    border-radius: 20px; }
+  .tyk-toggle--lg .tyk-toggle__list--single label {
+    padding-left: 45px; }
+  .tyk-toggle--lg .tyk-toggle__list--single .tyk-toggle__item--active label {
+    padding-left: 30px;
+    padding-right: 45px; }
+    .tyk-toggle--lg .tyk-toggle__list--single .tyk-toggle__item--active label .tyk-toggle__item-notch {
+      left: calc(100% - 43px); }
   .tyk-toggle__item-notch {
     border-radius: 25px;
     bottom: 2px;
@@ -5770,7 +5813,11 @@ textarea.tyk-form-control {
     .tyk-toggle__item-notch--single {
       background: white;
       left: 2px;
-      width: 25px; }
+      width: 32px; }
+  .tyk-toggle--sm .tyk-toggle__item-notch--single {
+    width: 24px; }
+  .tyk-toggle--lg .tyk-toggle__item-notch--single {
+    width: 40px; }
   .tyk-toggle__notch {
     border-radius: 25px;
     bottom: 0;

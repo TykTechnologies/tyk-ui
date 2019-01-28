@@ -8,6 +8,7 @@ class Toggle extends Component {
     disabled: PropTypes.bool,
     theme: PropTypes.string,
     type: PropTypes.string, // single || multiple
+    size: PropTypes.string,
     value: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string
@@ -66,6 +67,7 @@ class Toggle extends Component {
     const {
       children,
       disabled,
+      size,
       theme,
       type,
       value
@@ -74,7 +76,7 @@ class Toggle extends Component {
     const { notchStyle } = this.state;
 
     return (
-      <div className={`tyk-toggle tyk-toggle--disabled-${ disabled } tyk-toggle--${ theme }`} ref={ this.toggleRef }>
+      <div className={`tyk-toggle tyk-toggle--disabled-${ disabled } tyk-toggle--${ size || 'md' } tyk-toggle--${ theme }`} ref={ this.toggleRef }>
         <ToggleContext.Provider
           value={{
             disabled,
