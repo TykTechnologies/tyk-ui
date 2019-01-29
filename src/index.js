@@ -22,6 +22,7 @@ export { Message } from './components/Message';
 export { Modal } from './components/Modal';
 export { Multiselect } from './components/Multiselect';
 export { FieldMultiselect } from './components/Multiselect';
+export { NavBar } from './components/NavBar';
 export { Pagination } from './components/Pagination';
 export { Radio } from './components/Radio';
 export { FieldPagination } from './components/Pagination';

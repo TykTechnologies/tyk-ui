@@ -1,0 +1,51 @@
+@import './variables';
+
+.tyk-nav-bar {
+  border: 0;
+  background-color: $white;
+  font-family: $font-family-title;
+  left: 0;
+  margin: 0;
+  padding: $nav-bar-padding;
+  position: fixed;
+  top: $nav-bar-top;
+  width: 100%;
+  z-index: 8;
+  transition: all .2s linear;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 20px;
+
+    .menu-opened & {
+      transform: translate($nav-par-padding-left);
+    }
+  }
+}
+
+.tyk-nav-bar .tyk-nav-bar__wrapper {
+  padding-bottom: 30px;
+  display: flex;
+
+  @media screen and (max-width: 1024px) {
+    padding-left: 0;
+  }
+
+  h1 {
+    margin: 0;
+    padding-right: 10px;
+  }
+
+  .tyk-nav-bar__container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  .tyk-nav-bar__left {
+    flex-grow: 1;
+  }
+
+  .tyk-nav-bar__right {
+    margin-left: auto;
+  }
+}
