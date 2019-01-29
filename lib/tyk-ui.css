@@ -5534,6 +5534,42 @@ select {
       .tyk-multiselect .tyk-multiselect-item__controls .tyk-button:last-child {
         margin-right: 0; }
 
+.tyk-nav-bar {
+  border: 0;
+  background-color: white;
+  font-family: "robotomedium";
+  left: 0;
+  margin: 0;
+  padding: 30px 20px 0 245px;
+  position: fixed;
+  top: 51px;
+  width: 100%;
+  z-index: 8;
+  transition: all .2s linear; }
+  @media screen and (max-width: 1024px) {
+    .tyk-nav-bar {
+      padding-left: 20px; }
+      .menu-opened .tyk-nav-bar {
+        transform: translate(245px); } }
+
+.tyk-nav-bar .tyk-nav-bar__wrapper {
+  padding-bottom: 30px;
+  display: flex; }
+  @media screen and (max-width: 1024px) {
+    .tyk-nav-bar .tyk-nav-bar__wrapper {
+      padding-left: 0; } }
+  .tyk-nav-bar .tyk-nav-bar__wrapper h1 {
+    margin: 0;
+    padding-right: 10px; }
+  .tyk-nav-bar .tyk-nav-bar__wrapper .tyk-nav-bar__container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between; }
+  .tyk-nav-bar .tyk-nav-bar__wrapper .tyk-nav-bar__left {
+    flex-grow: 1; }
+  .tyk-nav-bar .tyk-nav-bar__wrapper .tyk-nav-bar__right {
+    margin-left: auto; }
+
 .tyk-pagination {
   display: flex;
   list-style-type: none;
