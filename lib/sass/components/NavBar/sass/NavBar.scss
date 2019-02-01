@@ -17,7 +17,7 @@
     padding-left: 20px;
 
     .menu-opened & {
-      transform: translate($nav-par-padding-left);
+      transform: translate($nav-bar-animate-left);
     }
   }
 }

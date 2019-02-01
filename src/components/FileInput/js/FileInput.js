@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, createRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Icon } from '../../Icon';
@@ -15,62 +15,33 @@ export default class FileInput extends Component {
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
-    placeholder: PropTypes.string,
-    value: PropTypes.string
+    placeholder: PropTypes.string
   }
-
-  state = {
-    initValue: this.props.value,
-    value: this.props.value
-  };
 
   constructor(props) {
     super(props);
 
     this._handleOnChange = this._handleOnChange.bind(this);
     this.clearValue = this.clearValue.bind(this);
+    this.fileInputRef = createRef();
   }
 
-  reset() {
-    const { initValue } = this.state;
-    const { onChange } = this.props;
-
-    this.setState({
-      value: initValue
-    });
-  }
+  reset() {}
 
   clearValue() {
-    const { onChange, isfield } = this.props;
-    
-    if(!isfield) {
-      this.setState({
-        value: ''
-      }, () => {
-        onChange('');
-      });
-    } else {
-      onChange('');
-    }
+    const { onChange } = this.props;
+    this.fileInputRef.current.value = '';
+    onChange('');
   }
 
   _handleOnChange(e) {
-    const { onChange, isfield } = this.props;
+    const { onChange } = this.props;
 
-    if(!isfield) {
-      this.setState({
-        value: e.target.value
-      }, () => {
-        onChange(this.state.value);
-      });
-    } else {
-      onChange(e.target.value);
-    }
+    onChange(e.target.files);
   }
 
   getFileInputComponent() {
-    const { accept, isfield, onChange, ...rest } = this.props;
-    let value = (isfield) ? this.props.value : this.state.value;
+    const { accept, value: omitValue, onChange, ...rest } = this.props;
 
     return (
       <div className="tyk-file-input__wrapper">
@@ -79,13 +50,14 @@ export default class FileInput extends Component {
           className="tyk-form-control"
           { ...rest }
           onChange={ this._handleOnChange }
-          value={ value }
+          ref={ this.fileInputRef }
           type="file"
         />
         {
-          value
+          this.fileInputRef.current && this.fileInputRef.current.files.length > 0
             ? <button
                 onClick={ this.clearValue }
+                type="button"
               >
                 <Icon type="times"/>
               </button>

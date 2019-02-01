@@ -4691,6 +4691,19 @@ select {
   .tyk-radio--inline {
     display: inline-flex; }
 
+.tyk-inline-form {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap; }
+  .tyk-inline-form .tyk-form-group {
+    flex: 1;
+    margin-left: 20px;
+    min-width: 200px; }
+    .tyk-inline-form .tyk-form-group:first-child {
+      margin-left: 0; }
+  .tyk-inline-form > .tyk-button {
+    margin-left: 20px; }
+
 .tyk-button {
   background-color: transparent;
   border: none;
@@ -5058,6 +5071,16 @@ select {
   .tyk-combobox__search-box input:focus {
     outline: none; }
 
+.tyk-combobox .tyk-combobox__placeholder {
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 15px 10px 15px;
+  width: 100%; }
+  .tyk-combobox .tyk-combobox__placeholder > i {
+    margin-left: auto; }
+
 .tyk-combobox__list {
   background-color: white;
   border: 1px solid #D2D2D2;
@@ -5086,15 +5109,6 @@ select {
       background-color: white; }
     .tyk-combobox__list li i {
       margin-right: 5px; }
-
-.tyk-combobox__placeholder {
-  align-items: center;
-  display: flex;
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 10px 15px 10px 15px; }
-  .tyk-combobox__placeholder > i {
-    margin-left: auto; }
 
 .tyk-form-group.has-error > .rdt .tyk-form-control {
   border: 2px solid #FF6C7E;
@@ -5265,7 +5279,7 @@ select {
     cursor: pointer;
     position: absolute;
     right: 15px;
-    top: 12px; }
+    top: 9px; }
 
 .tyk-infinite-scroller {
   height: 100%;
@@ -5540,7 +5554,7 @@ select {
   font-family: "robotomedium";
   left: 0;
   margin: 0;
-  padding: 30px 20px 0 245px;
+  padding: 30px 20px 0 265px;
   position: fixed;
   top: 51px;
   width: 100%;
@@ -5624,7 +5638,7 @@ select {
   background-color: white;
   font-family: 'robotoregular';
   padding: 25px;
-  transition: all .2s; }
+  transition: height .2s; }
   .tyk-panel__body.no-padding {
     padding: 0; }
 
@@ -5668,7 +5682,8 @@ select {
   .tyk-table th {
     padding: 20px 10px; }
   .tyk-table td {
-    padding: 10px; }
+    padding: 10px;
+    vertical-align: middle; }
   .tyk-table tbody tr:nth-child(2n+1) {
     background-color: #F0F0F0; }
   .tyk-table tr td:first-child,
@@ -5684,6 +5699,9 @@ select {
 
 .tyk-table-search {
   padding: 10px 25px 0 25px; }
+  .tyk-table-search label {
+    font-size: 12px;
+    text-transform: uppercase; }
 
 .tyk-tabs--default > ul {
   display: flex;

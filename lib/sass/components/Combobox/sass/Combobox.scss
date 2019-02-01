@@ -54,6 +54,19 @@
       }
     }
   }
+
+  & &__placeholder {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
+    width: 100%;
+
+    > i {
+      margin-left: auto;
+    }
+  }
 }
 
 .tyk-combobox__list {
@@ -98,17 +111,5 @@
     i {
       margin-right: 5px;
     }
-  }
-}
-
-.tyk-combobox__placeholder {
-  align-items: center;
-  display: flex;
-  overflow: hidden;
-  white-space: nowrap;
-  padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
-
-  > i {
-    margin-left: auto;
   }
 }

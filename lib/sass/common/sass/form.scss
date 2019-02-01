@@ -105,3 +105,23 @@ select {
     display: inline-flex;
   }
 }
+
+.tyk-inline-form {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+
+  .tyk-form-group {
+    flex: 1;
+    margin-left: 20px;
+    min-width: 200px;
+
+    &:first-child {
+      margin-left:0
+    }
+  }
+
+  > .tyk-button {
+    margin-left: 20px;
+  }
+}

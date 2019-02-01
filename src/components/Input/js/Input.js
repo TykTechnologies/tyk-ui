@@ -93,6 +93,7 @@ export default class Input extends Component {
 
     return (
       <input
+        autoComplete="off"
         className="tyk-form-control"
         { ...rest }
         onChange={ this._handleOnChange }

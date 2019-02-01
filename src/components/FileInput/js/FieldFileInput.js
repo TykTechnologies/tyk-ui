@@ -25,10 +25,9 @@ export default class FieldFileInput extends Component {
     const { input, ...rest } = this.props;
 
     return (
-      <FieldInput
+      <FileInput
         { ...input }
         { ...rest }
-        isfield="true"
         error={ this.getInputError() }
       />
     );

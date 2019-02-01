@@ -26,6 +26,7 @@
 
   td {
     padding: $table-td-padding;
+    vertical-align: middle;
   }
 
   tbody tr:nth-child(2n+1) {
@@ -53,4 +54,9 @@
 
 .tyk-table-search {
   padding: 10px 25px 0 25px;
+
+  label {
+    font-size: text-scale('sm');
+    text-transform: uppercase;
+  }
 }

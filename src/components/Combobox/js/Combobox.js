@@ -257,7 +257,6 @@ export default class Combobox extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-
   filterValues() {
     const { values } = this.props;
 
@@ -478,7 +477,8 @@ export default class Combobox extends Component {
 
   getComboboxDisplayData() {
     const { stateSelectedValues } = this.state;
-    const { multiple, placeholder } = this.props;
+    const { multiple, placeholder, values } = this.props;
+    console.log(stateSelectedValues);
     if(!stateSelectedValues) {
       return placeholder;
     }
@@ -495,6 +495,12 @@ export default class Combobox extends Component {
       return stateSelectedValues.reduce((prevValue, value, index) => {
         return prevValue + value.name + ((index !== stateSelectedValues.length - 1) ? ', ' : '');
       }, '');
+    }
+
+    if(values && values.length && !Array.isArray(stateSelectedValues) && !stateSelectedValues.name) {
+      return values.filter((value) => {
+        return value.id === stateSelectedValues.id;
+      })[0].name;
     }
 
     return stateSelectedValues.name;
