@@ -1,6 +1,6 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
@@ -66,10 +66,6 @@
     "react-ace": "^6.3.2",
     "react-datetime": "^2.16.3",
     "react-dom": "^16.7.0",
-    "react-redux": "^6.0.0",
-    "react-transition-group": "^2.5.3",
-    "redux": "^4.0.1",
-    "redux-form": "^8.1.0",
-    "redux-immutable": "^4.0.0"
+    "react-transition-group": "^2.5.3"
   }
 }
