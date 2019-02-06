@@ -32,6 +32,7 @@ export { Select } from './components/Select';
 export { FieldSelect } from './components/Select';
 export { Tabs } from './components/Tabs';
 export { Textarea } from './components/Textarea';
+export { FieldTextarea } from './components/FieldTextarea';
 export { Toggle } from './components/Toggle';
 export { FieldToggle } from './components/Toggle';
 
