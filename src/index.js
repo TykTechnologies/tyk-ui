@@ -3,6 +3,7 @@ export { Checkbox } from './components/Checkbox';
 export { Column } from './components/Column';
 export { Combobox } from './components/Combobox';
 export { CodeEditor } from './components/CodeEditor';
+export { FieldCodeEditor } from './components/CodeEditor';
 export { FieldCombobox } from './components/Combobox';
 export { DateTimePicker } from './components/DateTimePicker';
 export { FieldDateTimePicker } from './components/DateTimePicker';
