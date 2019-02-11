@@ -140,7 +140,6 @@ export default class EditableListForm extends Component {
     this.setState((previousState) => {
       return Object.assign({}, previousState, tempState);
     }, () => {
-      console.log('aaaa', addValueOnFieldChange);
       if(addValueOnFieldChange) {
         this.submitForm();
       }
