@@ -9,13 +9,13 @@ export default class Checkbox extends Component {
     label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
   };
 
   getCssClasses() {
-    let cssClasses = [];
+    const cssClasses = [];
 
-    if(this.props.inline) {
+    if (this.props.inline) {
       cssClasses.push('tyk-checkbox--inline');
     } else {
       cssClasses.push('tyk-checkbox');
@@ -29,14 +29,16 @@ export default class Checkbox extends Component {
 
     return (
       <div
-        className={ this.getCssClasses() }
+        className={this.getCssClasses()}
       >
         <label>
           <input
-            { ...input }
-            { ...rest }
+            {...input}
+            {...rest}
             type="checkbox"
-          /> { this.props.label }
+          />
+          {' '}
+          { this.props.label }
         </label>
       </div>
     );

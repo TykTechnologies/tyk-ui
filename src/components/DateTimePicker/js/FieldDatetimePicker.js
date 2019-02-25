@@ -12,7 +12,7 @@ export default class FieldDateTimePicker extends Component {
     const { touched, error, warning } = this.props.meta;
     let message = null;
 
-    if(touched && error && this.props.validationmessages[error]) {
+    if (touched && error && this.props.validationmessages[error]) {
       message = this.props.validationmessages[error];
     }
 
@@ -24,10 +24,10 @@ export default class FieldDateTimePicker extends Component {
 
     return (
       <DateTimePicker
-        { ...input }
-        { ...rest }
+        {...input}
+        {...rest}
         isfield="true"
-        error={ this.getInputError() }
+        error={this.getInputError()}
       />
     );
   }

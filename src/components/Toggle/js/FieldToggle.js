@@ -1,32 +1,40 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import Toggle from './Toggle.js';
+import Toggle from './Toggle';
 
 export default class FieldToggle extends Component {
+  static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.node,
+    ]),
+    onChange: PropTypes.func,
+    input: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
 
-    this._handleOnChange = this._handleOnChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
-  _handleOnChange(value) {
-    const { onChange } = this.props.input;
+  handleOnChange(value) {
+    const { input } = this.props;
 
-    onChange(fromJS(value));
+    input.onChange(fromJS(value));
   }
 
   render() {
-    const { ...props } = this.props;
+    const { children, ...props } = this.props;
 
     return (
       <Toggle
-        { ...props }
-        onChange={ this._handleOnChange }
-        value={ !props.input.value ? props.input.value : props.input.value.toJS() }
+        {...props}
+        onChange={this.handleOnChange}
+        value={!props.input.value ? props.input.value : props.input.value.toJS()}
       >
-        { this.props.children }
+        {children}
       </Toggle>
     );
   }

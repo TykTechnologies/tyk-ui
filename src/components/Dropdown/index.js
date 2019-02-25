@@ -6,5 +6,5 @@ Dropdown.Item = DropdownItem;
 
 export {
   Dropdown,
-  FieldDropdown
+  FieldDropdown,
 };

@@ -21,9 +21,9 @@ export default class FieldCodeEditor extends Component {
     const { touched, error, warning } = this.props.meta;
     let message = null;
 
-    if(touched && error && this.props.validationmessages[error]) {
+    if (touched && error && this.props.validationmessages[error]) {
       message = this.props.validationmessages[error];
-    } else if(touched && warning) {
+    } else if (touched && warning) {
       message = 'warning';
     }
 
@@ -35,9 +35,9 @@ export default class FieldCodeEditor extends Component {
 
     return (
       <CodeEditor
-        { ...input }
-        { ...rest }
-        error={ this.getInputError() }
+        {...input}
+        {...rest}
+        error={this.getInputError()}
       />
     );
   }

@@ -7,29 +7,29 @@ export default class Input extends Component {
     id: PropTypes.string,
     error: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.bool
+      PropTypes.bool,
     ]),
     inputGroupAddonLeft: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
     inputGroupAddonRight: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
     label: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
   }
 
   state = {
     initValue: this.props.value,
-    value: this.props.value
+    value: this.props.value,
   };
 
   constructor(props) {
@@ -43,7 +43,7 @@ export default class Input extends Component {
     const { onChange } = this.props;
 
     this.setState({
-      value: initValue
+      value: initValue,
     });
   }
 
@@ -51,9 +51,9 @@ export default class Input extends Component {
     const { onChange, isfield } = this.props;
 
 
-    if(!isfield) {
+    if (!isfield) {
       this.setState({
-        value: e.target.value
+        value: e.target.value,
       }, () => {
         onChange(this.state.value);
       });
@@ -63,7 +63,7 @@ export default class Input extends Component {
   }
 
   getAddon(content) {
-    return(
+    return (
       <div className="tyk-input-group__addon">
         { content }
       </div>
@@ -95,9 +95,9 @@ export default class Input extends Component {
       <input
         autoComplete="off"
         className="tyk-form-control"
-        { ...rest }
-        onChange={ this._handleOnChange }
-        value={ (isfield) ? this.props.value : this.state.value }
+        {...rest}
+        onChange={this._handleOnChange}
+        value={(isfield) ? this.props.value : this.state.value}
       />
     );
   }
@@ -105,20 +105,22 @@ export default class Input extends Component {
   getInputError() {
     const { error } = this.props;
 
-    return (error && error !== 'true' && error !=='false')
-      ? <p
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
           className="tyk-form-control__error-message"
         >
           { error }
         </p>
+      )
       : null;
   }
 
   getCssClasses() {
     const { error } = this.props;
-    let cssClasses = ['tyk-form-group'];
+    const cssClasses = ['tyk-form-group'];
 
-    if(error) {
+    if (error) {
       cssClasses.push('has-error');
     }
 
@@ -128,10 +130,10 @@ export default class Input extends Component {
   render() {
     return (
       <Fragment>
-        <div className={ this.getCssClasses() }>
+        <div className={this.getCssClasses()}>
           {
             this.props.label
-              ? <label htmlFor={ this.props.id }>{ this.props.label }</label>
+              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
               : null
           }
           {

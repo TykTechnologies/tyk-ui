@@ -1,28 +1,34 @@
+import React, { Component, Fragment } from 'react';
+
 import Toggle from './js/Toggle';
 import ToggleItem from './js/ToggleItem';
 
-Toggle.Item = ToggleItem;
-
-import React, { Component, Fragment } from 'react';
 import { Row } from '../Row';
 import { Column } from '../Column';
 
-export default class TestToggle extends Component {
+Toggle.Item = ToggleItem;
 
+export default class TestToggle extends Component {
   state = {
     active: false,
-    activeMultiple: 'option2'
+    activeMultiple: 'option2',
   };
+
+  constructor(props) {
+    super(props);
+    this.toggleMultipleOnChange = this.toggleMultipleOnChange.bind(this);
+    this.toggleOnChange = this.toggleOnChange.bind(this);
+  }
 
   toggleOnChange(value) {
     this.setState({
-      active: value
+      active: value,
     });
   }
 
   toggleMultipleOnChange(value) {
     this.setState({
-      activeMultiple: value
+      activeMultiple: value,
     });
   }
 
@@ -34,8 +40,8 @@ export default class TestToggle extends Component {
         <Row>
           <Column size="md-12 lg-12">
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="primary"
               size="lg"
             >
@@ -46,8 +52,8 @@ export default class TestToggle extends Component {
             </Toggle>
 
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="success"
             >
               <Toggle.Item
@@ -57,8 +63,8 @@ export default class TestToggle extends Component {
             </Toggle>
 
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="danger"
               size="sm"
             >
@@ -69,8 +75,8 @@ export default class TestToggle extends Component {
             </Toggle>
 
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="warning"
             >
               <Toggle.Item
@@ -80,12 +86,14 @@ export default class TestToggle extends Component {
             </Toggle>
           </Column>
         </Row>
-        <br /><br />
+
+        <br />
+        <br />
         <Row>
           <Column size="md-12 lg-12">
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="primary-gradient"
             >
               <Toggle.Item
@@ -95,8 +103,8 @@ export default class TestToggle extends Component {
             </Toggle>
 
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="success-gradient"
             >
               <Toggle.Item
@@ -106,8 +114,8 @@ export default class TestToggle extends Component {
             </Toggle>
 
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="danger-gradient"
             >
               <Toggle.Item
@@ -117,8 +125,8 @@ export default class TestToggle extends Component {
             </Toggle>
 
             <Toggle
-              value={ active }
-              onChange={ this.toggleOnChange.bind(this) }
+              value={active}
+              onChange={this.toggleOnChange}
               theme="warning-gradient"
             >
               <Toggle.Item
@@ -128,12 +136,14 @@ export default class TestToggle extends Component {
             </Toggle>
           </Column>
         </Row>
-        <br /><br />
+
+        <br />
+        <br />
         <Row>
           <Column size="md-12 lg-12">
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="primary"
               type="multiple"
             >
@@ -152,10 +162,12 @@ export default class TestToggle extends Component {
                 name="option"
                 value="option3"
               />
-            </Toggle><br /><br />
+            </Toggle>
+            <br />
+            <br />
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="success"
               type="multiple"
             >
@@ -174,10 +186,12 @@ export default class TestToggle extends Component {
                 name="option"
                 value="option3"
               />
-            </Toggle><br /><br />
+            </Toggle>
+            <br />
+            <br />
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="danger"
               type="multiple"
             >
@@ -196,10 +210,12 @@ export default class TestToggle extends Component {
                 name="option"
                 value="option3"
               />
-            </Toggle><br /><br />
+            </Toggle>
+            <br />
+            <br />
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="warning"
               type="multiple"
             >
@@ -218,10 +234,12 @@ export default class TestToggle extends Component {
                 name="option"
                 value="option3"
               />
-            </Toggle><br /><br />
+            </Toggle>
+            <br />
+            <br />
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="primary-gradient"
               type="multiple"
             >
@@ -240,10 +258,12 @@ export default class TestToggle extends Component {
                 name="option"
                 value="option3"
               />
-            </Toggle><br /><br />
+            </Toggle>
+            <br />
+            <br />
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="success-gradient"
               type="multiple"
             >
@@ -262,10 +282,12 @@ export default class TestToggle extends Component {
                 name="option"
                 value="option3"
               />
-            </Toggle><br /><br />
+            </Toggle>
+            <br />
+            <br />
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="danger-gradient"
               type="multiple"
               size="sm"
@@ -285,10 +307,12 @@ export default class TestToggle extends Component {
                 name="option"
                 value="option3"
               />
-            </Toggle><br /><br />
+            </Toggle>
+            <br />
+            <br />
             <Toggle
-              value={ activeMultiple }
-              onChange={ this.toggleMultipleOnChange.bind(this) }
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="warning-gradient"
               type="multiple"
               size="lg"

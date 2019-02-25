@@ -9,13 +9,13 @@ export default class FileInput extends Component {
     id: PropTypes.string,
     error: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.bool
+      PropTypes.bool,
     ]),
     label: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
   }
 
   constructor(props) {
@@ -41,26 +41,30 @@ export default class FileInput extends Component {
   }
 
   getFileInputComponent() {
-    const { accept, value: omitValue, onChange, ...rest } = this.props;
+    const {
+      accept, value: omitValue, onChange, ...rest
+    } = this.props;
 
     return (
       <div className="tyk-file-input__wrapper">
         <input
-          accept={ accept }
+          accept={accept}
           className="tyk-form-control"
-          { ...rest }
-          onChange={ this._handleOnChange }
-          ref={ this.fileInputRef }
+          {...rest}
+          onChange={this._handleOnChange}
+          ref={this.fileInputRef}
           type="file"
         />
         {
           this.fileInputRef.current && this.fileInputRef.current.files.length > 0
-            ? <button
-                onClick={ this.clearValue }
+            ? (
+              <button
+                onClick={this.clearValue}
                 type="button"
               >
-                <Icon type="times"/>
+                <Icon type="times" />
               </button>
+            )
             : null
         }
       </div>
@@ -70,20 +74,22 @@ export default class FileInput extends Component {
   getFileInputError() {
     const { error } = this.props;
 
-    return (error && error !== 'true' && error !=='false')
-      ? <p
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
           className="tyk-form-control__error-message"
         >
           { error }
         </p>
+      )
       : null;
   }
 
   getCssClasses() {
     const { error } = this.props;
-    let cssClasses = ['tyk-form-group'];
+    const cssClasses = ['tyk-form-group'];
 
-    if(error) {
+    if (error) {
       cssClasses.push('has-error');
     }
 
@@ -93,10 +99,10 @@ export default class FileInput extends Component {
   render() {
     return (
       <Fragment>
-        <div className={ this.getCssClasses() }>
+        <div className={this.getCssClasses()}>
           {
             this.props.label
-              ? <label htmlFor={ this.props.id }>{ this.props.label }</label>
+              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
               : null
           }
           { this.getFileInputComponent() }

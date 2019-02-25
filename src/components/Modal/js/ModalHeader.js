@@ -9,22 +9,20 @@ export default class ModalHeader extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
-    ])
+      PropTypes.string,
+    ]),
   };
 
   render() {
     return (
       <ModalContext.Consumer>
         {
-          (modalContext) => {
-            return (
-              <div className="tyk-modal__header">
-                { this.props.children }
-                <Button onClick={ modalContext.closeModal } iconType="times" iconPosition="left" />
-              </div>
-            );
-          }
+          modalContext => (
+            <div className="tyk-modal__header">
+              { this.props.children }
+              <Button onClick={modalContext.closeModal} iconType="times" iconPosition="left" />
+            </div>
+          )
         }
       </ModalContext.Consumer>
     );

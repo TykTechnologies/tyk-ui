@@ -6,7 +6,7 @@ import { Button } from '../Button';
 export default class ModalExample extends Component {
   state = {
     smallModalOpened: false,
-    largeModalOpened: false
+    largeModalOpened: false,
   };
 
   closeModal(param) {
@@ -28,17 +28,17 @@ export default class ModalExample extends Component {
   render() {
     const {
       smallModalOpened,
-      largeModalOpened
+      largeModalOpened,
     } = this.state;
 
     return (
       <Fragment>
-        <Button onClick={ this.openModal.bind(this, 'smallModalOpened') } theme="primary">Small Modal</Button>
-        <Button onClick={ this.openModal.bind(this, 'largeModalOpened') } theme="primary">Large Modal</Button>
+        <Button onClick={this.openModal.bind(this, 'smallModalOpened')} theme="primary">Small Modal</Button>
+        <Button onClick={this.openModal.bind(this, 'largeModalOpened')} theme="primary">Large Modal</Button>
 
         <Modal
-          opened={ smallModalOpened }
-          onClose={ this.closeModal.bind(this, 'smallModalOpened') }
+          opened={smallModalOpened}
+          onClose={this.closeModal.bind(this, 'smallModalOpened')}
         >
           <Modal.Header>
             <Modal.Title>
@@ -59,8 +59,8 @@ export default class ModalExample extends Component {
         </Modal>
 
         <Modal
-          opened={ largeModalOpened }
-          onClose={ this.closeModal.bind(this, 'largeModalOpened') }
+          opened={largeModalOpened}
+          onClose={this.closeModal.bind(this, 'largeModalOpened')}
           size="lg"
         >
           <Modal.Header>

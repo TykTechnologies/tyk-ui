@@ -7,17 +7,6 @@ const ExtractAppCSS = new MiniCssExtractPlugin({
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-// function getEntries(pattern) {
-//   const entries = {};
-//
-//   glob.sync(pattern).forEach((file) => {
-//     let key = file.replace(/src\/components\/(.*)\/js\//g, '').replace('.js', '');
-//     entries[key] = path.join(__dirname, file);
-//   });
-//   return entries;
-// }
-//
-// let entries = getEntries('src/components/**/js/*.js');
 entries = {};
 entries['tyk-ui'] = path.resolve(__dirname, "src/index.js");
 entries.index = path.resolve(__dirname, "src/index.js");
@@ -41,6 +30,20 @@ module.exports = {
           options: {
             name: 'fonts/[name].[ext]'
           }
+        }
+      },
+      {
+        enforce: "pre",
+        test: /\.js?$/,
+        include: [
+          path.resolve(__dirname, "src")
+        ],
+        exclude: /node_modules/,
+        loader: "eslint-loader",
+        options: {
+          emitError: true,
+          emitWarning: true,
+          configFile: path.resolve(__dirname, '.eslintrc')
         }
       },
       {
@@ -99,7 +102,6 @@ module.exports = {
         from: 'src/**/*.scss',
         to: 'sass/',
         transformPath (targetPath, absolutePath) {
-          console.log('++++++++++', targetPath, absolutePath);
           return targetPath.replace('src/', '');
         }
       }

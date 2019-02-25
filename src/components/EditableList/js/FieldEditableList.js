@@ -16,7 +16,7 @@ export default class FieldEditableList extends Component {
     const { input } = this.props;
     let message = null;
 
-    if(touched && error && this.props.validationmessages[error]) {
+    if (touched && error && this.props.validationmessages[error]) {
       message = this.props.validationmessages[error];
     }
 
@@ -34,12 +34,11 @@ export default class FieldEditableList extends Component {
 
     return (
       <EditableList
-        { ...props }
-        onChange={ this._handleOnChange }
-        value={ !props.input.value ? props.input.value : props.input.value.toJS() }
-        error={ this.getEditableListError() }
-      >
-      </EditableList>
+        {...props}
+        onChange={this._handleOnChange}
+        value={!props.input.value ? props.input.value : props.input.value.toJS()}
+        error={this.getEditableListError()}
+      />
     );
   }
 }

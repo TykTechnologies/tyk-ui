@@ -7,7 +7,23 @@
     title="Tab 1"
     selected={ true }
   >
-    Tab 1
+    <Tabs
+      selected="tab-1.0"
+    >
+      <Tabs.Tab
+        id="tab-1.1"
+        title="Tab 1.1"
+        selected={ true }
+      >
+        Tab 1.1
+      </Tabs.Tab>
+      <Tabs.Tab
+        id="tab-1.2"
+        title="Tab 1.2"
+      >
+        Tab 1.2
+      </Tabs.Tab>
+    </Tabs>
   </Tabs.Tab>
   <Tabs.Tab
     id="tab-2"

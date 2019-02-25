@@ -6,8 +6,8 @@ export default class ModalTitle extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
-    ])
+      PropTypes.string,
+    ]),
   };
 
   render() {

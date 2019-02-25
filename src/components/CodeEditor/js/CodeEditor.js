@@ -18,14 +18,14 @@ export default class CodeEditor extends Component {
     id: PropTypes.string,
     error: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.bool
+      PropTypes.bool,
     ]),
     label: PropTypes.string,
     mode: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
   }
 
   constructor(props) {
@@ -37,7 +37,7 @@ export default class CodeEditor extends Component {
 
   _handleOnChange(value) {
     const { onChange } = this.props;
-    if(onChange) {
+    if (onChange) {
       onChange(value);
     }
   }
@@ -45,20 +45,22 @@ export default class CodeEditor extends Component {
   getCodeEditorError() {
     const { error } = this.props;
 
-    return (error && error !== 'true' && error !=='false')
-      ? <p
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
           className="tyk-form-control__error-message"
         >
           { error }
         </p>
+      )
       : null;
   }
 
   getCssClasses() {
     const { error } = this.props;
-    let cssClasses = ["tyk-form-group"];
+    const cssClasses = ['tyk-form-group'];
 
-    if(error) {
+    if (error) {
       cssClasses.push('has-error');
     }
 
@@ -68,7 +70,7 @@ export default class CodeEditor extends Component {
   _handleOnBlur() {
     const { value, onBlur } = this.props;
 
-    if(onBlur) {
+    if (onBlur) {
       onBlur(value);
     }
   }
@@ -76,19 +78,19 @@ export default class CodeEditor extends Component {
   render() {
     return (
       <Fragment>
-        <div className={ this.getCssClasses() }>
+        <div className={this.getCssClasses()}>
           {
             this.props.label
-              ? <label htmlFor={ this.props.id }>{ this.props.label }</label>
+              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
               : null
           }
           <AceEditor
             className="tyk-form-control"
-            { ...this.props }
-            onChange={ this._handleOnChange }
-            onBlur={ this._handleOnBlur }
+            {...this.props}
+            onChange={this._handleOnChange}
+            onBlur={this._handleOnBlur}
             theme="github"
-            editorProps={{$blockScrolling: true}}
+            editorProps={{ $blockScrolling: true }}
           />
           {
             this.props.note

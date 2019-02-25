@@ -9,16 +9,16 @@ export default class PanelBody extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
     noPadding: PropTypes.bool,
   };
 
   getCssClasses() {
     const { noPadding } = this.props;
-    let cssClasses = ['tyk-panel__body'];
+    const cssClasses = ['tyk-panel__body'];
 
-    if(noPadding) {
+    if (noPadding) {
       cssClasses.push('no-padding');
     }
 
@@ -28,20 +28,24 @@ export default class PanelBody extends Component {
   render() {
     return (
       <PortalContext.Consumer>
-      {
-        (portalContext) => (
+        {
+        portalContext => (
           portalContext.collapsable
-            ? <Collapsible
-                collapsed={ portalContext.collapsed }
-                className={ this.getCssClasses() }
+            ? (
+              <Collapsible
+                collapsed={portalContext.collapsed}
+                className={this.getCssClasses()}
               >
                 { this.props.children }
               </Collapsible>
-            : <div
-                className={ this.getCssClasses() }
+            )
+            : (
+              <div
+                className={this.getCssClasses()}
               >
                 { this.props.children }
               </div>
+            )
         )
       }
       </PortalContext.Consumer>

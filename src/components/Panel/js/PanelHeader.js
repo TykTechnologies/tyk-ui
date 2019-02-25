@@ -9,19 +9,19 @@ export default class PanelHeader extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
-    ]).isRequired
+      PropTypes.string,
+    ]).isRequired,
   }
 
   getCssClasses(props) {
     const { className } = this.props;
     let cssClasses = ['tyk-panel__header'];
 
-    if(props.collapsable) {
+    if (props.collapsable) {
       cssClasses.push('collapsable');
     }
 
-    if(className) {
+    if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
     }
 
@@ -33,23 +33,23 @@ export default class PanelHeader extends Component {
       <PortalContext.Consumer>
         {
           (portalContext) => {
-            let HeaderTag = portalContext.theme === 'blank' ? 'h4' : 'div';
-            let iconType = portalContext.collapsed ? 'chevron-up' : 'chevron-down';
+            const HeaderTag = portalContext.theme === 'blank' ? 'h4' : 'div';
+            const iconType = portalContext.collapsed ? 'chevron-up' : 'chevron-down';
 
             return (
-                <HeaderTag
-                  className={ this.getCssClasses(portalContext) }
-                  onClick={ portalContext.collapsable ? portalContext.onToggle : undefined }
-                >
-                  { this.props.children }
-                  {
+              <HeaderTag
+                className={this.getCssClasses(portalContext)}
+                onClick={portalContext.collapsable ? portalContext.onToggle : undefined}
+              >
+                { this.props.children }
+                {
                     portalContext.collapsable
-                      ? <Icon className="collapsable__arrow" type={ iconType } />
+                      ? <Icon className="collapsable__arrow" type={iconType} />
                       : null
                   }
-                </HeaderTag>
-              );
-            }
+              </HeaderTag>
+            );
+          }
           }
       </PortalContext.Consumer>
     );

@@ -9,12 +9,11 @@ export default class FieldPagination extends Component {
 
     return (
       <Pagination
-        { ...input }
-        { ...rest }
-        onChange={ input.onChange }
-        value={ input.value ? input.value : 0 }
-      >
-      </Pagination>
+        {...input}
+        {...rest}
+        onChange={input.onChange}
+        value={input.value ? input.value : 0}
+      />
     );
   }
 }

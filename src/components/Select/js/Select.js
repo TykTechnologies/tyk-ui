@@ -7,7 +7,7 @@ export default class Select extends Component {
     id: PropTypes.string,
     error: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.bool
+      PropTypes.bool,
     ]),
     options: PropTypes.array,
     label: PropTypes.string,
@@ -17,13 +17,13 @@ export default class Select extends Component {
     placeholder: PropTypes.string,
     value: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.object
-    ])
+      PropTypes.object,
+    ]),
   }
 
   state = {
     initValue: this.props.value,
-    value: this.props.value
+    value: this.props.value,
   };
 
   constructor(props) {
@@ -38,7 +38,7 @@ export default class Select extends Component {
     const { onChange } = this.props;
 
     this.setState({
-      value: initValue
+      value: initValue,
     });
   }
 
@@ -46,13 +46,11 @@ export default class Select extends Component {
     const { onChange, isfield, options } = this.props;
     let selectedValue = null;
 
-    selectedValue = options.filter((option) => {
-      return option.id === e.target.value;
-    })[0];
+    selectedValue = options.filter(option => option.id === e.target.value)[0];
 
-    if(!isfield) {
+    if (!isfield) {
       this.setState({
-        value: selectedValue
+        value: selectedValue,
       }, () => {
         onChange(this.state.value.id ? this.state.value : null);
       });
@@ -68,27 +66,27 @@ export default class Select extends Component {
   }
 
   getSelectComponent() {
-    const { isfield, options, onChange, onBlur, ...rest } = this.props;
+    const {
+      isfield, options, onChange, onBlur, ...rest
+    } = this.props;
     let value = '';
 
-    if(isfield && this.props.value) {
+    if (isfield && this.props.value) {
       value = this.props.value;
-    } else if(this.state.value) {
+    } else if (this.state.value) {
       value = this.state.value;
     }
 
     return (
       <select
         className="tyk-form-control tyk-select"
-        { ...rest }
-        onChange={ this._handleOnChange }
-        onBlur={ this._handleOnBlur }
-        value={ value ? value.id : '' }
+        {...rest}
+        onChange={this._handleOnChange}
+        onBlur={this._handleOnBlur}
+        value={value ? value.id : ''}
       >
         {
-          options.map((option) => {
-            return <option key={ option.id } value={ option.id }>{ option.name }</option>;
-          })
+          options.map(option => <option key={option.id} value={option.id}>{ option.name }</option>)
         }
       </select>
     );
@@ -97,20 +95,22 @@ export default class Select extends Component {
   getSelectError() {
     const { error } = this.props;
 
-    return (error && error !== 'true' && error !=='false')
-      ? <p
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
           className="tyk-form-control__error-message"
         >
           { error }
         </p>
+      )
       : null;
   }
 
   getCssClasses() {
     const { error } = this.props;
-    let cssClasses = ['tyk-form-group'];
+    const cssClasses = ['tyk-form-group'];
 
-    if(error) {
+    if (error) {
       cssClasses.push('has-error');
     }
 
@@ -120,10 +120,10 @@ export default class Select extends Component {
   render() {
     return (
       <Fragment>
-        <div className={ this.getCssClasses() }>
+        <div className={this.getCssClasses()}>
           {
             this.props.label
-              ? <label htmlFor={ this.props.id }>{ this.props.label }</label>
+              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
               : null
           }
           {

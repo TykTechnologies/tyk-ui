@@ -15,9 +15,9 @@ export default class FieldCombobox extends Component {
     const { touched, error, warning } = this.props.meta;
     let message = null;
 
-    if(touched && error && this.props.validationmessages[error]) {
+    if (touched && error && this.props.validationmessages[error]) {
       message = this.props.validationmessages[error];
-    } else if(touched && warning) {
+    } else if (touched && warning) {
       message = 'warning';
     }
 
@@ -35,12 +35,11 @@ export default class FieldCombobox extends Component {
 
     return (
       <Combobox
-        { ...props }
-        onChange={ this._handleOnChange }
-        value={ !props.input.value ? props.input.value : props.input.value.toJS() }
-        error={ this.getComboboxError() }
-      >
-      </Combobox>
+        {...props}
+        onChange={this._handleOnChange}
+        value={!props.input.value ? props.input.value : props.input.value.toJS()}
+        error={this.getComboboxError()}
+      />
     );
   }
 }

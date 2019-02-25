@@ -9,12 +9,12 @@ export default class DropdownItem extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
     eventKey: PropTypes.string,
     href: PropTypes.string,
     onClick: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
   };
 
   constructor(props) {
@@ -36,26 +36,22 @@ export default class DropdownItem extends Component {
     return (
       <DropdownContext.Consumer>
         {
-          (dropdownContext) => {
-            return (
-              <li onClick={ this.dropdownItemCLick.bind(this, dropdownContext, this.props) }>
-                <a href={ href }>
-                  {
+          dropdownContext => (
+            <li onClick={this.dropdownItemCLick.bind(this, dropdownContext, this.props)}>
+              <a href={href}>
+                {
                     eventKey && dropdownContext.selectedItem === eventKey
-                      ? <Icon type="check"></Icon>
+                      ? <Icon type="check" />
                       : null
                   }
-                  <span>
-                    {
-                      title
-                        ? title
-                        : this.props.children
+                <span>
+                  {
+                      title || this.props.children
                     }
-                  </span>
-                </a>
-              </li>
-            );
-          }
+                </span>
+              </a>
+            </li>
+          )
         }
       </DropdownContext.Consumer>
     );

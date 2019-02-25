@@ -5,20 +5,20 @@ export default class Row extends PureComponent {
   static propTypes = {
     children: PropTypes.oneOfType([
       PropTypes.element,
-      PropTypes.node
+      PropTypes.node,
     ]),
     className: PropTypes.string,
-    noGutters: PropTypes.bool
+    noGutters: PropTypes.bool,
   }
 
   getCssClasses() {
     let cssClass = ['tyk-row'];
 
-    if(this.props.noGutters) {
+    if (this.props.noGutters) {
       cssClass.push('no-gutters');
     }
 
-    if(this.props.className) {
+    if (this.props.className) {
       cssClass = cssClass.concat(this.props.className.split(' '));
     }
 
@@ -27,7 +27,7 @@ export default class Row extends PureComponent {
 
   render() {
     return (
-      <div className={ this.getCssClasses() } { ...this.props }>
+      <div className={this.getCssClasses()} {...this.props}>
         { this.props.children }
       </div>
     );

@@ -8,20 +8,20 @@ export default class Radio extends Component {
     name: PropTypes.string,
     noSpace: PropTypes.bool,
     onChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
   };
 
   getCssClasses() {
     const { inline, nospace } = this.props;
-    let cssClasses = [];
+    const cssClasses = [];
 
-    if(inline) {
+    if (inline) {
       cssClasses.push('tyk-radio--inline');
     } else {
       cssClasses.push('tyk-radio');
     }
 
-    if(nospace) {
+    if (nospace) {
       cssClasses.push('no-margin');
     }
 
@@ -32,14 +32,16 @@ export default class Radio extends Component {
     const { input, ...rest } = this.props;
     return (
       <div
-        className={ this.getCssClasses() }
+        className={this.getCssClasses()}
       >
         <label>
           <input
-            { ...input }
-            { ...rest }
+            {...input}
+            {...rest}
             type="radio"
-          /> { this.props.label }
+          />
+          {' '}
+          { this.props.label }
         </label>
       </div>
     );

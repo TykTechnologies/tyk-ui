@@ -10,18 +10,18 @@ export default class DateTimePicker extends Component {
     id: PropTypes.string,
     error: PropTypes.oneOfType([
       PropTypes.string,
-      PropTypes.bool
+      PropTypes.bool,
     ]),
     label: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
   }
 
   state = {
     initValue: this.props.value,
-    value: this.props.value
+    value: this.props.value,
   };
 
   constructor(props) {
@@ -37,16 +37,16 @@ export default class DateTimePicker extends Component {
     const { onChange } = this.props;
 
     this.setState({
-      value: initValue
+      value: initValue,
     });
   }
 
   _handleOnChange(value) {
     const { onChange, isfield } = this.props;
 
-    if(!isfield) {
+    if (!isfield) {
       this.setState({
-        value
+        value,
       }, () => {
         onChange(this.state.value);
       });
@@ -56,7 +56,7 @@ export default class DateTimePicker extends Component {
   }
 
   _handleIconClick() {
-    if(this.props.disabled) {
+    if (this.props.disabled) {
       return;
     }
 
@@ -64,28 +64,28 @@ export default class DateTimePicker extends Component {
   }
 
   getDateTimeComponent() {
-    const { isfield, config, disabled, placeholder, value } = this.props;
+    const {
+      isfield, config, disabled, placeholder, value,
+    } = this.props;
 
     return (
       <Datetime
-        { ...this.props }
-        onChange={ this._handleOnChange }
-        ref={ this.datepickerRef }
-        value={ (isfield) ? value : this.state.value }
+        {...this.props}
+        onChange={this._handleOnChange}
+        ref={this.datepickerRef}
+        value={(isfield) ? value : this.state.value}
         inputProps={{
           placeholder: placeholder || '',
-          disabled: disabled
+          disabled,
         }}
-        renderInput={ (inputProps) => {
-          return (
-            <div className="tyk-input-group">
-              <input disabled={ this.props.disabled } { ...inputProps } className="tyk-form-control" />
-              <span className="tyk-input-group__addon" onClick={ this._handleIconClick }>
-                <Icon type="calendar" />
-              </span>
-            </div>
-          );
-        }}
+        renderInput={inputProps => (
+          <div className="tyk-input-group">
+            <input disabled={this.props.disabled} {...inputProps} className="tyk-form-control" />
+            <span className="tyk-input-group__addon" onClick={this._handleIconClick}>
+              <Icon type="calendar" />
+            </span>
+          </div>
+        )}
       />
     );
   }
@@ -93,20 +93,22 @@ export default class DateTimePicker extends Component {
   getDateTimePickerError() {
     const { error } = this.props;
 
-    return (error && error !== 'true' && error !=='false')
-      ? <p
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
           className="tyk-form-control__error-message"
         >
           { error }
         </p>
+      )
       : null;
   }
 
   getCssClasses() {
     const { error } = this.props;
-    let cssClasses = ['tyk-form-group'];
+    const cssClasses = ['tyk-form-group'];
 
-    if(error) {
+    if (error) {
       cssClasses.push('has-error');
     }
 
@@ -116,10 +118,10 @@ export default class DateTimePicker extends Component {
   render() {
     return (
       <Fragment>
-        <div className={ this.getCssClasses() }>
+        <div className={this.getCssClasses()}>
           {
             this.props.label
-              ? <label htmlFor={ this.props.id }>{ this.props.label }</label>
+              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
               : null
           }
           { this.getDateTimeComponent() }

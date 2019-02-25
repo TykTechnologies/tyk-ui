@@ -4,19 +4,21 @@ import PropTypes from 'prop-types';
 export default class Textarea extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    input: PropTypes.object,
+    error: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
     id: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
   };
 
   getCssClasses() {
     const { error } = this.props;
-    let cssClasses = ['tyk-form-group'];
+    const cssClasses = ['tyk-form-group'];
 
-    if(error) {
+    if (error) {
       cssClasses.push('has-error');
     }
 
@@ -26,40 +28,49 @@ export default class Textarea extends Component {
   getTextareaError() {
     const { error } = this.props;
 
-    return (error && error !== 'true' && error !=='false')
-      ? <p
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
           className="tyk-form-control__error-message"
         >
           { error }
         </p>
+      )
       : null;
   }
 
   render() {
-    const { input, ...rest } = this.props;
+    const {
+      id,
+      input,
+      label,
+      note,
+      value,
+      ...rest
+    } = this.props;
 
     return (
       <Fragment>
-        <div className={ this.getCssClasses() }>
+        <div className={this.getCssClasses()}>
           {
-            this.props.label
-              ? <label htmlFor={ this.props.id }>{ this.props.label }</label>
+            label
+              ? <label htmlFor={id}>{label}</label>
               : null
           }
           <textarea
             className="tyk-form-control"
-            { ...rest }
-            { ...input}
+            {...rest}
+            {...input}
           >
-            { this.props.value }
+            { value }
           </textarea>
           {
-            this.props.note
-              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
         </div>
-        { this.getTextareaError() }
+        {this.getTextareaError()}
       </Fragment>
     );
   }

@@ -12,12 +12,12 @@ class InfiniteScroller extends Component {
   };
 
   static defaultProps = {
-    hasMore: true
-   };
+    hasMore: true,
+  };
 
   state = {
     refChildHeight: 0,
-    showLoader: false
+    showLoader: false,
   };
 
   constructor(props) {
@@ -32,7 +32,7 @@ class InfiniteScroller extends Component {
     const { initialLoad, loadMore, pageNumber } = this.props;
     this.containerRef.current.addEventListener('scroll', this.debounce(this.scrollHandler.bind(this, event), 200));
 
-    if(initialLoad && loadMore && typeof loadMore === 'function') {
+    if (initialLoad && loadMore && typeof loadMore === 'function') {
       loadMore(pageNumber);
     }
   }
@@ -45,24 +45,24 @@ class InfiniteScroller extends Component {
     const { refChild, hasMore } = this.props;
     const { refChildHeight, showLoader } = this.state;
 
-    if(refChild.current.clientHeight === refChildHeight && showLoader === false && hasMore) {
+    if (refChild.current.clientHeight === refChildHeight && showLoader === false && hasMore) {
       this.setState({
-        showLoader: true
+        showLoader: true,
       });
     }
 
-    if(refChild.current.clientHeight > this.containerRef.current.clientHeight && refChild.current.clientHeight > refChildHeight && showLoader === true && refChildHeight) {
+    if (refChild.current.clientHeight > this.containerRef.current.clientHeight && refChild.current.clientHeight > refChildHeight && showLoader === true && refChildHeight) {
       this.setState({
-        showLoader: false
+        showLoader: false,
       });
     }
 
-    if(refChild.current.clientHeight < this.containerRef.current.clientHeight && hasMore && !this.stateChanged) {
+    if (refChild.current.clientHeight < this.containerRef.current.clientHeight && hasMore && !this.stateChanged) {
       this.loadMoreData();
 
       this.setState({
         showLoader: true,
-        refChildHeight: refChild.current.clientHeight
+        refChildHeight: refChild.current.clientHeight,
       });
 
       this.stateChanged = true;
@@ -71,15 +71,16 @@ class InfiniteScroller extends Component {
 
   debounce(func, wait, immediate) {
     let timeout;
-    return function() {
-      let context = this, args = arguments;
-      let later = () => {
-      timeout = null;
-      if (!immediate) {
+    return function () {
+      const context = this; const
+        args = arguments;
+      const later = () => {
+        timeout = null;
+        if (!immediate) {
           func.apply(context, args);
         }
       };
-      let callNow = immediate && !timeout;
+      const callNow = immediate && !timeout;
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
       if (callNow) {
@@ -98,7 +99,7 @@ class InfiniteScroller extends Component {
   loadMoreData() {
     const { refChild, loadMore, pageNumber } = this.props;
 
-    if(loadMore && typeof loadMore === 'function') {
+    if (loadMore && typeof loadMore === 'function') {
       loadMore(pageNumber + 1);
     }
   }
@@ -106,11 +107,11 @@ class InfiniteScroller extends Component {
   scrollHandler(event) {
     const { refChild } = this.props;
 
-    if(this.shouldLoad()) {
+    if (this.shouldLoad()) {
       console.log('aaa');
       this.loadMoreData();
       this.setState({
-        refChildHeight: refChild.current.clientHeight
+        refChildHeight: refChild.current.clientHeight,
       });
     }
   }
@@ -124,15 +125,17 @@ class InfiniteScroller extends Component {
       >
         <div
           className="tyk-infinite-scroller__wrapper"
-          ref={ this.containerRef }
+          ref={this.containerRef}
         >
-        { this.props.children }
+          { this.props.children }
         </div>
         {
           showLoader
-            ? <Loader
+            ? (
+              <Loader
                 position="absolute"
               />
+            )
             : null
         }
       </div>

@@ -8,15 +8,15 @@ export default class InfoNote extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
-    ])
+      PropTypes.string,
+    ]),
   };
 
   render() {
     return (
       <div className="tyk-info-note">
         <Message theme="info">
-        { this.props.children }
+          { this.props.children }
         </Message>
       </div>
     );

@@ -21,9 +21,9 @@ export default class FieldDropdown extends Component {
 
     return (
       <Dropdown
-        { ...rest }
-        onSelect={ this._handleOnChange }
-        selectedItem={ input.value }
+        {...rest}
+        onSelect={this._handleOnChange}
+        selectedItem={input.value}
       >
         { this.props.children }
       </Dropdown>
