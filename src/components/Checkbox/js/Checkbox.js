@@ -37,8 +37,7 @@ export default class Checkbox extends Component {
             {...rest}
             type="checkbox"
           />
-          {' '}
-          { this.props.label }
+          {this.props.label}
         </label>
       </div>
     );

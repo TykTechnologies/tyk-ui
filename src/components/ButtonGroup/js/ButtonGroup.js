@@ -27,9 +27,7 @@ export default class ButtonGroup extends PureComponent {
           label
             ? (
               <label>
-                {' '}
-                { label }
-                {' '}
+                {label}
               </label>
             )
             : null

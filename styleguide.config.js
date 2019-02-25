@@ -43,7 +43,7 @@ module.exports = {
 			rules: [
 	      {
 	        enforce: "pre",
-	        test: /components\/Tabs\/js\/Tab.js?$/,
+	        test: /components\/Tabs\/js\/TabContent.js?$/,
 	        include: [
 	          path.resolve(__dirname, "src")
 	        ],

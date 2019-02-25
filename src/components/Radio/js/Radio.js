@@ -40,8 +40,7 @@ export default class Radio extends Component {
             {...rest}
             type="radio"
           />
-          {' '}
-          { this.props.label }
+          {this.props.label}
         </label>
       </div>
     );
