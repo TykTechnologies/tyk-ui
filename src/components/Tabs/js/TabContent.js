@@ -18,6 +18,7 @@ const TabContent = (props) => {
 
   useEffect(() => {
     const tempTabData = fromJS(tabData).toJS();
+
     if (!tabExists(path)) {
       addTab(tempTabData, path);
     }

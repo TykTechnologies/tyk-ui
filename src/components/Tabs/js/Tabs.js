@@ -1,4 +1,4 @@
-import React, { Component, createContext, Fragment } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Collapsible } from '../../Collapsible';
@@ -6,186 +6,413 @@ import { Icon } from '../../Icon';
 
 export const TabsContext = createContext();
 
-export default class Tabs extends Component {
-  static propTypes = {
-    type: PropTypes.string
-  };
+const Tabs = (props) => {
+  const {
+    children,
+    className,
+    id,
+    onTabChange,
+    type,
+  } = props;
+  const [tabs, setTabs] = useState({});
+  const [selectedPath, setSelectedPath] = useState([]);
+  const [rendered, setRendered] = useState(false);
+  let initialPath = null;
 
-  state = {
-    tabs: {},
-    selectedPath: [],
-    rendered: false
-  };
+  useEffect(() => {
+    setSelectedPath(initialPath);
+  }, [initialPath]);
 
-  updateTabsList(object, path, tabData) {
-    let tempPath = path.slice(0);
+  const updateTabsList = (tabsState, path, tabData) => {
+    let tempTabsState = Object.assign({}, tabsState);
+    const tempTabData = Object.assign({}, tabData);
+    const tempPath = path.slice(0);
 
-    while(tempPath.length > 1) {
-      object = object.tabs[tempPath.shift()];
+    while (tempPath.length > 1) {
+      tempTabsState = tempTabsState[tempPath.shift()];
 
-      if(!object.tabs) {
-        object.tabs = {};
+      if (!tempTabsState) {
+        tempTabsState = {};
       }
     }
 
-    tabData.tempPath = tempPath;
-    object.tabs[tempPath.shift()] = tabData;
-  }
+    tempTabData.tempPath = tempPath;
+    tempTabsState[tempPath.shift()] = tempTabData;
 
-  tabExists(path) {
-    const { state } = this;
-    let tempState = state;
-    let tempPath = path.slice(0);
+    return tempTabsState;
+  };
 
-    while(tempPath.length > 1) {
-      tempState = tempState.tabs[tempPath.shift()];
+  const toggleTab = (tabsState, path) => {
+    let tempTabsState = Object.assign({}, tabsState);
+    const tempPath = path.slice(0);
+
+    while (tempPath.length > 1) {
+      tempTabsState = tempTabsState[tempPath.shift()];
     }
 
-    let key = tempPath.shift();
+    const key = tempPath.shift();
+    if (tempTabsState[key].collapsed === undefined) {
+      tempTabsState[key].collapsed = true;
+    } else {
+      tempTabsState[key].collapsed = !tempTabsState[key].collapsed;
+    }
 
-    return tempState.tabs && tempState.tabs[key] ? true : false;
-  }
+    return tempTabsState;
+  };
 
-  addTab(tabData, path) {
-    this.setState((prevState) => {
-      let tempState = prevState;
+  const getCssClasses = () => {
+    let cssClasses = ['tyk-tabs'];
 
-      this.updateTabsList(tempState, path, tabData);
+    cssClasses.push(`tyk-tabs--${type || 'default'}`);
 
-      if(tabData.selected) {
-        tempState.selectedPath = path;
-      }
+    if (className) {
+      cssClasses = cssClasses.concat(className.split(' '));
+    }
 
-      return tempState;
+    return cssClasses.join(' ');
+  };
+
+  const setCurrentSelectedPath = (path, tabData) => {
+    const tempPath = path.slice(0);
+    let tempRendered = true;
+
+    if (tabData.collapsible) {
+      tempPath.push(Object.keys(tabData.tabs)[0]);
+      tempRendered = false;
+    }
+
+    setTabs((prevTabs) => {
+      let tempTabs = Object.assign({}, prevTabs);
+
+      tempTabs = toggleTab(tempTabs, path);
+
+      return tempTabs;
     });
+    setSelectedPath(tempPath);
+    setRendered(tempRendered);
+
+    if (onTabChange) {
+      onTabChange(tabData);
+    }
   };
 
-  getTabCssClass(id) {
-    const { selectedPath } = this.state;
-    let cssClasses = [];
-
-    if(selectedPath.indexOf(id) > -1) {
+  const getTabCssClass = (tabId) => {
+    const cssClasses = [];
+    console.log(selectedPath);
+    if (selectedPath.indexOf(tabId) > -1) {
       cssClasses.push('active');
     }
 
     return cssClasses.join(' ');
-  }
+  };
 
-  genTabs(tabs, path) {
+  const genTabs = (currentTabs, path) => {
+    if (!currentTabs) {
+      return null;
+    }
+
     return (
       <ul>
         {
-          Object.keys(tabs).map((tabId) => {
-            let tempPath = path ? path.concat([tabs[tabId].id]) : [tabs[tabId].id];
-            let iconType = tabs[tabId].collapsed ? 'chevron-up' : 'chevron-down';
+          Object.keys(currentTabs).map((tabId, index) => {
+            const tempPath = path ? path.concat([currentTabs[tabId].id]) : [currentTabs[tabId].id];
+            const iconType = currentTabs[tabId].collapsed ? 'chevron-up' : 'chevron-down';
 
             return (
-              <li className={ this.getTabCssClass(tabs[tabId].id) } key={ tabs[tabId].id }>
-                <a onClick={ this.setSelectedPath.bind(this, tempPath, tabs[tabId]) }>{ tabs[tabId].title }
+              <li className={getTabCssClass(currentTabs[tabId].id)} key={currentTabs[tabId].id}>
+                <button
+                  type="button"
+                  onClick={setCurrentSelectedPath.bind(null, tempPath, currentTabs[tabId])}
+                  onKeyDown={setCurrentSelectedPath.bind(null, tempPath, currentTabs[tabId])}
+                  tabIndex={index}
+                >
+                  { currentTabs[tabId].title }
                   {
-                    tabs[tabId].collapsible
-                      ? <Icon className="collapsable-arrow" type={ iconType } />
+                    currentTabs[tabId].collapsible
+                      ? <Icon className="collapsable-arrow" type={iconType} />
                       : null
                   }
-                </a>
-                  {
-                    tabs[tabId].collapsible
-                      ? <Collapsible
-                          collapsed={ tabs[tabId].collapsed }
-                        >
-                          {
-                            tabs[tabId].tabs
-                              ? this.genTabs(tabs[tabId].tabs, tempPath)
-                              : null
-                          }
-                        </Collapsible>
-                      : tabs[tabId].tabs
-                          ? this.genTabs(tabs[tabId].tabs, tempPath)
-                          : null
-                  }
+                </button>
+                {
+                  currentTabs[tabId].collapsible
+                    ? (
+                      <Collapsible
+                        collapsed={currentTabs[tabId].collapsed}
+                      >
+                        {genTabs(currentTabs[tabId].tabs, tempPath)}
+                      </Collapsible>
+                    )
+                    : genTabs(currentTabs[tabId].tabs, tempPath)
+                }
               </li>
             );
           })
         }
       </ul>
     );
-  }
+  };
 
-  toggleTab(tempState, path) {
-    let tempPath = path.slice(0);
+  const addTab = (tabData, path) => {
+    setTabs((prevTabs) => {
+      let tempTabs = Object.assign({}, prevTabs);
 
-    while(tempPath.length > 1) {
-      tempState = tempState.tabs[tempPath.shift()];
+      tempTabs = updateTabsList(tempTabs, path, tabData);
+
+      return tempTabs;
+    });
+
+    if (tabData.selected) {
+      initialPath = path;
+    }
+  };
+
+  const tabExists = (path) => {
+    let tempTabs = Object.assign(tabs);
+    const tempPath = path.slice(0);
+
+    while (tempPath.length > 1) {
+      tempTabs = tempTabs[tempPath.shift()];
     }
 
-    let key = tempPath.shift();
-    if(tempState.tabs[key].collapsed === undefined) {
-      tempState.tabs[key].collapsed = true;
-    } else {
-      tempState.tabs[key].collapsed = !tempState.tabs[key].collapsed;
-    }
-  }
+    const key = tempPath.shift();
 
-  setSelectedPath(path, tabData) {
-    const { onTabChange } = this.props;
-    const { selectedPath } = this.state;
-    let tempPath = path.slice(0);
+    return !!(tempTabs && tempTabs[key]);
+  };
 
-    if(tabData.collapsible) {
-      tempPath.push(Object.keys(tabData.tabs)[0]);
+  return (
+    <div className={getCssClasses()}>
+      {genTabs(tabs)}
+      <TabsContext.Provider
+        value={{
+          id,
+          addTab,
+          tabExists,
+          selectedPath,
+          rendered,
+        }}
+      >
+        {children}
+      </TabsContext.Provider>
+    </div>
+  );
+};
 
-      this.setState((prevState) => {
-        let tempState = prevState;
+Tabs.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+  id: PropTypes.string,
+  onTabChange: PropTypes.func,
+  type: PropTypes.string,
+};
 
-        this.toggleTab(tempState, path);
-
-        return tempState;
-      });
-    } else {
-      this.setState({
-        selectedPath: tempPath,
-        rendered: true
-      });
-    }
-
-    if(onTabChange) {
-      onTabChange(tabData);
-    }
-  }
-
-  getCssClasses() {
-    const { type } = this.props;
-    const { className } = this.props;
-    let cssClasses = ['tyk-tabs'];
-
-    cssClasses.push('tyk-tabs--' + (type || 'default'));
-
-    if(className) {
-      cssClasses = cssClasses.concat(className.split(' '));
-    }
-
-    return cssClasses.join(' ');
-  }
-
-  render() {
-    const { selectedPath, tabs, rendered } = this.state;
-    const { id } = this.props;
-
-    return (
-      <div className={ this.getCssClasses() }>
-        { this.genTabs(tabs) }
-        <TabsContext.Provider
-          value={{
-            id,
-            addTab: this.addTab.bind(this),
-            tabExists: this.tabExists.bind(this),
-            selectedPath,
-            rendered
-          }}
-        >
-          { this.props.children }
-        </TabsContext.Provider>
-      </div>
-    );
-  }
-}
+export default Tabs;
+//
+// export default class Tabs extends Component {
+//   static propTypes = {
+//     className: PropTypes.string,
+//     children: PropTypes.oneOfType([
+//       PropTypes.arrayOf(PropTypes.node),
+//       PropTypes.node,
+//       PropTypes.element,
+//       PropTypes.string,
+//     ]),
+//     id: PropTypes.string,
+//     onTabChange: PropTypes.func,
+//     type: PropTypes.string,
+//   };
+//
+//   static updateTabsList(state, path, tabData) {
+//     let tempState = Object.assign({}, state);
+//     const tempTabData = Object.assign({}, tabData);
+//     const tempPath = path.slice(0);
+//
+//     while (tempPath.length > 1) {
+//       tempState = tempState.tabs[tempPath.shift()];
+//
+//       if (!tempState.tabs) {
+//         tempState.tabs = {};
+//       }
+//     }
+//
+//     tempTabData.tempPath = tempPath;
+//     tempState.tabs[tempPath.shift()] = tempTabData;
+//
+//     return tempState;
+//   }
+//
+//   static toggleTab(state, path) {
+//     let tempState = Object.assign({}, state);
+//     const tempPath = path.slice(0);
+//
+//     while (tempPath.length > 1) {
+//       tempState = tempState.tabs[tempPath.shift()];
+//     }
+//
+//     const key = tempPath.shift();
+//     if (tempState.tabs[key].collapsed === undefined) {
+//       tempState.tabs[key].collapsed = true;
+//     } else {
+//       tempState.tabs[key].collapsed = !tempState.tabs[key].collapsed;
+//     }
+//
+//     return tempState;
+//   }
+//
+//   state = {
+//     tabs: {},
+//     selectedPath: [],
+//     rendered: false,
+//   };
+//
+//   getCssClasses() {
+//     const { type } = this.props;
+//     const { className } = this.props;
+//     let cssClasses = ['tyk-tabs'];
+//
+//     cssClasses.push(`tyk-tabs--${type || 'default'}`);
+//
+//     if (className) {
+//       cssClasses = cssClasses.concat(className.split(' '));
+//     }
+//
+//     return cssClasses.join(' ');
+//   }
+//
+//   setSelectedPath(path, tabData) {
+//     const { onTabChange } = this.props;
+//     const tempPath = path.slice(0);
+//
+//     if (tabData.collapsible) {
+//       tempPath.push(Object.keys(tabData.tabs)[0]);
+//
+//       this.setState((prevState) => {
+//         let tempState = Object.assign({}, prevState);
+//
+//         tempState = Tabs.toggleTab(tempState, path);
+//
+//         return tempState;
+//       });
+//     } else {
+//       this.setState({
+//         selectedPath: tempPath,
+//         rendered: true,
+//       });
+//     }
+//
+//     if (onTabChange) {
+//       onTabChange(tabData);
+//     }
+//   }
+//
+//   getTabCssClass(id) {
+//     const { selectedPath } = this.state;
+//     const cssClasses = [];
+//
+//     if (selectedPath.indexOf(id) > -1) {
+//       cssClasses.push('active');
+//     }
+//
+//     return cssClasses.join(' ');
+//   }
+//
+//   genTabs(tabs, path) {
+//     if (!tabs) {
+//       return null;
+//     }
+//
+//     return (
+//       <ul>
+//         {
+//           Object.keys(tabs).map((tabId, index) => {
+//             const tempPath = path ? path.concat([tabs[tabId].id]) : [tabs[tabId].id];
+//             const iconType = tabs[tabId].collapsed ? 'chevron-up' : 'chevron-down';
+//
+//             return (
+//               <li className={this.getTabCssClass(tabs[tabId].id)} key={tabs[tabId].id}>
+//                 <button
+//                   type="button"
+//                   onClick={this.setSelectedPath.bind(this, tempPath, tabs[tabId])}
+//                   onKeyDown={this.setSelectedPath.bind(this, tempPath, tabs[tabId])}
+//                   tabIndex={index}
+//                 >
+//                   { tabs[tabId].title }
+//                   {
+//                     tabs[tabId].collapsible
+//                       ? <Icon className="collapsable-arrow" type={iconType} />
+//                       : null
+//                   }
+//                 </button>
+//                 {
+//                   tabs[tabId].collapsible
+//                     ? (
+//                       <Collapsible
+//                         collapsed={tabs[tabId].collapsed}
+//                       >
+//                         {this.genTabs(tabs[tabId].tabs, tempPath)}
+//                       </Collapsible>
+//                     )
+//                     : this.genTabs(tabs[tabId].tabs, tempPath)
+//                 }
+//               </li>
+//             );
+//           })
+//         }
+//       </ul>
+//     );
+//   }
+//
+//   addTab(tabData, path) {
+//     this.setState((prevState) => {
+//       let tempState = Object.assign({}, prevState);
+//
+//       tempState = Tabs.updateTabsList(tempState, path, tabData);
+//
+//       if (tabData.selected) {
+//         tempState.selectedPath = path;
+//       }
+//
+//       return tempState;
+//     });
+//   }
+//
+//   tabExists(path) {
+//     const { state } = this;
+//     let tempState = state;
+//     const tempPath = path.slice(0);
+//
+//     while (tempPath.length > 1) {
+//       tempState = tempState.tabs[tempPath.shift()];
+//     }
+//
+//     const key = tempPath.shift();
+//
+//     return !!(tempState.tabs && tempState.tabs[key]);
+//   }
+//
+//   render() {
+//     const { selectedPath, tabs, rendered } = this.state;
+//     const { children, id } = this.props;
+//
+//     return (
+//       <div className={this.getCssClasses()}>
+//         { this.genTabs(tabs) }
+//         <TabsContext.Provider
+//           value={{
+//             id,
+//             addTab: this.addTab.bind(this),
+//             tabExists: this.tabExists.bind(this),
+//             selectedPath,
+//             rendered,
+//           }}
+//         >
+//           {children}
+//         </TabsContext.Provider>
+//       </div>
+//     );
+//   }
+// }

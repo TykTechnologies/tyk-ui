@@ -54,6 +54,7 @@ Tab.propTypes = {
     PropTypes.string,
   ]),
   id: PropTypes.string,
+  selected: PropTypes.bool,
 };
 
 Tab.defaultProps = {};

@@ -33,13 +33,12 @@ class ToggleItem extends Component {
   }
 
   onChange() {
-    console.log('--------');
     const { context, name, value } = this.props;
 
     if(context.disabled) {
       return;
     }
-    console.log(value);
+    
     context.onItemSelected(context.type === 'single' ? !context.value : value, this.itemRef);
 
     if(context.type === 'multiple') {
