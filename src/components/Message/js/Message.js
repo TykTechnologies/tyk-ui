@@ -7,18 +7,18 @@ export default class Message extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
-    noMargin: PropTypes.bool
+    noMargin: PropTypes.bool,
   };
 
   getCssClasses() {
     const { theme, noMargin } = this.props;
-    let cssClasses = ['tyk-message'];
+    const cssClasses = ['tyk-message'];
 
-    cssClasses.push('tyk-message--' + (theme || 'info'));
+    cssClasses.push(`tyk-message--${theme || 'info'}`);
 
-    if(noMargin) {
+    if (noMargin) {
       cssClasses.push('no-margin');
     }
 
@@ -27,7 +27,7 @@ export default class Message extends Component {
 
   render() {
     return (
-      <div className={ this.getCssClasses() }>
+      <div className={this.getCssClasses()}>
         { this.props.children }
       </div>
     );

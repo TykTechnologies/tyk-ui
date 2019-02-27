@@ -43,14 +43,14 @@ export default class PanelHeader extends Component {
               >
                 { this.props.children }
                 {
-                    portalContext.collapsable
-                      ? <Icon className="collapsable__arrow" type={iconType} />
-                      : null
-                  }
+                  portalContext.collapsable
+                    ? <Icon className="collapsable__arrow" type={iconType} />
+                    : null
+                }
               </HeaderTag>
             );
           }
-          }
+        }
       </PortalContext.Consumer>
     );
   }

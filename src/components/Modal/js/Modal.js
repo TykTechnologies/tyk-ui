@@ -10,15 +10,15 @@ export default class Modal extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
     opened: PropTypes.bool,
     onClose: PropTypes.func,
-    size: PropTypes.string
+    size: PropTypes.string,
   };
 
   state = {
-    initialOpenedState: false
+    initialOpenedState: false,
   };
 
   constructor(props) {
@@ -29,7 +29,7 @@ export default class Modal extends Component {
   closeModal() {
     const { onClose } = this.props;
 
-    if(onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === 'function') {
       onClose();
     }
   }
@@ -37,14 +37,14 @@ export default class Modal extends Component {
   getModalSize() {
     const { size } = this.props;
 
-    return 'tyk-modal--' + (size || 'md');
+    return `tyk-modal--${size || 'md'}`;
   }
 
   getCssClasses() {
     const { opened } = this.props;
-    let cssClasses = ['tyk-modal'];
+    const cssClasses = ['tyk-modal'];
 
-    if(opened) {
+    if (opened) {
       cssClasses.push('opened');
     }
 
@@ -53,9 +53,9 @@ export default class Modal extends Component {
 
   getBackdropCssClasses() {
     const { opened } = this.props;
-    let cssClasses = ['tyk-modal__backdrop'];
+    const cssClasses = ['tyk-modal__backdrop'];
 
-    if(opened) {
+    if (opened) {
       cssClasses.push('opened');
     }
 
@@ -70,17 +70,17 @@ export default class Modal extends Component {
         {
           ReactDOM.createPortal(
             <CSSTransition
-              in={ opened }
-              timeout={ 100 }
+              in={opened}
+              timeout={100}
               classNames="appear"
             >
-              <div className={ this.getCssClasses() }>
-                <div className={ "tyk-modal__dialog " + this.getModalSize() }>
+              <div className={this.getCssClasses()}>
+                <div className={`tyk-modal__dialog ${this.getModalSize()}`}>
                   <div className="tyk-modal__content">
                     <ModalContext.Provider
                       value={{
                         opened,
-                        closeModal: this.closeModal
+                        closeModal: this.closeModal,
                       }}
                     >
                       { this.props.children }
@@ -89,23 +89,22 @@ export default class Modal extends Component {
                 </div>
               </div>
             </CSSTransition>,
-            document.querySelector('body')
+            document.querySelector('body'),
           )
         }
         {
           ReactDOM.createPortal(
             <CSSTransition
-              in={ opened }
-              timeout={ 100 }
+              in={opened}
+              timeout={100}
               classNames="fade"
             >
               <div
-                className={ this.getBackdropCssClasses() }
-                onClick={ this.closeModal }
-              >
-              </div>
+                className={this.getBackdropCssClasses()}
+                onClick={this.closeModal}
+              />
             </CSSTransition>,
-            document.querySelector('body')
+            document.querySelector('body'),
           )
         }
       </Fragment>

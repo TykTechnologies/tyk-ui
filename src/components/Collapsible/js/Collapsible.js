@@ -7,10 +7,10 @@ export default class Collapsible extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
     collapsed: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
   }
 
   constructor(props) {
@@ -23,7 +23,7 @@ export default class Collapsible extends Component {
   }
 
   componentDidMount() {
-    let height = (this.props.collapsed) ? 0 : this.getHeight();
+    const height = (this.props.collapsed) ? 0 : this.getHeight();
 
     this.setHeight(height);
 
@@ -34,8 +34,8 @@ export default class Collapsible extends Component {
 
   state = {
     contentContainerStyle: {
-      height: 'auto'
-    }
+      height: 'auto',
+    },
   };
 
   getHeight() {
@@ -45,8 +45,8 @@ export default class Collapsible extends Component {
   setHeight(height) {
     this.setState({
       contentContainerStyle: {
-        height: height + 'px'
-      }
+        height: `${height}px`,
+      },
     });
   }
 
@@ -61,20 +61,20 @@ export default class Collapsible extends Component {
   render() {
     return (
       <CSSTransition
-        onEnter={ this.onEnter }
-        onExit={ this.onExit }
-        in={ !this.props.collapsed }
-        timeout={ 0 }
+        onEnter={this.onEnter}
+        onExit={this.onExit}
+        in={!this.props.collapsed}
+        timeout={0}
         classNames="collapse"
       >
         <div
           className="collapse-wrapper"
-          ref={ this.collapseWrapper }
-          style={ this.state.contentContainerStyle }
+          ref={this.collapseWrapper}
+          style={this.state.contentContainerStyle}
         >
           <div
-            className={ this.props.className }
-            ref={ this.contentContainer }
+            className={this.props.className}
+            ref={this.contentContainer}
           >
             { this.props.children }
           </div>

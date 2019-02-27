@@ -15,13 +15,13 @@ export default class EditableList extends Component {
     addValueOnFieldChange: PropTypes.bool,
     error: PropTypes.string,
     config: PropTypes.object,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
   };
 
   state = {
     initialValue: this.props.value || '',
     value: this.props.value || [],
-    buttonWidth: 0
+    buttonWidth: 0,
   };
 
   constructor(props) {
@@ -33,9 +33,9 @@ export default class EditableList extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    let state = {};
+    const state = {};
 
-    if(nextProps.value && JSON.stringify(nextProps.value) !== JSON.stringify(prevState.initialValue)) {
+    if (nextProps.value && JSON.stringify(nextProps.value) !== JSON.stringify(prevState.initialValue)) {
       state.value = nextProps.value || [];
       state.initialValue = nextProps.value || '';
     }
@@ -45,14 +45,14 @@ export default class EditableList extends Component {
 
   getMainFormButtonWidth(value) {
     this.setState({
-      buttonWidth: value
+      buttonWidth: value,
     });
   }
 
   triggerOnChange(index, prevValue, nextValue) {
     const { onChange } = this.props;
 
-    if(onChange && typeof onChange === 'function') {
+    if (onChange && typeof onChange === 'function') {
       onChange(((this.state.value.length) ? this.state.value : null), index, prevValue, nextValue);
     }
   }
@@ -60,8 +60,8 @@ export default class EditableList extends Component {
   closeListItems() {
     const { value } = this.state;
 
-    let newValues = value.map((value, index) => {
-      if(value.editMode) {
+    const newValues = value.map((value, index) => {
+      if (value.editMode) {
         value.editMode = false;
         return value;
       }
@@ -73,10 +73,8 @@ export default class EditableList extends Component {
   }
 
   _handleFormSubmit(value) {
-    let tempState = this.addValues(value);
-    this.setState((previousState) => {
-      return Object.assign({}, previousState, tempState);
-    }, () => {
+    const tempState = this.addValues(value);
+    this.setState(previousState => Object.assign({}, previousState, tempState), () => {
       this.triggerOnChange(tempState.value.length - 1, null, value);
     });
   }
@@ -86,8 +84,8 @@ export default class EditableList extends Component {
     let ok = false;
 
     value.forEach((item, itemIndex) => {
-      if(JSON.stringify(item.value) === JSON.stringify(itemValue)) {
-        if(index >= 0 && itemIndex === index) {
+      if (JSON.stringify(item.value) === JSON.stringify(itemValue)) {
+        if (index >= 0 && itemIndex === index) {
           ok = false;
         } else {
           ok = true;
@@ -101,15 +99,15 @@ export default class EditableList extends Component {
   addValues(newValue) {
     const { value } = this.state;
     const { config } = this.props;
-    let itemValue = {
+    const itemValue = {
       editMode: false,
-      value: newValue
+      value: newValue,
     };
-    let tempState = {
-      value: value.slice(0)
+    const tempState = {
+      value: value.slice(0),
     };
 
-    if(config.children) {
+    if (config.children) {
       itemValue.children = [];
     }
 
@@ -121,11 +119,11 @@ export default class EditableList extends Component {
   removeListItem(index) {
     let removedItem;
     this.setState((previousState) => {
-      let valueArr = previousState.value.slice(0);
+      const valueArr = previousState.value.slice(0);
       removedItem = valueArr.splice(index, 1);
 
       return {
-        value: valueArr
+        value: valueArr,
       };
     }, () => {
       this.triggerOnChange(index, removedItem, null);
@@ -133,7 +131,7 @@ export default class EditableList extends Component {
   }
 
   setItemEditMode(index) {
-    let newValues = this.closeListItems();
+    const newValues = this.closeListItems();
 
     this.setState((previousState) => {
       previousState.value = newValues;
@@ -157,9 +155,9 @@ export default class EditableList extends Component {
   }
 
   getListItemCssClass(displayType) {
-    let cssClasses = [];
+    const cssClasses = [];
 
-    if(displayType === 'inline') {
+    if (displayType === 'inline') {
       cssClasses.push('editable-list-item--inline');
     }
 
@@ -167,12 +165,12 @@ export default class EditableList extends Component {
   }
 
   getListItemsCssClass(displayType) {
-    let { config } = this.props;
-    let cssClasses = ['editable-list-items'];
+    const { config } = this.props;
+    const cssClasses = ['editable-list-items'];
 
     cssClasses.push(config.displayType || 'table');
 
-    if(displayType === 'inline') {
+    if (displayType === 'inline') {
       cssClasses.push('editable-list-items--inline');
     }
 
@@ -194,67 +192,65 @@ export default class EditableList extends Component {
   getItemListValue(itemValue) {
     let tempValue = null;
 
-    if(typeof itemValue === 'string') {
+    if (typeof itemValue === 'string') {
       tempValue = itemValue;
     }
 
-    if(Object.prototype.toString.call(itemValue) === '[object Object]') {
+    if (Object.prototype.toString.call(itemValue) === '[object Object]') {
       tempValue = itemValue.name;
     }
 
-    if(moment.isMoment(itemValue)) {
+    if (moment.isMoment(itemValue)) {
       tempValue = itemValue.format('L');
     }
 
-    if(Object.prototype.toString.call(itemValue) === '[object Date]') {
+    if (Object.prototype.toString.call(itemValue) === '[object Date]') {
       tempValue = moment(itemValue).format('L');
     }
 
     return tempValue;
   }
 
-  //generate list item valuse based on the display types
-  //table, inline, list
+  // generate list item valuse based on the display types
+  // table, inline, list
   getListItemText(itemData) {
     const { config } = this.props;
     let value = null;
 
-    switch(config.displayType) {
-      case 'list':
-      case 'inline':
-        let itemText = itemData.value.reduce((prevValue, itemValue, index) => {
-          let tempValue = this.getItemListValue(itemValue);
-          let separator = ', ';
+    switch (config.displayType) {
+    case 'list':
+    case 'inline':
+      const itemText = itemData.value.reduce((prevValue, itemValue, index) => {
+        const tempValue = this.getItemListValue(itemValue);
+        let separator = ', ';
 
-          if(index === itemData.value.length - 1) {
-            separator = '';
+        if (index === itemData.value.length - 1) {
+          separator = '';
+        }
+
+        return prevValue + tempValue + separator;
+      }, '');
+
+      value = itemText;
+
+      break;
+    default:
+      value = (
+        <Row>
+          {
+            config.components.map((component, index) => (
+              <Column
+                key={this.getItemListValue(itemData.value[index]) + index}
+                size={`md-${component.size} lg-${component.size}`}
+              >
+                { this.getItemListValue(itemData.value[index]) }
+              </Column>
+            ))
           }
+        </Row>
+      );
 
-          return prevValue + tempValue + separator;
-        }, '');
-
-        value = itemText;
-
-        break;
-      default:
-        value = (
-          <Row>
-            {
-              config.components.map((component, index) => {
-                return (
-                  <Column
-                    key={ this.getItemListValue(itemData.value[index]) + index }
-                    size={ "md-" + component.size + " lg-" + component.size }
-                  >
-                    { this.getItemListValue(itemData.value[index]) }
-                  </Column>
-                );
-              })
-            }
-          </Row>
-        );
-
-        break;
+      break;
     }
 
     return value;
@@ -264,7 +260,7 @@ export default class EditableList extends Component {
     const { config, disabled } = this.props;
     const { buttonWidth, value } = this.state;
 
-    let clonedComponents = cloneDeep(config.components);
+    const clonedComponents = cloneDeep(config.components);
 
     itemData.value.forEach((itemValue, index) => {
       clonedComponents[index].props.value = itemValue;
@@ -272,57 +268,63 @@ export default class EditableList extends Component {
 
     return (
       <li
-        key={ index }
-        className={ this.getListItemCssClass(config.displayType) }
-        ref={ this.dropdownListItemRef }
+        key={index}
+        className={this.getListItemCssClass(config.displayType)}
+        ref={this.dropdownListItemRef}
       >
         <div
-          className={ "editable-list-item__text " + (config.displayType || 'table') + ((itemData.editMode) ? ' edit-mode-wrapper' : '') }
+          className={`editable-list-item__text ${config.displayType || 'table'}${(itemData.editMode) ? ' edit-mode-wrapper' : ''}`}
         >
-        {
-          !itemData.editMode
-            ? <Fragment>
-                { this.getListItemText(itemData, index) }
-                <div
-                  className="editable-list-item__controls"
-                  style={{
-                    display: 'block',
-                    width: (config.displayType === 'inline') ? 'auto' : buttonWidth + 15 + 'px'
-                  }}
-                >
-                  <button disabled={ disabled } type="button" className="editable-list-action__button" onClick={ this.setItemEditMode.bind(this, index) }>
-                    <Icon type="edit" />
-                  </button>
-                  <button disabled={ disabled } type="button" className="editable-list-action__button" onClick={ this.removeListItem.bind(this, index) }>
+          {
+            !itemData.editMode
+              ? (
+                <Fragment>
+                  { this.getListItemText(itemData, index) }
+                  <div
+                    className="editable-list-item__controls"
+                    style={{
+                      display: 'block',
+                      width: (config.displayType === 'inline') ? 'auto' : `${buttonWidth + 15}px`,
+                    }}
+                  >
+                    <button disabled={disabled} type="button" className="editable-list-action__button" onClick={this.setItemEditMode.bind(this, index)}>
+                      <Icon type="edit" />
+                    </button>
+                    <button disabled={disabled} type="button" className="editable-list-action__button" onClick={this.removeListItem.bind(this, index)}>
+                      <Icon type="trash" />
+                    </button>
+                  </div>
+                </Fragment>
+              )
+              : (
+                <Fragment>
+                  <EditableListForm
+                    buttonName="Update"
+                    noLabels={config.noLabels}
+                    disabled={disabled}
+                    displayType={config.displayType}
+                    components={clonedComponents}
+                    onSubmit={this.handleItemUpdate.bind(this, index)}
+                    validate={this.isInList.bind(this, index)}
+                    validationmessage="This value is already in the list"
+                  />
+                  <button type="button" className="editable-list-action__button on-edit" onClick={this.removeListItem.bind(this, index)}>
                     <Icon type="trash" />
                   </button>
-                </div>
-              </Fragment>
-            : <Fragment>
-                <EditableListForm
-                  buttonName="Update"
-                  noLabels={ config.noLabels }
-                  disabled={ disabled }
-                  displayType={ config.displayType }
-                  components={ clonedComponents }
-                  onSubmit={ this.handleItemUpdate.bind(this, index) }
-                  validate={ this.isInList.bind(this, index) }
-                  validationmessage="This value is already in the list"
-                />
-                <button type="button" className="editable-list-action__button on-edit" onClick={ this.removeListItem.bind(this, index) }>
-                  <Icon type="trash" />
-                </button>
-              </Fragment>
-        }
+                </Fragment>
+              )
+          }
         </div>
         {
           config.children
-            ? <EditableList
-                disabled={ disabled }
-                onChange={ this.handleChildrenOnChange.bind(this, index) }
-                config={ config.children.config }
-                value={ (value[index] && value[index].children) || [] }
+            ? (
+              <EditableList
+                disabled={disabled}
+                onChange={this.handleChildrenOnChange.bind(this, index)}
+                config={config.children.config}
+                value={(value[index] && value[index].children) || []}
               />
+            )
             : null
         }
       </li>
@@ -335,33 +337,31 @@ export default class EditableList extends Component {
 
     return (
       <Fragment>
-          {
-            config.displayType === 'table' || !config.displayType
-              ? <div
-                  className="editable-list__header"
-                  style={{
-                    paddingRight: (buttonWidth + 15) + 'px'
-                  }}
-                >
-                  <Row>
+        {
+          config.displayType === 'table' || !config.displayType
+            ? (
+              <div
+                className="editable-list__header"
+                style={{
+                  paddingRight: `${buttonWidth + 15}px`,
+                }}
+              >
+                <Row>
                   {
-                    config.components.map((component, index) => {
-                      return (
-                        <Column key={ component.props.label || index } size={ 'md-' + (component.size || 12) + ' lg-' + (component.size || 12) }>
-                          { component.props.label }
-                        </Column>
-                      );
-                    })
+                    config.components.map((component, index) => (
+                      <Column key={component.props.label || index} size={`md-${component.size || 12} lg-${component.size || 12}`}>
+                        { component.props.label }
+                      </Column>
+                    ))
                   }
-                  </Row>
-                </div>
-              : null
+                </Row>
+              </div>
+            )
+            : null
         }
-        <ul className={ this.getListItemsCssClass(config.displayType) }>
+        <ul className={this.getListItemsCssClass(config.displayType)}>
           {
-            value.map((itemData, index) => {
-              return this.genListItem(itemData, index);
-            })
+            value.map((itemData, index) => this.genListItem(itemData, index))
           }
         </ul>
       </Fragment>
@@ -369,7 +369,9 @@ export default class EditableList extends Component {
   }
 
   render() {
-    const { addValueOnFieldChange, config, error, disabled, label } = this.props;
+    const {
+      addValueOnFieldChange, config, error, disabled, label,
+    } = this.props;
     const { buttonWidth, value } = this.state;
 
     return (
@@ -380,27 +382,27 @@ export default class EditableList extends Component {
             : null
         }
         <EditableListForm
-          addValueOnFieldChange={ addValueOnFieldChange }
-          components={ config.components }
-          buttonName={ config.formButtonTitle }
-          buttonStyle={ config.formButtonStyle }
-          disabled={ disabled }
-          error={ error }
-          errorPersist={ (error) ? true : false }
-          noLabels={ config.noLabels }
-          onSubmit={ this._handleFormSubmit }
-          validate={ this.isInList.bind(this, -1) }
+          addValueOnFieldChange={addValueOnFieldChange}
+          components={config.components}
+          buttonName={config.formButtonTitle}
+          buttonStyle={config.formButtonStyle}
+          disabled={disabled}
+          error={error}
+          errorPersist={!!(error)}
+          noLabels={config.noLabels}
+          onSubmit={this._handleFormSubmit}
+          validate={this.isInList.bind(this, -1)}
           validationmessage="This value is already in the list"
-          getMainFormButtonWidth={ this.getMainFormButtonWidth }
+          getMainFormButtonWidth={this.getMainFormButtonWidth}
         />
         {
           value.length
             ? config.appendTo
-                ? ReactDOM.createPortal(
-                  this.genList(),
-                  document.querySelector(config.appendTo) || document.querySelector('body')
-                )
-                : this.genList()
+              ? ReactDOM.createPortal(
+                this.genList(),
+                document.querySelector(config.appendTo) || document.querySelector('body'),
+              )
+              : this.genList()
             : null
         }
       </div>

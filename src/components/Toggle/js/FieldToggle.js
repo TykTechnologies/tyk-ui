@@ -10,7 +10,7 @@ export default class FieldToggle extends Component {
       PropTypes.node,
     ]),
     onChange: PropTypes.func,
-    input: PropTypes.object,
+    input: PropTypes.instanceOf(Object),
   };
 
   constructor(props) {

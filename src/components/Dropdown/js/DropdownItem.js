@@ -40,14 +40,14 @@ export default class DropdownItem extends Component {
             <li onClick={this.dropdownItemCLick.bind(this, dropdownContext, this.props)}>
               <a href={href}>
                 {
-                    eventKey && dropdownContext.selectedItem === eventKey
-                      ? <Icon type="check" />
-                      : null
-                  }
+                  eventKey && dropdownContext.selectedItem === eventKey
+                    ? <Icon type="check" />
+                    : null
+                }
                 <span>
                   {
-                      title || this.props.children
-                    }
+                    title || this.props.children
+                  }
                 </span>
               </a>
             </li>

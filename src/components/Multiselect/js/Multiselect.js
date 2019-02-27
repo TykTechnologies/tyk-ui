@@ -20,18 +20,16 @@ class Multiselect extends Component {
     itemsNrPages: PropTypes.number,
     loadMoreItems: PropTypes.func,
     note: PropTypes.string,
-    maxSelections: PropTypes.number
+    maxSelections: PropTypes.number,
   };
 
   state = {
-    opened: {}
+    opened: {},
   };
 
   diffObjects(value, items) {
-    let newItems = items.filter((item) => {
-      let isCommon = value.filter((selectedItem) => {
-        return selectedItem.id === item.id;
-      }).length > 0;
+    const newItems = items.filter((item) => {
+      const isCommon = value.filter(selectedItem => selectedItem.id === item.id).length > 0;
 
       return !isCommon;
     });
@@ -41,7 +39,7 @@ class Multiselect extends Component {
 
   itemsChange(allItems, item) {
     const { value, onChange } = this.props;
-    let valueClone = fromJS(value).toJS();
+    const valueClone = fromJS(value).toJS();
 
     valueClone.unshift(item);
 
@@ -50,7 +48,7 @@ class Multiselect extends Component {
 
   valueChange(value, item) {
     const { items, onChange } = this.props;
-    let allItemsClone = fromJS(items).toJS();
+    const allItemsClone = fromJS(items).toJS();
 
     allItemsClone.unshift(item);
 
@@ -72,20 +70,22 @@ class Multiselect extends Component {
   getMultiselectError() {
     const { error } = this.props;
 
-    return (error && error !== 'true' && error !=='false')
-      ? <p
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
           className="tyk-form-control__error-message"
         >
           { error }
         </p>
+      )
       : null;
   }
 
   getCssClasses() {
     const { error } = this.props;
-    let cssClasses = ['tyk-multiselect'];
+    const cssClasses = ['tyk-multiselect'];
 
-    if(error) {
+    if (error) {
       cssClasses.push('has-error');
     }
 
@@ -107,16 +107,16 @@ class Multiselect extends Component {
       loadMoreItems,
       maxSelections,
       onChange,
-      value
+      value,
     } = this.props;
     const { opened } = this.state;
 
     return (
       <Fragment>
-        <div className={ this.getCssClasses() }>
+        <div className={this.getCssClasses()}>
           <MultiselectContext.Provider
             value={{
-              disabled: disabled,
+              disabled,
               parentContext: this,
               itemDisplayTemplate,
               detailsDisplayTemplate,
@@ -124,49 +124,58 @@ class Multiselect extends Component {
               maxSelections,
               nrSelectedItems: value.length,
               onGetItemDetails: this.onGetItemDetails,
-              opened
+              opened,
             }}
           >
-            <div class="tyk-multiselect__header">
-              <div>{ value.length } Selected { entityNamePlural }</div>
-              <div>Select from existing { entityNamePlural }</div>
+            <div className="tyk-multiselect__header">
+              <div>
+                { value.length }
+                {' '}
+Selected
+                {' '}
+                { entityNamePlural }
+              </div>
+              <div>
+Select from existing
+                { entityNamePlural }
+              </div>
             </div>
             <div className="tyk-multiselect__panel-wrapper">
               <MultiselectPanel
-                inputPlaceholder={ `Search through selected ${ entityNamePlural }` }
-                noItemsMessage={ `Selected ${ entityNamePlural } will show here` }
-                items={ value }
-                onChange={ this.valueChange.bind(this) }
+                inputPlaceholder={`Search through selected ${entityNamePlural}`}
+                noItemsMessage={`Selected ${entityNamePlural} will show here`}
+                items={value}
+                onChange={this.valueChange.bind(this)}
                 panelType="selected"
               />
               <MultiselectPanel
-                inputPlaceholder={ `Search existing ${ entityNamePlural }` }
-                noItemsMessage={ `No ${ entityNamePlural } to display` }
-                entityNamePlural={ entityNamePlural }
-                customSearch={ customSearch ? true : false }
-                onCustomSearch={ customSearch }
-                items={ this.diffObjects(value, items) }
-                onChange={ this.itemsChange.bind(this) }
-                serverLoad={ loadMoreItems ? true : false }
-                loadMoreItems={ loadMoreItems }
-                itemsPageNumber={ itemsPageNumber }
-                itemsNrPages={ itemsNrPages }
+                inputPlaceholder={`Search existing ${entityNamePlural}`}
+                noItemsMessage={`No ${entityNamePlural} to display`}
+                entityNamePlural={entityNamePlural}
+                customSearch={!!customSearch}
+                onCustomSearch={customSearch}
+                items={this.diffObjects(value, items)}
+                onChange={this.itemsChange.bind(this)}
+                serverLoad={!!loadMoreItems}
+                loadMoreItems={loadMoreItems}
+                itemsPageNumber={itemsPageNumber}
+                itemsNrPages={itemsNrPages}
                 panelType="normal"
               />
             </div>
           </MultiselectContext.Provider>
         </div>
         <div>
-        {
-          this.props.note
-            ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
-            : null
-        }
+          {
+            this.props.note
+              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+              : null
+          }
         </div>
         { this.getMultiselectError() }
       </Fragment>
     );
   }
-};
+}
 
 export default Multiselect;

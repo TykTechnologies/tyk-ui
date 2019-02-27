@@ -29,25 +29,25 @@ export default class PanelBody extends Component {
     return (
       <PortalContext.Consumer>
         {
-        portalContext => (
-          portalContext.collapsable
-            ? (
-              <Collapsible
-                collapsed={portalContext.collapsed}
-                className={this.getCssClasses()}
-              >
-                { this.props.children }
-              </Collapsible>
-            )
-            : (
-              <div
-                className={this.getCssClasses()}
-              >
-                { this.props.children }
-              </div>
-            )
-        )
-      }
+          portalContext => (
+            portalContext.collapsable
+              ? (
+                <Collapsible
+                  collapsed={portalContext.collapsed}
+                  className={this.getCssClasses()}
+                >
+                  { this.props.children }
+                </Collapsible>
+              )
+              : (
+                <div
+                  className={this.getCssClasses()}
+                >
+                  { this.props.children }
+                </div>
+              )
+          )
+        }
       </PortalContext.Consumer>
     );
   }

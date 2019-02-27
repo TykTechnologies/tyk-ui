@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import { Modal } from './index';
-import { Button } from '../Button';
+import Button from '../Button';
 
 export default class ModalExample extends Component {
   state = {

@@ -5,23 +5,30 @@ import ToggleContext from './ToggleContext';
 
 class Toggle extends Component {
   static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
     disabled: PropTypes.bool,
+    onChange: PropTypes.func,
     theme: PropTypes.string,
     type: PropTypes.string, // single || multiple
     size: PropTypes.string,
     value: PropTypes.oneOfType([
       PropTypes.bool,
-      PropTypes.string
-    ])
+      PropTypes.string,
+    ]),
   };
 
   static defaultProps = {
     theme: 'primary',
-    type: 'single'
+    type: 'single',
   };
 
   state = {
-    selectedRef: null
+    selectedRef: null,
   }
 
   constructor(props) {
@@ -31,35 +38,35 @@ class Toggle extends Component {
     this.toggleRef = createRef();
   }
 
-  onItemSelected(value, ref) {
+  onItemSelected(value) {
     const { onChange } = this.props;
 
-    if(onChange) {
+    if (onChange) {
       onChange(value);
     }
   }
 
   saveSelectedRef(ref) {
     this.setState({
-      selectedRef: ref
+      selectedRef: ref,
     });
   }
 
   positionNotch() {
     const { selectedRef } = this.state;
 
-    if(!selectedRef) {
+    if (!selectedRef) {
       return {};
     }
 
-    let selectedWidth = selectedRef.current.offsetWidth;
-    let selectedOffset = selectedRef.current.getBoundingClientRect().left;
-    let toggleOffset = this.toggleRef.current.getBoundingClientRect().left;
-    let left = selectedOffset - toggleOffset;
+    const selectedWidth = selectedRef.current.offsetWidth;
+    const selectedOffset = selectedRef.current.getBoundingClientRect().left;
+    const toggleOffset = this.toggleRef.current.getBoundingClientRect().left;
+    const left = selectedOffset - toggleOffset;
 
     return {
-      left: left + 'px',
-      width: selectedWidth + 'px'
+      left: `${left}px`,
+      width: `${selectedWidth}px`,
     };
   }
 
@@ -70,27 +77,25 @@ class Toggle extends Component {
       size,
       theme,
       type,
-      value
+      value,
     } = this.props;
 
-    const { notchStyle } = this.state;
-
     return (
-      <div className={`tyk-toggle tyk-toggle--disabled-${ disabled } tyk-toggle--${ size || 'md' } tyk-toggle--${ theme }`} ref={ this.toggleRef }>
+      <div className={`tyk-toggle tyk-toggle--disabled-${disabled} tyk-toggle--${size || 'md'} tyk-toggle--${theme}`} ref={this.toggleRef}>
         <ToggleContext.Provider
           value={{
             disabled,
             onItemSelected: this.onItemSelected.bind(this),
             saveSelectedRef: this.saveSelectedRef.bind(this),
             type,
-            value
+            value,
           }}
         >
-          <ul className={ `tyk-toggle__list tyk-toggle__list--${ type }` }>
+          <ul className={`tyk-toggle__list tyk-toggle__list--${type}`}>
             { children }
             {
               type === 'multiple'
-                ? <li className="tyk-toggle__notch" ref={ this.notchRef } style={ this.positionNotch() }></li>
+                ? <li className="tyk-toggle__notch" ref={this.notchRef} style={this.positionNotch()} />
                 : null
             }
           </ul>

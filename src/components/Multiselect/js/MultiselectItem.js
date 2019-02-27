@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import MultiselectContext from './MultiselectContext';
-import { Button } from '../../Button';
+import Button from '../../Button';
 import { Collapsible } from '../../Collapsible';
 import { Loader } from '../../Loader';
 
@@ -37,33 +37,33 @@ class MultiselectItem extends Component {
       <Fragment>
         <MultiselectContext.Consumer>
           {
-          context => (
-            this.isInSearchValue(context.fieldsToSearchOn)
-              ? (
-                <li>
-                  <div>
-                    <span>
-                      {
+            context => (
+              this.isInSearchValue(context.fieldsToSearchOn)
+                ? (
+                  <li>
+                    <div>
+                      <span>
+                        {
                           context.itemDisplayTemplate
                             ? context.itemDisplayTemplate(item)
                             : JSON.stringify(item)
                         }
-                    </span>
-                    <span className="tyk-multiselect-item__controls">
-                      <Button
-                        iconType={itemType === 'normal' ? 'plus' : 'minus'}
-                        iconOnly
-                        onClick={onChange.bind(null, item)}
-                        disabled={context.disabled || (context.maxSelections && context.maxSelections === context.nrSelectedItems && itemType === 'normal')}
-                      />
-                      <Button
-                        iconType={context.opened[item.id] ? 'chevron-up' : 'chevron-down'}
-                        iconOnly
-                        onClick={context.onGetItemDetails.bind(context.parentContext, item)}
-                      />
-                    </span>
-                  </div>
-                  {
+                      </span>
+                      <span className="tyk-multiselect-item__controls">
+                        <Button
+                          iconType={itemType === 'normal' ? 'plus' : 'minus'}
+                          iconOnly
+                          onClick={onChange.bind(null, item)}
+                          disabled={context.disabled || (context.maxSelections && context.maxSelections === context.nrSelectedItems && itemType === 'normal')}
+                        />
+                        <Button
+                          iconType={context.opened[item.id] ? 'chevron-up' : 'chevron-down'}
+                          iconOnly
+                          onClick={context.onGetItemDetails.bind(context.parentContext, item)}
+                        />
+                      </span>
+                    </div>
+                    {
                       item.details
                         ? (
                           <Collapsible
@@ -81,11 +81,11 @@ class MultiselectItem extends Component {
                           ? <Loader position="relative" />
                           : null
                     }
-                </li>
-              )
-              : null
-          )
-        }
+                  </li>
+                )
+                : null
+            )
+          }
         </MultiselectContext.Consumer>
       </Fragment>
     );

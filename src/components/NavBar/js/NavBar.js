@@ -25,15 +25,15 @@ export default class NavBar extends PureComponent {
           }
           <div className="tyk-nav-bar__container">
             {
-            this.props.left
-              ? <div className="tyk-nav-bar__left">{ this.props.left }</div>
-              : ''
-          }
+              this.props.left
+                ? <div className="tyk-nav-bar__left">{ this.props.left }</div>
+                : ''
+            }
             {
-            this.props.right
-              ? <div className="tyk-nav-bar__right">{ this.props.right }</div>
-              : ''
-          }
+              this.props.right
+                ? <div className="tyk-nav-bar__right">{ this.props.right }</div>
+                : ''
+            }
           </div>
         </div>
         { this.props.children }

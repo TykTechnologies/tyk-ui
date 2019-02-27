@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Textarea extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
-    input: PropTypes.object,
+    input: PropTypes.instanceOf(Object),
     error: PropTypes.string,
     label: PropTypes.string,
     name: PropTypes.string,

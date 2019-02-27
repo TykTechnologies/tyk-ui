@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from 'react';
 
 import Toggle from './js/Toggle';
-import ToggleItem from './js/ToggleItem';
+import ToggleItemWrapper from './js/ToggleItemWrapper';
 
 import { Row } from '../Row';
 import { Column } from '../Column';
 
-Toggle.Item = ToggleItem;
+Toggle.Item = ToggleItemWrapper;
 
 export default class TestToggle extends Component {
   state = {

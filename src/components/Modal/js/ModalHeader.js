@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from '../../Button';
+import Button from '../../Button';
 import { ModalContext } from './Modal.js';
 
 export default class ModalHeader extends Component {

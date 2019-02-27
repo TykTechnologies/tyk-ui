@@ -8,28 +8,28 @@ export default class Panel extends Component {
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
-      PropTypes.string
+      PropTypes.string,
     ]),
     collapsable: PropTypes.bool,
     collapsed: PropTypes.bool,
     onExtend: PropTypes.func,
     onCollapsed: PropTypes.func,
-    theme: PropTypes.string
+    theme: PropTypes.string,
   };
 
   state = {
     collapsable: this.props.collapsable || false,
-    collapsed: this.props.collapsed || false
+    collapsed: this.props.collapsed || false,
   };
 
   getCssClasses() {
     const { className, theme } = this.props;
     let cssClasses = ['tyk-panel'];
-    let panelTheme = 'tyk-panel--' + (theme || 'default');
+    const panelTheme = `tyk-panel--${theme || 'default'}`;
 
     cssClasses.push(panelTheme);
 
-    if(className) {
+    if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
     }
 
@@ -38,19 +38,19 @@ export default class Panel extends Component {
 
   handleToggle() {
     this.setState({
-      collapsed: !this.state.collapsed
+      collapsed: !this.state.collapsed,
     });
   }
 
   render() {
     return (
-      <div className={ this.getCssClasses() }>
+      <div className={this.getCssClasses()}>
         <PortalContext.Provider
           value={{
             collapsable: this.props.collapsable,
             collapsed: this.state.collapsed,
             onToggle: this.handleToggle.bind(this),
-            theme: this.props.theme
+            theme: this.props.theme,
           }}
         >
           { this.props.children }

@@ -4,7 +4,7 @@ import { fromJS } from 'immutable';
 
 import { Column } from '../../Column';
 import { Row } from '../../Row';
-import { Button } from '../../Button';
+import Button from '../../Button';
 
 export default class EditableListForm extends Component {
   static propTypes = {
@@ -18,14 +18,14 @@ export default class EditableListForm extends Component {
     errorPersist: PropTypes.bool,
     onSubmit: PropTypes.func,
     validate: PropTypes.func,
-    validationmessage: PropTypes.string
+    validationmessage: PropTypes.string,
   };
 
   state = {
     errors: {},
     mainError: null,
     mainFormValue: this.getMainFormValue(),
-    refs: []
+    refs: [],
   };
 
   constructor(props) {
@@ -40,14 +40,14 @@ export default class EditableListForm extends Component {
     const { addValueOnFieldChange } = this.props;
     this.createRefs();
 
-    if(this.props.getMainFormButtonWidth) {
+    if (this.props.getMainFormButtonWidth) {
       this.props.getMainFormButtonWidth(!addValueOnFieldChange ? this.submitButtonRef.current.clientWidth : 0);
     }
   }
 
   getMainFormValue() {
     const { components } = this.props;
-    let mainFormValue = new Array(components.length);
+    const mainFormValue = new Array(components.length);
 
     components.forEach((component, index) => {
       mainFormValue[index] = component.props.value || undefined;
@@ -58,14 +58,14 @@ export default class EditableListForm extends Component {
 
   createRefs() {
     const { components } = this.props;
-    let refs = [];
+    const refs = [];
 
     components.forEach((component) => {
       refs.push(createRef());
     });
 
     this.setState({
-      refs
+      refs,
     });
   }
 
@@ -73,30 +73,30 @@ export default class EditableListForm extends Component {
     const { mainError } = this.state;
     const { error, errorPersist } = this.props;
 
-    let validatorsNames = props.validate ? Object.keys(props.validate) : [];
-    //if there is a general form error don't take field errors into consideration
-    let tempState = {
-      errors: (error || mainError) ? {} : Object.assign({}, this.state.errors)
+    const validatorsNames = props.validate ? Object.keys(props.validate) : [];
+    // if there is a general form error don't take field errors into consideration
+    const tempState = {
+      errors: (error || mainError) ? {} : Object.assign({}, this.state.errors),
     };
     let ok = true;
 
-    //if the error should stay after changing fields values don't take actions
-    if(errorPersist) {
+    // if the error should stay after changing fields values don't take actions
+    if (errorPersist) {
       return tempState;
     }
 
-    //validate each field from the form
+    // validate each field from the form
     for (let i = 0; i < validatorsNames.length; i++) {
-      let validator = props.validate[validatorsNames[i]];
-      if(validator(value)) {
+      const validator = props.validate[validatorsNames[i]];
+      if (validator(value)) {
         tempState.errors[props.name] = props.validationmessages[validatorsNames[i]];
         ok = false;
         break;
       }
     }
 
-    //if the field is ok delete its error
-    if(ok) {
+    // if the field is ok delete its error
+    if (ok) {
       delete tempState.errors[props.name];
     }
 
@@ -108,15 +108,15 @@ export default class EditableListForm extends Component {
   hasMainFormErrors() {
     const { components, errorPersist } = this.props;
     const { mainFormValue } = this.state;
-    let tempState = {
-      errors: Object.assign({}, this.state.errors)
+    const tempState = {
+      errors: Object.assign({}, this.state.errors),
     };
 
-    if(errorPersist && mainFormValue.indexOf(undefined) === -1) {
+    if (errorPersist && mainFormValue.indexOf(undefined) === -1) {
       return false;
     }
 
-    if(Object.keys(tempState.errors).length > 0) {
+    if (Object.keys(tempState.errors).length > 0) {
       return true;
     }
 
@@ -133,15 +133,13 @@ export default class EditableListForm extends Component {
 
     tempState = Object.assign({}, tempState, this.validateValue(value, component.props));
 
-    if(!tempState.errors[component.props.name]) {
+    if (!tempState.errors[component.props.name]) {
       tempState.mainFormValue[index] = value;
     }
 
-    this.setState((previousState) => {
-      return Object.assign({}, previousState, tempState);
-    }, () => {
+    this.setState(previousState => Object.assign({}, previousState, tempState), () => {
       console.log('aaaa', addValueOnFieldChange);
-      if(addValueOnFieldChange) {
+      if (addValueOnFieldChange) {
         this.submitForm();
       }
     });
@@ -151,7 +149,7 @@ export default class EditableListForm extends Component {
     const { refs, mainFormValue } = this.state;
 
     refs.forEach((ref) => {
-      if(ref.current.reset) {
+      if (ref.current.reset) {
         ref.current.reset();
       }
     });
@@ -159,7 +157,7 @@ export default class EditableListForm extends Component {
     this.setState({
       errors: {},
       mainError: null,
-      mainFormValue: this.getMainFormValue()
+      mainFormValue: this.getMainFormValue(),
     });
   }
 
@@ -167,26 +165,27 @@ export default class EditableListForm extends Component {
     const { components } = this.props;
 
     this.setState({
-      mainError: error
+      mainError: error,
     });
   }
 
   submitForm() {
     const { errors, mainFormValue, refs } = this.state;
-    const { errorPersist, onSubmit, validate, validationmessage, error } = this.props;
+    const {
+      errorPersist, onSubmit, validate, validationmessage, error,
+    } = this.props;
     console.log(mainFormValue);
-    if(errorPersist) {
+    if (errorPersist) {
       onSubmit(mainFormValue);
       this.resetForm();
     }
 
-    if(
+    if (
       Object.keys(errors).length === 0
       && (onSubmit && typeof onSubmit === 'function')
     ) {
-
-      if(validate) {
-        if(validate(mainFormValue)) {
+      if (validate) {
+        if (validate(mainFormValue)) {
           this.showMainError(validationmessage);
         } else {
           onSubmit(mainFormValue);
@@ -202,9 +201,9 @@ export default class EditableListForm extends Component {
   getComponentsError(component) {
     const { errors, mainError } = this.state;
 
-    if(this.props.error || mainError) {
-      errors[component.props.name] = "true";
-    } else if(!(this.props.error || mainError) && errors[component.props.name] === "true") {
+    if (this.props.error || mainError) {
+      errors[component.props.name] = 'true';
+    } else if (!(this.props.error || mainError) && errors[component.props.name] === 'true') {
       delete errors[component.props.name];
     }
 
@@ -213,13 +212,13 @@ export default class EditableListForm extends Component {
 
   getButtonClassName() {
     const { buttonStyle, displayType } = this.props;
-    let cssClasses = [];
+    const cssClasses = [];
 
-    if(buttonStyle) {
+    if (buttonStyle) {
       cssClasses.push(buttonStyle);
     }
 
-    if(displayType) {
+    if (displayType) {
       cssClasses.push(displayType);
     }
 
@@ -228,9 +227,9 @@ export default class EditableListForm extends Component {
 
   getFormCssClasses() {
     const { noLabels } = this.props;
-    let cssClasses = ['editable-list__form'];
+    const cssClasses = ['editable-list__form'];
 
-    if(noLabels) {
+    if (noLabels) {
       cssClasses.push('no-labels');
     }
 
@@ -238,25 +237,27 @@ export default class EditableListForm extends Component {
   }
 
   render() {
-    const { addValueOnFieldChange, components, buttonName, buttonStyle, disabled, displayType, error } = this.props;
+    const {
+      addValueOnFieldChange, components, buttonName, buttonStyle, disabled, displayType, error,
+    } = this.props;
     const { errors, mainError, refs } = this.state;
 
     return (
       <div>
-        <div className={ this.getFormCssClasses() }>
+        <div className={this.getFormCssClasses()}>
           <Row>
             {
               components.map((component, index) => {
-                let Component = component.name;
+                const Component = component.name;
                 return (
-                  <Column size={ 'md-' + (component.size || '12') + ' lg-' + (component.size || '12') } key={ component.props.name }>
+                  <Column size={`md-${component.size || '12'} lg-${component.size || '12'}`} key={component.props.name}>
                     <Component
-                      disabled={ disabled || component.props.disabled }
-                      onChange={ this.handleOnChange.bind(this, component, index)}
-                      { ...component.props }
-                      label={ displayType === 'inline' ? '' : component.props.label }
-                      error={ this.getComponentsError(component) }
-                      ref={ refs[index] }
+                      disabled={disabled || component.props.disabled}
+                      onChange={this.handleOnChange.bind(this, component, index)}
+                      {...component.props}
+                      label={displayType === 'inline' ? '' : component.props.label}
+                      error={this.getComponentsError(component)}
+                      ref={refs[index]}
                     />
                   </Column>
                 );
@@ -265,32 +266,36 @@ export default class EditableListForm extends Component {
           </Row>
           {
             !addValueOnFieldChange
-              ? <span
-                  className={ this.getButtonClassName() }
-                  ref={ this.submitButtonRef }
+              ? (
+                <span
+                  className={this.getButtonClassName()}
+                  ref={this.submitButtonRef}
                 >
                   <Button
-                    disabled={ this.hasMainFormErrors() }
-                    onClick={ this.submitForm }
+                    disabled={this.hasMainFormErrors()}
+                    onClick={this.submitForm}
                     theme="default"
                     type="button"
-                    size={ displayType === 'inline' ? 'sm' : 'md' }
+                    size={displayType === 'inline' ? 'sm' : 'md'}
                   >
                     { buttonName || 'ADD' }
                   </Button>
                 </span>
+              )
               : null
           }
         </div>
-          {
-            error || mainError
-              ? <div className="editable-list-main-error">
-                  <p className="error-message">
-                    { error || mainError }
-                  </p>
-                </div>
-              : null
-          }
+        {
+          error || mainError
+            ? (
+              <div className="editable-list-main-error">
+                <p className="error-message">
+                  { error || mainError }
+                </p>
+              </div>
+            )
+            : null
+        }
       </div>
     );
   }

@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 export default class Icon extends Component {
   static propTypes = {
     familly: PropTypes.string,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
   };
 
   getCssClasses() {
-    let cssClasses = [];
-    let fontFamily = this.props.family || 'fa';
+    const cssClasses = [];
+    const fontFamily = this.props.family || 'fa';
 
     cssClasses.push(fontFamily);
-    cssClasses.push(fontFamily + '-' + this.props.type);
+    cssClasses.push(`${fontFamily}-${this.props.type}`);
 
     return cssClasses
       .concat([this.props.className] || [])
@@ -20,8 +20,8 @@ export default class Icon extends Component {
   }
 
   render() {
-    return(
-      <i className={ this.getCssClasses() }></i>
+    return (
+      <i className={this.getCssClasses()} />
     );
   }
 }

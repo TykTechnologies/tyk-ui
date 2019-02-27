@@ -1,4 +1,4 @@
-export { Button } from './components/Button';
+export { default as Button } from './components/Button';
 export { Checkbox } from './components/Checkbox';
 export { Column } from './components/Column';
 export { Combobox } from './components/Combobox';
@@ -31,8 +31,8 @@ export { Panel } from './components/Panel';
 export { Row } from './components/Row';
 export { Select } from './components/Select';
 export { FieldSelect } from './components/Select';
-export { Tabs } from './components/Tabs';
-export { Textarea } from './components/Textarea';
+export { default as Tabs } from './components/Tabs';
+export { default as Textarea } from './components/Textarea';
 export { Toggle } from './components/Toggle';
 export { FieldToggle } from './components/Toggle';
 

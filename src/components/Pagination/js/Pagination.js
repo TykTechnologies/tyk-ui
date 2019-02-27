@@ -114,42 +114,42 @@ export default class Pagination extends Component {
     return (
       <Fragment>
         {
-        totalNrOfPages
-          ? (
-            <ul className="tyk-pagination">
-              {
-                selectedPage > 0 && totalNrOfPages > 5
-                  ? (
-                    <li>
-                      <a onClick={this.goToPage.bind(this, selectedPage - 1)}>Previous</a>
-                    </li>
-                  )
-                  : null
-              }
-              {
-                pagesArray.map((pageNr, key) => (
-                  <li key={key} className={this.getPageCssClass(pageNr - 1)}>
-                    {
+          totalNrOfPages
+            ? (
+              <ul className="tyk-pagination">
+                {
+                  selectedPage > 0 && totalNrOfPages > 5
+                    ? (
+                      <li>
+                        <a onClick={this.goToPage.bind(this, selectedPage - 1)}>Previous</a>
+                      </li>
+                    )
+                    : null
+                }
+                {
+                  pagesArray.map((pageNr, key) => (
+                    <li key={key} className={this.getPageCssClass(pageNr - 1)}>
+                      {
                         pageNr !== '...'
                           ? <a onClick={this.goToPage.bind(this, pageNr - 1)}>{ pageNr }</a>
                           : <span>{ pageNr }</span>
                       }
-                  </li>
-                ))
-              }
-              {
-                selectedPage < totalNrOfPages && totalNrOfPages > 5
-                  ? (
-                    <li>
-                      <a onClick={this.goToPage.bind(this, selectedPage + 1)}>Next</a>
                     </li>
-                  )
-                  : null
-              }
-            </ul>
-          )
-          : null
-      }
+                  ))
+                }
+                {
+                  selectedPage < totalNrOfPages && totalNrOfPages > 5
+                    ? (
+                      <li>
+                        <a onClick={this.goToPage.bind(this, selectedPage + 1)}>Next</a>
+                      </li>
+                    )
+                    : null
+                }
+              </ul>
+            )
+            : null
+        }
       </Fragment>
     );
   }
