@@ -3,8 +3,8 @@ import React, { Component, Fragment } from 'react';
 import Toggle from './js/Toggle';
 import ToggleItemWrapper from './js/ToggleItemWrapper';
 
-import { Row } from '../Row';
-import { Column } from '../Column';
+import Row from '../Row';
+import Column from '../Column';
 
 Toggle.Item = ToggleItemWrapper;
 

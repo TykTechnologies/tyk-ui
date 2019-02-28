@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 export default class Checkbox extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    inline: PropTypes.bool,
+    input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
     onChange: PropTypes.func,
@@ -13,9 +15,10 @@ export default class Checkbox extends Component {
   };
 
   getCssClasses() {
+    const { inline } = this.props;
     const cssClasses = [];
 
-    if (this.props.inline) {
+    if (inline) {
       cssClasses.push('tyk-checkbox--inline');
     } else {
       cssClasses.push('tyk-checkbox');
@@ -25,7 +28,7 @@ export default class Checkbox extends Component {
   }
 
   render() {
-    const { input, ...rest } = this.props;
+    const { input, label, ...rest } = this.props;
 
     return (
       <div
@@ -37,7 +40,7 @@ export default class Checkbox extends Component {
             {...rest}
             type="checkbox"
           />
-          {this.props.label}
+          {label}
         </label>
       </div>
     );

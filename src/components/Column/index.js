@@ -1,1 +1,1 @@
-export { default as Column } from './js/Column';
+export { default } from './js/Column';

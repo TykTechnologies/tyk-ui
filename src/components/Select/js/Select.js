@@ -108,9 +108,6 @@ export default class Select extends Component {
       isfield,
       options,
     } = this.props;
-    const {
-      stateValue,
-    } = this.state;
     let selectedValue = null;
 
     selectedValue = options.filter(option => option.id === e.target.value);

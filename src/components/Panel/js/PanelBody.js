@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Collapsible } from '../../Collapsible';
+import Collapsible from '../../Collapsible';
 import { PortalContext } from './Panel';
 
 export default class PanelBody extends Component {

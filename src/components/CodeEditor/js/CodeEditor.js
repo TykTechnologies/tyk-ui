@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import brace from 'brace';
+import 'brace';
 import AceEditor from 'react-ace';
 
 import 'brace/mode/javascript';
@@ -24,6 +24,7 @@ export default class CodeEditor extends Component {
     mode: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
+    onBlur: PropTypes.func,
     onChange: PropTypes.func,
     value: PropTypes.string,
   }
@@ -31,15 +32,8 @@ export default class CodeEditor extends Component {
   constructor(props) {
     super(props);
 
-    this._handleOnChange = this._handleOnChange.bind(this);
-    this._handleOnBlur = this._handleOnBlur.bind(this);
-  }
-
-  _handleOnChange(value) {
-    const { onChange } = this.props;
-    if (onChange) {
-      onChange(value);
-    }
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnBlur = this.handleOnBlur.bind(this);
   }
 
   getCodeEditorError() {
@@ -67,7 +61,14 @@ export default class CodeEditor extends Component {
     return cssClasses.join(' ');
   }
 
-  _handleOnBlur() {
+  handleOnChange(value) {
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange(value);
+    }
+  }
+
+  handleOnBlur() {
     const { value, onBlur } = this.props;
 
     if (onBlur) {
@@ -76,25 +77,31 @@ export default class CodeEditor extends Component {
   }
 
   render() {
+    const {
+      id,
+      label,
+      note,
+    } = this.props;
+
     return (
       <Fragment>
         <div className={this.getCssClasses()}>
           {
-            this.props.label
-              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
+            label
+              ? <label htmlFor={id}>{ label }</label>
               : null
           }
           <AceEditor
             className="tyk-form-control"
             {...this.props}
-            onChange={this._handleOnChange}
-            onBlur={this._handleOnBlur}
+            onChange={this.handleOnChange}
+            onBlur={this.handleOnBlur}
             theme="github"
             editorProps={{ $blockScrolling: true }}
           />
           {
-            this.props.note
-              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
         </div>

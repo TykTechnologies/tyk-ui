@@ -13,6 +13,12 @@ export default class Collapsible extends Component {
     className: PropTypes.string,
   }
 
+  state = {
+    contentContainerStyle: {
+      height: 'auto',
+    },
+  };
+
   constructor(props) {
     super(props);
 
@@ -23,30 +29,13 @@ export default class Collapsible extends Component {
   }
 
   componentDidMount() {
-    const height = (this.props.collapsed) ? 0 : this.getHeight();
+    const { collapsed } = this.props;
+    const height = (collapsed) ? 0 : this.getHeight();
 
     this.setHeight(height);
 
     window.addEventListener('resize', () => {
       this.setHeight(this.getHeight());
-    });
-  }
-
-  state = {
-    contentContainerStyle: {
-      height: 'auto',
-    },
-  };
-
-  getHeight() {
-    return this.contentContainer.current.clientHeight;
-  }
-
-  setHeight(height) {
-    this.setState({
-      contentContainerStyle: {
-        height: `${height}px`,
-      },
     });
   }
 
@@ -58,25 +47,45 @@ export default class Collapsible extends Component {
     this.setHeight(0);
   }
 
+  setHeight(height) {
+    this.setState({
+      contentContainerStyle: {
+        height: `${height}px`,
+      },
+    });
+  }
+
+  getHeight() {
+    return this.contentContainer.current.clientHeight;
+  }
+
   render() {
+    const {
+      className,
+      collapsed,
+      children,
+    } = this.props;
+    const {
+      contentContainerStyle,
+    } = this.state;
     return (
       <CSSTransition
         onEnter={this.onEnter}
         onExit={this.onExit}
-        in={!this.props.collapsed}
+        in={!collapsed}
         timeout={0}
         classNames="collapse"
       >
         <div
           className="collapse-wrapper"
           ref={this.collapseWrapper}
-          style={this.state.contentContainerStyle}
+          style={contentContainerStyle}
         >
           <div
-            className={this.props.className}
+            className={className}
             ref={this.contentContainer}
           >
-            { this.props.children }
+            { children }
           </div>
         </div>
       </CSSTransition>

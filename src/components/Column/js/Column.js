@@ -20,8 +20,8 @@ export default class Column extends PureComponent {
     const colSize = size.split(' ');
     const colOffsets = offset ? offset.split(' ') : [];
 
-    let cssClasses = colSize.map(size => `tyk-col--${size}`);
-    const offsets = colOffsets.map(offset => `tyk-col--${offset}`);
+    let cssClasses = colSize.map(cSize => `tyk-col--${cSize}`);
+    const offsets = colOffsets.map(cOffset => `tyk-col--${cOffset}`);
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
@@ -34,11 +34,11 @@ export default class Column extends PureComponent {
   }
 
   render() {
-    const { id } = this.props;
+    const { children, id } = this.props;
 
     return (
       <div className={this.getCssClasses()} id={id}>
-        { this.props.children }
+        { children }
       </div>
     );
   }

@@ -1,32 +1,41 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import Select from './Select.js';
+import Select from './Select';
 
 export default class FieldSelect extends Component {
+  static propTypes = {
+    input: PropTypes.instanceOf(Object),
+    meta: PropTypes.instanceOf(Object),
+    validationmessages: PropTypes.instanceOf(Object),
+  };
+
   constructor(props) {
     super(props);
 
-    this._handleEvent = this._handleEvent.bind(this);
-  }
-
-  _handleEvent(selectValue) {
-    const { onChange, value } = this.props.input;
-
-    onChange(fromJS(selectValue !== undefined ? selectValue : value));
+    this.handleEvent = this.handleEvent.bind(this);
   }
 
   getSelectError() {
-    const { touched, error, warning } = this.props.meta;
+    const { meta, validationmessages } = this.props;
+    const { touched, error, warning } = meta;
     let message = null;
 
-    if (touched && error && this.props.validationmessages[error]) {
-      message = this.props.validationmessages[error];
+    if (touched && error && validationmessages[error]) {
+      message = validationmessages[error];
     } else if (touched && warning) {
       message = 'warning';
     }
 
     return message;
+  }
+
+  handleEvent(selectValue) {
+    const { input } = this.props;
+    const { onChange, value } = input;
+
+    onChange(fromJS(selectValue !== undefined ? selectValue : value));
   }
 
   render() {
@@ -38,8 +47,8 @@ export default class FieldSelect extends Component {
         {...rest}
         isfield="true"
         error={this.getSelectError()}
-        onChange={this._handleEvent}
-        onBlur={this._handleEvent}
+        onChange={this.handleEvent}
+        onBlur={this.handleEvent}
         value={!input.value ? input.value : input.value.toJS()}
       />
     );

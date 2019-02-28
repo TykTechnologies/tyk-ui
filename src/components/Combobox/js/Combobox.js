@@ -15,29 +15,47 @@ const getStateSelectedValues = (multiple, tags, value) => {
 export default class Combobox extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    error: PropTypes.string,
     id: PropTypes.string,
     label: PropTypes.string,
     multiple: PropTypes.bool,
-    name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     tags: PropTypes.bool,
-    validationmessages: PropTypes.object,
-    values: PropTypes.array,
+    value: PropTypes.instanceOf(Array),
+    values: PropTypes.instanceOf(Array),
   };
 
-  state = {
-    cursor: -1,
-    opened: false,
-    width: 50,
-    initialValue: this.props.value,
-    stateSelectedValues: getStateSelectedValues(this.props.multiple, this.props.tags, this.props.value),
-    searchText: '',
-  };
+  static closeList() {
+    return {
+      cursor: -1,
+      opened: false,
+    };
+  }
+
+  static openList() {
+    return {
+      opened: true,
+    };
+  }
 
   constructor(props) {
     super(props);
+    const {
+      multiple,
+      tags,
+      value,
+    } = props;
+
+    this.state = {
+      cursor: -1,
+      opened: false,
+      width: 50,
+      initialValue: value,
+      stateSelectedValues: getStateSelectedValues(multiple, tags, value),
+      searchText: '',
+    };
 
     this.comboboxRef = createRef();
     this.valuesListRef = createRef();
@@ -46,7 +64,7 @@ export default class Combobox extends Component {
 
     this.focusInput = this.focusInput.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
-    this.openList = this.openList.bind(this);
+    Combobox.openList = Combobox.openList.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleItemsNavigation = this.handleItemsNavigation.bind(this);
     this.handleComboboxDropdownClick = this.handleComboboxDropdownClick.bind(this);
@@ -73,40 +91,15 @@ export default class Combobox extends Component {
     if (JSON.stringify(nextProps.value) !== JSON.stringify(prevState.initialValue)) {
       return {
         initialValue: nextProps.value,
-        stateSelectedValues: getStateSelectedValues(nextProps.multiple, nextProps.tags, nextProps.value),
+        stateSelectedValues: getStateSelectedValues(
+          nextProps.multiple,
+          nextProps.tags,
+          nextProps.value,
+        ),
       };
     }
 
     return null;
-  }
-
-  reset() {
-    const { multiple, tags, value } = this.props;
-
-    this.setState({
-      stateSelectedValues: getStateSelectedValues(multiple, tags, value),
-    });
-  }
-
-  focusInput() {
-    if (this.inputRef.current) {
-      this.inputRef.current.focus();
-    }
-  }
-
-  closeList() {
-    const { values } = this.props;
-
-    return {
-      cursor: -1,
-      opened: false,
-    };
-  }
-
-  openList() {
-    return {
-      opened: true,
-    };
   }
 
   onKeyUp(e) {
@@ -130,132 +123,23 @@ export default class Combobox extends Component {
 
     if (
       !opened
-      && this.inputRef.current.value
-      && filteredValues
-      && filteredValues.length
-      && e.key !== 'Escape'
+        && this.inputRef.current.value
+        && filteredValues
+        && filteredValues.length
+        && e.key !== 'Escape'
     ) {
-      tempState = Object.assign({}, tempState, this.openList());
+      tempState = Object.assign({}, tempState, Combobox.openList());
     }
 
     if (e.key === 'Escape' && opened) {
-      tempState = Object.assign({}, tempState, this.closeList());
+      tempState = Object.assign({}, tempState, Combobox.closeList());
     }
 
     if (opened && filteredValues && !filteredValues.length) {
-      tempState = Object.assign({}, tempState, this.closeList());
+      tempState = Object.assign({}, tempState, Combobox.closeList());
     }
 
     this.setState(previousState => Object.assign({}, previousState, tempState));
-  }
-
-  handleItemsNavigation(e) {
-    const { tags } = this.props;
-    if (['ArrowDown', 'ArrowUp'].indexOf(e.key) === -1) {
-      return;
-    }
-
-    const { cursor } = this.state;
-    const filteredValues = this.filterValues();
-    let cursorNext;
-
-    e.preventDefault();
-
-    if (e.key === 'ArrowDown') {
-      if (cursor === -1 || cursor === filteredValues.length - 1) {
-        cursorNext = 0;
-      } else if (cursor < filteredValues.length - 1) {
-        cursorNext = cursor + 1;
-      }
-    }
-
-    if (e.key === 'ArrowUp') {
-      if (cursor > 0) {
-        cursorNext = cursor - 1;
-      } else {
-        cursorNext = filteredValues.length - 1;
-      }
-    }
-
-    if (this.valuesListRef.current && cursorNext > 4) {
-      const scrollTop = (cursorNext - 4) * 38;
-
-      this.valuesListRef.current.scrollTop = (!tags) ? 60 + scrollTop : scrollTop;
-    } else if (this.valuesListRef.current) {
-      this.valuesListRef.current.scrollTop = 0;
-    }
-
-    this.setState(previousState => ({
-      ...previousState,
-      opened: true,
-      cursor: cursorNext,
-    }));
-  }
-
-  handleListItemClick(index) {
-    const { multiple, tags } = this.props;
-
-    const methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';
-    const tempState = Object.assign({}, tempState, this[methodName](index));
-
-    this.setState((previousState) => {
-      if (!multiple && !tags) {
-        tempState.opened = false;
-      }
-
-      return Object.assign({}, previousState, tempState);
-    });
-  }
-
-  handlePillRemoveClick(index) {
-    const { disabled } = this.props;
-
-    if (disabled) {
-      return;
-    }
-
-    const tempState = this.removeSelectedValue(index);
-
-    this.setState(previousState => Object.assign({}, previousState, tempState));
-  }
-
-  handleClickOutside() {
-    if (
-      this.valuesListRef.current && !this.valuesListRef.current.contains(event.target)
-      && this.comboboxRef.current && !this.comboboxRef.current.contains(event.target)
-    ) {
-      this.setState(previousState => Object.assign({}, previousState, this.closeList()));
-    }
-  }
-
-  handleComboboxDropdownClick() {
-    const { disabled } = this.props;
-
-    if (disabled) {
-      return;
-    }
-
-    this.setState(previousState => Object.assign({}, previousState, this.openList()));
-  }
-
-  bindEvents() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  unBindEvents() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
-  filterValues() {
-    const { values } = this.props;
-
-    if (!this.inputRef.current) {
-      return values;
-    }
-
-    const arr = values.filter(value => value.name.toLowerCase().indexOf(this.inputRef.current.value.toLowerCase()) > -1);
-
-    return arr;
   }
 
   setInputWidth() {
@@ -264,22 +148,8 @@ export default class Combobox extends Component {
     };
   }
 
-  isInInitialValues(value) {
-    const { values } = this.props;
-    let ok = false;
-
-    values.forEach((item) => {
-      if (value.id === item.id) {
-        ok = true;
-      }
-    });
-
-    return ok;
-  }
-
   getSelectedIndex(value) {
     const { stateSelectedValues } = this.state;
-    const { tags, values } = this.props;
     let position = -1;
 
     if (Array.isArray(stateSelectedValues)) {
@@ -303,95 +173,13 @@ export default class Combobox extends Component {
     };
   }
 
-  removeSelectedValue(index) {
-    const { stateSelectedValues } = this.state;
-    const { onChange, values, input } = this.props;
-    const tempStateSelectedValues = JSON.parse(JSON.stringify(stateSelectedValues));
-
-    tempStateSelectedValues.splice(index, 1);
-
-    if (onChange && typeof onChange === 'function') {
-      onChange(tempStateSelectedValues.length ? tempStateSelectedValues : null);
-    }
-
-    return {
-      stateSelectedValues: tempStateSelectedValues,
-      searchText: '',
-    };
-  }
-
-  addSelectedValue(value) {
-    const { stateSelectedValues } = this.state;
-    const { onChange, values } = this.props;
-    const tempStateSelectedValues = JSON.parse(JSON.stringify(stateSelectedValues));
-
-    tempStateSelectedValues.push(value);
-
-    if (onChange && typeof onChange === 'function') {
-      onChange(tempStateSelectedValues.length ? tempStateSelectedValues : null);
-    }
-
-    return {
-      stateSelectedValues: tempStateSelectedValues,
-      searchText: '',
-    };
-  }
-
-  manageSelectedTags(index) {
-    const { stateSelectedValues } = this.state;
-    const filteredValues = this.filterValues();
-    const { tags, values } = this.props;
-    const value = { id: this.inputRef.current.value, name: this.inputRef.current.value };
-    const tempValue = filteredValues[index] || value;
-    const selectedIndex = this.getSelectedIndex(tempValue);
-    let selectedValues = {};
-
-    this.inputRef.current.value = '';
-
-    if (selectedIndex > -1 && this.isInInitialValues(tempValue)) {
-      selectedValues = this.removeSelectedValue(selectedIndex);
-    } else if (selectedIndex === -1) {
-      selectedValues = this.addSelectedValue(tempValue);
-    }
-
-    return selectedValues;
-  }
-
-  manageSelectedValues(index) {
-    const {
-      multiple, onChange, tags, values,
-    } = this.props;
-    const { stateSelectedValues } = this.state;
-    const filteredValues = this.filterValues();
-    const tempSelectedValues = filteredValues[index];
-    let selectedValues;
-    const selectedIndex = this.getSelectedIndex(tempSelectedValues);
-
-    if (tempSelectedValues && multiple) {
-      if (selectedIndex > -1) {
-        selectedValues = this.removeSelectedValue(selectedIndex);
-      } else {
-        selectedValues = this.addSelectedValue(filteredValues[index]);
-      }
-
-      // tempSelectedValues = stateSelectedValues;
-    } else {
-      selectedValues = {
-        stateSelectedValues: (selectedIndex === -1) ? tempSelectedValues : { id: null },
-      };
-
-      if (onChange && typeof onChange === 'function') {
-        onChange((selectedIndex === -1) ? tempSelectedValues : null);
-      }
-    }
-
-    return selectedValues;
-  }
-
   getListItemCssClasses(value, index) {
     const cssClasses = [];
+    const {
+      cursor,
+    } = this.state;
 
-    if (this.state.cursor === index) {
+    if (cursor === index) {
       cssClasses.push('active');
     }
 
@@ -449,7 +237,6 @@ export default class Combobox extends Component {
     const el = this.comboboxRef.current;
     const elHeight = el.clientHeight;
     const elWidth = el.offsetWidth;
-    const valuesListEl = this.valuesListRef.current;
 
     const offset = el.getBoundingClientRect();
     const { left } = offset;
@@ -467,7 +254,7 @@ export default class Combobox extends Component {
   getComboboxDisplayData() {
     const { stateSelectedValues } = this.state;
     const { multiple, placeholder, values } = this.props;
-    console.log(stateSelectedValues);
+
     if (!stateSelectedValues) {
       return placeholder;
     }
@@ -484,15 +271,247 @@ export default class Combobox extends Component {
       return stateSelectedValues.reduce((prevValue, value, index) => prevValue + value.name + ((index !== stateSelectedValues.length - 1) ? ', ' : ''), '');
     }
 
-    if (values && values.length && !Array.isArray(stateSelectedValues) && !stateSelectedValues.name) {
+    if (
+      values
+      && values.length
+      && !Array.isArray(stateSelectedValues) && !stateSelectedValues.name
+    ) {
       return values.filter(value => value.id === stateSelectedValues.id)[0].name;
     }
 
     return stateSelectedValues.name;
   }
 
+  manageSelectedTags(index) {
+    const filteredValues = this.filterValues();
+    const value = { id: this.inputRef.current.value, name: this.inputRef.current.value };
+    const tempValue = filteredValues[index] || value;
+    const selectedIndex = this.getSelectedIndex(tempValue);
+    let selectedValues = {};
+
+    this.inputRef.current.value = '';
+
+    if (selectedIndex > -1 && this.isInInitialValues(tempValue)) {
+      selectedValues = this.removeSelectedValue(selectedIndex);
+    } else if (selectedIndex === -1) {
+      selectedValues = this.addSelectedValue(tempValue);
+    }
+
+    return selectedValues;
+  }
+
+  manageSelectedValues(index) {
+    const {
+      multiple, onChange,
+    } = this.props;
+    const filteredValues = this.filterValues();
+    const tempSelectedValues = filteredValues[index];
+    let selectedValues;
+    const selectedIndex = this.getSelectedIndex(tempSelectedValues);
+
+    if (tempSelectedValues && multiple) {
+      if (selectedIndex > -1) {
+        selectedValues = this.removeSelectedValue(selectedIndex);
+      } else {
+        selectedValues = this.addSelectedValue(filteredValues[index]);
+      }
+
+      // tempSelectedValues = stateSelectedValues;
+    } else {
+      selectedValues = {
+        stateSelectedValues: (selectedIndex === -1) ? tempSelectedValues : { id: null },
+      };
+
+      if (onChange && typeof onChange === 'function') {
+        onChange((selectedIndex === -1) ? tempSelectedValues : null);
+      }
+    }
+
+    return selectedValues;
+  }
+
+  removeSelectedValue(index) {
+    const { stateSelectedValues } = this.state;
+    const { onChange } = this.props;
+    const tempStateSelectedValues = JSON.parse(JSON.stringify(stateSelectedValues));
+
+    tempStateSelectedValues.splice(index, 1);
+
+    if (onChange && typeof onChange === 'function') {
+      onChange(tempStateSelectedValues.length ? tempStateSelectedValues : null);
+    }
+
+    return {
+      stateSelectedValues: tempStateSelectedValues,
+      searchText: '',
+    };
+  }
+
+  addSelectedValue(value) {
+    const { stateSelectedValues } = this.state;
+    const { onChange } = this.props;
+    const tempStateSelectedValues = JSON.parse(JSON.stringify(stateSelectedValues));
+
+    tempStateSelectedValues.push(value);
+
+    if (onChange && typeof onChange === 'function') {
+      onChange(tempStateSelectedValues.length ? tempStateSelectedValues : null);
+    }
+
+    return {
+      stateSelectedValues: tempStateSelectedValues,
+      searchText: '',
+    };
+  }
+
+  isInInitialValues(value) {
+    const { values } = this.props;
+    let ok = false;
+
+    values.forEach((item) => {
+      if (value.id === item.id) {
+        ok = true;
+      }
+    });
+
+    return ok;
+  }
+
+  filterValues() {
+    const { values } = this.props;
+
+    if (!this.inputRef.current) {
+      return values;
+    }
+
+    const arr = values
+      .filter(
+        value => value.name.toLowerCase().indexOf(this.inputRef.current.value.toLowerCase()) > -1,
+      );
+
+    return arr;
+  }
+
+  bindEvents() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  unBindEvents() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleItemsNavigation(e) {
+    const { tags } = this.props;
+    if (['ArrowDown', 'ArrowUp'].indexOf(e.key) === -1) {
+      return;
+    }
+
+    const { cursor } = this.state;
+    const filteredValues = this.filterValues();
+    let cursorNext;
+
+    e.preventDefault();
+
+    if (e.key === 'ArrowDown') {
+      if (cursor === -1 || cursor === filteredValues.length - 1) {
+        cursorNext = 0;
+      } else if (cursor < filteredValues.length - 1) {
+        cursorNext = cursor + 1;
+      }
+    }
+
+    if (e.key === 'ArrowUp') {
+      if (cursor > 0) {
+        cursorNext = cursor - 1;
+      } else {
+        cursorNext = filteredValues.length - 1;
+      }
+    }
+
+    if (this.valuesListRef.current && cursorNext > 4) {
+      const scrollTop = (cursorNext - 4) * 38;
+
+      this.valuesListRef.current.scrollTop = (!tags) ? 60 + scrollTop : scrollTop;
+    } else if (this.valuesListRef.current) {
+      this.valuesListRef.current.scrollTop = 0;
+    }
+
+    this.setState(previousState => ({
+      ...previousState,
+      opened: true,
+      cursor: cursorNext,
+    }));
+  }
+
+  handleListItemClick(index) {
+    const { multiple, tags } = this.props;
+
+    const methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';
+    const tempState = Object.assign({}, this.state, this[methodName](index));
+
+    this.setState((previousState) => {
+      if (!multiple && !tags) {
+        tempState.opened = false;
+      }
+
+      return Object.assign({}, previousState, tempState);
+    });
+  }
+
+  handlePillRemoveClick(index) {
+    const { disabled } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
+    const tempState = this.removeSelectedValue(index);
+
+    this.setState(previousState => Object.assign({}, previousState, tempState));
+  }
+
+  handleClickOutside(event) {
+    if (
+      this.valuesListRef.current && !this.valuesListRef.current.contains(event.target)
+      && this.comboboxRef.current && !this.comboboxRef.current.contains(event.target)
+    ) {
+      this.setState(previousState => Object.assign({}, previousState, Combobox.closeList()));
+    }
+  }
+
+  handleComboboxDropdownClick() {
+    const { disabled } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
+    this.setState(previousState => Object.assign({}, previousState, Combobox.openList()));
+  }
+
+  reset() {
+    const { multiple, tags, value } = this.props;
+
+    this.setState({
+      stateSelectedValues: getStateSelectedValues(multiple, tags, value),
+    });
+  }
+
+  focusInput() {
+    if (this.inputRef.current) {
+      this.inputRef.current.focus();
+    }
+  }
+
   render() {
-    const { disabled, tags, placeholder } = this.props;
+    const {
+      disabled,
+      id,
+      label,
+      note,
+      tags,
+      placeholder,
+    } = this.props;
     const {
       width, opened, searchText, stateSelectedValues,
     } = this.state;
@@ -503,13 +522,14 @@ export default class Combobox extends Component {
       <Fragment>
         <div className={this.getCssClasses()}>
           {
-            this.props.label
-              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
+            label
+              ? <label htmlFor={id}>{ label }</label>
               : null
           }
           <ul
             className={`tyk-form-control${(tags) ? ' tyk-form-control--with-tags' : ''}`}
             onClick={this.focusInput}
+            onKeyDown={() => {}}
             ref={this.comboboxRef}
           >
             {
@@ -519,9 +539,9 @@ export default class Combobox extends Component {
                     {
                       stateSelectedValues.map((value, index) => (
                         <li className="pill" key={value.id}>
-                          <a onClick={this.handlePillRemoveClick.bind(this, index)}>
+                          <button type="button" onClick={this.handlePillRemoveClick.bind(this, index)}>
                             <Icon type="times" />
-                          </a>
+                          </button>
                           <span>{ value.name }</span>
                         </li>
                       ))
@@ -562,7 +582,11 @@ export default class Combobox extends Component {
                   </Fragment>
                 )
                 : (
-                  <li className="tyk-combobox__placeholder" onClick={this.handleComboboxDropdownClick}>
+                  <li
+                    className="tyk-combobox__placeholder"
+                    onClick={this.handleComboboxDropdownClick}
+                    onKeyDown={() => {}}
+                  >
                     { this.getComboboxDisplayData() }
                     <Icon type="arrow-down" />
                   </li>
@@ -570,8 +594,8 @@ export default class Combobox extends Component {
             }
           </ul>
           {
-            this.props.note
-              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
         </div>
@@ -606,6 +630,7 @@ export default class Combobox extends Component {
                       <li
                         className={this.getListItemCssClasses(value, index)}
                         onClick={this.handleListItemClick.bind(this, index)}
+                        onKeyDown={() => {}}
                         key={value.id}
                       >
                         {

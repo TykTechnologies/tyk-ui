@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { Collapsible } from '../../Collapsible';
+import Collapsible from '../../Collapsible';
 import { Icon } from '../../Icon';
 
 export const TabsContext = createContext();

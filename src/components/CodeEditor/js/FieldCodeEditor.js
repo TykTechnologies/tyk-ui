@@ -1,33 +1,41 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import CodeEditor from './CodeEditor.js';
+import CodeEditor from './CodeEditor';
 
 export default class FieldCodeEditor extends Component {
+  static propTypes = {
+    input: PropTypes.instanceOf(Object),
+    meta: PropTypes.instanceOf(Object),
+    validationmessages: PropTypes.instanceOf(Object),
+  };
+
   constructor(props) {
     super(props);
 
-    this._handleOnChange = this._handleOnChange.bind(this);
-  }
-
-  _handleOnChange(value) {
-    const { onChange } = this.props.input;
-
-    onChange(fromJS(value));
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   getInputError() {
-    const { touched, error, warning } = this.props.meta;
+    const { meta, validationmessages } = this.props;
+    const { touched, error, warning } = meta;
     let message = null;
 
-    if (touched && error && this.props.validationmessages[error]) {
-      message = this.props.validationmessages[error];
+    if (touched && error && validationmessages[error]) {
+      message = validationmessages[error];
     } else if (touched && warning) {
       message = 'warning';
     }
 
     return message;
+  }
+
+  handleOnChange(value) {
+    const { input } = this.prop;
+    const { onChange } = input;
+
+    onChange(fromJS(value));
   }
 
   render() {

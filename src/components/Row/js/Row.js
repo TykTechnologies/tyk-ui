@@ -12,23 +12,28 @@ export default class Row extends PureComponent {
   }
 
   getCssClasses() {
+    const { className, noGutters } = this.props;
     let cssClass = ['tyk-row'];
 
-    if (this.props.noGutters) {
+    if (noGutters) {
       cssClass.push('no-gutters');
     }
 
-    if (this.props.className) {
-      cssClass = cssClass.concat(this.props.className.split(' '));
+    if (className) {
+      cssClass = cssClass.concat(className.split(' '));
     }
 
     return cssClass.join(' ');
   }
 
   render() {
+    const {
+      children,
+    } = this.props;
+
     return (
       <div className={this.getCssClasses()} {...this.props}>
-        { this.props.children }
+        { children }
       </div>
     );
   }

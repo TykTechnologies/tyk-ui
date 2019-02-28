@@ -9,8 +9,14 @@
     "react/require-default-props": false,
     "jsx-a11y/label-has-for": false,
     "jsx-a11y/label-has-associated-control": false,
+    "jsx-a11y/no-autofocus": false,
+    "jsx-a11y/no-noninteractive-element-interactions": false,
     "indent": ["error", 2, {
       "ignoredNodes": ["TemplateLiteral"]
     }]
+  },
+  "globals": {
+    "window": true,
+    "document": true
   }
 }

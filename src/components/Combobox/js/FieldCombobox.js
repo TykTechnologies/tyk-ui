@@ -1,22 +1,29 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import Combobox from './Combobox.js';
+import Combobox from './Combobox';
 
 export default class FieldCombobox extends Component {
+  static propTypes = {
+    meta: PropTypes.instanceOf(Object),
+    input: PropTypes.instanceOf(Object),
+    validationmessages: PropTypes.instanceOf(Object),
+  }
+
   constructor(props) {
     super(props);
 
-    this._handleOnChange = this._handleOnChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   getComboboxError() {
-    const { touched, error, warning } = this.props.meta;
+    const { meta, validationmessages } = this.props;
+    const { touched, error, warning } = meta;
     let message = null;
 
-    if (touched && error && this.props.validationmessages[error]) {
-      message = this.props.validationmessages[error];
+    if (touched && error && validationmessages[error]) {
+      message = validationmessages[error];
     } else if (touched && warning) {
       message = 'warning';
     }
@@ -24,8 +31,9 @@ export default class FieldCombobox extends Component {
     return message;
   }
 
-  _handleOnChange(value) {
-    const { onChange } = this.props.input;
+  handleOnChange(value) {
+    const { input } = this.props;
+    const { onChange } = input;
 
     onChange(fromJS(value));
   }
@@ -36,7 +44,7 @@ export default class FieldCombobox extends Component {
     return (
       <Combobox
         {...props}
-        onChange={this._handleOnChange}
+        onChange={this.handleOnChange}
         value={!props.input.value ? props.input.value : props.input.value.toJS()}
         error={this.getComboboxError()}
       />

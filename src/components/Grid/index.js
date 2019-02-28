@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { Column } from '../Column';
-import { Row } from '../Row';
+import Column from '../Column';
+import Row from '../Row';
 
 const containerStyle = {
   backgroundColor: '#F0F0F0',

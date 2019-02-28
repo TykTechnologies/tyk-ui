@@ -1,4 +1,5 @@
 export { default as Button } from './components/Button';
+export { default as ButtonGroup } from './components/ButtonGroup';
 export { Checkbox } from './components/Checkbox';
 export { Column } from './components/Column';
 export { Combobox } from './components/Combobox';
@@ -28,8 +29,8 @@ export { Pagination } from './components/Pagination';
 export { Radio } from './components/Radio';
 export { FieldPagination } from './components/Pagination';
 export { Panel } from './components/Panel';
-export { Row } from './components/Row';
-export { Select } from './components/Select';
+export { dedault as Row } from './components/Row';
+export { default as Select } from './components/Select';
 export { FieldSelect } from './components/Select';
 export { default as Tabs } from './components/Tabs';
 export { default as Textarea } from './components/Textarea';

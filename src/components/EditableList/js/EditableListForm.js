@@ -2,8 +2,8 @@ import React, { Component, Fragment, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import { Column } from '../../Column';
-import { Row } from '../../Row';
+import Column from '../../Column';
+import Row from '../../Row';
 import Button from '../../Button';
 
 export default class EditableListForm extends Component {

@@ -1,1 +1,1 @@
-export { default as Collapsible } from './js/Collapsible';
+export { default } from './js/Collapsible';
