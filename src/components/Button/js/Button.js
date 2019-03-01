@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon } from '../../Icon';
+import Icon from '../../Icon';
 /**
  * Button component.
  */

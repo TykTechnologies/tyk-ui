@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Loader } from '../../Loader';
+import Loader from '../../Loader';
 
 class InfiniteScroller extends Component {
   static propTypes = {

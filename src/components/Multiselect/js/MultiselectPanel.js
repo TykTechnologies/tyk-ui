@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
 import { Input } from '../../Input';
-import { Message } from '../../Message';
-import { InfiniteScroller } from '../../InfiniteScroller';
+import Message from '../../Message';
+import InfiniteScroller from '../../InfiniteScroller';
 import MultiselectItem from './MultiselectItem';
 
 class MultiselectPanel extends Component {

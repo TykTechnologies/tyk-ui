@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class ModalFooter extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-  };
+const ModalFooter = (props) => {
+  const { children } = props;
+  return (
+    <div className="tyk-modal__footer">
+      { children }
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div className="tyk-modal__footer">
-        { this.props.children }
-      </div>
-    );
-  }
-}
+ModalFooter.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+};
+
+export default ModalFooter;

@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import EditableListForm from './EditableListForm';
 import Column from '../../Column';
-import { Icon } from '../../Icon';
+import Icon from '../../Icon';
 import Row from '../../Row';
 
 export default class EditableList extends Component {

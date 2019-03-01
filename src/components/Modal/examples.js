@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-import { Modal } from './index';
+import Modal from './index';
 import Button from '../Button';
 
 export default class ModalExample extends Component {
@@ -11,17 +11,19 @@ export default class ModalExample extends Component {
 
   closeModal(param) {
     this.setState((prevState) => {
-      prevState[param] = false;
+      const tempState = Object.assign({}, prevState);
+      tempState[param] = false;
 
-      return prevState;
+      return tempState;
     });
   }
 
   openModal(param) {
     this.setState((prevState) => {
-      prevState[param] = true;
+      const tempState = Object.assign({}, prevState);
+      tempState[param] = true;
 
-      return prevState;
+      return tempState;
     });
   }
 
@@ -33,11 +35,14 @@ export default class ModalExample extends Component {
 
     return (
       <Fragment>
+        {/* eslint-disable-next-line react/jsx-no-bind */}
         <Button onClick={this.openModal.bind(this, 'smallModalOpened')} theme="primary">Small Modal</Button>
+        {/* eslint-disable-next-line react/jsx-no-bind */}
         <Button onClick={this.openModal.bind(this, 'largeModalOpened')} theme="primary">Large Modal</Button>
 
         <Modal
           opened={smallModalOpened}
+          // eslint-disable-next-line react/jsx-no-bind
           onClose={this.closeModal.bind(this, 'smallModalOpened')}
         >
           <Modal.Header>
@@ -60,6 +65,7 @@ export default class ModalExample extends Component {
 
         <Modal
           opened={largeModalOpened}
+          // eslint-disable-next-line react/jsx-no-bind
           onClose={this.closeModal.bind(this, 'largeModalOpened')}
           size="lg"
         >

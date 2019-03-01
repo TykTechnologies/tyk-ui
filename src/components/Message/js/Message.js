@@ -26,9 +26,11 @@ export default class Message extends Component {
   }
 
   render() {
+    const { children } = this.props;
+
     return (
       <div className={this.getCssClasses()}>
-        { this.props.children }
+        { children }
       </div>
     );
   }

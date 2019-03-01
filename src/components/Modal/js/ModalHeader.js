@@ -1,30 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../Button';
-import { ModalContext } from './Modal.js';
+import { ModalContext } from './Modal';
 
-export default class ModalHeader extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-  };
+const ModalHeader = (props) => {
+  const { children } = props;
 
-  render() {
-    return (
-      <ModalContext.Consumer>
-        {
-          modalContext => (
-            <div className="tyk-modal__header">
-              { this.props.children }
-              <Button onClick={modalContext.closeModal} iconType="times" iconPosition="left" />
-            </div>
-          )
-        }
-      </ModalContext.Consumer>
-    );
-  }
-}
+  return (
+    <ModalContext.Consumer>
+      {
+        modalContext => (
+          <div className="tyk-modal__header">
+            { children }
+            <Button onClick={modalContext.closeModal} iconType="times" iconPosition="left" />
+          </div>
+        )
+      }
+    </ModalContext.Consumer>
+  );
+};
+
+ModalHeader.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+};
+
+export default ModalHeader;

@@ -1,7 +1,7 @@
 import React, { Component, Fragment, createRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon } from '../../Icon';
+import Icon from '../../Icon';
 
 export default class FileInput extends Component {
   static propTypes = {

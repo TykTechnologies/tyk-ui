@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Icon } from '../../Icon';
+import Icon from '../../Icon';
 import { PortalContext } from './Panel';
 
 export default class PanelHeader extends Component {

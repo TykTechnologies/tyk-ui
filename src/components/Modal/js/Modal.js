@@ -17,38 +17,9 @@ export default class Modal extends Component {
     size: PropTypes.string,
   };
 
-  state = {
-    initialOpenedState: false,
-  };
-
   constructor(props) {
     super(props);
     this.closeModal = this.closeModal.bind(this);
-  }
-
-  closeModal() {
-    const { onClose } = this.props;
-
-    if (onClose && typeof onClose === 'function') {
-      onClose();
-    }
-  }
-
-  getModalSize() {
-    const { size } = this.props;
-
-    return `tyk-modal--${size || 'md'}`;
-  }
-
-  getCssClasses() {
-    const { opened } = this.props;
-    const cssClasses = ['tyk-modal'];
-
-    if (opened) {
-      cssClasses.push('opened');
-    }
-
-    return cssClasses.join(' ');
   }
 
   getBackdropCssClasses() {
@@ -62,8 +33,33 @@ export default class Modal extends Component {
     return cssClasses.join(' ');
   }
 
-  render() {
+  getCssClasses() {
     const { opened } = this.props;
+    const cssClasses = ['tyk-modal'];
+
+    if (opened) {
+      cssClasses.push('opened');
+    }
+
+    return cssClasses.join(' ');
+  }
+
+  getModalSize() {
+    const { size } = this.props;
+
+    return `tyk-modal--${size || 'md'}`;
+  }
+
+  closeModal() {
+    const { onClose } = this.props;
+
+    if (onClose && typeof onClose === 'function') {
+      onClose();
+    }
+  }
+
+  render() {
+    const { children, opened } = this.props;
 
     return (
       <Fragment>
@@ -83,7 +79,7 @@ export default class Modal extends Component {
                         closeModal: this.closeModal,
                       }}
                     >
-                      { this.props.children }
+                      { children }
                     </ModalContext.Provider>
                   </div>
                 </div>
@@ -99,9 +95,11 @@ export default class Modal extends Component {
               timeout={100}
               classNames="fade"
             >
-              <div
+              <button
                 className={this.getBackdropCssClasses()}
                 onClick={this.closeModal}
+                onKeyDown={() => {}}
+                type="button"
               />
             </CSSTransition>,
             document.querySelector('body'),

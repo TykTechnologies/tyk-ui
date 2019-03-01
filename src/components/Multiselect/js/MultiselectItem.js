@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MultiselectContext from './MultiselectContext';
 import Button from '../../Button';
 import Collapsible from '../../Collapsible';
-import { Loader } from '../../Loader';
+import Loader from '../../Loader';
 
 class MultiselectItem extends Component {
   static propTypes = {

@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class ModalBody extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-  };
+const ModalBody = (props) => {
+  const { children } = props;
 
-  render() {
-    return (
-      <div className="tyk-modal__body">
-        { this.props.children }
-      </div>
-    );
-  }
-}
+  return (
+    <div className="tyk-modal__body">
+      { children }
+    </div>
+  );
+};
+
+ModalBody.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+};
+
+export default ModalBody;

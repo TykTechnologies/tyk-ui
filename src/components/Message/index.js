@@ -1,1 +1,1 @@
-export { default as Message } from './js/Message';
+export { default } from './js/Message';
