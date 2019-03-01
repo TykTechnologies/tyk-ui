@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { DropdownContext } from './Dropdown';
@@ -14,7 +14,7 @@ export default class DropdownItem extends Component {
     eventKey: PropTypes.string,
     href: PropTypes.string,
     onClick: PropTypes.func,
-    value: PropTypes.string,
+    title: PropTypes.string,
   };
 
   constructor(props) {
@@ -28,16 +28,26 @@ export default class DropdownItem extends Component {
 
     dropdownContext.onSelectItem(eventKey, itemProps);
 
-    onClick && onClick(eventKey);
+    if (onClick) {
+      onClick(eventKey);
+    }
   }
 
   render() {
-    const { eventKey, href, title } = this.props;
+    const {
+      children,
+      eventKey,
+      href,
+      title,
+    } = this.props;
     return (
       <DropdownContext.Consumer>
         {
           dropdownContext => (
-            <li onClick={this.dropdownItemCLick.bind(this, dropdownContext, this.props)}>
+            <li
+              onClick={this.dropdownItemCLick.bind(this, dropdownContext, this.props)}
+              onKeyUp={() => {}}
+            >
               <a href={href}>
                 {
                   eventKey && dropdownContext.selectedItem === eventKey
@@ -45,9 +55,7 @@ export default class DropdownItem extends Component {
                     : null
                 }
                 <span>
-                  {
-                    title || this.props.children
-                  }
+                  {title || children}
                 </span>
               </a>
             </li>

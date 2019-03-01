@@ -8,6 +8,7 @@ export default class DateTimePicker extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
     id: PropTypes.string,
+    isfield: PropTypes.bool,
     error: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool,
@@ -17,73 +18,56 @@ export default class DateTimePicker extends Component {
     note: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    value: PropTypes.instanceOf(Date),
   }
-
-  state = {
-    initValue: this.props.value,
-    value: this.props.value,
-  };
 
   constructor(props) {
     super(props);
+    const {
+      value,
+    } = this.props;
 
-    this._handleOnChange = this._handleOnChange.bind(this);
-    this._handleIconClick = this._handleIconClick.bind(this);
+    this.state = {
+      initValue: value,
+      stateValue: value,
+    };
+
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleIconClick = this.handleIconClick.bind(this);
     this.datepickerRef = createRef();
-  }
-
-  reset() {
-    const { initValue } = this.state;
-    const { onChange } = this.props;
-
-    this.setState({
-      value: initValue,
-    });
-  }
-
-  _handleOnChange(value) {
-    const { onChange, isfield } = this.props;
-
-    if (!isfield) {
-      this.setState({
-        value,
-      }, () => {
-        onChange(this.state.value);
-      });
-    } else {
-      onChange(value);
-    }
-  }
-
-  _handleIconClick() {
-    if (this.props.disabled) {
-      return;
-    }
-
-    this.datepickerRef.current.openCalendar();
   }
 
   getDateTimeComponent() {
     const {
-      isfield, config, disabled, placeholder, value,
+      isfield,
+      disabled,
+      placeholder,
+      value,
     } = this.props;
+    const {
+      stateValue,
+    } = this.state;
 
     return (
       <Datetime
         {...this.props}
-        onChange={this._handleOnChange}
+        onChange={this.handleOnChange}
         ref={this.datepickerRef}
-        value={(isfield) ? value : this.state.value}
+        value={(isfield) ? value : stateValue}
         inputProps={{
           placeholder: placeholder || '',
           disabled,
         }}
         renderInput={inputProps => (
           <div className="tyk-input-group">
-            <input disabled={this.props.disabled} {...inputProps} className="tyk-form-control" />
-            <span className="tyk-input-group__addon" onClick={this._handleIconClick}>
+            <input disabled={disabled} {...inputProps} className="tyk-form-control" />
+            <button
+              className="tyk-input-group__addon"
+              onClick={this.handleIconClick}
+              type="button"
+            >
               <Icon type="calendar" />
-            </span>
+            </button>
           </div>
         )}
       />
@@ -115,19 +99,62 @@ export default class DateTimePicker extends Component {
     return cssClasses.join(' ');
   }
 
+  handleOnChange(value) {
+    const { onChange, isfield } = this.props;
+
+    if (!isfield) {
+      this.setState({
+        stateValue: value,
+      }, () => {
+        const {
+          stateValue,
+        } = this.state;
+        onChange(stateValue);
+      });
+    } else {
+      onChange(value);
+    }
+  }
+
+  handleIconClick() {
+    const {
+      disabled,
+    } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
+    this.datepickerRef.current.openCalendar();
+  }
+
+  reset() {
+    const { initValue } = this.state;
+
+    this.setState({
+      stateValue: initValue,
+    });
+  }
+
   render() {
+    const {
+      label,
+      id,
+      note,
+    } = this.props;
+
     return (
       <Fragment>
         <div className={this.getCssClasses()}>
           {
-            this.props.label
-              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
+            label
+              ? <label htmlFor={id}>{ label }</label>
               : null
           }
           { this.getDateTimeComponent() }
           {
-            this.props.note
-              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
         </div>

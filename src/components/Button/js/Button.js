@@ -6,7 +6,7 @@ import { Icon } from '../../Icon';
  * Button component.
  */
 
-const Button = (props) => {
+const Button = React.forwardRef((props, ref) => {
   const {
     children,
     iconType,
@@ -21,6 +21,7 @@ const Button = (props) => {
     size,
     theme,
     type,
+    ...rest
   } = props;
 
   const getCssClasses = () => {
@@ -66,6 +67,8 @@ const Button = (props) => {
               disabled={disabled}
               onClick={onClick}
               href={href}
+              ref={ref}
+              {...rest}
             >
               { getButtonIcon('left') }
               { children }
@@ -80,6 +83,8 @@ const Button = (props) => {
               disabled={disabled}
               onClick={onClick}
               type={type}
+              ref={ref}
+              {...rest}
             >
               { getButtonIcon('left') }
               { children && <span>{children}</span> }
@@ -89,7 +94,7 @@ const Button = (props) => {
       }
     </Fragment>
   );
-};
+});
 
 Button.propTypes = {
   /**

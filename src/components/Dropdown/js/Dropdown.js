@@ -1,5 +1,5 @@
 import React, {
-  Component, Fragment, createContext, createRef,
+  Component, createContext, createRef,
 } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
@@ -17,9 +17,12 @@ export default class Dropdown extends Component {
     ]),
     btnClassName: PropTypes.string,
     btnSize: PropTypes.string,
+    btnGroupSize: PropTypes.string,
     btnTheme: PropTypes.string,
     btnTitle: PropTypes.string,
     btnGroup: PropTypes.bool,
+    className: PropTypes.string,
+    hasCustomContent: PropTypes.bool,
     label: PropTypes.string,
     onClose: PropTypes.func,
     onSelect: PropTypes.func,
@@ -27,13 +30,34 @@ export default class Dropdown extends Component {
     stopButtonTextChange: PropTypes.bool,
   };
 
-  state = {
-    opened: false,
-    selectedItem: this.props.selectedItem || null,
-  };
+  static isElemInRightView(el, dropdownWidth) {
+    const windowWidth = window.innerWidth;
+    const offset = el.getBoundingClientRect();
+    const elemRight = offset.left + dropdownWidth;
+
+    return elemRight <= windowWidth;
+  }
+
+  static isElemInBottomView(el, dropdownHeight) {
+    const windowHeight = window.innerHeight;
+    const offset = el.getBoundingClientRect();
+    const elHeight = el.clientHeight;
+    const elemBottom = offset.top + elHeight + dropdownHeight;
+
+    return elemBottom <= windowHeight;
+  }
 
   constructor(props) {
     super(props);
+
+    const {
+      selectedItem,
+    } = this.props;
+
+    this.state = {
+      opened: false,
+      selectedItem: selectedItem || null,
+    };
 
     this.dropdownRef = createRef();
     this.dropdownListRef = createRef();
@@ -47,37 +71,18 @@ export default class Dropdown extends Component {
     document.addEventListener('mousedown', this.handleClickOutside);
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
   componentDidUpdate() {
     if (this.dropdownListRef.current) {
       this.getStyles();
     }
   }
 
-  handleClickOutside() {
-    if (
-      this.dropdownListRef.current && !this.dropdownListRef.current.contains(event.target)
-      && this.dropdownRef.current && !this.dropdownRef.current.contains(event.target)
-    ) {
-      this.closeDropdown();
-    }
-  }
-
-  closeDropdown() {
-    const { onClose } = this.props;
-
-    this.setState({
-      opened: false,
-    }, () => {
-      onClose && onClose();
-    });
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
   onSelectItem(itemId, itemProps) {
-    const { stopButtonTextChange, onSelect } = this.props;
+    const { onSelect } = this.props;
 
     this.setState({
       selectedItem: itemId,
@@ -89,23 +94,6 @@ export default class Dropdown extends Component {
     }
   }
 
-  isElemInBottomView(el, dropdownHeight) {
-    const windowHeight = window.innerHeight;
-    const offset = el.getBoundingClientRect();
-    const elHeight = el.clientHeight;
-    const elemBottom = offset.top + elHeight + dropdownHeight;
-
-    return elemBottom <= windowHeight;
-  }
-
-  isElemInRightView(el, dropdownWidth) {
-    const windowWidth = window.innerWidth;
-    const offset = el.getBoundingClientRect();
-    const elemRight = offset.left + dropdownWidth;
-
-    return elemRight <= windowWidth;
-  }
-
   getStyles() {
     const { scrollTop } = document.documentElement;
     const el = this.dropdownRef.current;
@@ -114,49 +102,38 @@ export default class Dropdown extends Component {
     const dropdownHeight = dropdownEl ? dropdownEl.clientHeight : 0;
     const dropdownWidth = dropdownEl ? dropdownEl.clientWidth : 0;
     const offset = el.getBoundingClientRect();
-    let { left } = offset;
-    let top = 0;
+    const { left, top } = offset;
+    let customTop = 0;
+    let customLeft = left;
 
     // calculate top position, depending on the element position on the page
-    if (this.isElemInBottomView(el, dropdownHeight)) {
-      top = offset.top + scrollTop + elHeight;
+    if (Dropdown.isElemInBottomView(el, dropdownHeight)) {
+      customTop = top + scrollTop + elHeight;
     } else {
-      top = offset.top + scrollTop - dropdownHeight - 5;
+      customTop = top + scrollTop - dropdownHeight - 5;
     }
 
-    if (this.isElemInRightView(el, dropdownWidth)) {
-      left = offset.left;
+    if (Dropdown.isElemInRightView(el, dropdownWidth)) {
+      customLeft = left;
     } else {
-      left = offset.left + el.clientWidth - dropdownWidth;
+      customLeft = left + el.clientWidth - dropdownWidth;
     }
 
-    dropdownEl.style.top = `${top}px`;
-    dropdownEl.style.left = `${left}px`;
-
-    const buttonNode = ReactDOM.findDOMNode(this.dropdownButtonRef.current);
-    console.log(buttonNode.clientWidth);
-    dropdownEl.style.minWidth = `${buttonNode.clientWidth}px`;
-  }
-
-  openDropdown() {
-    if (this.state.opened) {
-      this.setState({
-        opened: false,
-      });
-
-      return;
-    }
-
-    this.setState({
-      opened: true,
-    });
+    dropdownEl.style.top = `${customTop}px`;
+    dropdownEl.style.left = `${customLeft}px`;
+    dropdownEl.style.minWidth = `${this.dropdownButtonRef.current.clientWidth}px`;
   }
 
   getWrapperCssClasses() {
-    const { btnGroup, btnGroupSize, className } = this.props;
+    const {
+      btnGroup,
+      btnGroupSize,
+      className,
+      btnTheme,
+    } = this.props;
     let cssClasses = ['tyk-dropdown'];
 
-    cssClasses.push(`theme-${this.props.btnTheme || 'default'}`);
+    cssClasses.push(`theme-${btnTheme || 'default'}`);
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
@@ -171,9 +148,12 @@ export default class Dropdown extends Component {
   }
 
   getCssClasses() {
+    const {
+      opened,
+    } = this.state;
     const cssClasses = ['tyk-dropdown-menu', 'tyk-dropdown'];
 
-    if (this.state.opened) {
+    if (opened) {
       cssClasses.push('opened');
     }
 
@@ -191,10 +171,57 @@ export default class Dropdown extends Component {
     return btnTitle;
   }
 
+  openDropdown() {
+    const {
+      opened,
+    } = this.state;
+    if (opened) {
+      this.setState({
+        opened: false,
+      });
+
+      return;
+    }
+
+    this.setState({
+      opened: true,
+    });
+  }
+
+  closeDropdown() {
+    const { onClose } = this.props;
+
+    this.setState({
+      opened: false,
+    }, () => {
+      if (onClose) {
+        onClose();
+      }
+    });
+  }
+
+  handleClickOutside(event) {
+    if (
+      this.dropdownListRef.current && !this.dropdownListRef.current.contains(event.target)
+      && this.dropdownRef.current && !this.dropdownRef.current.contains(event.target)
+    ) {
+      this.closeDropdown();
+    }
+  }
+
   render() {
     const {
-      btnClassName, btnSize, btnTitle, hasCustomContent, btnTheme, label, onSelect,
+      btnClassName,
+      btnSize,
+      hasCustomContent,
+      btnTheme,
+      children,
+      label,
     } = this.props;
+    const {
+      selectedItem,
+      opened,
+    } = this.state;
     const DropdownWrapperTag = hasCustomContent ? 'div' : 'ul';
 
     return (
@@ -206,8 +233,7 @@ export default class Dropdown extends Component {
           label
             ? (
               <label className="title-label">
-                {' '}
-                { label }
+                {label}
               </label>
             )
             : null
@@ -229,17 +255,17 @@ export default class Dropdown extends Component {
             <DropdownContext.Provider
               value={{
                 onSelectItem: this.onSelectItem,
-                selectedItem: this.state.selectedItem,
+                selectedItem,
               }}
             >
               {
-                this.state.opened
+                opened
                   ? (
                     <DropdownWrapperTag
                       className={this.getCssClasses()}
                       ref={this.dropdownListRef}
                     >
-                      { this.props.children }
+                      { children }
                     </DropdownWrapperTag>
                   )
                   : null

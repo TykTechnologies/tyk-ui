@@ -1,19 +1,25 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import DateTimePicker from './DateTimePicker.js';
+import DateTimePicker from './DateTimePicker';
 
 export default class FieldDateTimePicker extends Component {
-  constructor(props) {
-    super(props);
-  }
+  static propTypes = {
+    meta: PropTypes.instanceOf(Object),
+    input: PropTypes.instanceOf(Object),
+    validationmessages: PropTypes.instanceOf(Object),
+  };
 
   getInputError() {
-    const { touched, error, warning } = this.props.meta;
+    const {
+      meta,
+      validationmessages,
+    } = this.props;
+    const { touched, error } = meta;
     let message = null;
 
-    if (touched && error && this.props.validationmessages[error]) {
-      message = this.props.validationmessages[error];
+    if (touched && error && validationmessages[error]) {
+      message = validationmessages[error];
     }
 
     return message;
