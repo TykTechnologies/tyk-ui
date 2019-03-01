@@ -1,1 +1,1 @@
-export { default as InfoNote } from './js/InfoNote';
+export { default } from './js/InfoNote';

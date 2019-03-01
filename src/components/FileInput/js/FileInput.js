@@ -5,6 +5,7 @@ import { Icon } from '../../Icon';
 
 export default class FileInput extends Component {
   static propTypes = {
+    accept: PropTypes.string,
     disabled: PropTypes.bool,
     id: PropTypes.string,
     error: PropTypes.oneOfType([
@@ -16,28 +17,40 @@ export default class FileInput extends Component {
     note: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    value: PropTypes.instanceOf(Object),
   }
 
   constructor(props) {
     super(props);
 
-    this._handleOnChange = this._handleOnChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
     this.clearValue = this.clearValue.bind(this);
     this.fileInputRef = createRef();
   }
 
-  reset() {}
+  getCssClasses() {
+    const { error } = this.props;
+    const cssClasses = ['tyk-form-group'];
 
-  clearValue() {
-    const { onChange } = this.props;
-    this.fileInputRef.current.value = '';
-    onChange('');
+    if (error) {
+      cssClasses.push('has-error');
+    }
+
+    return cssClasses.join(' ');
   }
 
-  _handleOnChange(e) {
-    const { onChange } = this.props;
+  getFileInputError() {
+    const { error } = this.props;
 
-    onChange(e.target.files);
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
+          className="tyk-form-control__error-message"
+        >
+          { error }
+        </p>
+      )
+      : null;
   }
 
   getFileInputComponent() {
@@ -51,7 +64,7 @@ export default class FileInput extends Component {
           accept={accept}
           className="tyk-form-control"
           {...rest}
-          onChange={this._handleOnChange}
+          onChange={this.handleOnChange}
           ref={this.fileInputRef}
           type="file"
         />
@@ -71,44 +84,40 @@ export default class FileInput extends Component {
     );
   }
 
-  getFileInputError() {
-    const { error } = this.props;
-
-    return (error && error !== 'true' && error !== 'false')
-      ? (
-        <p
-          className="tyk-form-control__error-message"
-        >
-          { error }
-        </p>
-      )
-      : null;
+  clearValue() {
+    const { onChange } = this.props;
+    this.fileInputRef.current.value = '';
+    onChange('');
   }
 
-  getCssClasses() {
-    const { error } = this.props;
-    const cssClasses = ['tyk-form-group'];
+  handleOnChange(e) {
+    const { onChange } = this.props;
 
-    if (error) {
-      cssClasses.push('has-error');
-    }
-
-    return cssClasses.join(' ');
+    onChange(e.target.files);
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  reset() {}
 
   render() {
+    const {
+      id,
+      label,
+      note,
+    } = this.props;
+
     return (
       <Fragment>
         <div className={this.getCssClasses()}>
           {
-            this.props.label
-              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
+            label
+              ? <label htmlFor={id}>{ label }</label>
               : null
           }
           { this.getFileInputComponent() }
           {
-            this.props.note
-              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
         </div>

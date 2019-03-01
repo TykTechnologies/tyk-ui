@@ -1,19 +1,22 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import FileInput from './FileInput';
 
 export default class FieldFileInput extends Component {
-  constructor(props) {
-    super(props);
-  }
+  static propTypes = {
+    input: PropTypes.instanceOf(Object),
+    meta: PropTypes.instanceOf(Object),
+    validationmessages: PropTypes.instanceOf(Object),
+  };
 
   getInputError() {
-    const { touched, error, warning } = this.props.meta;
+    const { meta, validationmessages } = this.props;
+    const { touched, error, warning } = meta;
     let message = null;
 
-    if (touched && error && this.props.validationmessages[error]) {
-      message = this.props.validationmessages[error];
+    if (touched && error && validationmessages[error]) {
+      message = validationmessages[error];
     } else if (touched && warning) {
       message = 'warning';
     }

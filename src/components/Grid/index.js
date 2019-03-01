@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import Column from '../Column';
 import Row from '../Row';
 
@@ -257,4 +256,4 @@ const Grid = () => (
   </div>
 );
 
-export { Grid };
+export default Grid;

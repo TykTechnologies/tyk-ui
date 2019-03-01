@@ -5,6 +5,7 @@ export default class Input extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
     id: PropTypes.string,
+    isfield: PropTypes.bool,
     error: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool,
@@ -27,42 +28,7 @@ export default class Input extends Component {
     value: PropTypes.string,
   }
 
-  state = {
-    initValue: this.props.value,
-    value: this.props.value,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this._handleOnChange = this._handleOnChange.bind(this);
-  }
-
-  reset() {
-    const { initValue } = this.state;
-    const { onChange } = this.props;
-
-    this.setState({
-      value: initValue,
-    });
-  }
-
-  _handleOnChange(e) {
-    const { onChange, isfield } = this.props;
-
-
-    if (!isfield) {
-      this.setState({
-        value: e.target.value,
-      }, () => {
-        onChange(this.state.value);
-      });
-    } else {
-      onChange(e.target.value);
-    }
-  }
-
-  getAddon(content) {
+  static getAddon(content) {
     return (
       <div className="tyk-input-group__addon">
         { content }
@@ -70,36 +36,18 @@ export default class Input extends Component {
     );
   }
 
-  getInputGroupAddon() {
-    return (
-      <div className="tyk-input-group">
-        {
-          this.props.inputGroupAddonLeft
-            ? this.getAddon(this.props.inputGroupAddonLeft)
-            : null
-        }
-        { this.getInputComponent() }
-        {
-          this.props.inputGroupAddonRight
-            ? this.getAddon(this.props.inputGroupAddonRight)
-            : null
-        }
-      </div>
-    );
-  }
+  constructor(props) {
+    super(props);
+    const {
+      value,
+    } = this.props;
 
-  getInputComponent() {
-    const { isfield, onChange, ...rest } = this.props;
+    this.state = {
+      initValue: value,
+      stateValue: value,
+    };
 
-    return (
-      <input
-        autoComplete="off"
-        className="tyk-form-control"
-        {...rest}
-        onChange={this._handleOnChange}
-        value={(isfield) ? this.props.value : this.state.value}
-      />
-    );
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   getInputError() {
@@ -127,23 +75,95 @@ export default class Input extends Component {
     return cssClasses.join(' ');
   }
 
+  getInputGroupAddon() {
+    const {
+      inputGroupAddonLeft,
+      inputGroupAddonRight,
+    } = this.props;
+
+    return (
+      <div className="tyk-input-group">
+        {
+          inputGroupAddonLeft
+            ? Input.getAddon(inputGroupAddonLeft)
+            : null
+        }
+        { this.getInputComponent() }
+        {
+          inputGroupAddonRight
+            ? Input.getAddon(inputGroupAddonRight)
+            : null
+        }
+      </div>
+    );
+  }
+
+  getInputComponent() {
+    const {
+      isfield, onChange, value, ...rest
+    } = this.props;
+    const { stateValue } = this.state;
+    return (
+      <input
+        autoComplete="off"
+        className="tyk-form-control"
+        {...rest}
+        onChange={this.handleOnChange}
+        value={(isfield) ? value : stateValue}
+      />
+    );
+  }
+
+  reset() {
+    const { initValue } = this.state;
+
+    this.setState({
+      stateValue: initValue,
+    });
+  }
+
+  handleOnChange(e) {
+    const { onChange, isfield } = this.props;
+    const {
+      stateValue,
+    } = this.state;
+
+    if (!isfield) {
+      this.setState({
+        stateValue: e.target.value,
+      }, () => {
+        onChange(stateValue);
+      });
+    } else {
+      onChange(e.target.value);
+    }
+  }
+
   render() {
+    const {
+      label,
+      id,
+      inputGroupAddonLeft,
+      inputGroupAddonRight,
+      note,
+    } = this.props;
+
     return (
       <Fragment>
         <div className={this.getCssClasses()}>
           {
-            this.props.label
-              ? <label htmlFor={this.props.id}>{ this.props.label }</label>
+            label
+              ? <label htmlFor={id}>{ label }</label>
               : null
           }
           {
-            this.props.inputGroupAddonLeft || this.props.inputGroupAddonRight
+            inputGroupAddonLeft || inputGroupAddonRight
               ? this.getInputGroupAddon()
               : this.getInputComponent()
           }
           {
-            this.props.note
-              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
         </div>

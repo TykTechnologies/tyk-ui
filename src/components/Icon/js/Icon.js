@@ -3,19 +3,26 @@ import PropTypes from 'prop-types';
 
 export default class Icon extends Component {
   static propTypes = {
-    familly: PropTypes.string,
+    className: PropTypes.string,
+    family: PropTypes.string,
     type: PropTypes.string.isRequired,
   };
 
   getCssClasses() {
+    const {
+      className,
+      family,
+      type,
+    } = this.props;
+
     const cssClasses = [];
-    const fontFamily = this.props.family || 'fa';
+    const fontFamily = family || 'fa';
 
     cssClasses.push(fontFamily);
-    cssClasses.push(`${fontFamily}-${this.props.type}`);
+    cssClasses.push(`${fontFamily}-${type}`);
 
     return cssClasses
-      .concat([this.props.className] || [])
+      .concat([className] || [])
       .join(' ');
   }
 

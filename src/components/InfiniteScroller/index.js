@@ -1,1 +1,1 @@
-export { default as InfiniteScroller } from './js/InfiniteScroller';
+export { default } from './js/InfiniteScroller';

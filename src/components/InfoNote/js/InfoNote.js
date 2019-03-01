@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Message } from '../../Message';
 
-export default class InfoNote extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-  };
+const InfoNote = (props) => {
+  const { children } = props;
 
-  render() {
-    return (
-      <div className="tyk-info-note">
-        <Message theme="info">
-          { this.props.children }
-        </Message>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="tyk-info-note">
+      <Message theme="info">
+        { children }
+      </Message>
+    </div>
+  );
+};
+
+InfoNote.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+};
+
+export default InfoNote;
