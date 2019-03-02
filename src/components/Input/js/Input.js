@@ -10,12 +10,12 @@ export default class Input extends Component {
       PropTypes.string,
       PropTypes.bool,
     ]),
-    inputGroupAddonLeft: PropTypes.oneOfType([
+    inputgroupaddonleft: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
       PropTypes.string,
     ]),
-    inputGroupAddonRight: PropTypes.oneOfType([
+    inputgroupaddonright: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
       PropTypes.string,
@@ -77,21 +77,21 @@ export default class Input extends Component {
 
   getInputGroupAddon() {
     const {
-      inputGroupAddonLeft,
-      inputGroupAddonRight,
+      inputgroupaddonleft,
+      inputgroupaddonright,
     } = this.props;
 
     return (
       <div className="tyk-input-group">
         {
-          inputGroupAddonLeft
-            ? Input.getAddon(inputGroupAddonLeft)
+          inputgroupaddonleft
+            ? Input.getAddon(inputgroupaddonleft)
             : null
         }
         { this.getInputComponent() }
         {
-          inputGroupAddonRight
-            ? Input.getAddon(inputGroupAddonRight)
+          inputgroupaddonright
+            ? Input.getAddon(inputgroupaddonright)
             : null
         }
       </div>
@@ -141,8 +141,8 @@ export default class Input extends Component {
     const {
       label,
       id,
-      inputGroupAddonLeft,
-      inputGroupAddonRight,
+      inputgroupaddonleft,
+      inputgroupaddonright,
       note,
     } = this.props;
 
@@ -155,7 +155,7 @@ export default class Input extends Component {
               : null
           }
           {
-            inputGroupAddonLeft || inputGroupAddonRight
+            inputgroupaddonleft || inputgroupaddonright
               ? this.getInputGroupAddon()
               : this.getInputComponent()
           }

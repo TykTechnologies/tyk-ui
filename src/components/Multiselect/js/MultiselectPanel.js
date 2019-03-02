@@ -123,7 +123,7 @@ class MultiselectPanel extends Component {
     return (
       <div className="tyk-multiselect__panel">
         <Input
-          inputGroupAddonLeft={
+          inputgroupaddonleft={
             <Icon type="search" />
           }
           name="search"

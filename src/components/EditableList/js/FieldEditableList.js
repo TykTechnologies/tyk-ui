@@ -30,7 +30,7 @@ export default class FieldEditableList extends Component {
   }
 
   handleOnChange(value) {
-    const { input } = this.prop;
+    const { input } = this.props;
     const { onChange } = input;
 
     onChange(fromJS(value));
@@ -43,7 +43,7 @@ export default class FieldEditableList extends Component {
       <EditableList
         {...props}
         onChange={this.handleOnChange}
-        value={!props.input.value ? props.input.value : props.input.value.toJS()}
+        value={!props.input.value ? null : props.input.value.toJS()}
         error={this.getEditableListError()}
       />
     );

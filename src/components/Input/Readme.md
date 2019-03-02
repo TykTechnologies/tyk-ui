@@ -35,7 +35,7 @@
 ```
 ```js
 <Input
-  inputGroupAddonLeft={
+  inputgroupaddonleft={
     <Icon type="search" />
   }
   label="Input with addon"
@@ -45,7 +45,7 @@
   onChange={ (e) => { console.log(e); }}
 />
 <Input
-  inputGroupAddonRight={
+  inputgroupaddonright={
     <Icon type="search" />
   }
   name="input"

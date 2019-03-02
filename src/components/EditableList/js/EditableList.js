@@ -17,7 +17,10 @@ export default class EditableList extends Component {
     config: PropTypes.instanceOf(Object),
     onChange: PropTypes.func,
     label: PropTypes.string,
-    value: PropTypes.instanceOf(Array),
+    value: PropTypes.oneOfType([
+      PropTypes.instanceOf(Array),
+      PropTypes.instanceOf(Object),
+    ]),
   };
 
   static getItemListValue(itemValue) {

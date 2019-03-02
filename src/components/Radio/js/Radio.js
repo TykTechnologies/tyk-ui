@@ -8,7 +8,7 @@ export default class Radio extends Component {
     input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
-    nospace: PropTypes.bool,
+    nospace: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
   };

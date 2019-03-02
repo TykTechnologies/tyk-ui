@@ -14,7 +14,7 @@ export default class Select extends Component {
     label: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
-    onBlur: PropTypes.string,
+    onBlur: PropTypes.func,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     value: PropTypes.oneOfType([

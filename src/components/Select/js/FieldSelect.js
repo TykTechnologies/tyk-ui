@@ -45,7 +45,7 @@ export default class FieldSelect extends Component {
       <Select
         {...input}
         {...rest}
-        isfield="true"
+        isfield
         error={this.getSelectError()}
         onChange={this.handleEvent}
         onBlur={this.handleEvent}

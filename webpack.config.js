@@ -32,20 +32,15 @@ module.exports = {
           }
         }
       },
-      {
-        enforce: "pre",
-        test: /\.js?$/,
-        include: [
-          path.resolve(__dirname, "src")
-        ],
-        exclude: /node_modules/,
-        loader: "eslint-loader",
-        options: {
-          emitError: true,
-          emitWarning: true,
-          configFile: path.resolve(__dirname, '.eslintrc')
-        }
-      },
+	      {
+	        enforce: "pre",
+	        test: /.js?$/,
+	        include: [
+	          path.resolve(__dirname, "src")
+	        ],
+	        exclude: /node_modules/,
+	        loader: "eslint-loader"
+	      },
       {
         test: /\.js?$/,
         include: [

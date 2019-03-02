@@ -15,16 +15,23 @@
         display: flex;
         white-space: nowrap;
 
-        &.active a,
-        a:hover {
+        &.active button,
+        button:hover {
           border-bottom-color: theme-color('primary', 'base');
         }
 
-        a {
+        button {
+          background: none;
+          border: none;
           border-bottom: 5px solid transparent;
           cursor: pointer;
+          font-size: text-scale('md');
           padding: $tab-button-padding;
           transition: all .2s linear;
+
+          &:focus {
+            outline: none;
+          }
         }
       }
     }

@@ -23,6 +23,14 @@
     .tyk-button {
       border-radius: 0;
 
+      + .tyk-button {
+        margin-left: 0;
+      }
+
+      + .tyk-dropdown {
+        margin-left: 0;
+      }
+
       &:first-child {
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;

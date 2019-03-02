@@ -5019,6 +5019,10 @@ select {
       border-bottom-right-radius: 0; }
     .tyk-button-group__wrapper .tyk-button-group .tyk-button {
       border-radius: 0; }
+      .tyk-button-group__wrapper .tyk-button-group .tyk-button + .tyk-button {
+        margin-left: 0; }
+      .tyk-button-group__wrapper .tyk-button-group .tyk-button + .tyk-dropdown {
+        margin-left: 0; }
       .tyk-button-group__wrapper .tyk-button-group .tyk-button:first-child {
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px; }
@@ -5061,8 +5065,11 @@ select {
   margin-left: 10px;
   margin-top: 6px;
   padding: 5px 10px; }
-  .tyk-combobox .pill a {
-    cursor: pointer; }
+  .tyk-combobox .pill button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 23px; }
   .tyk-combobox .pill i {
     margin-right: 5px; }
 
@@ -5470,12 +5477,14 @@ select {
 
 .tyk-modal__backdrop {
   background-color: #0A0D10;
+  border: none;
   bottom: 0;
   display: none;
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
+  width: 100%;
   z-index: 1079; }
   .tyk-modal__backdrop.opened {
     display: block;
@@ -5544,9 +5553,10 @@ select {
   .tyk-multiselect .tyk-multiselect-item__controls {
     margin-left: auto; }
     .tyk-multiselect .tyk-multiselect-item__controls .tyk-button {
-      margin-right: 5px; }
+      color: #000018;
+      margin-left: 5px; }
       .tyk-multiselect .tyk-multiselect-item__controls .tyk-button:last-child {
-        margin-right: 0; }
+        margin-left: 0; }
 
 .tyk-nav-bar {
   border: 0;
@@ -5592,23 +5602,24 @@ select {
   .tyk-pagination li {
     align-items: center;
     display: flex; }
-  .tyk-pagination li:first-child a {
+  .tyk-pagination li:first-child button {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px; }
-  .tyk-pagination li:last-child a {
+  .tyk-pagination li:last-child button {
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px; }
   .tyk-pagination span {
     margin: 0 10px; }
-  .tyk-pagination a {
+  .tyk-pagination button {
     background: white;
     border: 1px solid #D2D2D2;
+    font-size: 12px;
     cursor: pointer;
     margin-left: -1px;
     padding: 10px 15px; }
-    .tyk-pagination a:hover {
+    .tyk-pagination button:hover {
       background-color: #F0F0F0; }
-  .tyk-pagination .active a {
+  .tyk-pagination .active button {
     background-color: #368493;
     color: white; }
 
@@ -5712,14 +5723,19 @@ select {
   .tyk-tabs--default > ul li {
     display: flex;
     white-space: nowrap; }
-    .tyk-tabs--default > ul li.active a,
-    .tyk-tabs--default > ul li a:hover {
+    .tyk-tabs--default > ul li.active button,
+    .tyk-tabs--default > ul li button:hover {
       border-bottom-color: #368493; }
-    .tyk-tabs--default > ul li a {
+    .tyk-tabs--default > ul li button {
+      background: none;
+      border: none;
       border-bottom: 5px solid transparent;
       cursor: pointer;
+      font-size: 16px;
       padding: 10px 20px 5px 20px;
       transition: all .2s linear; }
+      .tyk-tabs--default > ul li button:focus {
+        outline: none; }
 
 .tyk-tab__content {
   padding: 25px; }

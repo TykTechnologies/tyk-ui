@@ -134,7 +134,7 @@ Button.propTypes = {
   /**
   * Type of the button (ex: button, submit etc.)
   */
-  type: PropTypes.arrayOf(['submit', 'button', 'reset']),
+  type: PropTypes.string,
   /**
   * Describes the size of the button (sm, md, lg). Default one is md
   */

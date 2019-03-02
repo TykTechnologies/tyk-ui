@@ -31,7 +31,7 @@ export default class FieldInput extends Component {
       <Input
         {...input}
         {...rest}
-        isfield="true"
+        isfield
         error={this.getInputError()}
       />
     );

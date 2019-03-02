@@ -23,7 +23,11 @@ export default class Combobox extends Component {
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     tags: PropTypes.bool,
-    value: PropTypes.instanceOf(Array),
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(Object),
+      PropTypes.instanceOf(Array),
+    ]),
     values: PropTypes.instanceOf(Array),
   };
 

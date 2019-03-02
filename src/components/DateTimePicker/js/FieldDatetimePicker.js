@@ -32,7 +32,7 @@ export default class FieldDateTimePicker extends Component {
       <DateTimePicker
         {...input}
         {...rest}
-        isfield="true"
+        isfield
         error={this.getInputError()}
       />
     );

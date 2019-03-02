@@ -8,14 +8,14 @@ export default class Row extends PureComponent {
       PropTypes.node,
     ]),
     className: PropTypes.string,
-    noGutters: PropTypes.bool,
+    nogutters: PropTypes.string,
   }
 
   getCssClasses() {
-    const { className, noGutters } = this.props;
+    const { className, nogutters } = this.props;
     let cssClass = ['tyk-row'];
 
-    if (noGutters) {
+    if (nogutters) {
       cssClass.push('no-gutters');
     }
 

@@ -36,8 +36,11 @@
     margin-top: 6px;
     padding: 5px 10px;
 
-    a {
+    button {
+      background: none;
+      border: none;
       cursor: pointer;
+      width: 23px;
     }
 
     i {
