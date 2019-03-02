@@ -6,9 +6,23 @@ import Button from '../../Button';
 import Collapsible from '../../Collapsible';
 import Loader from '../../Loader';
 
+const getItemContent = (context, item) => (
+  context.detailsDisplayTemplate
+    ? context.detailsDisplayTemplate(item)
+    : JSON.stringify(item.details)
+);
+
+const getItemLoader = (context, item) => {
+  const { opened } = context;
+
+  return opened[item.id]
+    ? <Loader position="relative" />
+    : null;
+};
+
 class MultiselectItem extends Component {
   static propTypes = {
-    item: PropTypes.object,
+    item: PropTypes.instanceOf(Object),
     itemType: PropTypes.string,
     searchValue: PropTypes.string,
     onChange: PropTypes.func,
@@ -30,7 +44,9 @@ class MultiselectItem extends Component {
 
   render() {
     const {
-      searchValue, item, itemType, onChange,
+      item,
+      itemType,
+      onChange,
     } = this.props;
 
     return (
@@ -53,12 +69,14 @@ class MultiselectItem extends Component {
                         <Button
                           iconType={itemType === 'normal' ? 'plus' : 'minus'}
                           iconOnly
+                          // eslint-disable-next-line react/jsx-no-bind
                           onClick={onChange.bind(null, item)}
                           disabled={context.disabled || (context.maxSelections && context.maxSelections === context.nrSelectedItems && itemType === 'normal')}
                         />
                         <Button
                           iconType={context.opened[item.id] ? 'chevron-up' : 'chevron-down'}
                           iconOnly
+                          // eslint-disable-next-line react/jsx-no-bind
                           onClick={context.onGetItemDetails.bind(context.parentContext, item)}
                         />
                       </span>
@@ -70,16 +88,10 @@ class MultiselectItem extends Component {
                             collapsed={!context.opened[item.id]}
                             className="tyk-multiselect-item__details"
                           >
-                            {
-                              context.detailsDisplayTemplate
-                                ? context.detailsDisplayTemplate(item)
-                                : JSON.stringify(item.details)
-                            }
+                            {getItemContent(context, item)}
                           </Collapsible>
                         )
-                        : context.opened[item.id]
-                          ? <Loader position="relative" />
-                          : null
+                        : getItemLoader(context, item)
                     }
                   </li>
                 )

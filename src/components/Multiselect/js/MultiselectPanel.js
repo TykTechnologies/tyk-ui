@@ -3,33 +3,67 @@ import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
 import { Input } from '../../Input';
+import Icon from '../../Icon';
 import Message from '../../Message';
 import InfiniteScroller from '../../InfiniteScroller';
 import MultiselectItem from './MultiselectItem';
 
 class MultiselectPanel extends Component {
   static propTypes = {
+    customSearch: PropTypes.bool,
     onCustomSearch: PropTypes.func,
     panelType: PropTypes.string,
     onChange: PropTypes.func,
-    items: PropTypes.array,
+    items: PropTypes.instanceOf(Array),
+    itemsPageNumber: PropTypes.number,
+    itemsNrPages: PropTypes.number,
     inputPlaceholder: PropTypes.string,
+    loadMoreItems: PropTypes.func,
     noItemsMessage: PropTypes.string,
+    serverLoad: PropTypes.bool,
   };
 
   state = {
     searchValue: '',
   };
 
-  static propTypes = {
-    items: PropTypes.array,
-  };
-
   constructor(props) {
     super(props);
 
-    this.itemsListRef = createRef();
     this.searchOnChange = this.searchOnChange.bind(this);
+    this.itemChanged = this.itemChanged.bind(this);
+    this.itemIndex = 0;
+    this.itemsListRef = createRef();
+  }
+
+  getItemIndex() {
+    this.itemIndex += 1;
+
+    return this.itemIndex;
+  }
+
+  getItemsList() {
+    const {
+      itemsPageNumber,
+      itemsNrPages,
+      loadMoreItems,
+      serverLoad,
+    } = this.props;
+
+    return (
+      serverLoad
+        ? (
+          <InfiniteScroller
+            refChild={this.itemsListRef}
+            hasMore={itemsNrPages > itemsPageNumber}
+            loadMore={loadMoreItems}
+            pageNumber={itemsPageNumber}
+          >
+            { this.renderListItems() }
+          </InfiniteScroller>
+        )
+        : this.renderListItems()
+    );
   }
 
   searchOnChange(value) {
@@ -58,18 +92,17 @@ class MultiselectPanel extends Component {
       customSearch, items, panelType, serverLoad,
     } = this.props;
     const { searchValue } = this.state;
-
     return (
       <ul
         className={`tyk-multiselect__list${(!serverLoad) ? ' tyk-multiselect__list--scroll' : ''}`}
         ref={this.itemsListRef}
       >
         {
-          items.map((item, key) => (
+          items.map(item => (
             <MultiselectItem
               itemType={panelType}
-              key={key}
-              onChange={this.itemChanged.bind(this)}
+              key={this.getItemIndex()}
+              onChange={this.itemChanged}
               searchValue={customSearch ? '' : searchValue}
               item={item}
             />
@@ -82,12 +115,8 @@ class MultiselectPanel extends Component {
   render() {
     const {
       inputPlaceholder,
-      itemsPageNumber,
-      itemsNrPages,
       noItemsMessage,
-      loadMoreItems,
       items,
-      serverLoad,
     } = this.props;
     const { searchValue } = this.state;
 
@@ -104,18 +133,7 @@ class MultiselectPanel extends Component {
         />
         {
           items.length
-            ? serverLoad
-              ? (
-                <InfiniteScroller
-                  refChild={this.itemsListRef}
-                  hasMore={itemsNrPages > itemsPageNumber}
-                  loadMore={loadMoreItems}
-                  pageNumber={itemsPageNumber}
-                >
-                  { this.renderListItems() }
-                </InfiniteScroller>
-              )
-              : this.renderListItems()
+            ? this.getItemsList()
             : (
               <Message
                 theme="info"

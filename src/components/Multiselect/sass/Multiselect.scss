@@ -89,10 +89,11 @@
     margin-left: auto;
 
     .tyk-button {
-      margin-right: 5px;
+      color: $text-color;
+      margin-left: 5px;
 
       &:last-child {
-        margin-right: 0;
+        margin-left: 0;
       }
     }
   }

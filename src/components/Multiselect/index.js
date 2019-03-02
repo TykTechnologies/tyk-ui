@@ -1,9 +1,28 @@
 import React, { Component, Fragment } from 'react';
+import Multiselect from './js/Multiselect';
 
-export { default as Multiselect } from './js/Multiselect';
 export { default as FieldMultiselect } from './js/FieldMultiselect';
+export { Multiselect };
 
 export default class Test extends Component {
+  static itemDisplayTemplate(item) {
+    return (
+      <Fragment>
+        <strong>ID: </strong>
+        <span>{ item.id }</span>
+      </Fragment>
+    );
+  }
+
+  static detailsDisplayTemplate(item) {
+    return (
+      <Fragment>
+        <strong>DETAILS: </strong>
+        <span>{ item.details.prct }</span>
+      </Fragment>
+    );
+  }
+
   state = {
     items: [
       { id: 1, name: 'item 1' },
@@ -24,7 +43,7 @@ export default class Test extends Component {
     page: 0,
   };
 
-  onMultiselectChange(selectedItems, item, action) {
+  onMultiselectChange(selectedItems) {
     this.setState({
       selectedItems,
     });
@@ -35,35 +54,18 @@ export default class Test extends Component {
 
     setTimeout(() => {
       const newItems = items.map((itm) => {
-        if (item.id === itm.id) {
-          itm.details = { prct: 'prct' };
+        const tempItem = Object.assign({}, itm);
+        if (item.id === tempItem.id) {
+          tempItem.details = { prct: 'prct' };
         }
 
-        return itm;
+        return tempItem;
       });
 
       this.setState({
         items: newItems,
       });
     }, 2000);
-  }
-
-  itemDisplayTemplate(item) {
-    return (
-      <Fragment>
-        <strong>ID: </strong>
-        <span>{ item.id }</span>
-      </Fragment>
-    );
-  }
-
-  detailsDisplayTemplate(item) {
-    return (
-      <Fragment>
-        <strong>DETAILS: </strong>
-        <span>{ item.details.prct }</span>
-      </Fragment>
-    );
   }
 
   loadMoreItems(page) {
@@ -88,9 +90,7 @@ export default class Test extends Component {
     }, 2000);
   }
 
-  customSearch(value) {
-    const { items } = this.state;
-
+  customSearch() {
     setTimeout(() => {
       this.setState({
         page: 0,
@@ -122,13 +122,17 @@ export default class Test extends Component {
         fieldsToSearchOn={['name']}
         items={items}
         value={selectedItems}
+        // eslint-disable-next-line react/jsx-no-bind
         onChange={this.onMultiselectChange.bind(this)}
+        // eslint-disable-next-line react/jsx-no-bind
         getItemDetails={this.getItemDetails.bind(this)}
-        itemDisplayTemplate={this.itemDisplayTemplate}
-        detailsDisplayTemplate={this.detailsDisplayTemplate}
+        itemDisplayTemplate={Test.itemDisplayTemplate}
+        detailsDisplayTemplate={Test.detailsDisplayTemplate}
+        // eslint-disable-next-line react/jsx-no-bind
         loadMoreItems={this.loadMoreItems.bind(this)}
         itemsPageNumber={page}
         itemsNrPages={nrPages}
+        // eslint-disable-next-line react/jsx-no-bind
         customSearch={this.customSearch.bind(this)}
         maxSelections={3}
       />

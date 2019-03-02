@@ -51,7 +51,7 @@ class InfiniteScroller extends Component {
   componentDidMount() {
     const { initialLoad, loadMore, pageNumber } = this.props;
     this.containerRef.current.addEventListener('scroll', InfiniteScroller.debounce(this.scrollHandler.bind(this), 200));
-
+    console.log(this.props);
     if (initialLoad && loadMore && typeof loadMore === 'function') {
       loadMore(pageNumber);
     }
@@ -131,7 +131,8 @@ class InfiniteScroller extends Component {
   }
 
   render() {
-    const { children, showLoader } = this.state;
+    const { children } = this.props;
+    const { showLoader } = this.state;
 
     return (
       <div

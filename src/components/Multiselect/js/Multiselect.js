@@ -2,18 +2,29 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import './MultiselectPanel';
+import MultiselectPanel from './MultiselectPanel';
 import MultiselectContext from './MultiselectContext';
+
+const diffObjects = (value, items) => {
+  const newItems = items.filter((item) => {
+    const isCommon = value.filter(selectedItem => selectedItem.id === item.id).length > 0;
+
+    return !isCommon;
+  });
+
+  return newItems;
+};
 
 class Multiselect extends Component {
   static propTypes = {
     customSearch: PropTypes.func,
     disabled: PropTypes.bool,
-    entityName: PropTypes.string,
+    error: PropTypes.string,
     entityNamePlural: PropTypes.string,
+    items: PropTypes.instanceOf(Array),
     itemDisplayTemplate: PropTypes.func,
     detailsDisplayTemplate: PropTypes.func,
-    fieldsToSearchOn: PropTypes.array,
+    fieldsToSearchOn: PropTypes.instanceOf(Array),
     onChange: PropTypes.func,
     getItemDetails: PropTypes.func,
     itemsPageNumber: PropTypes.number,
@@ -21,49 +32,32 @@ class Multiselect extends Component {
     loadMoreItems: PropTypes.func,
     note: PropTypes.string,
     maxSelections: PropTypes.number,
+    value: PropTypes.instanceOf(Array),
   };
 
   state = {
     opened: {},
   };
 
-  diffObjects(value, items) {
-    const newItems = items.filter((item) => {
-      const isCommon = value.filter(selectedItem => selectedItem.id === item.id).length > 0;
+  constructor(props) {
+    super(props);
 
-      return !isCommon;
-    });
-
-    return newItems;
-  }
-
-  itemsChange(allItems, item) {
-    const { value, onChange } = this.props;
-    const valueClone = fromJS(value).toJS();
-
-    valueClone.unshift(item);
-
-    onChange(valueClone, item, 'added');
-  }
-
-  valueChange(value, item) {
-    const { items, onChange } = this.props;
-    const allItemsClone = fromJS(items).toJS();
-
-    allItemsClone.unshift(item);
-
-    onChange(value, item, 'removed');
+    this.valueChange = this.valueChange.bind(this);
+    this.itemsChange = this.itemsChange.bind(this);
   }
 
   onGetItemDetails(item) {
     const { getItemDetails } = this.props;
 
     this.setState((prevState) => {
-      prevState.opened[item.id] = !prevState.opened[item.id];
+      const tempState = Object.assign({}, prevState);
+      tempState.opened[item.id] = !tempState.opened[item.id];
 
-      return prevState;
+      return tempState;
     }, () => {
-      getItemDetails && getItemDetails(item);
+      if (getItemDetails) {
+        getItemDetails(item);
+      }
     });
   }
 
@@ -92,10 +86,27 @@ class Multiselect extends Component {
     return cssClasses.join(' ');
   }
 
+  itemsChange(allItems, item) {
+    const { value, onChange } = this.props;
+    const valueClone = fromJS(value).toJS();
+
+    valueClone.unshift(item);
+
+    onChange(valueClone, item, 'added');
+  }
+
+  valueChange(value, item) {
+    const { items, onChange } = this.props;
+    const allItemsClone = fromJS(items).toJS();
+
+    allItemsClone.unshift(item);
+
+    onChange(value, item, 'removed');
+  }
+
   render() {
     const {
       customSearch,
-      entityName,
       entityNamePlural,
       disabled,
       itemDisplayTemplate,
@@ -106,7 +117,7 @@ class Multiselect extends Component {
       itemsNrPages,
       loadMoreItems,
       maxSelections,
-      onChange,
+      note,
       value,
     } = this.props;
     const { opened } = this.state;
@@ -145,7 +156,7 @@ Select from existing
                 inputPlaceholder={`Search through selected ${entityNamePlural}`}
                 noItemsMessage={`Selected ${entityNamePlural} will show here`}
                 items={value}
-                onChange={this.valueChange.bind(this)}
+                onChange={this.valueChange}
                 panelType="selected"
               />
               <MultiselectPanel
@@ -154,8 +165,8 @@ Select from existing
                 entityNamePlural={entityNamePlural}
                 customSearch={!!customSearch}
                 onCustomSearch={customSearch}
-                items={this.diffObjects(value, items)}
-                onChange={this.itemsChange.bind(this)}
+                items={diffObjects(value, items)}
+                onChange={this.itemsChange}
                 serverLoad={!!loadMoreItems}
                 loadMoreItems={loadMoreItems}
                 itemsPageNumber={itemsPageNumber}
@@ -167,8 +178,8 @@ Select from existing
         </div>
         <div>
           {
-            this.props.note
-              ? <p className="tyk-form-control__help-block">{ this.props.note }</p>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
         </div>
