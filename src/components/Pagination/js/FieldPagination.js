@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
-import { fromJS } from 'immutable';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import Pagination from './Pagination';
 
-export default class FieldPagination extends Component {
-  render() {
-    const { input, ...rest } = this.props;
+const FieldPagination = (props) => {
+  const { input, ...rest } = props;
 
-    return (
-      <Pagination
-        {...input}
-        {...rest}
-        onChange={input.onChange}
-        value={input.value ? input.value : 0}
-      />
-    );
-  }
-}
+  return (
+    <Pagination
+      {...input}
+      {...rest}
+      onChange={input.onChange}
+      value={input.value ? input.value : 0}
+    />
+  );
+};
+
+FieldPagination.propTypes = {
+  input: PropTypes.instanceOf(Object),
+};
+
+export default FieldPagination;

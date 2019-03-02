@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 export default class Radio extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    inline: PropTypes.bool,
+    input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
-    noSpace: PropTypes.bool,
+    nospace: PropTypes.bool,
     onChange: PropTypes.func,
     value: PropTypes.string,
   };
@@ -29,7 +31,7 @@ export default class Radio extends Component {
   }
 
   render() {
-    const { input, ...rest } = this.props;
+    const { input, label, ...rest } = this.props;
     return (
       <div
         className={this.getCssClasses()}
@@ -40,7 +42,7 @@ export default class Radio extends Component {
             {...rest}
             type="radio"
           />
-          {this.props.label}
+          {label}
         </label>
       </div>
     );

@@ -41,7 +41,7 @@ const getPagesArr = (nrOfPages, selectedPage) => {
   let i; const
     pagesArr = [];
 
-  for (i = 0; i <= nrOfPages; i++) {
+  for (i = 0; i <= nrOfPages; i += 1) {
     if (shouldShowPage(i, selectedPage, nrOfPages)) {
       if (i > pagesArr[pagesArr.length - 1]) {
         pagesArr.push('...');
@@ -55,26 +55,32 @@ const getPagesArr = (nrOfPages, selectedPage) => {
 
 export default class Pagination extends Component {
   static propTypes = {
-    prevProps: PropTypes.object,
     value: PropTypes.number,
-    nrItemsOnPage: PropTypes.number,
     totalNrOfPages: PropTypes.number,
     onChange: PropTypes.func,
   };
 
-  state = {
-    prevProps: this.props,
-    selectedPage: this.props.value || 0,
-    nrPages: this.props.totalNrOfPages,
-    pagesArray: getPagesArr(this.props.totalNrOfPages, this.props.value),
-  };
-
   constructor(props) {
     super(props);
+    const {
+      value,
+      totalNrOfPages,
+    } = this.props;
+
+    this.state = {
+      prevProps: this.props,
+      selectedPage: value || 0,
+      pagesArray: getPagesArr(totalNrOfPages, value),
+    };
+
+    this.pageKey = 0;
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.value !== prevState.prevProps.value || nextProps.totalNrOfPages !== prevState.prevProps.totalNrOfPages) {
+    if (
+      nextProps.value !== prevState.prevProps.value
+      || nextProps.totalNrOfPages !== prevState.prevProps.totalNrOfPages
+    ) {
       return {
         selectedPage: nextProps.value,
         pagesArray: getPagesArr(nextProps.totalNrOfPages, nextProps.value),
@@ -93,6 +99,12 @@ export default class Pagination extends Component {
     }
 
     return cssClasses.join(' ');
+  }
+
+  getPageKey() {
+    this.pageKey += 1;
+
+    return this.pageKey;
   }
 
   goToPage(pageNr) {
@@ -121,17 +133,17 @@ export default class Pagination extends Component {
                   selectedPage > 0 && totalNrOfPages > 5
                     ? (
                       <li>
-                        <a onClick={this.goToPage.bind(this, selectedPage - 1)}>Previous</a>
+                        <button onClick={this.goToPage.bind(this, selectedPage - 1)} type="button">Previous</button>
                       </li>
                     )
                     : null
                 }
                 {
-                  pagesArray.map((pageNr, key) => (
-                    <li key={key} className={this.getPageCssClass(pageNr - 1)}>
+                  pagesArray.map(pageNr => (
+                    <li key={this.getPageKey()} className={this.getPageCssClass(pageNr - 1)}>
                       {
                         pageNr !== '...'
-                          ? <a onClick={this.goToPage.bind(this, pageNr - 1)}>{ pageNr }</a>
+                          ? <button onClick={this.goToPage.bind(this, pageNr - 1)} type="button">{ pageNr }</button>
                           : <span>{ pageNr }</span>
                       }
                     </li>
@@ -141,7 +153,7 @@ export default class Pagination extends Component {
                   selectedPage < totalNrOfPages && totalNrOfPages > 5
                     ? (
                       <li>
-                        <a onClick={this.goToPage.bind(this, selectedPage + 1)}>Next</a>
+                        <button onClick={this.goToPage.bind(this, selectedPage + 1)} type="button">Next</button>
                       </li>
                     )
                     : null

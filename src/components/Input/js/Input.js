@@ -124,18 +124,16 @@ export default class Input extends Component {
 
   handleOnChange(e) {
     const { onChange, isfield } = this.props;
-    const {
-      stateValue,
-    } = this.state;
+    const inputValue = e.target.value;
 
     if (!isfield) {
       this.setState({
-        stateValue: e.target.value,
+        stateValue: inputValue,
       }, () => {
-        onChange(stateValue);
+        onChange(inputValue);
       });
     } else {
-      onChange(e.target.value);
+      onChange(inputValue);
     }
   }
 

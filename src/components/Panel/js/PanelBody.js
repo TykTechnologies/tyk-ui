@@ -26,6 +26,10 @@ export default class PanelBody extends Component {
   }
 
   render() {
+    const {
+      children,
+    } = this.props;
+
     return (
       <PortalContext.Consumer>
         {
@@ -36,14 +40,14 @@ export default class PanelBody extends Component {
                   collapsed={portalContext.collapsed}
                   className={this.getCssClasses()}
                 >
-                  { this.props.children }
+                  { children }
                 </Collapsible>
               )
               : (
                 <div
                   className={this.getCssClasses()}
                 >
-                  { this.props.children }
+                  { children }
                 </div>
               )
           )

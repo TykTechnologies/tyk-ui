@@ -41,18 +41,18 @@ module.exports = {
 	webpackConfig: {
 		module: {
 			rules: [
-	      // {
-	      //   enforce: "pre",
-	      //   test: /.js?$/,
-	      //   include: [
-	      //     path.resolve(__dirname, "src")
-	      //   ],
-	      //   exclude: /node_modules/,
-	      //   loader: "eslint-loader",
-				// 	options: {
-				// 		fix: true
-				// 	}
-	      // },
+	      {
+	        enforce: "pre",
+	        test: /.js?$/,
+	        include: [
+	          path.resolve(__dirname, "src")
+	        ],
+	        exclude: /node_modules/,
+	        loader: "eslint-loader",
+					options: {
+						fix: true
+					}
+	      },
 				{
 					test: /\.js?$/,
 					exclude: /node_modules/,

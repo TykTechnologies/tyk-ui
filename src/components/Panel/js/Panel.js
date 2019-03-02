@@ -10,17 +10,20 @@ export default class Panel extends Component {
       PropTypes.node,
       PropTypes.string,
     ]),
+    className: PropTypes.string,
     collapsable: PropTypes.bool,
     collapsed: PropTypes.bool,
-    onExtend: PropTypes.func,
-    onCollapsed: PropTypes.func,
     theme: PropTypes.string,
   };
 
-  state = {
-    collapsable: this.props.collapsable || false,
-    collapsed: this.props.collapsed || false,
-  };
+  constructor(props) {
+    super(props);
+    const { collapsed } = this.props;
+
+    this.state = {
+      collapsed: collapsed || false,
+    };
+  }
 
   getCssClasses() {
     const { className, theme } = this.props;
@@ -37,23 +40,34 @@ export default class Panel extends Component {
   }
 
   handleToggle() {
+    const { collapsed } = this.state;
+
     this.setState({
-      collapsed: !this.state.collapsed,
+      collapsed: !collapsed,
     });
   }
 
   render() {
+    const {
+      collapsable,
+      children,
+      theme,
+    } = this.props;
+    const {
+      collapsed,
+    } = this.state;
+
     return (
       <div className={this.getCssClasses()}>
         <PortalContext.Provider
           value={{
-            collapsable: this.props.collapsable,
-            collapsed: this.state.collapsed,
+            collapsable,
+            collapsed,
             onToggle: this.handleToggle.bind(this),
-            theme: this.props.theme,
+            theme,
           }}
         >
-          { this.props.children }
+          { children }
         </PortalContext.Provider>
       </div>
     );

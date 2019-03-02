@@ -5,4 +5,4 @@ import PanelHeader from './js/PanelHeader';
 Panel.Body = PanelBody;
 Panel.Header = PanelHeader;
 
-export { Panel };
+export default Panel;

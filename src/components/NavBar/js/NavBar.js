@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 
 export default class NavBar extends PureComponent {
   static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
     title: PropTypes.string,
     left: PropTypes.oneOfType([
       PropTypes.element,
@@ -15,28 +21,35 @@ export default class NavBar extends PureComponent {
   }
 
   render() {
+    const {
+      children,
+      left,
+      right,
+      title,
+    } = this.props;
+
     return (
       <section className="tyk-nav-bar">
         <div className="tyk-nav-bar__wrapper">
           {
-            this.props.title
-              ? <h1>{ this.props.title }</h1>
+            title
+              ? <h1>{ title }</h1>
               : ''
           }
           <div className="tyk-nav-bar__container">
             {
-              this.props.left
-                ? <div className="tyk-nav-bar__left">{ this.props.left }</div>
+              left
+                ? <div className="tyk-nav-bar__left">{ left }</div>
                 : ''
             }
             {
-              this.props.right
-                ? <div className="tyk-nav-bar__right">{ this.props.right }</div>
+              right
+                ? <div className="tyk-nav-bar__right">{ right }</div>
                 : ''
             }
           </div>
         </div>
-        { this.props.children }
+        { children }
       </section>
     );
   }

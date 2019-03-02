@@ -5,6 +5,12 @@ import Loader from '../../Loader';
 
 class InfiniteScroller extends Component {
   static propTypes = {
+    children: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
     hasMore: PropTypes.bool,
     initialLoad: PropTypes.bool,
     pageNumber: PropTypes.number,
@@ -51,7 +57,7 @@ class InfiniteScroller extends Component {
   componentDidMount() {
     const { initialLoad, loadMore, pageNumber } = this.props;
     this.containerRef.current.addEventListener('scroll', InfiniteScroller.debounce(this.scrollHandler.bind(this), 200));
-    console.log(this.props);
+
     if (initialLoad && loadMore && typeof loadMore === 'function') {
       loadMore(pageNumber);
     }

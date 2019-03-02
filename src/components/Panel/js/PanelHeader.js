@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../../Icon';
@@ -11,6 +11,7 @@ export default class PanelHeader extends Component {
       PropTypes.node,
       PropTypes.string,
     ]).isRequired,
+    className: PropTypes.string,
   }
 
   getCssClasses(props) {
@@ -29,6 +30,10 @@ export default class PanelHeader extends Component {
   }
 
   render() {
+    const {
+      children,
+    } = this.props;
+
     return (
       <PortalContext.Consumer>
         {
@@ -41,7 +46,7 @@ export default class PanelHeader extends Component {
                 className={this.getCssClasses(portalContext)}
                 onClick={portalContext.collapsable ? portalContext.onToggle : undefined}
               >
-                { this.props.children }
+                { children }
                 {
                   portalContext.collapsable
                     ? <Icon className="collapsable__arrow" type={iconType} />
