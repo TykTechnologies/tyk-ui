@@ -3,6 +3,7 @@ export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as Checkbox } from './components/Checkbox';
 export { CodeEditor } from './components/CodeEditor';
 export { FieldCodeEditor } from './components/CodeEditor';
+export { default as Chart } from './components/Chart';
 export { default as Column } from './components/Column';
 export { Combobox } from './components/Combobox';
 export { FieldCombobox } from './components/Combobox';
