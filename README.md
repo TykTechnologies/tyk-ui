@@ -8,6 +8,8 @@ https://tyktechnologies.github.io/tyk-ui-styleguide/
 npm install --save @tyk-technologies/tyk-ui
 ```
 
+>Note that this is a private package so you'll need to be added as a member to the tyk-technologies org and then run `npm adduser` which will ask you for your npm credentials
+
 **Loading tyk-ui into the project**
 
 *Loading SASS files*
