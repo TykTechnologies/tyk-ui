@@ -21,3 +21,41 @@
   />
 </Dropdown>
 ```
+
+```js
+<Dropdown
+  appendTo="#dropdownContainer1"
+  label="Period"
+  name="period"
+  customBtnTitle={
+    (
+      <span>
+        <span>22, Feb 2016</span>
+        <span> > </span>
+        <span>22, Feb 2016</span>
+      </span>
+    )
+  }
+  btnTitle="22, Feb 2016 > 23, Feb 2016"
+  hasCustomContent={ true }
+  display="block"
+  showDropdownIcon={ false }
+>
+  prct
+</Dropdown>
+<div id="dropdownContainer1"></div>
+```
+```js
+<Dropdown
+  appendTo="#dropdownContainer2"
+  label="Period"
+  name="period"
+  btnTitle="Dropdown"
+  hasCustomContent={ true }
+  display="block"
+  position="relative"
+>
+  prct
+</Dropdown>
+<div id="dropdownContainer2"></div>
+```

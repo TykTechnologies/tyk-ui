@@ -203,7 +203,6 @@ const Chart = (props) => {
   useEffect(() => {
     if (!tykChartInstance) {
       setTykChartInstance(echarts.init(chartWrapperRef.current));
-      console.log('init echarts');
     }
 
     return () => {
@@ -215,7 +214,6 @@ const Chart = (props) => {
 
   useEffect(() => {
     if (tykChartInstance) {
-      console.log('add events echarts');
       tykChartInstance.on('dataZoom', (e) => {
         if (onChange) {
           onChange(e);
@@ -238,7 +236,6 @@ const Chart = (props) => {
 
   useEffect(() => {
     if (tykChartInstance) {
-      console.log('set options');
       tykChartInstance.setOption(buildChartOptions(type, option, series));
       tykChartInstance.dispatchAction({
         type: 'takeGlobalCursor',

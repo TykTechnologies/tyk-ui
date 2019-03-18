@@ -32,7 +32,7 @@ export default class FieldToggle extends Component {
       <Toggle
         {...props}
         onChange={this.handleOnChange}
-        value={!props.input.value ? props.input.value : props.input.value.toJS()}
+        value={props.input.value}
       >
         {children}
       </Toggle>

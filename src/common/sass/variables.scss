@@ -1,5 +1,6 @@
 $font-path: '../fonts/' !default;
 $component-images-path: '../images' !default;
+$general-border-radius: 18px;
 
 $theme-colors: (
   'primary': (
@@ -8,9 +9,9 @@ $theme-colors: (
     'dark': #1B3E4F
   ),
   'success': (
-    'base': #00D9BA,
+    'base': #61D4BC,
     'light': #bdded3,
-    'dark': #05C7B6
+    'dark': #8BBAC4
   ),
   'info': (
     'base': #82BBC6,

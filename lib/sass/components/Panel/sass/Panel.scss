@@ -86,3 +86,15 @@
     }
   }
 }
+
+.tyk-panel__footer {
+  align-items: center;
+  border-top: 1px solid theme-color('background', 'light');
+  display: flex;
+  justify-content: flex-end;
+  padding: map-get($spacing, 'lg');
+
+  >:not(:first-child) {
+    margin-left: map-get($spacing, 'xs');
+  }
+}

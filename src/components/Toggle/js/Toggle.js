@@ -16,6 +16,7 @@ class Toggle extends Component {
     theme: PropTypes.string,
     type: PropTypes.string, // single || multiple
     size: PropTypes.string,
+    separated: PropTypes.bool,
     value: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
@@ -23,6 +24,7 @@ class Toggle extends Component {
   };
 
   static defaultProps = {
+    separated: false,
     theme: 'primary',
     type: 'single',
   };
@@ -53,9 +55,10 @@ class Toggle extends Component {
   }
 
   positionNotch() {
+    const { separated } = this.props;
     const { selectedRef } = this.state;
 
-    if (!selectedRef) {
+    if (!selectedRef || separated) {
       return {};
     }
 
@@ -77,6 +80,7 @@ class Toggle extends Component {
       size,
       theme,
       type,
+      separated,
       value,
     } = this.props;
 
@@ -87,14 +91,15 @@ class Toggle extends Component {
             disabled,
             onItemSelected: this.onItemSelected.bind(this),
             saveSelectedRef: this.saveSelectedRef.bind(this),
+            separated,
             type,
             value,
           }}
         >
-          <ul className={`tyk-toggle__list tyk-toggle__list--${type}`}>
+          <ul className={`tyk-toggle__list tyk-toggle__list--${type}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
             { children }
             {
-              type === 'multiple'
+              type === 'multiple' && !separated
                 ? <li className="tyk-toggle__notch" ref={this.notchRef} style={this.positionNotch()} />
                 : null
             }

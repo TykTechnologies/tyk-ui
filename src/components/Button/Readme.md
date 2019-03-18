@@ -8,6 +8,7 @@
 <Button theme="warning">Push Me</Button> &ensp;
 <Button theme="danger">Push Me</Button> &ensp;
 <Button theme="default">Push Me</Button> &ensp;
+<Button theme="white">Push Me</Button> &ensp;
 <Button>Push Me</Button>
 ```
 *Outline theme*

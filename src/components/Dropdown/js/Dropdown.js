@@ -10,6 +10,7 @@ const DropdownContext = createContext();
 
 export default class Dropdown extends Component {
   static propTypes = {
+    appendTo: PropTypes.string,
     children: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
@@ -20,14 +21,26 @@ export default class Dropdown extends Component {
     btnGroupSize: PropTypes.string,
     btnTheme: PropTypes.string,
     btnTitle: PropTypes.string,
+    customBtnTitle: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
     btnGroup: PropTypes.bool,
     className: PropTypes.string,
+    display: PropTypes.string,
     hasCustomContent: PropTypes.bool,
     label: PropTypes.string,
     onClose: PropTypes.func,
     onSelect: PropTypes.func,
+    position: PropTypes.string,
     selectedItem: PropTypes.string,
+    showDropdownIcon: PropTypes.bool,
     stopButtonTextChange: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    showDropdownIcon: true,
   };
 
   static isElemInRightView(el, dropdownWidth) {
@@ -95,6 +108,10 @@ export default class Dropdown extends Component {
   }
 
   getStyles() {
+    const {
+      display,
+      position,
+    } = this.props;
     const { scrollTop } = document.documentElement;
     const el = this.dropdownRef.current;
     const elHeight = el.clientHeight;
@@ -119,9 +136,16 @@ export default class Dropdown extends Component {
       customLeft = left + el.clientWidth - dropdownWidth;
     }
 
-    dropdownEl.style.top = `${customTop}px`;
-    dropdownEl.style.left = `${customLeft}px`;
-    dropdownEl.style.minWidth = `${this.dropdownButtonRef.current.clientWidth}px`;
+
+    if (position !== 'relative') {
+      dropdownEl.style.top = `${customTop}px`;
+      if (display !== 'block') {
+        dropdownEl.style.left = `${customLeft}px`;
+      }
+    }
+    if (display !== 'block') {
+      dropdownEl.style.minWidth = `${this.dropdownButtonRef.current.clientWidth}px`;
+    }
   }
 
   getWrapperCssClasses() {
@@ -151,10 +175,27 @@ export default class Dropdown extends Component {
     const {
       opened,
     } = this.state;
+    const {
+      hasCustomContent,
+      display,
+      position,
+    } = this.props;
     const cssClasses = ['tyk-dropdown-menu', 'tyk-dropdown'];
 
     if (opened) {
       cssClasses.push('opened');
+    }
+
+    if (display) {
+      cssClasses.push('tyk-dropdown--block');
+    }
+
+    if (hasCustomContent) {
+      cssClasses.push('tyk-dropdown--custom');
+    }
+
+    if (position === 'relative') {
+      cssClasses.push('tyk-dropdown--relative');
     }
 
     return cssClasses.join(' ');
@@ -211,19 +252,21 @@ export default class Dropdown extends Component {
 
   render() {
     const {
+      appendTo,
       btnClassName,
       btnSize,
+      customBtnTitle,
       hasCustomContent,
       btnTheme,
       children,
       label,
+      showDropdownIcon,
     } = this.props;
     const {
       selectedItem,
       opened,
     } = this.state;
     const DropdownWrapperTag = hasCustomContent ? 'div' : 'ul';
-
     return (
       <div
         className={this.getWrapperCssClasses()}
@@ -239,40 +282,42 @@ export default class Dropdown extends Component {
             : null
         }
         <Button
-          className={btnClassName}
+          className={`tyk-dropdown__trigger ${(opened) ? 'tyk-dropdown__trigger--opened ' : ' '} ${btnClassName}`}
           theme={btnTheme || 'default'}
           onClick={this.openDropdown}
-          iconType="chevron-down"
+          iconType={showDropdownIcon ? 'chevron-down' : null}
           iconPosition="right"
           size={btnSize || 'md'}
           type="button"
           ref={this.dropdownButtonRef}
         >
-          { this.getBtnTitle() }
+          { customBtnTitle || this.getBtnTitle() }
         </Button>
         {
-          ReactDOM.createPortal(
-            <DropdownContext.Provider
-              value={{
-                onSelectItem: this.onSelectItem,
-                selectedItem,
-              }}
-            >
-              {
-                opened
-                  ? (
-                    <DropdownWrapperTag
-                      className={this.getCssClasses()}
-                      ref={this.dropdownListRef}
-                    >
-                      { children }
-                    </DropdownWrapperTag>
-                  )
-                  : null
-              }
-            </DropdownContext.Provider>,
-            document.querySelector('body'),
-          )
+          opened
+            ? ReactDOM.createPortal(
+              <DropdownContext.Provider
+                value={{
+                  onSelectItem: this.onSelectItem,
+                  selectedItem,
+                }}
+              >
+                {
+                  opened
+                    ? (
+                      <DropdownWrapperTag
+                        className={this.getCssClasses()}
+                        ref={this.dropdownListRef}
+                      >
+                        { children }
+                      </DropdownWrapperTag>
+                    )
+                    : null
+                }
+              </DropdownContext.Provider>,
+              document.querySelector(appendTo || 'body'),
+            )
+            : null
         }
       </div>
     );

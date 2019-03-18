@@ -27,7 +27,7 @@
   }
 
   i + span {
-    margin-right: 10px;
+    margin-left: 10px;
   }
 
   &.disabled {
@@ -51,6 +51,14 @@
     $line-height-button-md,
     $button-border-radius
   )
+
+  &--white {
+    @include button-variant(
+      white,
+      transparent,
+      $text-color
+    )
+  }
 
   &--primary {
     @include button-variant(

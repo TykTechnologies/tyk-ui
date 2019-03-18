@@ -9,6 +9,57 @@
 />
 ```
 ```js
+<Input
+  label="This is a demo Input"
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  inline={ true }
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
+<Input
+  label="This is a demo Input"
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  theme="primary inline"
+  onChange={ (e) => { console.log(e); }}
+/>
+
+<Input
+  label="This is a demo Input"
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  theme="success inline"
+  onChange={ (e) => { console.log(e); }}
+/>
+<Input
+  label="This is a demo Input"
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  theme="primary inline rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+
+<Input
+  label="This is a demo Input"
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  theme="success inline rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
 
 <Input
   error="Please fix the error"

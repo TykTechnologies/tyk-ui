@@ -10,8 +10,43 @@
     margin-left: 10px
   }
 
+  &--block {
+    left: 20px;
+    right: 20px;
+  }
+
+  &--relative {
+    left: auto;
+    right: auto;
+  }
+
+  &--custom {
+    padding: 20px 25px;
+  }
+
   label {
     display: block;
+  }
+
+  &__trigger {
+    position: relative;
+
+    &--opened {
+      &:before {
+        content: '';
+        bottom: -10px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid white;
+        // -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
+        // filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
+        height: 0px;
+        left: 50%;
+        margin-left: -4px;
+        position: absolute;
+        width: 0px;
+      }
+    }
   }
 
   &.theme-list .tyk-button {
@@ -35,13 +70,19 @@
 .tyk-dropdown-menu {
   background: white;
   border: theme-color('background', 'dark');
-  border-radius: 5px;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.175);
+  border-radius: $general-border-radius;
+  -webkit-filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
   list-style-type: none;
   margin: 0;
-  margin-top: 3px;
+  margin-top: 10px;
+  overflow: hidden;
   padding: 0;
   z-index: 1000;
+
+  .tyk-panel {
+    margin: 0;
+  }
 
   &.opened {
     display: flex;
@@ -86,4 +127,8 @@
   &:hover {
     background-color: theme-color('background', 'light');
   }
+}
+
+.tyk-dropdown--relative.opened {
+  position: relative;
 }

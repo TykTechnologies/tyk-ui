@@ -1,0 +1,15 @@
+.tyk-date-range-picker {
+  display: flex;
+
+  > div:first-child {
+    margin-right: 30px;
+
+    .rdtPicker td.rdtActive span {
+      background-color: theme-color('success', 'base');
+    }
+
+    .rdtPicker  thead tr:first-child th {
+      color: theme-color('success', 'base');
+    }
+  }
+}

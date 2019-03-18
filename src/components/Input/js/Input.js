@@ -25,6 +25,7 @@ export default class Input extends Component {
     note: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    theme: PropTypes.string,
     value: PropTypes.string,
   }
 
@@ -65,8 +66,18 @@ export default class Input extends Component {
   }
 
   getCssClasses() {
-    const { error } = this.props;
+    const {
+      error,
+      theme,
+    } = this.props;
     const cssClasses = ['tyk-form-group'];
+    const themes = theme ? theme.split(' ') : [];
+
+    if (themes.length) {
+      themes.forEach((iTheme) => {
+        cssClasses.push(`tyk-form-group--${iTheme}`);
+      });
+    }
 
     if (error) {
       cssClasses.push('has-error');

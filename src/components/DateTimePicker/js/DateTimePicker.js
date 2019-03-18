@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import Icon from '../../Icon';
 
+const renderDay = (cellProps, currentDate) => <td {...cellProps}><span>{ `${currentDate.date() < 10 ? `0${currentDate.date()}` : currentDate.date()}` }</span></td>;
+
 export default class DateTimePicker extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
@@ -70,6 +72,7 @@ export default class DateTimePicker extends Component {
             </button>
           </div>
         )}
+        renderDay={renderDay}
       />
     );
   }

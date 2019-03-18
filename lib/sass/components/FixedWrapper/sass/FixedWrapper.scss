@@ -1,0 +1,12 @@
+@import './variables';
+
+.tyk-fixed-wrapper {
+  left: $fixed-wrapper-left;
+  position: fixed;
+  right: $fixed-wrapper-right;
+  top: $fixed-wrapper-top;
+
+  &--scrolled {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+}

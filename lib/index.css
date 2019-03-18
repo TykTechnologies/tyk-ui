@@ -4613,6 +4613,12 @@ h6 {
 .hide {
   display: none !important; }
 
+.tyk-form-section__title {
+  font-size: 14px;
+  margin: 5px 0 15px 0; }
+  .tyk-form-section__title--light {
+    color: #D2D2D2; }
+
 .tyk-form-group {
   margin-bottom: 20px; }
   .tyk-form-group.has-error > .tyk-form-control,
@@ -4625,6 +4631,51 @@ h6 {
       border-left: 10px solid #C9234D;
       border-color: #C9234D;
       outline: none; }
+  .tyk-form-group--inline {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap; }
+    .tyk-form-group--inline label {
+      display: flex;
+      flex-basis: 30%; }
+    .tyk-form-group--inline input,
+    .tyk-form-group--inline select {
+      display: flex;
+      flex-basis: 70%; }
+    .tyk-form-group--inline .tyk-form-control__help-block {
+      display: flex;
+      flex-basis: 70%;
+      margin-left: auto; }
+  .tyk-form-group--primary {
+    color: #368493; }
+    .tyk-form-group--primary input {
+      border: 2px solid #368493;
+      color: #368493; }
+      .tyk-form-group--primary input::placeholder {
+        color: #368493;
+        opacity: 0.8; }
+      .tyk-form-group--primary input:-ms-input-placeholder {
+        color: #368493; }
+      .tyk-form-group--primary input::-ms-input-placeholder {
+        color: #368493; }
+    .tyk-form-group--primary .tyk-form-control__help-block {
+      color: #368493; }
+  .tyk-form-group--success {
+    color: #61D4BC; }
+    .tyk-form-group--success input {
+      border: 2px solid #61D4BC;
+      color: #61D4BC; }
+      .tyk-form-group--success input::placeholder {
+        color: #61D4BC;
+        opacity: 0.8; }
+      .tyk-form-group--success input:-ms-input-placeholder {
+        color: #61D4BC; }
+      .tyk-form-group--success input::-ms-input-placeholder {
+        color: #61D4BC; }
+    .tyk-form-group--success .tyk-form-control__help-block {
+      color: #61D4BC; }
+  .tyk-form-group--rounded-corners input {
+    border-radius: 18px; }
 
 .tyk-form-control__error-message {
   color: #C9234D;
@@ -4727,7 +4778,7 @@ select {
   .tyk-button span + i {
     margin-left: 10px; }
   .tyk-button i + span {
-    margin-right: 10px; }
+    margin-left: 10px; }
   .tyk-button.disabled {
     cursor: not-allowed;
     opacity: 0.7; }
@@ -4736,6 +4787,13 @@ select {
     text-decoration: none; }
   .tyk-button:focus {
     outline: none; }
+  .tyk-button--white {
+    background-color: white;
+    border-color: transparent;
+    color: #000018; }
+    .tyk-button--white:hover {
+      background-color: #ececec;
+      color: #000018; }
   .tyk-button--primary {
     background-color: #368493;
     border-color: transparent;
@@ -4778,41 +4836,41 @@ select {
           background-position: 0 0;
           color: white; }
   .tyk-button--success {
-    background-color: #00D9BA;
+    background-color: #61D4BC;
     border-color: transparent;
     color: white; }
     .tyk-button--success:hover {
-      background-color: #00b399;
+      background-color: #43ccaf;
       color: white; }
     .tyk-button--success-outline {
-      border: 2px solid #00D9BA;
+      border: 2px solid #61D4BC;
       background-color: white;
-      color: #00D9BA; }
+      color: #61D4BC; }
       .tyk-button--success-outline:hover {
-        background-color: #00D9BA;
+        background-color: #61D4BC;
         color: white; }
       .tyk-button--success-outline.disabled {
-        color: #00D9BA; }
+        color: #61D4BC; }
         .tyk-button--success-outline.disabled:hover {
           background-color: white;
-          color: #00D9BA; }
+          color: #61D4BC; }
     .tyk-button--success-gradient {
-      border-image: linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA) 0 round;
-      background: transparent linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA);
+      border-image: linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC) 0 round;
+      background: transparent linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC);
       background-origin: border-box;
       background-clip: border-box;
       background-size: 200% auto;
       background-position: 0 0;
       color: white; }
       .tyk-button--success-gradient:hover, .tyk-button--success-gradient:active, .tyk-button--success-gradient:active:focus {
-        border-image: linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA) 0 round;
-        background: transparent linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA);
+        border-image: linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC) 0 round;
+        background: transparent linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC);
         background-position: 100% 0;
         background-size: 200% auto;
         background-clip: border-box; }
         .tyk-button--success-gradient:hover.disabled, .tyk-button--success-gradient:active.disabled, .tyk-button--success-gradient:active:focus.disabled {
-          border-image: linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA) 0 round;
-          background: transparent linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA);
+          border-image: linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC) 0 round;
+          background: transparent linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC);
           background-origin: border-box;
           background-clip: border-box;
           background-size: 200% auto;
@@ -5118,8 +5176,86 @@ select {
       margin-right: 5px; }
 
 .tyk-form-group.has-error > .rdt .tyk-form-control {
-  border: 2px solid #FF6C7E;
+  border: 1px solid #FF6C7E;
   border-left: 10px solid #C9234D; }
+
+.rdtPicker {
+  border: none;
+  width: 250px; }
+  .tyk-date-range-picker--no-input .rdtPicker {
+    padding: 0;
+    margin: 0; }
+  .rdtPicker table {
+    border-spacing: 0px;
+    border-collapse: initial; }
+  .rdtPicker th {
+    border-bottom: none; }
+  .rdtPicker td {
+    padding: 0;
+    line-height: 14px; }
+    .rdtPicker td.rdtDay:hover {
+      background-color: white; }
+  .rdtPicker thead tr:first-child th {
+    color: #368493;
+    cursor: pointer;
+    padding: 10px 0; }
+    .tyk-date-range-picker--no-input .rdtPicker thead tr:first-child th {
+      padding-top: 0; }
+    .rdtPicker thead tr:first-child th:hover {
+      background: transparent; }
+  .rdtPicker thead tr:last-child th {
+    border-top: 1px solid #D2D2D2;
+    padding-top: 20px;
+    padding-bottom: 6px; }
+    .rdtPicker thead tr:last-child th:first-child {
+      border-left: 1px solid #D2D2D2;
+      border-top-left-radius: 15px;
+      padding-left: 20px; }
+    .rdtPicker thead tr:last-child th:last-child {
+      border-right: 1px solid #D2D2D2;
+      border-top-right-radius: 15px;
+      padding-right: 20px; }
+  .rdtPicker tbody td:first-child {
+    border-left: 1px solid #D2D2D2;
+    padding-left: 20px; }
+  .rdtPicker tbody td:last-child {
+    border-right: 1px solid #D2D2D2;
+    padding-right: 20px; }
+  .rdtPicker tbody tr:last-child td {
+    border-bottom: 1px solid #D2D2D2;
+    padding-bottom: 20px;
+    padding-top: 6px; }
+    .rdtPicker tbody tr:last-child td:first-child {
+      border-bottom-left-radius: 15px; }
+    .rdtPicker tbody tr:last-child td:last-child {
+      border-bottom-right-radius: 15px; }
+  .rdtPicker td span {
+    border-radius: 50%;
+    padding: 3px 6px; }
+    .rdtPicker td span:hover {
+      background: #F0F0F0; }
+  .rdtPicker td.rdtToday:before {
+    content: none; }
+  .rdtPicker td.rdtDisabled {
+    color: #E1E1E1; }
+  .rdtPicker td.rdtActive {
+    background-color: white !important; }
+    .rdtPicker td.rdtActive span {
+      background-color: #368493;
+      color: white; }
+  .rdtPicker .rdtTimeToggle {
+    padding: 15px 0; }
+    .rdtPicker .rdtTimeToggle:hover {
+      background: transparent; }
+
+.tyk-date-range-picker {
+  display: flex; }
+  .tyk-date-range-picker > div:first-child {
+    margin-right: 30px; }
+    .tyk-date-range-picker > div:first-child .rdtPicker td.rdtActive span {
+      background-color: #61D4BC; }
+    .tyk-date-range-picker > div:first-child .rdtPicker thead tr:first-child th {
+      color: #61D4BC; }
 
 .tyk-dropdown {
   display: inline-block; }
@@ -5127,8 +5263,29 @@ select {
   .tyk-dropdown + .tyk-dropdown,
   .tyk-dropdown + .tyk-toggle {
     margin-left: 10px; }
+  .tyk-dropdown--block {
+    left: 20px;
+    right: 20px; }
+  .tyk-dropdown--relative {
+    left: auto;
+    right: auto; }
+  .tyk-dropdown--custom {
+    padding: 20px 25px; }
   .tyk-dropdown label {
     display: block; }
+  .tyk-dropdown__trigger {
+    position: relative; }
+    .tyk-dropdown__trigger--opened:before {
+      content: '';
+      bottom: -10px;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid white;
+      height: 0px;
+      left: 50%;
+      margin-left: -4px;
+      position: absolute;
+      width: 0px; }
   .tyk-dropdown.theme-list .tyk-button {
     background: white;
     border: 1px solid #D2D2D2;
@@ -5143,13 +5300,17 @@ select {
 .tyk-dropdown-menu {
   background: white;
   border: #D2D2D2;
-  border-radius: 5px;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.175);
+  border-radius: 18px;
+  -webkit-filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
   list-style-type: none;
   margin: 0;
-  margin-top: 3px;
+  margin-top: 10px;
+  overflow: hidden;
   padding: 0;
   z-index: 1000; }
+  .tyk-dropdown-menu .tyk-panel {
+    margin: 0; }
   .tyk-dropdown-menu.opened {
     display: flex;
     flex-direction: column;
@@ -5181,6 +5342,9 @@ select {
     margin-left: 6px; }
   .tyk-dropdown-menu > li > a:hover {
     background-color: #F0F0F0; }
+
+.tyk-dropdown--relative.opened {
+  position: relative; }
 
 .editable-list__form {
   align-items: center;
@@ -5288,6 +5452,14 @@ select {
     right: 15px;
     top: 9px; }
 
+.tyk-fixed-wrapper {
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0; }
+  .tyk-fixed-wrapper--scrolled {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); }
+
 .tyk-infinite-scroller {
   height: 100%;
   overflow: hidden;
@@ -5388,7 +5560,7 @@ select {
     color: #000018; }
   .tyk-message--success {
     background-color: #bdded3;
-    border: 1px solid #05C7B6;
+    border: 1px solid #8BBAC4;
     color: #000018; }
   .tyk-message--warning {
     background-color: #F3EFC2;
@@ -5562,11 +5734,8 @@ select {
   border: 0;
   background-color: white;
   font-family: "robotomedium";
-  left: 0;
   margin: 0;
-  padding: 30px 20px 0 265px;
-  position: fixed;
-  top: 51px;
+  padding: 30px 20px 0 20px;
   width: 100%;
   z-index: 8;
   transition: all .2s linear; }
@@ -5636,7 +5805,7 @@ select {
     background-color: #368493;
     color: white; }
   .tyk-panel--success .tyk-panel__header {
-    background-color: #00D9BA;
+    background-color: #61D4BC;
     color: white; }
   .tyk-panel--danger .tyk-panel__header {
     background-color: #E8244F;
@@ -5672,6 +5841,15 @@ select {
     top: calc(50% - 17px); }
     .tyk-panel__header .collapsable__arrow i {
       float: left; }
+
+.tyk-panel__footer {
+  align-items: center;
+  border-top: 1px solid #F0F0F0;
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px; }
+  .tyk-panel__footer > :not(:first-child) {
+    margin-left: 6px; }
 
 .tyk-select {
   background: transparent url(images/arrow_down.svg) no-repeat calc(100% - 15px) center;
@@ -5762,35 +5940,47 @@ textarea.tyk-form-control {
     margin: 0;
     padding: 0;
     position: relative; }
-  .tyk-toggle--primary .tyk-toggle__list--single .tyk-toggle__item--active {
+    .tyk-toggle__list--separated {
+      background: transparent;
+      flex-wrap: wrap; }
+  .tyk-toggle--primary .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--primary .tyk-toggle__list--separated .tyk-toggle__item--active {
     background-color: #368493;
     border-color: transparent;
     color: white; }
-    .tyk-toggle--primary .tyk-toggle__list--single .tyk-toggle__item--active:hover {
+    .tyk-toggle--primary .tyk-toggle__list--single .tyk-toggle__item--active:hover,
+    .tyk-toggle--primary .tyk-toggle__list--separated .tyk-toggle__item--active:hover {
       background-color: #368493;
       color: white; }
-  .tyk-toggle--success .tyk-toggle__list--single .tyk-toggle__item--active {
-    background-color: #00D9BA;
+  .tyk-toggle--success .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--success .tyk-toggle__list--separated .tyk-toggle__item--active {
+    background-color: #61D4BC;
     border-color: transparent;
     color: white; }
-    .tyk-toggle--success .tyk-toggle__list--single .tyk-toggle__item--active:hover {
-      background-color: #00D9BA;
+    .tyk-toggle--success .tyk-toggle__list--single .tyk-toggle__item--active:hover,
+    .tyk-toggle--success .tyk-toggle__list--separated .tyk-toggle__item--active:hover {
+      background-color: #61D4BC;
       color: white; }
-  .tyk-toggle--danger .tyk-toggle__list--single .tyk-toggle__item--active {
+  .tyk-toggle--danger .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--danger .tyk-toggle__list--separated .tyk-toggle__item--active {
     background-color: #E8244F;
     border-color: transparent;
     color: white; }
-    .tyk-toggle--danger .tyk-toggle__list--single .tyk-toggle__item--active:hover {
+    .tyk-toggle--danger .tyk-toggle__list--single .tyk-toggle__item--active:hover,
+    .tyk-toggle--danger .tyk-toggle__list--separated .tyk-toggle__item--active:hover {
       background-color: #E8244F;
       color: white; }
-  .tyk-toggle--warning .tyk-toggle__list--single .tyk-toggle__item--active {
+  .tyk-toggle--warning .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--warning .tyk-toggle__list--separated .tyk-toggle__item--active {
     background-color: #FEC789;
     border-color: transparent;
     color: #22272B; }
-    .tyk-toggle--warning .tyk-toggle__list--single .tyk-toggle__item--active:hover {
+    .tyk-toggle--warning .tyk-toggle__list--single .tyk-toggle__item--active:hover,
+    .tyk-toggle--warning .tyk-toggle__list--separated .tyk-toggle__item--active:hover {
       background-color: #FEC789;
       color: #22272B; }
-  .tyk-toggle--primary-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
+  .tyk-toggle--primary-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--primary-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
     border-image: linear-gradient(to right, #368493, #1B3E4F, #368493) 0 round;
     background: transparent linear-gradient(to right, #368493, #1B3E4F, #368493);
     background-origin: border-box;
@@ -5798,15 +5988,17 @@ textarea.tyk-form-control {
     background-size: 200% auto;
     background-position: 0 0;
     color: white; }
-  .tyk-toggle--success-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
-    border-image: linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA) 0 round;
-    background: transparent linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA);
+  .tyk-toggle--success-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--success-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
+    border-image: linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC) 0 round;
+    background: transparent linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC);
     background-origin: border-box;
     background-clip: border-box;
     background-size: 200% auto;
     background-position: 0 0;
     color: white; }
-  .tyk-toggle--danger-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
+  .tyk-toggle--danger-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--danger-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
     border-image: linear-gradient(to right, #E8244F, #C9234D, #E8244F) 0 round;
     background: transparent linear-gradient(to right, #E8244F, #C9234D, #E8244F);
     background-origin: border-box;
@@ -5814,7 +6006,8 @@ textarea.tyk-form-control {
     background-size: 200% auto;
     background-position: 0 0;
     color: white; }
-  .tyk-toggle--warning-gradient .tyk-toggle__list--single .tyk-toggle__item--active {
+  .tyk-toggle--warning-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+  .tyk-toggle--warning-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
     border-image: linear-gradient(to right, #F3EFC2, #FEC789, #F3EFC2) 0 round;
     background: transparent linear-gradient(to right, #F3EFC2, #FEC789, #F3EFC2);
     background-origin: border-box;
@@ -5824,6 +6017,7 @@ textarea.tyk-form-control {
     color: #22272B; }
   .tyk-toggle__item {
     color: white;
+    text-transform: uppercase;
     z-index: 2; }
     .tyk-toggle__item:first-child {
       border-top-left-radius: 25px;
@@ -5831,6 +6025,13 @@ textarea.tyk-form-control {
     .tyk-toggle__item:last-child {
       border-top-right-radius: 25px;
       border-bottom-right-radius: 25px; }
+    .tyk-toggle__list--separated .tyk-toggle__item {
+      background: #D2D2D2;
+      border-radius: 25px;
+      margin-bottom: 10px;
+      margin-right: 10px; }
+      .tyk-toggle__list--separated .tyk-toggle__item:last-child {
+        margin-right: 0; }
     .tyk-toggle__item input {
       display: none; }
     .tyk-toggle__item label {
@@ -5905,11 +6106,11 @@ textarea.tyk-form-control {
       background-color: #368493;
       color: white; }
   .tyk-toggle--success .tyk-toggle__notch {
-    background-color: #00D9BA;
+    background-color: #61D4BC;
     border-color: transparent;
     color: white; }
     .tyk-toggle--success .tyk-toggle__notch:hover {
-      background-color: #00D9BA;
+      background-color: #61D4BC;
       color: white; }
   .tyk-toggle--danger .tyk-toggle__notch {
     background-color: #E8244F;
@@ -5934,8 +6135,8 @@ textarea.tyk-form-control {
     background-position: 0 0;
     color: white; }
   .tyk-toggle--success-gradient .tyk-toggle__notch {
-    border-image: linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA) 0 round;
-    background: transparent linear-gradient(to right, #00D9BA, #05C7B6, #00D9BA);
+    border-image: linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC) 0 round;
+    background: transparent linear-gradient(to right, #61D4BC, #8BBAC4, #61D4BC);
     background-origin: border-box;
     background-clip: border-box;
     background-size: 200% auto;

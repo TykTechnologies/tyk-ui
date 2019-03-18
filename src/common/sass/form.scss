@@ -1,6 +1,15 @@
 @import 'variables';
 @import 'mixins';
 
+.tyk-form-section__title {
+  font-size: text-scale('base');
+  margin: 5px 0 15px 0;
+
+  &--light {
+    color: theme-color('background', 'dark');
+  }
+}
+
 .tyk-form-group {
   margin-bottom: $form-group-margin-bottom;
 
@@ -15,6 +24,45 @@
       border-color: theme-color('danger', 'dark');
       outline: none;
     }
+  }
+
+  &--inline {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+
+    label {
+      display: flex;
+      flex-basis: 30%;
+    }
+
+    input,
+    select {
+      display: flex;
+      flex-basis: 70%;
+    }
+
+    .tyk-form-control__help-block {
+      display: flex;
+      flex-basis: 70%;
+      margin-left: auto;
+    }
+  }
+
+  &--primary {
+    @include form-group-variant(
+      theme-color('primary', 'base')
+    );
+  }
+
+  &--success {
+    @include form-group-variant(
+      theme-color('success', 'base')
+    );
+  }
+
+  &--rounded-corners input {
+    border-radius: $general-border-radius;
   }
 }
 

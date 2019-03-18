@@ -144,6 +144,31 @@ export default class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
+              theme="success-gradient"
+              type="multiple"
+              separated
+            >
+              <Toggle.Item
+                label="short"
+                name="option"
+                value="option1"
+              />
+              <Toggle.Item
+                label="medium name"
+                name="option"
+                value="option2"
+              />
+              <Toggle.Item
+                label="very long long name"
+                name="option"
+                value="option3"
+              />
+            </Toggle>
+            <br />
+            <br />
+            <Toggle
+              value={activeMultiple}
+              onChange={this.toggleMultipleOnChange}
               theme="primary"
               type="multiple"
             >

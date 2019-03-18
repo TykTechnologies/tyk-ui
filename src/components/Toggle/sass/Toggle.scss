@@ -22,9 +22,15 @@
     margin: 0;
     padding: 0;
     position: relative;
+
+    &--separated {
+      background: transparent;
+      flex-wrap: wrap;
+    }
   }
 
-  &--primary &__list--single &__item--active {
+  &--primary &__list--single &__item--active,
+  &--primary &__list--separated &__item--active {
     @include button-variant(
       theme-color('primary', 'base'),
       transparent,
@@ -35,7 +41,8 @@
     )
   }
 
-  &--success &__list--single &__item--active {
+  &--success &__list--single &__item--active,
+  &--success &__list--separated &__item--active {
     @include button-variant(
       theme-color('success', 'base'),
       transparent,
@@ -46,7 +53,8 @@
     )
   }
 
-  &--danger &__list--single &__item--active {
+  &--danger &__list--single &__item--active,
+  &--danger &__list--separated &__item--active  {
     @include button-variant(
       theme-color('danger', 'base'),
       transparent,
@@ -57,7 +65,8 @@
     )
   }
 
-  &--warning &__list--single &__item--active {
+  &--warning &__list--single &__item--active,
+  &--warning &__list--separated &__item--active {
     @include button-variant(
       theme-color('warning', 'base'),
       transparent,
@@ -68,7 +77,8 @@
     )
   }
 
-  &--primary-gradient &__list--single &__item--active {
+  &--primary-gradient &__list--single &__item--active,
+  &--primary-gradient &__list--separated &__item--active {
     @include button-variant-gradient(
       theme-color('primary', 'base'),
       theme-color('primary', 'dark'),
@@ -77,7 +87,8 @@
     )
   }
 
-  &--success-gradient &__list--single &__item--active {
+  &--success-gradient &__list--single &__item--active,
+  &--success-gradient &__list--separated &__item--active {
     @include button-variant-gradient(
       theme-color('success', 'base'),
       theme-color('success', 'dark'),
@@ -86,7 +97,8 @@
     )
   }
 
-  &--danger-gradient &__list--single &__item--active {
+  &--danger-gradient &__list--single &__item--active,
+  &--danger-gradient &__list--separated &__item--active {
     @include button-variant-gradient(
       theme-color('danger', 'base'),
       theme-color('danger', 'dark'),
@@ -95,7 +107,8 @@
     )
   }
 
-  &--warning-gradient &__list--single &__item--active {
+  &--warning-gradient &__list--single &__item--active,
+  &--warning-gradient &__list--separated &__item--active {
     @include button-variant-gradient(
       theme-color('warning', 'light'),
       theme-color('warning', 'base'),
@@ -106,6 +119,7 @@
 
   &__item {
     color: white;
+    text-transform: uppercase;
     z-index: 2;
 
     &:first-child {
@@ -115,6 +129,17 @@
     &:last-child {
       border-top-right-radius: 25px;
       border-bottom-right-radius: 25px;
+    }
+
+    .tyk-toggle__list--separated & {
+      background: theme-color('background', 'dark');
+      border-radius: 25px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
 
     input {

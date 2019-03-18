@@ -59,3 +59,30 @@
     }
   }
 }
+
+@mixin form-group-variant(
+  $color,
+) {
+  color: $color;
+
+  input {
+    border: 2px solid $color;
+    color: $color;
+
+    &::placeholder {
+      color: $color;
+      opacity: 0.8;
+    }
+
+    &:-ms-input-placeholder {
+      color: $color;
+    }
+
+    &::-ms-input-placeholder {
+      color: $color;
+    }
+  }
+  .tyk-form-control__help-block {
+    color: $color;
+  }
+}
