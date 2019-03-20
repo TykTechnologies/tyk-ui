@@ -23,7 +23,6 @@
 <Input
   label="This is a demo Input"
   name="input"
-  note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
   theme="primary inline"
@@ -33,7 +32,6 @@
 <Input
   label="This is a demo Input"
   name="input"
-  note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
   theme="success inline"
@@ -42,7 +40,6 @@
 <Input
   label="This is a demo Input"
   name="input"
-  note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
   theme="primary inline rounded-corners"
@@ -51,8 +48,8 @@
 
 <Input
   label="This is a demo Input"
+  labelWidth="60%"
   name="input"
-  note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
   theme="success inline rounded-corners"

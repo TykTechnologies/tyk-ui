@@ -1,0 +1,53 @@
+.tyk-pill {
+  align-items: center;
+  border-radius: $general-border-radius;
+  display: inline-flex;
+  font-size: text-scale('sm');
+  margin-bottom: 10px;
+  padding: 6px 15px;
+
+  + .tyk-pill {
+    margin-right: 10px;
+  }
+
+  button + span {
+    margin-left: 10px;
+  }
+
+  span + button {
+    margin-left: 10px;
+  }
+
+  &:first-child {
+    margin-right: 10px;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &--default {
+    background-color: theme-color('foreground', 'light');
+    color: white;
+  }
+
+  &--primary {
+    background-color: theme-color('primary', 'base');
+    color: white;
+  }
+
+  &--success {
+    background-color: theme-color('success', 'base');
+    color: white;
+  }
+
+  &--danger {
+    background-color: theme-color('danger', 'base');
+    color: white;
+  }
+
+  &--warning {
+    background-color: theme-color('warning', 'base');
+    color: white;
+  }
+}

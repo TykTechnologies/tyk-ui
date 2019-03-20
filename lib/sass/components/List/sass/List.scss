@@ -1,0 +1,67 @@
+.tyk-list {
+  border: 1px solid theme-color('foreground', 'light');
+  border-radius: $general-border-radius;
+  font-size: text-scale('sm');
+  list-style-type: none;
+  margin: 0;
+  max-height: 191px;
+  padding: 0;
+  overflow: scroll;
+
+  &--with-inline-label {
+    display: flex;
+
+    > label {
+      margin-right: 20px;
+    }
+  }
+
+  li {
+    border-bottom: 1px solid theme-color('foreground', 'light');
+    padding: 10px 20px;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  &--default {
+    border-color: theme-color('foreground', 'light');
+  }
+
+  &--primary {
+    border-color: theme-color('primary', 'base');
+
+    li {
+      border-color: theme-color('primary', 'light');
+      color: theme-color('primary', 'base');
+    }
+  }
+
+  &--primary-light {
+    border-color: theme-color('primary', 'light');
+
+    li {
+      border-color: theme-color('primary', 'light');
+      color: theme-color('primary', 'light');
+    }
+  }
+
+  &--success {
+    border-color: theme-color('success', 'base');
+    color: theme-color('success', 'base');
+
+    li {
+      border-color: theme-color('success', 'base');
+    }
+  }
+
+  &--danger {
+    border-color: theme-color('danger', 'base');
+    color: theme-color('danger', 'base');
+
+    li {
+      border-color: theme-color('danger', 'light');
+    }
+  }
+}

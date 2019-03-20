@@ -114,6 +114,7 @@
       )
     }
   }
+
   &--warning {
     @include button-variant(
       theme-color('warning', 'base'),
@@ -182,6 +183,7 @@
       $button-border-radius
     )
   }
+
   &--md {
     @include button-size(
       $padding-y-button-md,
@@ -209,6 +211,22 @@
     &:hover {
       border-radius: 3px;
       background-color: theme-color('background', 'light');
+    }
+  }
+
+  &--fit {
+    height: auto;
+    width: auto;
+    line-height: normal;
+  }
+
+  &--no-style {
+    background: transparent;
+    border: none;
+
+    &:hover {
+      background: transparent;
+      border: none;
     }
   }
 }

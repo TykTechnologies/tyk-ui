@@ -29,22 +29,21 @@
   &--inline {
     align-items: center;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 
     label {
       display: flex;
-      flex-basis: 30%;
+      white-space: nowrap;
+      margin-right: 20px;
     }
 
     input,
     select {
       display: flex;
-      flex-basis: 70%;
     }
 
     .tyk-form-control__help-block {
       display: flex;
-      flex-basis: 70%;
       margin-left: auto;
     }
   }

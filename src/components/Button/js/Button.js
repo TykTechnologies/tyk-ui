@@ -18,6 +18,7 @@ const Button = React.forwardRef((props, ref) => {
     display,
     href,
     onClick,
+    noStyle,
     size,
     theme,
     type,
@@ -31,12 +32,14 @@ const Button = React.forwardRef((props, ref) => {
     const displayClass = display || '';
     const themeClass = theme ? `tyk-button--${theme}` : '';
     const iconOnlyClass = iconOnly ? 'tyk-button--icon-only' : '';
+    const noStyleClass = noStyle ? 'tyk-button--no-style' : '';
 
     cssClasses.push(iconOnlyClass);
     cssClasses.push(themeClass);
     cssClasses.push(sizeClass);
     cssClasses.push(disabledClass);
     cssClasses.push(displayClass);
+    cssClasses.push(noStyleClass);
 
     if (iconType) {
       cssClasses.push(`icon-${iconPosition || 'left'}`);
@@ -123,6 +126,7 @@ Button.propTypes = {
   iconPosition: PropTypes.string, // left or right
   iconOnly: PropTypes.bool,
   iconType: PropTypes.string,
+  noStyle: PropTypes.bool,
   /**
   * Callback function, called when the button si clicked
   */

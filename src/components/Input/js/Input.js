@@ -21,6 +21,7 @@ export default class Input extends Component {
       PropTypes.string,
     ]),
     label: PropTypes.string,
+    labelWidth: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
@@ -51,6 +52,28 @@ export default class Input extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
+  getLabelStyles() {
+    const { labelWidth } = this.props;
+    const styles = {};
+
+    if (labelWidth) {
+      styles.flexBasis = labelWidth;
+    }
+
+    return styles;
+  }
+
+  getNonLabelWidth() {
+    const { labelWidth } = this.props;
+    const styles = {};
+
+    if (labelWidth) {
+      styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    }
+    
+    return styles;
+  }
+
   getInputError() {
     const { error } = this.props;
 
@@ -58,6 +81,7 @@ export default class Input extends Component {
       ? (
         <p
           className="tyk-form-control__error-message"
+          style={this.getNonLabelWidth()}
         >
           { error }
         </p>
@@ -69,6 +93,7 @@ export default class Input extends Component {
     const {
       error,
       theme,
+      labelWidth,
     } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
@@ -77,6 +102,10 @@ export default class Input extends Component {
       themes.forEach((iTheme) => {
         cssClasses.push(`tyk-form-group--${iTheme}`);
       });
+    }
+
+    if (labelWidth) {
+      cssClasses.push('tyk-form-group--label-has-width');
     }
 
     if (error) {
@@ -121,6 +150,7 @@ export default class Input extends Component {
         {...rest}
         onChange={this.handleOnChange}
         value={(isfield) ? value : stateValue}
+        style={this.getNonLabelWidth()}
       />
     );
   }
@@ -162,7 +192,7 @@ export default class Input extends Component {
         <div className={this.getCssClasses()}>
           {
             label
-              ? <label htmlFor={id}>{ label }</label>
+              ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
               : null
           }
           {
@@ -172,7 +202,7 @@ export default class Input extends Component {
           }
           {
             note
-              ? <p className="tyk-form-control__help-block">{ note }</p>
+              ? <p className="tyk-form-control__help-block" style={this.getNonLabelWidth()}>{ note }</p>
               : null
           }
         </div>

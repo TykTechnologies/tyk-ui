@@ -1,7 +1,7 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 
-.editable-list__form {
+.tyk-editable-list__form {
   align-items: center;
   display: flex;
 
@@ -31,7 +31,7 @@
   }
 }
 
-.editable-list__header {
+.tyk-editable-list__header {
   border-bottom: 1px solid theme-color('background', 'dark');
   color: $text-color;
   font-size: 11px;
@@ -43,10 +43,10 @@
   }
 }
 
-.editable-list-items {
+.tyk-editable-list-items {
   overflow: hidden;
   list-style: none;
-  padding: 0 0 20px 0;
+  padding: 20px 0 0 0;
 
   .edit-mode-wrapper.table button {
     margin-top: 23px;
@@ -60,19 +60,18 @@
     cursor: not-allowed;
   }
 
-  &.editable-list-items--inline {
+  &.tyk-editable-list-items--inline {
     align-items: center;
     color: $text-color;
     display: flex;
     flex-wrap: wrap;
-    padding: 0;
   }
 
   li {
     border-top: 1px solid theme-color('background', 'dark');
     transition: all .2s linear;
 
-    &.editable-list-item--inline {
+    &.tyk-editable-list-item--inline {
       background-color: theme-color('background', 'base');
       border-radius: 25px;
       border: none;
@@ -83,12 +82,12 @@
       padding: 0 15px;
       white-space: nowrap;
 
-      .editable-list-item__text {
+      .tyk-editable-list-item__text {
         color: $text-color;
         padding: 5px 0;
       }
 
-      .editable-list-action__button.on-edit {
+      .tyk-editable-list-action__button.on-edit {
         margin-top: 0;
       }
     }
@@ -97,7 +96,7 @@
       border-top: none;
     }
 
-    .editable-list-item__text {
+    .tyk-editable-list-item__text {
       display: flex;
       padding: 10px 0;
 
@@ -114,27 +113,23 @@
       }
     }
 
-    .editable-list-items {
+    .tyk-editable-list-items {
       overflow: hidden;
       padding-bottom: 10px;
-
-      &.editable-list-item--inline {
-        padding: 0;
-      }
     }
 
-    .editable-list {
+    .tyk-editable-list {
       border-top: 5px solid theme-color('background', 'dark');
       background: theme-color('background', 'light');
       padding: 10px 15px;
     }
   }
 
-  .editable-list-item__text {
+  .tyk-editable-list-item__text {
     display: block;
   }
 
-  .editable-list-action__button {
+  .tyk-editable-list-action__button {
     border: none;
     background: transparent;
 
@@ -143,12 +138,12 @@
     }
   }
 
-  .editable-list-item-controls {
+  .tyk-editable-list-item-controls {
     flex-grow: 0;
     text-align: right;
   }
 }
 
-.editable-list-item__controls {
+.tyk-editable-list-item__controls {
   text-align: right;
 }

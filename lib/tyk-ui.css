@@ -4634,17 +4634,16 @@ h6 {
   .tyk-form-group--inline {
     align-items: center;
     display: flex;
-    flex-wrap: wrap; }
+    flex-wrap: nowrap; }
     .tyk-form-group--inline label {
       display: flex;
-      flex-basis: 30%; }
+      white-space: nowrap;
+      margin-right: 20px; }
     .tyk-form-group--inline input,
     .tyk-form-group--inline select {
-      display: flex;
-      flex-basis: 70%; }
+      display: flex; }
     .tyk-form-group--inline .tyk-form-control__help-block {
       display: flex;
-      flex-basis: 70%;
       margin-left: auto; }
   .tyk-form-group--primary {
     color: #368493; }
@@ -5062,6 +5061,16 @@ select {
     .tyk-button--icon-only:hover {
       border-radius: 3px;
       background-color: #F0F0F0; }
+  .tyk-button--fit {
+    height: auto;
+    width: auto;
+    line-height: normal; }
+  .tyk-button--no-style {
+    background: transparent;
+    border: none; }
+    .tyk-button--no-style:hover {
+      background: transparent;
+      border: none; }
 
 .tyk-button-group__wrapper {
   display: inline-block;
@@ -5283,7 +5292,7 @@ select {
       border-bottom: 8px solid white;
       height: 0px;
       left: 50%;
-      margin-left: -4px;
+      margin-left: -8px;
       position: absolute;
       width: 0px; }
   .tyk-dropdown.theme-list .tyk-button {
@@ -5346,54 +5355,53 @@ select {
 .tyk-dropdown--relative.opened {
   position: relative; }
 
-.editable-list__form {
+.tyk-editable-list__form {
   align-items: center;
   display: flex; }
-  .editable-list__form .tyk-form-group {
+  .tyk-editable-list__form .tyk-form-group {
     margin-bottom: 0; }
-  .editable-list__form--sticked {
+  .tyk-editable-list__form--sticked {
     margin-left: 0; }
-    .editable-list__form--sticked button {
+    .tyk-editable-list__form--sticked button {
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
       padding-bottom: 11px;
       padding: 10px 15px 11px 15px; }
-  .editable-list__form span.inline {
+  .tyk-editable-list__form span.inline {
     margin-top: 0; }
-  .editable-list__form > span {
+  .tyk-editable-list__form > span {
     margin-left: 15px; }
 
-.editable-list__header {
+.tyk-editable-list__header {
   border-bottom: 1px solid #D2D2D2;
   color: #000018;
   font-size: 11px;
   padding-bottom: 15px;
   text-transform: uppercase; }
-  .editable-list__header .tyk-row {
+  .tyk-editable-list__header .tyk-row {
     margin: 0 -10px 0 0; }
 
-.editable-list-items {
+.tyk-editable-list-items {
   overflow: hidden;
   list-style: none;
-  padding: 0 0 20px 0; }
-  .editable-list-items .edit-mode-wrapper.table button {
+  padding: 20px 0 0 0; }
+  .tyk-editable-list-items .edit-mode-wrapper.table button {
     margin-top: 23px; }
-  .editable-list-items .tyk-row {
+  .tyk-editable-list-items .tyk-row {
     margin: 0 -10px 0 0; }
-  .editable-list-items button[disabled] {
+  .tyk-editable-list-items button[disabled] {
     cursor: not-allowed; }
-  .editable-list-items.editable-list-items--inline {
+  .tyk-editable-list-items.tyk-editable-list-items--inline {
     align-items: center;
     color: #000018;
     display: flex;
-    flex-wrap: wrap;
-    padding: 0; }
-  .editable-list-items li {
+    flex-wrap: wrap; }
+  .tyk-editable-list-items li {
     border-top: 1px solid #D2D2D2;
     transition: all .2s linear; }
-    .editable-list-items li.editable-list-item--inline {
+    .tyk-editable-list-items li.tyk-editable-list-item--inline {
       background-color: #E1E1E1;
       border-radius: 25px;
       border: none;
@@ -5403,43 +5411,41 @@ select {
       margin-right: 15px;
       padding: 0 15px;
       white-space: nowrap; }
-      .editable-list-items li.editable-list-item--inline .editable-list-item__text {
+      .tyk-editable-list-items li.tyk-editable-list-item--inline .tyk-editable-list-item__text {
         color: #000018;
         padding: 5px 0; }
-      .editable-list-items li.editable-list-item--inline .editable-list-action__button.on-edit {
+      .tyk-editable-list-items li.tyk-editable-list-item--inline .tyk-editable-list-action__button.on-edit {
         margin-top: 0; }
-    .editable-list-items li:first-child {
+    .tyk-editable-list-items li:first-child {
       border-top: none; }
-    .editable-list-items li .editable-list-item__text {
+    .tyk-editable-list-items li .tyk-editable-list-item__text {
       display: flex;
       padding: 10px 0; }
-      .editable-list-items li .editable-list-item__text > span {
+      .tyk-editable-list-items li .tyk-editable-list-item__text > span {
         flex-grow: 1; }
-      .editable-list-items li .editable-list-item__text > div:first-child {
+      .tyk-editable-list-items li .tyk-editable-list-item__text > div:first-child {
         flex-grow: 1; }
-        .editable-list-items li .editable-list-item__text > div:first-child .error-message {
+        .tyk-editable-list-items li .tyk-editable-list-item__text > div:first-child .error-message {
           margin: 0; }
-    .editable-list-items li .editable-list-items {
+    .tyk-editable-list-items li .tyk-editable-list-items {
       overflow: hidden;
       padding-bottom: 10px; }
-      .editable-list-items li .editable-list-items.editable-list-item--inline {
-        padding: 0; }
-    .editable-list-items li .editable-list {
+    .tyk-editable-list-items li .tyk-editable-list {
       border-top: 5px solid #D2D2D2;
       background: #F0F0F0;
       padding: 10px 15px; }
-  .editable-list-items .editable-list-item__text {
+  .tyk-editable-list-items .tyk-editable-list-item__text {
     display: block; }
-  .editable-list-items .editable-list-action__button {
+  .tyk-editable-list-items .tyk-editable-list-action__button {
     border: none;
     background: transparent; }
-    .editable-list-items .editable-list-action__button.on-edit {
+    .tyk-editable-list-items .tyk-editable-list-action__button.on-edit {
       margin-left: 10px; }
-  .editable-list-items .editable-list-item-controls {
+  .tyk-editable-list-items .tyk-editable-list-item-controls {
     flex-grow: 0;
     text-align: right; }
 
-.editable-list-item__controls {
+.tyk-editable-list-item__controls {
   text-align: right; }
 
 .tyk-file-input__wrapper {
@@ -5549,6 +5555,47 @@ select {
     transform: scale(1, 2.2); }
   40% {
     transform: scale(1); } }
+
+.tyk-list {
+  border: 1px solid #5a5a68;
+  border-radius: 18px;
+  font-size: 12px;
+  list-style-type: none;
+  margin: 0;
+  max-height: 191px;
+  padding: 0;
+  overflow: scroll; }
+  .tyk-list--with-inline-label {
+    display: flex; }
+    .tyk-list--with-inline-label > label {
+      margin-right: 20px; }
+  .tyk-list li {
+    border-bottom: 1px solid #5a5a68;
+    padding: 10px 20px; }
+    .tyk-list li:last-child {
+      border: none; }
+  .tyk-list--default {
+    border-color: #5a5a68; }
+  .tyk-list--primary {
+    border-color: #368493; }
+    .tyk-list--primary li {
+      border-color: #109EAE;
+      color: #368493; }
+  .tyk-list--primary-light {
+    border-color: #109EAE; }
+    .tyk-list--primary-light li {
+      border-color: #109EAE;
+      color: #109EAE; }
+  .tyk-list--success {
+    border-color: #61D4BC;
+    color: #61D4BC; }
+    .tyk-list--success li {
+      border-color: #61D4BC; }
+  .tyk-list--danger {
+    border-color: #E8244F;
+    color: #E8244F; }
+    .tyk-list--danger li {
+      border-color: #FF6C7E; }
 
 .tyk-message {
   border-radius: 3px;
@@ -5851,9 +5898,56 @@ select {
   .tyk-panel__footer > :not(:first-child) {
     margin-left: 6px; }
 
+.tyk-pill {
+  align-items: center;
+  border-radius: 18px;
+  display: inline-flex;
+  font-size: 12px;
+  margin-bottom: 10px;
+  padding: 6px 15px; }
+  .tyk-pill + .tyk-pill {
+    margin-right: 10px; }
+  .tyk-pill button + span {
+    margin-left: 10px; }
+  .tyk-pill span + button {
+    margin-left: 10px; }
+  .tyk-pill:first-child {
+    margin-right: 10px; }
+  .tyk-pill:last-child {
+    margin-right: 0; }
+  .tyk-pill--default {
+    background-color: #5a5a68;
+    color: white; }
+  .tyk-pill--primary {
+    background-color: #368493;
+    color: white; }
+  .tyk-pill--success {
+    background-color: #61D4BC;
+    color: white; }
+  .tyk-pill--danger {
+    background-color: #E8244F;
+    color: white; }
+  .tyk-pill--warning {
+    background-color: #FEC789;
+    color: white; }
+
 .tyk-select {
   background: transparent url(images/arrow_down.svg) no-repeat calc(100% - 15px) center;
   background-size: 15px 15px; }
+
+.tyk-selectable-list {
+  margin-bottom: 20px; }
+  .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) {
+    padding: 0; }
+    .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) label {
+      margin: 0; }
+    .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) > label {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      padding: 10px 20px; }
+      .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) > label input[type="checkbox"] {
+        margin-left: auto; }
 
 .tyk-table {
   border-collapse: collapse;

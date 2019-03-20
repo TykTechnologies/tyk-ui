@@ -55,7 +55,7 @@ export default class EditableListForm extends Component {
 
   getFormCssClasses() {
     const { noLabels } = this.props;
-    const cssClasses = ['editable-list__form'];
+    const cssClasses = ['tyk-editable-list__form'];
 
     if (noLabels) {
       cssClasses.push('no-labels');
@@ -301,7 +301,7 @@ export default class EditableListForm extends Component {
         {
           error || mainError
             ? (
-              <div className="editable-list-main-error">
+              <div className="tyk-editable-list-main-error">
                 <p className="error-message">
                   { error || mainError }
                 </p>

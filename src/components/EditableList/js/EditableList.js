@@ -49,7 +49,7 @@ export default class EditableList extends Component {
     const cssClasses = [];
 
     if (displayType === 'inline') {
-      cssClasses.push('editable-list-item--inline');
+      cssClasses.push('tyk-editable-list-item--inline');
     }
 
     return cssClasses.join(' ');
@@ -90,12 +90,12 @@ export default class EditableList extends Component {
 
   getListItemsCssClass(displayType) {
     const { config } = this.props;
-    const cssClasses = ['editable-list-items'];
+    const cssClasses = ['tyk-editable-list-items'];
 
     cssClasses.push(config.displayType || 'table');
 
     if (displayType === 'inline') {
-      cssClasses.push('editable-list-items--inline');
+      cssClasses.push('tyk-editable-list-items--inline');
     }
 
     return cssClasses.join(' ');
@@ -298,7 +298,7 @@ export default class EditableList extends Component {
         ref={this.dropdownListItemRef}
       >
         <div
-          className={`editable-list-item__text ${config.displayType || 'table'}${(itemData.editMode) ? ' edit-mode-wrapper' : ''}`}
+          className={`tyk-editable-list-item__text ${config.displayType || 'table'}${(itemData.editMode) ? ' edit-mode-wrapper' : ''}`}
         >
           {
             !itemData.editMode
@@ -306,16 +306,16 @@ export default class EditableList extends Component {
                 <Fragment>
                   { this.getListItemText(itemData, index) }
                   <div
-                    className="editable-list-item__controls"
+                    className="tyk-editable-list-item__controls"
                     style={{
                       display: 'block',
                       width: (config.displayType === 'inline') ? 'auto' : `${buttonWidth + 15}px`,
                     }}
                   >
-                    <button disabled={disabled} type="button" className="editable-list-action__button" onClick={this.setItemEditMode.bind(this, index)}>
+                    <button disabled={disabled} type="button" className="tyk-editable-list-action__button" onClick={this.setItemEditMode.bind(this, index)}>
                       <Icon type="edit" />
                     </button>
-                    <button disabled={disabled} type="button" className="editable-list-action__button" onClick={this.removeListItem.bind(this, index)}>
+                    <button disabled={disabled} type="button" className="tyk-editable-list-action__button" onClick={this.removeListItem.bind(this, index)}>
                       <Icon type="trash" />
                     </button>
                   </div>
@@ -335,7 +335,7 @@ export default class EditableList extends Component {
                     validate={this.isInList.bind(this, index)}
                     validationmessage="This value is already in the list"
                   />
-                  <button type="button" className="editable-list-action__button on-edit" onClick={this.removeListItem.bind(this, index)}>
+                  <button type="button" className="tyk-editable-list-action__button on-edit" onClick={this.removeListItem.bind(this, index)}>
                     <Icon type="trash" />
                   </button>
                 </Fragment>
@@ -373,7 +373,7 @@ export default class EditableList extends Component {
           config.displayType === 'table' || !config.displayType
             ? (
               <div
-                className="editable-list__header"
+                className="tyk-editable-list__header"
                 style={{
                   paddingRight: `${buttonWidth + 15}px`,
                 }}
@@ -407,7 +407,7 @@ export default class EditableList extends Component {
     const appendToElement = document.querySelector(config.appendTo) || document.querySelector('body');
 
     return (
-      <div className="editable-list">
+      <div className="tyk-editable-list">
         {
           label
             ? <label>{ label }</label>

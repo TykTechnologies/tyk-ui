@@ -18,7 +18,7 @@ export default class Row extends PureComponent {
     if (nogutters) {
       cssClass.push('no-gutters');
     }
-
+    
     if (className) {
       cssClass = cssClass.concat(className.split(' '));
     }
@@ -32,7 +32,7 @@ export default class Row extends PureComponent {
     } = this.props;
 
     return (
-      <div className={this.getCssClasses()} {...this.props}>
+      <div {...this.props} className={this.getCssClasses()}>
         { children }
       </div>
     );
