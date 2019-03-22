@@ -39,7 +39,7 @@ $theme-colors: (
     'light': #F0F0F0,
     'dark': #D2D2D2
   )
-);
+) !default;
 
 $text-color: #000018;
 
@@ -90,7 +90,7 @@ $text-settings: (
     font-size: 32px,
     line-height: $base-line-height
   )
-);
+) !default;
 
 $spacing: (
   'xs': 6px,

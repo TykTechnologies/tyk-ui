@@ -217,6 +217,39 @@ td.rdtYear:hover {
   cursor: default;
 }
 
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: '';
+  content: none; }
+
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
 .container {
   max-width: 1240px;
   margin: 0 auto; }
@@ -5777,12 +5810,34 @@ select {
       .tyk-multiselect .tyk-multiselect-item__controls .tyk-button:last-child {
         margin-left: 0; }
 
+.tyk-navigation {
+  background-color: white;
+  padding: 0;
+  width: 100%; }
+  .tyk-navigation .tyk-navigation-item {
+    width: 100%; }
+    .tyk-navigation .tyk-navigation-item a {
+      color: #000018;
+      display: block;
+      padding: 10px 20px;
+      text-decoration: none;
+      transition: all .2s ease; }
+      .tyk-navigation .tyk-navigation-item a:hover {
+        background-color: #368493;
+        color: white; }
+      .tyk-navigation .tyk-navigation-item a.active {
+        background-color: #1B3E4F;
+        color: white; }
+
 .tyk-nav-bar {
   border: 0;
   background-color: white;
+  color: #000018;
   font-family: "robotomedium";
   margin: 0;
-  padding: 30px 20px 0 20px;
+  padding: 10px 20px 0 20px;
+  position: sticky;
+  top: 0;
   width: 100%;
   z-index: 8;
   transition: all .2s linear; }
@@ -5791,9 +5846,11 @@ select {
       padding-left: 20px; }
       .menu-opened .tyk-nav-bar {
         transform: translate(245px); } }
+  .tyk-nav-bar h1 {
+    color: #000018; }
 
 .tyk-nav-bar .tyk-nav-bar__wrapper {
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   display: flex; }
   @media screen and (max-width: 1024px) {
     .tyk-nav-bar .tyk-nav-bar__wrapper {
@@ -5948,6 +6005,14 @@ select {
       padding: 10px 20px; }
       .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) > label input[type="checkbox"] {
         margin-left: auto; }
+
+.tyk-sidebar {
+  background-color: white;
+  height: calc(100vh - 58px);
+  flex: 0 0 280px;
+  padding: 0;
+  position: sticky;
+  top: 58px; }
 
 .tyk-table {
   border-collapse: collapse;
@@ -6252,6 +6317,16 @@ textarea.tyk-form-control {
     background-size: 200% auto;
     background-position: 0 0;
     color: #22272B; }
+
+body {
+  background-color: #E1E1E1; }
+
+.tyk-main-wrapper {
+  display: flex;
+  flex-wrap: nowrap; }
+
+.tyk-main-content-wrapper {
+  flex: 1; }
 
 * {
   box-sizing: border-box; }

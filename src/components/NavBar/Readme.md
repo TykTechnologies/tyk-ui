@@ -1,0 +1,5 @@
+```js
+<NavBar
+  title="Prct"
+/>
+```

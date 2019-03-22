@@ -70,7 +70,7 @@ export default class Input extends Component {
     if (labelWidth) {
       styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
     }
-    
+
     return styles;
   }
 

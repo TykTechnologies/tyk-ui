@@ -2,10 +2,13 @@
 
 .tyk-nav-bar {
   border: 0;
-  background-color: white;
+  background-color: $nav-bar-background-color;
+  color: $nav-bar-text-color;
   font-family: $headings-font-family;
   margin: 0;
   padding: $nav-bar-padding;
+  position: sticky;
+  top: 0;
   width: 100%;
   z-index: 8;
   transition: all .2s linear;
@@ -17,10 +20,14 @@
       transform: translate($nav-bar-animate-left);
     }
   }
+
+  h1 {
+    color: $nav-bar-text-color;
+  }
 }
 
 .tyk-nav-bar .tyk-nav-bar__wrapper {
-  padding-bottom: 30px;
+  padding-bottom: $nav-bar-bottom-padding;
   display: flex;
 
   @media screen and (max-width: 1024px) {

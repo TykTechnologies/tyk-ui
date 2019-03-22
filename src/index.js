@@ -30,6 +30,7 @@ export { default as Modal } from './components/Modal';
 export { Multiselect } from './components/Multiselect';
 export { FieldMultiselect } from './components/Multiselect';
 export { default as NavBar } from './components/NavBar';
+export { default as Navigation } from './components/Navigation';
 export { Pagination } from './components/Pagination';
 export { FieldPagination } from './components/Pagination';
 export { default as Panel } from './components/Panel';

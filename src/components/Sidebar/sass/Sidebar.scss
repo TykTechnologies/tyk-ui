@@ -1,0 +1,10 @@
+@import './variables';
+
+.tyk-sidebar {
+  background-color: $sidebar-background-color;
+  height: $sidebar-height;
+  flex: 0 0 $sidebar-width;
+  padding: $sidebar-padding;
+  position: sticky;
+  top: $sidebar-top;
+}

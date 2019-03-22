@@ -18,7 +18,7 @@ export default class Row extends PureComponent {
     if (nogutters) {
       cssClass.push('no-gutters');
     }
-    
+
     if (className) {
       cssClass = cssClass.concat(className.split(' '));
     }
