@@ -8,181 +8,9 @@ import Message from '../../Message';
 
 echarts.registerMap('world', require('echarts/map/json/world.json'));
 
-const lineBarChart = {
-  defaultOpts: fromJS({
-    color: [],
-    toolbox: {
-      left: 'left',
-      itemSize: 15,
-      feature: {
-        dataZoom: {
-          yAxisIndex: false,
-          show: true,
-        },
-        restore: {},
-      },
-    },
-    dataZoom: [{
-      show: true,
-      start: 0,
-      end: 100,
-      orient: 'horizontal',
-      dataBackground: {
-        lineStyle: {
-          color: '#368493',
-        },
-        areaStyle: {
-          color: '#368493',
-        },
-      },
-      handleStyle: {
-        color: '#368493',
-      },
-      textStyle: {
-        color: '#5a5a68',
-      },
-      borderColor: 'transparent',
-      fillerColor: 'rgba(54, 132, 147, 0.1)',
-    }],
-    legend: {
-      data: [],
-      right: '1%',
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross',
-      },
-    },
-    grid: {
-      left: '1%',
-      right: '1%',
-      bottom: '50px',
-      top: '40px',
-      containLabel: true,
-    },
-    xAxis: {
-      boundaryGap: false,
-      type: 'category',
-      splitLine: {
-        show: false,
-      },
-      axisLine: {
-        show: false,
-      },
-      axisTick: {
-        show: false,
-      },
-      data: [],
-    },
-    yAxis: {
-      boundaryGap: true,
-      axisPointer: {
-        show: true,
-      },
-      splitLine: {
-        lineStyle: {
-          type: 'dotted',
-          color: '#F0F0F0',
-        },
-        show: true,
-      },
-      axisLabel: {
-        inside: false,
-        padding: [3, 6, 3, 0],
-      },
-      axisLine: {
-        show: false,
-      },
-      axisTick: {
-        show: false,
-      },
-      type: 'value',
-    },
-    textStyle: {
-      color: '#5a5a68',
-    },
-    series: [],
-    animationEasing: 'elasticOut',
-  }),
-  seriesDefault: fromJS({
-    data: [],
-    type: 'line',
-    areaStyle: {},
-    smooth: true,
-    name: '',
-  }),
-};
-
-const pieChart = {
-  defaultOpts: fromJS({
-    tooltip: {
-      trigger: 'item',
-      formatter: '{b}: {c} ({d}%)',
-    },
-    legend: {
-      orient: 'horizontal',
-      x: 'left',
-      y: 'top',
-      data: [],
-    },
-    color: [],
-    series: [],
-  }),
-  seriesDefault: fromJS({
-    type: 'pie',
-    center: [
-      '50%',
-      '55%',
-    ],
-    radius: [
-      '50%',
-      '75%',
-    ],
-    avoidLabelOverlap: false,
-    animationType: 'scale',
-    animationEasing: 'elasticOut',
-    labelLine: {
-      normal: {
-        show: true,
-        smooth: 0.2,
-        length: 6,
-        length2: 6,
-      },
-    },
-    data: [],
-  }),
-};
-
-const buildChartOptions = (type, options, series) => {
-  let finalOpts = {};
-
-  switch (type) {
-  case 'pie': {
-    finalOpts = pieChart.defaultOpts.mergeDeep(fromJS(options)).toJS();
-
-    series.forEach((entry) => {
-      finalOpts.series.push(pieChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
-    });
-
-    break;
-  }
-  default: {
-    finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(options)).toJS();
-
-    series.forEach((entry) => {
-      finalOpts.series.push(lineBarChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
-    });
-
-    break;
-  }
-  }
-  return finalOpts;
-};
-
 const Chart = (props) => {
   const {
-    dataLoaded, hasData, type, option, series, onChange,
+    areaStyleColors, dataLoaded, hasData, type, option, series, onChange,
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -190,6 +18,218 @@ const Chart = (props) => {
     if (tykChartInstance) {
       tykChartInstance.resize();
     }
+  };
+
+  const lineBarChart = {
+    defaultOpts: fromJS({
+      title: {
+        show: true,
+        text: 'Success requests',
+        left: 0,
+      },
+      color: [],
+      toolbox: {
+        right: '0',
+        orient: 'horizontal',
+        itemSize: 15,
+        showTitle: true,
+        feature: {
+          dataZoom: {
+            yAxisIndex: false,
+            show: true,
+            title: {
+              zoom: 'Drag over the area you want to zoom in',
+              back: 'Restore area zooming',
+            },
+          },
+          restore: {
+            title: 'Restore zooming to initial state',
+          },
+          magicType: {
+            type: ['line', 'bar'],
+            title: {
+              line: 'Display line chart',
+              bar: 'Display bar chart',
+            },
+          },
+        },
+      },
+      dataZoom: [{
+        show: true,
+        start: 0,
+        end: 100,
+        orient: 'horizontal',
+        dataBackground: {
+          lineStyle: {
+            color: '#368493',
+          },
+          areaStyle: {
+            color: '#368493',
+          },
+        },
+        handleStyle: {
+          color: '#368493',
+        },
+        textStyle: {
+          color: '#368493',
+        },
+        borderColor: 'transparent',
+        fillerColor: 'rgba(54, 132, 147, 0.1)',
+      }],
+      legend: {
+        show: false,
+        // data: [],
+        // right: '1%',
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+        },
+      },
+      grid: {
+        left: '1%',
+        right: '1%',
+        bottom: '50px',
+        top: '40px',
+        containLabel: true,
+      },
+      xAxis: {
+        boundaryGap: false,
+        type: 'category',
+        splitLine: {
+          show: true,
+          lineStyle: {
+            type: 'dotted',
+            color: '#F0F0F0',
+          },
+        },
+        axisLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        data: [],
+      },
+      yAxis: {
+        min: 'dataMin',
+        boundaryGap: true,
+        axisPointer: {
+          show: true,
+        },
+        splitLine: {
+          lineStyle: {
+            type: 'dotted',
+            color: '#F0F0F0',
+          },
+          show: true,
+        },
+        axisLabel: {
+          show: false,
+          // inside: false,
+          // padding: [3, 6, 3, 0],
+        },
+        axisLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        type: 'value',
+      },
+      textStyle: {
+        color: '#5a5a68',
+      },
+      series: [],
+      animationEasing: 'elasticOut',
+    }),
+    seriesDefault: fromJS({
+      data: [],
+      type: 'line',
+      areaStyle: {
+        opacity: 1,
+        color: areaStyleColors ? new echarts.graphic.LinearGradient(0, 0, 1, 1,
+          areaStyleColors.map((color, index) => ({
+            offset: index,
+            color,
+          }))) : [],
+      },
+      markPoint: {
+        data: [
+          { type: 'max' },
+          { type: 'min' },
+        ],
+      },
+      smooth: true,
+      name: '',
+    }),
+  };
+
+  const pieChart = {
+    defaultOpts: fromJS({
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c} ({d}%)',
+      },
+      legend: {
+        orient: 'horizontal',
+        x: 'left',
+        y: 'top',
+        data: [],
+      },
+      color: [],
+      series: [],
+    }),
+    seriesDefault: fromJS({
+      type: 'pie',
+      center: [
+        '50%',
+        '55%',
+      ],
+      radius: [
+        '50%',
+        '75%',
+      ],
+      avoidLabelOverlap: false,
+      animationType: 'scale',
+      animationEasing: 'elasticOut',
+      labelLine: {
+        normal: {
+          show: true,
+          smooth: 0.2,
+          length: 6,
+          length2: 6,
+        },
+      },
+      data: [],
+    }),
+  };
+
+  const buildChartOptions = (selectedType, selectedOptions, selectedSeries) => {
+    let finalOpts = {};
+
+    switch (selectedType) {
+    case 'pie': {
+      finalOpts = pieChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+
+      selectedSeries.forEach((entry) => {
+        finalOpts.series.push(pieChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+      });
+
+      break;
+    }
+    default: {
+      finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+
+      selectedSeries.forEach((entry) => {
+        finalOpts.series.push(lineBarChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+      });
+
+      break;
+    }
+    }
+    return finalOpts;
   };
 
   useEffect(() => {
@@ -243,7 +283,7 @@ const Chart = (props) => {
         dataZoomSelectActive: true,
       });
     }
-  }, [option, series, tykChartInstance, type]);
+  }, [buildChartOptions, option, series, tykChartInstance, type]);
 
   const getStyle = () => {
     const { style } = props;
@@ -296,6 +336,7 @@ const Chart = (props) => {
 };
 
 Chart.propTypes = {
+  areaStyleColors: PropTypes.instanceOf(Array),
   dataLoaded: PropTypes.bool,
   hasData: PropTypes.bool,
   option: PropTypes.instanceOf(Object),

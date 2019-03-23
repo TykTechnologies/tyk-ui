@@ -5495,7 +5495,8 @@ select {
   left: 0;
   position: fixed;
   right: 0;
-  top: 0; }
+  top: 0;
+  z-index: 8; }
   .tyk-fixed-wrapper--scrolled {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); }
 
@@ -5836,8 +5837,6 @@ select {
   font-family: "robotomedium";
   margin: 0;
   padding: 10px 20px 0 20px;
-  position: sticky;
-  top: 0;
   width: 100%;
   z-index: 8;
   transition: all .2s linear; }
