@@ -18,35 +18,4 @@
   	}
   ]}
 />
-<Chart
-  hasData={ true }
-  dataLoaded={ true }
-  type="pie"
-  option={{
-    legend: {
-      data: [
-        'Forbidden (403)',
-        'Application error (500)'
-      ]
-    },
-    color: [
-      '#c9234d',
-      '#e0839a'
-    ]
-  }}
-  series={[
-    {
-      data: [
-        {
-          value: 91,
-          name: 'Forbidden (403)'
-        },
-        {
-          value: 93,
-          name: 'Application error (500)'
-        }
-      ]
-    }
-  ]}
-/>
 ```

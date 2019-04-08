@@ -15,7 +15,7 @@ export default class Icon extends Component {
       type,
     } = this.props;
 
-    const cssClasses = [];
+    const cssClasses = ['tyk-icon'];
     const fontFamily = family || 'fa';
 
     cssClasses.push(fontFamily);
