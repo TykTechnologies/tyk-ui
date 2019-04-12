@@ -585,6 +585,12 @@ table {
   font-weight: normal;
   font-style: normal; }
 
+@font-face {
+  font-family: "tykon";
+  src: url(fonts/tykon.woff2) format("woff2"), url(fonts/tykon.woff) format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
 /*!
  * Font Awesome Free 5.5.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -4603,6 +4609,56 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
 
+.tykon:before {
+  font-family: "tykon" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.tykon-arrowdown:before {
+  content: "a"; }
+
+.tykon-arrowleft:before {
+  content: "b"; }
+
+.tykon-arrowright:before {
+  content: "c"; }
+
+.tykon-arrowup:before {
+  content: "d"; }
+
+.tykon-doublearrowdown:before {
+  content: "e"; }
+
+.tykon-filter:before {
+  content: "f"; }
+
+.tykon-graph1:before {
+  content: "g"; }
+
+.tykon-graph2:before {
+  content: "h"; }
+
+.tykon-label:before {
+  content: "i"; }
+
+.tykon-reload:before {
+  content: "j"; }
+
+.tykon-select:before {
+  content: "k"; }
+
+.tykon-target:before {
+  content: "l"; }
+
+.tykon-undo:before {
+  content: "m"; }
+
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 15px;
   font-family: "robotomedium";
@@ -5499,6 +5555,9 @@ select {
   z-index: 8; }
   .tyk-fixed-wrapper--scrolled {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); }
+
+.tyk-icon + .tyk-icon {
+  margin-left: 10px; }
 
 .tyk-infinite-scroller {
   height: 100%;

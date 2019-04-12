@@ -6,11 +6,14 @@ import ToggleItem from './ToggleItem';
 
 const ToggleItemWrapper = React.forwardRef((props, ref) => (
   <ToggleContext.Consumer>
-    {context => (
-      <ToggleItem {...props} context={context} ref={ref}>
-        {props.children}
-      </ToggleItem>
-    )}
+    {context => {
+        return (
+          <ToggleItem {...props} context={context} ref={ref}>
+            {props.children}
+          </ToggleItem>
+        )
+      }
+    }
   </ToggleContext.Consumer>
 ));
 

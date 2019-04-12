@@ -27,7 +27,7 @@ export default class FieldToggle extends Component {
 
   render() {
     const { children, ...props } = this.props;
-
+    
     return (
       <Toggle
         {...props}

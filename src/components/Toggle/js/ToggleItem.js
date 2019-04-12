@@ -29,6 +29,14 @@ export default class ToggleItem extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { context, value } = this.props;
+
+    if (prevProps.context.value !== context.value && context.value === value) {
+      context.saveSelectedRef(this.itemRef);
+    }
+  }
+
   onChange() {
     const { context, value } = this.props;
 

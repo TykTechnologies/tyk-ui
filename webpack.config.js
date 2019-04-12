@@ -117,8 +117,8 @@ module.exports = {
   },
   devtool: "source-map",
   externals: {
-    'react': 'commonjs react',
-    "react-dom": 'react-dom',
+    'react': 'react',
+    "react-dom": 'reactDOM',
     'moment': 'moment',
     'immutable': 'immutable'
   },
