@@ -66,7 +66,7 @@ class Toggle extends Component {
     const selectedOffset = selectedRef.current.getBoundingClientRect().left;
     const toggleOffset = this.toggleRef.current.getBoundingClientRect().left;
     const left = selectedOffset - toggleOffset;
-    
+
     return {
       left: `${left}px`,
       width: `${selectedWidth}px`,
