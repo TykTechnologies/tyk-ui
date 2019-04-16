@@ -1,6 +1,6 @@
 $font-path: '../fonts/' !default;
 $component-images-path: '../images' !default;
-$general-border-radius: 18px;
+$general-border-radius: 18px !default;
 
 $theme-colors: (
   'primary': (
@@ -56,10 +56,10 @@ $contrast-colors: (
     'disabled': rgba(0, 0, 0, .38),
     'hint': rgba(0, 0, 0, .12)
   ),
-);
+) !default;
 
-$base-font-size: 16px;
-$base-line-height: 1.2;
+$base-font-size: 16px !default;
+$base-line-height: 1.2 !default;
 
 $text-settings: (
   'xs': (
@@ -100,7 +100,7 @@ $spacing: (
   'lg': 18px,
   'xl': 22px,
   'xxl': 32px
-);
+) !default;
 
 $grid-gutter: 20px !default;
 $grid-max-width: 1200px + ($grid-gutter * 2) !default;
@@ -126,8 +126,8 @@ $grid-breakpoints: (
 ) !default;
 
 
-$headings-margin-bottom: 15px;
-$headings-font-family: 'robotomedium';
+$headings-margin-bottom: 15px !default;
+$headings-font-family: 'robotomedium' !default;
 $headings-font-weight: 500 !default;
 $headings-line-height: $base-line-height !default;
 

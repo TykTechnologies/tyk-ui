@@ -40,7 +40,7 @@ const SelectableList = (props) => {
             </li>
           )
           : items.map(item => (
-            <List.Item>
+            <List.Item key={item[primaryKey]}>
               <label>
                 <div className="tyk-selectable-list__item">
                   {itemTemplate ? itemTemplate(item) : item.name}
