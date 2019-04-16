@@ -4843,6 +4843,18 @@ select {
   .tyk-inline-form > .tyk-button {
     margin-left: 20px; }
 
+.tyk-accordion__item-header > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  outline: none;
+  padding: 12px 12px;
+  width: 100%; }
+  .tyk-accordion__item-header > button .tyk-icon {
+    margin-left: auto; }
+
 .tyk-button {
   background-color: transparent;
   border: none;

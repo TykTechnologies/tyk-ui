@@ -1,3 +1,4 @@
+export { default as Accordion } from './components/Accordion';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as Checkbox } from './components/Checkbox';
