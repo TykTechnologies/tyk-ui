@@ -4720,6 +4720,18 @@ h6 {
       border-left: 10px solid #C9234D;
       border-color: #C9234D;
       outline: none; }
+  .tyk-form-group.clear-button {
+    position: relative; }
+  .tyk-form-group.clear-button > button {
+    background-color: #5a5a68;
+    border-radius: 50%;
+    line-height: 19px;
+    padding: 0 5px;
+    position: absolute;
+    right: 5px;
+    top: 30px; }
+  .tyk-form-group.clear-button > .tyk-form-control {
+    display: inline-block; }
   .tyk-form-group--inline {
     align-items: center;
     display: flex;

@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import Button from '../../Button';
+
 export default class Input extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
@@ -28,6 +30,7 @@ export default class Input extends Component {
     placeholder: PropTypes.string,
     theme: PropTypes.string,
     value: PropTypes.string,
+    hasClearButton: PropTypes.bool,
   }
 
   static getAddon(content) {
@@ -50,6 +53,7 @@ export default class Input extends Component {
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.clearField = this.clearField.bind(this);
   }
 
   getLabelStyles() {
@@ -94,6 +98,7 @@ export default class Input extends Component {
       error,
       theme,
       labelWidth,
+      hasClearButton,
     } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
@@ -110,6 +115,10 @@ export default class Input extends Component {
 
     if (error) {
       cssClasses.push('has-error');
+    }
+
+    if (hasClearButton) {
+      cssClasses.push('clear-button');
     }
 
     return cssClasses.join(' ');
@@ -143,6 +152,7 @@ export default class Input extends Component {
       isfield, onChange, value, ...rest
     } = this.props;
     const { stateValue } = this.state;
+
     return (
       <input
         autoComplete="off"
@@ -163,9 +173,9 @@ export default class Input extends Component {
     });
   }
 
-  handleOnChange(e) {
+  handleOnChange(e, clearValue) {
     const { onChange, isfield } = this.props;
-    const inputValue = e.target.value;
+    const inputValue = e.target.value || clearValue;
 
     if (!isfield) {
       this.setState({
@@ -178,6 +188,10 @@ export default class Input extends Component {
     }
   }
 
+  clearField(e) {
+    this.handleOnChange(e, '');
+  }
+
   render() {
     const {
       label,
@@ -185,7 +199,10 @@ export default class Input extends Component {
       inputgroupaddonleft,
       inputgroupaddonright,
       note,
+      hasClearButton,
+      value,
     } = this.props;
+    const { stateValue } = this.state;
 
     return (
       <Fragment>
@@ -199,6 +216,16 @@ export default class Input extends Component {
             inputgroupaddonleft || inputgroupaddonright
               ? this.getInputGroupAddon()
               : this.getInputComponent()
+          }
+          {
+            hasClearButton && (value || stateValue)
+              ? (
+                <Button
+                  iconType="times"
+                  onClick={this.clearField}
+                />
+              )
+              : null
           }
           {
             note

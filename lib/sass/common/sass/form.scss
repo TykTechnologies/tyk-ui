@@ -26,6 +26,24 @@
     }
   }
 
+  &.clear-button {
+    position: relative;
+  }
+
+  &.clear-button > button {
+    background-color: #5a5a68;
+    border-radius: 50%;
+    line-height: 19px;
+    padding: 0 5px;
+    position: absolute;
+    right: 5px;
+    top: 30px;
+  }
+
+  &.clear-button > .tyk-form-control {
+    display: inline-block;
+  }
+
   &--inline {
     align-items: center;
     display: flex;

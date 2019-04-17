@@ -5,6 +5,7 @@
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
+  hasClearButton={ true }
   onChange={ (e) => { console.log(e); }}
 />
 ```
