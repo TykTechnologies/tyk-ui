@@ -30,6 +30,7 @@ const SelectableList = (props) => {
     }
   };
 
+  console.log(value, ',,,,<');
   return (
     <List {...props} theme={theme || 'default'} className="tyk-selectable-list">
       {

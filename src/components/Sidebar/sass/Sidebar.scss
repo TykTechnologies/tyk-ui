@@ -6,5 +6,6 @@
   flex: 0 0 $sidebar-width;
   padding: $sidebar-padding;
   position: sticky;
+  overflow: scroll;
   top: $sidebar-top;
 }

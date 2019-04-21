@@ -12,7 +12,7 @@
 
     a {
       color: $navigation-item-color;
-      display: block;
+      display: flex;
       padding: $navigation-item-padding-y $navigation-item-padding-x;
       text-decoration: none;
       transition: all .2s ease;

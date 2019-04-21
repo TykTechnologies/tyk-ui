@@ -5,6 +5,7 @@
 
 .tyk-panel {
   border: none;
+  border-radius: $panel-border-radius;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.10);
   margin-bottom: 20px;
   font-family: 'robotomedium';
@@ -47,9 +48,15 @@
 
 .tyk-panel__body {
   background-color: white;
+  border-radius: $panel-border-radius;
   font-family: 'robotoregular';
   padding: $padding-panel-body;
   transition: height .2s;
+
+  & ~ .tyk-panel__header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 
   &.no-padding {
     padding: 0;
@@ -57,10 +64,18 @@
 }
 
 .tyk-panel__header {
+  border-radius: $panel-border-radius;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   font-family: "robotomedium";
   overflow: hidden;
   padding: $padding-y-panel-header $padding-x-panel-header;
   position: relative;
+
+  & ~ .tyk-panel__body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 
   &h4 {
     margin: 0;

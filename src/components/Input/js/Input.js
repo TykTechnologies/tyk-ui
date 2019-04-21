@@ -94,6 +94,8 @@ export default class Input extends Component {
       error,
       theme,
       labelWidth,
+      inputgroupaddonleft,
+      inputgroupaddonright,
     } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
@@ -102,6 +104,14 @@ export default class Input extends Component {
       themes.forEach((iTheme) => {
         cssClasses.push(`tyk-form-group--${iTheme}`);
       });
+    }
+
+    if (inputgroupaddonleft) {
+      cssClasses.push('tyk-form-group--addon-left');
+    }
+
+    if (inputgroupaddonright) {
+      cssClasses.push('tyk-form-group--addon-right');
     }
 
     if (labelWidth) {

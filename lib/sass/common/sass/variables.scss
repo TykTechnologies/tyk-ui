@@ -37,11 +37,12 @@ $theme-colors: (
   'background': (
     'base': #E1E1E1,
     'light': #F0F0F0,
-    'dark': #D2D2D2
+    'dark': #D2D2D2,
+    'extra-dark': #0A0D10
   )
 ) !default;
 
-$text-color: #000018;
+$text-color: #000018 !default;
 
 $contrast-colors: (
   'dark': (
@@ -135,5 +136,6 @@ $form-group-margin-bottom: 20px !default;
 $form-control-height: 40px !default;
 $form-control-padding-left: 15px !default;
 $form-control-padding-right: 15px !default;
-$form-control-padding-top: 10px !default;
+$form-control-padding-top: 11px !default;
 $form-control-padding-bottom: 10px !default;
+$form-control-addon-background-color: #F0F0F0 !default;

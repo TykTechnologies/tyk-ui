@@ -1,5 +1,7 @@
 ```js
-<Accordion>
+<Accordion
+  className="test-accordion-class"
+>
   <Accordion.Item>
     <Accordion.Item.Header>
       Header 1

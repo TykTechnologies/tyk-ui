@@ -82,7 +82,17 @@
       color: $color;
     }
   }
+
   .tyk-form-control__help-block {
     color: $color;
+  }
+
+  &.tyk-form-group--addon-right {
+    .tyk-input-group__addon {
+      border-bottom: 2px solid $color;
+      border-right: 2px solid $color;
+      border-top: 2px solid $color;
+      color: $color;
+    }
   }
 }

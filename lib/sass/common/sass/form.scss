@@ -48,6 +48,12 @@
     }
   }
 
+  &--extra-dark {
+    @include form-group-variant(
+      theme-color('background', 'extra-dark')
+    );
+  }
+
   &--primary {
     @include form-group-variant(
       theme-color('primary', 'base')
@@ -60,8 +66,34 @@
     );
   }
 
-  &--rounded-corners input {
-    border-radius: $general-border-radius;
+  &--rounded-corners {
+    input {
+      border-radius: $general-border-radius;
+    }
+  }
+}
+
+.tyk-form-group--rounded-corners.tyk-form-group--addon-right {
+  input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+  }
+  .tyk-input-group__addon {
+    border-top-right-radius: $general-border-radius;
+    border-bottom-right-radius: $general-border-radius;
+  }
+}
+
+.tyk-form-group--rounded-corners.tyk-form-group--addon-left {
+  input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+  }
+  .tyk-input-group__addon {
+    border-top-left-radius: $general-border-radius;
+    border-bottom-left-radius: $general-border-radius;
   }
 }
 
@@ -74,9 +106,10 @@
 .tyk-input-group {
   align-items: center;
   display: flex;
+  outline: none;
 
   &__addon {
-    background-color: theme-color('background', 'light');
+    background-color: $form-control-addon-background-color;
     border: 1px solid theme-color('background', 'dark');
     height: $form-control-height;
     padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
@@ -101,6 +134,10 @@
   padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
   transition: all .2s linear;
   width: 100%;
+
+  &:focus {
+    outline: none;
+  }
 
   &[disabled] {
     background-color: theme-color('background', 'light');
