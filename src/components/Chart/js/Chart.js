@@ -10,7 +10,14 @@ echarts.registerMap('world', require('echarts/map/json/world.json'));
 
 const Chart = (props) => {
   const {
-    areaStyleColors, dataLoaded, hasData, type, option, series, onChange,
+    areaStyleColors,
+    dataLoaded,
+    hasData,
+    highlight,
+    type,
+    option,
+    series,
+    onChange,
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -238,7 +245,7 @@ const Chart = (props) => {
     return () => {
       window.removeEventListener('resize', onResize);
     };
-  }, [onResize]);
+  }, []);
 
   useEffect(() => {
     if (!tykChartInstance) {
@@ -260,6 +267,10 @@ const Chart = (props) => {
         }
       });
 
+      tykChartInstance.on('highlight', (e) => {
+        console.log(e);
+      });
+
       tykChartInstance.on('restore', (e) => {
         if (onChange) {
           onChange(e);
@@ -272,7 +283,7 @@ const Chart = (props) => {
         }
       });
     }
-  }, [onChange, tykChartInstance]);
+  }, [tykChartInstance]);
 
   useEffect(() => {
     if (tykChartInstance) {
@@ -283,7 +294,22 @@ const Chart = (props) => {
         dataZoomSelectActive: true,
       });
     }
-  }, [buildChartOptions, option, series, tykChartInstance, type]);
+  }, [option, series, tykChartInstance, type]);
+
+  useEffect(() => {
+    if (tykChartInstance && highlight) {
+      tykChartInstance.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: highlight,
+      });
+      tykChartInstance.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: highlight,
+      });
+    }
+  }, [tykChartInstance, highlight]);
 
   const getStyle = () => {
     const { style } = props;
@@ -339,153 +365,16 @@ Chart.propTypes = {
   areaStyleColors: PropTypes.instanceOf(Array),
   dataLoaded: PropTypes.bool,
   hasData: PropTypes.bool,
+  highlight: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.instanceOf(Array),
+  ]),
   option: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
   style: PropTypes.instanceOf(Object),
   type: PropTypes.string,
   series: PropTypes.instanceOf(Array),
 };
-
-// export default class Chart extends Component {
-//   static propTypes = {
-//     dataLoaded: PropTypes.bool,
-//     hasData: PropTypes.bool,
-//     option: PropTypes.instanceOf(Object),
-//     onChange: PropTypes.func,
-//     style: PropTypes.instanceOf(Object),
-//     type: PropTypes.string,
-//     series: PropTypes.instanceOf(Array),
-//   };
-//
-//   state = {
-//     tykChartInstance: null,
-//   };
-//
-//   constructor(props) {
-//     super(props);
-//
-//     this.chartWrapperRef = createRef();
-//   }
-//
-//   componentDidMount() {
-//     const {
-//       option,
-//       onChange,
-//       type,
-//       series,
-//     } = this.props;
-//
-//     this.defaultOption = {
-//       grid: {
-//         top: 60,
-//         bottom: 60,
-//         left: '5%',
-//         right: '5%',
-//       },
-//     };
-//
-//     window.addEventListener('resize', () => {
-//       const {
-//         tykChartInstance,
-//       } = this.state;
-//
-//       if (tykChartInstance) {
-//         tykChartInstance.resize();
-//       }
-//     });
-//
-//     this.setState({
-//       tykChartInstance: echarts.init(this.chartWrapperRef.current),
-//     }, () => {
-//       const {
-//         tykChartInstance,
-//       } = this.state;
-//       tykChartInstance.setOption(buildChartOptions(type, option, series));
-//       tykChartInstance.dispatchAction({
-//         type: 'takeGlobalCursor',
-//         key: 'dataZoomSelect',
-//         dataZoomSelectActive: true,
-//       });
-//
-//       tykChartInstance.on('dataZoom', (e) => {
-//         if (onChange) {
-//           onChange(e);
-//         }
-//       });
-//
-//       tykChartInstance.on('restore', (e) => {
-//         if (onChange) {
-//           onChange(e);
-//         }
-//       });
-//
-//       tykChartInstance.on('click', (e) => {
-//         if (onChange) {
-//           onChange(e);
-//         }
-//       });
-//     });
-//   }
-//
-//   componentWillUnmount() {
-//     window.removeEventListener('resize');
-//   }
-//
-//   getStyle() {
-//     const { style } = this.props;
-//     const tempStyle = style || {};
-//
-//     if (!tempStyle.height) {
-//       tempStyle.height = '300px';
-//     }
-//
-//     return tempStyle;
-//   }
-//
-//   getCssClasses() {
-//     const { dataLoaded } = this.props;
-//     const cssClasses = ['tyk-chart'];
-//
-//     if (!dataLoaded) {
-//       cssClasses.push('tyk-chart--loading-chart');
-//     }
-//
-//     return cssClasses.join(' ');
-//   }
-//
-//   hasData() {
-//     const { hasData, dataLoaded } = this.props;
-//
-//     return (dataLoaded && (hasData === false || hasData === true)) ? hasData : true;
-//   }
-//
-//   render() {
-//     const { dataLoaded } = this.props;
-//
-//     return (
-//       <div className={this.hasData() ? '' : 'tyk-chart--no-data'}>
-//         {
-//           !dataLoaded
-//             ? <Loader />
-//             : null
-//         }
-//         <div
-//           className={this.getCssClasses()}
-//           style={this.getStyle()}
-//           ref={this.chartWrapperRef}
-//         />
-//         {
-//           this.hasData()
-//             ? null
-//             : (
-//               <Message theme="info">
-//                 No data to display
-//               </Message>
-//             )
-//         }
-//       </div>
-//     );
-//   }
-// }
 
 export default Chart;

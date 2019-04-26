@@ -5,6 +5,7 @@
   areaStyleColors={[
     '#05C7B6', '#109EAE'
   ]}
+  highlight={1}
   option={{
     color: ['#05C7B6'],
   	xAxis: {
