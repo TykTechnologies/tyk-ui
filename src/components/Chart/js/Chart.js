@@ -260,27 +260,27 @@ const Chart = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (tykChartInstance) {
-      tykChartInstance.on('dataZoom', (e) => {
-        if (onChange) {
-          onChange(e);
-        }
-      });
-
-      tykChartInstance.on('restore', (e) => {
-        if (onChange) {
-          onChange(e);
-        }
-      });
-
-      tykChartInstance.on('click', (e) => {
-        if (onChange) {
-          onChange(e);
-        }
-      });
+  const eventCallBack = (e) => {
+    if (onChange) {
+      onChange(e);
     }
-  }, [tykChartInstance]);
+  };
+
+  useEffect(() => {
+    if(tykChartInstance) {
+      tykChartInstance.on('dataZoom', eventCallBack);
+      tykChartInstance.on('restore', eventCallBack);
+      tykChartInstance.on('click', eventCallBack);
+    }
+
+    return () => {
+      if(tykChartInstance) {
+        tykChartInstance.off('dataZoom', eventCallBack);
+        tykChartInstance.off('restore', eventCallBack);
+        tykChartInstance.off('click', eventCallBack);
+      }
+    };
+  }, [eventCallBack, tykChartInstance]);
 
   const prevOption = usePrevious(option);
   const prevType = usePrevious(type);
