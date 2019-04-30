@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState, useEffect, useRef,
+} from 'react';
 import PropTypes from 'prop-types';
 import echarts from 'echarts';
 import { fromJS } from 'immutable';
 
+import usePrevious from '../../../common/js/hooks';
 import Loader from '../../Loader';
 import Message from '../../Message';
 
@@ -248,16 +251,14 @@ const Chart = (props) => {
   }, []);
 
   useEffect(() => {
-    if (!tykChartInstance) {
-      setTykChartInstance(echarts.init(chartWrapperRef.current));
-    }
+    setTykChartInstance(echarts.init(chartWrapperRef.current));
 
     return () => {
       if (tykChartInstance) {
         tykChartInstance.dispose();
       }
     };
-  }, [tykChartInstance]);
+  }, []);
 
   useEffect(() => {
     if (tykChartInstance) {
@@ -265,10 +266,6 @@ const Chart = (props) => {
         if (onChange) {
           onChange(e);
         }
-      });
-
-      tykChartInstance.on('highlight', (e) => {
-        console.log(e);
       });
 
       tykChartInstance.on('restore', (e) => {
@@ -285,8 +282,18 @@ const Chart = (props) => {
     }
   }, [tykChartInstance]);
 
+  const prevOption = usePrevious(option);
+  const prevType = usePrevious(type);
+  const prevSeries = usePrevious(series);
   useEffect(() => {
-    if (tykChartInstance) {
+    if (
+      tykChartInstance
+      && (
+        !fromJS(prevOption).equals(fromJS(option))
+        || (prevType !== type)
+        || !fromJS(prevSeries).equals(fromJS(series))
+      )
+    ) {
       tykChartInstance.setOption(buildChartOptions(type, option, series));
       tykChartInstance.dispatchAction({
         type: 'takeGlobalCursor',
@@ -294,7 +301,7 @@ const Chart = (props) => {
         dataZoomSelectActive: true,
       });
     }
-  }, [option, series, tykChartInstance, type]);
+  }, [option, series, type]);
 
   useEffect(() => {
     if (tykChartInstance && highlight) {
@@ -309,7 +316,7 @@ const Chart = (props) => {
         dataIndex: highlight,
       });
     }
-  }, [tykChartInstance, highlight]);
+  }, [highlight]);
 
   const getStyle = () => {
     const { style } = props;
