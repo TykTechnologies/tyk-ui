@@ -5257,6 +5257,19 @@ select {
   overflow: hidden;
   transition: all .2s; }
 
+.collapse-horizontal-exit,
+.collapse-horizontal-exit-active,
+.collapse-horizontal-exit-done {
+  width: 0px; }
+
+.collapse-horizontal-enter,
+.collapse-horizontal-enter-active,
+.collapse-horizontal-enter-done {
+  width: 100%; }
+
+.tyk-chart__wrapper {
+  position: relative; }
+
 .tyk-combobox.disabled .tyk-form-control {
   background-color: #F0F0F0;
   cursor: not-allowed; }

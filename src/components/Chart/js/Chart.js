@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import echarts from 'echarts';
 import { fromJS } from 'immutable';
 
+import debounce from '../../../common/js/utils';
 import usePrevious from '../../../common/js/hooks';
 import Loader from '../../Loader';
 import Message from '../../Message';
@@ -21,6 +22,8 @@ const Chart = (props) => {
     option,
     series,
     onChange,
+    zoomStart,
+    zoomEnd,
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -267,17 +270,19 @@ const Chart = (props) => {
   };
 
   useEffect(() => {
-    if(tykChartInstance) {
-      tykChartInstance.on('dataZoom', eventCallBack);
-      tykChartInstance.on('restore', eventCallBack);
-      tykChartInstance.on('click', eventCallBack);
+    let debouncedMethod;
+    if (tykChartInstance) {
+      debouncedMethod = debounce(eventCallBack, 200);
+      tykChartInstance.on('dataZoom', debouncedMethod);
+      tykChartInstance.on('restore', debouncedMethod);
+      tykChartInstance.on('click', debouncedMethod);
     }
 
     return () => {
-      if(tykChartInstance) {
-        tykChartInstance.off('dataZoom', eventCallBack);
-        tykChartInstance.off('restore', eventCallBack);
-        tykChartInstance.off('click', eventCallBack);
+      if (tykChartInstance) {
+        tykChartInstance.off('dataZoom', debouncedMethod);
+        tykChartInstance.off('restore', debouncedMethod);
+        tykChartInstance.off('click', debouncedMethod);
       }
     };
   }, [eventCallBack, tykChartInstance]);
@@ -318,6 +323,17 @@ const Chart = (props) => {
     }
   }, [highlight]);
 
+
+  useEffect(() => {
+    if (tykChartInstance && zoomStart !== -1 && zoomEnd !== -1) {
+      tykChartInstance.dispatchAction({
+        type: 'dataZoom',
+        startValue: zoomStart,
+        endValue: zoomEnd,
+      });
+    }
+  }, [zoomStart, zoomEnd]);
+
   const getStyle = () => {
     const { style } = props;
     const tempStyle = style || {};
@@ -344,7 +360,7 @@ const Chart = (props) => {
   );
 
   return (
-    <div className={chartHasData() ? '' : 'tyk-chart--no-data'}>
+    <div className={`tyk-chart__wrapper${chartHasData() ? '' : 'tyk-chart--no-data'}`}>
       {
         !dataLoaded
           ? <Loader />
@@ -377,6 +393,8 @@ Chart.propTypes = {
     PropTypes.string,
     PropTypes.instanceOf(Array),
   ]),
+  zoomStart: PropTypes.number,
+  zoomEnd: PropTypes.number,
   option: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
   style: PropTypes.instanceOf(Object),

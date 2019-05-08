@@ -50,7 +50,9 @@ export default class DropdownItem extends Component {
             >
               <a href={href}>
                 {
-                  eventKey && dropdownContext.selectedItem === eventKey
+                  eventKey
+                  && dropdownContext.selectedItem === eventKey
+                  && dropdownContext.showCheckmark
                     ? <Icon type="check" />
                     : null
                 }

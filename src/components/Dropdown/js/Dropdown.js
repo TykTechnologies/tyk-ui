@@ -33,14 +33,21 @@ export default class Dropdown extends Component {
     label: PropTypes.string,
     onClose: PropTypes.func,
     onSelect: PropTypes.func,
+    open: PropTypes.bool,
+    offset: PropTypes.instanceOf(Object),
     position: PropTypes.string,
     selectedItem: PropTypes.string,
     showDropdownIcon: PropTypes.bool,
     stopButtonTextChange: PropTypes.bool,
+    showTriggerButton: PropTypes.bool,
+    showCheckmark: PropTypes.bool,
   };
 
   static defaultProps = {
     showDropdownIcon: true,
+    showTriggerButton: true,
+    showCheckmark: true,
+    open: false,
   };
 
   static isElemInRightView(el, dropdownWidth) {
@@ -65,10 +72,11 @@ export default class Dropdown extends Component {
 
     const {
       selectedItem,
+      open,
     } = this.props;
 
     this.state = {
-      opened: false,
+      opened: open,
       selectedItem: selectedItem || null,
     };
 
@@ -82,11 +90,38 @@ export default class Dropdown extends Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
-  }
 
-  componentDidUpdate() {
     if (this.dropdownListRef.current) {
       this.getStyles();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      open,
+    } = this.props;
+    const {
+      opened,
+    } = this.state;
+
+    if (this.dropdownListRef.current) {
+      this.getStyles();
+    }
+
+    if (
+      !prevProps.open
+      && open === true
+      && !opened
+    ) {
+      this.openDropdown();
+    }
+
+    if (
+      prevProps.open
+      && open === false
+      && opened
+    ) {
+      this.closeDropdown();
     }
   }
 
@@ -111,15 +146,24 @@ export default class Dropdown extends Component {
     const {
       display,
       position,
+      offset,
     } = this.props;
+
+    const dropdownEl = this.dropdownListRef.current;
+
+    if (offset) {
+      dropdownEl.style.top = `${offset.top}`;
+      dropdownEl.style.left = `${offset.left}`;
+      return;
+    }
+
     const { scrollTop } = document.documentElement;
     const el = this.dropdownRef.current;
     const elHeight = el.clientHeight;
-    const dropdownEl = this.dropdownListRef.current;
     const dropdownHeight = dropdownEl ? dropdownEl.clientHeight : 0;
     const dropdownWidth = dropdownEl ? dropdownEl.clientWidth : 0;
-    const offset = el.getBoundingClientRect();
-    const { left, top } = offset;
+    const offsetPosition = el.getBoundingClientRect();
+    const { left, top } = offsetPosition;
     let customTop = 0;
     let customLeft = left;
 
@@ -261,6 +305,8 @@ export default class Dropdown extends Component {
       children,
       label,
       showDropdownIcon,
+      showTriggerButton,
+      showCheckmark,
     } = this.props;
     const {
       selectedItem,
@@ -281,18 +327,24 @@ export default class Dropdown extends Component {
             )
             : null
         }
-        <Button
-          className={`tyk-dropdown__trigger ${(opened) ? 'tyk-dropdown__trigger--opened ' : ' '} ${btnClassName}`}
-          theme={btnTheme || 'default'}
-          onClick={this.openDropdown}
-          iconType={showDropdownIcon ? 'chevron-down' : null}
-          iconPosition="right"
-          size={btnSize || 'md'}
-          type="button"
-          ref={this.dropdownButtonRef}
-        >
-          { customBtnTitle || this.getBtnTitle() }
-        </Button>
+        {
+          showTriggerButton
+            ? (
+              <Button
+                className={`tyk-dropdown__trigger ${(opened) ? 'tyk-dropdown__trigger--opened ' : ' '} ${btnClassName}`}
+                theme={btnTheme || 'default'}
+                onClick={this.openDropdown}
+                iconType={showDropdownIcon ? 'chevron-down' : null}
+                iconPosition="right"
+                size={btnSize || 'md'}
+                type="button"
+                ref={this.dropdownButtonRef}
+              >
+                { customBtnTitle || this.getBtnTitle() }
+              </Button>
+            )
+            : null
+        }
         {
           opened
             ? ReactDOM.createPortal(
@@ -300,6 +352,7 @@ export default class Dropdown extends Component {
                 value={{
                   onSelectItem: this.onSelectItem,
                   selectedItem,
+                  showCheckmark,
                 }}
               >
                 {

@@ -1,6 +1,7 @@
 import React, { Component, createRef } from 'react';
 import { PropTypes } from 'prop-types';
 
+import debounce from '../../../common/js/utils';
 import Loader from '../../Loader';
 
 class InfiniteScroller extends Component {
@@ -22,25 +23,6 @@ class InfiniteScroller extends Component {
     hasMore: true,
   };
 
-  static debounce(func, wait, immediate) {
-    let timeout;
-    return function debouncer(...args) {
-      const context = this;
-      const later = () => {
-        timeout = null;
-        if (!immediate) {
-          func.apply(context, args);
-        }
-      };
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) {
-        func.apply(context, args);
-      }
-    };
-  }
-
   state = {
     refChildHeight: 0,
     showLoader: false,
@@ -56,18 +38,27 @@ class InfiniteScroller extends Component {
 
   componentDidMount() {
     const { initialLoad, loadMore, pageNumber } = this.props;
-    this.containerRef.current.addEventListener('scroll', InfiniteScroller.debounce(this.scrollHandler.bind(this), 200));
+    this.containerRef.current.addEventListener('scroll', debounce(this.scrollHandler.bind(this), 200));
 
     if (initialLoad && loadMore && typeof loadMore === 'function') {
       loadMore(pageNumber);
     }
   }
 
-  componentDidUpdate() {
-    const { refChild, hasMore } = this.props;
+  componentDidUpdate(prevProps) {
+    const { refChild, hasMore, pageNumber } = this.props;
     const { refChildHeight, showLoader } = this.state;
 
-    if (refChild.current.clientHeight === refChildHeight && showLoader === false && hasMore) {
+    if (prevProps.pageNumber > 0 && pageNumber === 0) {
+      this.containerRef.current.scrollTop = 0;
+    }
+
+    if (
+      refChild.current.clientHeight === refChildHeight
+      && showLoader === false
+      && hasMore
+      && this.containerRef.current.scrollTop > 0
+    ) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         showLoader: true,
