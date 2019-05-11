@@ -17,6 +17,7 @@ export default class FileInput extends Component {
     note: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    theme: PropTypes.string,
     value: PropTypes.instanceOf(Object),
   }
 
@@ -29,8 +30,15 @@ export default class FileInput extends Component {
   }
 
   getCssClasses() {
-    const { error } = this.props;
+    const { error, theme } = this.props;
     const cssClasses = ['tyk-form-group'];
+    const themes = theme ? theme.split(' ') : [];
+
+    if (themes.length) {
+      themes.forEach((iTheme) => {
+        cssClasses.push(`tyk-form-group--${iTheme}`);
+      });
+    }
 
     if (error) {
       cssClasses.push('has-error');
@@ -114,14 +122,16 @@ export default class FileInput extends Component {
               ? <label htmlFor={id}>{ label }</label>
               : null
           }
-          { this.getFileInputComponent() }
-          {
-            note
-              ? <p className="tyk-form-control__help-block">{ note }</p>
-              : null
-          }
+          <div className="tyk-form-control__wrapper">
+            { this.getFileInputComponent() }
+            {
+              note
+                ? <p className="tyk-form-control__help-block">{ note }</p>
+                : null
+            }
+          </div>
+          { this.getFileInputError() }
         </div>
-        { this.getFileInputError() }
       </Fragment>
     );
   }

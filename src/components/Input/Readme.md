@@ -42,6 +42,15 @@
   name="input"
   placeholder="Please type something"
   type="text"
+  note="Some helpful message to be displayed on this Input"
+  theme="default inline rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+<Input
+  label="This is a demo Input"
+  name="input"
+  placeholder="Please type something"
+  type="text"
   theme="primary inline rounded-corners"
   onChange={ (e) => { console.log(e); }}
 />
@@ -67,7 +76,19 @@
   type="text"
   onChange={ (e) => { console.log(e); }}
 />
+```
+```js
 
+<Input
+  error="Please fix the error"
+  label="This an Input with error"
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  theme="success inline rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
 ```
 ```js
 <Input

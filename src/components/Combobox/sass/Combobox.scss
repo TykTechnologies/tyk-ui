@@ -1,5 +1,6 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
+@import './variables';
 
 .tyk-combobox {
   &.disabled {
@@ -15,7 +16,7 @@
     height: auto;
   }
 
-  > ul {
+  > .tyk-form-control__wrapper > .tyk-form-control {
     margin: 0;
     padding: 0;
   }
@@ -29,8 +30,9 @@
   }
 
   .pill {
-    background-color: #F0F0F0;
+    background-color: $tyk-combobox-pill-background;
     border-radius: 10px;
+    color: $tyk-combobox-pill-color;
     float: left;
     margin-left: 10px;
     margin-top: 6px;
@@ -84,6 +86,10 @@
   position: absolute;
   z-index: 5;
 
+  &.tyk-form-group--rounded-corners {
+    border-radius: $general-border-radius;
+  }
+
   &--has-tags {
     max-height: 195px;
   }
@@ -107,8 +113,10 @@
       background-color: theme-color('background', 'light');
     }
 
-    &.combobox-search__container:hover {
+    &.combobox-search__container {
       background-color: white;
+      position: sticky;
+      top: 0;
     }
 
     i {

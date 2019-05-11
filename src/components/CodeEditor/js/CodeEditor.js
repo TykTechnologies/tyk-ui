@@ -26,6 +26,7 @@ export default class CodeEditor extends Component {
     note: PropTypes.string,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
+    theme: PropTypes.string,
     value: PropTypes.string,
   }
 
@@ -51,8 +52,15 @@ export default class CodeEditor extends Component {
   }
 
   getCssClasses() {
-    const { error } = this.props;
+    const { error, theme } = this.props;
     const cssClasses = ['tyk-form-group'];
+    const themes = theme ? theme.split(' ') : [];
+
+    if (themes.length) {
+      themes.forEach((iTheme) => {
+        cssClasses.push(`tyk-form-group--${iTheme}`);
+      });
+    }
 
     if (error) {
       cssClasses.push('has-error');
@@ -91,21 +99,23 @@ export default class CodeEditor extends Component {
               ? <label htmlFor={id}>{ label }</label>
               : null
           }
-          <AceEditor
-            className="tyk-form-control"
-            {...this.props}
-            onChange={this.handleOnChange}
-            onBlur={this.handleOnBlur}
-            theme="github"
-            editorProps={{ $blockScrolling: true }}
-          />
-          {
-            note
-              ? <p className="tyk-form-control__help-block">{ note }</p>
-              : null
-          }
+          <div className="tyk-form-control__wrapper">
+            <AceEditor
+              className="tyk-form-control"
+              {...this.props}
+              onChange={this.handleOnChange}
+              onBlur={this.handleOnBlur}
+              theme="github"
+              editorProps={{ $blockScrolling: true }}
+            />
+            {
+              note
+                ? <p className="tyk-form-control__help-block">{ note }</p>
+                : null
+            }
+            { this.getCodeEditorError() }
+          </div>
         </div>
-        { this.getCodeEditorError() }
       </Fragment>
     );
   }

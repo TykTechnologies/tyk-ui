@@ -3,6 +3,7 @@
 *Default theme*
 ```js
 <Button theme="primary">Push Me</Button> &ensp;
+<Button theme="primary" customButton={<span>aaa</span>}>Push Me</Button> &ensp;
 <Button theme="success">Push Me</Button> &ensp;
 <Button theme="info">Push Me</Button> &ensp;
 <Button theme="warning">Push Me</Button> &ensp;

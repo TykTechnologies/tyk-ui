@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../../Icon';
@@ -8,6 +8,7 @@ import Icon from '../../Icon';
 
 const Button = React.forwardRef((props, ref) => {
   const {
+    customButton,
     children,
     iconType,
     iconPosition,
@@ -58,44 +59,62 @@ const Button = React.forwardRef((props, ref) => {
     );
   };
 
+  const getButtonType = () => {
+    let buttonType;
+    console.log(customButton);
+    if (customButton) {
+      return (
+        <Fragment>
+          { cloneElement(customButton, {
+            className: getCssClasses(),
+            disabled,
+          })
+          }
+        </Fragment>
+      );
+    }
+
+    if (href) {
+      buttonType = (
+        <a
+          id={id}
+          className={getCssClasses()}
+          disabled={disabled}
+          onClick={onClick}
+          href={href}
+          ref={ref}
+          {...rest}
+        >
+          { getButtonIcon('left') }
+          { children }
+          { getButtonIcon('right') }
+        </a>
+      );
+    } else {
+      buttonType = (
+        // eslint-disable-next-line react/button-has-type
+        <button
+          id={id}
+          className={getCssClasses()}
+          disabled={disabled}
+          onClick={onClick}
+          type={type || 'button'}
+          ref={ref}
+          {...rest}
+        >
+          { getButtonIcon('left') }
+          { children && <span>{children}</span> }
+          { getButtonIcon('right') }
+        </button>
+      );
+    }
+
+    return buttonType;
+  };
+
 
   return (
-    <Fragment>
-      {
-        href
-          ? (
-            <a
-              id={id}
-              className={getCssClasses()}
-              disabled={disabled}
-              onClick={onClick}
-              href={href}
-              ref={ref}
-              {...rest}
-            >
-              { getButtonIcon('left') }
-              { children }
-              { getButtonIcon('right') }
-            </a>
-          )
-          : (
-            // eslint-disable-next-line react/button-has-type
-            <button
-              id={id}
-              className={getCssClasses()}
-              disabled={disabled}
-              onClick={onClick}
-              type={type}
-              ref={ref}
-              {...rest}
-            >
-              { getButtonIcon('left') }
-              { children && <span>{children}</span> }
-              { getButtonIcon('right') }
-            </button>
-          )
-      }
-    </Fragment>
+    getButtonType()
   );
 });
 
@@ -108,6 +127,11 @@ Button.propTypes = {
     PropTypes.node,
     PropTypes.element,
     PropTypes.string,
+  ]),
+  customButton: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
   ]),
   className: PropTypes.string,
   /**

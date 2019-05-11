@@ -4,16 +4,30 @@
 @import './mixins';
 
 .tyk-panel {
-  border: none;
+  background: white;
   border-radius: $panel-border-radius;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.10);
   margin-bottom: 20px;
   font-family: 'robotomedium';
 
+  &__header {
+    border-bottom: 1px solid $panel-default-border-bottom-color;
+    font-size: $panel-header-font-size;
+  }
+
   .tyk-panel {
     border: 1px solid theme-color('background', 'dark');
     box-shadow: none;
     -webkit-box-shadow: none;
+  }
+
+  &--primary {
+    .tyk-panel__header {
+      @include panel-variant(
+        white,
+        $text-color
+      );
+    }
   }
 
   &--primary {

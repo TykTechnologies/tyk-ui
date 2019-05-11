@@ -4753,6 +4753,25 @@ h6 {
       border-right: 2px solid #0A0D10;
       border-top: 2px solid #0A0D10;
       color: #0A0D10; }
+  .tyk-form-group--default {
+    color: #D2D2D2; }
+    .tyk-form-group--default input {
+      border: 2px solid #D2D2D2;
+      color: #D2D2D2; }
+      .tyk-form-group--default input::placeholder {
+        color: #D2D2D2;
+        opacity: 0.8; }
+      .tyk-form-group--default input:-ms-input-placeholder {
+        color: #D2D2D2; }
+      .tyk-form-group--default input::-ms-input-placeholder {
+        color: #D2D2D2; }
+    .tyk-form-group--default .tyk-form-control__help-block {
+      color: #D2D2D2; }
+    .tyk-form-group--default.tyk-form-group--addon-right .tyk-input-group__addon {
+      border-bottom: 2px solid #D2D2D2;
+      border-right: 2px solid #D2D2D2;
+      border-top: 2px solid #D2D2D2;
+      color: #D2D2D2; }
   .tyk-form-group--primary {
     color: #368493; }
     .tyk-form-group--primary input {
@@ -6032,26 +6051,37 @@ select {
     color: white; }
 
 .tyk-panel {
-  border: none;
+  background: white;
   border-radius: 0;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   font-family: 'robotomedium'; }
+  .tyk-panel__header {
+    border-bottom: 1px solid #E1E1E1;
+    font-size: 14px; }
   .tyk-panel .tyk-panel {
     border: 1px solid #D2D2D2;
     box-shadow: none;
     -webkit-box-shadow: none; }
   .tyk-panel--primary .tyk-panel__header {
+    background-color: white;
+    border: none;
+    color: #000018; }
+  .tyk-panel--primary .tyk-panel__header {
     background-color: #368493;
+    border: none;
     color: white; }
   .tyk-panel--success .tyk-panel__header {
     background-color: #61D4BC;
+    border: none;
     color: white; }
   .tyk-panel--danger .tyk-panel__header {
     background-color: #E8244F;
+    border: none;
     color: white; }
   .tyk-panel--warning .tyk-panel__header {
     background-color: #FEC789;
+    border: none;
     color: white; }
 
 .tyk-panel__body {

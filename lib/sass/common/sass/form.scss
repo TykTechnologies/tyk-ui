@@ -54,6 +54,12 @@
     );
   }
 
+  &--default {
+    @include form-group-variant(
+      theme-color('background', 'dark')
+    );
+  }
+
   &--primary {
     @include form-group-variant(
       theme-color('primary', 'base')

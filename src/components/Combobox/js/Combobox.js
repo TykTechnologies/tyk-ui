@@ -23,6 +23,7 @@ export default class Combobox extends Component {
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     tags: PropTypes.bool,
+    theme: PropTypes.string,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.instanceOf(Object),
@@ -192,7 +193,8 @@ export default class Combobox extends Component {
 
   getComboboxListCssClass() {
     const { opened } = this.state;
-    const { tags } = this.props;
+    const { tags, theme } = this.props;
+    const themes = theme ? theme.split(' ') : [];
 
     const cssClasses = ['tyk-combobox__list'];
 
@@ -204,15 +206,28 @@ export default class Combobox extends Component {
       cssClasses.push('tyk-combobox__list--has-tags');
     }
 
+    if (themes.length) {
+      themes.forEach((iTheme) => {
+        cssClasses.push(`tyk-form-group--${iTheme}`);
+      });
+    }
+
     return cssClasses.join(' ');
   }
 
   getCssClasses() {
-    const { error, disabled } = this.props;
+    const { error, disabled, theme } = this.props;
     const cssClasses = ['tyk-form-group', 'tyk-combobox'];
+    const themes = theme ? theme.split(' ') : [];
 
     if (error) {
       cssClasses.push('has-error');
+    }
+
+    if (themes.length) {
+      themes.forEach((iTheme) => {
+        cssClasses.push(`tyk-form-group--${iTheme}`);
+      });
     }
 
     if (disabled) {
@@ -239,7 +254,7 @@ export default class Combobox extends Component {
   getStyles() {
     const { scrollTop } = document.documentElement;
     const el = this.comboboxRef.current;
-    const elHeight = el.clientHeight;
+    const elHeight = el.offsetHeight;
     const elWidth = el.offsetWidth;
 
     const offset = el.getBoundingClientRect();
@@ -530,80 +545,82 @@ export default class Combobox extends Component {
               ? <label htmlFor={id}>{ label }</label>
               : null
           }
-          <ul
-            className={`tyk-form-control${(tags) ? ' tyk-form-control--with-tags' : ''}`}
-            onClick={this.focusInput}
-            onKeyDown={() => {}}
-            ref={this.comboboxRef}
-          >
-            {
-              tags
-                ? (
-                  <Fragment>
-                    {
-                      stateSelectedValues.map((value, index) => (
-                        <li className="pill" key={value.id}>
-                          <button type="button" onClick={this.handlePillRemoveClick.bind(this, index)}>
-                            <Icon type="times" />
-                          </button>
-                          <span>{ value.name }</span>
-                        </li>
-                      ))
-                    }
-                    <li
-                      className="tyk-combobox__search-box"
-                      style={{
-                        width: (!stateSelectedValues.length) ? '100%' : 'auto',
-                      }}
-                    >
-                      <input
-                        className="tyk-form-control"
-                        disabled={disabled}
-                        onKeyPress={(e) => {
-                          if (e.key === 'Enter') {
-                            e.preventDefault();
-                          }
-                        }}
-                        onKeyUp={this.onKeyUp}
-                        onKeyDown={this.handleItemsNavigation}
-                        placeholder={(!stateSelectedValues.length) ? placeholder : ''}
-                        ref={this.inputRef}
+          <div className="tyk-form-control__wrapper">
+            <ul
+              className={`tyk-form-control${(tags) ? ' tyk-form-control--with-tags' : ''}`}
+              onClick={this.focusInput}
+              onKeyDown={() => {}}
+              ref={this.comboboxRef}
+            >
+              {
+                tags
+                  ? (
+                    <Fragment>
+                      {
+                        stateSelectedValues.map((value, index) => (
+                          <li className="pill" key={value.id}>
+                            <button type="button" onClick={this.handlePillRemoveClick.bind(this, index)}>
+                              <Icon type="times" />
+                            </button>
+                            <span>{ value.name }</span>
+                          </li>
+                        ))
+                      }
+                      <li
+                        className="tyk-combobox__search-box"
                         style={{
-                          width: (!stateSelectedValues.length) ? '100%' : `${width}px`,
-                        }}
-                      />
-                      <span
-                        ref={this.textRef}
-                        style={{
-                          visbility: 'hidden',
-                          position: 'absolute',
-                          top: '-9999px',
+                          width: (!stateSelectedValues.length) ? '100%' : 'auto',
                         }}
                       >
-                        { searchText }
-                      </span>
+                        <input
+                          className="tyk-form-control"
+                          disabled={disabled}
+                          onKeyPress={(e) => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                            }
+                          }}
+                          onKeyUp={this.onKeyUp}
+                          onKeyDown={this.handleItemsNavigation}
+                          placeholder={(!stateSelectedValues.length) ? placeholder : ''}
+                          ref={this.inputRef}
+                          style={{
+                            width: (!stateSelectedValues.length) ? '100%' : `${width}px`,
+                          }}
+                        />
+                        <span
+                          ref={this.textRef}
+                          style={{
+                            visbility: 'hidden',
+                            position: 'absolute',
+                            top: '-9999px',
+                          }}
+                        >
+                          { searchText }
+                        </span>
+                      </li>
+                    </Fragment>
+                  )
+                  : (
+                    <li
+                      className="tyk-combobox__placeholder"
+                      onClick={this.handleComboboxDropdownClick}
+                      onKeyDown={() => {}}
+                    >
+                      { this.getComboboxDisplayData() }
+                      <Icon type="arrow-down" />
                     </li>
-                  </Fragment>
-                )
-                : (
-                  <li
-                    className="tyk-combobox__placeholder"
-                    onClick={this.handleComboboxDropdownClick}
-                    onKeyDown={() => {}}
-                  >
-                    { this.getComboboxDisplayData() }
-                    <Icon type="arrow-down" />
-                  </li>
-                )
+                  )
+              }
+            </ul>
+            {
+              note
+                ? <p className="tyk-form-control__help-block">{ note }</p>
+                : null
             }
-          </ul>
-          {
-            note
-              ? <p className="tyk-form-control__help-block">{ note }</p>
-              : null
-          }
+            { this.getInputError() }
+          </div>
         </div>
-        { this.getInputError() }
         {
           opened && filteredValues.length
             ? ReactDOM.createPortal(

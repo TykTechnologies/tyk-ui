@@ -17,6 +17,7 @@ export default class Select extends Component {
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
+    theme: PropTypes.string,
     value: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,
@@ -84,8 +85,15 @@ export default class Select extends Component {
   }
 
   getCssClasses() {
-    const { error } = this.props;
+    const { error, theme } = this.props;
     const cssClasses = ['tyk-form-group'];
+    const themes = theme ? theme.split(' ') : [];
+
+    if (themes.length) {
+      themes.forEach((iTheme) => {
+        cssClasses.push(`tyk-form-group--${iTheme}`);
+      });
+    }
 
     if (error) {
       cssClasses.push('has-error');
@@ -147,16 +155,18 @@ export default class Select extends Component {
               ? <label htmlFor={id}>{ label }</label>
               : null
           }
-          {
-            this.getSelectComponent()
-          }
-          {
-            note
-              ? <p className="tyk-form-control__help-block">{ note }</p>
-              : null
-          }
+          <div className="tyk-form-control__wrapper">
+            {
+              this.getSelectComponent()
+            }
+            {
+              note
+                ? <p className="tyk-form-control__help-block">{ note }</p>
+                : null
+            }
+            { this.getSelectError() }
+          </div>
         </div>
-        { this.getSelectError() }
       </Fragment>
     );
   }

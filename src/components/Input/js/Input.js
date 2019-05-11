@@ -205,18 +205,20 @@ export default class Input extends Component {
               ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
               : null
           }
-          {
-            inputgroupaddonleft || inputgroupaddonright
-              ? this.getInputGroupAddon()
-              : this.getInputComponent()
-          }
-          {
-            note
-              ? <p className="tyk-form-control__help-block" style={this.getNonLabelWidth()}>{ note }</p>
-              : null
-          }
+          <div className="tyk-form-control__wrapper">
+            {
+              inputgroupaddonleft || inputgroupaddonright
+                ? this.getInputGroupAddon()
+                : this.getInputComponent()
+            }
+            {
+              note
+                ? <p className="tyk-form-control__help-block" style={this.getNonLabelWidth()}>{ note }</p>
+                : null
+            }
+            { this.getInputError() }
+          </div>
         </div>
-        { this.getInputError() }
       </Fragment>
     );
   }

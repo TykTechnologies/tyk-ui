@@ -11,12 +11,20 @@ export default class Textarea extends Component {
     note: PropTypes.string,
     onChange: PropTypes.func,
     id: PropTypes.string,
+    theme: PropTypes.string,
     value: PropTypes.string,
   };
 
   getCssClasses() {
-    const { error } = this.props;
+    const { error, theme } = this.props;
     const cssClasses = ['tyk-form-group'];
+    const themes = theme ? theme.split(' ') : [];
+
+    if (themes.length) {
+      themes.forEach((iTheme) => {
+        cssClasses.push(`tyk-form-group--${iTheme}`);
+      });
+    }
 
     if (error) {
       cssClasses.push('has-error');
@@ -57,20 +65,22 @@ export default class Textarea extends Component {
               ? <label htmlFor={id}>{label}</label>
               : null
           }
-          <textarea
-            className="tyk-form-control"
-            {...rest}
-            {...input}
-          >
-            { value }
-          </textarea>
-          {
-            note
-              ? <p className="tyk-form-control__help-block">{ note }</p>
-              : null
-          }
+          <div className="tyk-form-control__wrapper">
+            <textarea
+              className="tyk-form-control"
+              {...rest}
+              {...input}
+            >
+              { value }
+            </textarea>
+            {
+              note
+                ? <p className="tyk-form-control__help-block">{ note }</p>
+                : null
+            }
+            {this.getTextareaError()}
+          </div>
         </div>
-        {this.getTextareaError()}
       </Fragment>
     );
   }
