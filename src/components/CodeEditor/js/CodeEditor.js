@@ -21,6 +21,7 @@ export default class CodeEditor extends Component {
       PropTypes.bool,
     ]),
     label: PropTypes.string,
+    labelWidth: PropTypes.string,
     mode: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
@@ -52,7 +53,7 @@ export default class CodeEditor extends Component {
   }
 
   getCssClasses() {
-    const { error, theme } = this.props;
+    const { error, theme, labelWidth } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
@@ -62,11 +63,37 @@ export default class CodeEditor extends Component {
       });
     }
 
+    if (labelWidth) {
+      cssClasses.push('tyk-form-group--label-has-width');
+    }
+
     if (error) {
       cssClasses.push('has-error');
     }
 
     return cssClasses.join(' ');
+  }
+
+  getLabelStyles() {
+    const { labelWidth } = this.props;
+    const styles = {};
+
+    if (labelWidth) {
+      styles.flexBasis = labelWidth;
+    }
+
+    return styles;
+  }
+
+  getNonLabelWidth() {
+    const { labelWidth } = this.props;
+    const styles = {};
+
+    if (labelWidth) {
+      styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    }
+
+    return styles;
   }
 
   handleOnChange(value) {
@@ -96,10 +123,10 @@ export default class CodeEditor extends Component {
         <div className={this.getCssClasses()}>
           {
             label
-              ? <label htmlFor={id}>{ label }</label>
+              ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
               : null
           }
-          <div className="tyk-form-control__wrapper">
+          <div className="tyk-form-control__wrapper" style={this.getNonLabelWidth()}>
             <AceEditor
               className="tyk-form-control"
               {...this.props}

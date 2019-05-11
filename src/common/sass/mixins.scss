@@ -54,7 +54,7 @@
       max-width: percentage($i / $grid-columns);
     }
 
-    .tyk-col--#{$name}-offset-#{$i} {
+    .tyk-col--offset-#{$name}-#{$i} {
       margin-left: percentage($i / $grid-columns);
     }
   }
@@ -65,7 +65,7 @@
 ) {
   color: $text-color;
 
-  .tyk-form-control {
+  > .tyk-form-control__wrapper > .tyk-form-control {
     border: 2px solid $color;
     color: $text-color;
 

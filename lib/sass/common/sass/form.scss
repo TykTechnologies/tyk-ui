@@ -1,5 +1,5 @@
-@import 'variables';
 @import 'mixins';
+@import 'variables';
 
 .tyk-form-section__title {
   font-size: text-scale('base');
@@ -13,7 +13,7 @@
 .tyk-form-group {
   margin-bottom: $form-group-margin-bottom;
 
-  &.has-error > .tyk-form-control,
+  &.has-error > .tyk-form-control__wrapper > .tyk-form-control,
   &.has-error .tyk-file-input__wrapper  > .tyk-form-control {
     border: 2px solid theme-color('danger', 'light');
     border-left: 10px solid theme-color('danger', 'dark');
@@ -27,14 +27,19 @@
   }
 
   &--inline {
-    align-items: center;
+    align-items: stretch;
     display: flex;
     flex-wrap: nowrap;
+
+    .tyk-form-control__wrapper {
+      flex: 1;
+    }
 
     label {
       display: flex;
       white-space: nowrap;
       margin-right: 20px;
+      margin-top: 14px;
     }
 
     input,
@@ -56,24 +61,28 @@
 
   &--default {
     @include form-group-variant(
-      theme-color('background', 'dark')
+      $form-default-color
     );
   }
 
   &--primary {
     @include form-group-variant(
-      theme-color('primary', 'base')
+      $form-primary-color
     );
   }
 
   &--success {
     @include form-group-variant(
-      theme-color('success', 'base')
+      $form-success-color
     );
   }
 
   &--rounded-corners {
-    input {
+    &.has-error > .tyk-form-control__wrapper > .tyk-form-control {
+      border-left: 2px solid theme-color('danger', 'light');
+    }
+
+    .tyk-form-control {
       border-radius: $general-border-radius;
     }
   }
@@ -105,7 +114,7 @@
 
 .tyk-form-control__error-message {
   color: theme-color('danger', 'dark');
-  margin-top: -15px;
+  margin-top: 5px;
   margin-bottom: 20px;
 }
 

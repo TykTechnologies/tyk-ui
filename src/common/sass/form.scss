@@ -1,5 +1,5 @@
-@import 'variables';
 @import 'mixins';
+@import 'variables';
 
 .tyk-form-section__title {
   font-size: text-scale('base');
@@ -61,19 +61,19 @@
 
   &--default {
     @include form-group-variant(
-      theme-color('background', 'dark')
+      $form-default-color
     );
   }
 
   &--primary {
     @include form-group-variant(
-      theme-color('primary', 'base')
+      $form-primary-color
     );
   }
 
   &--success {
     @include form-group-variant(
-      theme-color('success', 'base')
+      $form-success-color
     );
   }
 

@@ -1,10 +1,11 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
+@import './variables';
 
 .tyk-combobox {
   &.disabled {
     .tyk-form-control {
-      background-color: theme-color('background', 'light');
+      background-color: $form-default-color;
       cursor: not-allowed;
     }
   }
@@ -15,7 +16,7 @@
     height: auto;
   }
 
-  > ul {
+  > .tyk-form-control__wrapper > .tyk-form-control {
     margin: 0;
     padding: 0;
   }
@@ -29,8 +30,9 @@
   }
 
   .pill {
-    background-color: #F0F0F0;
+    background-color: $tyk-combobox-pill-background;
     border-radius: 10px;
+    color: $tyk-combobox-pill-color;
     float: left;
     margin-left: 10px;
     margin-top: 6px;
@@ -74,7 +76,7 @@
 
 .tyk-combobox__list {
   background-color: white;
-  border: 1px solid theme-color('background', 'dark');
+  border: 1px solid $form-default-color;
   display: none;
   list-style-type: none;
   max-height: 255px;
@@ -83,6 +85,10 @@
   padding: 0;
   position: absolute;
   z-index: 5;
+
+  &.tyk-form-group--rounded-corners {
+    border-radius: $general-border-radius;
+  }
 
   &--has-tags {
     max-height: 195px;
@@ -93,7 +99,7 @@
   }
 
   li {
-    border-top: 1px solid theme-color('background', 'light');
+    border-top: 1px solid $form-default-color;
     cursor: pointer;
     padding: 10px 15px;
     transition: all .2s;
@@ -102,13 +108,19 @@
       border-top: none;
     }
 
-    &:hover,
-    &.active {
-      background-color: theme-color('background', 'light');
+    .tyk-form-control {
+      border-color: $form-default-color;
     }
 
-    &.combobox-search__container:hover {
+    &:hover,
+    &.active {
+      background-color: $form-default-color;
+    }
+
+    &.combobox-search__container {
       background-color: white;
+      position: sticky;
+      top: 0;
     }
 
     i {

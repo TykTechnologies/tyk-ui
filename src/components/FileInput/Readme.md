@@ -20,6 +20,18 @@
 />
 ```
 ```js
+<FileInput
+  accept=".pem"
+  label="This is a demo FileInput"
+  labelWidth="50%"
+  name="input"
+  note="Some helpful message to be displayed on this FileInput"
+  placeholder="Please type something"
+  theme="default inline rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
 
 <FileInput
   accept=".jpg"

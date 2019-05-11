@@ -54,6 +54,29 @@
     { id: 'apiseven', name: 'API seven'},
     { id: 'apieight', name: 'API eight'}
   ]}
+  label="Select"
+  labelWidth="50%"
+  name="select"
+  onChange={ (e) => {
+    console.log(e);
+  }}
+  theme="default inline rounded-corners"
+  placeholder="Please select a value"
+/>
+```
+```js
+<Select
+  options={[
+    { id: '', name: "None" },
+    { id: 'apione', name: 'API one'},
+    { id: 'apitwo', name: 'API two'},
+    { id: 'apithree', name: 'API three'},
+    { id: 'apifour', name: 'API four'},
+    { id: 'apifive', name: 'API five'},
+    { id: 'apisix', name: 'API six'},
+    { id: 'apiseven', name: 'API seven'},
+    { id: 'apieight', name: 'API eight'}
+  ]}
   label="Select with note"
   name="select"
   note="A note about this special select"

@@ -22,6 +22,19 @@
 />
 ```
 ```js
+<Textarea
+  label="This is a demo Textarea"
+  labelWidth="50%"
+  name="input"
+  note="Some helpful message to be displayed on this Textarea"
+  placeholder="Please type something"
+  type="text"
+  rows="10"
+  theme="default inline rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
 
 <Textarea
   error="Please fix the error"

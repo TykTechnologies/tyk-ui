@@ -81,7 +81,6 @@ export default class Input extends Component {
       ? (
         <p
           className="tyk-form-control__error-message"
-          style={this.getNonLabelWidth()}
         >
           { error }
         </p>
@@ -160,7 +159,6 @@ export default class Input extends Component {
         {...rest}
         onChange={this.handleOnChange}
         value={(isfield) ? value : stateValue}
-        style={this.getNonLabelWidth()}
       />
     );
   }
@@ -205,7 +203,10 @@ export default class Input extends Component {
               ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
               : null
           }
-          <div className="tyk-form-control__wrapper">
+          <div
+            className="tyk-form-control__wrapper"
+            style={this.getNonLabelWidth()}
+          >
             {
               inputgroupaddonleft || inputgroupaddonright
                 ? this.getInputGroupAddon()
@@ -213,7 +214,7 @@ export default class Input extends Component {
             }
             {
               note
-                ? <p className="tyk-form-control__help-block" style={this.getNonLabelWidth()}>{ note }</p>
+                ? <p className="tyk-form-control__help-block">{ note }</p>
                 : null
             }
             { this.getInputError() }

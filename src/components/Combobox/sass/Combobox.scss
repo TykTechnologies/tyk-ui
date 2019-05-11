@@ -5,7 +5,7 @@
 .tyk-combobox {
   &.disabled {
     .tyk-form-control {
-      background-color: theme-color('background', 'light');
+      background-color: $form-default-color;
       cursor: not-allowed;
     }
   }
@@ -76,7 +76,7 @@
 
 .tyk-combobox__list {
   background-color: white;
-  border: 1px solid theme-color('background', 'dark');
+  border: 1px solid $form-default-color;
   display: none;
   list-style-type: none;
   max-height: 255px;
@@ -99,7 +99,7 @@
   }
 
   li {
-    border-top: 1px solid theme-color('background', 'light');
+    border-top: 1px solid $form-default-color;
     cursor: pointer;
     padding: 10px 15px;
     transition: all .2s;
@@ -108,9 +108,13 @@
       border-top: none;
     }
 
+    .tyk-form-control {
+      border-color: $form-default-color;
+    }
+
     &:hover,
     &.active {
-      background-color: theme-color('background', 'light');
+      background-color: $form-default-color;
     }
 
     &.combobox-search__container {

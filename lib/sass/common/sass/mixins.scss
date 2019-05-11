@@ -54,7 +54,7 @@
       max-width: percentage($i / $grid-columns);
     }
 
-    .tyk-col--#{$name}-offset-#{$i} {
+    .tyk-col--offset-#{$name}-#{$i} {
       margin-left: percentage($i / $grid-columns);
     }
   }
@@ -63,28 +63,27 @@
 @mixin form-group-variant(
   $color,
 ) {
-  color: $color;
+  color: $text-color;
 
-  input {
+  > .tyk-form-control__wrapper > .tyk-form-control {
     border: 2px solid $color;
-    color: $color;
+    color: $text-color;
 
     &::placeholder {
-      color: $color;
       opacity: 0.8;
     }
 
     &:-ms-input-placeholder {
-      color: $color;
+      opacity: 0.8;
     }
 
     &::-ms-input-placeholder {
-      color: $color;
+      opacity: 0.8;
     }
   }
 
   .tyk-form-control__help-block {
-    color: $color;
+    color: $text-color;
   }
 
   &.tyk-form-group--addon-right {

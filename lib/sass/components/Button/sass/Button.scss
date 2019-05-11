@@ -62,114 +62,114 @@
 
   &--primary {
     @include button-variant(
-      theme-color('primary', 'base')
+      $button-primary-color
     )
 
     &-outline {
       @include button-variant-outline(
-        theme-color('primary', 'base')
+        $button-primary-color
       )
     }
 
     &-gradient {
       @include button-variant-gradient(
-        theme-color('primary', 'base'),
-        theme-color('primary', 'dark')
+        $button-primary-gradient-start-color,
+        $button-primary-gradient-end-color
       )
     }
   }
   &--success {
     @include button-variant(
-      theme-color('success', 'base')
+      $button-success-color
     )
 
     &-outline {
       @include button-variant-outline(
-        theme-color('success', 'base')
+        $button-success-color
       )
     }
 
     &-gradient {
       @include button-variant-gradient(
-        theme-color('success', 'base'),
-        theme-color('success', 'dark')
+        $button-success-gradient-start-color,
+        $button-success-gradient-end-color
       )
     }
   }
   &--danger {
     @include button-variant(
-      theme-color('danger', 'base')
+      $button-danger-color
     )
 
     &-outline {
       @include button-variant-outline(
-        theme-color('danger', 'base')
+        $button-danger-color
       )
     }
 
     &-gradient {
       @include button-variant-gradient(
-        theme-color('danger', 'base'),
-        theme-color('danger', 'dark')
+        $button-danger-gradient-start-color,
+        $button-danger-gradient-end-color
       )
     }
   }
 
   &--warning {
     @include button-variant(
-      theme-color('warning', 'base'),
+      $button-warning-color,
       transparent,
-      theme-color('foreground', 'base-dark')
+      $button-warning-font-color
     )
 
     &-outline {
       @include button-variant-outline(
-        theme-color('warning', 'base')
+        $button-warning-color
       )
     }
 
     &-gradient {
       @include button-variant-gradient(
-        theme-color('warning', 'light'),
-        theme-color('warning', 'base'),
-        theme-color('foreground', 'base-dark')
+        $button-warning-gradient-start-color,
+        $button-warning-gradient-end-color,
+        $button-warning-font-color
       )
     }
   }
   &--info {
     @include button-variant(
-      theme-color('info', 'base')
+      $button-info-color
     )
 
     &-outline {
       @include button-variant-outline(
-        theme-color('info', 'base')
+        $button-info-color
       )
     }
 
     &-gradient {
       @include button-variant-gradient(
-        theme-color('info', 'light'),
-        theme-color('info', 'base'),
-        theme-color('foreground', 'base-dark')
+        $button-info-gradient-start-color,
+        $button-info-gradient-end-color,
+        $button-info-font-color
       )
     }
   }
   &--default {
     @include button-variant(
-      theme-color('foreground', 'light')
+      $button-default-color
     )
 
     &-outline {
       @include button-variant-outline(
-        theme-color('foreground', 'light')
+        $button-default-color
       )
     }
 
     &-gradient {
       @include button-variant-gradient(
-        theme-color('foreground', 'base'),
-        theme-color('foreground', 'base-dark')
+        $button-default-gradient-start-color,
+        $button-default-gradient-end-color
       )
     }
   }

@@ -21,7 +21,7 @@ export default class Column extends PureComponent {
     const colOffsets = offset ? offset.split(' ') : [];
 
     let cssClasses = colSize.map(cSize => `tyk-col--${cSize}`);
-    const offsets = colOffsets.map(cOffset => `tyk-col--${cOffset}`);
+    const offsets = colOffsets.map(cOffset => `tyk-col--offset-${cOffset}`);
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));

@@ -18,6 +18,7 @@ export default class Combobox extends Component {
     error: PropTypes.string,
     id: PropTypes.string,
     label: PropTypes.string,
+    labelWidth: PropTypes.string,
     multiple: PropTypes.bool,
     note: PropTypes.string,
     onChange: PropTypes.func,
@@ -147,6 +148,28 @@ export default class Combobox extends Component {
     this.setState(previousState => Object.assign({}, previousState, tempState));
   }
 
+  getLabelStyles() {
+    const { labelWidth } = this.props;
+    const styles = {};
+
+    if (labelWidth) {
+      styles.flexBasis = labelWidth;
+    }
+
+    return styles;
+  }
+
+  getNonLabelWidth() {
+    const { labelWidth } = this.props;
+    const styles = {};
+
+    if (labelWidth) {
+      styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    }
+
+    return styles;
+  }
+
   setInputWidth() {
     return {
       width: 50 + this.textRef.current.offsetWidth,
@@ -216,12 +239,18 @@ export default class Combobox extends Component {
   }
 
   getCssClasses() {
-    const { error, disabled, theme } = this.props;
+    const {
+      error, disabled, theme, labelWidth,
+    } = this.props;
     const cssClasses = ['tyk-form-group', 'tyk-combobox'];
     const themes = theme ? theme.split(' ') : [];
 
     if (error) {
       cssClasses.push('has-error');
+    }
+
+    if (labelWidth) {
+      cssClasses.push('tyk-form-group--label-has-width');
     }
 
     if (themes.length) {
@@ -542,10 +571,13 @@ export default class Combobox extends Component {
         <div className={this.getCssClasses()}>
           {
             label
-              ? <label htmlFor={id}>{ label }</label>
+              ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
               : null
           }
-          <div className="tyk-form-control__wrapper">
+          <div
+            className="tyk-form-control__wrapper"
+            style={this.getNonLabelWidth()}
+          >
             <ul
               className={`tyk-form-control${(tags) ? ' tyk-form-control--with-tags' : ''}`}
               onClick={this.focusInput}
