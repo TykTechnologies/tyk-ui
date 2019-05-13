@@ -80,6 +80,11 @@
   &--rounded-corners {
     &.has-error > .tyk-form-control__wrapper > .tyk-form-control {
       border-left: 2px solid theme-color('danger', 'light');
+
+      &:focus {
+        border-left: 2px solid theme-color('danger', 'light');
+        outline: none;
+      }
     }
 
     .tyk-form-control {
@@ -115,7 +120,6 @@
 .tyk-form-control__error-message {
   color: theme-color('danger', 'dark');
   margin-top: 5px;
-  margin-bottom: 20px;
 }
 
 .tyk-input-group {

@@ -4811,6 +4811,9 @@ h6 {
       color: #61D4BC; }
   .tyk-form-group--rounded-corners.has-error > .tyk-form-control__wrapper > .tyk-form-control {
     border-left: 2px solid #FF6C7E; }
+    .tyk-form-group--rounded-corners.has-error > .tyk-form-control__wrapper > .tyk-form-control:focus {
+      border-left: 2px solid #FF6C7E;
+      outline: none; }
   .tyk-form-group--rounded-corners .tyk-form-control {
     border-radius: 18px; }
 
@@ -4834,8 +4837,7 @@ h6 {
 
 .tyk-form-control__error-message {
   color: #C9234D;
-  margin-top: 5px;
-  margin-bottom: 20px; }
+  margin-top: 5px; }
 
 .tyk-input-group {
   align-items: center;
@@ -4934,6 +4936,7 @@ select {
   font-family: 'robotomedium';
   text-align: center;
   text-transform: uppercase;
+  text-decoration: none;
   transition: all .2s linear;
   user-select: none;
   vertical-align: middle;
