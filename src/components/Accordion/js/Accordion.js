@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import AccordionContext from './AccordionContext';
+
 const Accordion = (props) => {
   const {
     className,
     children,
+    usearrowastrigger,
   } = props;
 
   const getCssClasses = () => {
@@ -19,7 +22,13 @@ const Accordion = (props) => {
 
   return (
     <div className={getCssClasses()}>
-      {children}
+      <AccordionContext.Provider
+        value={{
+          usearrowastrigger,
+        }}
+      >
+        {children}
+      </AccordionContext.Provider>
     </div>
   );
 };
@@ -32,6 +41,11 @@ Accordion.propTypes = {
     PropTypes.string,
   ]),
   className: PropTypes.string,
+  usearrowastrigger: PropTypes.bool,
+};
+
+Accordion.defaultProps = {
+  usearrowastrigger: false,
 };
 
 export default Accordion;

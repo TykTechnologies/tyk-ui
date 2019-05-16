@@ -12,6 +12,16 @@
 <Button theme="white">Push Me</Button> &ensp;
 <Button>Push Me</Button>
 ```
+*Link theme*
+```js
+<Button theme="primary-link">Push Me</Button> &ensp;
+<Button theme="success-link">Push Me</Button> &ensp;
+<Button theme="info-link">Push Me</Button> &ensp;
+<Button theme="warning-link">Push Me</Button> &ensp;
+<Button theme="danger-link">Push Me</Button> &ensp;
+<Button theme="default-link">Push Me</Button> &ensp;
+<Button>Push Me</Button>
+```
 *Outline theme*
 ```js
 <Button theme="primary-outline">Push Me</Button> &ensp;

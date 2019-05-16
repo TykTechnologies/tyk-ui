@@ -17,6 +17,7 @@ export default class Row extends PureComponent {
 
     if (nogutters) {
       cssClass.push('no-gutters');
+      cssClass.push('tyk-row--gutterless');
     }
 
     if (className) {

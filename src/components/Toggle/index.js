@@ -42,6 +42,7 @@ export default class TestToggle extends Component {
             <Toggle
               value={active}
               onChange={this.toggleOnChange}
+              label="Is enabled?"
               theme="primary"
               size="lg"
             >
@@ -54,7 +55,9 @@ export default class TestToggle extends Component {
             <Toggle
               value={active}
               onChange={this.toggleOnChange}
-              theme="success"
+              label="Is enabled?"
+              labelWidth="60%"
+              theme="success inline-label block"
             >
               <Toggle.Item
                 label="Option"

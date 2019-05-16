@@ -7,11 +7,22 @@ import AccordionItemContext from './AccordionItemContext';
 const AccordionItemContent = (props) => {
   const {
     children,
+    className,
   } = props;
   const accordionItemContext = useContext(AccordionItemContext);
 
+  const getCssClasses = () => {
+    let cssClasses = ['tyk-accordion__item-content'];
+
+    if(className) {
+      cssClasses = cssClasses.concat(className.split(' '));
+    }
+
+    return cssClasses.join(' ');
+  };
+
   return (
-    <div className="tyk-accordion__item-content">
+    <div className={getCssClasses()}>
       <Collapsible
         collapsed={accordionItemContext.collapsed}
       >
@@ -28,6 +39,7 @@ AccordionItemContent.propTypes = {
     PropTypes.element,
     PropTypes.string,
   ]),
+  className: PropTypes.string,
 };
 
 export default AccordionItemContent;

@@ -66,6 +66,12 @@
       $button-primary-color
     )
 
+    &-link {
+      @include button-variant-link(
+        $button-primary-color
+      )
+    }
+
     &-outline {
       @include button-variant-outline(
         $button-primary-color
@@ -84,6 +90,12 @@
       $button-success-color
     )
 
+    &-link {
+      @include button-variant-link(
+        $button-success-color
+      )
+    }
+
     &-outline {
       @include button-variant-outline(
         $button-success-color
@@ -101,6 +113,12 @@
     @include button-variant(
       $button-danger-color
     )
+
+    &-link {
+      @include button-variant-link(
+        $button-danger-color
+      )
+    }
 
     &-outline {
       @include button-variant-outline(
@@ -123,6 +141,12 @@
       $button-warning-font-color
     )
 
+    &-link {
+      @include button-variant-link(
+        $button-warning-color
+      )
+    }
+
     &-outline {
       @include button-variant-outline(
         $button-warning-color
@@ -142,6 +166,12 @@
       $button-info-color
     )
 
+    &-link {
+      @include button-variant-link(
+        $button-info-color
+      )
+    }
+
     &-outline {
       @include button-variant-outline(
         $button-info-color
@@ -160,6 +190,12 @@
     @include button-variant(
       $button-default-color
     )
+
+    &-link {
+      @include button-variant-link(
+        $text-color
+      )
+    }
 
     &-outline {
       @include button-variant-outline(
@@ -211,7 +247,7 @@
 
     &:hover {
       border-radius: 3px;
-      background-color: theme-color('background', 'light');
+      background-color: $button-icon-only-background-hover;
     }
   }
 

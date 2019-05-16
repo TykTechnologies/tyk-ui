@@ -1,6 +1,7 @@
 ```js
 <Accordion
   className="test-accordion-class"
+  usearrowastrigger={ true }
 >
   <Accordion.Item>
     <Accordion.Item.Header>

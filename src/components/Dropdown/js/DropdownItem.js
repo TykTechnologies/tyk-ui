@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, cloneElement, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { DropdownContext } from './Dropdown';
@@ -10,6 +10,11 @@ export default class DropdownItem extends Component {
       PropTypes.element,
       PropTypes.node,
       PropTypes.string,
+    ]),
+    customdropdownitem: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
     ]),
     eventKey: PropTypes.string,
     href: PropTypes.string,
@@ -35,6 +40,7 @@ export default class DropdownItem extends Component {
 
   render() {
     const {
+      customdropdownitem,
       children,
       eventKey,
       href,
@@ -48,18 +54,28 @@ export default class DropdownItem extends Component {
               onClick={this.dropdownItemCLick.bind(this, dropdownContext, this.props)}
               onKeyUp={() => {}}
             >
-              <a href={href}>
-                {
-                  eventKey
-                  && dropdownContext.selectedItem === eventKey
-                  && dropdownContext.showCheckmark
-                    ? <Icon type="check" />
-                    : null
-                }
-                <span>
-                  {title || children}
-                </span>
-              </a>
+              {
+                customdropdownitem
+                  ? (
+                    <Fragment>
+                      { cloneElement(customdropdownitem, {}) }
+                    </Fragment>
+                  )
+                  : (
+                    <a href={href}>
+                      {
+                        eventKey
+                        && dropdownContext.selectedItem === eventKey
+                        && dropdownContext.showCheckmark
+                          ? <Icon type="check" />
+                          : null
+                      }
+                      <span>
+                        {title || children}
+                      </span>
+                    </a>
+                  )
+              }
             </li>
           )
         }

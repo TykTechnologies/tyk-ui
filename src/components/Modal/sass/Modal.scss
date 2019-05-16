@@ -1,5 +1,6 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
+@import './variables';
 
 .tyk-modal {
   align-items: center;
@@ -61,7 +62,7 @@
 
 .tyk-modal__content {
   background: white;
-  border-radius: 3px;
+  border-radius: $general-border-radius;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -69,18 +70,20 @@
 }
 
 .tyk-modal__header {
-  border-bottom: 1px solid theme-color('background', 'light');
+  align-items: center;
+  border-bottom: 1px solid $tyk-modal-borders-color;
   display: flex;
-  padding: map-get($spacing, 'lg');
+  padding: $tyk-modal-header-padding;
   width: 100%;
 
   button {
+    margin-left: auto;
     padding: 0 5px;
   }
 }
 
 .tyk-modal__body {
-  padding: map-get($spacing, 'lg');
+  padding: $tyk-modal-body-padding;
 
   &.no-padding {
     padding: 0;
@@ -89,10 +92,10 @@
 
 .tyk-modal__footer {
   align-items: center;
-  border-top: 1px solid theme-color('background', 'light');
+  border-top: 1px solid $tyk-modal-borders-color;
   display: flex;
   justify-content: flex-end;
-  padding: map-get($spacing, 'lg');
+  padding: $tyk-modal-footer-padding;
 
   >:not(:first-child) {
     margin-left: map-get($spacing, 'xs');

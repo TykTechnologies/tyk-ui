@@ -24,6 +24,20 @@
   }
 }
 
+@mixin button-variant-link(
+  $color: white
+) {
+  background-color: transparent;
+  border-color: transparent;
+  color: $color;
+
+  &:hover {
+    background-color: transparent;
+    color: $color;
+    text-decoration: underline;
+  }
+}
+
 @mixin button-variant-outline(
   $border,
   $hover-color: white,

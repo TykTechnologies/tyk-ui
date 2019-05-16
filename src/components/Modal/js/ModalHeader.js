@@ -13,7 +13,7 @@ const ModalHeader = (props) => {
         modalContext => (
           <div className="tyk-modal__header">
             { children }
-            <Button onClick={modalContext.closeModal} iconType="times" iconPosition="left" />
+            <Button onClick={modalContext.closeModal} iconType="times" iconOnly theme="white" iconPosition="left" />
           </div>
         )
       }

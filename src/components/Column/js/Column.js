@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Column extends PureComponent {
   static propTypes = {
+    align: PropTypes.string,
     className: PropTypes.string,
     id: PropTypes.string,
     size: PropTypes.string,
@@ -16,12 +17,16 @@ export default class Column extends PureComponent {
   }
 
   getCssClasses() {
-    const { className, offset, size } = this.props;
+    const { align, className, offset, size } = this.props;
     const colSize = size.split(' ');
     const colOffsets = offset ? offset.split(' ') : [];
 
     let cssClasses = colSize.map(cSize => `tyk-col--${cSize}`);
     const offsets = colOffsets.map(cOffset => `tyk-col--offset-${cOffset}`);
+
+    if(align) {
+      cssClasses.push(`tyk-col--align-${align}`)
+    }
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));

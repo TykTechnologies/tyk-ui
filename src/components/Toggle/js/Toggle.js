@@ -13,6 +13,8 @@ class Toggle extends Component {
     ]),
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
+    label: PropTypes.string,
+    labelWidth: PropTypes.string,
     theme: PropTypes.string,
     type: PropTypes.string, // single || multiple
     size: PropTypes.string,
@@ -48,6 +50,17 @@ class Toggle extends Component {
     }
   }
 
+  getLabelStyles() {
+    const { labelWidth } = this.props;
+    const styles = {};
+
+    if (labelWidth) {
+      styles.flexBasis = labelWidth;
+    }
+
+    return styles;
+  }
+
   saveSelectedRef(ref) {
     this.setState({
       selectedRef: ref,
@@ -77,6 +90,7 @@ class Toggle extends Component {
     const {
       children,
       disabled,
+      label,
       size,
       theme,
       type,
@@ -96,6 +110,11 @@ class Toggle extends Component {
             value,
           }}
         >
+          {
+            label
+              ? <label className="tyk-toggle__label" style={this.getLabelStyles()}>{label}</label>
+              : null
+          }
           <ul className={`tyk-toggle__list tyk-toggle__list--${type}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
             { children }
             {

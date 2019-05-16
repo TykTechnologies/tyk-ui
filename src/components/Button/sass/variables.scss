@@ -36,3 +36,5 @@ $button-info-color: theme-color('info', 'base') !default;
 $button-info-font-color: theme-color('foreground', 'base-dark') !default;
 $button-info-gradient-start-color: theme-color('info', 'base') !default;
 $button-info-gradient-end-color: theme-color('info', 'light') !default;
+
+$button-icon-only-background-hover: theme-color('background', 'light') !default;

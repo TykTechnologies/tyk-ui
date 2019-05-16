@@ -17,4 +17,18 @@
       }
     }
   }
+
+  &__item-header.tyk-accordion__arrow-trigger {
+    align-items: center;
+    display: flex;
+
+    > div {
+      flex: 1;
+    }
+
+    > button {
+      margin-left: auto;
+      width: auto;
+    }
+  }
 }

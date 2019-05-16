@@ -1,5 +1,6 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
+@import './variables';
 
 .tyk-dropdown {
   display: inline-block;
@@ -110,11 +111,8 @@
   font-size: 12px;
   padding: 7px 24px;
   text-transform: uppercase;
+  text-decoration: none;
   width: 100%;
-
-  &:hover {
-    text-decoration: none;
-  }
 
   .badge {
     background: $text-color;
@@ -125,7 +123,8 @@
   }
 
   &:hover {
-    background-color: theme-color('background', 'light');
+    background-color: $tyk-dropdown-item-background-hover;
+    text-decoration: none;
   }
 }
 
