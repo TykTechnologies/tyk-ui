@@ -18,15 +18,19 @@ const AccordionItem = (props) => {
   const getCssClasses = () => {
     let cssClasses = ['tyk-accordion__item'];
 
-    if(className) {
+    if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
+    }
+
+    if (collapsedState === false) {
+      cssClasses.push('tyk-accordion__item--active');
     }
 
     return cssClasses.join(' ');
   };
 
   return (
-    <div className={ getCssClasses() }>
+    <div className={getCssClasses()}>
       <AccordionItemContext.Provider
         value={{
           collapsed: collapsedState,

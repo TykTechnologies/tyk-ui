@@ -19,13 +19,13 @@ const AccordionItemHeader = (props) => {
   const iconType = !collapsed ? 'chevron-down' : 'chevron-up';
 
   const getCssClasses = () => {
-    const cssClasses = ['tyk-accordion__item-header'];
+    let cssClasses = ['tyk-accordion__item-header'];
 
     if (accordionContext.usearrowastrigger) {
       cssClasses.push('tyk-accordion__arrow-trigger');
     }
 
-    if(className) {
+    if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
     }
 

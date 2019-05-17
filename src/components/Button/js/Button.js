@@ -61,7 +61,7 @@ const Button = React.forwardRef((props, ref) => {
 
   const getButtonType = () => {
     let buttonType;
-    
+
     if (customButton) {
       return (
         <Fragment>

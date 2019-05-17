@@ -14,7 +14,7 @@ const AccordionItemContent = (props) => {
   const getCssClasses = () => {
     let cssClasses = ['tyk-accordion__item-content'];
 
-    if(className) {
+    if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
     }
 
