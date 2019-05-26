@@ -1,6 +1,16 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 
+.tyk-loading__wrapper {
+  background: rgba(255, 255, 255, 0.6);
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 99;
+}
+
 .loader-wrapper {
   min-height: 100px;
   position: relative;

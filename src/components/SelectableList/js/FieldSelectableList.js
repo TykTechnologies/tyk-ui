@@ -27,7 +27,7 @@ export default class FieldSelectableList extends Component {
 
   render() {
     const { children, ...props } = this.props;
-    console.log(props.input.value ? props.input.value.toJS() : []);
+    
     return (
       <SelectableList
         {...props}

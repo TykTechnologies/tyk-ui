@@ -35,7 +35,9 @@ export default class Collapsible extends Component {
     this.setHeight(height);
 
     window.addEventListener('resize', () => {
-      this.setHeight(this.getHeight());
+      if (collapsed) {
+        this.setHeight(this.getHeight());
+      }
     });
   }
 

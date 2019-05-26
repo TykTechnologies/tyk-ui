@@ -45,6 +45,7 @@ export { SelectableList } from './components/SelectableList';
 export { FieldSelectableList } from './components/SelectableList';
 export { default as Tabs } from './components/Tabs';
 export { default as Textarea } from './components/Textarea';
+export { toast } from './components/Toast';
 export { Toggle } from './components/Toggle';
 export { FieldToggle } from './components/Toggle';
 

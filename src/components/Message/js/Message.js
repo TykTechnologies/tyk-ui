@@ -9,17 +9,22 @@ export default class Message extends Component {
       PropTypes.node,
       PropTypes.string,
     ]),
+    className: PropTypes.string,
     noMargin: PropTypes.bool,
   };
 
   getCssClasses() {
-    const { theme, noMargin } = this.props;
-    const cssClasses = ['tyk-message'];
+    const { theme, noMargin, className } = this.props;
+    let cssClasses = ['tyk-message'];
 
     cssClasses.push(`tyk-message--${theme || 'info'}`);
 
     if (noMargin) {
       cssClasses.push('no-margin');
+    }
+
+    if (className) {
+      cssClasses = cssClasses.concat(className.split(' '));
     }
 
     return cssClasses.join(' ');
