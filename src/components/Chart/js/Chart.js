@@ -272,7 +272,7 @@ const Chart = (props) => {
   useEffect(() => {
     let debouncedMethod;
     if (tykChartInstance) {
-      debouncedMethod = debounce(eventCallBack, 200);
+      debouncedMethod = debounce(eventCallBack, 500);
       tykChartInstance.on('dataZoom', debouncedMethod);
       tykChartInstance.on('restore', debouncedMethod);
       tykChartInstance.on('click', debouncedMethod);

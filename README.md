@@ -4,6 +4,16 @@ https://tyktechnologies.github.io/tyk-ui-styleguide/
 ## Local setup
 
 **Installing library with npm**
+
+*Pre-installation steps*
+Before installing the library, bear in mind that this is a private npm module, therefore in order to have access to it follow next steps:
+
+  - Create an account on `https://www.npmjs.com/`
+  - Give your username to any owner of the `tyk-ui` library, so that you can be added as a member of the project
+  - Run `npm adduser` locally
+  - Follow next steps
+
+*Installation*
 ```javascript
 npm install --save @tyk-technologies/tyk-ui
 ```
@@ -40,3 +50,15 @@ import {
 ```
 
 *Note*: for the projects that don't have React this is not usable, and we can use just the styling.
+
+## Build tyk-ui project
+Contributions to the current library are welcome, so please follow these steps each time you want to make a change:
+
+  - Create a GH issue, describing the necessary change
+  - Raise a PR with the change
+
+  *In order to publish the changes, please do the following*
+  - After PR merge, run `npm run build-prod` which generates prod code of the library
+  - Increase the library version in `package.json`
+  - Commit and Push changes
+  - Run `npm publish`
