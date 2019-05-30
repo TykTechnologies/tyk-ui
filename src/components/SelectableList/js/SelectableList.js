@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
+import Message from '../../Message';
 import List from '../../List';
+import Icon from '../../Icon';
 
 const SelectableList = (props) => {
   const {
+    checkboxalticon,
     items,
     itemTemplate,
     value,
@@ -30,17 +33,36 @@ const SelectableList = (props) => {
     }
   };
 
+  const getListItemCssClassName = (isActive) => {
+    const cssClasses = [];
+
+    if (checkboxalticon) {
+      cssClasses.push('tyk-selectable-list__item--with-icon');
+    }
+
+    if (isActive) {
+      cssClasses.push('tyk-selectable-list__item--active');
+    }
+
+    return cssClasses.join(' ');
+  };
+  
   return (
     <List {...props} theme={theme || 'default'} className="tyk-selectable-list">
       {
         !items.length
           ? (
             <li className="tyk-selectable-list__no-items-message">
-              {noItemsMessage || 'No items in the list'}
+              <Message theme="info">
+                {noItemsMessage || 'No items in the list'}
+              </Message>
             </li>
           )
           : items.map(item => (
-            <List.Item key={item[primaryKey]}>
+            <List.Item
+              key={item[primaryKey]}
+              className={getListItemCssClassName(value.includes(item[primaryKey]))}
+            >
               <label>
                 <div className="tyk-selectable-list__item">
                   {itemTemplate ? itemTemplate(item) : item.name}
@@ -52,6 +74,11 @@ const SelectableList = (props) => {
                   onChange={handleOnSelect.bind(item)}
                   value={item[primaryKey]}
                 />
+                {
+                  checkboxalticon
+                    ? <Icon type={checkboxalticon} />
+                    : null
+                }
               </label>
             </List.Item>
           ))
@@ -71,6 +98,11 @@ SelectableList.propTypes = {
   onChange: PropTypes.func,
   primaryKey: PropTypes.string,
   noItemsMessage: PropTypes.string,
+  checkboxalticon: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
   theme: PropTypes.string,
 };
 

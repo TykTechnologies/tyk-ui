@@ -1,10 +1,11 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
     "start": "npx styleguidist server",
+    "build-prod": "webpack",
     "build": "npx --max_old_space_size=4096 styleguidist build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "styleguide": "styleguidist server",

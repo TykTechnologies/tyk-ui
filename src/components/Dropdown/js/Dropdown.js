@@ -31,6 +31,7 @@ export default class Dropdown extends Component {
     display: PropTypes.string,
     hasCustomContent: PropTypes.bool,
     label: PropTypes.string,
+    listclassnames: PropTypes.string,
     onClose: PropTypes.func,
     onSelect: PropTypes.func,
     open: PropTypes.bool,
@@ -222,12 +223,17 @@ export default class Dropdown extends Component {
     const {
       hasCustomContent,
       display,
+      listclassnames,
       position,
     } = this.props;
-    const cssClasses = ['tyk-dropdown-menu', 'tyk-dropdown'];
+    let cssClasses = ['tyk-dropdown-menu', 'tyk-dropdown'];
 
     if (opened) {
       cssClasses.push('opened');
+    }
+
+    if (listclassnames) {
+      cssClasses = cssClasses.concat(listclassnames.split(' '));
     }
 
     if (display) {

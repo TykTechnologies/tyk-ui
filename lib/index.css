@@ -6253,6 +6253,8 @@ select {
   margin-bottom: 20px; }
   .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) {
     padding: 0; }
+    .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) .tyk-message {
+      margin-bottom: 0; }
     .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) label {
       margin: 0; }
     .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) > label {
@@ -6262,6 +6264,8 @@ select {
       padding: 10px 20px; }
       .tyk-selectable-list li:not(.tyk-selectable-list__no-items-message) > label input[type="checkbox"] {
         margin-left: auto; }
+  .tyk-selectable-list__item--with-icon input[type="checkbox"] {
+    visibility: hidden; }
 
 .tyk-sidebar {
   background-color: white;
