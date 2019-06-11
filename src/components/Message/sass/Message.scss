@@ -1,11 +1,12 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 @import './mixins';
+@import './variables';
 
 .tyk-message {
   border-radius: 3px;
   margin-bottom: 20px;
-  padding: 20px;
+  padding: $tyk-message-padding-top $tyk-message-padding-right $tyk-message-padding-bottom $tyk-message-padding-left;
 
   &--info {
     @include message-variant(
