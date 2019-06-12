@@ -17,8 +17,8 @@
 
   &--success {
     @include message-variant(
-      theme-color('success', 'light'),
-      theme-color('success', 'dark')
+      $tyk-message-success-background,
+      $tyk-message-success-border
     );
   }
 
