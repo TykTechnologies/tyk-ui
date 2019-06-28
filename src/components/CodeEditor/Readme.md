@@ -38,7 +38,7 @@
 ```js
 <CodeEditor
   label="Standard code editor"
-  labelWidth="50%"
+  labelwidth="50%"
   height={ "200px" }
   name="defaultPanelCode"
   mode="json"

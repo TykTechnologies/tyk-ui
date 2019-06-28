@@ -24,7 +24,7 @@
 ```js
 <Textarea
   label="This is a demo Textarea"
-  labelWidth="50%"
+  labelwidth="50%"
   name="input"
   note="Some helpful message to be displayed on this Textarea"
   placeholder="Please type something"

@@ -21,7 +21,7 @@ export default class Input extends Component {
       PropTypes.string,
     ]),
     label: PropTypes.string,
-    labelWidth: PropTypes.string,
+    labelwidth: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onChange: PropTypes.func,
@@ -53,22 +53,22 @@ export default class Input extends Component {
   }
 
   getLabelStyles() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = labelWidth;
+    if (labelwidth) {
+      styles.flexBasis = labelwidth;
     }
 
     return styles;
   }
 
   getNonLabelWidth() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    if (labelwidth) {
+      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
 
     return styles;
@@ -92,7 +92,7 @@ export default class Input extends Component {
     const {
       error,
       theme,
-      labelWidth,
+      labelwidth,
       inputgroupaddonleft,
       inputgroupaddonright,
     } = this.props;
@@ -113,7 +113,7 @@ export default class Input extends Component {
       cssClasses.push('tyk-form-group--addon-right');
     }
 
-    if (labelWidth) {
+    if (labelwidth) {
       cssClasses.push('tyk-form-group--label-has-width');
     }
 

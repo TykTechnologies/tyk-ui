@@ -18,7 +18,7 @@ export default class Combobox extends Component {
     error: PropTypes.string,
     id: PropTypes.string,
     label: PropTypes.string,
-    labelWidth: PropTypes.string,
+    labelwidth: PropTypes.string,
     multiple: PropTypes.bool,
     note: PropTypes.string,
     onChange: PropTypes.func,
@@ -149,22 +149,22 @@ export default class Combobox extends Component {
   }
 
   getLabelStyles() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = labelWidth;
+    if (labelwidth) {
+      styles.flexBasis = labelwidth;
     }
 
     return styles;
   }
 
   getNonLabelWidth() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    if (labelwidth) {
+      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
 
     return styles;
@@ -240,7 +240,7 @@ export default class Combobox extends Component {
 
   getCssClasses() {
     const {
-      error, disabled, theme, labelWidth,
+      error, disabled, theme, labelwidth,
     } = this.props;
     const cssClasses = ['tyk-form-group', 'tyk-combobox'];
     const themes = theme ? theme.split(' ') : [];
@@ -249,7 +249,7 @@ export default class Combobox extends Component {
       cssClasses.push('has-error');
     }
 
-    if (labelWidth) {
+    if (labelwidth) {
       cssClasses.push('tyk-form-group--label-has-width');
     }
 

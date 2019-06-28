@@ -14,7 +14,7 @@ class Toggle extends Component {
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
     label: PropTypes.string,
-    labelWidth: PropTypes.string,
+    labelwidth: PropTypes.string,
     theme: PropTypes.string,
     type: PropTypes.string, // single || multiple
     size: PropTypes.string,
@@ -51,11 +51,11 @@ class Toggle extends Component {
   }
 
   getLabelStyles() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = labelWidth;
+    if (labelwidth) {
+      styles.flexBasis = labelwidth;
     }
 
     return styles;

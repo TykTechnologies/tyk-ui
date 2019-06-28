@@ -7,7 +7,7 @@ const List = (props) => {
     className,
     children,
     label,
-    labelWidth,
+    labelwidth,
     theme,
     style,
   } = props;
@@ -28,20 +28,20 @@ const List = (props) => {
 
   const getListStyle = () => {
     const styleCopy = fromJS(style).toJS();
-    if (labelWidth) {
-      styleCopy.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    if (labelwidth) {
+      styleCopy.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
 
     return styleCopy;
   };
 
   return (
-    <div className={`tyk-list__wrapper ${labelWidth ? 'tyk-list--with-inline-label' : ''}`}>
+    <div className={`tyk-list__wrapper ${labelwidth ? 'tyk-list--with-inline-label' : ''}`}>
       {
         label !== undefined
           ? (
             <label style={{
-              flexBasis: labelWidth || 'auto',
+              flexBasis: labelwidth || 'auto',
             }}
             >
               { label }
@@ -65,7 +65,7 @@ List.propTypes = {
   ]),
   className: PropTypes.string,
   label: PropTypes.string,
-  labelWidth: PropTypes.string,
+  labelwidth: PropTypes.string,
   theme: PropTypes.string,
   style: PropTypes.instanceOf(Object),
 };

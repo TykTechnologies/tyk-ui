@@ -56,7 +56,7 @@ export default class TestToggle extends Component {
               value={active}
               onChange={this.toggleOnChange}
               label="Is enabled?"
-              labelWidth="60%"
+              labelwidth="60%"
               theme="success inline-label block"
             >
               <Toggle.Item

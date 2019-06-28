@@ -261,6 +261,7 @@ export default class EditableListForm extends Component {
             {
               components.map((component, index) => {
                 const ComponentName = component.name;
+
                 return (
                   <Column size={`md-${component.size || '12'} lg-${component.size || '12'}`} key={component.props.name}>
                     <ComponentName

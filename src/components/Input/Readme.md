@@ -57,7 +57,7 @@
 
 <Input
   label="This is a demo Input"
-  labelWidth="60%"
+  labelwidth="60%"
   name="input"
   placeholder="Please type something"
   type="text"
@@ -103,33 +103,36 @@
 
 ```
 ```js
-<Input
-  inputgroupaddonleft={
-    <Icon type="search" />
-  }
-  label="Input with addon"
-  name="input"
-  placeholder="Please type something"
-  type="text"
-  onChange={ (e) => { console.log(e); }}
-/>
-<Input
-  inputgroupaddonright={
-    <Icon type="search" />
-  }
-  name="input"
-  placeholder="Please type something"
-  type="text"
-  onChange={ (e) => { console.log(e); }}
-/>
-<Input
-  inputgroupaddonright={
-    <Icon type="search" />
-  }
-  name="input"
-  placeholder="Please type something"
-  type="text"
-  onChange={ (e) => { console.log(e); }}
-  theme="extra-dark inline rounded-corners"
-/>
+import Icon from '../Icon';
+<div>
+  <Input
+    inputgroupaddonleft={
+      <Icon type="search" />
+    }
+    label="Input with addon"
+    name="input"
+    placeholder="Please type something"
+    type="text"
+    onChange={ (e) => { console.log(e); }}
+  />
+  <Input
+    inputgroupaddonright={
+      <Icon type="search" />
+    }
+    name="input"
+    placeholder="Please type something"
+    type="text"
+    onChange={ (e) => { console.log(e); }}
+  />
+  <Input
+    inputgroupaddonright={
+      <Icon type="search" />
+    }
+    name="input"
+    placeholder="Please type something"
+    type="text"
+    onChange={ (e) => { console.log(e); }}
+    theme="extra-dark inline rounded-corners"
+  />
+</div>
 ```

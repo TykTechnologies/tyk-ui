@@ -12,7 +12,7 @@ export default class Select extends Component {
     ]),
     options: PropTypes.instanceOf(Array),
     label: PropTypes.string,
-    labelWidth: PropTypes.string,
+    labelwidth: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
     onBlur: PropTypes.func,
@@ -86,7 +86,7 @@ export default class Select extends Component {
   }
 
   getCssClasses() {
-    const { error, labelWidth, theme } = this.props;
+    const { error, labelwidth, theme } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
@@ -96,7 +96,7 @@ export default class Select extends Component {
       });
     }
 
-    if (labelWidth) {
+    if (labelwidth) {
       cssClasses.push('tyk-form-group--label-has-width');
     }
 
@@ -108,22 +108,22 @@ export default class Select extends Component {
   }
 
   getLabelStyles() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = labelWidth;
+    if (labelwidth) {
+      styles.flexBasis = labelwidth;
     }
 
     return styles;
   }
 
   getNonLabelWidth() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    if (labelwidth) {
+      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
 
     return styles;

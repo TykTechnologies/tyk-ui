@@ -1,4 +1,6 @@
 ```js
+import { Combobox } from '../Combobox';
+import {Input} from '../Input';
 <EditableList
   label="Editable list inline display"
   name="editableListInline"
@@ -48,6 +50,7 @@
 />
 ```
 ```js
+import { Combobox } from '../Combobox';
 <EditableList
   addValueOnFieldChange={ true }
   label="Editable list inline display"
@@ -87,6 +90,8 @@
 />
 ```
 ```js
+import { Combobox } from '../Combobox';
+import {Input} from '../Input';
 <EditableList
   label="Editable list table display"
   name="editableListInline"
@@ -135,31 +140,35 @@
 />
 ```
 ```js
-<EditableList
-  label="Editable list append the results to another element"
-  name="editableListInline"
-  onChange={ (list, index, prevValue, nextValue) => {
-    console.log('list:', list);
-    console.log('index:', index);
-    console.log('prevValue:', prevValue);
-    console.log('nextValue:', nextValue);
-  }}
-  config={{
-    appendTo: '#prct',
-    components: [
-      {
-        size: 12,
-        name: Input,
-        props: {
-          label: 'Input',
-          placeholder: 'Pleas type smth',
-          name: "elInput",
-          type: "text",
-          value: ""
+import {Fragment} from 'react';
+import {Input} from '../Input';
+<Fragment>
+  <EditableList
+    label="Editable list append the results to another element"
+    name="editableListInline"
+    onChange={ (list, index, prevValue, nextValue) => {
+      console.log('list:', list);
+      console.log('index:', index);
+      console.log('prevValue:', prevValue);
+      console.log('nextValue:', nextValue);
+    }}
+    config={{
+      appendTo: '#prct',
+      components: [
+        {
+          size: 12,
+          name: Input,
+          props: {
+            label: 'Input',
+            placeholder: 'Pleas type smth',
+            name: "elInput",
+            type: "text",
+            value: ""
+          }
         }
-      }
-    ]
-  }}
-/>
-<div id="prct"></div>
+      ]
+    }}
+  />
+  <div id="prct"></div>
+</Fragment>
 ```

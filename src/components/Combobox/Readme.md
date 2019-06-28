@@ -58,7 +58,7 @@
   note="Some note on the combobox"
   theme="default inline rounded-corners"
   placeholder="Please select a value"
-  labelWidth="40%"
+  labelwidth="40%"
 />
 ```
 ```js

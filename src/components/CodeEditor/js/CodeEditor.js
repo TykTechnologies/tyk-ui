@@ -21,7 +21,7 @@ export default class CodeEditor extends Component {
       PropTypes.bool,
     ]),
     label: PropTypes.string,
-    labelWidth: PropTypes.string,
+    labelwidth: PropTypes.string,
     mode: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
@@ -53,7 +53,7 @@ export default class CodeEditor extends Component {
   }
 
   getCssClasses() {
-    const { error, theme, labelWidth } = this.props;
+    const { error, theme, labelwidth } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
@@ -63,7 +63,7 @@ export default class CodeEditor extends Component {
       });
     }
 
-    if (labelWidth) {
+    if (labelwidth) {
       cssClasses.push('tyk-form-group--label-has-width');
     }
 
@@ -75,22 +75,22 @@ export default class CodeEditor extends Component {
   }
 
   getLabelStyles() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = labelWidth;
+    if (labelwidth) {
+      styles.flexBasis = labelwidth;
     }
 
     return styles;
   }
 
   getNonLabelWidth() {
-    const { labelWidth } = this.props;
+    const { labelwidth } = this.props;
     const styles = {};
 
-    if (labelWidth) {
-      styles.flexBasis = `calc(100% - ${labelWidth} - 20px)`;
+    if (labelwidth) {
+      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
 
     return styles;

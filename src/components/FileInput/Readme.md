@@ -23,7 +23,7 @@
 <FileInput
   accept=".pem"
   label="This is a demo FileInput"
-  labelWidth="50%"
+  labelwidth="50%"
   name="input"
   note="Some helpful message to be displayed on this FileInput"
   placeholder="Please type something"

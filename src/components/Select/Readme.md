@@ -55,7 +55,7 @@
     { id: 'apieight', name: 'API eight'}
   ]}
   label="Select"
-  labelWidth="50%"
+  labelwidth="50%"
   name="select"
   onChange={ (e) => {
     console.log(e);

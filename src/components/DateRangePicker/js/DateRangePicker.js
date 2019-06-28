@@ -77,6 +77,10 @@ DateRangePicker.defaultProps = {
     timeFormat: false,
   },
   withInput: false,
+  value: {
+    startDate: '',
+    endDate: '',
+  },
 };
 
 export default DateRangePicker;

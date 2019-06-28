@@ -30,6 +30,7 @@ module.exports = {
 	require: [
     path.join(__dirname, 'src/index.scss')
   ],
+	components: 'src/components/**/index.js',
 	resolver: require('react-docgen').resolver.findAllExportedComponentDefinitions,
 	webpackConfig: {
 		module: {

@@ -13,7 +13,7 @@
     maxHeight: '100px'
   }}
   label="super cool list"
-  labelWidth="25%"
+  labelwidth="25%"
 />
 ```
 
@@ -33,6 +33,6 @@
     maxHeight: '100px'
   }}
   label="super cool list"
-  labelWidth="25%"
+  labelwidth="25%"
 />
 ```

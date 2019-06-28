@@ -1,4 +1,6 @@
 ```js
+import Button from '../Button';
+import {Dropdown} from '../Dropdown';
 <ButtonGroup
   label="Button Group"
 >
@@ -29,6 +31,8 @@
 </ButtonGroup>
 ```
 ```js
+import Button from '../Button';
+import {Dropdown} from '../Dropdown';
 <ButtonGroup
   label="Button Group"
 >
