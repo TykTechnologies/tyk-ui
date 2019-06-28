@@ -324,7 +324,6 @@ export default class Combobox extends Component {
       && values.length
       && !Array.isArray(stateSelectedValues) && !stateSelectedValues.name
     ) {
-      console.log('-----', values, stateSelectedValues);
       return values.filter(value => value.id === stateSelectedValues.id)[0].name;
     }
 
