@@ -27,13 +27,6 @@ module.exports = {
 		'**/components/Row/**/*.js',
 		'**/components/Tabs/**/Tab.js'
 	],
-	getExampleFilename(componentPath) {
-		let path = componentPath.split('/');
-		let componentName = path[path.length-1];
-		let finameComponentPath = componentPath.replace('js/' + componentName, 'Readme.md');
-
-    return finameComponentPath;
-  },
 	require: [
     path.join(__dirname, 'src/index.scss')
   ],

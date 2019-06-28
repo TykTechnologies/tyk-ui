@@ -46,7 +46,7 @@ const SelectableList = (props) => {
 
     return cssClasses.join(' ');
   };
-  
+
   return (
     <List {...props} theme={theme || 'default'} className="tyk-selectable-list">
       {

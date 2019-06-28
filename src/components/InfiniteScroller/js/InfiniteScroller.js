@@ -1,158 +1,135 @@
-import React, { Component, createRef } from 'react';
+import React, {
+  useEffect, useState, useRef, useCallback,
+} from 'react';
 import { PropTypes } from 'prop-types';
 
 import debounce from '../../../common/js/utils';
+import { usePrevious, useComponentSize } from '../../../common/js/hooks';
 import Loader from '../../Loader';
 
-class InfiniteScroller extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.string,
-    ]),
-    hasMore: PropTypes.bool,
-    initialLoad: PropTypes.bool,
-    pageNumber: PropTypes.number,
-    loadMore: PropTypes.func,
-    refChild: PropTypes.instanceOf(Object),
-  };
+const InfiniteScroller = (props) => {
+  const [showLoader, setShowLoader] = useState(false);
+  const containerRef = useRef(null);
+  const {
+    children,
+    hasMore,
+    initialLoad,
+    loadMore,
+    pageNumber,
+    refChild,
+  } = props;
+  const refChildSize = useComponentSize(refChild);
 
-  static defaultProps = {
-    hasMore: true,
-  };
-
-  state = {
-    refChildHeight: 0,
-    showLoader: false,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.containerRef = createRef();
-    this.scrollHandler = this.scrollHandler.bind(this);
-    this.stateChanged = false;
-  }
-
-  componentDidMount() {
-    const { initialLoad, loadMore, pageNumber } = this.props;
-    this.containerRef.current.addEventListener('scroll', debounce(this.scrollHandler.bind(this), 200));
-
+  useEffect(() => {
     if (initialLoad && loadMore && typeof loadMore === 'function') {
+      setShowLoader(false);
       loadMore(pageNumber);
     }
-  }
+  }, [initialLoad]);
 
-  componentDidUpdate(prevProps) {
-    const { refChild, hasMore, pageNumber } = this.props;
-    const { refChildHeight, showLoader } = this.state;
+  const shouldLoad = useCallback(() => {
+    const { clientHeight, scrollTop } = containerRef.current;
 
-    if (prevProps.pageNumber > 0 && pageNumber === 0) {
-      this.containerRef.current.scrollTop = 0;
-    }
-
-    if (
-      refChild.current.clientHeight === refChildHeight
-      && showLoader === false
-      && hasMore
-      && this.containerRef.current.scrollTop > 0
-    ) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        showLoader: true,
-      });
-    }
-
-    if (
-      refChild.current.clientHeight > this.containerRef.current.clientHeight
-      && refChild.current.clientHeight > refChildHeight && showLoader === true
-      && refChildHeight
-    ) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        showLoader: false,
-      });
-    }
-
-    if (
-      refChild.current.clientHeight < this.containerRef.current.clientHeight
-      && hasMore
-      && !this.stateChanged
-    ) {
-      this.loadMoreData();
-
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        showLoader: true,
-        refChildHeight: refChild.current.clientHeight,
-      });
-
-      this.stateChanged = true;
-    }
-  }
-
-  componentWillUnmount() {
-    this.containerRef.current.removeEventListener('scroll', this.scrollHandler.bind(this));
-  }
-
-  shouldLoad() {
-    const { hasMore, refChild } = this.props;
-    const { clientHeight, scrollTop } = this.containerRef.current;
     return (
       hasMore
       && (
-        clientHeight + Math.round(scrollTop) === refChild.current.clientHeight)
-    )
-      || (hasMore && clientHeight > refChild.current.clientHeight);
-  }
-
-  loadMoreData() {
-    const { loadMore, pageNumber } = this.props;
-
-    if (loadMore && typeof loadMore === 'function') {
-      loadMore(pageNumber + 1);
-    }
-  }
-
-  scrollHandler() {
-    const { refChild } = this.props;
-
-    if (this.shouldLoad()) {
-      this.loadMoreData();
-      this.setState({
-        refChildHeight: refChild.current.clientHeight,
-      });
-    }
-  }
-
-  render() {
-    const { children } = this.props;
-    const { showLoader } = this.state;
-
-    return (
-      <div
-        className="tyk-infinite-scroller"
-      >
-        <div
-          className="tyk-infinite-scroller__wrapper"
-          ref={this.containerRef}
-        >
-          { children }
-        </div>
-        {
-          showLoader
-            ? (
-              <Loader
-                position="absolute"
-              />
-            )
-            : null
-        }
-      </div>
+        (clientHeight + Math.round(scrollTop) === refChildSize.height)
+        || (clientHeight > refChildSize.height)
+      )
     );
-  }
-}
+  }, [containerRef, refChildSize.height]);
+
+  const loadMoreData = useCallback(() => {
+    if (loadMore && typeof loadMore === 'function' && hasMore) {
+      loadMore(pageNumber + 1);
+      setShowLoader(true);
+    }
+  }, [hasMore]);
+
+  const prevPageNumber = usePrevious(pageNumber);
+  const scrollHandler = useCallback(debounce(() => {
+    if (shouldLoad() && prevPageNumber <= pageNumber) {
+      loadMoreData();
+    }
+  }, 200), [loadMoreData, shouldLoad]);
+
+  useEffect(() => {
+    if (containerRef && containerRef.current) {
+      containerRef.current.addEventListener('scroll', scrollHandler);
+    }
+
+    return () => {
+      containerRef.current.removeEventListener('scroll', scrollHandler);
+    };
+  }, [containerRef, scrollHandler]);
+
+
+  // if content resets (page number resets) scroll to top
+  useEffect(() => {
+    if (prevPageNumber > 0 && pageNumber === 0) {
+      containerRef.current.scrollTop = 0;
+    }
+  }, [containerRef, pageNumber]);
+
+  const prevRefChildSize = usePrevious(refChildSize);
+  useEffect(() => {
+    if (
+      refChildSize && prevRefChildSize
+      && refChildSize.height !== prevRefChildSize.height
+      && showLoader === true
+    ) {
+      setShowLoader(false);
+    }
+  }, [showLoader, refChildSize.height]);
+
+  useEffect(() => {
+    if (
+      refChildSize.height < containerRef.current.clientHeight
+      && hasMore
+    ) {
+      loadMoreData();
+    }
+  }, [containerRef, refChild, hasMore]);
+
+  return (
+    <div
+      className="tyk-infinite-scroller"
+    >
+      <div
+        className="tyk-infinite-scroller__wrapper"
+        ref={containerRef}
+      >
+        { children }
+      </div>
+      {
+        showLoader
+          ? (
+            <Loader
+              position="absolute"
+            />
+          )
+          : null
+      }
+    </div>
+  );
+};
+
+InfiniteScroller.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+  hasMore: PropTypes.bool,
+  initialLoad: PropTypes.bool,
+  pageNumber: PropTypes.number,
+  loadMore: PropTypes.func,
+  refChild: PropTypes.instanceOf(Object),
+};
+
+InfiniteScroller.defaultProps = {
+  hasMore: true,
+};
 
 export default InfiniteScroller;

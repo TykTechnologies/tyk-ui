@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../../Button';
 import Message from '../../Message';
-import useTimeout from '../../../common/js/hooks/useTimeout';
+import { useTimeout } from '../../../common/js/hooks';
 
 const ToastMessage = (props) => {
   const {

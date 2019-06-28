@@ -4,7 +4,7 @@ import Multiselect from './js/Multiselect';
 export { default as FieldMultiselect } from './js/FieldMultiselect';
 export { Multiselect };
 
-export default class Test extends Component {
+export default class TestMultiselect extends Component {
   static itemDisplayTemplate(item) {
     return (
       <Fragment>
@@ -87,7 +87,7 @@ export default class Test extends Component {
           { id: 19, name: 'item 19' },
         ]),
       });
-    }, 2000);
+    }, 5000);
   }
 
   customSearch() {
@@ -126,8 +126,8 @@ export default class Test extends Component {
         onChange={this.onMultiselectChange.bind(this)}
         // eslint-disable-next-line react/jsx-no-bind
         getItemDetails={this.getItemDetails.bind(this)}
-        itemDisplayTemplate={Test.itemDisplayTemplate}
-        detailsDisplayTemplate={Test.detailsDisplayTemplate}
+        itemDisplayTemplate={TestMultiselect.itemDisplayTemplate}
+        detailsDisplayTemplate={TestMultiselect.detailsDisplayTemplate}
         // eslint-disable-next-line react/jsx-no-bind
         loadMoreItems={this.loadMoreItems.bind(this)}
         itemsPageNumber={page}
