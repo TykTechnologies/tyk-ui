@@ -8,3 +8,4 @@ $nav-bar-left-padding: 20px !default;
 $nav-bar-right-padding: 20px !default;
 $nav-bar-padding: $nav-bar-top-padding $nav-bar-right-padding 0 $nav-bar-left-padding !default;
 $nav-bar-top: 51px !default;
+$nav-bar-header-font-size: map-get($spacing, 'xxl');
