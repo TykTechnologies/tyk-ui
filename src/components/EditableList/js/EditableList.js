@@ -106,7 +106,7 @@ export default class EditableList extends Component {
     return this.startIndex;
   }
 
-  // generate list item valuse based on the display types
+  // generate list item value's based on the display types
   // table, inline, list
   getListItemText(itemData) {
     const { config } = this.props;
@@ -363,7 +363,7 @@ export default class EditableList extends Component {
     const { config } = this.props;
     const { buttonWidth, value } = this.state;
 
-    if (!value) {
+    if (value.length === 0) {
       return null;
     }
 
@@ -375,6 +375,7 @@ export default class EditableList extends Component {
               <div
                 className="tyk-editable-list__header"
                 style={{
+                  paddingTop: '15px',
                   paddingRight: `${buttonWidth + 15}px`,
                 }}
               >
