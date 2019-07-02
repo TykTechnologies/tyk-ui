@@ -5627,6 +5627,7 @@ select {
     margin-left: 15px; }
 
 .tyk-editable-list__header {
+  padding-top: 15px;
   border-bottom: 1px solid #D2D2D2;
   color: #000018;
   font-size: 11px;
@@ -5865,7 +5866,7 @@ select {
 .tyk-message {
   border-radius: 3px;
   margin-bottom: 20px;
-  padding: 20px; }
+  padding: 20px 20px 20px 20px; }
   .tyk-message--info {
     background-color: #D3EBEF;
     border: 1px solid #82BBC6;
@@ -6090,6 +6091,8 @@ select {
     .tyk-nav-bar .tyk-nav-bar__wrapper {
       padding-left: 0; } }
   .tyk-nav-bar .tyk-nav-bar__wrapper h1 {
+    font-size: 32px;
+    font-family: "robotomedium";
     margin: 0;
     padding-right: 10px; }
   .tyk-nav-bar .tyk-nav-bar__wrapper .tyk-nav-bar__container {
