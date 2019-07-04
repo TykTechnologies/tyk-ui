@@ -76,6 +76,7 @@
   ]}
   label="Combobox multiple selections"
   multiple={ true }
+  max={3}
   name="combobox"
   placeholder="Please select a value"
 />
@@ -95,6 +96,7 @@
   ]}
   label="Combobox as tags"
   tags={ true }
+  max={3}
   name="combobox"
   placeholder="Please select a value"
 />

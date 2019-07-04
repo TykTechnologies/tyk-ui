@@ -20,6 +20,7 @@ export default class Combobox extends Component {
     label: PropTypes.string,
     labelwidth: PropTypes.string,
     multiple: PropTypes.bool,
+    max: PropTypes.number,
     note: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
@@ -61,6 +62,7 @@ export default class Combobox extends Component {
       initialValue: value,
       stateSelectedValues: getStateSelectedValues(multiple, tags, value),
       searchText: '',
+      tags,
     };
 
     this.comboboxRef = createRef();
@@ -94,7 +96,10 @@ export default class Combobox extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (JSON.stringify(nextProps.value) !== JSON.stringify(prevState.initialValue)) {
+    if (
+      JSON.stringify(nextProps.value) !== JSON.stringify(prevState.initialValue)
+      && nextProps.tags !== prevState.tags
+    ) {
       return {
         initialValue: nextProps.value,
         stateSelectedValues: getStateSelectedValues(
@@ -102,6 +107,7 @@ export default class Combobox extends Component {
           nextProps.tags,
           nextProps.value,
         ),
+        tags: nextProps.tags,
       };
     }
 
@@ -331,6 +337,8 @@ export default class Combobox extends Component {
   }
 
   manageSelectedTags(index) {
+    const { max } = this.props;
+    const { stateSelectedValues } = this.state;
     const filteredValues = this.filterValues();
     const value = { id: this.inputRef.current.value, name: this.inputRef.current.value };
     const tempValue = filteredValues[index] || value;
@@ -342,6 +350,9 @@ export default class Combobox extends Component {
     if (selectedIndex > -1 && this.isInInitialValues(tempValue)) {
       selectedValues = this.removeSelectedValue(selectedIndex);
     } else if (selectedIndex === -1) {
+      if (max && stateSelectedValues.length >= max) {
+        return selectedValues;
+      }
       selectedValues = this.addSelectedValue(tempValue);
     }
 
@@ -349,8 +360,9 @@ export default class Combobox extends Component {
   }
 
   manageSelectedValues(index) {
+    const { stateSelectedValues } = this.state;
     const {
-      multiple, onChange,
+      multiple, onChange, max,
     } = this.props;
     const filteredValues = this.filterValues();
     const tempSelectedValues = filteredValues[index];
@@ -361,6 +373,9 @@ export default class Combobox extends Component {
       if (selectedIndex > -1) {
         selectedValues = this.removeSelectedValue(selectedIndex);
       } else {
+        if (max && stateSelectedValues.length >= max) {
+          return selectedValues;
+        }
         selectedValues = this.addSelectedValue(filteredValues[index]);
       }
 
