@@ -14,13 +14,12 @@
 .tyk-row {
   display: flex;
   box-sizing: border-box;
-  margin-left: -$grid-gutter/2;
-  margin-right: -$grid-gutter/2;
   list-style: none;
   flex: 0 1 auto;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
+  margin-left: -$grid-gutter;
+  width: calc(100% + #{$grid-gutter});
 
   &.no-gutters {
     margin: 0;
@@ -36,14 +35,17 @@
 }
 
 .tyk-col {
-  max-width: 100%;
+  max-width: calc(100% - #{$grid-gutter});
   box-sizing: border-box;
   flex: 0 0 auto;
   flex-grow: 1;
-  flex-basis: 100%;
-  padding-left: $grid-gutter/2;
-  padding-right: $grid-gutter/2;
-  width: 100%;
+  flex-basis: calc(100% - #{$grid-gutter});
+  margin-left: $grid-gutter;
+  width: calc(100% - #{$grid-gutter});
+
+  &:last-child {
+    margin-right: 0;
+  }
 
   .tyk-row--gutterless & {
     padding-left: 0;

@@ -50,8 +50,8 @@
 @mixin grid-loop($name) {
   @for $i from 0 through $grid-columns {
     .tyk-col--#{$name}-#{$i} {
-      flex-basis: percentage($i / $grid-columns);
-      max-width: percentage($i / $grid-columns);
+      flex-basis: calc(#{percentage($i / $grid-columns)} - #{$grid-gutter});
+      max-width: calc(#{percentage($i / $grid-columns)} - #{$grid-gutter});
     }
 
     .tyk-col--offset-#{$name}-#{$i} {
