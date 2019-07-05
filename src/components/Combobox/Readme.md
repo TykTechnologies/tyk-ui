@@ -96,7 +96,6 @@
   ]}
   label="Combobox as tags"
   tags={ true }
-  max={3}
   name="combobox"
   placeholder="Please select a value"
 />

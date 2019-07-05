@@ -29,6 +29,18 @@
     cursor: auto;
   }
 
+  .tyk-combobox--with-tags__button-down {
+    bottom: 0;
+    border-radius: 0;
+    color: $text-color;
+    font-size: text-scale('base');
+    padding: 0 15px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+  }
+
   .pill {
     background-color: $tyk-combobox-pill-background;
     border-radius: 10px;
@@ -51,6 +63,9 @@
   }
 
   &__search-box {
+    padding-right: 45px;
+    position: relative;
+
     input {
       border: none;
 

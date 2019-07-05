@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import Icon from '../../Icon';
+import Button from '../../Button';
 
 const getStateSelectedValues = (multiple, tags, value) => {
   if (!value) {
@@ -98,7 +99,7 @@ export default class Combobox extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (
       JSON.stringify(nextProps.value) !== JSON.stringify(prevState.initialValue)
-      && nextProps.tags !== prevState.tags
+      || nextProps.tags !== prevState.tags
     ) {
       return {
         initialValue: nextProps.value,
@@ -604,7 +605,7 @@ export default class Combobox extends Component {
                   ? (
                     <Fragment>
                       {
-                        stateSelectedValues.map((value, index) => (
+                        (stateSelectedValues || []).map((value, index) => (
                           <li className="pill" key={value.id}>
                             <button type="button" onClick={this.handlePillRemoveClick.bind(this, index)}>
                               <Icon type="times" />
@@ -616,7 +617,7 @@ export default class Combobox extends Component {
                       <li
                         className="tyk-combobox__search-box"
                         style={{
-                          width: (!stateSelectedValues.length) ? '100%' : 'auto',
+                          width: (!stateSelectedValues || !stateSelectedValues.length) ? '100%' : 'auto',
                         }}
                       >
                         <input
@@ -629,10 +630,10 @@ export default class Combobox extends Component {
                           }}
                           onKeyUp={this.onKeyUp}
                           onKeyDown={this.handleItemsNavigation}
-                          placeholder={(!stateSelectedValues.length) ? placeholder : ''}
+                          placeholder={(!stateSelectedValues || !stateSelectedValues.length) ? placeholder : ''}
                           ref={this.inputRef}
                           style={{
-                            width: (!stateSelectedValues.length) ? '100%' : `${width}px`,
+                            width: (!stateSelectedValues || !stateSelectedValues.length) ? '100%' : `${width}px`,
                           }}
                         />
                         <span
@@ -645,6 +646,12 @@ export default class Combobox extends Component {
                         >
                           { searchText }
                         </span>
+                        <Button
+                          className="tyk-combobox--with-tags__button-down"
+                          iconType="arrow-down"
+                          iconOnly
+                          onClick={this.handleComboboxDropdownClick}
+                        />
                       </li>
                     </Fragment>
                   )
