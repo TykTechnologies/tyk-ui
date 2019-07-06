@@ -16,17 +16,37 @@
     height: auto;
   }
 
-  > .tyk-form-control__wrapper > .tyk-form-control {
-    margin: 0;
-    padding: 0;
+  > .tyk-form-control__wrapper {
+    > .tyk-form-control {
+      margin: 0;
+      padding: 0;
+    }
+    > .tyk-form-control--with-tags {
+      cursor: auto;
+      overflow: hidden;
+      padding-right: 45px;
+      position: relative;
+    }
   }
 
   > .tyk-form-control {
     cursor: pointer;
   }
 
-  > .tyk-form-control--with-tags {
-    cursor: auto;
+  .tyk-combobox--with-tags__button-down {
+    bottom: 0;
+    border-radius: 0;
+    color: $text-color;
+    font-size: text-scale('base');
+    padding: 0 15px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+
+    .tyk-form-group--rounded-corners & {
+      border-radius: $general-border-radius;
+    }
   }
 
   .pill {
@@ -51,6 +71,9 @@
   }
 
   &__search-box {
+    float: left;
+    padding-right: 45px;
+
     input {
       border: none;
 

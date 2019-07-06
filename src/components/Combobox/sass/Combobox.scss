@@ -16,17 +16,21 @@
     height: auto;
   }
 
-  > .tyk-form-control__wrapper > .tyk-form-control {
-    margin: 0;
-    padding: 0;
+  > .tyk-form-control__wrapper {
+    > .tyk-form-control {
+      margin: 0;
+      padding: 0;
+    }
+    > .tyk-form-control--with-tags {
+      cursor: auto;
+      overflow: hidden;
+      padding-right: 45px;
+      position: relative;
+    }
   }
 
   > .tyk-form-control {
     cursor: pointer;
-  }
-
-  > .tyk-form-control--with-tags {
-    cursor: auto;
   }
 
   .tyk-combobox--with-tags__button-down {
@@ -39,6 +43,10 @@
     right: 0;
     top: 0;
     width: auto;
+
+    .tyk-form-group--rounded-corners & {
+      border-radius: $general-border-radius;
+    }
   }
 
   .pill {
@@ -63,8 +71,8 @@
   }
 
   &__search-box {
+    float: left;
     padding-right: 45px;
-    position: relative;
 
     input {
       border: none;

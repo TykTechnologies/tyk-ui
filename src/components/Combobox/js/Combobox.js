@@ -395,6 +395,7 @@ export default class Combobox extends Component {
   }
 
   removeSelectedValue(index) {
+    console.log('====>', index);
     const { stateSelectedValues } = this.state;
     const { onChange } = this.props;
     const tempStateSelectedValues = JSON.parse(JSON.stringify(stateSelectedValues));
@@ -523,6 +524,7 @@ export default class Combobox extends Component {
   }
 
   handlePillRemoveClick(index) {
+    console.log(index);
     const { disabled } = this.props;
 
     if (disabled) {

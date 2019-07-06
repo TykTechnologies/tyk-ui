@@ -5364,11 +5364,27 @@ select {
   margin: 0;
   padding: 0; }
 
+.tyk-combobox > .tyk-form-control__wrapper > .tyk-form-control--with-tags {
+  cursor: auto;
+  overflow: hidden;
+  padding-right: 45px;
+  position: relative; }
+
 .tyk-combobox > .tyk-form-control {
   cursor: pointer; }
 
-.tyk-combobox > .tyk-form-control--with-tags {
-  cursor: auto; }
+.tyk-combobox .tyk-combobox--with-tags__button-down {
+  bottom: 0;
+  border-radius: 0;
+  color: #000018;
+  font-size: 14px;
+  padding: 0 15px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto; }
+  .tyk-form-group--rounded-corners .tyk-combobox .tyk-combobox--with-tags__button-down {
+    border-radius: 18px; }
 
 .tyk-combobox .pill {
   background-color: #F0F0F0;
@@ -5386,10 +5402,13 @@ select {
   .tyk-combobox .pill i {
     margin-right: 5px; }
 
-.tyk-combobox__search-box input {
-  border: none; }
-  .tyk-combobox__search-box input:focus {
-    outline: none; }
+.tyk-combobox__search-box {
+  float: left;
+  padding-right: 45px; }
+  .tyk-combobox__search-box input {
+    border: none; }
+    .tyk-combobox__search-box input:focus {
+      outline: none; }
 
 .tyk-combobox .tyk-combobox__placeholder {
   align-items: center;
