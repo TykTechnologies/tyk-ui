@@ -395,7 +395,6 @@ export default class Combobox extends Component {
   }
 
   removeSelectedValue(index) {
-    console.log('====>', index);
     const { stateSelectedValues } = this.state;
     const { onChange } = this.props;
     const tempStateSelectedValues = JSON.parse(JSON.stringify(stateSelectedValues));
@@ -524,7 +523,6 @@ export default class Combobox extends Component {
   }
 
   handlePillRemoveClick(index) {
-    console.log(index);
     const { disabled } = this.props;
 
     if (disabled) {
@@ -648,12 +646,18 @@ export default class Combobox extends Component {
                         >
                           { searchText }
                         </span>
-                        <Button
-                          className="tyk-combobox--with-tags__button-down"
-                          iconType="arrow-down"
-                          iconOnly
-                          onClick={this.handleComboboxDropdownClick}
-                        />
+                        {
+                          filteredValues.length
+                            ? (
+                              <Button
+                                className="tyk-combobox--with-tags__button-down"
+                                iconType="arrow-down"
+                                iconOnly
+                                onClick={this.handleComboboxDropdownClick}
+                              />
+                            )
+                            : null
+                        }
                       </li>
                     </Fragment>
                   )
