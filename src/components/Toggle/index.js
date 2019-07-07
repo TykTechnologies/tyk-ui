@@ -66,6 +66,7 @@ export default class TestToggle extends Component {
             </Toggle>
 
             <Toggle
+              className="laurentiu-custom-class"
               value={active}
               onChange={this.toggleOnChange}
               theme="danger"

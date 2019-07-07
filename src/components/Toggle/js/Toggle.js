@@ -11,6 +11,7 @@ class Toggle extends Component {
       PropTypes.element,
       PropTypes.string,
     ]),
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
     label: PropTypes.string,
@@ -48,6 +49,28 @@ class Toggle extends Component {
     if (onChange) {
       onChange(value);
     }
+  }
+
+  getCssClasses() {
+    const {
+      className,
+      disabled,
+      size,
+      theme,
+    } = this.props;
+
+    let cssClasses = [
+      'tyk-toggle',
+      `tyk-toggle--disabled-${disabled}`,
+      `tyk-toggle--${size || 'md'}`,
+      `tyk-toggle--${theme}`,
+    ];
+
+    if (className) {
+      cssClasses = cssClasses.concat(className.split(' '));
+    }
+
+    return cssClasses.join(' ');
   }
 
   getLabelStyles() {
@@ -91,15 +114,13 @@ class Toggle extends Component {
       children,
       disabled,
       label,
-      size,
-      theme,
       type,
       separated,
       value,
     } = this.props;
 
     return (
-      <div className={`tyk-toggle tyk-toggle--disabled-${disabled} tyk-toggle--${size || 'md'} tyk-toggle--${theme}`} ref={this.toggleRef}>
+      <div className={this.getCssClasses()} ref={this.toggleRef}>
         <ToggleContext.Provider
           value={{
             disabled,
