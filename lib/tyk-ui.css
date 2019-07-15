@@ -6388,7 +6388,7 @@ textarea.tyk-form-control {
   .tyk-toggle + .tyk-button,
   .tyk-toggle + .tyk-dropdown,
   .tyk-toggle + .tyk-toggle {
-    margin-left: 10px; }
+    margin-right: 10px; }
   .tyk-toggle--disabled-true {
     cursor: not-allowed;
     opacity: 0.7; }
