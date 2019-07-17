@@ -3,7 +3,7 @@
   className="test-accordion-class"
   usearrowastrigger={ true }
 >
-  <Accordion.Item>
+  <Accordion.Item disabled>
     <Accordion.Item.Header>
       Header 1
     </Accordion.Item.Header>

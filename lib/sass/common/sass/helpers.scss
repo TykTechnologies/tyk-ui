@@ -21,3 +21,15 @@
 .hide {
   display: none !important;
 }
+
+.text {
+  &--primary {
+    color: theme-color('primary', 'base');
+  }
+  &--danger {
+    color: theme-color('danger', 'base');
+  }
+  &--info {
+    color: theme-color('info', 'base');
+  }
+}

@@ -8,10 +8,15 @@ const AccordionItem = (props) => {
     collapsed,
     children,
     className,
+    disabled,
   } = props;
   const [collapsedState, setCollapsedState] = useState(collapsed);
 
   const toggleChange = () => {
+    if (disabled) {
+      return;
+    }
+
     setCollapsedState(!collapsedState);
   };
 
@@ -34,6 +39,7 @@ const AccordionItem = (props) => {
       <AccordionItemContext.Provider
         value={{
           collapsed: collapsedState,
+          disabled,
           toggleChange,
         }}
       >
@@ -52,6 +58,7 @@ AccordionItem.propTypes = {
   ]),
   collapsed: PropTypes.bool,
   className: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 AccordionItem.defaultProps = {

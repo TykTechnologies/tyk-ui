@@ -4703,6 +4703,15 @@ h6 {
 .hide {
   display: none !important; }
 
+.text--primary {
+  color: #368493; }
+
+.text--danger {
+  color: #E8244F; }
+
+.text--info {
+  color: #82BBC6; }
+
 .tyk-form-section__title {
   font-size: 14px;
   margin: 5px 0 15px 0; }
@@ -4927,6 +4936,9 @@ select {
   width: 100%; }
   .tyk-accordion__item-header > button .tyk-icon {
     margin-left: auto; }
+
+.tyk-accordion__trigger--disabled {
+  color: #E1E1E1; }
 
 .tyk-accordion__item-header.tyk-accordion__arrow-trigger {
   align-items: center;
