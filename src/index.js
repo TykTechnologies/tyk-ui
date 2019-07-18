@@ -48,5 +48,6 @@ export { default as Textarea } from './components/Textarea';
 export { toast } from './components/Toast';
 export { Toggle } from './components/Toggle';
 export { FieldToggle } from './components/Toggle';
+export { default as Tooltip } from './components/Tooltip';
 
 import './index.scss';
