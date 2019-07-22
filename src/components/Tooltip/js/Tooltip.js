@@ -1,29 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 
-export default class Tooltip extends Component {
-  constructor(props) {
-    super(props);
-    const id = 'tyk-tooltip';
-    this.domNode = document.querySelector(`#${id}`);
-    if (!this.domNode) {
-      this.domNode = document.createElement('div');
-      this.domNode.setAttribute('id', id);
-      document.body.appendChild(this.domNode);
-    }
-    this.state = {
-      active: false,
-    };
+const Tooltip = ({ render, children }) => {
+  const [active, setActive] = useState(false);
 
-    this.sourceRef = React.createRef();
+  const id = 'tyk-tooltip';
+  let domNode = document.querySelector(`#${id}`);
+  if (!domNode) {
+    domNode = document.createElement('div');
+    domNode.setAttribute('id', id);
+    document.body.appendChild(domNode);
   }
 
-  renderToolTip = () => {
-    const { active } = this.state;
-    const { render } = this.props;
+  const sourceRef = useRef(domNode);
+
+  const renderToolTip = () => {
     if (active) {
-      const { top, left, width } = this.sourceRef.current.getBoundingClientRect();
+      const { top, left, width } = sourceRef.current.getBoundingClientRect();
       return (
         ReactDom.createPortal(
           <div
@@ -37,34 +31,28 @@ export default class Tooltip extends Component {
               {render}
             </div>
           </div>,
-          this.domNode,
+          domNode,
         )
       );
     }
     return null;
-  }
+  };
 
-  showToolTip = () => this.setState({ active: true });
+  const source = (
+    <span
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onFocus={() => setActive(true)}
+      onBlur={() => setActive(false)}
+      ref={sourceRef}
+      key="0"
+    >
+      {children}
+    </span>
+  );
 
-  hideToolTip = () => this.setState({ active: false });
-
-  render() {
-    const { children } = this.props;
-    const source = (
-      <span
-        onMouseEnter={this.showToolTip}
-        onMouseLeave={this.hideToolTip}
-        onFocus={this.showToolTip}
-        onBlur={this.hideToolTip}
-        ref={this.sourceRef}
-        key="0"
-      >
-        {children}
-      </span>
-    );
-    return [source, this.renderToolTip()];
-  }
-}
+  return [source, renderToolTip()];
+};
 
 Tooltip.propTypes = {
   children: PropTypes.node.isRequired,
@@ -73,3 +61,5 @@ Tooltip.propTypes = {
     PropTypes.string,
   ]),
 };
+
+export default Tooltip;
