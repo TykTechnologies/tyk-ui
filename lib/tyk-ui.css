@@ -270,7 +270,8 @@ table {
   .tyk-row.no-gutters {
     margin: 0; }
   .tyk-row.tyk-row--gutterless {
-    margin: 0; }
+    margin: 0;
+    width: 100%; }
   .tyk-row.tyk-row--reverse {
     flex-direction: row-reverse; }
 
@@ -285,8 +286,7 @@ table {
   .tyk-col:last-child {
     margin-right: 0; }
   .tyk-row--gutterless .tyk-col {
-    padding-left: 0;
-    padding-right: 0; }
+    margin: 0; }
   .tyk-col.tyk-col--reverse {
     flex-direction: column-reverse; }
   .tyk-col.tyk-col--align-bottom {
@@ -5608,9 +5608,13 @@ select {
     flex-direction: column;
     position: absolute; }
   .tyk-dropdown-menu > li {
+    background: white;
+    border-bottom: 1px solid white;
     display: flex;
     position: relative;
     z-index: 7; }
+    .tyk-dropdown-menu > li:last-child {
+      border: none; }
     .tyk-dropdown-menu > li i {
       left: 7px;
       position: absolute;
@@ -5625,6 +5629,8 @@ select {
   text-transform: uppercase;
   text-decoration: none;
   width: 100%; }
+  .tyk-dropdown-menu > li > a:hover {
+    color: #000018; }
   .tyk-dropdown-menu > li > a .badge {
     background: #000018;
     color: white;
@@ -5895,9 +5901,13 @@ select {
       border-color: #FF6C7E; }
 
 .tyk-message {
-  border-radius: 3px;
+  border-radius: 18px;
   margin-bottom: 20px;
   padding: 20px 20px 20px 20px; }
+  .tyk-message--default {
+    background-color: #F0F0F0;
+    border: 1px solid #E1E1E1;
+    color: #000018; }
   .tyk-message--info {
     background-color: #D3EBEF;
     border: 1px solid #82BBC6;

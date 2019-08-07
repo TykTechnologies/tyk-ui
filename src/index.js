@@ -51,6 +51,7 @@ export { FieldToggle } from './components/Toggle';
 
 export { default as usePrevious } from './common/js/hooks/usePrevious';
 export { default as useTimeout } from './common/js/hooks/useTimeout';
+export { default as useInterval } from './common/js/hooks/useInterval';
 export { default as useEventListener } from './common/js/hooks/useEventListener';
 export { default as useComponentSize } from './common/js/hooks/useComponentSize';
 
