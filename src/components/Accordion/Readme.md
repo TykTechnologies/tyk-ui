@@ -3,7 +3,7 @@
   className="test-accordion-class"
   usearrowastrigger={ true }
 >
-  <Accordion.Item disabled>
+  <Accordion.Item disabled collapsed>
     <Accordion.Item.Header>
       Header 1
     </Accordion.Item.Header>
@@ -11,7 +11,7 @@
       Content 1
     </Accordion.Item.Content>
   </Accordion.Item>
-  <Accordion.Item>
+  <Accordion.Item collapsed>
     <Accordion.Item.Header>
       Header 2
     </Accordion.Item.Header>
@@ -19,7 +19,7 @@
       Content 2
     </Accordion.Item.Content>
   </Accordion.Item>
-  <Accordion.Item>
+  <Accordion.Item collapsed>
     <Accordion.Item.Header>
       Header 3
     </Accordion.Item.Header>
