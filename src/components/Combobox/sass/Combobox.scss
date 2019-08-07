@@ -142,6 +142,7 @@
 
     &.combobox-search__container {
       background-color: white;
+      position: -webkit-sticky; 
       position: sticky;
       top: 0;
     }

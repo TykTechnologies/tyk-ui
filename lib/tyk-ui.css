@@ -5462,6 +5462,7 @@ select {
       background-color: #D2D2D2; }
     .tyk-combobox__list li.combobox-search__container {
       background-color: white;
+      position: -webkit-sticky;
       position: sticky;
       top: 0; }
     .tyk-combobox__list li i {
@@ -6316,6 +6317,7 @@ select {
   height: calc(100vh - 58px);
   flex: 0 0 280px;
   padding: 0;
+  position: -webkit-sticky;
   position: sticky;
   overflow: scroll;
   top: 58px; }
