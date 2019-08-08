@@ -5460,6 +5460,9 @@ select {
       border-color: #D2D2D2; }
     .tyk-combobox__list li:hover, .tyk-combobox__list li.active {
       background-color: #D2D2D2; }
+    .tyk-combobox__list li.disabled {
+      color: #D2D2D2;
+      background-color: initial; }
     .tyk-combobox__list li.combobox-search__container {
       background-color: white;
       position: -webkit-sticky;

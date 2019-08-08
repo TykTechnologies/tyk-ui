@@ -140,9 +140,14 @@
       background-color: $form-default-color;
     }
 
+    &.disabled {
+      color: $form-default-color;
+      background-color: initial;
+    }
+
     &.combobox-search__container {
       background-color: white;
-      position: -webkit-sticky; 
+      position: -webkit-sticky;
       position: sticky;
       top: 0;
     }
