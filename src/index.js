@@ -1,3 +1,5 @@
+import './index.scss';
+
 export { default as Accordion } from './components/Accordion';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
@@ -23,36 +25,28 @@ export { default as FixedWrapper } from './components/FixedWrapper';
 export { default as Icon } from './components/Icon';
 export { default as InfiniteScroller } from './components/InfiniteScroller';
 export { default as InfoNote } from './components/InfoNote';
-export { Input } from './components/Input';
-export { FieldInput } from './components/Input';
+export { Input, FieldInput } from './components/Input';
 export { default as List } from './components/List';
 export { default as Loader } from './components/Loader';
 export { default as Message } from './components/Message';
 export { default as Modal } from './components/Modal';
-export { Multiselect } from './components/Multiselect';
-export { FieldMultiselect } from './components/Multiselect';
+export { Multiselect, FieldMultiselect } from './components/Multiselect';
 export { default as NavBar } from './components/NavBar';
 export { default as Navigation } from './components/Navigation';
-export { Pagination } from './components/Pagination';
-export { FieldPagination } from './components/Pagination';
+export { Pagination, FieldPagination } from './components/Pagination';
 export { default as Panel } from './components/Panel';
 export { default as Pill } from './components/Pill';
 export { default as Radio } from './components/Radio';
 export { default as Row } from './components/Row';
-export { default as Select } from './components/Select';
-export { FieldSelect } from './components/Select';
-export { SelectableList } from './components/SelectableList';
-export { FieldSelectableList } from './components/SelectableList';
+export { Select, FieldSelect } from './components/Select';
+export { SelectableList, FieldSelectableList } from './components/SelectableList';
 export { default as Tabs } from './components/Tabs';
 export { default as Textarea } from './components/Textarea';
 export { toast } from './components/Toast';
-export { Toggle } from './components/Toggle';
-export { FieldToggle } from './components/Toggle';
+export { Toggle, FieldToggle } from './components/Toggle';
 
 export { default as usePrevious } from './common/js/hooks/usePrevious';
 export { default as useTimeout } from './common/js/hooks/useTimeout';
 export { default as useInterval } from './common/js/hooks/useInterval';
 export { default as useEventListener } from './common/js/hooks/useEventListener';
 export { default as useComponentSize } from './common/js/hooks/useComponentSize';
-
-import './index.scss';

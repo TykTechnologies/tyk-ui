@@ -5460,6 +5460,9 @@ select {
       border-color: #D2D2D2; }
     .tyk-combobox__list li:hover, .tyk-combobox__list li.active {
       background-color: #D2D2D2; }
+    .tyk-combobox__list li.disabled {
+      color: #D2D2D2;
+      background-color: initial; }
     .tyk-combobox__list li.combobox-search__container {
       background-color: white;
       position: -webkit-sticky;
@@ -5868,7 +5871,7 @@ select {
   margin: 0;
   max-height: 191px;
   padding: 0;
-  overflow: scroll; }
+  overflow: auto; }
   .tyk-list--with-inline-label {
     display: flex; }
     .tyk-list--with-inline-label > label {
@@ -6090,7 +6093,7 @@ select {
 .tyk-navigation {
   background-color: white;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
   padding: 0;
   width: 100%; }
   .tyk-navigation .tyk-navigation-item {
@@ -6319,7 +6322,7 @@ select {
   padding: 0;
   position: -webkit-sticky;
   position: sticky;
-  overflow: scroll;
+  overflow: auto;
   top: 58px; }
 
 .tyk-table {
@@ -6364,7 +6367,7 @@ select {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: scroll; }
+  overflow: auto; }
   .tyk-tabs--default > ul li {
     display: flex;
     white-space: nowrap; }

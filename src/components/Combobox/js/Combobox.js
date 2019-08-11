@@ -218,6 +218,10 @@ export default class Combobox extends Component {
       cssClasses.push('active');
     }
 
+    if (value.disabled) {
+      cssClasses.push('disabled');
+    }
+
     return cssClasses.join(' ');
   }
 
@@ -508,6 +512,10 @@ export default class Combobox extends Component {
   }
 
   handleListItemClick(index) {
+    // eslint-disable-next-line react/destructuring-assignment
+    const clickedValue = this.props.values[index];
+    if (clickedValue.disabled) return;
+
     const { multiple, tags } = this.props;
 
     const methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';

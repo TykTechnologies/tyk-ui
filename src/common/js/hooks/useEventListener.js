@@ -7,7 +7,6 @@ const useEventListener = (eventName, handler, element) => {
   }, [handler]);
 
   useEffect(() => {
-    console.log('------->', element);
     const isSupported = element && element.addEventListener;
     if (!isSupported) {
       // eslint-disable-next-line consistent-return
