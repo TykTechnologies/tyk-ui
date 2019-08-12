@@ -4660,6 +4660,21 @@ readers do not read off random characters that represent icons */
 .tykon-undo:before {
   content: "m"; }
 
+.tykon-deployment:before {
+  content: "n"; }
+
+.tykon-team:before {
+  content: "o"; }
+
+.tykon-overview:before {
+  content: "p"; }
+
+.tykon-loadout:before {
+  content: "q"; }
+
+.tykon-entitlement:before {
+  content: "r"; }
+
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 15px;
   font-family: "robotomedium";

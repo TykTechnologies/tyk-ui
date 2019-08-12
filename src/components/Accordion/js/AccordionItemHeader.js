@@ -17,7 +17,7 @@ const AccordionItemHeader = (props) => {
     disabled,
     toggleChange,
   } = accordionItemContext;
-  const iconType = !collapsed ? 'chevron-down' : 'chevron-up';
+  const iconType = !collapsed ? 'chevron-up' : 'chevron-down';
 
   const getCssClasses = () => {
     let cssClasses = ['tyk-accordion__item-header'];

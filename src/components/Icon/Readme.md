@@ -14,5 +14,10 @@ import Icon from './index';
   <Icon family="tykon" type="select" />
   <Icon family="tykon" type="target" />
   <Icon family="tykon" type="undo" />
+  <Icon family="tykon" type="deployment" />
+  <Icon family="tykon" type="team" />
+  <Icon family="tykon" type="overview" />
+  <Icon family="tykon" type="loadout" />
+  <Icon family="tykon" type="entitlement" />
 </div>
 ```
