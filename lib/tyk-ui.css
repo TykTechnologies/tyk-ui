@@ -4675,6 +4675,9 @@ readers do not read off random characters that represent icons */
 .tykon-entitlement:before {
   content: "r"; }
 
+.tykon-users:before {
+  content: "s"; }
+
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 15px;
   font-family: "robotomedium";

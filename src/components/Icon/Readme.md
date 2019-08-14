@@ -19,5 +19,6 @@ import Icon from './index';
   <Icon family="tykon" type="overview" />
   <Icon family="tykon" type="loadout" />
   <Icon family="tykon" type="entitlement" />
+  <Icon family="tykon" type="users" />
 </div>
 ```
