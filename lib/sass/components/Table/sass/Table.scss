@@ -7,48 +7,50 @@
   border-spacing: 0;
   width: 100%;
 
-  th {
-    color: theme-color('foreground', 'light');
-    font-size: text-scale('sm');
-    text-align: left;
-    text-transform: uppercase;
-
-    .tyk-button {
-      background: none;
+  .table > {
+    th {
       color: theme-color('foreground', 'light');
-      padding: 0;
+      font-size: text-scale('sm');
+      text-align: left;
+      text-transform: uppercase;
+
+      .tyk-button {
+        background: none;
+        color: theme-color('foreground', 'light');
+        padding: 0;
+      }
     }
-  }
 
-  th {
-    padding: $table-th-padding;
-  }
+    th {
+      padding: $table-th-padding;
+    }
 
-  td {
-    padding: $table-td-padding-y $table-td-padding-x;
-    vertical-align: middle;
-  }
+    td {
+      padding: $table-td-padding-y $table-td-padding-x;
+      vertical-align: middle;
+    }
 
-  tbody tr:nth-child(2n+1) {
-    background-color: theme-color('background', 'light');
-  }
+    tbody tr:nth-child(2n+1) {
+      background-color: theme-color('background', 'light');
+    }
 
-  tr td:first-child,
-  tr th:first-child {
-    padding-left: $table-first-last-padding;
-  }
+    tr td:first-child,
+    tr th:first-child {
+      padding-left: $table-first-last-padding;
+    }
 
-  tr td:last-child,
-  tr th:last-child {
-    padding-right: $table-first-last-padding;
-  }
+    tr td:last-child,
+    tr th:last-child {
+      padding-right: $table-first-last-padding;
+    }
 
-  .tyk-pagination {
+    .tyk-pagination {
     padding: $table-pagination-padding;
 
     li:first-child {
       margin-left: auto;
     }
+  }
   }
 }
 

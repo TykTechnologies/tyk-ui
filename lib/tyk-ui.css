@@ -6347,31 +6347,31 @@ select {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%; }
-  .tyk-table th {
+  .tyk-table .table > th {
     color: #5a5a68;
     font-size: 12px;
     text-align: left;
     text-transform: uppercase; }
-    .tyk-table th .tyk-button {
+    .tyk-table .table > th .tyk-button {
       background: none;
       color: #5a5a68;
       padding: 0; }
-  .tyk-table th {
+  .tyk-table .table > th {
     padding: 20px 10px; }
-  .tyk-table td {
+  .tyk-table .table > td {
     padding: 10px 10px;
     vertical-align: middle; }
-  .tyk-table tbody tr:nth-child(2n+1) {
+  .tyk-table .table > tbody tr:nth-child(2n+1) {
     background-color: #F0F0F0; }
-  .tyk-table tr td:first-child,
-  .tyk-table tr th:first-child {
+  .tyk-table .table > tr td:first-child,
+  .tyk-table .table > tr th:first-child {
     padding-left: 25px; }
-  .tyk-table tr td:last-child,
-  .tyk-table tr th:last-child {
+  .tyk-table .table > tr td:last-child,
+  .tyk-table .table > tr th:last-child {
     padding-right: 25px; }
-  .tyk-table .tyk-pagination {
+  .tyk-table .table > .tyk-pagination {
     padding: 20px 25px; }
-    .tyk-table .tyk-pagination li:first-child {
+    .tyk-table .table > .tyk-pagination li:first-child {
       margin-left: auto; }
 
 .tyk-table-search {
