@@ -93,6 +93,7 @@ SelectableList.propTypes = {
     PropTypes.node,
     PropTypes.element,
     PropTypes.string,
+    PropTypes.func,
   ]),
   value: PropTypes.instanceOf(Array),
   onChange: PropTypes.func,

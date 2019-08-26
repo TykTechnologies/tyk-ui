@@ -8,7 +8,7 @@ export default class Row extends PureComponent {
       PropTypes.node,
     ]),
     className: PropTypes.string,
-    nogutters: PropTypes.string,
+    nogutters: PropTypes.bool,
   }
 
   getCssClasses() {
@@ -30,10 +30,12 @@ export default class Row extends PureComponent {
   render() {
     const {
       children,
+      nogutters,
+      ...rest
     } = this.props;
 
     return (
-      <div {...this.props} className={this.getCssClasses()}>
+      <div {...rest} className={this.getCssClasses()}>
         { children }
       </div>
     );
