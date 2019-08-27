@@ -43,8 +43,8 @@ export { SelectableList, FieldSelectableList } from './components/SelectableList
 export { default as Tabs } from './components/Tabs';
 export { default as Textarea } from './components/Textarea';
 export { toast } from './components/Toast';
+export { default as Tooltip } from './components/Tooltip';
 export { Toggle, FieldToggle } from './components/Toggle';
-
 export { default as usePrevious } from './common/js/hooks/usePrevious';
 export { default as useTimeout } from './common/js/hooks/useTimeout';
 export { default as useInterval } from './common/js/hooks/useInterval';
