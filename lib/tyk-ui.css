@@ -5684,6 +5684,9 @@ select {
     margin-top: 0; }
   .tyk-editable-list__form > span {
     margin-left: 15px; }
+    .tyk-editable-list__form > span.inline-with-label {
+      align-self: flex-end;
+      margin-bottom: 4px; }
 
 .tyk-editable-list__header {
   padding-top: 15px;
