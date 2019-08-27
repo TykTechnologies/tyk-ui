@@ -1,24 +1,8 @@
 ```js
-<Dropdown
-  label="Period"
-  name="period"
-  btnTitle="Dropdown"
->
-  <Dropdown.Item
-    key='1'
-    eventKey='1'
-    title='First'
-  />
-  <Dropdown.Item
-    key='2'
-    eventKey='2'
-    title='Second'
-  />
-  <Dropdown.Item
-    key='3'
-    eventKey='3'
-    title='Third'
-  />
+<Dropdown label="Period" name="period" btnTitle="Dropdown">
+  <Dropdown.Item key="1" eventKey="1" title="First" />
+  <Dropdown.Item key="2" eventKey="2" title="Second" />
+  <Dropdown.Item key="3" eventKey="3" title="Third" />
 </Dropdown>
 ```
 
@@ -45,6 +29,7 @@
 </Dropdown>
 <div id="dropdownContainer1"></div>
 ```
+
 ```js
 <Dropdown
   appendTo="#dropdownContainer2"
