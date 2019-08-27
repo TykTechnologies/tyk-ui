@@ -309,7 +309,7 @@ export default class EditableList extends Component {
                     className="tyk-editable-list-item__controls"
                     style={{
                       display: 'block',
-                      width: (config.displayType === 'inline') ? 'auto' : `${buttonWidth + 15}px`,
+                      width: (config.displayType === 'inline') ? 'auto' : `${buttonWidth + 60}px`,
                     }}
                   >
                     <button disabled={disabled} type="button" className="tyk-editable-list-action__button" onClick={this.setItemEditMode.bind(this, index)}>
