@@ -12,6 +12,7 @@ import {Input} from '../Input';
   }}
   config={{
     displayType: 'inline',
+    formButtonStyle: 'inline-with-label',
     components: [
       {
         size: 6,
@@ -102,6 +103,7 @@ import {Input} from '../Input';
     console.log('nextValue:', nextValue);
   }}
   config={{
+    formButtonStyle: 'inline-with-label',
     components: [
       {
         size: 6,
@@ -154,6 +156,7 @@ import {Input} from '../Input';
     }}
     config={{
       appendTo: '#prct',
+      formButtonStyle: 'inline-with-label',
       components: [
         {
           size: 12,
