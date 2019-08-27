@@ -38,7 +38,7 @@
         bottom: -10px;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
-        border-bottom: 8px solid white;
+        border-bottom: 8px solid $tyk-dropdown-item-background;
         // -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
         // filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
         height: 0px;
@@ -69,7 +69,7 @@
 }
 
 .tyk-dropdown-menu {
-  background: white;
+  background: $tyk-dropdown-item-background;
   border: theme-color('background', 'dark');
   border-radius: $general-border-radius;
   -webkit-filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
@@ -92,9 +92,15 @@
   }
 
   > li {
+    background: $tyk-dropdown-item-background;
+    border-bottom: 1px solid $tyk-dropdown-item-border-color;
     display: flex;
     position: relative;
     z-index: 7;
+
+    &:last-child {
+      border: none;
+    }
 
     i {
       left: 7px;
@@ -106,13 +112,17 @@
 
 .tyk-dropdown-menu > li > a {
   cursor: pointer;
-  color: $text-color;
+  color: $tyk-dropdown-item-text-color;
   display: flex;
   font-size: 12px;
   padding: 7px 24px;
   text-transform: uppercase;
   text-decoration: none;
   width: 100%;
+
+  &:hover {
+    color: $tyk-dropdown-item-hover-text-color;
+  }
 
   .badge {
     background: $text-color;

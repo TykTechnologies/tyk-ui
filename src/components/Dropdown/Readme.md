@@ -3,12 +3,6 @@
   label="Period"
   name="period"
   btnTitle="Dropdown"
-  showTriggerButton={ false }
-  open={true}
-  offset={{
-    left: 100,
-    top: 100
-  }}
 >
   <Dropdown.Item
     key='1'

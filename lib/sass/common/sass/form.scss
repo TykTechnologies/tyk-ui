@@ -159,7 +159,7 @@
   }
 
   &[disabled] {
-    background-color: theme-color('background', 'light');
+    background-color: $form-control-disabled-color;
     cursor: not-allowed;
   }
 

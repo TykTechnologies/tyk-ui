@@ -28,6 +28,11 @@
 
   > span {
     margin-left: 15px;
+
+    &.inline-with-label {
+      align-self: flex-end;
+      margin-bottom: 4px;
+    }
   }
 }
 

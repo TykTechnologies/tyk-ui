@@ -18,6 +18,10 @@
     }
   }
 
+  &__trigger--disabled {
+    color: theme-color('background', 'base');
+  }
+
   &__item-header.tyk-accordion__arrow-trigger {
     align-items: center;
     display: flex;

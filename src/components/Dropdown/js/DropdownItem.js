@@ -18,6 +18,7 @@ export default class DropdownItem extends Component {
     ]),
     eventKey: PropTypes.string,
     href: PropTypes.string,
+    target: PropTypes.string,
     onClick: PropTypes.func,
     title: PropTypes.string,
   };
@@ -44,6 +45,7 @@ export default class DropdownItem extends Component {
       children,
       eventKey,
       href,
+      target,
       title,
     } = this.props;
     return (
@@ -62,7 +64,7 @@ export default class DropdownItem extends Component {
                     </Fragment>
                   )
                   : (
-                    <a href={href}>
+                    <a href={href} target={target}>
                       {
                         eventKey
                         && dropdownContext.selectedItem === eventKey

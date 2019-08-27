@@ -162,3 +162,23 @@
   placeholder="Please select a value"
 />
 ```
+```js
+<Combobox
+  values={[
+    { id: '', name: "None" },
+    { id: 'apione', name: 'API one'},
+    { id: 'apitwo', name: 'API two', disabled: true},
+    { id: 'apithree', name: 'API three'},
+    { id: 'apifour', name: 'API four', disabled: true},
+    { id: 'apifive', name: 'API five'},
+    { id: 'apisix', name: 'API six'},
+    { id: 'apiseven', name: 'API seven'},
+    { id: 'apieight', name: 'API eight'}
+  ]}
+  label="Combobox with disabled items"
+  name="combobox"
+  onChange={ (e) => { console.log(e); }}
+  note="Some note on the combobox"
+  placeholder="Please select a value"
+/>
+```

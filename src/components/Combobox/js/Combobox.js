@@ -22,7 +22,11 @@ export default class Combobox extends Component {
     labelwidth: PropTypes.string,
     multiple: PropTypes.bool,
     max: PropTypes.number,
-    note: PropTypes.string,
+    note: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     tags: PropTypes.bool,
@@ -216,6 +220,10 @@ export default class Combobox extends Component {
 
     if (cursor === index) {
       cssClasses.push('active');
+    }
+
+    if (value.disabled) {
+      cssClasses.push('disabled');
     }
 
     return cssClasses.join(' ');
@@ -508,6 +516,10 @@ export default class Combobox extends Component {
   }
 
   handleListItemClick(index) {
+    // eslint-disable-next-line react/destructuring-assignment
+    const clickedValue = this.props.values[index];
+    if (clickedValue.disabled) return;
+
     const { multiple, tags } = this.props;
 
     const methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';

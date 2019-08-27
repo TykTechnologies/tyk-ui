@@ -27,6 +27,7 @@
 
   &.tyk-row--gutterless {
     margin: 0;
+    width: 100%;
   }
 
   &.tyk-row--reverse {
@@ -48,8 +49,7 @@
   }
 
   .tyk-row--gutterless & {
-    padding-left: 0;
-    padding-right: 0;
+    margin: 0;
   }
 
   &.tyk-col--reverse {

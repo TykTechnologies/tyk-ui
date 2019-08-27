@@ -14,9 +14,10 @@ const AccordionItemHeader = (props) => {
   const accordionContext = useContext(AccordionContext);
   const {
     collapsed,
+    disabled,
     toggleChange,
   } = accordionItemContext;
-  const iconType = !collapsed ? 'chevron-down' : 'chevron-up';
+  const iconType = !collapsed ? 'chevron-up' : 'chevron-down';
 
   const getCssClasses = () => {
     let cssClasses = ['tyk-accordion__item-header'];
@@ -40,6 +41,7 @@ const AccordionItemHeader = (props) => {
         !accordionContext.usearrowastrigger
           ? (
             <button
+              className={disabled ? 'tyk-accordion__trigger--disabled' : ''}
               onClick={toggleChange}
               type="button"
             >
@@ -51,6 +53,7 @@ const AccordionItemHeader = (props) => {
             <Fragment>
               <div>{children}</div>
               <button
+                className={disabled ? 'tyk-accordion__trigger--disabled' : ''}
                 onClick={toggleChange}
                 type="button"
               >
