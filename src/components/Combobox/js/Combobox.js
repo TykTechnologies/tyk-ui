@@ -22,7 +22,11 @@ export default class Combobox extends Component {
     labelwidth: PropTypes.string,
     multiple: PropTypes.bool,
     max: PropTypes.number,
-    note: PropTypes.string,
+    note: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     tags: PropTypes.bool,

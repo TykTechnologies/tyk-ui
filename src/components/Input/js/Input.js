@@ -27,7 +27,10 @@ export default class Input extends Component {
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     theme: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ]),
   }
 
   static getAddon(content) {
