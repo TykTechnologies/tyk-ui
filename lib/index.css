@@ -5596,6 +5596,7 @@ select {
       border-right: 8px solid transparent;
       border-bottom: 8px solid white;
       height: 0px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
       left: 50%;
       margin-left: -8px;
       position: absolute;
@@ -5613,7 +5614,7 @@ select {
 
 .tyk-dropdown-menu {
   background: white;
-  border: #D2D2D2;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 18px;
   -webkit-filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
   filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
@@ -6689,6 +6690,22 @@ textarea.tyk-form-control {
   .tyk-toast-message__button:hover {
     background: rgba(255, 255, 255, 0.3);
     color: #000018; }
+
+.tyk-tooltip-content {
+  position: relative;
+  background-color: #5a5a68;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  left: -50%; }
+  .tyk-tooltip-content:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 5px);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #5a5a68 transparent transparent transparent; }
 
 body {
   background-color: #E1E1E1; }
