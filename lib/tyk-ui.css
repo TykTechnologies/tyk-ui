@@ -6351,31 +6351,31 @@ select {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%; }
-  .tyk-table .table > th {
+  .tyk-table > thead th {
     color: #5a5a68;
     font-size: 12px;
     text-align: left;
     text-transform: uppercase; }
-    .tyk-table .table > th .tyk-button {
+    .tyk-table > thead th .tyk-button {
       background: none;
       color: #5a5a68;
       padding: 0; }
-  .tyk-table .table > th {
+  .tyk-table > thead th {
     padding: 20px 10px; }
-  .tyk-table .table > td {
+  .tyk-table > tbody td {
     padding: 10px 10px;
     vertical-align: middle; }
-  .tyk-table .table > tbody tr:nth-child(2n+1) {
+  .tyk-table > tbody tr:nth-child(2n+1) {
     background-color: #F0F0F0; }
-  .tyk-table .table > tr td:first-child,
-  .tyk-table .table > tr th:first-child {
+  .tyk-table > tbody tr td:first-child,
+  .tyk-table > thead tr th:first-child {
     padding-left: 25px; }
-  .tyk-table .table > tr td:last-child,
-  .tyk-table .table > tr th:last-child {
+  .tyk-table > tbody tr td:last-child,
+  .tyk-table > thead tr th:last-child {
     padding-right: 25px; }
-  .tyk-table .table > .tyk-pagination {
+  .tyk-table .tyk-pagination {
     padding: 20px 25px; }
-    .tyk-table .table > .tyk-pagination li:first-child {
+    .tyk-table .tyk-pagination li:first-child {
       margin-left: auto; }
 
 .tyk-table-search {

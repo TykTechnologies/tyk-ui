@@ -7,8 +7,7 @@
   border-spacing: 0;
   width: 100%;
 
-  .table > {
-    th {
+    > thead th {
       color: theme-color('foreground', 'light');
       font-size: text-scale('sm');
       text-align: left;
@@ -21,37 +20,36 @@
       }
     }
 
-    th {
+    > thead th {
       padding: $table-th-padding;
     }
 
-    td {
+    > tbody td {
       padding: $table-td-padding-y $table-td-padding-x;
       vertical-align: middle;
     }
 
-    tbody tr:nth-child(2n+1) {
+    > tbody tr:nth-child(2n+1) {
       background-color: theme-color('background', 'light');
     }
 
-    tr td:first-child,
-    tr th:first-child {
+    > tbody tr td:first-child,
+    > thead tr th:first-child {
       padding-left: $table-first-last-padding;
     }
 
-    tr td:last-child,
-    tr th:last-child {
+    > tbody tr td:last-child,
+    > thead tr th:last-child {
       padding-right: $table-first-last-padding;
     }
 
     .tyk-pagination {
-    padding: $table-pagination-padding;
+      padding: $table-pagination-padding;
 
-    li:first-child {
-      margin-left: auto;
+      li:first-child {
+        margin-left: auto;
+      }
     }
-  }
-  }
 }
 
 .tyk-table-search {
