@@ -122,6 +122,52 @@
     }
   }
 
+  .rdtMonths {
+    & .rdtMonth {
+      text-align: center; 
+      vertical-align: middle;
+
+      &.rdtActive {
+        background-color: theme-color('primary', 'base') !important;
+        color: white;
+      }
+    }
+
+    & tbody {
+      & td:first-child {
+        padding-left: 0px;
+      }
+
+      & td:last-child {
+        padding-right: 0px;
+      }
+    }
+  }
+
+  .rdtYears {
+    & .rdtYear {
+      text-align: center; 
+      vertical-align: middle;
+
+      &.rdtActive {
+        background-color: theme-color('primary', 'base') !important;
+        color: white;
+      }
+    }
+
+    & tbody {
+      & tr:last-child {
+        & td {
+          padding: 0;
+        }
+      }
+
+      & td:first-child, & td:last-child {
+        padding: 0;
+      }
+    }
+  }
+
   .rdtTimeToggle {
     padding: 15px 0;
 

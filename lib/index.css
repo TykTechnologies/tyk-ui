@@ -5557,6 +5557,26 @@ select {
     .rdtPicker td.rdtActive span {
       background-color: #368493;
       color: white; }
+  .rdtPicker .rdtMonths .rdtMonth {
+    text-align: center;
+    vertical-align: middle; }
+    .rdtPicker .rdtMonths .rdtMonth.rdtActive {
+      background-color: #368493 !important;
+      color: white; }
+  .rdtPicker .rdtMonths tbody td:first-child {
+    padding-left: 0px; }
+  .rdtPicker .rdtMonths tbody td:last-child {
+    padding-right: 0px; }
+  .rdtPicker .rdtYears .rdtYear {
+    text-align: center;
+    vertical-align: middle; }
+    .rdtPicker .rdtYears .rdtYear.rdtActive {
+      background-color: #368493 !important;
+      color: white; }
+  .rdtPicker .rdtYears tbody tr:last-child td {
+    padding: 0; }
+  .rdtPicker .rdtYears tbody td:first-child, .rdtPicker .rdtYears tbody td:last-child {
+    padding: 0; }
   .rdtPicker .rdtTimeToggle {
     padding: 15px 0; }
     .rdtPicker .rdtTimeToggle:hover {
@@ -6437,7 +6457,7 @@ textarea.tyk-form-control {
   .tyk-toggle + .tyk-button,
   .tyk-toggle + .tyk-dropdown,
   .tyk-toggle + .tyk-toggle {
-    margin-right: 10px; }
+    margin-left: 10px; }
   .tyk-toggle--disabled-true {
     cursor: not-allowed;
     opacity: 0.7; }
