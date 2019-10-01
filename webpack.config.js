@@ -1,24 +1,20 @@
 const path = require('path');
-const glob = require('glob');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ExtractAppCSS = new MiniCssExtractPlugin({
-  filename: '[name].css'
-});
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-entries = {};
-entries['tyk-ui'] = path.resolve(__dirname, "src/index.js");
-entries.index = path.resolve(__dirname, "src/index.js");
+const entries = {};
+entries['tyk-ui'] = path.resolve(__dirname, 'src/index.js');
+entries.index = path.resolve(__dirname, 'src/index.js');
 
 module.exports = {
-  mode: "development",
+  mode: 'production',
   entry: entries,
   output: {
-    path: path.resolve(__dirname, "./lib/"),
+    path: path.resolve(__dirname, './lib/'),
     filename: '[name].js',
-    library: "TykUI",
-    libraryTarget: 'commonjs2'
+    library: 'TykUI',
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
@@ -28,26 +24,26 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: 'fonts/[name].[ext]'
-          }
-        }
+            name: 'fonts/[name].[ext]',
+          },
+        },
       },
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /.js?$/,
         include: [
-          path.resolve(__dirname, "src")
+          path.resolve(__dirname, 'src'),
         ],
         exclude: /node_modules/,
-        loader: "eslint-loader"
+        loader: 'eslint-loader',
       },
       {
         test: /\.js?$/,
         include: [
-          path.resolve(__dirname, "src")
+          path.resolve(__dirname, 'src'),
         ],
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: 'babel-loader',
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -58,69 +54,61 @@ module.exports = {
               name: 'images/[name].[ext]',
             },
           },
-        ]
+        ],
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-            }
+            },
           },
           {
-            loader: "resolve-url-loader",
+            loader: 'resolve-url-loader',
             options: {
               debug: true,
-              engine: 'postcss'
-            }
+              engine: 'postcss',
+            },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: true,
-              sourceMapContents: false
-            }
-          }
-        ]
-      }
-    ]
+              sourceMapContents: false,
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
-    ExtractAppCSS,
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
+    new OptimizeCSSAssetsPlugin(),
     new CopyWebpackPlugin([
       {
         from: 'src/**/*.scss',
         to: 'sass/',
-        transformPath (targetPath, absolutePath) {
+        transformPath(targetPath) {
           return targetPath.replace('src/', '');
-        }
-      }
+        },
+      },
     ], {
-      debug: true
-    })
+      debug: true,
+    }),
   ],
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          output: {
-            comments: false
-          }
-        }
-      })
-    ]
-  },
-  devtool: "source-map",
+  devtool: 'source-map',
   externals: {
-    'react': 'react',
-    "react-dom": 'reactDOM',
-    'moment': 'moment',
-    'immutable': 'immutable'
+    react: 'react',
+    'react-dom': 'reactDOM',
+    moment: 'moment',
+    immutable: 'immutable',
   },
-  stats: "verbose"
-}
+  stats: 'verbose',
+};
