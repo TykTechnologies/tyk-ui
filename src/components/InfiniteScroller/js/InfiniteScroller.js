@@ -44,7 +44,7 @@ const InfiniteScroller = (props) => {
       loadMore(pageNumber + 1);
       setShowLoader(true);
     }
-  }, [hasMore]);
+  }, [hasMore, pageNumber]);
 
   const prevPageNumber = usePrevious(pageNumber);
   const scrollHandler = useCallback(debounce(() => {

@@ -182,7 +182,7 @@ const Chart = (props) => {
   const pieChart = {
     defaultOpts: fromJS({
       tooltip: {
-        trigger: 'item',
+        trigger: 'axis',
         formatter: '{b}: {c} ({d}%)',
       },
       legend: {
@@ -236,9 +236,10 @@ const Chart = (props) => {
       finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
       selectedSeries.forEach((entry) => {
-        finalOpts.series.push(lineBarChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+        console.log(lineBarChart.seriesDefault.toJS(), entry);
+        let seriesData = Object.assign({}, lineBarChart.seriesDefault.toJS(), entry);
+        finalOpts.series.push(seriesData);
       });
-
       break;
     }
     }
@@ -299,6 +300,7 @@ const Chart = (props) => {
         || !fromJS(prevSeries).equals(fromJS(series))
       )
     ) {
+      tykChartInstance.clear();
       tykChartInstance.setOption(buildChartOptions(type, option, series));
       tykChartInstance.dispatchAction({
         type: 'takeGlobalCursor',
