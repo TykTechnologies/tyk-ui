@@ -375,7 +375,13 @@ export default class Dropdown extends Component {
                         className={this.getCssClasses()}
                         ref={this.dropdownListRef}
                       >
-                        { children }
+                        {
+                          (typeof children === "function")
+                            ? children({
+                                closeDropdown: this.closeDropdown.bind(this),
+                              })
+                            : children
+                        }
                       </DropdownWrapperTag>
                     )
                     : null
