@@ -24,6 +24,7 @@ const Chart = (props) => {
     onChange,
     zoomStart,
     zoomEnd,
+    title,
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -37,7 +38,7 @@ const Chart = (props) => {
     defaultOpts: fromJS({
       title: {
         show: true,
-        text: 'Success requests',
+        text: title,
         left: 0,
       },
       color: [],
@@ -237,7 +238,7 @@ const Chart = (props) => {
 
       selectedSeries.forEach((entry) => {
         console.log(lineBarChart.seriesDefault.toJS(), entry);
-        let seriesData = Object.assign({}, lineBarChart.seriesDefault.toJS(), entry);
+        const seriesData = Object.assign({}, lineBarChart.seriesDefault.toJS(), entry);
         finalOpts.series.push(seriesData);
       });
       break;
@@ -401,6 +402,7 @@ Chart.propTypes = {
   onChange: PropTypes.func,
   style: PropTypes.instanceOf(Object),
   type: PropTypes.string,
+  title: PropTypes.string,
   series: PropTypes.instanceOf(Array),
 };
 

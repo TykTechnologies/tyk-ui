@@ -16,6 +16,7 @@ export default class Dropdown extends Component {
       PropTypes.node,
       PropTypes.string,
     ]),
+    closeOnSelect: PropTypes.bool,
     btnClassName: PropTypes.string,
     btnSize: PropTypes.string,
     btnGroupSize: PropTypes.string,
@@ -45,6 +46,7 @@ export default class Dropdown extends Component {
   };
 
   static defaultProps = {
+    closeOnSelect: false,
     showDropdownIcon: true,
     showTriggerButton: true,
     showCheckmark: true,
@@ -131,12 +133,17 @@ export default class Dropdown extends Component {
   }
 
   onSelectItem(itemId, itemProps) {
-    const { onSelect } = this.props;
-
-    this.setState({
+    const { closeOnSelect, onSelect } = this.props;
+    const changes = {
       selectedItem: itemId,
       selectedItemProps: itemProps,
-    });
+    };
+
+    if (closeOnSelect) {
+      changes.opened = false;
+    }
+
+    this.setState(changes);
 
     if (onSelect && typeof onSelect === 'function') {
       onSelect(itemId);
