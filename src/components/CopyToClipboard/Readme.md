@@ -11,8 +11,7 @@ import Button from '../Button';
 
 ### Copy by Span
 ```js
-<CopyToClipboard 
-  type="label"
+<CopyToClipboard
   copy="Copied by Span!"
   element="span"
   display="copy with span"

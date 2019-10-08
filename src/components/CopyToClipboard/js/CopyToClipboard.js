@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, createRef } from 'react';
 import PropTypes from 'prop-types';
 
 const CopyToClipboard = (props) => {
   const { display, copy } = props;
-  const txtRef = React.createRef();
+  const txtRef = createRef();
 
   const handleClick = () => {
     if (!window.navigator.clipboard) {
