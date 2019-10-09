@@ -1,19 +1,30 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, createRef } from 'react';
 import PropTypes from 'prop-types';
 
 const CopyToClipboard = (props) => {
   const { display, copy } = props;
+  const txtRef = createRef();
 
-  const handleClick = () => window.navigator.clipboard.writeText(copy);
+  const handleClick = () => {
+    if (!window.navigator.clipboard) {
+      txtRef.current.select();
+      document.execCommand('copy');
+      return;
+    }
+    window.navigator.clipboard.writeText(copy);
+  };
 
   return (
     <Fragment>
-      <props.element
-        onClick={handleClick}
-        onKeyUp={handleClick}
-        {...props}
-      >
+      <props.element onClick={handleClick} onKeyUp={handleClick} {...props}>
         {display}
+        {!window.navigator.clipboard ? (
+          <textarea ref={txtRef} className="tyk-copy-to-clipboard" name="copy">
+            {copy}
+          </textarea>
+        ) : (
+          ''
+        )}
       </props.element>
     </Fragment>
   );
