@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useRef,
+  useState, useEffect, useRef, memo,
 } from 'react';
 import PropTypes from 'prop-types';
 import echarts from 'echarts';
@@ -47,26 +47,7 @@ const Chart = (props) => {
         orient: 'horizontal',
         itemSize: 15,
         showTitle: true,
-        feature: {
-          dataZoom: {
-            yAxisIndex: false,
-            show: true,
-            title: {
-              zoom: 'Drag over the area you want to zoom in',
-              back: 'Restore area zooming',
-            },
-          },
-          restore: {
-            title: 'Restore zooming to initial state',
-          },
-          magicType: {
-            type: ['line', 'bar'],
-            title: {
-              line: 'Display line chart',
-              bar: 'Display bar chart',
-            },
-          },
-        },
+        feature: null,
       },
       dataZoom: [{
         show: true,
@@ -237,7 +218,6 @@ const Chart = (props) => {
       finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
       selectedSeries.forEach((entry) => {
-        console.log(lineBarChart.seriesDefault.toJS(), entry);
         const seriesData = Object.assign({}, lineBarChart.seriesDefault.toJS(), entry);
         finalOpts.series.push(seriesData);
       });
@@ -315,13 +295,13 @@ const Chart = (props) => {
     if (tykChartInstance && highlight) {
       tykChartInstance.dispatchAction({
         type: 'highlight',
-        seriesIndex: 0,
-        dataIndex: highlight,
+        seriesIndex: highlight.seriesIndex,
+        dataIndex: highlight.dataIndex,
       });
       tykChartInstance.dispatchAction({
         type: 'showTip',
-        seriesIndex: 0,
-        dataIndex: highlight,
+        seriesIndex: highlight.seriesIndex,
+        dataIndex: highlight.dataIndex,
       });
     }
   }, [highlight]);
@@ -406,4 +386,4 @@ Chart.propTypes = {
   series: PropTypes.instanceOf(Array),
 };
 
-export default Chart;
+export default memo(Chart);
