@@ -11,8 +11,6 @@ export { default as Chart } from './components/Chart';
 export { default as Column } from './components/Column';
 export { Combobox } from './components/Combobox';
 export { FieldCombobox } from './components/Combobox';
-export { DateTimePicker } from './components/DateTimePicker';
-export { FieldDateTimePicker } from './components/DateTimePicker';
 export { DateRangePicker } from './components/DateRangePicker';
 export { FieldDateRangePicker } from './components/DateRangePicker';
 export { Dropdown } from './components/Dropdown';

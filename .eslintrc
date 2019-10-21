@@ -10,6 +10,7 @@
     "jsx-a11y/label-has-associated-control": false,
     "jsx-a11y/no-autofocus": false,
     "jsx-a11y/no-noninteractive-element-interactions": false,
+    "no-console": 0,
     "indent": ["error", 2, {
       "ignoredNodes": ["TemplateLiteral"]
     }]
