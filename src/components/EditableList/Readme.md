@@ -1,6 +1,7 @@
 ```js
 import { Combobox } from '../Combobox';
 import {Input} from '../Input';
+import {DatePicker} from '../DatePicker';
 <EditableList
   label="Editable list inline display"
   name="editableListInline"
@@ -16,9 +17,9 @@ import {Input} from '../Input';
     components: [
       {
         size: 6,
-        name: Input,
+        name: DatePicker,
         props: {
-          label: 'Input',
+          label: 'Date picker',
           placeholder: 'Pleas type smth',
           name: "elInput",
           type: "text",
