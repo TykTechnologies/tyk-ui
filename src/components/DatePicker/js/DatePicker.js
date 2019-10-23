@@ -39,6 +39,12 @@ const DatePicker = (props) => {
         }),
       );
     }
+
+    return () => {
+      if (pickerInstance) {
+        pickerInstance.destroy();
+      }
+    };
   }, [dateRef.current]);
 
   useEffect(() => {
