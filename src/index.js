@@ -13,7 +13,6 @@ export { Combobox } from './components/Combobox';
 export { FieldCombobox } from './components/Combobox';
 export { DatePicker } from './components/DatePicker';
 export { FieldDatePicker } from './components/DatePicker';
-export { DTP } from './components/DTP';
 export { Dropdown } from './components/Dropdown';
 export { FieldDropdown } from './components/Dropdown';
 export { EditableList } from './components/EditableList';

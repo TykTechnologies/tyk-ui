@@ -4,8 +4,6 @@
 @import '../../components/Collapsible/sass/Collapsible';
 @import '../../components/Chart/sass/Chart';
 @import '../../components/Combobox/sass/Combobox';
-@import '../../components/DateTimePicker/sass/DateTimePicker';
-@import '../../components/DateRangePicker/sass/DateRangePicker';
 @import '../../components/Dropdown/sass/Dropdown';
 @import '../../components/EditableList/sass/EditableList';
 @import '../../components/FileInput/sass/FileInput';
@@ -32,3 +30,5 @@
 @import '../../components/Toggle/sass/Toggle';
 @import '../../components/Toast/sass/Toast';
 @import '../../components/Tooltip/sass/Tooltip.scss';
+@import '../../components/CopyToClipboard/sass/CopyToClipboard';
+@import '~flatpickr/dist/flatpickr.min.css'
