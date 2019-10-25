@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import flatpickr from 'flatpickr';
 import Icon from '../../Icon';
 
+import '../../../../node_modules/flatpickr/dist/flatpickr.min.css';
+import { usePrevious } from '../../../common/js/hooks';
+
 const DatePicker = (props) => {
   const {
     children,
@@ -24,27 +27,38 @@ const DatePicker = (props) => {
   const [pickerInstance, setPickerInstance] = useState(null);
   const dateRef = useRef(null);
 
+  const prevValue = usePrevious(value);
+
+  const hasValueChanged = (prevDate, currentDate) => {
+    if (!Array.isArray(currentDate)) {
+      return prevDate.getTime() === currentDate.getTime();
+    }
+    let diffDates = currentDate;
+
+    if (prevDate && currentDate.length && prevDate.length) {
+      diffDates = currentDate.filter((date, index) => date.getTime() !== prevDate[index].getTime());
+
+      return diffDates.length > 0;
+    }
+
+    return currentDate.length > 0;
+  };
+
   const onDateChange = (dateValue) => {
     const finalValue = config.mode === 'range' ? dateValue : dateValue[0];
-    if (onChange) {
+
+    if (onChange && hasValueChanged(prevValue, finalValue)) {
       onChange(finalValue);
     }
   };
 
   useEffect(() => {
     if (dateRef && dateRef.current && !pickerInstance) {
-      setPickerInstance(
-        flatpickr(dateRef.current, {
-          ...config, onChange: onDateChange, onClose, onOpen,
-        }),
-      );
+      const instance = flatpickr(dateRef.current, {
+        ...config, onChange: onDateChange, onClose, onOpen,
+      });
+      setPickerInstance(instance);
     }
-
-    return () => {
-      if (pickerInstance) {
-        pickerInstance.destroy();
-      }
-    };
   }, [dateRef.current]);
 
   useEffect(() => {
