@@ -376,10 +376,10 @@ export default class Dropdown extends Component {
                         ref={this.dropdownListRef}
                       >
                         {
-                          (typeof children === "function")
+                          (typeof children === 'function')
                             ? children({
-                                closeDropdown: this.closeDropdown.bind(this),
-                              })
+                              closeDropdown: this.closeDropdown.bind(this),
+                            })
                             : children
                         }
                       </DropdownWrapperTag>
