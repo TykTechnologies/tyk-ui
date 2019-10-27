@@ -14,6 +14,7 @@
   margin-bottom: $form-group-margin-bottom;
 
   &.has-error > .tyk-form-control__wrapper > .tyk-form-control,
+  &.has-error > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control,
   &.has-error .tyk-file-input__wrapper  > .tyk-form-control {
     border: 2px solid theme-color('danger', 'light');
     border-left: 10px solid theme-color('danger', 'dark');
