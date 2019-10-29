@@ -219,9 +219,38 @@ const Chart = (props) => {
     }),
   };
 
+  const globalChart = {
+    defaultOpts: fromJS({
+      series: [],
+    }),
+    seriesDefault: fromJS({
+      name: 'Map',
+      type: 'map',
+      map: 'world',
+      zoom: 1,
+      markPoint: {
+        symbol: 'pin',
+      },
+      itemStyle: {
+        emphasis: { label: { show: false } },
+        areaColor: {
+          color: '#ff0000',
+        },
+      },
+      data: [
+        {
+          name: 'World map',
+          type: 'map',
+          roam: true,
+          map: 'world',
+          data: [],
+        },
+      ],
+    }),
+  };
+
   const buildChartOptions = (selectedType, selectedOptions, selectedSeries) => {
     let finalOpts = {};
-
     switch (selectedType) {
     case 'pie': {
       finalOpts = pieChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
@@ -232,6 +261,17 @@ const Chart = (props) => {
 
       break;
     }
+
+    case 'global': {
+      finalOpts = globalChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+
+      selectedSeries.forEach((entry) => {
+        finalOpts.series.push(globalChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+      });
+
+      break;
+    }
+
     default: {
       finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
@@ -255,7 +295,6 @@ const Chart = (props) => {
 
   useEffect(() => {
     setTykChartInstance(echarts.init(chartWrapperRef.current));
-
     return () => {
       if (tykChartInstance) {
         tykChartInstance.dispose();
@@ -293,18 +332,18 @@ const Chart = (props) => {
   useEffect(() => {
     if (
       tykChartInstance
-      && (
-        !fromJS(prevOption).equals(fromJS(option))
-        || (prevType !== type)
-        || !fromJS(prevSeries).equals(fromJS(series))
-      )
+      // && (
+      //   !fromJS(prevOption).equals(fromJS(option))
+      //   || (prevType !== type)
+      //   || !fromJS(prevSeries).equals(fromJS(series))
+      // )
     ) {
-      tykChartInstance.setOption(buildChartOptions(type, option, series));
-      tykChartInstance.dispatchAction({
-        type: 'takeGlobalCursor',
-        key: 'dataZoomSelect',
-        dataZoomSelectActive: true,
-      });
+    tykChartInstance.setOption(buildChartOptions(type, option, series));
+    tykChartInstance.dispatchAction({
+      type: 'takeGlobalCursor',
+      key: 'dataZoomSelect',
+      dataZoomSelectActive: true,
+    });
     }
   }, [option, series, type]);
 
