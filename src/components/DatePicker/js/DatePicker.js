@@ -73,18 +73,18 @@ const DatePicker = (props) => {
 
   useEffect(() => {
     if (pickerInstance) {
-      let tempValue;
+      let tempValue = value;
 
       if (typeof value === 'string') {
         tempValue = new Date(value);
       } else if (Array.isArray(value)) {
         tempValue = value.map(date => (typeof date === 'string' ? new Date(date) : date));
       }
-      
+
       if (hasValueChanged(prevValue, tempValue)) {
         pickerInstance.set('onChange', onDateChange);
-        if (config.mode === 'range' && tempValue.length === 2) {
-          if (tempValue.length === 2) {
+        if (config.mode === 'range') {
+          if (tempValue && tempValue.length === 2) {
             pickerInstance.setDate(tempValue, true);
           }
         } else {

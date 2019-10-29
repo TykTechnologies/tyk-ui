@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
@@ -25,7 +25,7 @@ const FormDatePicker = (props) => {
 
   const handleOnChange = (value) => {
     const { onChange } = input;
-    
+
     onChange(fromJS(value));
   };
 
