@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, {
   useState, useEffect, useRef,
 } from 'react';
@@ -219,33 +220,13 @@ const Chart = (props) => {
     }),
   };
 
-  const globalChart = {
+  const geoChart = {
     defaultOpts: fromJS({
       series: [],
     }),
     seriesDefault: fromJS({
-      name: 'Map',
       type: 'map',
-      map: 'world',
-      zoom: 1,
-      markPoint: {
-        symbol: 'pin',
-      },
-      itemStyle: {
-        emphasis: { label: { show: false } },
-        areaColor: {
-          color: '#ff0000',
-        },
-      },
-      data: [
-        {
-          name: 'World map',
-          type: 'map',
-          roam: true,
-          map: 'world',
-          data: [],
-        },
-      ],
+      data: [],
     }),
   };
 
@@ -262,11 +243,11 @@ const Chart = (props) => {
       break;
     }
 
-    case 'global': {
-      finalOpts = globalChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+    case 'geo': {
+      finalOpts = geoChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
       selectedSeries.forEach((entry) => {
-        finalOpts.series.push(globalChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+        finalOpts.series.push(geoChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
       });
 
       break;
@@ -332,11 +313,11 @@ const Chart = (props) => {
   useEffect(() => {
     if (
       tykChartInstance
-      // && (
-      //   !fromJS(prevOption).equals(fromJS(option))
-      //   || (prevType !== type)
-      //   || !fromJS(prevSeries).equals(fromJS(series))
-      // )
+      && (
+        !fromJS(prevOption).equals(fromJS(option))
+        || (prevType !== type)
+        || !fromJS(prevSeries).equals(fromJS(series))
+      )
     ) {
     tykChartInstance.setOption(buildChartOptions(type, option, series));
     tykChartInstance.dispatchAction({
