@@ -69,7 +69,13 @@ const DatePicker = (props) => {
       });
       setPickerInstance(instance);
     }
-  }, [dateRef.current]);
+
+    return () => {
+      if (pickerInstance) {
+        pickerInstance.destroy();
+      }
+    };
+  }, [dateRef.current, pickerInstance]);
 
   useEffect(() => {
     if (pickerInstance) {

@@ -1,5 +1,5 @@
 import './index.scss';
-console.log('release 1.1.34');
+
 export { default as Accordion } from './components/Accordion';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
