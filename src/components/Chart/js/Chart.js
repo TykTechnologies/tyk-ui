@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, {
   useState, useEffect, useRef, memo,
 } from 'react';
@@ -201,9 +202,18 @@ const Chart = (props) => {
     }),
   };
 
+  const geoChart = {
+    defaultOpts: fromJS({
+      series: [],
+    }),
+    seriesDefault: fromJS({
+      type: 'map',
+      data: [],
+    }),
+  };
+
   const buildChartOptions = (selectedType, selectedOptions, selectedSeries) => {
     let finalOpts = {};
-
     switch (selectedType) {
     case 'pie': {
       finalOpts = pieChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
@@ -214,6 +224,17 @@ const Chart = (props) => {
 
       break;
     }
+
+    case 'geo': {
+      finalOpts = geoChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+
+      selectedSeries.forEach((entry) => {
+        finalOpts.series.push(geoChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+      });
+
+      break;
+    }
+
     default: {
       finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
@@ -237,7 +258,6 @@ const Chart = (props) => {
 
   useEffect(() => {
     setTykChartInstance(echarts.init(chartWrapperRef.current));
-
     return () => {
       if (tykChartInstance) {
         tykChartInstance.dispose();
