@@ -99,7 +99,7 @@ const Tabs = (props) => {
   const getTabCssClass = (tabId) => {
     const cssClasses = [];
 
-    if (selectedPath.indexOf(tabId) > -1) {
+    if (selectedPath && selectedPath.indexOf(tabId) > -1) {
       cssClasses.push('active');
     }
 

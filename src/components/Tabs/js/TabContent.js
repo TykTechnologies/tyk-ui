@@ -29,14 +29,14 @@ const TabContent = (props) => {
       return tabExists(path);
     }
 
-    return selectedPath.indexOf(tabData.id) > -1;
+    return selectedPath && selectedPath.indexOf(tabData.id) > -1;
   };
 
   return (
     (
       shouldRender()
         ? (
-          <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
+          <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath && selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
             <TabContext.Provider
               value={{
                 path,

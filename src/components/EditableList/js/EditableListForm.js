@@ -287,6 +287,7 @@ export default class EditableListForm extends Component {
                 >
                   <Button
                     disabled={this.hasMainFormErrors()}
+                    className="tyk-editable-list__submit-btn"
                     onClick={this.submitForm}
                     theme="default"
                     type="button"

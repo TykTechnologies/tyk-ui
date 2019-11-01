@@ -1,6 +1,6 @@
 /*eslint-disable */
 import React, {
-  useState, useEffect, useRef,
+  useState, useEffect, useRef, memo,
 } from 'react';
 import PropTypes from 'prop-types';
 import echarts from 'echarts';
@@ -25,6 +25,7 @@ const Chart = (props) => {
     onChange,
     zoomStart,
     zoomEnd,
+    title,
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -38,7 +39,7 @@ const Chart = (props) => {
     defaultOpts: fromJS({
       title: {
         show: true,
-        text: 'Success requests',
+        text: title,
         left: 0,
       },
       color: [],
@@ -47,26 +48,7 @@ const Chart = (props) => {
         orient: 'horizontal',
         itemSize: 15,
         showTitle: true,
-        feature: {
-          dataZoom: {
-            yAxisIndex: false,
-            show: true,
-            title: {
-              zoom: 'Drag over the area you want to zoom in',
-              back: 'Restore area zooming',
-            },
-          },
-          restore: {
-            title: 'Restore zooming to initial state',
-          },
-          magicType: {
-            type: ['line', 'bar'],
-            title: {
-              line: 'Display line chart',
-              bar: 'Display bar chart',
-            },
-          },
-        },
+        feature: null,
       },
       dataZoom: [{
         show: true,
@@ -183,7 +165,7 @@ const Chart = (props) => {
   const pieChart = {
     defaultOpts: fromJS({
       tooltip: {
-        trigger: 'item',
+        trigger: 'axis',
         formatter: '{b}: {c} ({d}%)',
       },
       legend: {
@@ -257,9 +239,9 @@ const Chart = (props) => {
       finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
       selectedSeries.forEach((entry) => {
-        finalOpts.series.push(lineBarChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+        const seriesData = Object.assign({}, lineBarChart.seriesDefault.toJS(), entry);
+        finalOpts.series.push(seriesData);
       });
-
       break;
     }
     }
@@ -319,12 +301,13 @@ const Chart = (props) => {
         || !fromJS(prevSeries).equals(fromJS(series))
       )
     ) {
-    tykChartInstance.setOption(buildChartOptions(type, option, series));
-    tykChartInstance.dispatchAction({
-      type: 'takeGlobalCursor',
-      key: 'dataZoomSelect',
-      dataZoomSelectActive: true,
-    });
+      tykChartInstance.clear();
+      tykChartInstance.setOption(buildChartOptions(type, option, series));
+      tykChartInstance.dispatchAction({
+        type: 'takeGlobalCursor',
+        key: 'dataZoomSelect',
+        dataZoomSelectActive: true,
+      });
     }
   }, [option, series, type]);
 
@@ -332,13 +315,13 @@ const Chart = (props) => {
     if (tykChartInstance && highlight) {
       tykChartInstance.dispatchAction({
         type: 'highlight',
-        seriesIndex: 0,
-        dataIndex: highlight,
+        seriesIndex: highlight.seriesIndex,
+        dataIndex: highlight.dataIndex,
       });
       tykChartInstance.dispatchAction({
         type: 'showTip',
-        seriesIndex: 0,
-        dataIndex: highlight,
+        seriesIndex: highlight.seriesIndex,
+        dataIndex: highlight.dataIndex,
       });
     }
   }, [highlight]);
@@ -419,7 +402,8 @@ Chart.propTypes = {
   onChange: PropTypes.func,
   style: PropTypes.instanceOf(Object),
   type: PropTypes.string,
+  title: PropTypes.string,
   series: PropTypes.instanceOf(Array),
 };
 
-export default Chart;
+export default memo(Chart);

@@ -14,8 +14,11 @@ const FixedWrapper = (props) => {
 
   const attachShadow = () => {
     const element = fixedWrapperRef.current;
-    if (window.scrollY && !element.classList.contains('thatClass')) {
-      element.classList.add('tyk-fixed-wrapper--scrolled');
+
+    if (window.scrollY) {
+      if (!element.classList.contains('tyk-fixed-wrapper--scrolled')) {
+        element.classList.add('tyk-fixed-wrapper--scrolled');
+      }
     } else {
       element.classList.remove('tyk-fixed-wrapper--scrolled');
     }
