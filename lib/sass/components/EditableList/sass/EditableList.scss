@@ -1,6 +1,12 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 
+.tyk-editable-list {
+  &__submit-btn {
+    white-space: nowrap;
+  }
+}
+
 .tyk-editable-list__form {
   align-items: center;
   display: flex;

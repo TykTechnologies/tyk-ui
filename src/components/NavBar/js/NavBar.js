@@ -18,6 +18,7 @@ export default class NavBar extends PureComponent {
       PropTypes.element,
       PropTypes.node,
     ]),
+    withTabs: PropTypes.bool,
   }
 
   render() {
@@ -26,10 +27,11 @@ export default class NavBar extends PureComponent {
       left,
       right,
       title,
+      withTabs,
     } = this.props;
 
     return (
-      <section className="tyk-nav-bar">
+      <section className={`tyk-nav-bar ${withTabs ? 'tyk-nav-bar__with-tabs' : ''}`}>
         <div className="tyk-nav-bar__wrapper">
           {
             title

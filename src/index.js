@@ -1,5 +1,5 @@
 import './index.scss';
-console.log('release 1.1.34');
+
 export { default as Accordion } from './components/Accordion';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
@@ -11,10 +11,8 @@ export { default as Chart } from './components/Chart';
 export { default as Column } from './components/Column';
 export { Combobox } from './components/Combobox';
 export { FieldCombobox } from './components/Combobox';
-export { DateTimePicker } from './components/DateTimePicker';
-export { FieldDateTimePicker } from './components/DateTimePicker';
-export { DateRangePicker } from './components/DateRangePicker';
-export { FieldDateRangePicker } from './components/DateRangePicker';
+export { DatePicker } from './components/DatePicker';
+export { FieldDatePicker } from './components/DatePicker';
 export { Dropdown } from './components/Dropdown';
 export { FieldDropdown } from './components/Dropdown';
 export { EditableList } from './components/EditableList';

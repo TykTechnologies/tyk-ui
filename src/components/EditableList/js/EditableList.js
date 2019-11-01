@@ -2,7 +2,9 @@ import React, { Component, Fragment, createRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
-import moment from 'moment';
+
+import format from 'date-fns/format';
+import isDate from 'date-fns/isDate';
 
 import EditableListForm from './EditableListForm';
 import Column from '../../Column';
@@ -34,12 +36,8 @@ export default class EditableList extends Component {
       tempValue = itemValue.name;
     }
 
-    if (moment.isMoment(itemValue)) {
-      tempValue = itemValue.format('L');
-    }
-
-    if (Object.prototype.toString.call(itemValue) === '[object Date]') {
-      tempValue = moment(itemValue).format('L');
+    if (isDate(itemValue)) {
+      tempValue = format(itemValue, 'dd/MM/yyyy');
     }
 
     return tempValue;
