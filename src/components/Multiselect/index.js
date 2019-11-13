@@ -3,6 +3,7 @@ import Multiselect from './js/Multiselect';
 
 export { default as FieldMultiselect } from './js/FieldMultiselect';
 export { Multiselect };
+export { default as FormikMultiselect } from './js/FormikMultiselect';
 
 export default class TestMultiselect extends Component {
   static itemDisplayTemplate(item) {
