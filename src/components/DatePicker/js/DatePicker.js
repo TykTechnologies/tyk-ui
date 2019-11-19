@@ -35,7 +35,7 @@ const DatePicker = (props) => {
     }
 
     if (!Array.isArray(currentDate)) {
-      return prevDate.getTime() === currentDate.getTime();
+      return prevDate.getTime() !== currentDate.getTime();
     }
     let diffDates = currentDate;
 
@@ -49,7 +49,7 @@ const DatePicker = (props) => {
   };
 
   const onDateChange = useCallback((dateValue) => {
-    const finalValue = config.mode === 'range' ? dateValue : dateValue[0];
+    const finalValue = config.mode === 'range' ? dateValue : dateValue[0] || null;
 
     if (onChange) {
       if (config.mode === 'range') {
