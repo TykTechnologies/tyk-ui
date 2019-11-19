@@ -9,7 +9,7 @@ const wrapper = Component => ({ field, form, ...properties }) => {
   };
 
   const onChange = (value) => {
-    field.onChange({ target: { name: field.name, value } });
+    field.onChange({ target: { name: field.name, value, checked: value } });
     if (typeof properties.onChange === 'function') properties.onChange(value);
   };
 
@@ -17,7 +17,16 @@ const wrapper = Component => ({ field, form, ...properties }) => {
     && getValueFromPath(form.errors, field.name);
   const error = typeof formError === 'string' ? formError : '';
 
-  return <Component {...field} error={error} {...properties} isfield onChange={onChange} />;
+  return (
+    <Component
+      {...field}
+      checked={field.value}
+      error={error}
+      {...properties}
+      isfield
+      onChange={onChange}
+    />
+  );
 };
 /* eslint-enable react/prop-types */
 
