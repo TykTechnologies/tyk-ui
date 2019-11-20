@@ -31,7 +31,9 @@ export default class Radio extends Component {
   }
 
   render() {
-    const { input, label, ...rest } = this.props;
+    const {
+      input, label, onChange = () => {}, ...rest
+    } = this.props;
     return (
       <div
         className={this.getCssClasses()}
@@ -40,6 +42,7 @@ export default class Radio extends Component {
           <input
             {...input}
             {...rest}
+            onChange={() => onChange(rest.value)}
             type="radio"
           />
           {label}
