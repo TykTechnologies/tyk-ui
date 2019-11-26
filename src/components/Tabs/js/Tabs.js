@@ -13,6 +13,7 @@ const Tabs = (props) => {
     id,
     onTabChange,
     type,
+    hideTabContent,
   } = props;
   const [tabs, setTabs] = useState({});
   const [selectedPath, setSelectedPath] = useState([]);
@@ -189,6 +190,7 @@ const Tabs = (props) => {
           tabExists,
           selectedPath,
           rendered,
+          hideTabContent,
         }}
       >
         {children}
@@ -205,6 +207,7 @@ Tabs.propTypes = {
     PropTypes.element,
     PropTypes.string,
   ]),
+  hideTabContent: PropTypes.bool,
   id: PropTypes.string,
   onTabChange: PropTypes.func,
   type: PropTypes.string,

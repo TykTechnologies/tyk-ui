@@ -13,6 +13,7 @@ const Tab = (props) => {
     selectedPath,
     addTab,
     rendered,
+    hideTabContent,
   } = tabsContext;
   const {
     children,
@@ -39,6 +40,7 @@ const Tab = (props) => {
         tabsId={tabsContext.id}
         selectedPath={selectedPath}
         rendered={rendered}
+        hideTabContent={hideTabContent}
       >
         {children}
       </TabContent>

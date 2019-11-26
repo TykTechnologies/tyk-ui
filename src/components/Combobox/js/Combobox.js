@@ -14,6 +14,19 @@ const getStateSelectedValues = (multiple, tags, value) => {
 };
 
 export default class Combobox extends Component {
+  static closeList() {
+    return {
+      cursor: -1,
+      opened: false,
+    };
+  }
+
+  static openList() {
+    return {
+      opened: true,
+    };
+  }
+
   static propTypes = {
     disabled: PropTypes.bool,
     error: PropTypes.string,
@@ -38,19 +51,6 @@ export default class Combobox extends Component {
     ]),
     values: PropTypes.instanceOf(Array),
   };
-
-  static closeList() {
-    return {
-      cursor: -1,
-      opened: false,
-    };
-  }
-
-  static openList() {
-    return {
-      opened: true,
-    };
-  }
 
   constructor(props) {
     super(props);
