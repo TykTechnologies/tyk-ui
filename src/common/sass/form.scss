@@ -193,7 +193,7 @@ select {
 
 .tyk-checkbox,
 .tyk-radio {
-  align-items: center;
+  flex-direction: column;
   display: flex;
   margin: 10px 0;
 

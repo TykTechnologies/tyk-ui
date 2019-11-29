@@ -12,6 +12,10 @@ export default class Checkbox extends Component {
     name: PropTypes.string,
     onChange: PropTypes.func,
     value: PropTypes.string,
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
   };
 
   getCssClasses() {
@@ -25,6 +29,20 @@ export default class Checkbox extends Component {
     }
 
     return cssClasses.join(' ');
+  }
+
+  getInputError() {
+    const { error } = this.props;
+
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p
+          className="tyk-form-control__error-message"
+        >
+          { error }
+        </p>
+      )
+      : null;
   }
 
   render() {
@@ -48,6 +66,7 @@ export default class Checkbox extends Component {
           />
           {label}
         </label>
+        { this.getInputError() }
       </div>
     );
   }
