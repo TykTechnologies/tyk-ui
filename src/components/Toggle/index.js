@@ -371,3 +371,4 @@ export default class TestToggle extends Component {
 
 export { Toggle };
 export { default as FieldToggle } from './js/FieldToggle';
+export { default as FormikToggle } from './js/FormikToggle';
