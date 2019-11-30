@@ -179,6 +179,26 @@ const CustomComponent = React.forwardRef((props, ref) => {
 ```
 ```js
 <Combobox
+  searchItem={(itemValue, inputValue) => {console.log(itemValue.name, inputValue); return itemValue.name.indexOf(inputValue) > -1;}}
+  values={[
+    { id: '', name: "None" },
+    { id: 'apione', name: 'API one'},
+    { id: 'apitwo', name: 'API two'},
+    { id: 'apithree', name: 'API three'},
+    { id: 'apifour', name: 'API four'},
+    { id: 'apifive', name: 'API five'},
+    { id: 'apisix', name: 'API six'},
+    { id: 'apiseven', name: 'API seven'},
+    { id: 'apieight', name: 'API eight'}
+  ]}
+  label="Custom Search Combobox"
+  multiple={ true }
+  name="combobox"
+  placeholder="Please select a value"
+/>
+```
+```js
+<Combobox
   disabled={ true }
   values={[
     { id: '', name: "None" },

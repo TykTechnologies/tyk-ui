@@ -27,6 +27,10 @@ export default class Combobox extends Component {
     };
   }
 
+  static filterByName(itemValue, inputValue) {
+    return itemValue.name.toLowerCase().indexOf(inputValue) > -1;
+  }
+
   static propTypes = {
     allowCustomValues: PropTypes.bool,
     CustomListComponent: PropTypes.oneOfType([
@@ -34,6 +38,7 @@ export default class Combobox extends Component {
       PropTypes.element,
       PropTypes.string,
     ]),
+    searchItem: PropTypes.func,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     id: PropTypes.string,
@@ -465,7 +470,7 @@ export default class Combobox extends Component {
   }
 
   filterValues() {
-    const { values } = this.props;
+    const { values, searchItem } = this.props;
 
     if (!this.inputRef.current) {
       return values;
@@ -473,7 +478,9 @@ export default class Combobox extends Component {
 
     const arr = values
       .filter(
-        value => value.name.toLowerCase().indexOf(this.inputRef.current.value.toLowerCase()) > -1,
+        value => (searchItem
+          ? searchItem(value, this.inputRef.current.value.toLowerCase())
+          : Combobox.filterByName(value, this.inputRef.current.value.toLowerCase())),
       );
 
     return arr;
