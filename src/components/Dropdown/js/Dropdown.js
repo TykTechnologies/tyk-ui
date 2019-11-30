@@ -9,6 +9,23 @@ import Button from '../../Button';
 const DropdownContext = createContext();
 
 export default class Dropdown extends Component {
+  static isElemInRightView(el, dropdownWidth) {
+    const windowWidth = window.innerWidth;
+    const offset = el.getBoundingClientRect();
+    const elemRight = offset.left + dropdownWidth;
+
+    return elemRight <= windowWidth;
+  }
+
+  static isElemInBottomView(el, dropdownHeight) {
+    const windowHeight = window.innerHeight;
+    const offset = el.getBoundingClientRect();
+    const elHeight = el.clientHeight;
+    const elemBottom = offset.top + elHeight + dropdownHeight;
+
+    return elemBottom <= windowHeight;
+  }
+
   static propTypes = {
     appendTo: PropTypes.string,
     children: PropTypes.oneOfType([
@@ -53,23 +70,6 @@ export default class Dropdown extends Component {
     showCheckmark: true,
     open: false,
   };
-
-  static isElemInRightView(el, dropdownWidth) {
-    const windowWidth = window.innerWidth;
-    const offset = el.getBoundingClientRect();
-    const elemRight = offset.left + dropdownWidth;
-
-    return elemRight <= windowWidth;
-  }
-
-  static isElemInBottomView(el, dropdownHeight) {
-    const windowHeight = window.innerHeight;
-    const offset = el.getBoundingClientRect();
-    const elHeight = el.clientHeight;
-    const elemBottom = offset.top + elHeight + dropdownHeight;
-
-    return elemBottom <= windowHeight;
-  }
 
   constructor(props) {
     super(props);

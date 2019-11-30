@@ -55,7 +55,7 @@ export default class ToggleItem extends Component {
     const {
       context, label, name, value,
     } = this.props;
-
+    
     return (
       <li className={`tyk-toggle__item ${(context.value && (context.type === 'single' || context.value === value)) ? 'tyk-toggle__item--active' : ''}`} ref={this.itemRef}>
         <label>

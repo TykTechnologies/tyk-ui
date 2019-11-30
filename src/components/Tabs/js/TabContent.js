@@ -14,6 +14,7 @@ const TabContent = (props) => {
     tabExists,
     path,
     rendered,
+    hideTabContent,
   } = props;
 
   useEffect(() => {
@@ -25,6 +26,10 @@ const TabContent = (props) => {
   });
 
   const shouldRender = () => {
+    if (hideTabContent) {
+      return false;
+    }
+
     if (!rendered) {
       return tabExists(path);
     }
@@ -61,6 +66,7 @@ TabContent.propTypes = {
     PropTypes.string,
   ]),
   path: PropTypes.instanceOf(Array),
+  hideTabContent: PropTypes.bool,
   rendered: PropTypes.bool,
   selectedPath: PropTypes.instanceOf(Array),
   tabExists: PropTypes.func,

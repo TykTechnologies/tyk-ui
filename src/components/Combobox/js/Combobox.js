@@ -14,7 +14,31 @@ const getStateSelectedValues = (multiple, tags, value) => {
 };
 
 export default class Combobox extends Component {
+  static closeList() {
+    return {
+      cursor: -1,
+      opened: false,
+    };
+  }
+
+  static openList() {
+    return {
+      opened: true,
+    };
+  }
+
+  static filterByName(itemValue, inputValue) {
+    return itemValue.name.toLowerCase().indexOf(inputValue) > -1;
+  }
+
   static propTypes = {
+    allowCustomValues: PropTypes.bool,
+    CustomListComponent: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
+    searchItem: PropTypes.func,
     disabled: PropTypes.bool,
     error: PropTypes.string,
     id: PropTypes.string,
@@ -39,18 +63,9 @@ export default class Combobox extends Component {
     values: PropTypes.instanceOf(Array),
   };
 
-  static closeList() {
-    return {
-      cursor: -1,
-      opened: false,
-    };
-  }
-
-  static openList() {
-    return {
-      opened: true,
-    };
-  }
+  static defaultProps = {
+    allowCustomValues: true,
+  };
 
   constructor(props) {
     super(props);
@@ -120,7 +135,7 @@ export default class Combobox extends Component {
   }
 
   onKeyUp(e) {
-    const { tags } = this.props;
+    const { tags, allowCustomValues } = this.props;
     const { cursor, opened } = this.state;
     const filteredValues = this.filterValues();
     let tempState = Object.assign({}, this.getSearchText());
@@ -134,7 +149,7 @@ export default class Combobox extends Component {
       tempState = Object.assign({}, tempState, this[methodName](cursor));
     }
 
-    if (e.key === ' ' && tags) {
+    if (allowCustomValues && !e.key === ' ' && tags) {
       tempState = Object.assign({}, tempState, this.manageSelectedTags());
     }
 
@@ -346,10 +361,15 @@ export default class Combobox extends Component {
   }
 
   manageSelectedTags(index) {
-    const { max } = this.props;
+    const { max, allowCustomValues } = this.props;
     const { stateSelectedValues } = this.state;
     const filteredValues = this.filterValues();
     const value = { id: this.inputRef.current.value, name: this.inputRef.current.value };
+
+    if (allowCustomValues === false && index === -1) {
+      return null;
+    }
+
     const tempValue = filteredValues[index] || value;
     const selectedIndex = this.getSelectedIndex(tempValue);
     let selectedValues = {};
@@ -450,7 +470,7 @@ export default class Combobox extends Component {
   }
 
   filterValues() {
-    const { values } = this.props;
+    const { values, searchItem } = this.props;
 
     if (!this.inputRef.current) {
       return values;
@@ -458,7 +478,9 @@ export default class Combobox extends Component {
 
     const arr = values
       .filter(
-        value => value.name.toLowerCase().indexOf(this.inputRef.current.value.toLowerCase()) > -1,
+        value => (searchItem
+          ? searchItem(value, this.inputRef.current.value.toLowerCase())
+          : Combobox.filterByName(value, this.inputRef.current.value.toLowerCase())),
       );
 
     return arr;
@@ -581,6 +603,7 @@ export default class Combobox extends Component {
 
   render() {
     const {
+      CustomListComponent,
       disabled,
       id,
       label,
@@ -694,54 +717,69 @@ export default class Combobox extends Component {
           </div>
         </div>
         {
-          opened && filteredValues.length
-            ? ReactDOM.createPortal(
-              <ul
-                className={this.getComboboxListCssClass()}
+          // eslint-disable-next-line no-nested-ternary
+          !CustomListComponent
+            ? opened && filteredValues.length
+              ? ReactDOM.createPortal(
+                <ul
+                  className={this.getComboboxListCssClass()}
+                  ref={this.valuesListRef}
+                  style={this.getStyles()}
+                >
+                  {
+                    !tags
+                      ? (
+                        <li className="combobox-search__container">
+                          <input
+                            autoFocus={opened}
+                            className="tyk-form-control"
+                            onKeyUp={this.onKeyUp}
+                            onKeyDown={this.handleItemsNavigation}
+                            key="searchInput"
+                            ref={this.inputRef}
+                          />
+                        </li>
+                      )
+                      : null
+                  }
+                  {
+                    filteredValues
+                      .map((value, index) => (
+                        <li
+                          className={this.getListItemCssClasses(value, index)}
+                          onClick={this.handleListItemClick.bind(this, index)}
+                          onKeyDown={() => {}}
+                          key={value.id}
+                        >
+                          {
+                            (this.getSelectedIndex(value) > -1)
+                              ? <Icon type="check" />
+                              : null
+                          }
+                          <span>
+                            {' '}
+                            { value.name }
+                          </span>
+                        </li>
+                      ))
+                  }
+                </ul>,
+                document.querySelector('body'),
+              )
+              : null
+            : (
+              <CustomListComponent
                 ref={this.valuesListRef}
-                style={this.getStyles()}
-              >
-                {
-                  !tags
-                    ? (
-                      <li className="combobox-search__container">
-                        <input
-                          autoFocus={opened}
-                          className="tyk-form-control"
-                          onKeyUp={this.onKeyUp}
-                          onKeyDown={this.handleItemsNavigation}
-                          key="searchInput"
-                          ref={this.inputRef}
-                        />
-                      </li>
-                    )
-                    : null
-                }
-                {
-                  filteredValues
-                    .map((value, index) => (
-                      <li
-                        className={this.getListItemCssClasses(value, index)}
-                        onClick={this.handleListItemClick.bind(this, index)}
-                        onKeyDown={() => {}}
-                        key={value.id}
-                      >
-                        {
-                          (this.getSelectedIndex(value) > -1)
-                            ? <Icon type="check" />
-                            : null
-                        }
-                        <span>
-                          {' '}
-                          { value.name }
-                        </span>
-                      </li>
-                    ))
-                }
-              </ul>,
-              document.querySelector('body'),
+                className={this.getComboboxListCssClass()}
+                // eslint-disable-next-line react/jsx-no-bind
+                getListItemCssClasses={this.getListItemCssClasses.bind(this)}
+                // eslint-disable-next-line react/jsx-no-bind
+                getSelectedIndex={this.getSelectedIndex.bind(this)}
+                filteredValues={filteredValues}
+                // eslint-disable-next-line react/jsx-no-bind
+                handleListItemClick={this.handleListItemClick.bind(this)}
+              />
             )
-            : null
         }
       </Fragment>
     );
