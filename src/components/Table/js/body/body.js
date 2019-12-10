@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { tableContext } from '../../tableContext';
-import { Row } from './row';
+import { Row } from './row/row';
 
 
 export const Body = () => {

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../../../../Checkbox';
-import { Cell } from './cell';
+import { Cell } from './cell/cell';
 import { tableContext } from '../../../tableContext';
 
 export const Row = ({ row, index }) => {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Pagination } from '../../Pagination';
-import { Header } from './header';
-import { Body } from './body';
+import { Header } from './header/header';
+import { Body } from './body/body';
 import { tableContext } from '../tableContext';
 
 const Table = ({ config, onMessage }) => {
