@@ -22,19 +22,33 @@ export default class EditableListForm extends Component {
     validationmessage: PropTypes.string,
   };
 
-  state = {
-    errors: {},
-    mainError: null,
-    mainFormValue: this.getMainFormValue(),
-    refs: [],
-  };
+  static getMainFormValue(components) {
+    const mainFormValue = new Array(components.length);
+
+    components.forEach((component, index) => {
+      mainFormValue[index] = component.props.value || undefined;
+    });
+
+    return mainFormValue;
+  }
 
   constructor(props) {
     super(props);
+    const {
+      components,
+    } = props;
 
     this.submitButtonRef = createRef();
     this.handleOnChange = this.handleOnChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
+
+    this.state = {
+      components,
+      errors: {},
+      mainError: null,
+      mainFormValue: EditableListForm.getMainFormValue(components),
+      refs: [],
+    };
   }
 
   componentDidMount() {
@@ -51,6 +65,29 @@ export default class EditableListForm extends Component {
           : 0,
       );
     }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const state = {};
+    const {
+      components: propsComponents,
+    } = nextProps;
+
+    const {
+      components: stateComponents,
+    } = prevState;
+
+    if (
+      JSON.stringify(propsComponents)
+      !== JSON.stringify(stateComponents)
+      && JSON.stringify(EditableListForm.getMainFormValue(propsComponents))
+      !== JSON.stringify(EditableListForm.getMainFormValue(stateComponents))
+    ) {
+      state.mainFormValue = EditableListForm.getMainFormValue(propsComponents);
+      state.components = propsComponents;
+    }
+
+    return state;
   }
 
   getFormCssClasses() {
@@ -93,17 +130,6 @@ export default class EditableListForm extends Component {
     }
 
     return errors[component.props.name] ? errors[component.props.name].toString() : undefined;
-  }
-
-  getMainFormValue() {
-    const { components } = this.props;
-    const mainFormValue = new Array(components.length);
-
-    components.forEach((component, index) => {
-      mainFormValue[index] = component.props.value || undefined;
-    });
-
-    return mainFormValue;
   }
 
   createRefs() {
@@ -155,9 +181,9 @@ export default class EditableListForm extends Component {
     return tempState;
   }
 
-  hasMainFormErrors() {
+  hasMainFormErrors(errors) {
     const { components, errorPersist } = this.props;
-    const { mainFormValue, errors } = this.state;
+    const { mainFormValue } = this.state;
     const tempState = {
       errors: Object.assign({}, errors),
     };
@@ -189,6 +215,10 @@ export default class EditableListForm extends Component {
 
     if (!tempState.errors[component.props.name]) {
       tempState.mainFormValue[index] = value;
+
+      if (component.props.onChange) {
+        component.props.onChange(value);
+      }
     }
 
     this.setState(previousState => Object.assign({}, previousState, tempState), () => {
@@ -200,6 +230,9 @@ export default class EditableListForm extends Component {
 
   resetForm() {
     const { refs } = this.state;
+    const {
+      components,
+    } = this.props;
 
     refs.forEach((ref) => {
       if (ref.current.reset) {
@@ -210,7 +243,7 @@ export default class EditableListForm extends Component {
     this.setState({
       errors: {},
       mainError: null,
-      mainFormValue: this.getMainFormValue(),
+      mainFormValue: EditableListForm.getMainFormValue(components),
     });
   }
 
@@ -225,6 +258,7 @@ export default class EditableListForm extends Component {
     const {
       errorPersist, onSubmit, validate, validationmessage,
     } = this.props;
+
     if (errorPersist) {
       onSubmit(mainFormValue);
       this.resetForm();
@@ -252,7 +286,9 @@ export default class EditableListForm extends Component {
     const {
       addValueOnFieldChange, components, buttonName, disabled, displayType, error,
     } = this.props;
-    const { mainError, refs } = this.state;
+    const {
+      mainError, refs, errors,
+    } = this.state;
 
     return (
       <div>
@@ -261,6 +297,9 @@ export default class EditableListForm extends Component {
             {
               components.map((component, index) => {
                 const ComponentName = component.name;
+                const {
+                  onChange, value, ...rest
+                } = component.props;
 
                 return (
                   <Column size={`md-${component.size || '12'} lg-${component.size || '12'}`} key={component.props.name}>
@@ -268,10 +307,11 @@ export default class EditableListForm extends Component {
                       disabled={disabled || component.props.disabled}
                       // eslint-disable-next-line react/jsx-no-bind
                       onChange={this.handleOnChange.bind(this, component, index)}
-                      {...component.props}
+                      {...rest}
                       label={displayType === 'inline' ? '' : component.props.label}
                       error={this.getComponentsError(component)}
                       ref={refs[index]}
+                      value={value}
                     />
                   </Column>
                 );
@@ -286,7 +326,7 @@ export default class EditableListForm extends Component {
                   ref={this.submitButtonRef}
                 >
                   <Button
-                    disabled={this.hasMainFormErrors()}
+                    disabled={this.hasMainFormErrors(errors)}
                     className="tyk-editable-list__submit-btn"
                     onClick={this.submitForm}
                     theme="default"
