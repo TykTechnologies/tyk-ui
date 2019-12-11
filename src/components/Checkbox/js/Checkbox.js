@@ -32,6 +32,7 @@ export default class Checkbox extends Component {
       input,
       label,
       onChange = () => {},
+      value,
       ...rest
     } = this.props;
 
@@ -41,6 +42,7 @@ export default class Checkbox extends Component {
       >
         <label>
           <input
+            checked={value}
             {...input}
             {...rest}
             onChange={e => onChange(e.target.checked)}
