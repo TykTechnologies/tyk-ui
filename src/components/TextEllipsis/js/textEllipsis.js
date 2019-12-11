@@ -4,7 +4,7 @@ import Tooltip from '../../Tooltip';
 
 const TextEllipsis = ({ text, limit }) => (
   <Tooltip render={text}>
-    {`${text.substring(0, limit)}...`}
+    {text.length > limit ? `${text.substring(0, limit)}...` : text}
   </Tooltip>
 );
 

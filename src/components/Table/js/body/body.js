@@ -11,9 +11,7 @@ export const Body = () => {
     <tbody>
       {
         rows.map((row, i) => (
-          <>
-            <Row key={row.id} row={row} index={i} />
-          </>
+          <Row key={row.id} row={row} index={i} />
         ))
       }
     </tbody>

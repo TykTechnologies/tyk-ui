@@ -11,7 +11,7 @@ export const Header = () => {
 
   const generateHeader = () => columns.map(column => (
     <th
-      key={Math.random(column.id)}
+      key={column.id}
       onClick={() => {
         sendMessage('sort', { column, sortOrder });
         setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');

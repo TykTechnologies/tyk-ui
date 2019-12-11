@@ -8,35 +8,27 @@ export const Row = ({ row, index }) => {
   const { state, sendMessage } = useContext(tableContext);
   const { columns, selectable } = state;
 
+  const SelectableCheckbox = () => (
+    <td>
+      <Checkbox
+        defaultChecked={row.selected}
+        onChange={v => sendMessage('row.selected', { index, selected: v })}
+      />
+    </td>
+  );
+
   return (
     <tr>
-      {selectable && selectable.position === 'LEFT' && (
-        <td>
-          <Checkbox
-            defaultChecked={row.selected}
-            onChange={v => sendMessage('row.selected', { index, selected: v })}
-          />
-        </td>
-      )}
+      {selectable && selectable.position === 'LEFT' && SelectableCheckbox()}
       {columns.map(col => (
-        <>
-          <Cell col={col} row={row} index={index} />
-        </>
+        <Cell col={col} row={row} index={index} />
       ))}
-      {selectable && selectable.position === 'RIGHT' && (
-        <td>
-          <Checkbox
-            defaultChecked={row.selected}
-            onChange={v => sendMessage('row.selected', { index, selected: v })}
-          />
-        </td>
-      )}
+      {selectable && selectable.position === 'RIGHT' && SelectableCheckbox()}
     </tr>
   );
 };
 
 Row.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  row: PropTypes.object,
+  row: PropTypes.instanceOf(Object),
   index: PropTypes.number,
 };

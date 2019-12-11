@@ -14,10 +14,8 @@ export const Cell = ({ col, row, index }) => {
     <td>
       <Component
         {...row.values[col.id]}
-        onClick={() => sendMessage(`${col.id}.click`, { index, row, col })
-        }
-        onChange={() => sendMessage(`${col.id}.change`, { index, row, col })
-        }
+        onClick={() => sendMessage('cell.click', { index, row, col })}
+        onChange={() => sendMessage('cell.change', { index, row, col })}
       >
         {row.values[col.id].value}
       </Component>
@@ -26,7 +24,7 @@ export const Cell = ({ col, row, index }) => {
 };
 
 Cell.propTypes = {
-  col: PropTypes.object,
-  row: PropTypes.object,
+  col: PropTypes.instanceOf(Object),
+  row: PropTypes.instanceOf(Object),
   index: PropTypes.number,
 };

@@ -8,7 +8,7 @@ import { tableContext } from '../tableContext';
 const Table = ({ config, onMessage }) => {
   const [state, setState] = useState(config);
 
-  const sortRow = (row, sortOrder) => {
+  const sortRows = (row, sortOrder) => {
     const compareFn = (a, b) => {
       // eslint-disable-next-line no-nested-ternary
       const compare = (x, y) => (x === y ? 0 : x > y ? 1 : -1);
@@ -33,12 +33,11 @@ const Table = ({ config, onMessage }) => {
   const selectRow = (data) => {
     const { index, selected } = data;
     const selectedRow = state.rows[index];
-    selectedRow.selected = selected;
     setState({
       ...state,
       rows: [
         ...state.rows.slice(0, index),
-        { ...selectedRow },
+        { ...selectedRow, selected },
         ...state.rows.slice(index + 1),
       ],
     });
@@ -61,7 +60,7 @@ const Table = ({ config, onMessage }) => {
 
   const sendMessage = (message, data) => {
     if (message === 'sort') {
-      sortRow(data.column.id, data.sortOrder);
+      sortRows(data.column.id, data.sortOrder);
     }
 
     if (message === 'header.selectAll.click') {
@@ -104,8 +103,7 @@ const Table = ({ config, onMessage }) => {
 };
 
 Table.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  config: PropTypes.object,
+  config: PropTypes.instanceOf(Object),
   onMessage: PropTypes.func,
 };
 
