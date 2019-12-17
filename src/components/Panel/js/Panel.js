@@ -25,6 +25,15 @@ export default class Panel extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const state = {};
+    if (nextProps.collapsed !== prevState.collapsed) {
+      state.collapsed = nextProps.collapsed;
+    }
+
+    return state;
+  }
+
   getCssClasses() {
     const { className, theme } = this.props;
     let cssClasses = ['tyk-panel'];

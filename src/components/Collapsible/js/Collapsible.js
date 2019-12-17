@@ -12,7 +12,6 @@ const Collapsible = (props) => {
     children,
   } = props;
 
-
   const contentContainer = useRef(null);
   const collapseWrapper = useRef(null);
   const [contentContainerStyle, setContentContainerStyle] = useState({
@@ -44,7 +43,9 @@ const Collapsible = (props) => {
   }, []);
 
   useEffect(() => {
-    setHeight(refContainerSize.height);
+    if (!collapsed) {
+      setHeight(refContainerSize.height);
+    }
   }, [refContainerSize.height]);
 
   const onWindowResize = useCallback(() => {
