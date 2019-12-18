@@ -1,96 +1,93 @@
-import React, { Component, createRef } from 'react';
+import React, {
+  useRef, useState, useCallback, useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import { useEventListener, useComponentSize } from '../../../common/js/hooks';
 
-export default class Collapsible extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-    collapsed: PropTypes.bool,
-    className: PropTypes.string,
-  }
+const Collapsible = (props) => {
+  const {
+    className,
+    collapsed,
+    children,
+  } = props;
 
-  state = {
-    contentContainerStyle: {
-      height: 'auto',
-    },
+  const contentContainer = useRef(null);
+  const collapseWrapper = useRef(null);
+  const [contentContainerStyle, setContentContainerStyle] = useState({
+    height: 'auto',
+  });
+
+  const refContainerSize = useComponentSize(contentContainer);
+
+  const setHeight = (height) => {
+    setContentContainerStyle({
+      height: `${height}px`,
+    });
   };
 
-  constructor(props) {
-    super(props);
+  const getHeight = () => (contentContainer.current ? contentContainer.current.clientHeight : 0);
 
-    this.contentContainer = createRef();
-    this.collapseWrapper = createRef();
-    this.onEnter = this.onEnter.bind(this);
-    this.onExit = this.onExit.bind(this);
-  }
+  const onEnter = () => {
+    setHeight(getHeight());
+  };
 
-  componentDidMount() {
-    const { collapsed } = this.props;
-    const height = (collapsed) ? 0 : this.getHeight();
+  const onExit = () => {
+    setHeight(0);
+  };
 
-    this.setHeight(height);
+  useEffect(() => {
+    const height = (collapsed) ? 0 : getHeight();
 
-    window.addEventListener('resize', () => {
-      if (!collapsed && this.contentContainer.current) {
-        this.setHeight(this.getHeight());
-      }
-    });
-  }
+    setHeight(height);
+  }, []);
 
-  onEnter() {
-    this.setHeight(this.getHeight());
-  }
+  useEffect(() => {
+    if (!collapsed) {
+      setHeight(refContainerSize.height);
+    }
+  }, [refContainerSize.height]);
 
-  onExit() {
-    this.setHeight(0);
-  }
+  const onWindowResize = useCallback(() => {
+    if (!collapsed && contentContainer.current) {
+      setHeight(getHeight());
+    }
+  }, [collapsed, contentContainer.current]);
 
-  setHeight(height) {
-    this.setState({
-      contentContainerStyle: {
-        height: `${height}px`,
-      },
-    });
-  }
+  useEventListener('resize', onWindowResize);
 
-  getHeight() {
-    return this.contentContainer.current ? this.contentContainer.current.clientHeight : 0;
-  }
-
-  render() {
-    const {
-      className,
-      collapsed,
-      children,
-    } = this.props;
-    const {
-      contentContainerStyle,
-    } = this.state;
-    return (
-      <CSSTransition
-        onEnter={this.onEnter}
-        onExit={this.onExit}
-        in={!collapsed}
-        timeout={0}
-        classNames="collapse"
+  return (
+    <CSSTransition
+      onEnter={onEnter}
+      onExit={onExit}
+      in={!collapsed}
+      timeout={0}
+      classNames="collapse"
+    >
+      <div
+        className="collapse-wrapper"
+        ref={collapseWrapper}
+        style={contentContainerStyle}
       >
         <div
-          className="collapse-wrapper"
-          ref={this.collapseWrapper}
-          style={contentContainerStyle}
+          className={className}
+          ref={contentContainer}
         >
-          <div
-            className={className}
-            ref={this.contentContainer}
-          >
-            { children }
-          </div>
+          { children }
         </div>
-      </CSSTransition>
-    );
-  }
-}
+      </div>
+    </CSSTransition>
+  );
+};
+
+Collapsible.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+  collapsed: PropTypes.bool,
+  className: PropTypes.string,
+};
+
+export default Collapsible;

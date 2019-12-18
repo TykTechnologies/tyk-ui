@@ -79,6 +79,10 @@
   max={3}
   name="combobox"
   placeholder="Please select a value"
+  value={[
+    { id: 'apione'},
+    { id: 'apitwo'}
+  ]}
 />
 ```
 ```js

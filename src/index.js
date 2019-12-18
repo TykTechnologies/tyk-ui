@@ -37,6 +37,7 @@ export { default as Tabs } from './components/Tabs';
 export { default as Textarea, FormikTextarea } from './components/Textarea';
 export { toast } from './components/Toast';
 export { default as Tooltip } from './components/Tooltip';
+export { default as Table } from './components/Table';
 export { Toggle, FieldToggle, FormikToggle } from './components/Toggle';
 export { default as usePrevious } from './common/js/hooks/usePrevious';
 export { default as useTimeout } from './common/js/hooks/useTimeout';
