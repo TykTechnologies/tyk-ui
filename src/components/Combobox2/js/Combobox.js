@@ -83,7 +83,7 @@ function Combobox(props) {
 
   function updateSearchValue(newSearchValue) {
     setSearchValue(newSearchValue);
-    if (getFilteredValues().every(fv => !fv.name.toLowerCase().includes(searchValue))) {
+    if (activeItem && getFilteredValues().every(fv => fv.id !== activeItem.id)) {
       setActiveItem(null);
     }
   }
