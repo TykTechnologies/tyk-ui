@@ -241,6 +241,12 @@ function Combobox(props) {
     setValues(propValues);
   }, [propValues]);
 
+  useEffect(() => {
+    const newValue = getValueFromProp(propValue);
+    setValue(newValue);
+    setValues(values.map(v => ({ ...v, selected: newValue.some(nv => nv.id === v.id) })));
+  }, [propValue]);
+
   return (
     <div className={getCssClasses()} ref={rootRef}>
       <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>

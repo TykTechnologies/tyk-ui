@@ -83,23 +83,28 @@
 />
 ```
 ```js
-<Combobox2
-  values={[
-    { id: '', name: "None" },
-    { id: 'apione', name: 'API one'},
-    { id: 'apitwo', name: 'API two'},
-    { id: 'apithree', name: 'API three'},
-    { id: 'apifour', name: 'API four'},
-    { id: 'apifive', name: 'API five'},
-    { id: 'apisix', name: 'API six'},
-    { id: 'apiseven', name: 'API seven'},
-    { id: 'apieight', name: 'API eight'}
-  ]}
-  label="Combobox as tags"
-  tags={ true }
-  name="combobox"
-  placeholder="Please select a value"
-/>
+<>
+  <button onClick={() => setState({ value: [{id: 1, name: 'aaa'}, { id: 'apifive', name: 'API five'}]}) }>Update value</button>
+  <button onClick={() => setState({ value: []}) }>Clear value</button>
+  <Combobox2
+    value={state.value}
+    values={[
+      { id: '', name: "None" },
+      { id: 'apione', name: 'API one'},
+      { id: 'apitwo', name: 'API two'},
+      { id: 'apithree', name: 'API three'},
+      { id: 'apifour', name: 'API four'},
+      { id: 'apifive', name: 'API five'},
+      { id: 'apisix', name: 'API six'},
+      { id: 'apiseven', name: 'API seven'},
+      { id: 'apieight', name: 'API eight'}
+    ]}
+    label="Combobox as tags"
+    tags={ true }
+    name="combobox"
+    placeholder="Please select a value"
+  />
+</>
 ```
 ```js
 <Combobox2
