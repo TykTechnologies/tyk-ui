@@ -4,6 +4,8 @@
 @import '../../FloatingContainer/sass/FloatingContainer';
 
 .tyk-combobox {
+  $container-trigger-width: 40px;
+
   &.disabled {
     .entry-field {
       background-color: $form-default-color;
@@ -32,6 +34,7 @@
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 10px;
+    max-width: calc(100% - #{$container-trigger-width});
 
     .text-value {
       padding: 12px 5px;
@@ -45,6 +48,7 @@
       border-radius: 10px;
       color: $tyk-combobox-pill-color;
       padding: 5px 10px;
+      max-width: 100%;
 
       button {
         background: none;
@@ -56,6 +60,11 @@
         + span {
           margin-left: 0;
         }
+      }
+
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       i {
@@ -76,7 +85,7 @@
   }
 
   .values-container-trigger {
-    flex-basis: 40px;
+    flex-basis: $container-trigger-width;
     display: flex;
     justify-content: center;
     align-items: center;

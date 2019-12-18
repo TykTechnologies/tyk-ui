@@ -97,7 +97,7 @@ function Value(props) {
         <button type="button" onClick={() => sendMessage('tag.remove', v.id)}>
           <Icon type="times" />
         </button>
-        <span>{ v.name }</span>
+        <span title={v.name}>{ v.name }</span>
       </Pill>
     );
   }
