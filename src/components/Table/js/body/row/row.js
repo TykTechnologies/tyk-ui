@@ -21,7 +21,7 @@ export const Row = ({ row, index }) => {
     <tr>
       {selectable && selectable.position === 'LEFT' && SelectableCheckbox()}
       {columns.map(col => (
-        <Cell col={col} row={row} index={index} />
+        <Cell key={col.id} col={col} row={row} index={index} />
       ))}
       {selectable && selectable.position === 'RIGHT' && SelectableCheckbox()}
     </tr>

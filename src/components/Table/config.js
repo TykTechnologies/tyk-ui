@@ -1,6 +1,7 @@
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 // import Icon from '../Icon';
+import { Input } from '../Input';
 import TextEllipsis from '../TextEllipsis';
 
 export const config = {
@@ -20,6 +21,9 @@ export const config = {
     },
     {
       id: 'delete_btn', name: 'Delete', type: Button, sortable: true,
+    },
+    {
+      id: 'input_test', name: 'Input Test', type: Input,
     },
   ],
   rows: [
@@ -42,6 +46,11 @@ export const config = {
           theme: 'danger',
           value: 'Delete',
           size: 'sm',
+        },
+        input_test: {
+          type: 'number',
+          value: 1,
+          noChild: true,
         },
       },
       selected: false,
@@ -66,6 +75,11 @@ export const config = {
           value: 'Delete',
           size: 'sm',
         },
+        input_test: {
+          type: 'number',
+          value: 1,
+          noChild: true,
+        },
       },
       selected: false,
     },
@@ -88,6 +102,11 @@ export const config = {
           value: 'Delete',
           size: 'sm',
         },
+        input_test: {
+          type: 'number',
+          value: 1,
+          noChild: true,
+        },
       },
       selected: false,
     },
@@ -109,6 +128,11 @@ export const config = {
           theme: 'danger',
           value: 'Delete',
           size: 'sm',
+        },
+        input_test: {
+          type: 'number',
+          value: 1,
+          noChild: true,
         },
       },
       selected: true,

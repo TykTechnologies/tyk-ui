@@ -10,9 +10,11 @@ export const Body = () => {
   return (
     <tbody>
       {
-        rows.map((row, i) => (
-          <Row key={row.id} row={row} index={i} />
-        ))
+        rows.map((row, i) => {
+          console.log({ row });
+          // eslint-disable-next-line react/no-array-index-key
+          return <Row key={i} row={row} index={i} />;
+        })
       }
     </tbody>
   );
