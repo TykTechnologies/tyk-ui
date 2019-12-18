@@ -1,0 +1,135 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+@import './variables';
+@import '../../FloatingContainer/sass/FloatingContainer';
+
+.tyk-combobox {
+  &.disabled {
+    .entry-field {
+      background-color: $form-default-color;
+    }
+  }
+
+  .tyk-form-control {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    min-height: 40px;
+    height: auto;
+    padding: 0;
+  }
+
+  &-disabled-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .current-values {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+
+    .text-value {
+      padding: 12px 5px;
+      width: 100%;
+    }
+
+    .tyk-pill--combobox {
+      margin-top: 3px;
+      margin-bottom: 3px;
+      background-color: $tyk-combobox-pill-background;
+      border-radius: 10px;
+      color: $tyk-combobox-pill-color;
+      padding: 5px 10px;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 23px;
+        outline: none;
+
+        + span {
+          margin-left: 0;
+        }
+      }
+
+      i {
+        margin-right: 5px;
+      }
+    }
+
+    .entry-field {
+      border: none;
+      line-height: 30px;
+
+      &:focus,
+      &:active {
+        border: none;
+        outline: none;
+      }
+    }
+  }
+
+  .values-container-trigger {
+    flex-basis: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+.combobox-dropdown {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $form-default-color;
+  background-color: white;
+
+  &.tyk-form-group--rounded-corners {
+    border-radius: $general-border-radius;
+  }
+
+  .combobox-search {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    padding: 10px 15px;
+
+    + .combobox-list {
+      border-top: 1px solid $form-default-color;
+    }
+  }
+
+  .combobox-list {
+    max-height: 255px;
+
+    li {
+      cursor: pointer;
+      padding: 10px 15px;
+      transition: all .2s;
+
+      &:hover,
+      &.active {
+        background-color: $form-default-color;
+      }
+
+      &.disabled {
+        color: $form-default-color;
+        background-color: initial;
+      }
+
+      + li {
+        border-top: 1px solid $form-default-color;
+      }
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+}
