@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Pagination } from '../../Pagination';
 import { Header } from './header/header';
@@ -81,6 +81,8 @@ const Table = ({ config, onMessage }) => {
 
     onMessage(message, state, api);
   };
+
+  useEffect(() => sendMessage('api', state, api));
 
   return (
     <tableContext.Provider value={{ state, sendMessage }}>
