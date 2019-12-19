@@ -39,6 +39,8 @@
     .text-value {
       padding: 12px 5px;
       width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .tyk-pill--combobox {
@@ -118,8 +120,9 @@
     max-height: 255px;
 
     li {
+      display: flex;
       cursor: pointer;
-      padding: 10px 15px;
+      padding: 9px 15px;
       transition: all .2s;
 
       &:hover,
@@ -138,6 +141,12 @@
 
       i {
         margin-right: 5px;
+      }
+
+      .item-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 16px;
       }
     }
   }

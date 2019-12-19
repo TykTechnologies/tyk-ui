@@ -30,6 +30,7 @@ function List(props) {
     return (
       <li
         key={item.id}
+        title={item.name}
         className={[
           item.disabled && 'disabled',
           activeItem && item.id === activeItem.id && 'active',
@@ -38,7 +39,7 @@ function List(props) {
         onKeyPress={() => {}}
       >
         {item.selected && <Icon type="check" />}
-        {item.name}
+        <span className="item-name">{item.name}</span>
       </li>
     );
   }
