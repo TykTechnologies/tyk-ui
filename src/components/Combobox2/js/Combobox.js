@@ -67,7 +67,7 @@ function Combobox(props) {
   function getCssClasses() {
     return [
       'tyk-form-group',
-      'tyk-combobox',
+      'tyk-combobox2',
       ...getThemeClasses(),
       error && 'has-error',
       labelwidth && 'tyk-form-group--label-has-width',
