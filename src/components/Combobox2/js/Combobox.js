@@ -100,7 +100,7 @@ function Combobox(props) {
 
   function updateValue(newValue) {
     setValue(newValue);
-    onChange(max === 1 ? (newValue[0] || null) : newValue);
+    onChange(max === 1 && !tags ? (newValue[0] || null) : newValue);
   }
 
   function addTag(val) {
