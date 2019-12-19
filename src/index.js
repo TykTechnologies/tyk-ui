@@ -14,6 +14,7 @@ export { Dropdown, FieldDropdown } from './components/Dropdown';
 export { EditableList, FieldEditableList, FormikEditableList } from './components/EditableList';
 export { FileInput, FieldFileInput, FormikFileInput } from './components/FileInput';
 export { default as FixedWrapper } from './components/FixedWrapper';
+export { default as FloatingContainer } from './components/FloatingContainer';
 export { default as Icon } from './components/Icon';
 export { default as InfiniteScroller } from './components/InfiniteScroller';
 export { default as InfoNote } from './components/InfoNote';
