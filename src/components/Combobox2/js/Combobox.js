@@ -261,6 +261,7 @@ function Combobox(props) {
           <div className="current-values">
             <Value
               value={value}
+              max={max}
               tags={tags}
               tagSeparators={tagSeparators}
               allowCustomValues={allowCustomValues}

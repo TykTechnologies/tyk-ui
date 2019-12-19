@@ -5,6 +5,7 @@ import Pill from '../../Pill';
 function Value(props) {
   const {
     value,
+    max,
     tags,
     tagSeparators,
     placeholder,
@@ -106,24 +107,28 @@ function Value(props) {
     return (
       <>
         {value.map(renderTag)}
-        <input
-          className="entry-field"
-          ref={inputRef}
-          placeholder={value.length ? '' : placeholder}
-          disabled={disabled}
-          value={inputValue}
-          style={{ width: value.length ? inputWidth : '100%' }}
-          onChange={e => entryFieldOnChange(e.target.value)}
-          onKeyDown={e => entryFieldOnKeyDown(e.key, e.target.value)}
-        />
-        <span
-          ref={dummyElementRef}
-          style={{
-            visbility: 'hidden',
-            position: 'absolute',
-            top: '-9999px',
-          }}
-        />
+        {value.length < max && (
+          <>
+            <input
+              className="entry-field"
+              ref={inputRef}
+              placeholder={value.length ? '' : placeholder}
+              disabled={disabled}
+              value={inputValue}
+              style={{ width: value.length ? inputWidth : '100%' }}
+              onChange={e => entryFieldOnChange(e.target.value)}
+              onKeyDown={e => entryFieldOnKeyDown(e.key, e.target.value)}
+            />
+            <span
+              ref={dummyElementRef}
+              style={{
+                visbility: 'hidden',
+                position: 'absolute',
+                top: '-9999px',
+              }}
+            />
+          </>
+        )}
       </>
     );
   }
