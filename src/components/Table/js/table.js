@@ -83,7 +83,7 @@ const Table = ({ value, onChange }) => {
     }
   };
 
-  useEffect(() => setState(value), []);
+  useEffect(() => setState(value), [value]);
   useEffect(() => onChange(onChangeMsg, state, api), [state]);
 
   if (!state) {
