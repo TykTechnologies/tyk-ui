@@ -17,7 +17,7 @@ export const Cell = ({ col, row, index }) => {
         onClick={() => sendMessage('cell.click', { index, row, col })}
         onChange={() => sendMessage('cell.change', { index, row, col })}
       >
-        {row.values[col.id].value}
+        {row.values[col.id].noChild ? null : row.values[col.id].value}
       </Component>
     </td>
   );

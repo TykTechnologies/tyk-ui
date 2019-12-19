@@ -43,7 +43,6 @@ export const Header = () => {
                 sendMessage('header.selectAll.click', selectAll);
               }}
               onChange={(v) => {
-                console.log({ v });
                 sendMessage('header.selectAll.change', v);
               }}
             >

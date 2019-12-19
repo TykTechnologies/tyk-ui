@@ -1,9 +1,10 @@
-```js
+```jsx
+import {Fragment, useState} from 'react';
 import { config } from './config.js';
 
 <Table 
-  config={config} 
-  onMessage={
+  value={config}
+  onChange={
     (message, data, tableApi) => {
       console.log({message, data, tableApi})
     }

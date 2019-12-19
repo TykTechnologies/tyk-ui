@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Pagination } from '../../Pagination';
+import Loader from '../../Loader';
 import { Header } from './header/header';
 import { Body } from './body/body';
 import { tableContext } from '../tableContext';
 
-const Table = ({ config, onMessage }) => {
-  const [state, setState] = useState(config);
+const Table = ({ value, onChange }) => {
+  const [state, setState] = useState(null);
+  const [onChangeMsg, setOnChangeMsg] = useState('api');
 
   const sortRows = (row, sortOrder) => {
     const compareFn = (a, b) => {
@@ -59,6 +61,7 @@ const Table = ({ config, onMessage }) => {
   };
 
   const sendMessage = (message, data) => {
+    setOnChangeMsg(message);
     if (message === 'sort') {
       sortRows(data.column.id, data.sortOrder);
     }
@@ -78,12 +81,14 @@ const Table = ({ config, onMessage }) => {
     if (message === 'pagination.change') {
       setPagination(data);
     }
-
-    onMessage(message, state, api);
   };
 
-  useEffect(() => sendMessage('api', state, api));
+  useEffect(() => setState(value), []);
+  useEffect(() => onChange(onChangeMsg, state, api), [state]);
 
+  if (!state) {
+    return <Loader />;
+  }
   return (
     <tableContext.Provider value={{ state, sendMessage }}>
       <table className="tyk-table">
@@ -105,8 +110,8 @@ const Table = ({ config, onMessage }) => {
 };
 
 Table.propTypes = {
-  config: PropTypes.instanceOf(Object),
-  onMessage: PropTypes.func,
+  value: PropTypes.instanceOf(Object),
+  onChange: PropTypes.func,
 };
 
 export default Table;
