@@ -64,7 +64,7 @@ function Value(props) {
   function textValue(val) {
     return (
       <span
-        className="text-value"
+        className="tyk-combobox2__text-value"
         role="button"
         tabIndex="0"
         onClick={triggerAction}
@@ -110,7 +110,7 @@ function Value(props) {
         {value.length < max && (
           <>
             <input
-              className="entry-field"
+              className="tyk-combobox2__entry-field"
               ref={inputRef}
               placeholder={value.length ? '' : placeholder}
               disabled={disabled}

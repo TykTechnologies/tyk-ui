@@ -264,7 +264,7 @@ function Combobox(props) {
           {disabled && (
             <div className="tyk-combobox-disabled-overlay" />
           )}
-          <div className="current-values">
+          <div className="tyk-combobox2__current-values">
             <Value
               value={value}
               max={max}
@@ -278,7 +278,7 @@ function Combobox(props) {
             />
           </div>
           <div
-            className="values-container-trigger"
+            className="tyk-combobox2__values-container-trigger"
             role="button"
             tabIndex={disabled ? -1 : 0}
             onClick={openDropdown}
@@ -291,7 +291,7 @@ function Combobox(props) {
           <FloatingContainer
             element={comboboxControlRef}
             size="matchElement"
-            className={`combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
+            className={`tyk-combobox2__combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
             ref={dropdownRef}
             {...floatingContainerConfig}
           >

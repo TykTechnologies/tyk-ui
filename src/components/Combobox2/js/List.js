@@ -47,7 +47,7 @@ function List(props) {
   return (
     <>
       {!tags && (
-        <div className="combobox-search">
+        <div className="tyk-combobox2__combobox-search">
           <input
             autoFocus
             className="tyk-form-control"
@@ -63,7 +63,7 @@ function List(props) {
         </div>
       )}
       {values.length > 0 && (
-        <ul ref={listRef} className="combobox-list">
+        <ul ref={listRef} className="tyk-combobox2__combobox-list">
           {values.map(renderItem)}
         </ul>
       )}
