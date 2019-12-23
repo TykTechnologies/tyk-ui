@@ -37,7 +37,7 @@
     max-width: calc(100% - #{$container-trigger-width});
 
     .text-value {
-      padding: 12px 5px;
+      padding: 9px 5px;
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -51,6 +51,7 @@
       color: $tyk-combobox-pill-color;
       padding: 5px 10px;
       max-width: 100%;
+      max-height: 26px;
 
       button {
         background: none;
