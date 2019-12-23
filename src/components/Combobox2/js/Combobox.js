@@ -238,7 +238,11 @@ function Combobox(props) {
   }, []);
 
   useEffect(() => {
-    setValues(propValues);
+    if (propValues.length) {
+      setValues(propValues);
+    } else if (values.length) {
+      setValues([]);
+    }
   }, [propValues]);
 
   useEffect(() => {
@@ -249,7 +253,9 @@ function Combobox(props) {
 
   return (
     <div className={getCssClasses()} ref={rootRef}>
-      <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+      {label && (
+        <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+      )}
       <div
         className="tyk-form-control__wrapper"
         style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
