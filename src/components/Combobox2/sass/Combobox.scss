@@ -27,7 +27,7 @@
     height: 100%;
   }
 
-  .current-values {
+  &__current-values {
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
@@ -35,13 +35,6 @@
     padding-bottom: 3px;
     padding-left: 10px;
     max-width: calc(100% - #{$container-trigger-width});
-
-    .text-value {
-      padding: 9px 5px;
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
 
     .tyk-pill--combobox {
       margin-top: 3px;
@@ -74,20 +67,27 @@
         margin-right: 5px;
       }
     }
+  }
 
-    .entry-field {
+  &__entry-field {
+    border: none;
+    line-height: 30px;
+
+    &:focus,
+    &:active {
       border: none;
-      line-height: 30px;
-
-      &:focus,
-      &:active {
-        border: none;
-        outline: none;
-      }
+      outline: none;
     }
   }
 
-  .values-container-trigger {
+  &__text-value {
+    padding: 9px 5px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__values-container-trigger {
     flex-basis: $container-trigger-width;
     display: flex;
     justify-content: center;
@@ -96,7 +96,7 @@
   }
 }
 
-.combobox-dropdown {
+.tyk-combobox2__combobox-dropdown {
   display: flex;
   flex-direction: column;
   border: 1px solid $form-default-color;
@@ -106,7 +106,7 @@
     border-radius: $general-border-radius;
   }
 
-  .combobox-search {
+  .tyk-combobox2__combobox-search {
     background-color: white;
     position: sticky;
     top: 0;
@@ -117,7 +117,7 @@
     }
   }
 
-  .combobox-list {
+  .tyk-combobox2__combobox-list {
     max-height: 255px;
 
     li {
