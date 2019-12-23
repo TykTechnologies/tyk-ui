@@ -249,7 +249,9 @@ function Combobox(props) {
 
   return (
     <div className={getCssClasses()} ref={rootRef}>
-      <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+      {label && (
+        <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+      )}
       <div
         className="tyk-form-control__wrapper"
         style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
