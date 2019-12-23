@@ -238,7 +238,11 @@ function Combobox(props) {
   }, []);
 
   useEffect(() => {
-    setValues(propValues);
+    if (propValues.length) {
+      setValues(propValues);
+    } else if (values.length) {
+      setValues([]);
+    }
   }, [propValues]);
 
   useEffect(() => {
