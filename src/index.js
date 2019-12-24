@@ -36,6 +36,7 @@ export { Select, FieldSelect, FormikSelect } from './components/Select';
 export { SelectableList, FieldSelectableList, FormikSelectableList } from './components/SelectableList';
 export { default as Tabs } from './components/Tabs';
 export { default as Textarea, FormikTextarea } from './components/Textarea';
+export { default as TextEllipsis } from './components/TextEllipsis';
 export { toast } from './components/Toast';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Table } from './components/Table';
