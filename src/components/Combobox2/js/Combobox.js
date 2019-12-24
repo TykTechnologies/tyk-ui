@@ -10,7 +10,7 @@ import List from './List';
 function normalizeValue(value, values) {
   let v = value;
   if (typeof value === 'string') v = { id: value, name: value };
-  else if (!value.hasOwnProperty('name')) v = { ...value, name: value }; // eslint-disable-line no-prototype-builtins
+  else if (!value.hasOwnProperty('name')) v = { ...value, name: value.id }; // eslint-disable-line no-prototype-builtins
   if (!values) return v;
   const existingVal = values.find(ev => ev.id === v.id);
   return existingVal ? { ...v, ...existingVal } : v;
