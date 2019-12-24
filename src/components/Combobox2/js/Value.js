@@ -11,6 +11,7 @@ function Value(props) {
     placeholder,
     disabled,
     renderValue,
+    valueOverflow,
     onMessage: sendMessage,
   } = props;
   const INPUT_MIN_WIDTH = 60;
@@ -64,7 +65,8 @@ function Value(props) {
   function textValue(val) {
     return (
       <span
-        className="tyk-combobox2__text-value"
+        className={`tyk-combobox2__text-value overflow-${valueOverflow}`}
+        title={valueOverflow === 'single' ? val : undefined}
         role="button"
         tabIndex="0"
         onClick={triggerAction}
