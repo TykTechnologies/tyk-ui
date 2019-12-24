@@ -7,11 +7,19 @@ import FloatingContainer from '../../FloatingContainer';
 import Value from './Value';
 import List from './List';
 
-function getValueFromProp(value) {
+function normalizeValue(value, values) {
+  let v = value;
+  if (typeof value === 'string') v = { id: value, name: value };
+  else if (!value.hasOwnProperty('name')) v = { ...value, name: value }; // eslint-disable-line no-prototype-builtins
+  if (!values) return v;
+  const existingVal = values.find(ev => ev.id === v.id);
+  return existingVal ? { ...v, ...existingVal } : v;
+}
+
+function getValueFromProp(value, values) {
   if (!value) return [];
-  if (Array.isArray(value)) return [...value];
-  if (typeof value === 'string') return [{ id: value, name: value }];
-  return [value];
+  if (Array.isArray(value)) return value.map(v => normalizeValue(v, values));
+  return [normalizeValue(value, values)];
 }
 
 function Combobox(props) {
@@ -53,7 +61,7 @@ function Combobox(props) {
   const comboboxControlRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  const [value, setValue] = useState(getValueFromProp(propValue));
+  const [value, setValue] = useState(getValueFromProp(propValue, propValues));
   const [values, setValues] = useState(propValues);
   const [searchValue, setSearchValue] = useState('');
   const [activeItem, setActiveItem] = useState(null);
@@ -246,7 +254,7 @@ function Combobox(props) {
   }, [propValues]);
 
   useEffect(() => {
-    const newValue = getValueFromProp(propValue);
+    const newValue = getValueFromProp(propValue, values);
     setValue(newValue);
     setValues(values.map(v => ({ ...v, selected: newValue.some(nv => nv.id === v.id) })));
   }, [propValue]);

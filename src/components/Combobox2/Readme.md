@@ -12,6 +12,7 @@
     { id: 'apiseven', name: 'API seven'},
     { id: 'apieight', name: 'API eight'}
   ]}
+  value={'apitwo'}
   label="Combobox"
   name="combobox"
   onChange={ (e) => { console.log(e); }}
