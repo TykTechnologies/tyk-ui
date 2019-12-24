@@ -26,6 +26,7 @@ function Combobox(props) {
   const {
     value: propValue,
     values: propValues = [],
+    valueOverflow = 'single',
     label = '',
     labelwidth,
     tags = false,
@@ -281,6 +282,7 @@ function Combobox(props) {
               allowCustomValues={allowCustomValues}
               placeholder={placeholder}
               disabled={disabled}
+              valueOverflow={valueOverflow}
               renderValue={renderValue}
               onMessage={onMessage}
             />
@@ -363,6 +365,7 @@ Combobox.propTypes = {
   ]),
   values: PropTypes.instanceOf(Array),
   floatingContainerConfig: PropTypes.instanceOf(Object),
+  valueOverflow: PropTypes.oneOf(['single', 'multiple']),
 };
 
 export default Combobox;
