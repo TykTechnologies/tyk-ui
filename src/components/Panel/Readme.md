@@ -2,17 +2,26 @@
 
 *Panel themes*
 ```js
+import Button from '../Button';
+<>
 <Panel theme="primary">
   <Panel.Header>Panel example</Panel.Header>
   <Panel.Body>
     Panel body content
   </Panel.Body>
 </Panel>
-<Panel theme="success">
-  <Panel.Header>Panel example</Panel.Header>
-  <Panel.Body>
-    Panel body content
-  </Panel.Body>
+<Panel collapsable theme="success">
+  {
+    ({toggleCollapse}) => (
+      <>
+        <Panel.Header>Panel example</Panel.Header>
+        <Panel.Body>
+          <Button onClick={toggleCollapse} theme="primary">Collapse</Button>
+          Panel body content 222
+        </Panel.Body>
+      </>
+    )
+  }
 </Panel>
 <Panel theme="danger">
   <Panel.Header>Panel example</Panel.Header>
@@ -26,6 +35,7 @@
     Panel body content
   </Panel.Body>
 </Panel>
+</>
 ```
 *Collapsable panel*
 ```js

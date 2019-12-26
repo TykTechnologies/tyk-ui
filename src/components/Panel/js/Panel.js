@@ -10,11 +10,14 @@ const Panel = (props) => {
     collapsed,
     collapsable,
     theme,
+    onToggleCollapse,
   } = props;
   const [collapsedState, setCollapsedState] = useState(collapsed || false);
 
   useEffect(() => {
-    setCollapsedState(collapsed);
+    if(collapsed !== collapsedState) {
+      setCollapsedState(collapsed);
+    }
   }, [collapsed]);
 
   const getCssClasses = () => {
@@ -31,8 +34,11 @@ const Panel = (props) => {
   };
 
   const handleToggle = () => {
-    console.log('aaa', collapsedState);
     setCollapsedState(!collapsedState);
+
+    if (onToggleCollapse) {
+      onToggleCollapse(!collapsedState);
+    }
   };
 
   return (
@@ -45,7 +51,13 @@ const Panel = (props) => {
           theme,
         }}
       >
-        { children }
+        {
+          (typeof children === 'function')
+            ? children({
+              toggleCollapse: handleToggle,
+            })
+            : children
+        }
       </PortalContext.Provider>
     </div>
   );
@@ -53,6 +65,7 @@ const Panel = (props) => {
 
 Panel.propTypes = {
   children: PropTypes.oneOfType([
+    PropTypes.func,
     PropTypes.element,
     PropTypes.node,
     PropTypes.string,
@@ -61,6 +74,7 @@ Panel.propTypes = {
   collapsable: PropTypes.bool,
   collapsed: PropTypes.bool,
   theme: PropTypes.string,
+  onToggleCollapse: PropTypes.func,
 };
 
 export default Panel;
