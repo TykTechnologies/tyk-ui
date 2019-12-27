@@ -86,6 +86,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1;
+
+    &.overflow-single {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   &__values-container-trigger {

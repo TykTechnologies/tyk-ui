@@ -15,7 +15,7 @@ const Panel = (props) => {
   const [collapsedState, setCollapsedState] = useState(collapsed || false);
 
   useEffect(() => {
-    if(collapsed !== collapsedState) {
+    if (collapsed !== collapsedState) {
       setCollapsedState(collapsed);
     }
   }, [collapsed]);

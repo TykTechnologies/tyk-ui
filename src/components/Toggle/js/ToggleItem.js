@@ -37,14 +37,14 @@ export default class ToggleItem extends Component {
     }
   }
 
-  onChange() {
+  onChange(event) {
     const { context, value } = this.props;
 
     if (context.disabled) {
       return;
     }
 
-    context.onItemSelected(context.type === 'single' ? !context.value : value, this.itemRef);
+    context.onItemSelected(context.type === 'single' ? !context.value : value, event);
 
     if (context.type === 'multiple') {
       context.saveSelectedRef(this.itemRef);
