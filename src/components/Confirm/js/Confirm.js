@@ -9,6 +9,8 @@ const Confirm = (props) => {
     children,
     title,
     description,
+    confirmBtnText = 'Confirm',
+    cancelBtnText = 'Cancel',
   } = props;
   const [open, setOpen] = useState(false);
   const [callback, setCallback] = useState(null);
@@ -46,13 +48,13 @@ const Confirm = (props) => {
             onClick={confirm}
             theme="success"
           >
-            Save
+            {confirmBtnText}
           </Button>
           <Button
             onClick={hide}
             theme="default"
           >
-            Cancel
+            {cancelBtnText}
           </Button>
         </Modal.Footer>
       </Modal>
