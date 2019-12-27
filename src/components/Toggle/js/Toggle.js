@@ -43,11 +43,11 @@ class Toggle extends Component {
     this.toggleRef = createRef();
   }
 
-  onItemSelected(value) {
+  onItemSelected(value, event) {
     const { onChange } = this.props;
 
     if (onChange) {
-      onChange(value);
+      onChange(value, event);
     }
   }
 
