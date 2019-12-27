@@ -63,6 +63,8 @@ const Confirm = (props) => {
 };
 
 Confirm.propTypes = {
+  confirmBtnText: PropTypes.string,
+  cancelBtnText: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   children: PropTypes.oneOfType([
