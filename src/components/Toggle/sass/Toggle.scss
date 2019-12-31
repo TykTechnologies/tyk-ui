@@ -1,7 +1,7 @@
 .tyk-toggle {
   display: inline-flex;
   flex-wrap: wrap;
-  font-family: 'robotoregular';
+  font-family: $font-family-regular;
   font-size: text-scale('sm');
 
   &.block {

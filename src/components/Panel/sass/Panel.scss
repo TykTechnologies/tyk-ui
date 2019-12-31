@@ -8,7 +8,7 @@
   border-radius: $panel-border-radius;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.10);
   margin-bottom: 20px;
-  font-family: 'robotomedium';
+  font-family: $font-family-medium;
 
   &__header {
     border-bottom: 1px solid $panel-default-border-bottom-color;
@@ -63,7 +63,7 @@
 .tyk-panel__body {
   background-color: white;
   border-radius: $panel-border-radius;
-  font-family: 'robotoregular';
+  font-family: $font-family-regular;
   padding: $padding-panel-body;
   position: relative;
   transition: height .2s;
@@ -82,7 +82,7 @@
   border-radius: $panel-border-radius;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  font-family: "robotomedium";
+  font-family: $panel-header-font-family;
   overflow: hidden;
   padding: $padding-y-panel-header $padding-x-panel-header;
   position: relative;

@@ -126,6 +126,10 @@ $grid-breakpoints: (
   'xs' '(max-width: ' + $breakpoint-sm + ')'
 ) !default;
 
+$font-family-regular: 'robotolight' !default;
+$font-family-regular: 'robotoregular' !default;
+$font-family-medium: 'robotomedium' !default;
+$font-family-bold: 'robotbold' !default;
 
 $headings-margin-bottom: 15px !default;
 $headings-font-family: 'robotomedium' !default;
