@@ -33,11 +33,7 @@ export default class Combobox extends Component {
 
   static propTypes = {
     allowCustomValues: PropTypes.bool,
-    CustomListComponent: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.string,
-    ]),
+    CustomListComponent: PropTypes.elementType,
     searchItem: PropTypes.func,
     disabled: PropTypes.bool,
     error: PropTypes.string,

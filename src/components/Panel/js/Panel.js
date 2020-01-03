@@ -1,41 +1,26 @@
-import React, { Component, createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const PortalContext = createContext();
 
-export default class Panel extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-    className: PropTypes.string,
-    collapsable: PropTypes.bool,
-    collapsed: PropTypes.bool,
-    theme: PropTypes.string,
-  };
+const Panel = (props) => {
+  const {
+    children,
+    className,
+    collapsed,
+    collapsable,
+    theme,
+    onToggleCollapse,
+  } = props;
+  const [collapsedState, setCollapsedState] = useState(collapsed || false);
 
-  constructor(props) {
-    super(props);
-    const { collapsed } = this.props;
-
-    this.state = {
-      collapsed: collapsed || false,
-    };
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const state = {};
-    if (nextProps.collapsed !== prevState.collapsed) {
-      state.collapsed = nextProps.collapsed;
+  useEffect(() => {
+    if (collapsed !== collapsedState) {
+      setCollapsedState(collapsed);
     }
+  }, [collapsed]);
 
-    return state;
-  }
-
-  getCssClasses() {
-    const { className, theme } = this.props;
+  const getCssClasses = () => {
     let cssClasses = ['tyk-panel'];
     const panelTheme = `tyk-panel--${theme || 'default'}`;
 
@@ -46,41 +31,51 @@ export default class Panel extends Component {
     }
 
     return cssClasses.join(' ');
-  }
+  };
 
-  handleToggle() {
-    const { collapsed } = this.state;
+  const handleToggle = () => {
+    setCollapsedState(!collapsedState);
 
-    this.setState({
-      collapsed: !collapsed,
-    });
-  }
+    if (onToggleCollapse) {
+      onToggleCollapse(!collapsedState);
+    }
+  };
 
-  render() {
-    const {
-      collapsable,
-      children,
-      theme,
-    } = this.props;
-    const {
-      collapsed,
-    } = this.state;
+  return (
+    <div className={getCssClasses()}>
+      <PortalContext.Provider
+        value={{
+          collapsable,
+          collapsed: collapsedState,
+          onToggle: handleToggle,
+          theme,
+        }}
+      >
+        {
+          (typeof children === 'function')
+            ? children({
+              toggleCollapse: handleToggle,
+            })
+            : children
+        }
+      </PortalContext.Provider>
+    </div>
+  );
+};
 
-    return (
-      <div className={this.getCssClasses()}>
-        <PortalContext.Provider
-          value={{
-            collapsable,
-            collapsed,
-            onToggle: this.handleToggle.bind(this),
-            theme,
-          }}
-        >
-          { children }
-        </PortalContext.Provider>
-      </div>
-    );
-  }
-}
+Panel.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+  className: PropTypes.string,
+  collapsable: PropTypes.bool,
+  collapsed: PropTypes.bool,
+  theme: PropTypes.string,
+  onToggleCollapse: PropTypes.func,
+};
 
+export default Panel;
 export { PortalContext };

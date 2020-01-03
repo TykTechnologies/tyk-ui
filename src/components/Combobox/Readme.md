@@ -125,26 +125,6 @@
 />
 ```
 ```js
-<Combobox
-  values={[
-    { id: '', name: "None" },
-    { id: 'apione', name: 'API one'},
-    { id: 'apitwo', name: 'API two'},
-    { id: 'apithree', name: 'API three'},
-    { id: 'apifour', name: 'API four'},
-    { id: 'apifive', name: 'API five'},
-    { id: 'apisix', name: 'API six'},
-    { id: 'apiseven', name: 'API seven'},
-    { id: 'apieight', name: 'API eight'}
-  ]}
-  label="Combobox custom List element"
-  tags={ true }
-  name="combobox"
-  placeholder="Please select a value"
-/>
-```
-
-```js
 import React from 'react';
 const CustomComponent = React.forwardRef((props, ref) => {
   const {
@@ -235,7 +215,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
     { id: 'apiseven', name: 'API seven'},
     { id: 'apieight', name: 'API eight'}
   ]}
-  label="Disabled Combobox"
+  label="Combobox with error"
   multiple={ true }
   name="combobox"
   placeholder="Please select a value"
@@ -255,7 +235,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
     { id: 'apiseven', name: 'API seven'},
     { id: 'apieight', name: 'API eight'}
   ]}
-  label="Combobox"
+  label="Combobox with error"
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
