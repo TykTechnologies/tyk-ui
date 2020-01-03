@@ -60,6 +60,43 @@ const Table = ({ value, onChange }) => {
     setState: newState => setState(newState),
   };
 
+  const changeCellValue = (data) => {
+    console.log("Let's change a cell value", { data });
+    const { index, col /* row */ } = data;
+    const newValue = data.value;
+    const selectedRow = state.rows[index];
+    selectedRow.values[col.id].props.value = newValue;
+    setState({
+      ...state,
+      rows: [
+        ...state.rows.slice(0, index),
+        {
+          ...selectedRow,
+          // values: {
+          //   ...selectedRow.values,
+          //   [col.id]: {
+          //     ...row.values[col.id],
+          //     value: newValue,
+          //   },
+          // },
+        },
+        ...state.rows.slice(index + 1),
+      ],
+      cellChange: {
+        ...data,
+      },
+    });
+  };
+
+  const handleCellClick = (data) => {
+    // eslint-disable-next-line no-shadow
+    const { value, ...clicked } = data;
+    setState({
+      ...state,
+      clicked,
+    });
+  };
+
   const sendMessage = (message, data) => {
     setOnChangeMsg(message);
     if (message === 'sort') {
@@ -81,6 +118,16 @@ const Table = ({ value, onChange }) => {
     if (message === 'pagination.change') {
       setPagination(data);
     }
+
+    if (message.includes('cell') && message.includes('change')) {
+      changeCellValue(data);
+    }
+
+    if (message.includes('cell') && message.includes('click')) {
+      handleCellClick(data);
+    }
+    // console.log('Triggering onChange from SendMessage Instead of UseEffect');
+    // onChange(onChangeMsg, state, api);
   };
 
   useEffect(() => setState(value), [value]);
