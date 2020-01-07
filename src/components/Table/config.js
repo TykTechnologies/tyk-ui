@@ -171,7 +171,7 @@ export const config = {
     },
   ],
   selectable: {
-    position: 'RIGHT',
+    position: 'LEFT',
     // type: Button,
     // type: 'default',
     type: Checkbox,

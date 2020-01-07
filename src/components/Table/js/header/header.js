@@ -9,18 +9,20 @@ export const Header = () => {
   const { state, sendMessage } = useContext(tableContext);
   const { columns, selectable } = state;
 
+  const sendSortMessage = (column) => {
+    sendMessage('sort', { column, sortOrder });
+    setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');
+  };
+
   const generateHeader = () => columns.map(column => (
     <th
       key={column.id}
-      onClick={() => {
-        sendMessage('sort', { column, sortOrder });
-        setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');
-      }}
+      onClick={column.sortable ? () => sendSortMessage(column) : null}
     >
       {column.name}
       {column.sortable && (
         <span className="header-sort">
-          <Icon family="tykon" type="arrowdown" />
+          <Icon family="tykon" type={sortOrder === 'DESC' ? 'arrowdown' : 'arrowup'} />
         </span>
       )}
     </th>
