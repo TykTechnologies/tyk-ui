@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   font-family: $font-family-regular;
   font-size: text-scale('sm');
+  white-space: nowrap;
 
   &.block {
     margin-bottom: 20px;

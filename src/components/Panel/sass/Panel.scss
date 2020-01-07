@@ -11,7 +11,9 @@
   font-family: $font-family-medium;
 
   &__header {
+    align-items: center;
     border-bottom: 1px solid $panel-default-border-bottom-color;
+    display: flex;
     font-size: $panel-header-font-size;
   }
 
@@ -21,7 +23,7 @@
     -webkit-box-shadow: none;
   }
 
-  &--primary {
+  &--blank {
     .tyk-panel__header {
       @include panel-variant(
         white,
@@ -86,6 +88,11 @@
   overflow: hidden;
   padding: $padding-y-panel-header $padding-x-panel-header;
   position: relative;
+
+  .tyk-panel--collapsed & {
+    border-bottom-left-radius: $panel-border-radius;
+    border-bottom-right-radius: $panel-border-radius;
+  }
 
   & ~ .tyk-panel__body {
     border-top-left-radius: 0;

@@ -101,7 +101,7 @@ const DatePicker = (props) => {
   }, [prevValue, value, pickerInstance]);
 
   const getCssClasses = () => {
-    const cssClasses = ['tyk-form-group'];
+    const cssClasses = ['tyk-form-group tyk-form-group--addon-right'];
     const themes = theme ? theme.split(' ') : [];
 
     if (themes.length) {

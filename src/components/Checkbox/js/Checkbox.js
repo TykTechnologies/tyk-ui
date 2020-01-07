@@ -18,10 +18,10 @@ export default class Checkbox extends Component {
     const { inline } = this.props;
     const cssClasses = [];
 
+    cssClasses.push('tyk-checkbox');
+
     if (inline) {
       cssClasses.push('tyk-checkbox--inline');
-    } else {
-      cssClasses.push('tyk-checkbox');
     }
 
     return cssClasses.join(' ');
