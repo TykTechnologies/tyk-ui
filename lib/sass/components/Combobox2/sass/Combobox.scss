@@ -34,7 +34,10 @@
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 10px;
-    max-width: calc(100% - #{$container-trigger-width});
+
+    + &__values-container-trigger {
+      max-width: calc(100% - #{$container-trigger-width});
+    }
 
     .tyk-pill--combobox {
       margin-top: 3px;

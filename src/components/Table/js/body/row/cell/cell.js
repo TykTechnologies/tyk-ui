@@ -11,13 +11,17 @@ export const Cell = ({ col, row, index }) => {
   }
   const Component = col.type;
   return (
-    <td>
+    <td className={row.values[col.id].styling?.className || null}>
       <Component
-        {...row.values[col.id]}
-        onClick={() => sendMessage('cell.click', { index, row, col })}
-        onChange={() => sendMessage('cell.change', { index, row, col })}
+        {...row.values[col.id].props}
+        onClick={value => sendMessage(`cell.${col.id}.click`, {
+          index, row, col, value,
+        })}
+        onChange={value => sendMessage(`cell.${col.id}.change`, {
+          index, row, col, value,
+        })}
       >
-        {row.values[col.id].noChild ? null : row.values[col.id].value}
+        {row.values[col.id].children ? row.values[col.id].children : null}
       </Component>
     </td>
   );

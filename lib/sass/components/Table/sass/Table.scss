@@ -6,12 +6,13 @@
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  display: block;
+  overflow-y: scroll;
 
     > thead th {
       color: theme-color('foreground', 'light');
       font-size: text-scale('sm');
-      text-align: left;
-      text-transform: uppercase;
+      position: sticky;
 
       .tyk-button {
         background: none;
@@ -27,6 +28,9 @@
     > tbody td {
       padding: $table-td-padding-y $table-td-padding-x;
       vertical-align: middle;
+        input:not([type='checkbox']) {
+          margin-top: 15px;
+        }
     }
 
     > tbody tr:nth-child(2n+1) {
@@ -64,4 +68,13 @@
 .header-sort {
   padding-left: 10px;
   padding-top: 5px;
+}
+
+.new-table-pagination {
+  float: right;
+  padding-top: 10px;
+}
+
+.selectable > div{
+  margin-left: 20px;
 }
