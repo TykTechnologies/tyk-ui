@@ -189,4 +189,5 @@ export const config = {
     perPage: 5,
     current: 1,
   },
+  maxHeight: '200px',
 };

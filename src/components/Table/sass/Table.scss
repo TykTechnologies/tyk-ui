@@ -10,8 +10,7 @@
     > thead th {
       color: theme-color('foreground', 'light');
       font-size: text-scale('sm');
-      text-align: left;
-      text-transform: uppercase;
+      position: sticky;
 
       .tyk-button {
         background: none;
@@ -71,8 +70,14 @@
 
 .new-table-pagination {
   float: right;
+  padding-top: 10px;
 }
 
 .selectable > div{
   margin-left: 20px;
+}
+
+.scrollable {
+  display: block;
+  overflow: scroll;
 }

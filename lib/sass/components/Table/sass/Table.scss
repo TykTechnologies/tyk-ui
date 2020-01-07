@@ -6,12 +6,13 @@
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  display: block;
+  overflow-y: scroll;
 
     > thead th {
       color: theme-color('foreground', 'light');
       font-size: text-scale('sm');
-      text-align: left;
-      text-transform: uppercase;
+      position: sticky;
 
       .tyk-button {
         background: none;
@@ -71,6 +72,7 @@
 
 .new-table-pagination {
   float: right;
+  padding-top: 10px;
 }
 
 .selectable > div{

@@ -126,10 +126,12 @@ const Table = ({ value, onChange }) => {
   }
   return (
     <tableContext.Provider value={{ state, sendMessage }}>
-      <table className="tyk-table">
-        <Header />
-        <Body />
-      </table>
+      <div className="scrollable" style={{ height: state.maxHeight ? state.maxHeight : 'auto' }}>
+        <table className="tyk-table">
+          <Header />
+          <Body />
+        </table>
+      </div>
       {state.pagination && (
         <div className="new-table-pagination ">
           <Pagination
