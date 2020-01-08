@@ -16,7 +16,8 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     ...options,
   };
 
-  const onChange = (value) => {
+  const onChange = (valueOrEvent) => {
+    const value = valueOrEvent.target ? valueOrEvent.target.checked : valueOrEvent;
     const onChangeProps = opts.getOnChangeProps(value, field, form, properties);
     field.onChange({ target: { name: field.name, value, ...onChangeProps } });
     if (typeof properties.onChange === 'function') properties.onChange(value);
@@ -25,15 +26,14 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
   const formError = getValueFromPath(form.touched, field.name)
     && getValueFromPath(form.errors, field.name);
   const error = typeof formError === 'string' ? formError : '';
-  const compProps = opts.getCompProps(field, form, properties);
 
   return (
     <Component
       {...field}
       error={error}
       {...properties}
-      {...compProps}
       onChange={onChange}
+      input={{ value: field.value, onChange }}
     />
   );
 };
