@@ -271,7 +271,7 @@ function Combobox(props) {
       >
         <div className="tyk-form-control" ref={comboboxControlRef}>
           {disabled && (
-            <div className="tyk-combobox-disabled-overlay" />
+            <div className="tyk-combobox2-disabled-overlay" />
           )}
           <div className="tyk-combobox2__current-values">
             <Value
