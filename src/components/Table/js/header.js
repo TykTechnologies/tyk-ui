@@ -1,7 +1,7 @@
 // HEADER
 import React, { useContext, useState } from 'react';
-import Icon from '../../../Icon';
-import { tableContext } from '../../tableContext';
+import Icon from '../../Icon';
+import { tableContext } from '../tableContext';
 
 export const Header = () => {
   const [sortOrder, setSortOrder] = useState('ASC');

@@ -34,7 +34,12 @@ export const config = {
           type: 'target',
           className: 'success',
         },
-        name: 'Freemium Policy',
+        name: {
+          value: 'Freemium Policy',
+          events: {
+            onClick: () => console.log('Name Clicked'),
+          },
+        },
         access_rights: {
           props: {
             text:
@@ -45,12 +50,17 @@ export const config = {
             className: 'alpha',
           },
         },
-        auth_type: 'tag1, tag2, tag3, tag4',
-        date: '01/01/2019',
+        auth_type: {
+          value: 'tag1, tag2, tag3, tag4',
+        },
+        date: {
+          value: '01/01/2019',
+        },
         delete_btn: {
           props: {
             theme: 'danger',
             size: 'sm',
+            onClick: () => console.log('Delete Btn Click'),
           },
           children: 'Delete',
         },
@@ -58,19 +68,28 @@ export const config = {
           props: {
             type: 'number',
             value: '1',
+            onChange: v => console.log('changing input', v),
           },
         },
       },
       selected: false,
+      events: {
+        onClick: () => console.log('Row Clicked {config}'),
+      },
     },
     {
       values: {
         active: {
           family: 'tykon',
           type: 'target',
-          className: 'text-danger',
+          className: 'success',
         },
-        name: 'Silver Policy',
+        name: {
+          value: 'Freemium Policy',
+          events: {
+            onClick: () => console.log('Name Clicked'),
+          },
+        },
         access_rights: {
           props: {
             text:
@@ -78,15 +97,20 @@ export const config = {
             limit: 10,
           },
           styling: {
-            className: 'bravo',
+            className: 'alpha',
           },
         },
-        auth_type: 'tag1, tag2, tag3, tag4',
-        date: '15/01/2019',
+        auth_type: {
+          value: 'tag1, tag2, tag3, tag4',
+        },
+        date: {
+          value: '01/01/2019',
+        },
         delete_btn: {
           props: {
             theme: 'danger',
             size: 'sm',
+            onClick: () => console.log('Delete Btn Click'),
           },
           children: 'Delete',
         },
@@ -98,30 +122,44 @@ export const config = {
         },
       },
       selected: false,
+      events: {
+        onClick: () => console.log('Row Clicked {config}'),
+      },
     },
     {
       values: {
         active: {
           family: 'tykon',
           type: 'target',
-          className: 'text-danger',
+          className: 'success',
         },
-        name: 'Golden Policy',
+        name: {
+          value: 'Freemium Policy',
+          events: {
+            onClick: () => console.log('Name Clicked'),
+          },
+        },
         access_rights: {
           props: {
-            text: 'charlie, api delta, api eclair, api foxtrot',
+            text:
+              'api alpha, api bravo, api charlie, api delta, api eclair, api foxtrot',
             limit: 10,
           },
           styling: {
-            className: 'charlie',
+            className: 'alpha',
           },
         },
-        auth_type: 'tag1, tag2, tag3, tag4',
-        date: '01/01/2019',
+        auth_type: {
+          value: 'tag1, tag2, tag3, tag4',
+        },
+        date: {
+          value: '01/01/2019',
+        },
         delete_btn: {
           props: {
             theme: 'danger',
             size: 'sm',
+            onClick: () => console.log('Delete Btn Click'),
           },
           children: 'Delete',
         },
@@ -133,41 +171,9 @@ export const config = {
         },
       },
       selected: false,
-    },
-    {
-      values: {
-        active: {
-          family: 'tykon',
-          type: 'target',
-          className: 'text-success',
-        },
-        name: 'Golden Policy',
-        access_rights: {
-          props: {
-            text: 'api alpha, api bravo',
-            limit: 10,
-          },
-          styling: {
-            className: 'delta',
-          },
-        },
-        auth_type: 'tag1, tag2, tag3, tag4',
-        date: '10/01/2019',
-        delete_btn: {
-          props: {
-            theme: 'danger',
-            size: 'sm',
-          },
-          children: 'Delete',
-        },
-        input_test: {
-          props: {
-            type: 'number',
-            value: '1',
-          },
-        },
+      events: {
+        onClick: () => console.log('Row Clicked {config}'),
       },
-      selected: true,
     },
   ],
   selectable: {
@@ -176,7 +182,7 @@ export const config = {
     // type: 'default',
     type: Checkbox,
     style: 'dummy-style',
-    allowSelectAll: false,
+    allowSelectAll: true,
     // name: 'Select'
     // values: {
     //   theme: 'primary',
