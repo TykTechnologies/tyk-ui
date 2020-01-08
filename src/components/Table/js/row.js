@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from '../../../../Checkbox';
-import { Cell } from './cell/cell';
-import { tableContext } from '../../../tableContext';
+import Checkbox from '../../Checkbox';
+import { Cell } from './cell';
+import { tableContext } from '../tableContext';
 
 export const Row = ({ row, index }) => {
   const { state, sendMessage } = useContext(tableContext);
@@ -18,7 +18,7 @@ export const Row = ({ row, index }) => {
   );
 
   return (
-    <tr>
+    <tr onClick={row.events?.onClick}>
       {selectable && selectable.position === 'LEFT' && SelectableCheckbox()}
       {columns.map(col => (
         <Cell key={col.id} col={col} row={row} index={index} />
