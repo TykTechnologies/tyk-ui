@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Pagination } from '../../Pagination';
 import Loader from '../../Loader';
-import { Header } from './header/header';
-import { Body } from './body/body';
+import { Header } from './header';
+import { Body } from './body';
 import { tableContext } from '../tableContext';
 
 const Table = ({ value, onChange }) => {
@@ -55,35 +55,6 @@ const Table = ({ value, onChange }) => {
     setState: newState => setState(newState),
   };
 
-  const changeCellValue = (data) => {
-    const { index, col } = data;
-    const newValue = data.value;
-    const selectedRow = state.rows[index];
-    selectedRow.values[col.id].props.value = newValue;
-    setState({
-      ...state,
-      rows: [
-        ...state.rows.slice(0, index),
-        {
-          ...selectedRow,
-        },
-        ...state.rows.slice(index + 1),
-      ],
-      cellChange: {
-        ...data,
-      },
-    });
-  };
-
-  const handleCellClick = (data) => {
-    // eslint-disable-next-line no-shadow
-    const { value, ...clicked } = data;
-    setState({
-      ...state,
-      clicked,
-    });
-  };
-
   const sendMessage = (message, data) => {
     setOnChangeMsg(message);
     if (message === 'sort') {
@@ -104,14 +75,6 @@ const Table = ({ value, onChange }) => {
 
     if (message === 'pagination.change') {
       setPagination(data);
-    }
-
-    if (message.includes('cell') && message.includes('change')) {
-      changeCellValue(data);
-    }
-
-    if (message.includes('cell') && message.includes('click')) {
-      handleCellClick(data);
     }
   };
 
