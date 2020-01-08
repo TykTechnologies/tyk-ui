@@ -61,12 +61,14 @@
 }
 
 @mixin form-group-variant(
-  $color,
+  $border-color,
+  $color: $border-color,
 ) {
   color: $text-color;
 
-  > .tyk-form-control__wrapper > .tyk-form-control {
-    border: 2px solid $color;
+  > .tyk-form-control__wrapper > .tyk-form-control,
+  > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control {
+    border: 2px solid $border-color;
     color: $text-color;
 
     &::placeholder {
@@ -88,9 +90,9 @@
 
   &.tyk-form-group--addon-right {
     .tyk-input-group__addon {
-      border-bottom: 2px solid $color;
-      border-right: 2px solid $color;
-      border-top: 2px solid $color;
+      border-bottom: 2px solid $border-color;
+      border-right: 2px solid $border-color;
+      border-top: 2px solid $border-color;
       color: $color;
     }
   }

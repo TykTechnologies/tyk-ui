@@ -144,7 +144,7 @@ export default class Select extends Component {
       options,
     } = this.props;
     let selectedValue = null;
-    console.log(options, selectedValue, e.target.value);
+
     selectedValue = options.filter(option => option.id === e.target.value);
     [selectedValue] = selectedValue;
 

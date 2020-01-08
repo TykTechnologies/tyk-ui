@@ -1,8 +1,11 @@
+@import './variables';
+
 .tyk-toggle {
   display: inline-flex;
   flex-wrap: wrap;
-  font-family: 'robotoregular';
+  font-family: $toggle-font-family;
   font-size: text-scale('sm');
+  white-space: nowrap;
 
   &.block {
     margin-bottom: 20px;
