@@ -27,14 +27,16 @@ export default class Checkbox extends Component {
   }
 
   render() {
-    const { input, label, ...rest } = this.props;
+    const {
+      input, value, label, ...rest
+    } = this.props;
     return (
       <div
         className={this.getCssClasses()}
       >
         <label>
           <input
-            checked={input.value}
+            checked={input ? input.value : value}
             {...input}
             {...rest}
             type="checkbox"
