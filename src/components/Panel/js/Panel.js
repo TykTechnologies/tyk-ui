@@ -29,7 +29,7 @@ const Panel = (props) => {
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
     }
-    console.log(collapsedState);
+
     if (collapsedState) {
       cssClasses.push('tyk-panel--collapsed');
     }

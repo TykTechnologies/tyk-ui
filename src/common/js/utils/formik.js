@@ -17,7 +17,7 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
   };
 
   const onChange = (valueOrEvent) => {
-    const value = valueOrEvent.target ? valueOrEvent.target.checked : valueOrEvent;
+    const value = valueOrEvent && valueOrEvent.target ? valueOrEvent.target.checked : valueOrEvent;
     const onChangeProps = opts.getOnChangeProps(value, field, form, properties);
     field.onChange({ target: { name: field.name, value, ...onChangeProps } });
     if (typeof properties.onChange === 'function') properties.onChange(value);

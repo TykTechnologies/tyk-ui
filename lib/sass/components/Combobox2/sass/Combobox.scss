@@ -109,6 +109,10 @@
   }
 }
 
+.tyk-form-group--rounded-corners .tyk-combobox2-disabled-overlay {
+  border-radius: 16px;
+}
+
 .tyk-combobox2__combobox-dropdown {
   display: flex;
   flex-direction: column;
