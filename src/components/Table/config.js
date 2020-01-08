@@ -63,6 +63,9 @@ export const config = {
             onClick: () => console.log('Delete Btn Click'),
           },
           children: 'Delete',
+          events: {
+            onClick: () => console.log('Clicked the cell'),
+          },
         },
         input_test: {
           props: {

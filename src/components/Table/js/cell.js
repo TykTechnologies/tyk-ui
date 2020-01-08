@@ -5,14 +5,17 @@ export const Cell = ({ col, row }) => {
   if (col.type === 'string') {
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-      <td onClick={row.values[col.id].events?.onClick}>
+      <td {...row.values[col.id].events}>
         {row.values[col.id].value}
       </td>
     );
   }
   const Component = col.type;
   return (
-    <td className={row.values[col.id].styling?.className || null}>
+    <td
+      className={row.values[col.id].styling?.className || null}
+      {...row.values[col.id].events}
+    >
       <Component
         {...row.values[col.id].props}
       >
