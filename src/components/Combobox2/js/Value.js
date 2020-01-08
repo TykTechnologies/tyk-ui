@@ -119,7 +119,10 @@ function Value(props) {
               value={inputValue}
               style={{ width: value.length ? inputWidth : '100%' }}
               onChange={e => entryFieldOnChange(e.target.value)}
-              onKeyDown={e => entryFieldOnKeyDown(e.key, e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') e.preventDefault();
+                entryFieldOnKeyDown(e.key, e.target.value);
+              }}
             />
             <span
               ref={dummyElementRef}

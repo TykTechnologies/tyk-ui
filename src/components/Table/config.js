@@ -36,21 +36,29 @@ export const config = {
         },
         name: 'Freemium Policy',
         access_rights: {
-          text:
-            'api alpha, api bravo, api charlie, api delta, api eclair, api foxtrot',
-          limit: 10,
+          props: {
+            text:
+              'api alpha, api bravo, api charlie, api delta, api eclair, api foxtrot',
+            limit: 10,
+          },
+          styling: {
+            className: 'alpha',
+          },
         },
         auth_type: 'tag1, tag2, tag3, tag4',
         date: '01/01/2019',
         delete_btn: {
-          theme: 'danger',
-          value: 'Delete',
-          size: 'sm',
+          props: {
+            theme: 'danger',
+            size: 'sm',
+          },
+          children: 'Delete',
         },
         input_test: {
-          type: 'number',
-          value: 1,
-          noChild: true,
+          props: {
+            type: 'number',
+            value: '1',
+          },
         },
       },
       selected: false,
@@ -64,21 +72,29 @@ export const config = {
         },
         name: 'Silver Policy',
         access_rights: {
-          text:
-            'api alpha, api bravo, api charlie, api delta, api eclair, api foxtrot',
-          limit: 10,
+          props: {
+            text:
+              'api alpha, api bravo, api charlie, api delta, api eclair, api foxtrot',
+            limit: 10,
+          },
+          styling: {
+            className: 'bravo',
+          },
         },
         auth_type: 'tag1, tag2, tag3, tag4',
         date: '15/01/2019',
         delete_btn: {
-          theme: 'danger',
-          value: 'Delete',
-          size: 'sm',
+          props: {
+            theme: 'danger',
+            size: 'sm',
+          },
+          children: 'Delete',
         },
         input_test: {
-          type: 'number',
-          value: 1,
-          noChild: true,
+          props: {
+            type: 'number',
+            value: '1',
+          },
         },
       },
       selected: false,
@@ -92,20 +108,28 @@ export const config = {
         },
         name: 'Golden Policy',
         access_rights: {
-          text: 'charlie, api delta, api eclair, api foxtrot',
-          limit: 10,
+          props: {
+            text: 'charlie, api delta, api eclair, api foxtrot',
+            limit: 10,
+          },
+          styling: {
+            className: 'charlie',
+          },
         },
         auth_type: 'tag1, tag2, tag3, tag4',
         date: '01/01/2019',
         delete_btn: {
-          theme: 'danger',
-          value: 'Delete',
-          size: 'sm',
+          props: {
+            theme: 'danger',
+            size: 'sm',
+          },
+          children: 'Delete',
         },
         input_test: {
-          type: 'number',
-          value: 1,
-          noChild: true,
+          props: {
+            type: 'number',
+            value: '1',
+          },
         },
       },
       selected: false,
@@ -119,27 +143,35 @@ export const config = {
         },
         name: 'Golden Policy',
         access_rights: {
-          text: 'api alpha, api bravo',
-          limit: 10,
+          props: {
+            text: 'api alpha, api bravo',
+            limit: 10,
+          },
+          styling: {
+            className: 'delta',
+          },
         },
         auth_type: 'tag1, tag2, tag3, tag4',
         date: '10/01/2019',
         delete_btn: {
-          theme: 'danger',
-          value: 'Delete',
-          size: 'sm',
+          props: {
+            theme: 'danger',
+            size: 'sm',
+          },
+          children: 'Delete',
         },
         input_test: {
-          type: 'number',
-          value: 1,
-          noChild: true,
+          props: {
+            type: 'number',
+            value: '1',
+          },
         },
       },
       selected: true,
     },
   ],
   selectable: {
-    position: 'RIGHT',
+    position: 'LEFT',
     // type: Button,
     // type: 'default',
     type: Checkbox,
@@ -157,4 +189,5 @@ export const config = {
     perPage: 5,
     current: 1,
   },
+  maxHeight: '200px',
 };

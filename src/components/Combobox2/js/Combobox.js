@@ -287,15 +287,17 @@ function Combobox(props) {
               onMessage={onMessage}
             />
           </div>
-          <div
-            className="tyk-combobox2__values-container-trigger"
-            role="button"
-            tabIndex={disabled ? -1 : 0}
-            onClick={openDropdown}
-            onKeyPress={openDropdown}
-          >
-            <Icon type="arrow-down" />
-          </div>
+          {(!tags || getFilteredValues().length > 0) && (
+            <div
+              className="tyk-combobox2__values-container-trigger"
+              role="button"
+              tabIndex={disabled ? -1 : 0}
+              onClick={openDropdown}
+              onKeyPress={openDropdown}
+            >
+              <Icon type="arrow-down" />
+            </div>
+          )}
         </div>
         {isOpened && (
           <FloatingContainer
