@@ -10,7 +10,6 @@ export default class Checkbox extends Component {
     input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
-    onChange: PropTypes.func,
     value: PropTypes.string,
   };
 
@@ -28,24 +27,16 @@ export default class Checkbox extends Component {
   }
 
   render() {
-    const {
-      input,
-      label,
-      onChange = () => {},
-      value,
-      ...rest
-    } = this.props;
-
+    const { input, label, ...rest } = this.props;
     return (
       <div
         className={this.getCssClasses()}
       >
         <label>
           <input
-            checked={value}
+            checked={input.value}
             {...input}
             {...rest}
-            onChange={e => onChange(e.target.checked)}
             type="checkbox"
           />
           {label}
