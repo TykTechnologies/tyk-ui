@@ -6,8 +6,6 @@
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
-  display: block;
-  overflow-y: scroll;
 
     > thead th {
       color: theme-color('foreground', 'light');
@@ -77,4 +75,9 @@
 
 .selectable > div{
   margin-left: 20px;
+}
+
+.scrollable {
+  display: block;
+  overflow: scroll;
 }
