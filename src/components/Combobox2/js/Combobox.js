@@ -90,13 +90,6 @@ function Combobox(props) {
     return values.filter(v => fn(v, searchValue));
   }
 
-  function updateSearchValue(newSearchValue) {
-    setSearchValue(newSearchValue);
-    if (activeItem && getFilteredValues().every(fv => fv.id !== activeItem.id)) {
-      setActiveItem(null);
-    }
-  }
-
   function openDropdown() {
     setIsOpened(true);
   }
@@ -105,6 +98,14 @@ function Combobox(props) {
     setIsOpened(false);
     if (!tags) updateSearchValue('');
     setActiveItem(null);
+  }
+
+  function updateSearchValue(newSearchValue) {
+    setSearchValue(newSearchValue);
+    if (activeItem && getFilteredValues().every(fv => fv.id !== activeItem.id)) {
+      setActiveItem(null);
+    }
+    if (newSearchValue && !isOpened) openDropdown();
   }
 
   function updateValue(newValue) {
@@ -284,20 +285,26 @@ function Combobox(props) {
               disabled={disabled}
               valueOverflow={valueOverflow}
               renderValue={renderValue}
+              focus={isOpened}
               onMessage={onMessage}
             />
           </div>
-          {(!tags || getFilteredValues().length > 0) && (
-            <div
-              className="tyk-combobox2__values-container-trigger"
-              role="button"
-              tabIndex={disabled ? -1 : 0}
-              onClick={openDropdown}
-              onKeyPress={openDropdown}
-            >
-              <Icon type="arrow-down" />
-            </div>
-          )}
+          <div
+            className="tyk-combobox2__values-container-trigger"
+            role="button"
+            tabIndex={disabled ? -1 : 0}
+            onClick={openDropdown}
+            onKeyPress={openDropdown}
+          >
+            <Icon type="arrow-down" />
+            {tags && getFilteredValues().length === 0 && (
+              <div
+                className="disabled-overlay"
+                onClick={e => e.stopPropagation()}
+                role="none"
+              />
+            )}
+          </div>
         </div>
         {isOpened && (
           <FloatingContainer

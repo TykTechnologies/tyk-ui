@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Icon from '../../Icon';
 import Pill from '../../Pill';
 
@@ -12,6 +12,7 @@ function Value(props) {
     disabled,
     renderValue,
     valueOverflow,
+    focus,
     onMessage: sendMessage,
   } = props;
   const INPUT_MIN_WIDTH = 60;
@@ -137,6 +138,10 @@ function Value(props) {
       </>
     );
   }
+
+  useEffect(() => {
+    if (focus) inputRef.current.focus();
+  }, [focus]);
 
   if (tags) return getTags();
   if (renderValue) {
