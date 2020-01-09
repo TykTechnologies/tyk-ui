@@ -9,7 +9,7 @@ export const Row = ({ row, index }) => {
   const { columns, selectable } = state;
 
   const SelectableCheckbox = () => (
-    <td className="selectable">
+    <td>
       <Checkbox
         defaultChecked={row.selected}
         onChange={v => sendMessage('row.selected', { index, selected: v })}

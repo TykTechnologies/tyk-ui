@@ -62,7 +62,8 @@
 
   &--default {
     @include form-group-variant(
-      $form-default-color
+      $form-default-color,
+      $text-color
     );
   }
 
@@ -207,6 +208,11 @@ select {
 
   &--inline {
     display: inline-flex;
+    margin-left: map-get($spacing, 'base');
+
+    &:first-child {
+      margin-left: 0;
+    }
   }
 }
 
@@ -227,5 +233,6 @@ select {
 
   > .tyk-button {
     margin-left: 20px;
+    margin-bottom: 20px;
   }
 }

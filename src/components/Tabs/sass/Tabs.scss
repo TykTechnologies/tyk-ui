@@ -25,9 +25,11 @@
           border: none;
           border-bottom: 5px solid transparent;
           cursor: pointer;
-          font-size: text-scale('md');
+          font-size: text-scale('sm');
+          font-family: $font-family-medium;
           padding: $tab-button-padding;
           transition: all .2s linear;
+          text-transform: uppercase;
 
           &:focus {
             outline: none;

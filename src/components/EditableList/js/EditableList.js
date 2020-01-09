@@ -373,7 +373,7 @@ export default class EditableList extends Component {
               <div
                 className="tyk-editable-list__header"
                 style={{
-                  paddingRight: `${buttonWidth + 15}px`,
+                  paddingRight: `${buttonWidth + 60}px`,
                 }}
               >
                 <Row>

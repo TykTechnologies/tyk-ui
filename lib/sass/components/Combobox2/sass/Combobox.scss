@@ -7,7 +7,7 @@
   $container-trigger-width: 40px;
 
   &.disabled {
-    .entry-field {
+    .tyk-combobox2__entry-field {
       background-color: $form-default-color;
     }
   }
@@ -25,6 +25,9 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    background-color: black;
+    opacity: 0.2;
+    cursor: not-allowed;
   }
 
   &__current-values {
@@ -104,6 +107,10 @@
     align-items: center;
     cursor: pointer;
   }
+}
+
+.tyk-form-group--rounded-corners .tyk-combobox2-disabled-overlay {
+  border-radius: 16px;
 }
 
 .tyk-combobox2__combobox-dropdown {

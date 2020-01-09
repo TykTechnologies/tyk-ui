@@ -34,6 +34,7 @@ import Button from '../Button';
     minDate: "today",
     dateFormat: "Y-m-d"
   }}
+  theme="default rounded-corners"
 />
 ```
 ```js

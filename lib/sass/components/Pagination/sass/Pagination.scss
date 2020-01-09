@@ -5,7 +5,7 @@
 .tyk-pagination {
   display: flex;
   list-style-type: none;
-  margin: 0;
+  margin: map-get($spacing, 'xl') 0;
   padding: 0;
 
   li {
@@ -29,7 +29,7 @@
 
   button {
     background: white;
-    border: 1px solid theme-color('background', 'dark');
+    border: 1px solid theme-color('background', 'light');
     font-size: text-scale('sm');
     cursor: pointer;
     margin-left: -1px;

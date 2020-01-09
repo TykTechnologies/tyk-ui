@@ -10,7 +10,6 @@ export default class Checkbox extends Component {
     input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
-    onChange: PropTypes.func,
     value: PropTypes.string,
   };
 
@@ -18,10 +17,10 @@ export default class Checkbox extends Component {
     const { inline } = this.props;
     const cssClasses = [];
 
+    cssClasses.push('tyk-checkbox');
+
     if (inline) {
       cssClasses.push('tyk-checkbox--inline');
-    } else {
-      cssClasses.push('tyk-checkbox');
     }
 
     return cssClasses.join(' ');
@@ -29,23 +28,17 @@ export default class Checkbox extends Component {
 
   render() {
     const {
-      input,
-      label,
-      onChange = () => {},
-      value,
-      ...rest
+      input, value, label, ...rest
     } = this.props;
-
     return (
       <div
         className={this.getCssClasses()}
       >
         <label>
           <input
-            checked={value}
+            checked={input ? input.value : value}
             {...input}
             {...rest}
-            onChange={e => onChange(e.target.checked)}
             type="checkbox"
           />
           {label}

@@ -9,7 +9,6 @@ export default class Radio extends Component {
     label: PropTypes.string,
     name: PropTypes.string,
     nospace: PropTypes.string,
-    onChange: PropTypes.func,
     value: PropTypes.string,
   };
 
@@ -31,9 +30,7 @@ export default class Radio extends Component {
   }
 
   render() {
-    const {
-      input, label, onChange = () => {}, ...rest
-    } = this.props;
+    const { input, label, ...rest } = this.props;
     return (
       <div
         className={this.getCssClasses()}
@@ -42,7 +39,6 @@ export default class Radio extends Component {
           <input
             {...input}
             {...rest}
-            onChange={() => onChange(rest.value)}
             type="radio"
           />
           {label}

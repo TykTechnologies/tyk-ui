@@ -30,6 +30,10 @@ const Panel = (props) => {
       cssClasses = cssClasses.concat(className.split(' '));
     }
 
+    if (collapsedState) {
+      cssClasses.push('tyk-panel--collapsed');
+    }
+
     return cssClasses.join(' ');
   };
 
