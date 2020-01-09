@@ -27,8 +27,14 @@ export default class Icon extends Component {
   }
 
   render() {
+    const {
+      className,
+      family,
+      type,
+      ...rest
+    } = this.props;
     return (
-      <i className={this.getCssClasses()} />
+      <i className={this.getCssClasses()} {...rest} />
     );
   }
 }
