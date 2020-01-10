@@ -145,7 +145,7 @@
 
       &:hover,
       &.active {
-        background-color: $form-default-color;
+        background-color: $tyk-combobox-list-item-hover-color;
       }
 
       &.disabled {
