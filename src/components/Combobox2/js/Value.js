@@ -140,7 +140,7 @@ function Value(props) {
   }
 
   useEffect(() => {
-    if (focus) inputRef.current.focus();
+    if (focus && inputRef.current) inputRef.current.focus();
   }, [focus]);
 
   if (tags) return getTags();
