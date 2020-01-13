@@ -4,27 +4,33 @@ import Icon from '../../Icon';
 import { tableContext } from '../tableContext';
 
 export const Header = () => {
-  const [sortOrder, setSortOrder] = useState('ASC');
   const [selectAll, setSelectAll] = useState(false);
   const { state, sendMessage } = useContext(tableContext);
+  const [sortOrder, setSortOrder] = useState('ASC');
   const { columns, selectable } = state;
+  console.log('HEADER', { state });
 
-  const generateHeader = () => columns.map(column => (
-    <th
-      key={column.id}
-      onClick={() => {
-        sendMessage('sort', { column, sortOrder });
-        setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');
-      }}
-    >
-      {column.name}
-      {column.sortable && (
-        <span className="header-sort">
-          <Icon family="tykon" type="arrowdown" />
-        </span>
-      )}
-    </th>
-  ));
+
+  const generateHeaders = () => columns.map((column) => {
+    const sendSortMessage = () => {
+      sendMessage('sort', { column, sortOrder });
+      setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');
+    };
+
+    return (
+      <th
+        key={column.id}
+        onClick={column.sortable ? sendSortMessage : null}
+      >
+        {column.name}
+        {column.sortable && (
+          <span className="header-sort">
+            <Icon family="tykon" type={sortOrder === 'ASC' ? 'arrowup' : 'arrowdown'} />
+          </span>
+        )}
+      </th>
+    );
+  });
 
   const generateSelectable = () => {
     if (!selectable) {
@@ -60,7 +66,7 @@ export const Header = () => {
     <thead>
       <tr>
         {selectable && selectable.position === 'LEFT' && generateSelectable()}
-        {generateHeader()}
+        {generateHeaders()}
         {selectable && selectable.position === 'RIGHT' && generateSelectable()}
       </tr>
     </thead>

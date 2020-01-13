@@ -10,7 +10,7 @@ export const config = {
     //   id: 'active', name: 'Active', type: Icon, sortable: true,
     // },
     {
-      id: 'name', name: 'Policy Name', type: 'string', sortable: true,
+      id: 'name', name: 'Policy Name', type: 'string', sortable: { order: 'ASC' },
     },
     { id: 'access_rights', name: 'Access Rights', type: TextEllipsis },
     {
