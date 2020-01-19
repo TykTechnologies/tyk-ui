@@ -2,7 +2,7 @@
 
 .tyk-fixed-wrapper {
   left: $fixed-wrapper-left;
-  position: fixed;
+  position: sticky;
   right: $fixed-wrapper-right;
   top: $fixed-wrapper-top;
   z-index: 8;

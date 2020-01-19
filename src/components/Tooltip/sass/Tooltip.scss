@@ -15,5 +15,12 @@
     border-style: solid;
     border-color: theme-color('foreground', 'light') transparent transparent transparent;
   }
+}
 
+.tyk-tooltip__bottom {
+  .tyk-tooltip-content:after {
+    border-color: transparent transparent theme-color('foreground', 'light') transparent;
+    bottom: auto;
+    top: -10px;
+  }
 }

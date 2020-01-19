@@ -95,13 +95,21 @@
   }
 }
 
+.tyk-form-group--addon-right input {
+  border-right: 0 !important;
+}
+
+.tyk-form-group--addon-left input {
+  border-left: 0 !important;
+}
+
 .tyk-form-group--rounded-corners.tyk-form-group--addon-right {
   input {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-right: 0;
   }
   .tyk-input-group__addon {
+    background: $form-control-addon-background-color;
     border-top-right-radius: $general-border-radius;
     border-bottom-right-radius: $general-border-radius;
   }
@@ -111,9 +119,10 @@
   input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    border-left: 0;
+    border-left: 0 !important;
   }
   .tyk-input-group__addon {
+    background: $form-control-addon-background-color;
     border-top-left-radius: $general-border-radius;
     border-bottom-left-radius: $general-border-radius;
   }

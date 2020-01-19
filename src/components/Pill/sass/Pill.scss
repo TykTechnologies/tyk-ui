@@ -31,9 +31,19 @@
     color: white;
   }
 
+  &--default-outline {
+    box-shadow: inset 0px 0px 0px 2px theme-color('foreground', 'light');
+    color: $text-color;
+  }
+
   &--primary {
     background-color: theme-color('primary', 'base');
     color: white;
+  }
+
+  &--primary-outline {
+    box-shadow: inset 0px 0px 0px 2px theme-color('primary', 'base');
+    color: $text-color;
   }
 
   &--success {
@@ -41,13 +51,28 @@
     color: white;
   }
 
+  &--success-outline {
+    box-shadow: inset 0px 0px 0px 2px theme-color('success', 'base');
+    color: $text-color;
+  }
+
   &--danger {
     background-color: theme-color('danger', 'base');
     color: white;
   }
 
+  &--danger-outline {
+    box-shadow: inset 0px 0px 0px 2px theme-color('danger', 'base');
+    color: $text-color;
+  }
+
   &--warning {
     background-color: theme-color('warning', 'base');
     color: white;
+  }
+
+  &--warning-outline {
+    box-shadow: inset 0px 0px 0px 2px theme-color('warning', 'base');
+    color: $text-color;
   }
 }
