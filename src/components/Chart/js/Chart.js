@@ -150,12 +150,6 @@ const Chart = (props) => {
             color,
           }))) : [],
       },
-      markPoint: {
-        data: [
-          { type: 'max' },
-          { type: 'min' },
-        ],
-      },
       smooth: true,
       name: '',
     }),

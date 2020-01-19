@@ -8,6 +8,7 @@ export { CodeEditor, FieldCodeEditor, FormikCodeEditor } from './components/Code
 export { default as Collapsible } from './components/Collapsible';
 export { default as Chart } from './components/Chart';
 export { default as Column } from './components/Column';
+export { default as CopyToClipboard } from './components/CopyToClipboard';
 export { Combobox, FieldCombobox, FormikCombobox } from './components/Combobox';
 export { Combobox2, FormikCombobox2 } from './components/Combobox2';
 export { Confirm } from './components/Confirm';

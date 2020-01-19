@@ -20,6 +20,7 @@ class Toggle extends Component {
     type: PropTypes.string, // single || multiple
     size: PropTypes.string,
     separated: PropTypes.bool,
+    direction: PropTypes.string,
     value: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
@@ -30,6 +31,7 @@ class Toggle extends Component {
     separated: false,
     theme: 'primary',
     type: 'single',
+    direction: 'row',
   };
 
   state = {
@@ -57,6 +59,7 @@ class Toggle extends Component {
       disabled,
       size,
       theme,
+      direction,
     } = this.props;
 
     let cssClasses = [
@@ -64,6 +67,7 @@ class Toggle extends Component {
       `tyk-toggle--disabled-${disabled}`,
       `tyk-toggle--${size || 'md'}`,
       `tyk-toggle--${theme}`,
+      `tyk-toggle--${direction}`,
     ];
 
     if (className) {

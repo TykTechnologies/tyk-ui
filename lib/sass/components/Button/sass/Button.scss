@@ -186,6 +186,7 @@
       )
     }
   }
+
   &--default {
     @include button-variant(
       $button-default-color
@@ -241,13 +242,12 @@
   }
 
   &--icon-only {
-    border-radius: 3px;
+    border-radius: $general-border-radius;
     padding: 0;
     width: 24px;
 
     &:hover {
-      border-radius: 3px;
-      background-color: $button-icon-only-background-hover;
+      border-radius: $general-border-radius;
     }
   }
 
@@ -260,10 +260,12 @@
   &--no-style {
     background: transparent;
     border: none;
+    color: $text-color;
 
     &:hover {
       background: transparent;
       border: none;
+      color: $text-color;
     }
   }
 }

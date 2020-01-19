@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 
-const Tooltip = ({ render, children }) => {
+const Tooltip = ({ render, children, position = 'top' }) => {
   const [active, setActive] = useState(false);
 
   const id = 'tyk-tooltip';
@@ -14,18 +14,51 @@ const Tooltip = ({ render, children }) => {
   }
 
   const sourceRef = useRef(domNode);
+  const tooltipRef = useRef(null);
+
+  const getOffsetTop = (element) => {
+    let offsetTop = 0;
+
+    while (element) {
+      offsetTop += element.offsetTop;
+      // eslint-disable-next-line no-param-reassign
+      element = element.offsetParent;
+    }
+    return offsetTop;
+  };
+
+  const getTooltipStyles = () => {
+    const {
+      top, left, width, height,
+    } = sourceRef.current.getBoundingClientRect();
+    const tooltipOffsetTop = getOffsetTop(sourceRef.current);
+    const tooltipLeft = left + width / 2 + window.scrollX;
+    const style = {
+      position: 'absolute',
+      left: tooltipLeft,
+      zIndex: '99999',
+      maxWidth: '300px',
+    };
+
+    if (position === 'bottom') {
+      style.top = `${tooltipOffsetTop + height + 8}px`;
+    }
+
+    if (position === 'top') {
+      style.bottom = `${window.innerHeight - top - window.scrollY + 8}px`;
+    }
+
+    return style;
+  };
 
   const renderToolTip = () => {
     if (active) {
-      const { top, left, width } = sourceRef.current.getBoundingClientRect();
       return (
         ReactDom.createPortal(
           <div
-            style={{
-              position: 'absolute',
-              bottom: window.innerHeight - top - window.scrollY + 8,
-              left: left + width / 2 + window.scrollX,
-            }}
+            className={`tyk-tooltip__${position}`}
+            style={getTooltipStyles()}
+            ref={tooltipRef}
           >
             <div className="tyk-tooltip-content">
               {render}
@@ -46,6 +79,9 @@ const Tooltip = ({ render, children }) => {
       onBlur={() => setActive(false)}
       ref={sourceRef}
       key="0"
+      style={{
+        display: 'inline-block',
+      }}
     >
       {children}
     </span>

@@ -174,10 +174,12 @@ export default class TestToggle extends Component {
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
               theme="primary"
+              direction="column"
+              separated
               type="multiple"
             >
               <Toggle.Item
-                label="short"
+                label="shortssss"
                 name="option"
                 value="option1"
               />

@@ -2,6 +2,7 @@
 ```js
 import Button from '../Button';
 <CopyToClipboard 
+  onCopy={() => {console.log('copied');}}
   copy="Copied by Button!"
   display="charlie"
   theme="primary"

@@ -1,6 +1,6 @@
 #### Using string as render props
 ```js
-<Tooltip render="Hello">
+<Tooltip render="Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello" position="bottom">
   Hover Over Me 1
 </Tooltip>
 ```
@@ -15,7 +15,7 @@
 #### Using JSX as children
 ```js
 import Button from '../Button';
-<Tooltip render="You Just Hovered Me !">
+<Tooltip render="You Just Hovered Me !" position="bottom">
   <Button theme="primary" size="sm">Hover Me or Not </Button>
 </Tooltip>
 ```
