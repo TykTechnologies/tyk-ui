@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useRef, forwardRef,
+  useEffect, useRef, forwardRef,
 } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -18,11 +18,11 @@ function FloatingContainer(props) {
   const localRef = useRef(null);
   const floatingContainerRef = passedRef || localRef;
 
-  const [targetPositionCache, setTargetPositionCache] = useState({});
 
   function determineDisplay() {
     const target = element.current;
     const container = floatingContainerRef.current;
+    if (!container) return 'bottom';
 
     if (displayAxis === 'vertical') {
       const { top } = target.getBoundingClientRect();
@@ -104,22 +104,10 @@ function FloatingContainer(props) {
   }
 
   useEffect(() => {
-    const POSITION_CHECK_THROTTLE = 30;
-    const target = element.current;
-    const { top, left } = target.getBoundingClientRect();
-    setTargetPositionCache({ top, left });
-
-    let timeoutId = setTimeout(function checkPosition() {
-      const { top: t, left: l } = target.getBoundingClientRect();
-      if (t !== targetPositionCache.top || l !== targetPositionCache.left) {
-        setTargetPositionCache({ top: t, left: l });
-        adjustPosition();
-      }
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(checkPosition, POSITION_CHECK_THROTTLE);
-    }, POSITION_CHECK_THROTTLE);
-
-    return () => clearTimeout(timeoutId);
+    window.requestAnimationFrame(function schedulePositionUpdate() {
+      adjustPosition();
+      window.requestAnimationFrame(schedulePositionUpdate);
+    });
   }, []);
 
   return createPortal(
