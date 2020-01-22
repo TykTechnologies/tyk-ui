@@ -25,6 +25,7 @@ const Chart = (props) => {
     zoomStart,
     zoomEnd,
     title,
+    seriesConfig = [],
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -231,8 +232,12 @@ const Chart = (props) => {
     default: {
       finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
-      selectedSeries.forEach((entry) => {
-        const seriesData = Object.assign({}, lineBarChart.seriesDefault.toJS(), entry);
+      selectedSeries.forEach((entry, index) => {
+        const seriesData = Object.assign(
+          {},
+          lineBarChart.seriesDefault.toJS(),
+          seriesConfig[index], entry,
+        );
         finalOpts.series.push(seriesData);
       });
       break;
@@ -397,6 +402,7 @@ Chart.propTypes = {
   type: PropTypes.string,
   title: PropTypes.string,
   series: PropTypes.instanceOf(Array),
+  seriesConfig: PropTypes.instanceOf(Object),
 };
 
 export default memo(Chart);
