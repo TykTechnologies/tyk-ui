@@ -20,10 +20,19 @@ const SelectableList = (props) => {
 
   const handleOnSelect = (event) => {
     const newSelectedItems = fromJS(value).toJS();
-    const elemPosition = newSelectedItems.indexOf(event.target.value);
+    const elemPosition = newSelectedItems.findIndex(
+      id => JSON.stringify(id) === JSON.stringify(
+        Array.isArray(id)
+          ? event.target.value.split(',')
+          : event.target.value,
+      ),
+    );
 
     if (event.target.checked && elemPosition === -1) {
-      newSelectedItems.push(event.target.value);
+      const tempValue = event.target.value.split(',');
+      const finalValue = tempValue.length > 1 ? tempValue : event.target.value;
+
+      newSelectedItems.push(finalValue);
     } else if (!event.target.checked && elemPosition > -1) {
       newSelectedItems.splice(elemPosition, 1);
     }
@@ -47,6 +56,10 @@ const SelectableList = (props) => {
     return cssClasses.join(' ');
   };
 
+  const isChecked = (inputValue, itemValue) => Boolean(
+    inputValue.find(tvalue => JSON.stringify(itemValue) === JSON.stringify(tvalue)),
+  );
+
   return (
     <List {...props} theme={theme || 'default'} className="tyk-selectable-list">
       {
@@ -58,9 +71,10 @@ const SelectableList = (props) => {
               </Message>
             </li>
           )
-          : items.map(item => (
+          : items.map((item, index) => (
             <List.Item
-              key={item[primaryKey]}
+              /* eslint-disable react/no-array-index-key */
+              key={index}
               className={getListItemCssClassName(value.includes(item[primaryKey]))}
             >
               <label>
@@ -69,7 +83,7 @@ const SelectableList = (props) => {
                 </div>
                 <input
                   type="checkbox"
-                  checked={value.includes(item[primaryKey])}
+                  checked={isChecked(value, item[primaryKey])}
                   /* eslint-disable-next-line react/jsx-no-bind */
                   onChange={handleOnSelect.bind(item)}
                   value={item[primaryKey]}

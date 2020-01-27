@@ -1,12 +1,12 @@
 ```js
 <SelectableList
   items={[
-    { name: 'API ONE', id: '1'},
+    { name: 'API ONE', id: ['1', '4']},
     { name: 'API TWO', id: '2'},
     { name: 'API THREE', id: '3'}
   ]}
   value={[
-    '1', '2'
+    ['1', '4']
   ]}
   onChange={(selectedItems) => { console.log(selectedItems); }}
   style={{
