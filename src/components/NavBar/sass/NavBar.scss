@@ -31,6 +31,10 @@
     padding-bottom: $nav-bar-bottom-padding;
     display: flex;
 
+    &.tyk-nav-bar--align-top {
+      align-items: flex-start;
+    }
+
     @media screen and (max-width: 1024px) {
       padding-left: 0;
     }
@@ -39,6 +43,10 @@
       font-size: $nav-bar-header-font-size;
       font-family: $headings-font-family;
       margin: 0;
+      padding-right: 10px;
+    }
+
+    h4 {
       padding-right: 10px;
     }
 
