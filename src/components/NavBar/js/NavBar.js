@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class NavBar extends PureComponent {
   static propTypes = {
+    align: PropTypes.string,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,
@@ -10,6 +11,7 @@ export default class NavBar extends PureComponent {
       PropTypes.string,
     ]),
     title: PropTypes.string,
+    subtitle: PropTypes.string,
     left: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
@@ -23,20 +25,31 @@ export default class NavBar extends PureComponent {
 
   render() {
     const {
+      align = 'center',
       children,
       left,
       right,
       title,
+      subtitle,
       withTabs,
     } = this.props;
 
     return (
-      <section className={`tyk-nav-bar ${withTabs ? 'tyk-nav-bar__with-tabs' : ''}`}>
-        <div className="tyk-nav-bar__wrapper">
+      <section className={`tyk-nav-bar  ${withTabs ? 'tyk-nav-bar__with-tabs' : ''}`}>
+        <div className={`tyk-nav-bar__wrapper tyk-nav-bar--align-${align}`}>
           {
             title
-              ? <h1>{ title }</h1>
-              : ''
+              ? (
+                <div>
+                  <h1>{ title }</h1>
+                  {
+                    subtitle
+                      ? <h4>{subtitle}</h4>
+                      : null
+                  }
+                </div>
+              )
+              : null
           }
           <div className="tyk-nav-bar__container">
             {
