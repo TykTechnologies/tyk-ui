@@ -1,6 +1,9 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, {
+  createContext, useEffect, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 
+import cloneDeep from 'lodash/cloneDeep';
 import Collapsible from '../../Collapsible';
 import Icon from '../../Icon';
 
@@ -18,7 +21,7 @@ const Tabs = (props) => {
   const [tabs, setTabs] = useState({});
   const [selectedPath, setSelectedPath] = useState([]);
   const [rendered, setRendered] = useState(false);
-  let initialPath = null;
+  const [initialPath, setInitialPath] = useState(null);
 
   useEffect(() => {
     setSelectedPath(initialPath);
@@ -119,6 +122,10 @@ const Tabs = (props) => {
             const tempPath = path ? path.concat([currentTabs[tabId].id]) : [currentTabs[tabId].id];
             const iconType = currentTabs[tabId].collapsed ? 'chevron-up' : 'chevron-down';
 
+            if (currentTabs[tabId].show === false) {
+              return null;
+            }
+
             return (
               <li className={getTabCssClass(currentTabs[tabId].id)} key={currentTabs[tabId].id}>
                 <button
@@ -154,23 +161,35 @@ const Tabs = (props) => {
   };
 
   const addTab = (tabData, path) => {
-    setTabs((prevTabs) => {
-      let tempTabs = Object.assign({}, prevTabs);
-
-      tempTabs = updateTabsList(tempTabs, path, tabData);
-
-      return tempTabs;
-    });
+    setTabs(prevTabs => updateTabsList({ ...prevTabs }, path, tabData));
 
     if (tabData.selected) {
-      initialPath = path;
+      setInitialPath(path);
     }
   };
 
-  const tabExists = (path) => {
-    let tempTabs = Object.assign(tabs);
-    const tempPath = path.slice(0);
+  const hideTab = (path) => {
+    setTabs((prevTabs) => {
+      const tempTabs = cloneDeep(prevTabs);
+      tempTabs[path].show = false;
 
+      return tempTabs;
+    });
+  };
+
+  const showTab = (path) => {
+    setTabs((prevTabs) => {
+      const tempTabs = cloneDeep(prevTabs);
+
+      tempTabs[path].show = true;
+
+      return tempTabs;
+    });
+  };
+
+  const tabExists = (path) => {
+    let tempTabs = { ...tabs };
+    const tempPath = path.slice(0);
     while (tempPath.length > 1) {
       tempTabs = tempTabs[tempPath.shift()];
     }
@@ -187,13 +206,23 @@ const Tabs = (props) => {
         value={{
           id,
           addTab,
+          hideTab,
+          showTab,
           tabExists,
           selectedPath,
           rendered,
           hideTabContent,
+          tabs,
         }}
       >
-        {children}
+        {
+          (typeof children === 'function')
+            ? children({
+              hideTab,
+              showTab,
+            })
+            : children
+        }
       </TabsContext.Provider>
     </div>
   );

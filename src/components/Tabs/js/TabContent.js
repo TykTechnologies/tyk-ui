@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { fromJS } from 'immutable';
+import cloneDeep from 'lodash/cloneDeep';
 
 import TabContext from './TabContext';
 
@@ -15,27 +15,31 @@ const TabContent = (props) => {
     path,
     rendered,
     hideTabContent,
+    tabs,
   } = props;
 
   useEffect(() => {
-    const tempTabData = fromJS(tabData).toJS();
+    const tempTabData = cloneDeep(tabData);
 
     if (!tabExists(path)) {
       addTab(tempTabData, path);
     }
-  });
+  }, [tabData, path]);
 
-  const shouldRender = () => {
-    if (hideTabContent) {
+  const shouldRender = useCallback(() => {
+    if (!Object.keys(tabs).length) {
+      return false;
+    }
+
+    if (hideTabContent || tabs[tabData.id].show === false) {
       return false;
     }
 
     if (!rendered) {
       return tabExists(path);
     }
-
     return selectedPath && selectedPath.indexOf(tabData.id) > -1;
-  };
+  }, [hideTabContent, rendered, selectedPath, tabData, tabs]);
 
   return (
     (
@@ -72,6 +76,7 @@ TabContent.propTypes = {
   tabExists: PropTypes.func,
   tabsId: PropTypes.string,
   tabData: PropTypes.instanceOf(Object),
+  tabs: PropTypes.instanceOf(Object),
 };
 
 export default TabContent;

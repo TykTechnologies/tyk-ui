@@ -26,6 +26,7 @@ const Chart = (props) => {
     zoomEnd,
     title,
     seriesConfig = [],
+    noDataComponent = null,
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -151,7 +152,8 @@ const Chart = (props) => {
             color,
           }))) : [],
       },
-      smooth: true,
+      smooth: false,
+      symbolSize: 7,
       name: '',
     }),
   };
@@ -276,6 +278,12 @@ const Chart = (props) => {
       tykChartInstance.on('dataZoom', debouncedMethod);
       tykChartInstance.on('restore', debouncedMethod);
       tykChartInstance.on('click', debouncedMethod);
+
+      tykChartInstance.on('mousemove', (params) => {
+        if (params.data) {
+          tykChartInstance.getZr().setCursorStyle('pointer');
+        }
+      });
     }
 
     return () => {
@@ -361,7 +369,7 @@ const Chart = (props) => {
   );
 
   return (
-    <div className={`tyk-chart__wrapper${chartHasData() ? '' : 'tyk-chart--no-data'}`}>
+    <div className={`tyk-chart__wrapper ${chartHasData() ? '' : 'tyk-chart--no-data'}`}>
       {
         !dataLoaded
           ? <Loader />
@@ -373,13 +381,16 @@ const Chart = (props) => {
         ref={chartWrapperRef}
       />
       {
+        /* eslint-disable-next-line no-nested-ternary */
         chartHasData()
           ? null
-          : (
-            <Message theme="info">
-              No data to display
-            </Message>
-          )
+          : noDataComponent
+            ? noDataComponent()
+            : (
+              <Message theme="info">
+                No data to display
+              </Message>
+            )
       }
     </div>
   );
@@ -394,6 +405,7 @@ Chart.propTypes = {
     PropTypes.string,
     PropTypes.instanceOf(Array),
   ]),
+  noDataComponent: PropTypes.func,
   zoomStart: PropTypes.number,
   zoomEnd: PropTypes.number,
   option: PropTypes.instanceOf(Object),
