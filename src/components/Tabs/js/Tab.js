@@ -1,4 +1,6 @@
-import React, { Fragment, useContext } from 'react';
+import React, {
+  Fragment, useContext, useEffect, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { TabsContext } from './Tabs';
 import TabContext from './TabContext';
@@ -14,20 +16,29 @@ const Tab = (props) => {
     addTab,
     rendered,
     hideTabContent,
+    tabs,
   } = tabsContext;
   const {
     children,
   } = props;
-  let path;
+  const [path, setPath] = useState('');
 
-  if (tabContext && path) {
-    if (tabContext.tabsId === tabsContext.id) {
-      path = tabContext.path.concat([id]);
+  useEffect(() => {
+    let tempPath;
+    if (tabContext && path) {
+      if (tabContext.tabsId === tabsContext.id) {
+        tempPath = tabContext.path.concat([id]);
+      } else {
+        tempPath = [id];
+      }
     } else {
-      path = [id];
+      tempPath = [id];
     }
-  } else {
-    path = [id];
+    setPath(tempPath);
+  }, [tabContext]);
+
+  if (!path) {
+    return null;
   }
 
   return (
@@ -41,6 +52,7 @@ const Tab = (props) => {
         selectedPath={selectedPath}
         rendered={rendered}
         hideTabContent={hideTabContent}
+        tabs={tabs}
       >
         {children}
       </TabContent>
