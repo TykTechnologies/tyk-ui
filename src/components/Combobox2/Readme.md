@@ -85,7 +85,15 @@
 ```
 ```js
 <>
-  <button onClick={() => setState({ value: [{id: 1, name: 'aaa'}, { id: 'apifive', name: 'API five'}]}) }>Update value</button>
+  <button onClick={() => setState({ value: [
+    {id: 1, name: 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww'},
+    {id: 2, name: 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww2'},
+    {id: 3, name: 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww3'},
+    {id: 35, name: 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww3.5'},
+    {id: 4, name: 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww4'},
+    {id: 5, name: 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww5'},
+    { id: 'apifive', name: 'API five'}
+  ]}) }>Update value</button>
   <button onClick={() => setState({ value: []}) }>Clear value</button>
   <Combobox2
     value={state.value}
@@ -101,9 +109,10 @@
       { id: 'apieight', name: 'API eight'}
     ]}
     label="Combobox as tags"
-    tags={ true }
+    tags={true}
     name="combobox"
     placeholder="Please select a value"
+    expandMode={true}
   />
 </>
 ```
