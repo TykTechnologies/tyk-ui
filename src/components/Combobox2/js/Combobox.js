@@ -261,6 +261,7 @@ function Combobox(props) {
     setValues(values.map(v => ({ ...v, selected: newValue.some(nv => nv.id === v.id) })));
   }, [propValue]);
 
+  const filteredValues = getFilteredValues();
   return (
     <div className={getCssClasses()} ref={rootRef}>
       {label && (
@@ -297,7 +298,7 @@ function Combobox(props) {
             onKeyPress={openDropdown}
           >
             <Icon type="arrow-down" />
-            {tags && getFilteredValues().length === 0 && (
+            {tags && filteredValues.length === 0 && (
               <div
                 className="disabled-overlay"
                 onClick={e => e.stopPropagation()}
@@ -306,7 +307,7 @@ function Combobox(props) {
             )}
           </div>
         </div>
-        {isOpened && (
+        {isOpened && (!tags || filteredValues.length > 0) && (
           <FloatingContainer
             element={comboboxControlRef}
             size="matchElement"
@@ -315,7 +316,7 @@ function Combobox(props) {
             {...floatingContainerConfig}
           >
             {renderList ? (
-              renderList(getFilteredValues(), {
+              renderList(filteredValues, {
                 tags,
                 searchValue,
                 activeItem,
@@ -323,7 +324,7 @@ function Combobox(props) {
               })
             ) : (
               <List
-                values={getFilteredValues()}
+                values={filteredValues}
                 tags={tags}
                 searchValue={searchValue}
                 activeItem={activeItem}
