@@ -45,6 +45,9 @@ function FloatingContainer(props) {
     const display = forceDisplay !== 'auto' ? forceDisplay : determineDisplay();
     const target = element.current;
     const container = floatingContainerRef.current;
+
+    if (!target || !container) return;
+
     const targetPosition = target.getBoundingClientRect();
 
     if (display === 'top') {
