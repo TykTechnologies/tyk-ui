@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import ResizeObserver from 'resize-observer-polyfill';
 import Icon from '../../Icon';
 import FloatingContainer from '../../FloatingContainer';
 
@@ -46,6 +47,7 @@ function Combobox(props) {
     CustomListComponent,
     onChange = () => {},
     floatingContainerConfig,
+    expandMode,
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -67,6 +69,7 @@ function Combobox(props) {
   const [searchValue, setSearchValue] = useState('');
   const [activeItem, setActiveItem] = useState(null);
   const [isOpened, setIsOpened] = useState(false);
+  const [valuesExpanded, setValuesExpanded] = useState(false);
 
   function getThemeClasses() {
     const themes = theme ? theme.split(' ') : [];
@@ -182,6 +185,14 @@ function Combobox(props) {
     setActiveItem(visibleItems[activeIndex < visibleItems.length - 1 ? activeIndex + 1 : 0]);
   }
 
+  function executeTriggerAction() {
+    if (expandMode) {
+      setValuesExpanded(!valuesExpanded);
+    } else {
+      openDropdown();
+    }
+  }
+
   function handleDocumentClick(e) {
     const isClickInside = (rootRef.current && rootRef.current.contains(e.target))
       || (dropdownRef.current && dropdownRef.current.contains(e.target));
@@ -261,6 +272,32 @@ function Combobox(props) {
     setValues(values.map(v => ({ ...v, selected: newValue.some(nv => nv.id === v.id) })));
   }, [propValue]);
 
+  useEffect(() => {
+    if (!expandMode) return () => {};
+
+    const valuesElement = comboboxControlRef.current.querySelector('.tyk-combobox2__current-values');
+    const updateScroll = () => {
+      valuesElement.scrollTop = valuesElement.scrollHeight;
+    };
+    /* eslint-disable-next-line no-undef */
+    const mobserver = new MutationObserver(updateScroll);
+    const robserver = new ResizeObserver(updateScroll);
+
+    mobserver.observe(valuesElement, { attributes: true, childList: true, subtree: true });
+    robserver.observe(valuesElement);
+
+    return () => {
+      mobserver.disconnect();
+      robserver.disconnect();
+    };
+  });
+
+  const filteredValues = getFilteredValues();
+  const currentValuesClasses = [
+    'tyk-combobox2__current-values',
+    expandMode && 'expand-mode',
+    `tyk-combobox2__current-values--${valuesExpanded ? 'expanded' : 'collapsed'}`,
+  ].join(' ');
   return (
     <div className={getCssClasses()} ref={rootRef}>
       {label && (
@@ -274,7 +311,7 @@ function Combobox(props) {
           {disabled && (
             <div className="tyk-combobox2-disabled-overlay" />
           )}
-          <div className="tyk-combobox2__current-values">
+          <div className={currentValuesClasses}>
             <Value
               value={value}
               max={max}
@@ -290,14 +327,14 @@ function Combobox(props) {
             />
           </div>
           <div
-            className="tyk-combobox2__values-container-trigger"
+            className={`tyk-combobox2__values-container-trigger${valuesExpanded ? ' tyk-combobox2__values-container-trigger--expanded' : ''}`}
             role="button"
             tabIndex={disabled ? -1 : 0}
-            onClick={openDropdown}
-            onKeyPress={openDropdown}
+            onClick={executeTriggerAction}
+            onKeyPress={executeTriggerAction}
           >
             <Icon type="arrow-down" />
-            {tags && getFilteredValues().length === 0 && (
+            {tags && filteredValues.length === 0 && !expandMode && (
               <div
                 className="disabled-overlay"
                 onClick={e => e.stopPropagation()}
@@ -306,7 +343,7 @@ function Combobox(props) {
             )}
           </div>
         </div>
-        {isOpened && (
+        {isOpened && (!tags || filteredValues.length > 0) && (
           <FloatingContainer
             element={comboboxControlRef}
             size="matchElement"
@@ -315,7 +352,7 @@ function Combobox(props) {
             {...floatingContainerConfig}
           >
             {renderList ? (
-              renderList(getFilteredValues(), {
+              renderList(filteredValues, {
                 tags,
                 searchValue,
                 activeItem,
@@ -323,7 +360,7 @@ function Combobox(props) {
               })
             ) : (
               <List
-                values={getFilteredValues()}
+                values={filteredValues}
                 tags={tags}
                 searchValue={searchValue}
                 activeItem={activeItem}
@@ -375,6 +412,7 @@ Combobox.propTypes = {
   values: PropTypes.instanceOf(Array),
   floatingContainerConfig: PropTypes.instanceOf(Object),
   valueOverflow: PropTypes.oneOf(['single', 'multiple']),
+  expandMode: PropTypes.bool,
 };
 
 export default Combobox;

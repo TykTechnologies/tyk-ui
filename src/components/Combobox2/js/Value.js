@@ -38,7 +38,7 @@ function Value(props) {
     }
     if (key === 'Enter') {
       sendMessage('tag.input.enter', val);
-      setInputValue('');
+      entryFieldOnChange('');
       return;
     }
     if (key === 'ArrowUp') {
@@ -55,7 +55,7 @@ function Value(props) {
     }
     if (tagSeparators.includes(key)) {
       sendMessage('tag.add', val);
-      setInputValue('');
+      entryFieldOnChange('');
     }
   }
 
