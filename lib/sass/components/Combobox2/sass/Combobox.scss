@@ -5,6 +5,7 @@
 
 .tyk-combobox2 {
   $container-trigger-width: 40px;
+  $values-default-height: 38px;
 
   &.disabled {
     .tyk-combobox2__entry-field {
@@ -38,6 +39,17 @@
     padding-bottom: 3px;
     padding-left: 10px;
     max-width: calc(100% - #{$container-trigger-width});
+
+    &.expand-mode {
+      max-height: 1000px;
+      overflow: hidden;
+      transition: max-height 1s ease;
+    }
+
+    &--collapsed.expand-mode {
+      max-height: $values-default-height;
+      transition: max-height .2s ease;
+    }
 
     .tyk-pill--combobox {
       margin-top: 3px;
@@ -104,6 +116,12 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    outline: none;
+    transition: all .2s;
+
+    &--expanded {
+      transform: rotate(180deg);
+    }
 
     .disabled-overlay {
       position: absolute;

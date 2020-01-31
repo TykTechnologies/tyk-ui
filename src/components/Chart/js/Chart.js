@@ -354,6 +354,10 @@ const Chart = (props) => {
     return tempStyle;
   };
 
+  const chartHasData = () => (
+    (dataLoaded && (hasData === false || hasData === true)) ? hasData : true
+  );
+
   const getCssClasses = () => {
     const cssClasses = ['tyk-chart'];
 
@@ -361,15 +365,15 @@ const Chart = (props) => {
       cssClasses.push('tyk-chart--loading-chart');
     }
 
+    if (!chartHasData()) {
+      cssClasses.push('tyk-chart--no-data');
+    }
+
     return cssClasses.join(' ');
   };
 
-  const chartHasData = () => (
-    (dataLoaded && (hasData === false || hasData === true)) ? hasData : true
-  );
-
   return (
-    <div className={`tyk-chart__wrapper ${chartHasData() ? '' : 'tyk-chart--no-data'}`}>
+    <div className="tyk-chart__wrapper">
       {
         !dataLoaded
           ? <Loader />
