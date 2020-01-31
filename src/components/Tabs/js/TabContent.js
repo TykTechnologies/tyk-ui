@@ -7,6 +7,8 @@ import TabContext from './TabContext';
 const TabContent = (props) => {
   const {
     addTab,
+    hideTab,
+    showTab,
     children,
     selectedPath,
     tabData,
@@ -25,6 +27,11 @@ const TabContent = (props) => {
       addTab(tempTabData, path);
     }
   }, [tabData, path]);
+
+  useEffect(() => {
+    showTab(path);
+    return () => hideTab(path);
+  }, []);
 
   const shouldRender = useCallback(() => {
     if (!Object.keys(tabs).length) {
@@ -63,6 +70,8 @@ const TabContent = (props) => {
 
 TabContent.propTypes = {
   addTab: PropTypes.func,
+  hideTab: PropTypes.func,
+  showTab: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

@@ -3,7 +3,14 @@ import {useState} from 'react';
 import Button from '../Button';
 
 const [showTab, setShowTab] = useState(true);
+const [displayTab3, setDisplayTab3] = useState(true);
 <>
+<Button
+  theme="default"
+  onClick={() => setDisplayTab3(!displayTab3)}
+>
+  Toggle Tab 3 display
+</Button>
 <Tabs
   id="group-tabs-1"
   selected="tab-1"
@@ -50,14 +57,16 @@ const [showTab, setShowTab] = useState(true);
             </Tabs.Tab>
           </Tabs>
         </Tabs.Tab>
-        <Tabs.Tab
-          id="tab-3"
-          title="Tab 3"
-        >
-          Tab 3
-        </Tabs.Tab>
+        {displayTab3 && (
+          <Tabs.Tab
+            id="tab-3"
+            title="Tab 3"
+          >
+            Tab 3
+          </Tabs.Tab>
+        )}
         {
-          showTab 
+          showTab
           ? (
             <Tabs.Tab
               id="tab-2"
