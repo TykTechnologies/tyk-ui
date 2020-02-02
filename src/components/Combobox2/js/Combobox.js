@@ -308,9 +308,9 @@ function Combobox(props) {
         style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
       >
         <div className="tyk-form-control" ref={comboboxControlRef}>
-          {disabled && (
-            <div className="tyk-combobox2-disabled-overlay" />
-          )}
+          {disabled
+            ? <div className="tyk-combobox2-disabled-overlay" />
+            : null}
           <div className={currentValuesClasses}>
             <Value
               value={value}
