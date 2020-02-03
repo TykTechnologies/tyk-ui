@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash/cloneDeep';
 
 import ResizeObserver from 'resize-observer-polyfill';
 import Icon from '../../Icon';
