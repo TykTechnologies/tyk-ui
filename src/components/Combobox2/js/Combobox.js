@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import cloneDeep from 'lodash/cloneDeep';
 
 import ResizeObserver from 'resize-observer-polyfill';
 import Icon from '../../Icon';
@@ -260,7 +261,9 @@ function Combobox(props) {
 
   useEffect(() => {
     if (propValues.length) {
-      setValues(propValues.map(v => ({ ...v, selected: value.some(sv => sv.id === v.id) })));
+      const newValues = propValues.map(v => ({ ...v, selected: value.some(sv => sv.id === v.id) }));
+      setValues(newValues);
+      setValue(value.map(v => newValues.find(nv => nv.id === v.id) || v));
     } else if (values.length) {
       setValues([]);
     }
