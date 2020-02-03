@@ -14,15 +14,26 @@ const Confirm = (props) => {
   } = props;
   const [open, setOpen] = useState(false);
   const [callback, setCallback] = useState(null);
+  const [cancelCallback, setCancelCallback] = useState(null);
 
-  const show = callbackFunc => (...args) => {
+  const show = (callbackFunc, cancelCallbackFunc, beforeCallback) => (...args) => {
+    if (beforeCallback) {
+      beforeCallback(...args);
+    }
     setOpen(true);
     setCallback(() => () => callbackFunc(...args));
+    setCancelCallback(() => () => cancelCallbackFunc(...args));
   };
 
   const hide = () => {
     setOpen(false);
     setCallback(null);
+    setCancelCallback(null);
+  };
+
+  const cancel = () => {
+    cancelCallback();
+    hide();
   };
 
   const confirm = () => {
@@ -35,7 +46,7 @@ const Confirm = (props) => {
       {children(show)}
       <Modal
         opened={open}
-        onClose={hide}
+        onClose={cancel}
       >
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
@@ -51,7 +62,7 @@ const Confirm = (props) => {
             {confirmBtnText}
           </Button>
           <Button
-            onClick={hide}
+            onClick={cancel}
             theme="default"
           >
             {cancelBtnText}

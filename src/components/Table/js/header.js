@@ -20,7 +20,7 @@ export const Header = () => {
       {column.name}
       {column.sortable && (
         <span className="header-sort">
-          <Icon family="tykon" type="arrowdown" />
+          <Icon family="tykon" type={sortOrder === 'DESC' ? 'arrowdown' : 'arrowup'} />
         </span>
       )}
     </th>
