@@ -45,10 +45,6 @@ export default class ToggleItem extends Component {
     }
 
     context.onItemSelected(context.type === 'single' ? !context.value : value, event);
-
-    if (context.type === 'multiple') {
-      context.saveSelectedRef(this.itemRef);
-    }
   }
 
   render() {
@@ -61,7 +57,7 @@ export default class ToggleItem extends Component {
           <input
             type={context.type === 'single' ? 'checkbox' : 'radio'}
             name={name}
-            defaultChecked={context.value === value}
+            checked={context.value === value}
             onChange={this.onChange.bind(this)}
             value={value}
           />
