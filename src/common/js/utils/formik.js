@@ -31,8 +31,9 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     <Component
       {...field}
       error={error}
+      isfield="true"
       {...properties}
-      checked={field.value === properties.value}
+      checked={typeof properties.value === 'string' ? field.value === properties.value : field.value}
       onChange={onChange}
       input={{ value: field.value, onChange }}
     />
