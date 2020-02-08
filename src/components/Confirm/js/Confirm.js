@@ -22,7 +22,9 @@ const Confirm = (props) => {
     }
     setOpen(true);
     setCallback(() => () => callbackFunc(...args));
-    setCancelCallback(() => () => cancelCallbackFunc(...args));
+    if (cancelCallback) {
+      setCancelCallback(() => () => cancelCallbackFunc(...args));
+    }
   };
 
   const hide = () => {
@@ -32,7 +34,9 @@ const Confirm = (props) => {
   };
 
   const cancel = () => {
-    cancelCallback();
+    if (cancelCallback) {
+      cancelCallback();
+    }
     hide();
   };
 
