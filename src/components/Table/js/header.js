@@ -1,29 +1,17 @@
-// HEADER
 import React, { useContext, useState } from 'react';
-import Icon from '../../Icon';
+import { HeaderCell } from './header-cell';
 import { tableContext } from '../tableContext';
 
 export const Header = () => {
-  const [sortOrder, setSortOrder] = useState('ASC');
   const [selectAll, setSelectAll] = useState(false);
   const { state, sendMessage } = useContext(tableContext);
   const { columns, selectable } = state;
 
-  const generateHeader = () => columns.map(column => (
-    <th
+  const generateHeaders = () => columns.map(column => (
+    <HeaderCell
       key={column.id}
-      onClick={() => {
-        sendMessage('sort', { column, sortOrder });
-        setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');
-      }}
-    >
-      {column.name}
-      {column.sortable && (
-        <span className="header-sort">
-          <Icon family="tykon" type={sortOrder === 'DESC' ? 'arrowdown' : 'arrowup'} />
-        </span>
-      )}
-    </th>
+      column={column}
+    />
   ));
 
   const generateSelectable = () => {
@@ -60,7 +48,7 @@ export const Header = () => {
     <thead>
       <tr>
         {selectable && selectable.position === 'LEFT' && generateSelectable()}
-        {generateHeader()}
+        {generateHeaders()}
         {selectable && selectable.position === 'RIGHT' && generateSelectable()}
       </tr>
     </thead>
