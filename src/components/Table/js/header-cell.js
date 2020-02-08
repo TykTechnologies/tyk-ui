@@ -7,7 +7,7 @@ import Icon from '../../Icon';
 export const HeaderCell = ({ column }) => {
   const { sortable } = column;
   const [sortOrder, setSortOrder] = useState(sortable?.default || 'ASC');
-  const { sendMessage } = useContext(tableContext);
+  const { state, sendMessage } = useContext(tableContext);
   return (
     <th
       key={column.id}
@@ -15,6 +15,7 @@ export const HeaderCell = ({ column }) => {
         sendMessage('sort', { column, sortOrder });
         setSortOrder(sortOrder === 'ASC' ? 'DESC' : 'ASC');
       } : null}
+      className={state.maxHeight ? 'fixed-header' : ''}
     >
       {column.name}
       {column.sortable && (

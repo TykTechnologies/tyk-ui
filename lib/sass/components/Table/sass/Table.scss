@@ -10,7 +10,6 @@
     > thead th {
       color: theme-color('foreground', 'light');
       font-size: text-scale('sm');
-      position: sticky;
 
       .tyk-button {
         background: none;
@@ -80,4 +79,10 @@
 .scrollable {
   display: block;
   overflow: scroll;
+}
+
+.fixed-header {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
 }
