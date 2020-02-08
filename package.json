@@ -9,8 +9,7 @@
     "build": "npx --max_old_space_size=4096 styleguidist build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
-    "build-dev": "webpack && cp -R lib/ ../tyk-analytics/webclient/node_modules/\\@tyk-technologies/tyk-ui/lib"
+    "styleguide:build": "styleguidist build"
   },
   "repository": {
     "type": "git",
