@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Message from '../../Message';
 import { Pagination } from '../../Pagination';
 import Loader from '../../Loader';
 import { Header } from './header';
 import { Body } from './body';
 import { tableContext } from '../tableContext';
 
-const Table = ({ value, onChange }) => {
+const Table = ({ value, onChange, noDataMsg }) => {
   const [state, setState] = useState(null);
   const [onChangeMsg, setOnChangeMsg] = useState('api');
 
@@ -87,6 +88,11 @@ const Table = ({ value, onChange }) => {
   if (!state) {
     return <Loader />;
   }
+
+  if (state.rows <= 0) {
+    return <Message theme="info">{noDataMsg || 'No Data Available'}</Message>;
+  }
+
   return (
     <tableContext.Provider value={{ state, sendMessage }}>
       <div className="scrollable" style={{ height: state.maxHeight ? state.maxHeight : 'auto' }}>
@@ -112,6 +118,7 @@ const Table = ({ value, onChange }) => {
 Table.propTypes = {
   value: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
+  noDataMsg: PropTypes.string,
 };
 
 export default Table;

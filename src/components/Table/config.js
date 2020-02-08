@@ -26,6 +26,7 @@ export const config = {
       id: 'input_test', name: 'Input Test', type: Input,
     },
   ],
+  // rows: [],
   rows: [
     {
       values: {
