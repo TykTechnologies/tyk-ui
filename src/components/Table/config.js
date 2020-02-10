@@ -206,4 +206,7 @@ export const config = {
     current: 1,
   },
   maxHeight: '200px',
+  styling: {
+    className: 'tyk-table__wrapper',
+  },
 };
