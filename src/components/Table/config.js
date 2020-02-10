@@ -10,7 +10,7 @@ export const config = {
     //   id: 'active', name: 'Active', type: Icon, sortable: true,
     // },
     {
-      id: 'name', name: 'Policy Name', type: 'string', sortable: true,
+      id: 'name', name: 'Policy Name', type: 'string', sortable: { default: 'DESC' },
     },
     { id: 'access_rights', name: 'Access Rights', type: TextEllipsis },
     {
@@ -26,6 +26,7 @@ export const config = {
       id: 'input_test', name: 'Input Test', type: Input,
     },
   ],
+  // rows: [],
   rows: [
     {
       values: {
@@ -35,7 +36,7 @@ export const config = {
           className: 'success',
         },
         name: {
-          value: 'Freemium Policy',
+          value: 'Freemium Policy (A)',
           events: {
             onClick: () => console.log('Name Clicked'),
           },
@@ -79,6 +80,9 @@ export const config = {
       events: {
         onClick: () => console.log('Row Clicked {config}'),
       },
+      styling: {
+        className: 'A',
+      },
     },
     {
       values: {
@@ -127,6 +131,9 @@ export const config = {
       selected: false,
       events: {
         onClick: () => console.log('Row Clicked {config}'),
+      },
+      styling: {
+        className: 'ALPHA',
       },
     },
     {

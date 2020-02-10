@@ -18,7 +18,10 @@ export const Row = ({ row, index }) => {
   );
 
   return (
-    <tr onClick={row.events?.onClick}>
+    <tr
+      onClick={row.events?.onClick}
+      className={row.styling?.className}
+    >
       {selectable && selectable.position === 'LEFT' && SelectableCheckbox()}
       {columns.map(col => (
         <Cell key={col.id} col={col} row={row} index={index} />

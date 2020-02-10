@@ -11,6 +11,8 @@
       color: theme-color('foreground', 'light');
       font-size: text-scale('sm');
       position: sticky;
+      top: 0;
+      background-color: #ffffff;
 
       .tyk-button {
         background: none;
