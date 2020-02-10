@@ -7,7 +7,7 @@ import { Header } from './header';
 import { Body } from './body';
 import { tableContext } from '../tableContext';
 
-const Table = ({ value, onChange, noDataMsg }) => {
+const Table = ({ value, onChange, noDataMessage }) => {
   const [state, setState] = useState(null);
   const [onChangeMsg, setOnChangeMsg] = useState('api');
 
@@ -90,12 +90,12 @@ const Table = ({ value, onChange, noDataMsg }) => {
   }
 
   if (state.rows <= 0) {
-    return <Message theme="info">{noDataMsg || 'No Data Available'}</Message>;
+    return <Message theme="info">{noDataMessage || 'No Data Available'}</Message>;
   }
 
   return (
     <tableContext.Provider value={{ state, sendMessage }}>
-      <div className="scrollable" style={{ height: state.maxHeight ? state.maxHeight : 'auto' }}>
+      <div className={`scrollable ${state.styling?.className || ''}`} style={{ height: state.maxHeight ? state.maxHeight : 'auto' }}>
         <table className="tyk-table">
           <Header />
           <Body />
@@ -118,7 +118,7 @@ const Table = ({ value, onChange, noDataMsg }) => {
 Table.propTypes = {
   value: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
-  noDataMsg: PropTypes.string,
+  noDataMessage: PropTypes.string,
 };
 
 export default Table;
