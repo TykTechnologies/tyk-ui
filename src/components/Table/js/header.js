@@ -21,7 +21,9 @@ export const Header = () => {
     const Component = selectable.type;
     // eslint-disable-next-line consistent-return
     return (
-      <th>
+      <th
+        className={state.maxHeight ? 'fixed-header' : ''}
+      >
         {selectable?.allowSelectAll ? (
           <div className={selectable?.style}>
             <Component

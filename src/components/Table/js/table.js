@@ -102,7 +102,7 @@ const Table = ({ value, onChange, noDataMsg }) => {
         </table>
       </div>
       {state.pagination && (
-        <div className="new-table-pagination ">
+        <div className="new-table-pagination">
           <Pagination
             value={state.pagination.current - 1}
             nrItemsOnPage={state.pagination.perPage - 1}
