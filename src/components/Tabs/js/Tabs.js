@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 
-import cloneDeep from 'lodash/cloneDeep';
 import Collapsible from '../../Collapsible';
 import Icon from '../../Icon';
 
@@ -170,7 +169,7 @@ const Tabs = (props) => {
 
   const hideTab = (path) => {
     setTabs((prevTabs) => {
-      const tempTabs = cloneDeep(prevTabs);
+      const tempTabs = { ...prevTabs };
       tempTabs[path].show = false;
 
       return tempTabs;
@@ -179,7 +178,7 @@ const Tabs = (props) => {
 
   const showTab = (path) => {
     setTabs((prevTabs) => {
-      const tempTabs = cloneDeep(prevTabs);
+      const tempTabs = { ...prevTabs };
 
       tempTabs[path].show = true;
 
