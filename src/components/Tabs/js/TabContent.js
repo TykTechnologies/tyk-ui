@@ -1,6 +1,5 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash/cloneDeep';
 
 import TabContext from './TabContext';
 
@@ -21,7 +20,7 @@ const TabContent = (props) => {
   } = props;
 
   useEffect(() => {
-    const tempTabData = cloneDeep(tabData);
+    const tempTabData = { ...tabData };
 
     if (!tabExists(path)) {
       addTab(tempTabData, path);
@@ -33,7 +32,7 @@ const TabContent = (props) => {
     return () => hideTab(path);
   }, []);
 
-  const shouldRender = useCallback(() => {
+  const shouldRender = useMemo(() => {
     if (!Object.keys(tabs).length) {
       return false;
     }
@@ -50,7 +49,7 @@ const TabContent = (props) => {
 
   return (
     (
-      shouldRender()
+      shouldRender
         ? (
           <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath && selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
             <TabContext.Provider
