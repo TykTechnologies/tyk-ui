@@ -9,6 +9,6 @@ import { config } from './config.js';
       console.log({message, data, tableApi})
     }
   }
-  noDataMsg="Hello World !"
+  noDataMessage="Hello World !"
 />
 ```

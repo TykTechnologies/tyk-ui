@@ -7,7 +7,9 @@ import { Header } from './header';
 import { Body } from './body';
 import { tableContext } from '../tableContext';
 
-const Table = ({ value, onChange, noDataMessage }) => {
+const Table = ({
+  value, onChange, noDataMessage, loading,
+}) => {
   const [state, setState] = useState(null);
   const [onChangeMsg, setOnChangeMsg] = useState('api');
 
@@ -85,8 +87,8 @@ const Table = ({ value, onChange, noDataMessage }) => {
     setOnChangeMsg('api');
   }, [state]);
 
-  if (!state) {
-    return <Loader />;
+  if (!state || loading) {
+    return <Loader position="relative" />;
   }
 
   if (state.rows <= 0) {
@@ -119,6 +121,7 @@ Table.propTypes = {
   value: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
   noDataMessage: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
 export default Table;
