@@ -58,7 +58,9 @@
     @include button-variant(
       white,
       transparent,
-      $text-color
+      $text-color,
+      theme-color('background', 'dark'),
+      theme-color('background', 'dark')
     )
   }
 

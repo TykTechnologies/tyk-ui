@@ -45,6 +45,7 @@ export default class TestToggle extends Component {
               label="Is enabled?"
               theme="primary"
               size="lg"
+              onDark
             >
               <Toggle.Item
                 label="Option"
@@ -151,6 +152,7 @@ export default class TestToggle extends Component {
               theme="success-gradient"
               type="multiple"
               separated
+              onDark
             >
               <Toggle.Item
                 label="short"
@@ -199,7 +201,7 @@ export default class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
-              theme="success"
+              theme="default"
               type="multiple"
             >
               <Toggle.Item
@@ -322,6 +324,7 @@ export default class TestToggle extends Component {
               theme="danger-gradient"
               type="multiple"
               size="sm"
+              onDark
             >
               <Toggle.Item
                 label="short"
