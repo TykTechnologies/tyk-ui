@@ -76,6 +76,18 @@
     background: $toggle-list-background-color-on-dark;
   }
 
+  &--default &__list--single &__item--active,
+  &--default &__list--separated &__item--active {
+    @include button-variant(
+      $button-default-color,
+      transparent,
+      white,
+      $button-default-color,
+      transparent,
+      $button-default-color
+    )
+  }
+
   &--primary &__list--single &__item--active,
   &--primary &__list--separated &__item--active {
     @include button-variant(
@@ -307,6 +319,17 @@
     transition: all .2s ease;
     width: 100px;
     z-index: 1;
+  }
+
+  &--default &__notch {
+    @include button-variant(
+      $button-default-color,
+      transparent,
+      white,
+      $button-default-color,
+      transparent,
+      $button-default-color
+    )
   }
 
   &--primary &__notch {

@@ -27,6 +27,7 @@ const Chart = (props) => {
     title,
     seriesConfig = [],
     noDataComponent = null,
+    zoomColors,
   } = props;
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
@@ -35,7 +36,7 @@ const Chart = (props) => {
       tykChartInstance.resize();
     }
   };
-
+  console.log(zoomColors);
   const lineBarChart = {
     defaultOpts: fromJS({
       title: {
@@ -58,20 +59,20 @@ const Chart = (props) => {
         orient: 'horizontal',
         dataBackground: {
           lineStyle: {
-            color: '#368493',
+            color: zoomColors?.lineStyle || '#368493',
           },
           areaStyle: {
-            color: '#368493',
+            color: zoomColors?.areaStyle || '#368493',
           },
         },
         handleStyle: {
-          color: '#368493',
+          color: zoomColors?.handleStyle || '#368493',
         },
         textStyle: {
-          color: '#368493',
+          color: zoomColors?.textStyle || '#368493',
         },
         borderColor: 'transparent',
-        fillerColor: 'rgba(54, 132, 147, 0.1)',
+        fillerColor: zoomColors?.fillerColor || 'rgba(54, 132, 147, 0.1)',
       }],
       legend: {
         show: false,
@@ -422,6 +423,7 @@ Chart.propTypes = {
   noDataComponent: PropTypes.func,
   zoomStart: PropTypes.number,
   zoomEnd: PropTypes.number,
+  zoomColors: PropTypes.instanceOf(Object),
   option: PropTypes.instanceOf(Object),
   onChange: PropTypes.func,
   style: PropTypes.instanceOf(Object),
