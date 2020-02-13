@@ -36,7 +36,7 @@ const Chart = (props) => {
       tykChartInstance.resize();
     }
   };
-  console.log(zoomColors);
+  
   const lineBarChart = {
     defaultOpts: fromJS({
       title: {
