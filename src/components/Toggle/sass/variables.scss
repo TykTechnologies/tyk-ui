@@ -1,1 +1,7 @@
 $toggle-font-family: $font-family-regular !default;
+$toggle-list-background-color: theme-color('background', 'dark') !default;
+$toggle-list-text-color: white !default;
+$toggle-list-background-color-on-dark: white !default;
+$toggle-list-text-color-on-dark: $text-color !default;
+$toggle-top: 4px !default;
+$toggle-bottom: 4px !default;

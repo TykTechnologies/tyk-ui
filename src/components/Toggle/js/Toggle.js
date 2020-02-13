@@ -25,6 +25,7 @@ class Toggle extends Component {
       PropTypes.bool,
       PropTypes.string,
     ]),
+    onDark: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -60,6 +61,7 @@ class Toggle extends Component {
       size,
       theme,
       direction,
+      onDark,
     } = this.props;
 
     let cssClasses = [
@@ -69,6 +71,10 @@ class Toggle extends Component {
       `tyk-toggle--${theme}`,
       `tyk-toggle--${direction}`,
     ];
+
+    if (onDark) {
+      cssClasses.push('tyk-toggle--on-dark');
+    }
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
@@ -108,8 +114,8 @@ class Toggle extends Component {
     const left = selectedOffset - toggleOffset;
 
     return {
-      left: `${left}px`,
-      width: `${selectedWidth}px`,
+      left: `${left + 4}px`,
+      width: `${selectedWidth - 8}px`,
     };
   }
 

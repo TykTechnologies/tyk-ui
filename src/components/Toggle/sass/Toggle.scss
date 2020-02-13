@@ -51,13 +51,14 @@
       margin-right: 20px;
       
       .tyk-toggle__item {
+        background-color: $toggle-list-background-color;
         margin-right: auto;
       }
     }
   }
 
   &__list {
-    background: theme-color('background', 'dark');
+    background: $toggle-list-background-color;
     border-radius: 25px;
     display: flex;
     list-style-type: none;
@@ -69,6 +70,10 @@
       background: transparent;
       flex-wrap: wrap;
     }
+  }
+
+  &--on-dark &__list {
+    background: $toggle-list-background-color-on-dark;
   }
 
   &--primary &__list--single &__item--active,
@@ -160,7 +165,7 @@
   }
 
   &__item {
-    color: white;
+    color: $toggle-list-text-color;
     text-transform: uppercase;
     z-index: 2;
 
@@ -174,7 +179,7 @@
     }
 
     .tyk-toggle__list--separated & {
-      background: theme-color('background', 'dark');
+      background: tyk-toggle__list--separated;
       border-radius: 25px;
       margin-bottom: 10px;
       margin-right: 10px;
@@ -209,6 +214,10 @@
         }
       }
     }
+  }
+
+  &--on-dark &__item:not(.tyk-toggle__item--active) {
+    color: $toggle-list-text-color-on-dark;
   }
 
   &--sm label {
@@ -291,10 +300,10 @@
 
   &__notch {
     border-radius: 25px;
-    bottom: 0;
     left: 0;
     position: absolute;
-    top: 0;
+    bottom: $toggle-bottom;
+    top: $toggle-top;
     transition: all .2s ease;
     width: 100px;
     z-index: 1;
