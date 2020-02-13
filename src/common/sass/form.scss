@@ -176,6 +176,10 @@
     cursor: not-allowed;
   }
 
+  &::placeholder {
+    font-family: "OpenSans-Regular, Helvetica, Arial, sans-serif";
+  }
+
   &__help-block {
     color: $text-color;
     font-style: italic;
@@ -200,6 +204,7 @@ select {
 
   > button {
     margin-left: 10px;
+    margin-bottom: 20px;
   }
 }
 
