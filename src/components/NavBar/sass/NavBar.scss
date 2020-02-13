@@ -1,15 +1,21 @@
 @import './variables';
 
 .tyk-nav-bar {
-  border: 0;
+  align-items: center;
+  border: none;
   background-color: $nav-bar-background-color;
+  font-family: $nav-bar-font-family;
   color: $nav-bar-text-color;
-  font-family: $headings-font-family;
   margin: 0;
   padding: $nav-bar-padding;
   width: 100%;
   z-index: 8;
   transition: all .2s linear;
+
+  &__pre {
+    align-self: flex-end;
+    flex-basis: 100%;
+  }
 
   &.tyk-nav-bar__with-tabs {
     padding-bottom: 0;
@@ -27,9 +33,16 @@
     color: $nav-bar-text-color;
   }
 
+  h4 {
+    margin: 0;
+  }
+
   .tyk-nav-bar__wrapper {
+    align-items: center;
     padding-bottom: $nav-bar-bottom-padding;
     display: flex;
+    flex-wrap: wrap;
+    height: $nav-bar-height;
 
     &.tyk-nav-bar--align-top {
       align-items: flex-start;
@@ -64,9 +77,5 @@
     .tyk-nav-bar__right {
       margin-left: auto;
     }
-  }
-
-  &.tyk-nav-bar__with-tabs .tyk-nav-bar__wrapper {
-    padding-bottom: 30px;
   }
 }
