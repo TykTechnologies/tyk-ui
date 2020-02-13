@@ -12,6 +12,10 @@ export default class NavBar extends PureComponent {
     ]),
     title: PropTypes.string,
     subtitle: PropTypes.string,
+    pre: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.node,
+    ]),
     left: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.node,
@@ -30,6 +34,7 @@ export default class NavBar extends PureComponent {
       left,
       right,
       title,
+      pre,
       subtitle,
       withTabs,
     } = this.props;
@@ -37,6 +42,11 @@ export default class NavBar extends PureComponent {
     return (
       <section className={`tyk-nav-bar  ${withTabs ? 'tyk-nav-bar__with-tabs' : ''}`}>
         <div className={`tyk-nav-bar__wrapper tyk-nav-bar--align-${align}`}>
+          {
+            pre
+              ? <div className="tyk-nav-bar__pre">{pre}</div>
+              : null
+          }
           {
             title
               ? (

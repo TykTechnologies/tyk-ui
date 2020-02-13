@@ -139,8 +139,10 @@
   outline: none;
 
   &__addon {
+    align-items: center;
     background-color: $form-control-addon-background-color;
     border: 1px solid theme-color('background', 'dark');
+    display: flex;
     height: $form-control-height;
     padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
 

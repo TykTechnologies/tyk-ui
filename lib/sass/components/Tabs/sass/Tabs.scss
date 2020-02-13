@@ -14,19 +14,26 @@
       li {
         display: flex;
         white-space: nowrap;
+        margin-right: $tab-button-margin;
+
+        &:last-child {
+          margin-right: 0;
+        }
 
         &.active button,
         button:hover {
           border-bottom-color: theme-color('primary', 'base');
+          color: $tab-active-button-color;
         }
 
         button {
           background: none;
           border: none;
           border-bottom: 5px solid transparent;
+          color: $tab-button-color;
           cursor: pointer;
           font-size: text-scale('sm');
-          font-family: $font-family-medium;
+          font-family: $tabs-font-familly;
           padding: $tab-button-padding;
           transition: all .2s linear;
           text-transform: uppercase;

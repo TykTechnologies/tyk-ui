@@ -333,8 +333,18 @@ const Chart = (props) => {
   }, [highlight]);
 
 
+  const prevZoomStart = usePrevious(zoomStart);
+  const prevZoomEnd = usePrevious(zoomEnd);
   useEffect(() => {
-    if (tykChartInstance && zoomStart !== -1 && zoomEnd !== -1) {
+    if (
+      tykChartInstance
+      && zoomStart !== -1
+      && zoomEnd !== -1
+      && (
+        prevZoomStart !== zoomStart
+        || prevZoomEnd !== zoomEnd
+      )
+    ) {
       tykChartInstance.dispatchAction({
         type: 'dataZoom',
         startValue: zoomStart,
