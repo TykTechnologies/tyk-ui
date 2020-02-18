@@ -10,7 +10,7 @@ export { default as Chart } from './components/Chart';
 export { default as Column } from './components/Column';
 export { default as CopyToClipboard } from './components/CopyToClipboard';
 export { Combobox, FieldCombobox, FormikCombobox } from './components/Combobox';
-export { Combobox2, FormikCombobox2 } from './components/Combobox2';
+export { Combobox2, FormikCombobox2, FieldCombobox2 } from './components/Combobox2';
 export { Confirm } from './components/Confirm';
 export { DatePicker, FieldDatePicker, FormikDatePicker } from './components/DatePicker';
 export { Dropdown, FieldDropdown } from './components/Dropdown';
