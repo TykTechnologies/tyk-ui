@@ -84,12 +84,13 @@ const InfiniteScroller = (props) => {
 
   useEffect(() => {
     if (
-      refChildSize.height < containerRef.current.clientHeight
+      refChild && refChildSize.height < containerRef.current.clientHeight
+      && refChildSize.height
       && hasMore
     ) {
       loadMoreData();
     }
-  }, [containerRef, refChild, hasMore]);
+  }, [containerRef, refChildSize, refChild, hasMore]);
 
   return (
     <div

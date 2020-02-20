@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Message from '../../Message';
 import { Pagination } from '../../Pagination';
 import Loader from '../../Loader';
+import InfiniteScroller from '../../InfiniteScroller';
 import { Header } from './header';
 import { Body } from './body';
 import { tableContext } from '../tableContext';
 
 const Table = ({
-  value, onChange, noDataMessage, loading,
+  value, onChange, noDataMessage, loading, infiniteScrolling,
 }) => {
   const [state, setState] = useState(null);
   const [onChangeMsg, setOnChangeMsg] = useState('api');
-
+  const itemsListRef = useRef(null);
   const sortRows = (col, sortOrder) => {
     setState({
       ...state,
@@ -95,15 +96,33 @@ const Table = ({
     return <Message theme="info">{noDataMessage || 'No Data Available'}</Message>;
   }
 
+  const getTable = () => (
+    <table className="tyk-table" ref={itemsListRef}>
+      <Header />
+      <Body />
+    </table>
+  );
+
   return (
     <tableContext.Provider value={{ state, sendMessage }}>
       <div className={`scrollable ${state.styling?.className || ''}`} style={{ height: state.maxHeight ? state.maxHeight : 'auto' }}>
-        <table className="tyk-table">
-          <Header />
-          <Body />
-        </table>
+        {
+          infiniteScrolling && state.pagination
+            ? (
+              <InfiniteScroller
+                refChild={itemsListRef}
+                hasMore={state.pagination.totalPages > state.pagination.current}
+                loadMore={num => sendMessage('pagination.change', num)}
+                pageNumber={state.pagination.current - 1}
+                initialLoad={false}
+              >
+                { getTable() }
+              </InfiniteScroller>
+            )
+            : getTable()
+        }
       </div>
-      {state.pagination && (
+      {state.pagination && !infiniteScrolling && (
         <div className="new-table-pagination">
           <Pagination
             value={state.pagination.current - 1}
@@ -122,6 +141,7 @@ Table.propTypes = {
   onChange: PropTypes.func,
   noDataMessage: PropTypes.string,
   loading: PropTypes.bool,
+  infiniteScrolling: PropTypes.bool,
 };
 
 export default Table;
