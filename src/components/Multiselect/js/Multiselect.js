@@ -142,12 +142,12 @@ class Multiselect extends Component {
               <div>
                 { value.length }
                 {' '}
-Selected
+                Selected
                 {' '}
                 { entityNamePlural }
               </div>
               <div>
-Select from existing
+                Select from existing
                 { entityNamePlural }
               </div>
             </div>
