@@ -1,9 +1,0 @@
-@mixin message-variant(
-  $background,
-  $border: transparent,
-  $color: $text-color
-) {
-  background-color: $background;
-  border: 1px solid $border;
-  color: $color;
-}
