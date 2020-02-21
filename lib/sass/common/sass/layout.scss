@@ -1,0 +1,12 @@
+body {
+  background-color: theme-color('background', 'base');
+}
+
+.tyk-main-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.tyk-main-content-wrapper {
+  flex: 1;
+}

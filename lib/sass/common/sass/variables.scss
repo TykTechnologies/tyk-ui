@@ -1,0 +1,150 @@
+$font-path: '../fonts/' !default;
+$component-images-path: '../images' !default;
+$general-border-radius: 18px !default;
+
+$theme-colors: (
+  'primary': (
+    'base': #368493,
+    'light': #109EAE,
+    'dark': #1B3E4F
+  ),
+  'success': (
+    'base': #00d9ba,
+    'light': #bdded3,
+    'dark': #8BBAC4
+  ),
+  'info': (
+    'base': #82BBC6,
+    'light': #D3EBEF
+  ),
+  'danger': (
+    'base': #ff6c7d,
+    'extra-light': #F5CCD1,
+    'light': #FF6C7E,
+    'dark': #C9234D
+  ),
+  'warning': (
+    'base': #d6b218,
+    'light': #F3EFC2
+  ),
+  'foreground': (
+    'base': #393939,
+    'base-dark': #22272B,
+    'light': #5a5a68,
+    'dark': #161B20,
+    'extra-dark': #0A0D10
+  ),
+  'background': (
+    'base': #E1E1E1,
+    'light': #F0F0F0,
+    'dark': #D2D2D2,
+    'extra-dark': #0A0D10
+  )
+) !default;
+
+$text-color: #000018 !default;
+
+$contrast-colors: (
+  'dark': (
+    'primary': rgb(255, 255, 255),
+    'secondary': rgba(255, 255, 255, .70),
+    'disabled': rgba(255, 255, 255, .5),
+    'hint': rgba(255, 255, 255, .12)
+  ),
+  'light': (
+    'primary': rgba(0, 0, 0, .87),
+    'secondary': rgba(0, 0, 0, .54),
+    'disabled': rgba(0, 0, 0, .38),
+    'hint': rgba(0, 0, 0, .12)
+  ),
+) !default;
+
+$base-font-size: 16px !default;
+$base-line-height: 1.2 !default;
+
+$text-settings: (
+  'xs': (
+    font-size: 10px,
+    line-height: $base-line-height
+  ),
+  'sm': (
+    font-size: 12px,
+    line-height: $base-line-height
+  ),
+  'base': (
+    font-size: 14px,
+    line-height: $base-line-height
+  ),
+  'md': (
+    font-size: 16px,
+    line-height: $base-line-height
+  ),
+  'lg': (
+    font-size: 20px,
+    line-height: $base-line-height
+  ),
+  'xl': (
+    font-size: 24px,
+    line-height: $base-line-height
+  ),
+  'xxl': (
+    font-size: 32px,
+    line-height: $base-line-height
+  )
+) !default;
+
+$spacing: (
+  'xs': 6px,
+  'sm': 8px,
+  'base': 12px,
+  'md': 14px,
+  'lg': 18px,
+  'xl': 22px,
+  'xxl': 32px
+) !default;
+
+$grid-gutter: 20px !default;
+$grid-max-width: 1200px + ($grid-gutter * 2) !default;
+$grid-columns: 12 !default;
+
+$breakpoint-xs: 420px !default;
+$breakpoint-sm: 768px !default;
+$breakpoint-md: 1024px !default;
+$breakpoint-lg: 1248px !default;
+
+$breakpoints: (
+  "xs": $breakpoint-xs,
+  "sm": $breakpoint-sm,
+  "md": $breakpoint-md,
+  "lg": $breakpoint-lg
+);
+
+$grid-breakpoints: (
+  'lg' '(min-width: ' + $breakpoint-lg + ')',
+  'md' '(min-width: ' + $breakpoint-md + ') and (max-width: ' + ($breakpoint-lg - 1) + ')',
+  'sm' '(min-width: ' + ($breakpoint-sm + 1) + ') and (max-width:' + ($breakpoint-md - 1) + ')',
+  'xs' '(max-width: ' + $breakpoint-sm + ')'
+) !default;
+
+$font-family-regular: 'robotolight' !default;
+$font-family-regular: 'robotoregular' !default;
+$font-family-medium: 'robotomedium' !default;
+$font-family-bold: 'robotbold' !default;
+
+$headings-margin-bottom: 15px !default;
+$headings-font-family: 'robotomedium' !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: $base-line-height !default;
+
+$form-group-margin-bottom: 20px !default;
+$form-control-height: 40px !default;
+$form-control-padding-left: 15px !default;
+$form-control-padding-right: 15px !default;
+$form-control-padding-top: 11px !default;
+$form-control-padding-bottom: 10px !default;
+$form-control-addon-background-color: white !default;
+$form-control-disabled-color: theme-color('background', 'light') !default;
+
+$form-default-color: theme-color('background', 'dark') !default;
+$form-primary-color: theme-color('primary', 'base') !default;
+$form-success-color: theme-color('success', 'base') !default;

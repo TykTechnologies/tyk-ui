@@ -1,0 +1,87 @@
+@import 'variables';
+@import 'mixins';
+
+.container {
+  max-width: $grid-max-width;
+  margin: 0 auto;
+}
+
+.container,
+.container-fluid {
+  padding: 0 $grid-gutter;
+}
+
+.tyk-row {
+  display: flex;
+  box-sizing: border-box;
+  list-style: none;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -$grid-gutter;
+  width: calc(100% + #{$grid-gutter});
+
+  &.no-gutters {
+    margin: 0;
+  }
+
+  &.tyk-row--gutterless {
+    margin: 0;
+    width: 100%;
+  }
+
+  &.tyk-row--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.tyk-col {
+  max-width: calc(100% - #{$grid-gutter});
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  flex-grow: 1;
+  flex-basis: calc(100% - #{$grid-gutter});
+  margin-left: $grid-gutter;
+  width: calc(100% - #{$grid-gutter});
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .tyk-row--gutterless & {
+    margin: 0;
+  }
+
+  &.tyk-col--reverse {
+    flex-direction: column-reverse;
+  }
+
+  &.tyk-col--align-bottom {
+    align-self: flex-end;
+  }
+
+  &.tyk-col--align-top {
+    align-self: flex-start;
+  }
+
+  &.tyk-col--align-center {
+    align-self: center;
+  }
+
+  &.tyk-col--align-baseline {
+    align-self: baseline;
+  }
+
+  &.tyk-col--align-stretch {
+    align-self: stretch;
+  }
+}
+
+@each $breakpoint in $grid-breakpoints {
+  $name: nth($breakpoint, 1);
+  $declaration: nth($breakpoint, 2);
+
+  @media screen and #{$declaration} {
+    @include grid-loop($name);
+  }
+}

@@ -1,0 +1,41 @@
+$button-font-family: $font-family-medium !default;
+$button-border-radius: 20px !default;
+
+$padding-y-button-sm: 4px !default;
+$padding-x-button-sm: 20px !default;
+$padding-y-button-md: 6px !default;
+$padding-x-button-md: 30px !default;
+$padding-y-button-lg: 8px !default;
+$padding-x-button-lg: 30px !default;
+
+$line-height-button-sm: 20px !default;
+$line-height-button-md: 24px !default;
+$line-height-button-lg: 30px !default;
+
+$button-default-color: theme-color('foreground', 'light') !default;
+$button-default-gradient-start-color: theme-color('foreground', 'base') !default;
+$button-default-gradient-end-color: theme-color('foreground', 'base-dark') !default;
+
+$button-primary-color: theme-color('primary', 'base') !default;
+$button-primary-gradient-start-color: theme-color('primary', 'base') !default;
+$button-primary-gradient-end-color: theme-color('primary', 'dark') !default;
+
+$button-success-color: theme-color('success', 'base') !default;
+$button-success-gradient-start-color: theme-color('success', 'base') !default;
+$button-success-gradient-end-color: theme-color('success', 'dark') !default;
+
+$button-danger-color: theme-color('danger', 'base') !default;
+$button-danger-gradient-start-color: theme-color('danger', 'base') !default;
+$button-danger-gradient-end-color: theme-color('danger', 'dark') !default;
+
+$button-warning-color: theme-color('warning', 'base') !default;
+$button-warning-font-color: theme-color('foreground', 'base-dark') !default;
+$button-warning-gradient-start-color: theme-color('warning', 'base') !default;
+$button-warning-gradient-end-color: theme-color('warning', 'light') !default;
+
+$button-info-color: theme-color('info', 'base') !default;
+$button-info-font-color: theme-color('foreground', 'base-dark') !default;
+$button-info-gradient-start-color: theme-color('info', 'base') !default;
+$button-info-gradient-end-color: theme-color('info', 'light') !default;
+
+$button-icon-only-background-hover: theme-color('background', 'light') !default;

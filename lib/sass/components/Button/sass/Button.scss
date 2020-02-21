@@ -1,0 +1,274 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+@import './variables';
+@import './mixins';
+
+.tyk-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $button-font-family;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all .2s linear;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  + .tyk-button,
+  + .tyk-dropdown,
+  + .tyk-toggle {
+    margin-left: 10px;
+  }
+
+  span + i {
+    margin-left: 10px;
+  }
+
+  i + span {
+    margin-left: 10px;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @include button-size(
+    $padding-y-button-md,
+    $padding-x-button-md,
+    text-scale('sm'),
+    $line-height-button-md,
+    $button-border-radius
+  )
+
+  &--white {
+    @include button-variant(
+      white,
+      transparent,
+      $text-color,
+      theme-color('background', 'dark'),
+      theme-color('background', 'dark')
+    )
+  }
+
+  &--primary {
+    @include button-variant(
+      $button-primary-color
+    )
+
+    &-link {
+      @include button-variant-link(
+        $button-primary-color
+      )
+    }
+
+    &-outline {
+      @include button-variant-outline(
+        $button-primary-color
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        $button-primary-gradient-start-color,
+        $button-primary-gradient-end-color
+      )
+    }
+  }
+  &--success {
+    @include button-variant(
+      $button-success-color
+    )
+
+    &-link {
+      @include button-variant-link(
+        $button-success-color
+      )
+    }
+
+    &-outline {
+      @include button-variant-outline(
+        $button-success-color
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        $button-success-gradient-start-color,
+        $button-success-gradient-end-color
+      )
+    }
+  }
+  &--danger {
+    @include button-variant(
+      $button-danger-color
+    )
+
+    &-link {
+      @include button-variant-link(
+        $button-danger-color
+      )
+    }
+
+    &-outline {
+      @include button-variant-outline(
+        $button-danger-color
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        $button-danger-gradient-start-color,
+        $button-danger-gradient-end-color
+      )
+    }
+  }
+
+  &--warning {
+    @include button-variant(
+      $button-warning-color,
+      transparent,
+      $button-warning-font-color
+    )
+
+    &-link {
+      @include button-variant-link(
+        $button-warning-color
+      )
+    }
+
+    &-outline {
+      @include button-variant-outline(
+        $button-warning-color
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        $button-warning-gradient-start-color,
+        $button-warning-gradient-end-color,
+        $button-warning-font-color
+      )
+    }
+  }
+  &--info {
+    @include button-variant(
+      $button-info-color
+    )
+
+    &-link {
+      @include button-variant-link(
+        $button-info-color
+      )
+    }
+
+    &-outline {
+      @include button-variant-outline(
+        $button-info-color
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        $button-info-gradient-start-color,
+        $button-info-gradient-end-color,
+        $button-info-font-color
+      )
+    }
+  }
+
+  &--default {
+    @include button-variant(
+      $button-default-color
+    )
+
+    &-link {
+      @include button-variant-link(
+        $text-color
+      )
+    }
+
+    &-outline {
+      @include button-variant-outline(
+        $button-default-color
+      )
+    }
+
+    &-gradient {
+      @include button-variant-gradient(
+        $button-default-gradient-start-color,
+        $button-default-gradient-end-color
+      )
+    }
+  }
+
+  &--sm {
+    @include button-size(
+      $padding-y-button-sm,
+      $padding-x-button-sm,
+      text-scale('xs'),
+      $line-height-button-sm,
+      $button-border-radius
+    )
+  }
+
+  &--md {
+    @include button-size(
+      $padding-y-button-md,
+      $padding-x-button-md,
+      text-scale('sm'),
+      $line-height-button-md,
+      $button-border-radius
+    )
+  }
+  &--lg {
+    @include button-size(
+      $padding-y-button-lg,
+      $padding-x-button-lg,
+      text-scale('md'),
+      $line-height-button-lg,
+      $button-border-radius
+    )
+  }
+
+  &--icon-only {
+    border-radius: $general-border-radius;
+    padding: 0;
+    width: 24px;
+
+    &:hover {
+      border-radius: $general-border-radius;
+    }
+  }
+
+  &--fit {
+    height: auto;
+    width: auto;
+    line-height: normal;
+  }
+
+  &--no-style {
+    background: transparent;
+    border: none;
+    color: $text-color;
+
+    &:hover {
+      background: transparent;
+      border: none;
+      color: $text-color;
+    }
+  }
+}

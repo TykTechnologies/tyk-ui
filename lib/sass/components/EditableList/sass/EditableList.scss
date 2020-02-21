@@ -1,0 +1,161 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+
+.tyk-editable-list {
+  &__submit-btn {
+    white-space: nowrap;
+  }
+}
+
+.tyk-editable-list__form {
+  align-items: center;
+  display: flex;
+
+  .tyk-form-group {
+    margin-bottom: 0;
+  }
+
+  &--sticked {
+    margin-left: 0;
+
+    button {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      padding-bottom: 11px;
+      padding: 10px 15px 11px 15px;
+    }
+  }
+
+  span.inline {
+    margin-top: 0;
+  }
+
+  > span {
+    margin-left: 15px;
+
+    &.inline-with-label {
+      align-self: flex-end;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.tyk-editable-list__header {
+  padding-top: 15px;
+  border-bottom: 1px solid theme-color('background', 'dark');
+  color: $text-color;
+  font-size: 11px;
+  padding-bottom: 15px;
+  text-transform: uppercase;
+
+  .tyk-row {
+    margin: 0 -10px 0 0;
+  }
+}
+
+.tyk-editable-list-items {
+  overflow: hidden;
+  list-style: none;
+  padding: 20px 0 0 0;
+
+  .edit-mode-wrapper.table button {
+    margin-top: 23px;
+  }
+
+  .tyk-row {
+    margin: 0 -10px 0 0;
+  }
+
+  button[disabled] {
+    cursor: not-allowed;
+  }
+
+  &.tyk-editable-list-items--inline {
+    align-items: center;
+    color: $text-color;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  li {
+    border-top: 1px solid theme-color('background', 'dark');
+    transition: all .2s linear;
+
+    &.tyk-editable-list-item--inline {
+      background-color: theme-color('background', 'base');
+      border-radius: 25px;
+      border: none;
+      color: white;
+      float: left;
+      margin-bottom: 10px;
+      margin-right: 15px;
+      padding: 0 15px;
+      white-space: nowrap;
+
+      .tyk-editable-list-item__text {
+        color: $text-color;
+        padding: 5px 0;
+      }
+
+      .tyk-editable-list-action__button.on-edit {
+        margin-top: 0;
+      }
+    }
+
+    &:first-child {
+      border-top: none;
+    }
+
+    .tyk-editable-list-item__text {
+      display: flex;
+      padding: 10px 0;
+
+      > span {
+        flex-grow: 1;
+      }
+
+      > div:first-child {
+        flex-grow: 1;
+
+        .error-message {
+          margin: 0;
+        }
+      }
+    }
+
+    .tyk-editable-list-items {
+      overflow: hidden;
+      padding-bottom: 10px;
+    }
+
+    .tyk-editable-list {
+      border-top: 5px solid theme-color('background', 'dark');
+      background: theme-color('background', 'light');
+      padding: 10px 15px;
+    }
+  }
+
+  .tyk-editable-list-item__text {
+    display: block;
+  }
+
+  .tyk-editable-list-action__button {
+    border: none;
+    background: transparent;
+
+    &.on-edit {
+      margin-left: 10px;
+    }
+  }
+
+  .tyk-editable-list-item-controls {
+    flex-grow: 0;
+    text-align: right;
+  }
+}
+
+.tyk-editable-list-item__controls {
+  text-align: right;
+}

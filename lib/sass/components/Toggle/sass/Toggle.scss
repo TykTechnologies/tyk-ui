@@ -1,0 +1,414 @@
+@import './variables';
+
+.tyk-toggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  font-family: $toggle-font-family;
+  font-size: text-scale('sm');
+  white-space: nowrap;
+
+  &.block {
+    margin-bottom: 20px;
+    width: 100%;
+
+    + .tyk-toggle {
+      margin-left: 0;
+    }
+  }
+
+  &.inline-label {
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  & &__label {
+    display: block;
+    font-size: text-scale('md');
+    padding: 0;
+    width: 100%;
+  }
+
+  &.inline-label &__label {
+    margin-right: 10px;
+    width: auto;
+  }
+
+  + .tyk-button,
+  + .tyk-dropdown,
+  + .tyk-toggle {
+    margin-left: 10px
+  }
+
+  &--disabled-true {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &--column {
+    .tyk-toggle__list--separated {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+      
+      .tyk-toggle__item {
+        background-color: $toggle-list-background-color;
+        margin-right: auto;
+      }
+    }
+  }
+
+  &__list {
+    background: $toggle-list-background-color;
+    border-radius: 25px;
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    &--separated {
+      background: transparent;
+      flex-wrap: wrap;
+    }
+  }
+
+  &--on-dark &__list {
+    background: $toggle-list-background-color-on-dark;
+  }
+
+  &--default &__list--single &__item--active,
+  &--default &__list--separated &__item--active {
+    @include button-variant(
+      $button-default-color,
+      transparent,
+      white,
+      $button-default-color,
+      transparent,
+      $button-default-color
+    )
+  }
+
+  &--primary &__list--single &__item--active,
+  &--primary &__list--separated &__item--active {
+    @include button-variant(
+      theme-color('primary', 'base'),
+      transparent,
+      white,
+      theme-color('primary', 'base'),
+      transparent,
+      theme-color('primary', 'base')
+    )
+  }
+
+  &--success &__list--single &__item--active,
+  &--success &__list--separated &__item--active {
+    @include button-variant(
+      theme-color('success', 'base'),
+      transparent,
+      white,
+      theme-color('success', 'base'),
+      transparent,
+      theme-color('success', 'base')
+    )
+  }
+
+  &--danger &__list--single &__item--active,
+  &--danger &__list--separated &__item--active  {
+    @include button-variant(
+      theme-color('danger', 'base'),
+      transparent,
+      white,
+      theme-color('danger', 'base'),
+      transparent,
+      theme-color('danger', 'base')
+    )
+  }
+
+  &--warning &__list--single &__item--active,
+  &--warning &__list--separated &__item--active {
+    @include button-variant(
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('foreground', 'base-dark'),
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('warning', 'base')
+    )
+  }
+
+  &--primary-gradient &__list--single &__item--active,
+  &--primary-gradient &__list--separated &__item--active {
+    @include button-variant-gradient(
+      theme-color('primary', 'base'),
+      theme-color('primary', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--success-gradient &__list--single &__item--active,
+  &--success-gradient &__list--separated &__item--active {
+    @include button-variant-gradient(
+      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--danger-gradient &__list--single &__item--active,
+  &--danger-gradient &__list--separated &__item--active {
+    @include button-variant-gradient(
+      theme-color('danger', 'base'),
+      theme-color('danger', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--warning-gradient &__list--single &__item--active,
+  &--warning-gradient &__list--separated &__item--active {
+    @include button-variant-gradient(
+      theme-color('warning', 'light'),
+      theme-color('warning', 'base'),
+      theme-color('foreground', 'base-dark'),
+      false
+    )
+  }
+
+  &__item {
+    color: $toggle-list-text-color;
+    text-transform: uppercase;
+    z-index: 2;
+
+    &:first-child {
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+    }
+    &:last-child {
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+    }
+
+    .tyk-toggle__list--separated & {
+      background: tyk-toggle__list--separated;
+      border-radius: 25px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    input {
+      display: none;
+    }
+
+    label {
+      cursor: pointer;
+      position: relative;
+      margin: 0;
+      transition: all .2s ease;
+
+      .tyk-toggle__list--single & {
+        padding-left: 45px;
+      }
+    }
+
+    .tyk-toggle__list--single &--active {
+      label {
+        padding-left: 30px;
+        padding-right: 45px;
+
+        .tyk-toggle__item-notch {
+          left: calc(100% - 35px);
+        }
+      }
+    }
+  }
+
+  &--on-dark &__item:not(.tyk-toggle__item--active) {
+    color: $toggle-list-text-color-on-dark;
+  }
+
+  &--sm label {
+    @include button-size(
+      $padding-y-button-sm,
+      $padding-x-button-sm,
+      text-scale('xs'),
+      $line-height-button-sm,
+      $button-border-radius
+    )
+  }
+
+  &--sm &__list--single label {
+    padding-left: 35px;
+  }
+
+  &--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
+    padding-left: 20px;
+    padding-right: 35px;
+
+    .tyk-toggle__item-notch {
+      left: calc(100% - 27px);
+    }
+  }
+
+  &--md label {
+    @include button-size(
+      $padding-y-button-md,
+      $padding-x-button-md,
+      text-scale('sm'),
+      $line-height-button-md,
+      $button-border-radius
+    )
+  }
+
+  &--lg label {
+    @include button-size(
+      $padding-y-button-lg,
+      $padding-x-button-lg,
+      text-scale('md'),
+      $line-height-button-lg,
+      $button-border-radius
+    )
+  }
+
+  &--lg &__list--single label {
+    padding-left: 45px;
+  }
+
+  &--lg .tyk-toggle__list--single .tyk-toggle__item--active label {
+    padding-left: 30px;
+    padding-right: 45px;
+
+    .tyk-toggle__item-notch {
+      left: calc(100% - 43px);
+    }
+  }
+
+  &__item-notch {
+    border-radius: 25px;
+    bottom: 2px;
+    position: absolute;
+    transition: all .2s ease;
+    top: 2px;
+
+    &--single {
+      background: white;
+      left: 2px;
+      width: 32px;
+    }
+  }
+
+  &--sm &__item-notch--single {
+    width: 24px;
+  }
+
+  &--lg &__item-notch--single {
+    width: 40px;
+  }
+
+  &__notch {
+    border-radius: 25px;
+    left: 0;
+    position: absolute;
+    bottom: $toggle-bottom;
+    top: $toggle-top;
+    transition: all .2s ease;
+    width: 100px;
+    z-index: 1;
+  }
+
+  &--default &__notch {
+    @include button-variant(
+      $button-default-color,
+      transparent,
+      white,
+      $button-default-color,
+      transparent,
+      $button-default-color
+    )
+  }
+
+  &--primary &__notch {
+    @include button-variant(
+      theme-color('primary', 'base'),
+      transparent,
+      white,
+      theme-color('primary', 'base'),
+      transparent,
+      theme-color('primary', 'base')
+    )
+  }
+
+  &--success &__notch {
+    @include button-variant(
+      theme-color('success', 'base'),
+      transparent,
+      white,
+      theme-color('success', 'base'),
+      transparent,
+      theme-color('success', 'base')
+    )
+  }
+
+  &--danger &__notch {
+    @include button-variant(
+      theme-color('danger', 'base'),
+      transparent,
+      white,
+      theme-color('danger', 'base'),
+      transparent,
+      theme-color('danger', 'base')
+    )
+  }
+
+  &--warning &__notch {
+    @include button-variant(
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('foreground', 'base-dark'),
+      theme-color('warning', 'base'),
+      transparent,
+      theme-color('warning', 'base')
+    )
+  }
+
+  &--primary-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('primary', 'base'),
+      theme-color('primary', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--success-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--danger-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('danger', 'base'),
+      theme-color('danger', 'dark'),
+      white,
+      false
+    )
+  }
+
+  &--warning-gradient &__notch {
+    @include button-variant-gradient(
+      theme-color('warning', 'light'),
+      theme-color('warning', 'base'),
+      theme-color('foreground', 'base-dark'),
+      false
+    )
+  }
+}

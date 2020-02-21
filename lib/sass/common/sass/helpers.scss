@@ -1,0 +1,35 @@
+.right-align {
+  text-align: right !important;
+}
+
+.left-align {
+  text-align: left !important;
+}
+
+.center-align {
+  text-align: center !important;
+}
+
+.left {
+  float: left !important;
+}
+
+.right {
+  float: right !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.text {
+  &--primary {
+    color: theme-color('primary', 'base');
+  }
+  &--danger {
+    color: theme-color('danger', 'base');
+  }
+  &--info {
+    color: theme-color('info', 'base');
+  }
+}

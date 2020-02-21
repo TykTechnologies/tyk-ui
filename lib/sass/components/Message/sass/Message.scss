@@ -1,0 +1,50 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+@import './mixins';
+@import './variables';
+
+.tyk-message {
+  border-radius: $tyk-message-border-radius;
+  margin-bottom: 20px;
+  padding: $tyk-message-padding-top $tyk-message-padding-right $tyk-message-padding-bottom $tyk-message-padding-left;
+
+  &--default {
+    @include message-variant(
+      $tyk-message-default-background,
+      $tyk-message-default-border,
+      $tyk-message-default-text-color
+    );
+  }
+
+  &--info {
+    @include message-variant(
+      $tyk-message-info-background,
+      $tyk-message-info-border,
+      $tyk-message-info-text-color
+    );
+  }
+
+  &--success {
+    @include message-variant(
+      $tyk-message-success-background,
+      $tyk-message-success-border,
+      $tyk-message-success-text-color
+    );
+  }
+
+  &--warning {
+    @include message-variant(
+      $tyk-message-warning-background,
+      $tyk-message-warning-border,
+      $tyk-message-warning-text-color
+    );
+  }
+
+  &--danger {
+    @include message-variant(
+      $tyk-message-danger-background,
+      $tyk-message-danger-border,
+      $tyk-message-danger-text-color
+    );
+  }
+}

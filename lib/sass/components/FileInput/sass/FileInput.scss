@@ -1,0 +1,12 @@
+.tyk-file-input__wrapper {
+  position: relative;
+
+  > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 9px;
+  }
+}
