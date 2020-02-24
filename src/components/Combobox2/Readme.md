@@ -1,17 +1,22 @@
 
 ```js
+const newValues = [
+  { id: '', name: "None" },
+  { id: 'apione', name: 'API one!'},
+  { id: 'apitwo', name: 'API two'},
+  { id: 'apithree', name: 'APIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthree'},
+  { id: 'apifour', name: 'API four'},
+  { id: 'apifive', name: 'API five'},
+  { id: 'apisix', name: 'API six'},
+  { id: 'apiseven', name: 'API seven'},
+  { id: 'apieight', name: 'API eight'},
+];
+for (let i = 0; i < 40; i++) {
+  newValues.push({ id: '' + i, name: `Item ${i + 1}`});
+}
+setTimeout(() => setState({ values: newValues }));
 <Combobox2
-  values={[
-    { id: '', name: "None" },
-    { id: 'apione', name: 'API one'},
-    { id: 'apitwo', name: 'API two'},
-    { id: 'apithree', name: 'APIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthree'},
-    { id: 'apifour', name: 'API four'},
-    { id: 'apifive', name: 'API five'},
-    { id: 'apisix', name: 'API six'},
-    { id: 'apiseven', name: 'API seven'},
-    { id: 'apieight', name: 'API eight'}
-  ]}
+  values={state.values || []}
   value={'apitwo'}
   label="Combobox"
   name="combobox"
