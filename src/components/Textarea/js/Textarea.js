@@ -81,7 +81,6 @@ export default class Textarea extends Component {
       label,
       note,
       value,
-      onChange = () => {},
       ...rest
     } = this.props;
 
@@ -101,7 +100,6 @@ export default class Textarea extends Component {
               className="tyk-form-control"
               {...rest}
               {...input}
-              onChange={e => onChange(e.target.value)}
             >
               { value }
             </textarea>
