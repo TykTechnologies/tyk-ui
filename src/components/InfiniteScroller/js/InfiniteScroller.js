@@ -34,7 +34,7 @@ const InfiniteScroller = (props) => {
       hasMore
       && (
         (clientHeight + Math.round(scrollTop) === refChildSize.height)
-        || (clientHeight > refChildSize.height)
+        || (clientHeight >= refChildSize.height)
       )
     );
   }, [containerRef, refChildSize.height]);
@@ -43,6 +43,8 @@ const InfiniteScroller = (props) => {
     if (loadMore && typeof loadMore === 'function' && hasMore) {
       loadMore(pageNumber + 1);
       setShowLoader(true);
+    } else {
+      setShowLoader(false);
     }
   }, [hasMore, pageNumber]);
 

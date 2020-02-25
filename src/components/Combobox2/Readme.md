@@ -1,11 +1,29 @@
 
 ```js
-const values = [];
-for (let i = 1; i < 100; i++) {
-  values.push({ id: String(i), name: `Item ${i}` });
+const ITEMS_PAGE_SIZE = 10;
+function getNewValues() {
+  const vs = [];
+  for (let i = 1; i <= ITEMS_PAGE_SIZE; i++) {
+    const id = (state.currentPage || 0) * ITEMS_PAGE_SIZE + i;
+    vs.push({ id: String(id), name: `Item ${id}` });
+  }
+  return vs;
 }
+function loadMore(p) {
+  setState({
+    currentPage: p,
+    values: [
+      ...state.values,
+      ...getNewValues(),
+    ]
+  });
+}
+initialState = {
+  currentPage: 1,
+  values: getNewValues()
+};
 <Combobox2
-  values={values}
+  values={state.values}
   value={'apitwo'}
   label="Combobox (with infinite scroll enabled)"
   name="combobox"
@@ -15,9 +33,10 @@ for (let i = 1; i < 100; i++) {
   floatingContainerConfig={{
     forceDisplay: 'bottom'
   }}
-  infiniteScroll={{
-    enabled: true,
-    pageSize: 15,
+  infiniteScrollerConfig={{
+    hasMore: state.currentPage < 10,
+    loadMore,
+    pageNumber: state.currentPage
   }}
 />
 ```
