@@ -1,23 +1,24 @@
 
 ```js
+const values = [];
+for (let i = 1; i < 100; i++) {
+  values.push({ id: String(i), name: `Item ${i}` });
+}
 <Combobox2
-  values={[
-    { id: '', name: "None" },
-    { id: 'apione', name: 'API one'},
-    { id: 'apitwo', name: 'API two'},
-    { id: 'apithree', name: 'APIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthree'},
-    { id: 'apifour', name: 'API four'},
-    { id: 'apifive', name: 'API five'},
-    { id: 'apisix', name: 'API six'},
-    { id: 'apiseven', name: 'API seven'},
-    { id: 'apieight', name: 'API eight'}
-  ]}
+  values={values}
   value={'apitwo'}
-  label="Combobox"
+  label="Combobox (with infinite scroll enabled)"
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
   placeholder="Please select a value"
+  floatingContainerConfig={{
+    forceDisplay: 'bottom'
+  }}
+  infiniteScroll={{
+    enabled: true,
+    pageSize: 15,
+  }}
 />
 ```
 ```js

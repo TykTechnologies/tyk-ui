@@ -48,6 +48,9 @@ function Combobox(props) {
     onChange = () => {},
     floatingContainerConfig,
     expandMode,
+    infiniteScroll = {
+      enabled: false,
+    },
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -70,6 +73,7 @@ function Combobox(props) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpened, setIsOpened] = useState(false);
   const [valuesExpanded, setValuesExpanded] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   function getThemeClasses() {
     const themes = theme ? theme.split(' ') : [];
@@ -87,10 +91,14 @@ function Combobox(props) {
     ].filter(Boolean).join(' ');
   }
 
-  function getFilteredValues() {
+  function getFilteredValues(filterForScroll = true) {
     const defaultFn = (v, s) => v.name.toLowerCase().includes(s);
     const fn = matchItemFn || defaultFn;
-    return values.filter(v => fn(v, searchValue));
+    let filteredValues = values.filter(v => fn(v, searchValue));
+    if (infiniteScroll.enabled && filterForScroll) {
+      filteredValues = filteredValues.slice(0, currentPage * infiniteScroll.pageSize);
+    }
+    return filteredValues;
   }
 
   function openDropdown() {
@@ -101,6 +109,7 @@ function Combobox(props) {
     setIsOpened(false);
     if (!tags) updateSearchValue('');
     setActiveItem(null);
+    setCurrentPage(1);
   }
 
   function updateSearchValue(newSearchValue) {
@@ -253,6 +262,16 @@ function Combobox(props) {
     }
   }
 
+  function loadMore() {
+    setCurrentPage((curr) => {
+      const valuesCount = getFilteredValues(false).length;
+      if (curr * infiniteScroll.pageSize < valuesCount) {
+        return curr + 1;
+      }
+      return curr;
+    });
+  }
+
   useEffect(() => {
     window.addEventListener('click', handleDocumentClick);
     return () => window.removeEventListener('click', handleDocumentClick);
@@ -353,6 +372,10 @@ function Combobox(props) {
             className={`tyk-combobox2__combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
             ref={dropdownRef}
             {...floatingContainerConfig}
+            infiniteScroll={{
+              enabled: infiniteScroll.enabled,
+              loadMore,
+            }}
           >
             {renderList ? (
               renderList(filteredValues, {
@@ -416,6 +439,7 @@ Combobox.propTypes = {
   floatingContainerConfig: PropTypes.instanceOf(Object),
   valueOverflow: PropTypes.oneOf(['single', 'multiple']),
   expandMode: PropTypes.bool,
+  infiniteScroll: PropTypes.instanceOf(Object),
 };
 
 export default Combobox;

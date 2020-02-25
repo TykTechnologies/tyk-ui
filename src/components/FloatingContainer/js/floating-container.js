@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import debounce from '../../../common/js/utils';
 
 function FloatingContainer(props) {
   const {
@@ -14,6 +15,7 @@ function FloatingContainer(props) {
     className,
     children,
     passedRef,
+    infiniteScroll,
   } = props;
   const localRef = useRef(null);
   const floatingContainerRef = passedRef || localRef;
@@ -112,6 +114,22 @@ function FloatingContainer(props) {
       window.requestAnimationFrame(schedulePositionUpdate);
     });
   }, []);
+
+  function scrollHandler() {
+    const EPSILON = 20;
+    const { scrollHeight, scrollTop, clientHeight } = floatingContainerRef.current;
+    if (scrollHeight - scrollTop - clientHeight < EPSILON) {
+      infiniteScroll.loadMore();
+    }
+  }
+  useEffect(() => {
+    const container = floatingContainerRef.current;
+    if (!infiniteScroll.enabled || !container) return () => {};
+
+    const handler = debounce(scrollHandler, 200);
+    container.addEventListener('scroll', handler);
+    return () => container.removeEventListener('scroll', handler);
+  }, [floatingContainerRef.current]);
 
   return createPortal(
     <div
