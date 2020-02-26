@@ -128,7 +128,6 @@ module.exports = {
   externals: {
     react: 'react',
     'react-dom': 'reactDOM',
-    moment: 'moment',
     immutable: 'immutable',
   },
   stats: 'verbose',

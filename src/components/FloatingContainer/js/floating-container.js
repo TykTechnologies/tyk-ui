@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import InfiniteScroller from '../../InfiniteScroller';
 
 function FloatingContainer(props) {
   const {
@@ -14,20 +15,21 @@ function FloatingContainer(props) {
     className,
     children,
     passedRef,
+    infiniteScrollerConfig,
   } = props;
   const localRef = useRef(null);
   const floatingContainerRef = passedRef || localRef;
-
+  const contentWrapperRef = useRef(null);
 
   function determineDisplay() {
     const target = element.current;
     const container = floatingContainerRef.current;
-    if (!container) return 'bottom';
+    if (!container) return displayAxis === 'vertical' ? 'bottom' : 'right';
 
     if (displayAxis === 'vertical') {
       const { top } = target.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const topSpace = windowHeight - top;
+      const topSpace = top;
       const bottomSpace = windowHeight - top - target.offsetHeight;
       const hasBottomSpace = bottomSpace > container.scrollHeight;
       return hasBottomSpace || bottomSpace > topSpace ? 'bottom' : 'top';
@@ -35,7 +37,7 @@ function FloatingContainer(props) {
 
     const { left } = target.getBoundingClientRect();
     const windowWidth = window.innerWidth;
-    const leftSpace = windowWidth - left;
+    const leftSpace = left;
     const rightSpace = windowWidth - left - target.offsetWidth;
     const hasRightSpace = rightSpace > container.offsetWidth;
     return hasRightSpace || rightSpace > leftSpace ? 'right' : 'left';
@@ -118,7 +120,17 @@ function FloatingContainer(props) {
       className={`floating-container ${className || ''}`}
       ref={floatingContainerRef}
     >
-      {children}
+      <InfiniteScroller
+        refChild={contentWrapperRef}
+        {...infiniteScrollerConfig}
+      >
+        <div
+          className="floating-container__content-wrapper"
+          ref={contentWrapperRef}
+        >
+          {children}
+        </div>
+      </InfiniteScroller>
     </div>,
     document.querySelector('body'),
   );
@@ -134,6 +146,7 @@ FloatingContainer.propTypes = {
   offset: PropTypes.number,
   forceDisplay: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
   displayAxis: PropTypes.oneOf(['vertical', 'horizontal']),
+  infiniteScrollerConfig: PropTypes.instanceOf(Object),
 };
 
 export default forwardRef((props, ref) => <FloatingContainer {...props} passedRef={ref} />);
