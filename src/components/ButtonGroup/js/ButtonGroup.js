@@ -11,6 +11,7 @@ export default class ButtonGroup extends PureComponent {
       PropTypes.element,
       PropTypes.string,
     ]),
+    className: PropTypes.string,
     /**
     * Label that will sit above the button group
     */
@@ -25,12 +26,13 @@ export default class ButtonGroup extends PureComponent {
 
   render() {
     const {
+      className,
       children,
       label,
     } = this.props;
 
     return (
-      <div className="tyk-button-group__wrapper">
+      <div className={`tyk-button-group__wrapper ${className}`}>
         {
           label
             ? (

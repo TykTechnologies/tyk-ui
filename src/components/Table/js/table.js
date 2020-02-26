@@ -89,7 +89,7 @@ const Table = ({
   }, [state]);
 
   if (!state || loading) {
-    return <Loader position="relative" />;
+    return <Loader position="absolute" />;
   }
 
   if (state.rows <= 0) {
