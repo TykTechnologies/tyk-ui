@@ -48,6 +48,7 @@ function Combobox(props) {
     onChange = () => {},
     floatingContainerConfig,
     expandMode,
+    infiniteScrollerConfig,
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -90,7 +91,8 @@ function Combobox(props) {
   function getFilteredValues() {
     const defaultFn = (v, s) => v.name.toLowerCase().includes(s);
     const fn = matchItemFn || defaultFn;
-    return values.filter(v => fn(v, searchValue));
+    const filteredValues = values.filter(v => fn(v, searchValue));
+    return filteredValues;
   }
 
   function openDropdown() {
@@ -353,6 +355,7 @@ function Combobox(props) {
             className={`tyk-combobox2__combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
             ref={dropdownRef}
             {...floatingContainerConfig}
+            infiniteScrollerConfig={infiniteScrollerConfig}
           >
             {renderList ? (
               renderList(filteredValues, {
@@ -416,6 +419,7 @@ Combobox.propTypes = {
   floatingContainerConfig: PropTypes.instanceOf(Object),
   valueOverflow: PropTypes.oneOf(['single', 'multiple']),
   expandMode: PropTypes.bool,
+  infiniteScrollerConfig: PropTypes.instanceOf(Object),
 };
 
 export default Combobox;
