@@ -24,12 +24,12 @@ function FloatingContainer(props) {
   function determineDisplay() {
     const target = element.current;
     const container = floatingContainerRef.current;
-    if (!container) return 'bottom';
+    if (!container) return displayAxis === 'vertical' ? 'bottom' : 'right';
 
     if (displayAxis === 'vertical') {
       const { top } = target.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      const topSpace = windowHeight - top;
+      const topSpace = top;
       const bottomSpace = windowHeight - top - target.offsetHeight;
       const hasBottomSpace = bottomSpace > container.scrollHeight;
       return hasBottomSpace || bottomSpace > topSpace ? 'bottom' : 'top';
@@ -37,7 +37,7 @@ function FloatingContainer(props) {
 
     const { left } = target.getBoundingClientRect();
     const windowWidth = window.innerWidth;
-    const leftSpace = windowWidth - left;
+    const leftSpace = left;
     const rightSpace = windowWidth - left - target.offsetWidth;
     const hasRightSpace = rightSpace > container.offsetWidth;
     return hasRightSpace || rightSpace > leftSpace ? 'right' : 'left';
