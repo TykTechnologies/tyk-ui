@@ -168,9 +168,11 @@ const Tabs = (props) => {
   };
 
   const updateTab = (tabData) => {
-    const tempTabs = { ...tabs };
-    tempTabs[tabData.id] = tabData;
-    setTabs(tempTabs);
+    setTabs((prevTabs) => {
+      const tempTabs = { ...prevTabs };
+      tempTabs[tabData.id] = tabData;
+      return tempTabs;
+    });
   };
 
   const hideTab = (path) => {
@@ -203,7 +205,7 @@ const Tabs = (props) => {
 
     return !!(tempTabs && tempTabs[key]);
   };
-
+  
   return (
     <div className={getCssClasses()}>
       {genTabs(tabs)}
