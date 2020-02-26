@@ -167,6 +167,12 @@ const Tabs = (props) => {
     }
   };
 
+  const updateTab = (tabData) => {
+    const tempTabs = { ...tabs };
+    tempTabs[tabData.id] = tabData;
+    setTabs(tempTabs);
+  };
+
   const hideTab = (path) => {
     setTabs((prevTabs) => {
       const tempTabs = { ...prevTabs };
@@ -206,6 +212,7 @@ const Tabs = (props) => {
           id,
           addTab,
           hideTab,
+          updateTab,
           showTab,
           tabExists,
           selectedPath,

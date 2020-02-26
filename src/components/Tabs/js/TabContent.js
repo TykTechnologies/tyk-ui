@@ -2,11 +2,13 @@ import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import TabContext from './TabContext';
+import { usePrevious } from '../../../common/js/hooks';
 
 const TabContent = (props) => {
   const {
     addTab,
     hideTab,
+    updateTab,
     showTab,
     children,
     selectedPath,
@@ -26,6 +28,14 @@ const TabContent = (props) => {
       addTab(tempTabData, path);
     }
   }, [tabData, path]);
+
+  const prevTabData = usePrevious(tabData);
+  useEffect(() => {
+    if (tabExists(path) && prevTabData.title !== tabData.title) {
+      const tempTabData = { ...tabData };
+      updateTab(tempTabData);
+    }
+  }, [tabData.title, path]);
 
   useEffect(() => {
     showTab(path);
@@ -69,6 +79,7 @@ const TabContent = (props) => {
 
 TabContent.propTypes = {
   addTab: PropTypes.func,
+  updateTab: PropTypes.func,
   hideTab: PropTypes.func,
   showTab: PropTypes.func,
   children: PropTypes.oneOfType([

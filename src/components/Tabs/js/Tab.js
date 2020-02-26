@@ -14,6 +14,7 @@ const Tab = (props) => {
     tabExists,
     selectedPath,
     addTab,
+    updateTab,
     hideTab,
     showTab,
     rendered,
@@ -47,6 +48,7 @@ const Tab = (props) => {
     <Fragment>
       <TabContent
         addTab={addTab}
+        updateTab={updateTab}
         hideTab={hideTab}
         showTab={showTab}
         tabExists={tabExists}
