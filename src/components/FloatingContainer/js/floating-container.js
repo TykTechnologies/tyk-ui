@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import InfiniteScroller from '../../InfiniteScroller';
 
 function FloatingContainer(props) {
   const {
@@ -14,10 +15,11 @@ function FloatingContainer(props) {
     className,
     children,
     passedRef,
+    infiniteScrollerConfig,
   } = props;
   const localRef = useRef(null);
   const floatingContainerRef = passedRef || localRef;
-
+  const contentWrapperRef = useRef(null);
 
   function determineDisplay() {
     const target = element.current;
@@ -118,7 +120,17 @@ function FloatingContainer(props) {
       className={`floating-container ${className || ''}`}
       ref={floatingContainerRef}
     >
-      {children}
+      <InfiniteScroller
+        refChild={contentWrapperRef}
+        {...infiniteScrollerConfig}
+      >
+        <div
+          className="floating-container__content-wrapper"
+          ref={contentWrapperRef}
+        >
+          {children}
+        </div>
+      </InfiniteScroller>
     </div>,
     document.querySelector('body'),
   );
@@ -134,6 +146,7 @@ FloatingContainer.propTypes = {
   offset: PropTypes.number,
   forceDisplay: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
   displayAxis: PropTypes.oneOf(['vertical', 'horizontal']),
+  infiniteScrollerConfig: PropTypes.instanceOf(Object),
 };
 
 export default forwardRef((props, ref) => <FloatingContainer {...props} passedRef={ref} />);

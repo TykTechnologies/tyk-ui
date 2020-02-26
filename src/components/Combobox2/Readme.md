@@ -1,28 +1,43 @@
 
 ```js
-const newValues = [
-  { id: '', name: "None" },
-  { id: 'apione', name: 'API one!'},
-  { id: 'apitwo', name: 'API two'},
-  { id: 'apithree', name: 'APIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthreeAPIthree'},
-  { id: 'apifour', name: 'API four'},
-  { id: 'apifive', name: 'API five'},
-  { id: 'apisix', name: 'API six'},
-  { id: 'apiseven', name: 'API seven'},
-  { id: 'apieight', name: 'API eight'},
-];
-for (let i = 0; i < 40; i++) {
-  newValues.push({ id: '' + i, name: `Item ${i + 1}`});
+const ITEMS_PAGE_SIZE = 10;
+function getNewValues() {
+  const vs = [];
+  for (let i = 1; i <= ITEMS_PAGE_SIZE; i++) {
+    const id = (state.currentPage || 0) * ITEMS_PAGE_SIZE + i;
+    vs.push({ id: String(id), name: `Item ${id}` });
+  }
+  return vs;
 }
-setTimeout(() => setState({ values: newValues }));
+function loadMore(p) {
+  setState({
+    currentPage: p,
+    values: [
+      ...state.values,
+      ...getNewValues(),
+    ]
+  });
+}
+initialState = {
+  currentPage: 1,
+  values: getNewValues()
+};
 <Combobox2
-  values={state.values || []}
+  values={state.values}
   value={'apitwo'}
-  label="Combobox"
+  label="Combobox (with infinite scroll enabled)"
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
   placeholder="Please select a value"
+  floatingContainerConfig={{
+    forceDisplay: 'bottom'
+  }}
+  infiniteScrollerConfig={{
+    hasMore: state.currentPage < 10,
+    loadMore,
+    pageNumber: state.currentPage
+  }}
 />
 ```
 ```js
