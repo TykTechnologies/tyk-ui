@@ -36,8 +36,7 @@ const Tooltip = ({ render, children, position = 'top' }) => {
     const style = {
       position: 'absolute',
       left: tooltipLeft,
-      zIndex: '99999',
-      maxWidth: '300px',
+      zIndex: '99999'
     };
 
     if (position === 'bottom') {
