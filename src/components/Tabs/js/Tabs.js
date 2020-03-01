@@ -205,7 +205,7 @@ const Tabs = (props) => {
 
     return !!(tempTabs && tempTabs[key]);
   };
-  
+
   return (
     <div className={getCssClasses()}>
       {genTabs(tabs)}
