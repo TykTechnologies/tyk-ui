@@ -55,6 +55,25 @@ export default class Input extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      isfield,
+      value,
+      onChange,
+    } = this.props;
+
+    if (!isfield && prevProps.value !== value) {
+      /* eslint-disable react/no-did-update-set-state */
+      this.setState({
+        stateValue: value,
+      }, () => {
+        if (onChange) {
+          onChange(value);
+        }
+      });
+    }
+  }
+
   getLabelStyles() {
     const { labelwidth } = this.props;
     const styles = {};
@@ -182,7 +201,9 @@ export default class Input extends Component {
       this.setState({
         stateValue: inputValue,
       }, () => {
-        onChange(inputValue);
+        if (onChange) {
+          onChange(inputValue);
+        }
       });
     } else {
       onChange(inputValue);
