@@ -40,6 +40,25 @@ export default class Select extends Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      isfield,
+      value,
+      onChange,
+    } = this.props;
+
+    if (!isfield && prevProps.value !== value) {
+      /* eslint-disable react/no-did-update-set-state */
+      this.setState({
+        stateValue: value,
+      }, () => {
+        if (onChange) {
+          onChange(value);
+        }
+      });
+    }
+  }
+
   getSelectComponent() {
     const {
       isfield, options, onChange, onBlur, value, ...rest
