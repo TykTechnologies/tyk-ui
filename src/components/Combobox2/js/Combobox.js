@@ -119,6 +119,7 @@ function Combobox(props) {
   }
 
   function addTag(val) {
+    if (!val) return;
     if (value.length >= max) return;
     if (value.some(({ name }) => name === val)) return;
 
