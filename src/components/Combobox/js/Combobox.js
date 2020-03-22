@@ -605,6 +605,7 @@ export default class Combobox extends Component {
       label,
       note,
       tags,
+      max,
       placeholder,
     } = this.props;
     const {
@@ -651,32 +652,36 @@ export default class Combobox extends Component {
                           width: (!stateSelectedValues || !stateSelectedValues.length) ? '100%' : 'auto',
                         }}
                       >
-                        <input
-                          className="tyk-form-control"
-                          disabled={disabled}
-                          onKeyPress={(e) => {
-                            if (e.key === 'Enter') {
-                              e.preventDefault();
-                            }
-                          }}
-                          onKeyUp={this.onKeyUp}
-                          onKeyDown={this.handleItemsNavigation}
-                          placeholder={(!stateSelectedValues || !stateSelectedValues.length) ? placeholder : ''}
-                          ref={this.inputRef}
-                          style={{
-                            width: (!stateSelectedValues || !stateSelectedValues.length) ? '100%' : `${width}px`,
-                          }}
-                        />
-                        <span
-                          ref={this.textRef}
-                          style={{
-                            visbility: 'hidden',
-                            position: 'absolute',
-                            top: '-9999px',
-                          }}
-                        >
-                          { searchText }
-                        </span>
+                        {(max === undefined || stateSelectedValues?.length < max) && (
+                          <>
+                            <input
+                              className="tyk-form-control"
+                              disabled={disabled}
+                              onKeyPress={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                }
+                              }}
+                              onKeyUp={this.onKeyUp}
+                              onKeyDown={this.handleItemsNavigation}
+                              placeholder={(!stateSelectedValues || !stateSelectedValues.length) ? placeholder : ''}
+                              ref={this.inputRef}
+                              style={{
+                                width: (!stateSelectedValues || !stateSelectedValues.length) ? '100%' : `${width}px`,
+                              }}
+                            />
+                            <span
+                              ref={this.textRef}
+                              style={{
+                                visbility: 'hidden',
+                                position: 'absolute',
+                                top: '-9999px',
+                              }}
+                            >
+                              { searchText }
+                            </span>
+                          </>
+                        )}
                         {
                           filteredValues.length
                             ? (
