@@ -49,6 +49,7 @@ function Combobox(props) {
     floatingContainerConfig,
     expandMode,
     infiniteScrollerConfig,
+    displayDropdownTrigger = true,
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -332,22 +333,24 @@ function Combobox(props) {
               onMessage={onMessage}
             />
           </div>
-          <div
-            className={`tyk-combobox2__values-container-trigger${valuesExpanded ? ' tyk-combobox2__values-container-trigger--expanded' : ''}`}
-            role="button"
-            tabIndex={disabled ? -1 : 0}
-            onClick={executeTriggerAction}
-            onKeyPress={executeTriggerAction}
-          >
-            <Icon type="arrow-down" />
-            {tags && filteredValues.length === 0 && !expandMode && (
-              <div
-                className="disabled-overlay"
-                onClick={e => e.stopPropagation()}
-                role="none"
-              />
-            )}
-          </div>
+          {displayDropdownTrigger && (
+            <div
+              className={`tyk-combobox2__values-container-trigger${valuesExpanded ? ' tyk-combobox2__values-container-trigger--expanded' : ''}`}
+              role="button"
+              tabIndex={disabled ? -1 : 0}
+              onClick={executeTriggerAction}
+              onKeyPress={executeTriggerAction}
+            >
+              <Icon type="arrow-down" />
+              {tags && filteredValues.length === 0 && !expandMode && (
+                <div
+                  className="disabled-overlay"
+                  onClick={e => e.stopPropagation()}
+                  role="none"
+                />
+              )}
+            </div>
+          )}
         </div>
         {isOpened && (!tags || filteredValues.length > 0) && (
           <FloatingContainer
@@ -421,6 +424,7 @@ Combobox.propTypes = {
   valueOverflow: PropTypes.oneOf(['single', 'multiple']),
   expandMode: PropTypes.bool,
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
+  displayDropdownTrigger: PropTypes.bool,
 };
 
 export default Combobox;
