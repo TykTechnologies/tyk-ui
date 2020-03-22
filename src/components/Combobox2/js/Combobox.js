@@ -32,6 +32,7 @@ function Combobox(props) {
     labelwidth,
     tags = false,
     tagSeparators = [' ', 'Enter'],
+    addTagOnBlur = false,
     max: maxProp,
     multiple = false,
     placeholder = '',
@@ -235,6 +236,11 @@ function Combobox(props) {
     }
 
     if (message === 'input.escape') closeDropdown();
+
+    if (message === 'input.blur' && addTagOnBlur) {
+      addTag(data);
+      updateSearchValue('');
+    }
   }
 
   function onMessage(message, data) {
@@ -413,6 +419,7 @@ Combobox.propTypes = {
   placeholder: PropTypes.string,
   tags: PropTypes.bool,
   tagSeparators: PropTypes.arrayOf(PropTypes.string),
+  addTagOnBlur: PropTypes.bool,
   theme: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,

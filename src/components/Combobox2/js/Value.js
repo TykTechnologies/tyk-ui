@@ -125,7 +125,7 @@ function Value(props) {
                 entryFieldOnKeyDown(e.key, e.target.value);
               }}
               onBlur={(e) => {
-                sendMessage('tag.add', e.target.value);
+                sendMessage('tag.input.blur', e.target.value);
                 entryFieldOnChange('');
               }}
             />
