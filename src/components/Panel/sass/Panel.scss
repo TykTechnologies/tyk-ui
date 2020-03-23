@@ -61,6 +61,23 @@
       );
     }
   }
+
+  &--dark {
+    color: white;
+
+    .tyk-panel__body {
+      background-color: custom-color('dark', 'base');
+
+      & label {
+        color: custom-color('purple', 'base');
+      }
+    }
+
+    & .tyk-panel__header {
+      background: custom-color('dark', 'base');
+      border-bottom: 1px solid custom-color('dark', 'extra-dark');
+    }
+  }
 }
 
 .tyk-panel__body {

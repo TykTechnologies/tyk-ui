@@ -42,6 +42,24 @@ $theme-colors: (
   )
 ) !default;
 
+$custom-colors: (
+  'dark': (
+    'base': #43435B,
+    'extra-dark': #505071,
+  ),
+  'extra-light': (
+    'base': #EDEDF9
+  ),
+  'purple': (
+    'base': #A2A2CC
+  ),
+  'primary': (
+    'base': #00D9BA,
+  )
+);
+
+$light-purple: #A2A2CC;
+
 $text-color: #000018 !default;
 
 $contrast-colors: (
@@ -143,8 +161,25 @@ $form-control-padding-right: 15px !default;
 $form-control-padding-top: 11px !default;
 $form-control-padding-bottom: 10px !default;
 $form-control-addon-background-color: white !default;
-$form-control-disabled-color: theme-color('background', 'light') !default;
+$form-control-disabled-background-color: theme-color('background', 'light') !default;
 
 $form-default-color: theme-color('background', 'dark') !default;
 $form-primary-color: theme-color('primary', 'base') !default;
 $form-success-color: theme-color('success', 'base') !default;
+
+$border-on-error: 2px solid theme-color('danger', 'light') !default;
+$tyk-form-control-default-color: #000018 !default;
+$form-control-error-colour: theme-color('danger', 'dark') !default;
+$help-block-color: #000018 !default;
+$help-block-font-style: italic !default;
+$help-block-padding: 0 !default;
+$error-message-padding: 0 !default;
+$form-control-border: 1px solid theme-color('background', 'dark') !default;
+$form-control-disabled-border: 1px solid theme-color('background', 'dark') !default;
+$border-left-on-error: 10px solid theme-color('danger', 'dark') !default;
+$combobox-disabled-border: 1px solid theme-color('background', 'dark') !default;
+$tyk-form-control-placeholder-color: $text-color !default;
+$form-control-disabled-color: $text-color !default;
+$form-control-border-focus: none !default;
+$select-background-color: transparent !default;
+

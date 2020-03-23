@@ -4,7 +4,7 @@
 ```js
 import Button from '../Button';
 <>
-<Panel theme="primary">
+<Panel theme="dark">
   <Panel.Header>Panel example</Panel.Header>
   <Panel.Body>
     Panel body content

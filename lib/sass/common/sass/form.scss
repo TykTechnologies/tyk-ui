@@ -16,8 +16,8 @@
   &.has-error > .tyk-form-control__wrapper > .tyk-form-control,
   &.has-error > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control,
   &.has-error .tyk-file-input__wrapper  > .tyk-form-control {
-    border: 2px solid theme-color('danger', 'light');
-    border-left: 10px solid theme-color('danger', 'dark');
+    border: $border-on-error;
+    border-left: $border-left-on-error;
     outline: none;
 
     &:focus {
@@ -60,6 +60,20 @@
     );
   }
 
+  &--dark {
+    color: custom-color('purple', 'base');
+
+    &:focus {
+      border: 2px solid custom-color('primary', 'base');
+    }
+
+    &__help-block {
+      color: white;
+      font-style: normal;
+      padding-left: map-get($spacing, 'base');
+    }
+  }
+
   &--default {
     @include form-group-variant(
       $form-default-color,
@@ -81,10 +95,10 @@
 
   &--rounded-corners {
     &.has-error > .tyk-form-control__wrapper > .tyk-form-control {
-      border-left: 2px solid theme-color('danger', 'light');
+      border-left: $border-on-error;
 
       &:focus {
-        border-left: 2px solid theme-color('danger', 'light');
+        border-left: $border-on-error;
         outline: none;
       }
     }
@@ -129,8 +143,9 @@
 }
 
 .tyk-form-control__error-message {
-  color: theme-color('danger', 'dark');
+  color: $form-control-error-colour;
   margin-top: 5px;
+  padding: $error-message-padding;
 }
 
 .tyk-input-group {
@@ -157,7 +172,7 @@
 }
 
 .tyk-form-control {
-  border: 1px solid theme-color('background', 'dark');
+  border: $form-control-border;
   background-color: white;
   color: $text-color;
   display: block;
@@ -169,21 +184,26 @@
 
   &:focus {
     outline: none;
+    border: $form-control-border-focus;
   }
 
   &[disabled] {
-    background-color: $form-control-disabled-color;
+    border: $form-control-disabled-border;
+    background-color: $form-control-disabled-background-color;
+    color: $form-control-disabled-color;
     cursor: not-allowed;
   }
 
   &::placeholder {
     font-family: "OpenSans-Regular, Helvetica, Arial, sans-serif";
+    color: $tyk-form-control-placeholder-color;
   }
 
   &__help-block {
-    color: $text-color;
-    font-style: italic;
+    color: $help-block-color;
+    font-style: $help-block-font-style;
     font-size: text-scale('sm');
+    padding: $help-block-padding;
     margin: 5px 0 0 0;
   }
 }

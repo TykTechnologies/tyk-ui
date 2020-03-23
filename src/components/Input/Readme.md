@@ -23,9 +23,9 @@
 <Input
   label="This is a demo Input"
   name="input"
-  placeholder="Please type something"
+  placeholder="DARK"
   type="text"
-  theme="primary inline"
+  theme="dark inline"
   onChange={ (e) => { console.log(e); }}
 />
 
