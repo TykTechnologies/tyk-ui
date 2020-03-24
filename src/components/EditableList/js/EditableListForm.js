@@ -76,7 +76,9 @@ export default class EditableListForm extends Component {
     const {
       components: stateComponents,
     } = prevState;
-
+    const { label } = propsComponents[0].props;
+    delete stateComponents[0].props.label;
+    delete propsComponents[0].props.label;
     if (
       JSON.stringify(propsComponents)
       !== JSON.stringify(stateComponents)
@@ -86,6 +88,8 @@ export default class EditableListForm extends Component {
       state.mainFormValue = EditableListForm.getMainFormValue(propsComponents);
       state.components = propsComponents;
     }
+    stateComponents[0].props.label = label;
+    propsComponents[0].props.label = label;
 
     return state;
   }
@@ -300,6 +304,7 @@ export default class EditableListForm extends Component {
                 const {
                   onChange, value, ...rest
                 } = component.props;
+                console.log({ component });
 
                 return (
                   <Column size={`md-${component.size || '12'} lg-${component.size || '12'}`} key={component.props.name}>
