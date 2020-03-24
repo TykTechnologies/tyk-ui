@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 
 import Column from '../../Column';
@@ -76,20 +77,16 @@ export default class EditableListForm extends Component {
     const {
       components: stateComponents,
     } = prevState;
-    const { label } = propsComponents[0].props;
-    delete stateComponents[0].props.label;
-    delete propsComponents[0].props.label;
     if (
-      JSON.stringify(propsComponents)
-      !== JSON.stringify(stateComponents)
-      && JSON.stringify(EditableListForm.getMainFormValue(propsComponents))
-      !== JSON.stringify(EditableListForm.getMainFormValue(stateComponents))
+      !isEqual(propsComponents, stateComponents)
+      && !isEqual(
+        EditableListForm.getMainFormValue(propsComponents),
+        EditableListForm.getMainFormValue(stateComponents),
+      )
     ) {
       state.mainFormValue = EditableListForm.getMainFormValue(propsComponents);
       state.components = propsComponents;
     }
-    stateComponents[0].props.label = label;
-    propsComponents[0].props.label = label;
 
     return state;
   }
