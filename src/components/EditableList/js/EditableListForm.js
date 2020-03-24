@@ -304,7 +304,6 @@ export default class EditableListForm extends Component {
                 const {
                   onChange, value, ...rest
                 } = component.props;
-                console.log({ component });
 
                 return (
                   <Column size={`md-${component.size || '12'} lg-${component.size || '12'}`} key={component.props.name}>
