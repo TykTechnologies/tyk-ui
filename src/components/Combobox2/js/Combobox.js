@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import ResizeObserver from 'resize-observer-polyfill';
 import Icon from '../../Icon';
+import Tooltip from '../../Tooltip';
 import FloatingContainer from '../../FloatingContainer';
 
 import Value from './Value';
@@ -29,6 +30,7 @@ function Combobox(props) {
     values: propValues = [],
     valueOverflow = 'single',
     label = '',
+    labelHelp,
     labelwidth,
     tags = false,
     tagSeparators = [' ', 'Enter'],
@@ -313,7 +315,19 @@ function Combobox(props) {
   return (
     <div className={getCssClasses()} ref={rootRef}>
       {label && (
-        <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+        <>
+          <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+          {
+            labelHelp && (
+              <>
+                &nbsp;
+                <Tooltip render={labelHelp}>
+                  <Icon type="question-circle" />
+                </Tooltip>
+              </>
+            )
+          }
+        </>
       )}
       <div
         className="tyk-form-control__wrapper"
@@ -407,6 +421,7 @@ Combobox.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.string,
   label: PropTypes.string,
+  labelHelp: PropTypes.string,
   labelwidth: PropTypes.string,
   max: PropTypes.number,
   multiple: PropTypes.bool,

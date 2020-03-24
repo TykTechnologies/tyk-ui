@@ -26,6 +26,7 @@ initialState = {
   values={state.values}
   value={'apitwo'}
   label="Combobox (with infinite scroll enabled)"
+  labelHelp="Combobox (with infinite scroll enabled)"
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
