@@ -35,11 +35,21 @@
 
   &--primary {
     .tyk-panel__header {
-      @include panel-variant(
-        theme-color('primary', 'base')
-      );
+      @include panel-variant($panel-primary-header-color)
+    }
+
+    .tyk-panel__body {
+        @include panel-variant($panel-primary-body-color);
+      }
+    .tyk-panel__header {
+      border: $panel-primary-border-color;
+    }
+
+    & label {
+      color: $panel-primary-label-color;
     }
   }
+
   &--success {
     .tyk-panel__header {
       @include panel-variant(
@@ -59,23 +69,6 @@
       @include panel-variant(
         theme-color('warning', 'base')
       );
-    }
-  }
-
-  &--dark {
-    color: white;
-
-    .tyk-panel__body {
-      background-color: custom-color('dark', 'base');
-
-      & label {
-        color: custom-color('purple', 'base');
-      }
-    }
-
-    & .tyk-panel__header {
-      background: custom-color('dark', 'base');
-      border-bottom: 1px solid custom-color('dark', 'extra-dark');
     }
   }
 }

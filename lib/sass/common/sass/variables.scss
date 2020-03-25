@@ -42,24 +42,6 @@ $theme-colors: (
   )
 ) !default;
 
-$custom-colors: (
-  'dark': (
-    'base': #43435B,
-    'extra-dark': #505071,
-  ),
-  'extra-light': (
-    'base': #EDEDF9
-  ),
-  'purple': (
-    'base': #A2A2CC
-  ),
-  'primary': (
-    'base': #00D9BA,
-  )
-);
-
-$light-purple: #A2A2CC;
-
 $text-color: #000018 !default;
 
 $contrast-colors: (
@@ -180,6 +162,6 @@ $border-left-on-error: 10px solid theme-color('danger', 'dark') !default;
 $combobox-disabled-border: 1px solid theme-color('background', 'dark') !default;
 $tyk-form-control-placeholder-color: $text-color !default;
 $form-control-disabled-color: $text-color !default;
-$form-control-border-focus: none !default;
+$form-control-border-focus: theme-color('background', 'dark') !default;
 $select-background-color: transparent !default;
-
+$form-control-placeholder-font-family: "OpenSans-Regular, Helvetica, Arial, sans-serif" !default;

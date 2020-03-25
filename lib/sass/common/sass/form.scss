@@ -60,20 +60,6 @@
     );
   }
 
-  &--dark {
-    color: custom-color('purple', 'base');
-
-    &:focus {
-      border: 2px solid custom-color('primary', 'base');
-    }
-
-    &__help-block {
-      color: white;
-      font-style: normal;
-      padding-left: map-get($spacing, 'base');
-    }
-  }
-
   &--default {
     @include form-group-variant(
       $form-default-color,
@@ -182,21 +168,14 @@
   transition: all .2s linear;
   width: 100%;
 
+  &::placeholder {
+    font-family: $form-control-placeholder-font-family;
+    color: $tyk-form-control-placeholder-color;
+  }
+
   &:focus {
     outline: none;
     border: $form-control-border-focus;
-  }
-
-  &[disabled] {
-    border: $form-control-disabled-border;
-    background-color: $form-control-disabled-background-color;
-    color: $form-control-disabled-color;
-    cursor: not-allowed;
-  }
-
-  &::placeholder {
-    font-family: "OpenSans-Regular, Helvetica, Arial, sans-serif";
-    color: $tyk-form-control-placeholder-color;
   }
 
   &__help-block {

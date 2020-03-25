@@ -4,9 +4,10 @@
 ```js
 import Button from '../Button';
 <>
-<Panel theme="dark">
+<Panel theme="primary">
   <Panel.Header>Panel example</Panel.Header>
   <Panel.Body>
+    <label>label</label>
     Panel body content
   </Panel.Body>
 </Panel>
