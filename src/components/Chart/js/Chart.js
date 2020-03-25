@@ -124,12 +124,10 @@ const Chart = (props) => {
           show: true,
         },
         axisLabel: {
-          show: false,
-          // inside: false,
-          // padding: [3, 6, 3, 0],
+          show: true,
         },
         axisLine: {
-          show: false,
+          show: true,
         },
         axisTick: {
           show: false,
@@ -234,6 +232,9 @@ const Chart = (props) => {
 
     default: {
       finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+      if (Array.isArray(selectedOptions.yAxis)) {
+        finalOpts.yAxis = selectedOptions.yAxis;
+      }
 
       selectedSeries.forEach((entry, index) => {
         const seriesData = Object.assign(
