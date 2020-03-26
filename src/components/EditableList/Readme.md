@@ -1,5 +1,6 @@
 ```js
 import { Combobox } from '../Combobox';
+import {Combobox2} from '../Combobox2';
 import {Input} from '../Input';
 import {DatePicker} from '../DatePicker';
 <EditableList
@@ -16,14 +17,22 @@ import {DatePicker} from '../DatePicker';
     formButtonStyle: 'inline-with-label',
     components: [
       {
-        size: 6,
-        name: DatePicker,
+        size: 8,
+        name: Combobox2,
         props: {
-          label: 'Date picker',
-          placeholder: 'Pleas type smth',
-          name: "elInput",
-          type: "text",
-          value: ""
+          "label": <span>asasasdlahsdkja</span>,
+          "name": "endpoints",
+          "placeholder": "Enter custom regex or select an endpoint.",
+          "value": null,
+          "values": [
+            {
+              "version": "Default",
+              "name": "/i",
+              "id": "GET-/i",
+              "method": "GET",
+              "path": "/i",
+            },
+          ],
         }
       },
       {

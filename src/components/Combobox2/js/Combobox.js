@@ -32,6 +32,7 @@ function Combobox(props) {
     labelwidth,
     tags = false,
     tagSeparators = [' ', 'Enter'],
+    addTagOnBlur = false,
     max: maxProp,
     multiple = false,
     placeholder = '',
@@ -49,6 +50,7 @@ function Combobox(props) {
     floatingContainerConfig,
     expandMode,
     infiniteScrollerConfig,
+    displayDropdownTrigger = true,
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -119,6 +121,7 @@ function Combobox(props) {
   }
 
   function addTag(val) {
+    if (!val) return;
     if (value.length >= max) return;
     if (value.some(({ name }) => name === val)) return;
 
@@ -233,6 +236,11 @@ function Combobox(props) {
     }
 
     if (message === 'input.escape') closeDropdown();
+
+    if (message === 'input.blur' && addTagOnBlur) {
+      addTag(data);
+      updateSearchValue('');
+    }
   }
 
   function onMessage(message, data) {
@@ -331,22 +339,24 @@ function Combobox(props) {
               onMessage={onMessage}
             />
           </div>
-          <div
-            className={`tyk-combobox2__values-container-trigger${valuesExpanded ? ' tyk-combobox2__values-container-trigger--expanded' : ''}`}
-            role="button"
-            tabIndex={disabled ? -1 : 0}
-            onClick={executeTriggerAction}
-            onKeyPress={executeTriggerAction}
-          >
-            <Icon type="arrow-down" />
-            {tags && filteredValues.length === 0 && !expandMode && (
-              <div
-                className="disabled-overlay"
-                onClick={e => e.stopPropagation()}
-                role="none"
-              />
-            )}
-          </div>
+          {displayDropdownTrigger && (
+            <div
+              className={`tyk-combobox2__values-container-trigger${valuesExpanded ? ' tyk-combobox2__values-container-trigger--expanded' : ''}`}
+              role="button"
+              tabIndex={disabled ? -1 : 0}
+              onClick={executeTriggerAction}
+              onKeyPress={executeTriggerAction}
+            >
+              <Icon type="arrow-down" />
+              {tags && filteredValues.length === 0 && !expandMode && (
+                <div
+                  className="disabled-overlay"
+                  onClick={e => e.stopPropagation()}
+                  role="none"
+                />
+              )}
+            </div>
+          )}
         </div>
         {isOpened && (!tags || filteredValues.length > 0) && (
           <FloatingContainer
@@ -409,6 +419,7 @@ Combobox.propTypes = {
   placeholder: PropTypes.string,
   tags: PropTypes.bool,
   tagSeparators: PropTypes.arrayOf(PropTypes.string),
+  addTagOnBlur: PropTypes.bool,
   theme: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -420,6 +431,7 @@ Combobox.propTypes = {
   valueOverflow: PropTypes.oneOf(['single', 'multiple']),
   expandMode: PropTypes.bool,
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
+  displayDropdownTrigger: PropTypes.bool,
 };
 
 export default Combobox;

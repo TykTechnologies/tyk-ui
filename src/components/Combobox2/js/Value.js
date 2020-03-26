@@ -124,6 +124,10 @@ function Value(props) {
                 if (e.key === 'Enter') e.preventDefault();
                 entryFieldOnKeyDown(e.key, e.target.value);
               }}
+              onBlur={(e) => {
+                sendMessage('tag.input.blur', e.target.value);
+                entryFieldOnChange('');
+              }}
             />
             <span
               ref={dummyElementRef}
