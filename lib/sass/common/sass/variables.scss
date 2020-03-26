@@ -147,6 +147,7 @@ $form-control-disabled-background-color: theme-color('background', 'light') !def
 $form-control-border: 1px solid theme-color('background', 'dark') !default;
 $form-control-disabled-border: 1px solid theme-color('background', 'dark') !default;
 $form-control-placeholder-color: $text-color !default;
+$form-control-disabled-background-color: theme-color('background', 'light') !default;
 $form-control-disabled-color: $text-color !default;
 $form-control-border-focus: theme-color('background', 'dark') !default;
 $form-control-placeholder-font-family: "OpenSans-Regular, Helvetica, Arial, sans-serif" !default;

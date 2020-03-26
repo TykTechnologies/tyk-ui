@@ -7,7 +7,7 @@
     .tyk-form-control {
       background-color: $form-control-disabled-background-color;
       border: $combobox-disabled-border;
-      color: $form-control-disabled-color;
+      color: $form-control-disabled-background-color;
       cursor: not-allowed;
     }
   }
