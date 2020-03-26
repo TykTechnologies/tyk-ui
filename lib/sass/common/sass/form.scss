@@ -16,8 +16,8 @@
   &.has-error > .tyk-form-control__wrapper > .tyk-form-control,
   &.has-error > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control,
   &.has-error .tyk-file-input__wrapper  > .tyk-form-control {
-    border: $border-on-error;
-    border-left: $border-left-on-error;
+    border: $error-border;
+    border-left: $error-border-left;
     outline: none;
 
     &:focus {
@@ -81,10 +81,10 @@
 
   &--rounded-corners {
     &.has-error > .tyk-form-control__wrapper > .tyk-form-control {
-      border-left: $border-on-error;
+      border-left: $error-border;
 
       &:focus {
-        border-left: $border-on-error;
+        border-left: $error-border;
         outline: none;
       }
     }
@@ -170,7 +170,7 @@
 
   &::placeholder {
     font-family: $form-control-placeholder-font-family;
-    color: $tyk-form-control-placeholder-color;
+    color: $form-control-placeholder-color;
   }
 
   &:focus {
