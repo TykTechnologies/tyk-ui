@@ -16,8 +16,8 @@
   &.has-error > .tyk-form-control__wrapper > .tyk-form-control,
   &.has-error > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control,
   &.has-error .tyk-file-input__wrapper  > .tyk-form-control {
-    border: 2px solid theme-color('danger', 'light');
-    border-left: 10px solid theme-color('danger', 'dark');
+    border: $error-border;
+    border-left: $error-border-left;
     outline: none;
 
     &:focus {
@@ -81,10 +81,10 @@
 
   &--rounded-corners {
     &.has-error > .tyk-form-control__wrapper > .tyk-form-control {
-      border-left: 2px solid theme-color('danger', 'light');
+      border-left: $error-border;
 
       &:focus {
-        border-left: 2px solid theme-color('danger', 'light');
+        border-left: $error-border;
         outline: none;
       }
     }
@@ -129,8 +129,9 @@
 }
 
 .tyk-form-control__error-message {
-  color: theme-color('danger', 'dark');
+  color: $form-control-error-colour;
   margin-top: 5px;
+  padding: $error-message-padding;
 }
 
 .tyk-input-group {
@@ -157,7 +158,7 @@
 }
 
 .tyk-form-control {
-  border: 1px solid theme-color('background', 'dark');
+  border: $form-control-border;
   background-color: white;
   color: $text-color;
   display: block;
@@ -167,23 +168,21 @@
   transition: all .2s linear;
   width: 100%;
 
+  &::placeholder {
+    font-family: $form-control-placeholder-font-family;
+    color: $form-control-placeholder-color;
+  }
+
   &:focus {
     outline: none;
-  }
-
-  &[disabled] {
-    background-color: $form-control-disabled-color;
-    cursor: not-allowed;
-  }
-
-  &::placeholder {
-    font-family: "OpenSans-Regular, Helvetica, Arial, sans-serif";
+    border-color: $form-control-border-focus;
   }
 
   &__help-block {
-    color: $text-color;
-    font-style: italic;
+    color: $help-block-color;
+    font-style: $help-block-font-style;
     font-size: text-scale('sm');
+    padding: $help-block-padding;
     margin: 5px 0 0 0;
   }
 }

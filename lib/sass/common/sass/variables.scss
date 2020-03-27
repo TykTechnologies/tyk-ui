@@ -129,7 +129,7 @@ $grid-breakpoints: (
 $font-family-regular: 'robotolight' !default;
 $font-family-regular: 'robotoregular' !default;
 $font-family-medium: 'robotomedium' !default;
-$font-family-bold: 'robotbold' !default;
+$font-family-bold: 'robotobold' !default;
 
 $headings-margin-bottom: 15px !default;
 $headings-font-family: 'robotomedium' !default;
@@ -143,8 +143,22 @@ $form-control-padding-right: 15px !default;
 $form-control-padding-top: 11px !default;
 $form-control-padding-bottom: 10px !default;
 $form-control-addon-background-color: white !default;
-$form-control-disabled-color: theme-color('background', 'light') !default;
-
+$form-control-disabled-background-color: theme-color('background', 'light') !default;
+$form-control-border: 1px solid theme-color('background', 'dark') !default;
+$form-control-disabled-border: 1px solid theme-color('background', 'dark') !default;
+$form-control-placeholder-color: $text-color !default;
+$form-control-disabled-background-color: theme-color('background', 'light') !default;
+$form-control-disabled-color: $text-color !default;
+$form-control-border-focus: theme-color('background', 'dark') !default;
+$form-control-placeholder-font-family: "OpenSans-Regular, Helvetica, Arial, sans-serif" !default;
+$form-control-error-colour: theme-color('danger', 'dark') !default;
 $form-default-color: theme-color('background', 'dark') !default;
 $form-primary-color: theme-color('primary', 'base') !default;
 $form-success-color: theme-color('success', 'base') !default;
+
+$error-border: 2px solid theme-color('danger', 'light') !default;
+$error-border-left: 10px solid theme-color('danger', 'dark') !default;
+$help-block-color: #000018 !default;
+$help-block-font-style: italic !default;
+$help-block-padding: 0 !default;
+$error-message-padding: 0 !default;

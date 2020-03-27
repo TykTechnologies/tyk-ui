@@ -13,8 +13,9 @@
   ]}
   label="Combobox"
   name="combobox"
+  disabled
   onChange={ (e) => { console.log(e); }}
-  note="Some note on the combobox"
+  note="disabled"
   placeholder="Please select a value"
 />
 ```

@@ -71,6 +71,13 @@
     border: 2px solid $border-color;
     color: $text-color;
 
+    &[disabled] {
+      border: $form-control-disabled-border;
+      background-color: $form-control-disabled-background-color;
+      color: $form-control-disabled-color;
+      cursor: not-allowed;
+    }
+
     &::placeholder {
       opacity: 0.8;
     }
@@ -85,7 +92,10 @@
   }
 
   .tyk-form-control__help-block {
-    color: $text-color;
+    color: $help-block-color;
+    font-style: $help-block-font-style;
+    font-size: text-scale('sm');
+    padding: $help-block-padding;
   }
 
   &.tyk-form-group--addon-right {

@@ -23,8 +23,8 @@
 
   & &__label {
     display: block;
-    font-size: text-scale('md');
-    padding: 0;
+    font-size: $toggle-label-font-size;
+    padding: $toggle-padding;
     width: 100%;
   }
 

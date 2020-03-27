@@ -5,7 +5,9 @@
 .tyk-combobox {
   &.disabled {
     .tyk-form-control {
-      background-color: $form-default-color;
+      background-color: $form-control-disabled-background-color;
+      border: $combobox-disabled-border;
+      color: $form-control-disabled-background-color;
       cursor: not-allowed;
     }
   }
@@ -87,6 +89,7 @@
   }
 
   & &__placeholder {
+    color: $form-control-placeholder-color;
     align-items: center;
     display: flex;
     overflow: hidden;
