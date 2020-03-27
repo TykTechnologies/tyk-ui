@@ -175,7 +175,7 @@
 
   &:focus {
     outline: none;
-    border-color: $form-control-border-focus;
+    border: $form-control-border-focus;
   }
 
   &__help-block {
