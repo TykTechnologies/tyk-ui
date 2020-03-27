@@ -2,7 +2,9 @@ import React, { useState, useRef } from 'react';
 import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 
-const Tooltip = ({ render, children, position = 'top' }) => {
+const Tooltip = ({
+  render, children, position = 'top', style,
+}) => {
   const [active, setActive] = useState(false);
 
   const id = 'tyk-tooltip';
@@ -33,7 +35,7 @@ const Tooltip = ({ render, children, position = 'top' }) => {
     } = sourceRef.current.getBoundingClientRect();
     const tooltipOffsetTop = getOffsetTop(sourceRef.current);
     const tooltipLeft = left + width / 2 + window.scrollX;
-    const style = {
+    const internalStyle = {
       position: 'absolute',
       left: tooltipLeft,
       zIndex: '99999',
@@ -42,14 +44,14 @@ const Tooltip = ({ render, children, position = 'top' }) => {
     };
 
     if (position === 'bottom') {
-      style.top = `${tooltipOffsetTop + height + 8}px`;
+      internalStyle.top = `${tooltipOffsetTop + height + 8}px`;
     }
 
     if (position === 'top') {
-      style.bottom = `${window.innerHeight - top - window.scrollY + 8}px`;
+      internalStyle.bottom = `${window.innerHeight - top - window.scrollY + 8}px`;
     }
 
-    return style;
+    return internalStyle;
   };
 
   const renderToolTip = () => {
@@ -82,6 +84,7 @@ const Tooltip = ({ render, children, position = 'top' }) => {
       key="0"
       style={{
         display: 'inline-block',
+        ...style,
       }}
     >
       {children}
@@ -93,6 +96,7 @@ const Tooltip = ({ render, children, position = 'top' }) => {
 
 Tooltip.propTypes = {
   children: PropTypes.node.isRequired,
+  style: PropTypes.instanceOf(Object),
   render: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
