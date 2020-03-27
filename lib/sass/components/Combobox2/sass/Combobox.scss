@@ -93,6 +93,11 @@
       border: none;
       outline: none;
     }
+
+    &::placeholder {
+      color: $form-control-placeholder-color;
+      font-family: $form-control-placeholder-font-family;
+    }
   }
 
   &__text-value {
@@ -106,6 +111,11 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    &.is-placeholder {
+      color: $form-control-placeholder-color;
+      font-family: $form-control-placeholder-font-family;
     }
   }
 

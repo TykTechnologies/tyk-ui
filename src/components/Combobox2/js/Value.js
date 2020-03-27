@@ -63,10 +63,15 @@ function Value(props) {
     sendMessage('text-value.click');
   }
 
-  function textValue(val) {
+  function textValue(val, isPlaceholder = false) {
+    const classes = [
+      'tyk-combobox2__text-value',
+      `overflow-${valueOverflow}`,
+      isPlaceholder && 'is-placeholder',
+    ].filter(Boolean).join(' ');
     return (
       <span
-        className={`tyk-combobox2__text-value overflow-${valueOverflow}`}
+        className={classes}
         title={valueOverflow === 'single' ? val : undefined}
         role="button"
         tabIndex="0"
@@ -149,13 +154,11 @@ function Value(props) {
 
   if (tags) return getTags();
   if (renderValue) {
-    return value.length === 0 ? textValue(placeholder) : value.map(renderCustomValue);
+    return value.length === 0 ? textValue(placeholder, true) : value.map(renderCustomValue);
   }
-  return textValue(
-    value.length === 0
-      ? placeholder
-      : value.map(v => v.name).join(', '),
-  );
+  return value.length === 0
+    ? textValue(placeholder, true)
+    : textValue(value.map(v => v.name).join(', '));
 }
 
 export default Value;
