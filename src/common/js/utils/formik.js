@@ -2,7 +2,7 @@ import React from 'react';
 
 const getValueFromPath = (obj, path) => {
   // turn 'aaa.qqq[2].bbb[5][3].mmm' into ['aaa', 'qqq', '2', 'bbb', '5', '3', 'mmm']
-  const indexes = path.split('.').map(x => x.split('[')).flat().map(x => x.replace(/]/g, ''));
+  const indexes = path.split(/[\][.]/).filter(x => Boolean(x));
   return indexes.reduce((acc, v) => (acc ? acc[v] : acc), obj);
 };
 
@@ -31,10 +31,9 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     if (typeof properties.onChange === 'function') properties.onChange(value);
   };
 
-  const formError = getValueFromPath(form.touched, field.name)
+  const formError = (getValueFromPath(form.touched, field.name) || Boolean(form.submitCount))
     && getValueFromPath(form.errors, field.name);
   const error = typeof formError === 'string' ? formError : '';
-
   return (
     <Component
       {...field}
