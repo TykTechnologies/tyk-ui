@@ -78,7 +78,7 @@ function List(props) {
 
   return (
     <>
-      {!tags && (
+      {!tags && values.length > 15 && (
         <div className="tyk-combobox2__combobox-search">
           <input
             autoFocus
