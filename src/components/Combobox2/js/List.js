@@ -10,9 +10,11 @@ function List(props) {
     activeItem,
     onMessage: sendMessage,
     renderListItem,
+    selectAll,
   } = props;
 
   const listRef = useRef(null);
+  const isAllSelected = values.every(v => v.selected);
 
   useEffect(() => {
     if (!listRef.current) return;
@@ -44,6 +46,22 @@ function List(props) {
     );
   }
 
+  function renderSelectAllOption() {
+    const label = selectAll?.label ?? 'Select All';
+    const render = selectAll?.render;
+
+    if (render) return render(isAllSelected, sendMessage);
+    return (
+      <li
+        onClick={() => sendMessage('value.select-all', !isAllSelected)}
+        onKeyDown={() => {}}
+      >
+        {isAllSelected && <Icon type="check" />}
+        {label}
+      </li>
+    );
+  }
+
   return (
     <>
       {!tags && (
@@ -64,6 +82,9 @@ function List(props) {
       )}
       {values.length > 0 && (
         <ul ref={listRef} className="tyk-combobox2__combobox-list">
+          {Boolean(selectAll) && (
+            renderSelectAllOption()
+          )}
           {values.map(renderItem)}
         </ul>
       )}
@@ -78,6 +99,13 @@ List.propTypes = {
   activeItem: PropTypes.instanceOf(Object),
   onMessage: PropTypes.func,
   renderListItem: PropTypes.func,
+  selectAll: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      label: PropTypes.string,
+      render: PropTypes.func,
+    }),
+  ]),
 };
 
 export default List;
