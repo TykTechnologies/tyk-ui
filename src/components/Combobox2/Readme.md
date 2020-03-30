@@ -96,6 +96,89 @@ initialState = {
     { id: 'apiseven', name: 'API seven'},
     { id: 'apieight', name: 'API eight'}
   ]}
+  label="Combobox with 'select all' item"
+  name="combobox"
+  onChange={ (e) => { console.log(e); }}
+  note="Some note on the combobox"
+  theme="default inline rounded-corners"
+  placeholder="Please select a value"
+  selectAll={{
+    label: 'Select everything',
+  }}
+  max={20}
+/>
+```
+```js
+<Combobox2
+  values={[
+    { id: '', name: "None" },
+    { id: 'apione', name: 'API one'},
+    { id: 'apitwo', name: 'API two'},
+    { id: 'apithree', name: 'API three'},
+    { id: 'apifour', name: 'API four'},
+    { id: 'apifive', name: 'API five'},
+    { id: 'apisix', name: 'API six'},
+    { id: 'apiseven', name: 'API seven'},
+    { id: 'apieight', name: 'API eight'}
+  ]}
+  label="Combobox with a custom renderer for the 'select all' item"
+  name="combobox"
+  onChange={ (e) => { console.log(e); }}
+  note="Some note on the combobox"
+  theme="default inline rounded-corners"
+  placeholder="Please select a value"
+  selectAll={{
+    render: (isAllSelected, sendMessage) => (
+      <input
+        type="checkbox"
+        checked={isAllSelected}
+        onChange={() => sendMessage('value.select-all', !isAllSelected)}
+      />
+    )
+  }}
+  max={20}
+/>
+```
+```js
+<Combobox2
+  values={[
+    { id: '', name: "None" },
+    { id: 'apione', name: 'API one'},
+    { id: 'apitwo', name: 'API two'},
+    { id: 'apithree', name: 'API three'},
+    { id: 'apifour', name: 'API four'},
+    { id: 'apifive', name: 'API five'},
+    { id: 'apisix', name: 'API six'},
+    { id: 'apiseven', name: 'API seven'},
+    { id: 'apieight', name: 'API eight'}
+  ]}
+  label="Combobox with a 'clear filter' like functionality"
+  name="combobox"
+  onChange={ (e) => { console.log(e); }}
+  note="Some note on the combobox"
+  theme="default inline rounded-corners"
+  placeholder="Please select a value"
+  selectAll={{
+    label: 'Clear Filter',
+    mode: 'unselect',
+    show: 'notSameState',
+  }}
+  max={20}
+/>
+```
+```js
+<Combobox2
+  values={[
+    { id: '', name: "None" },
+    { id: 'apione', name: 'API one'},
+    { id: 'apitwo', name: 'API two'},
+    { id: 'apithree', name: 'API three'},
+    { id: 'apifour', name: 'API four'},
+    { id: 'apifive', name: 'API five'},
+    { id: 'apisix', name: 'API six'},
+    { id: 'apiseven', name: 'API seven'},
+    { id: 'apieight', name: 'API eight'}
+  ]}
   label="Combobox multiple selections"
   multiple={ true }
   max={3}

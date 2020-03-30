@@ -28,7 +28,7 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     const value = getValue(valueOrEvent);
     const onChangeProps = opts.getOnChangeProps(value, field, form, properties);
     field.onChange({ target: { name: field.name, value, ...onChangeProps } });
-    if (typeof properties.onChange === 'function') properties.onChange(value);
+    if (typeof properties.onChange === 'function') properties.onChange(onChangeProps.value || properties.value || value);
   };
 
   const formError = (getValueFromPath(form.touched, field.name) || Boolean(form.submitCount))

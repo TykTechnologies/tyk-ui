@@ -51,6 +51,8 @@ function Combobox(props) {
     expandMode,
     infiniteScrollerConfig,
     displayDropdownTrigger = true,
+    selectAll,
+    closeOnSelect,
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -163,9 +165,16 @@ function Combobox(props) {
       setValues(values.map(v => ({ ...v, selected: v.id === val.id })));
     }
 
-    if (max === 1) {
+    if (max === 1 || closeOnSelect) {
       closeDropdown();
     }
+  }
+
+  function selectAllValues(selected) {
+    if (values.length > max) return;
+    updateValue(selected ? [...values] : []);
+    setValues(values.map(v => ({ ...v, selected })));
+    if (closeOnSelect) closeDropdown();
   }
 
   function moveUpActiveItem() {
@@ -248,6 +257,8 @@ function Combobox(props) {
 
     if (message === 'value.select') selectValue(data.item);
 
+    if (message === 'value.select-all') selectAllValues(data);
+
     if (message === 'text-value.click') openDropdown();
 
     if (message === 'search.change') updateSearchValue(data);
@@ -264,8 +275,8 @@ function Combobox(props) {
   }
 
   useEffect(() => {
-    window.addEventListener('click', handleDocumentClick);
-    return () => window.removeEventListener('click', handleDocumentClick);
+    window.addEventListener('click', handleDocumentClick, true);
+    return () => window.removeEventListener('click', handleDocumentClick, true);
   }, []);
 
   useEffect(() => {
@@ -382,6 +393,7 @@ function Combobox(props) {
                 activeItem={activeItem}
                 onMessage={onMessage}
                 renderListItem={renderListItem}
+                selectAll={selectAll}
               />
             )}
           </FloatingContainer>
@@ -432,6 +444,16 @@ Combobox.propTypes = {
   expandMode: PropTypes.bool,
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
   displayDropdownTrigger: PropTypes.bool,
+  selectAll: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      label: PropTypes.string,
+      mode: PropTypes.oneOf(['select', 'unselect']),
+      show: PropTypes.oneOf(['always', 'notSameState']),
+      render: PropTypes.func,
+    }),
+  ]),
+  closeOnSelect: PropTypes.bool,
 };
 
 export default Combobox;
