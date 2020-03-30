@@ -275,8 +275,8 @@ function Combobox(props) {
   }
 
   useEffect(() => {
-    window.addEventListener('click', handleDocumentClick);
-    return () => window.removeEventListener('click', handleDocumentClick);
+    window.addEventListener('click', handleDocumentClick, true);
+    return () => window.removeEventListener('click', handleDocumentClick, true);
   }, []);
 
   useEffect(() => {
@@ -448,6 +448,8 @@ Combobox.propTypes = {
     PropTypes.bool,
     PropTypes.shape({
       label: PropTypes.string,
+      mode: PropTypes.oneOf(['select', 'unselect']),
+      show: PropTypes.oneOf(['always', 'notSameState']),
       render: PropTypes.func,
     }),
   ]),

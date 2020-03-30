@@ -14,7 +14,6 @@ function List(props) {
   } = props;
 
   const listRef = useRef(null);
-  const isAllSelected = values.every(v => v.selected);
 
   useEffect(() => {
     if (!listRef.current) return;
@@ -47,16 +46,31 @@ function List(props) {
   }
 
   function renderSelectAllOption() {
+    const isAllSelected = values.every(v => v.selected);
+    const isNoneSelected = values.every(v => !v.selected);
     const label = selectAll?.label ?? 'Select All';
+    const mode = selectAll?.mode ?? 'select';
+    const show = selectAll?.show ?? 'always';
     const render = selectAll?.render;
 
-    if (render) return render(isAllSelected, sendMessage);
+    const shouldRenderOption = show === 'always' || (mode === 'select' ? !isAllSelected : !isNoneSelected);
+    if (!shouldRenderOption) return null;
+
+    if (render) {
+      return render({
+        label,
+        mode,
+        show,
+        isAllSelected,
+        isNoneSelected,
+      }, sendMessage);
+    }
     return (
       <li
-        onClick={() => sendMessage('value.select-all', !isAllSelected)}
+        onClick={() => sendMessage('value.select-all', mode === 'select' ? !isAllSelected : isNoneSelected)}
         onKeyDown={() => {}}
       >
-        {isAllSelected && <Icon type="check" />}
+        {(mode === 'select' ? isAllSelected : isNoneSelected) && <Icon type="check" />}
         {label}
       </li>
     );
@@ -103,6 +117,8 @@ List.propTypes = {
     PropTypes.bool,
     PropTypes.shape({
       label: PropTypes.string,
+      mode: PropTypes.oneOf(['select', 'unselect']),
+      show: PropTypes.oneOf(['always', 'notSameState']),
       render: PropTypes.func,
     }),
   ]),
