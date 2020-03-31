@@ -11,6 +11,7 @@ function List(props) {
     onMessage: sendMessage,
     renderListItem,
     selectAll,
+    showSearch,
   } = props;
 
   const listRef = useRef(null);
@@ -78,7 +79,7 @@ function List(props) {
 
   return (
     <>
-      {!tags && values.length > 15 && (
+      {!tags && showSearch && (
         <div className="tyk-combobox2__combobox-search">
           <input
             autoFocus
@@ -122,6 +123,7 @@ List.propTypes = {
       render: PropTypes.func,
     }),
   ]),
+  showSearch: PropTypes.bool,
 };
 
 export default List;
