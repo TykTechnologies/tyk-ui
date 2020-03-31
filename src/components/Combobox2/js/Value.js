@@ -74,7 +74,7 @@ function Value(props) {
         className={classes}
         title={valueOverflow === 'single' ? val : undefined}
         role="button"
-        tabIndex="0"
+        tabIndex={disabled ? '-1' : '0'}
         onClick={triggerAction}
         onKeyPress={triggerAction}
       >
