@@ -73,7 +73,7 @@ function Value(props) {
       <span
         className={classes}
         title={valueOverflow === 'single' ? val : undefined}
-        role="button"
+        role="none"
         tabIndex={disabled ? '-1' : '0'}
         onClick={triggerAction}
         onKeyPress={triggerAction}
