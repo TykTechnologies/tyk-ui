@@ -53,6 +53,7 @@ function Combobox(props) {
     displayDropdownTrigger = true,
     selectAll,
     closeOnSelect,
+    showSearch = false,
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -387,6 +388,7 @@ function Combobox(props) {
               })
             ) : (
               <List
+                showSearch={showSearch}
                 values={filteredValues}
                 tags={tags}
                 searchValue={searchValue}
@@ -454,6 +456,7 @@ Combobox.propTypes = {
     }),
   ]),
   closeOnSelect: PropTypes.bool,
+  showSearch: PropTypes.bool,
 };
 
 export default Combobox;
