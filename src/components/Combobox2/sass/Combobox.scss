@@ -6,10 +6,9 @@
 .tyk-combobox2 {
   $container-trigger-width: 40px;
   $values-default-height: 38px;
+  outline: none;
 
   &.disabled {
-    outline: none;
-
     .tyk-form-control {
       border: $form-control-disabled-border;
       background-color: $form-control-disabled-background-color;
@@ -29,12 +28,6 @@
       background-color: transparent;
       cursor: not-allowed;
     }
-
-    .tyk-combobox2__text-value {
-      &:focus {
-        outline: none;
-      }
-    }
   }
 
   .tyk-form-control {
@@ -44,6 +37,11 @@
     min-height: 40px;
     height: auto;
     padding: 0;
+
+    &:focus-within {
+      outline: none;
+      border: $form-control-border-focus;
+    }
   }
 
   &__current-values {
@@ -121,6 +119,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1;
+    outline: none;
 
     &.overflow-single {
       white-space: nowrap;
