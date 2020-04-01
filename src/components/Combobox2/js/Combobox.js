@@ -71,7 +71,7 @@ function Combobox(props) {
   const dropdownRef = useRef(null);
 
   const [value, setValue] = useState(getValueFromProp(propValue, propValues));
-  const [values, setValues] = useState(propValues);
+  const [values, setValues] = useState(propValues.map(v => normalizeValue(v)));
   const [searchValue, setSearchValue] = useState('');
   const [activeItem, setActiveItem] = useState(null);
   const [isOpened, setIsOpened] = useState(false);
@@ -297,7 +297,10 @@ function Combobox(props) {
 
   useEffect(() => {
     if (propValues.length) {
-      const newValues = propValues.map(v => ({ ...v, selected: value.some(sv => sv.id === v.id) }));
+      const newValues = propValues.map(v => ({
+        ...normalizeValue(v),
+        selected: value.some(sv => sv.id === v.id),
+      }));
       setValues(newValues);
       setValue(value.map(v => newValues.find(nv => nv.id === v.id) || v));
     } else if (values.length) {
@@ -308,7 +311,10 @@ function Combobox(props) {
   useEffect(() => {
     const newValue = getValueFromProp(propValue, values);
     setValue(newValue);
-    setValues(values.map(v => ({ ...v, selected: newValue.some(nv => nv.id === v.id) })));
+    setValues(values.map(v => ({
+      ...normalizeValue(v),
+      selected: newValue.some(nv => nv.id === v.id),
+    })));
   }, [propValue]);
 
   useEffect(() => {
