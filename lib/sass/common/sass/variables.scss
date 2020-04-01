@@ -162,3 +162,8 @@ $help-block-color: #000018 !default;
 $help-block-font-style: italic !default;
 $help-block-padding: 0 !default;
 $error-message-padding: 0 !default;
+$default-pill-background-color: theme-color('foreground', 'light') !default;
+$default-pill-color: white !default;
+$pill-margin: 0 0 10px 0 !default;
+$default-outline-pill-box-shadow: inset 0px 0px 0px 2px theme-color('foreground', 'light');
+$default-outline-pill-color: $text-color;
