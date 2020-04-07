@@ -7,6 +7,7 @@ export default class Checkbox extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
     inline: PropTypes.bool,
+    theme: PropTypes.string,
     input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
@@ -14,13 +15,21 @@ export default class Checkbox extends Component {
   };
 
   getCssClasses() {
-    const { inline } = this.props;
+    const { inline, disabled, theme = '' } = this.props;
     const cssClasses = [];
 
     cssClasses.push('tyk-checkbox');
 
     if (inline) {
       cssClasses.push('tyk-checkbox--inline');
+    }
+
+    if (theme.trim()) {
+      cssClasses.push(...theme.split(' ').map(t => `tyk-checkbox--theme-${t}`));
+    }
+
+    if (disabled) {
+      cssClasses.push('tyk-checkbox--is-disabled');
     }
 
     return cssClasses.join(' ');

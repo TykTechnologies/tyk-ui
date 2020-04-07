@@ -34,6 +34,8 @@
   }
 
   &--primary {
+    background-color: transparent;
+
     .tyk-panel__header {
       @include panel-variant($panel-primary-header-color)
     }
@@ -45,8 +47,10 @@
       border: $panel-primary-border-color;
     }
 
-    & label {
-      color: $panel-primary-label-color;
+    & .tyk-form-group {
+      label {
+        color: $panel-primary-label-color;
+      }
     }
   }
 
