@@ -3,7 +3,7 @@
   border-radius: $general-border-radius;
   display: inline-flex;
   font-size: text-scale('sm');
-  margin-bottom: 10px;
+  margin: $pill-margin;
   padding: 6px 15px;
 
   + .tyk-pill {
@@ -27,13 +27,13 @@
   }
 
   &--default {
-    background-color: theme-color('foreground', 'light');
-    color: white;
+    background-color: $default-pill-background-color;
+    color: $default-pill-color;
   }
 
   &--default-outline {
-    box-shadow: inset 0px 0px 0px 2px theme-color('foreground', 'light');
-    color: $text-color;
+    box-shadow: $default-outline-pill-box-shadow;
+    color: $default-outline-pill-color;
   }
 
   &--primary {
