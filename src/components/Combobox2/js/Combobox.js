@@ -364,6 +364,7 @@ function Combobox(props) {
               max={max}
               tags={tags}
               tagSeparators={tagSeparators}
+              addTagOnBlur={addTagOnBlur}
               allowCustomValues={allowCustomValues}
               placeholder={placeholder}
               disabled={disabled}
