@@ -6,6 +6,10 @@ import Button from '../Button';
     <a href="">Back to something</a>
   }
   title="Prct"
+  styles={{
+    left: 'my_class_for_left_element_container'
+    right: 'my_class_for_right_element_container'
+  }}
   left={
     <Tooltip
       render="prct"

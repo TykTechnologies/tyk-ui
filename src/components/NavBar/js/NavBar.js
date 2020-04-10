@@ -25,6 +25,7 @@ export default class NavBar extends PureComponent {
       PropTypes.node,
     ]),
     withTabs: PropTypes.bool,
+    styles: PropTypes.instanceOf(Object),
   }
 
   render() {
@@ -37,6 +38,7 @@ export default class NavBar extends PureComponent {
       pre,
       subtitle,
       withTabs,
+      styles,
     } = this.props;
 
     return (
@@ -63,14 +65,10 @@ export default class NavBar extends PureComponent {
           }
           <div className="tyk-nav-bar__container">
             {
-              left
-                ? <div className="tyk-nav-bar__left">{ left }</div>
-                : ''
+              left && <div className={`tyk-nav-bar__left ${styles?.left || ''}`}>{ left }</div>
             }
             {
-              right
-                ? <div className="tyk-nav-bar__right">{ right }</div>
-                : ''
+              right && <div className={`tyk-nav-bar__right ${styles?.right || ''}`}>{ right }</div>
             }
           </div>
         </div>
