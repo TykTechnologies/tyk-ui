@@ -302,7 +302,7 @@ function Combobox(props) {
         selected: value.some(sv => sv.id === v.id),
       }));
       setValues(newValues);
-      setValue(value.map(v => newValues.find(nv => nv.id === v.id) || v));
+      setValue(val => val.map(v => newValues.find(nv => nv.id === v.id) || v));
     } else if (values.length) {
       setValues([]);
     }
@@ -311,7 +311,7 @@ function Combobox(props) {
   useEffect(() => {
     const newValue = getValueFromProp(propValue, values);
     setValue(newValue);
-    setValues(values.map(v => ({
+    setValues(vals => vals.map(v => ({
       ...normalizeValue(v),
       selected: newValue.some(nv => nv.id === v.id),
     })));

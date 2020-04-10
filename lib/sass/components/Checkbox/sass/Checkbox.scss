@@ -1,0 +1,29 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+@import './variables';
+
+.tyk-checkbox {
+  &--theme-light {
+    label {
+      color: $tyk-checkbox-theme-light-label-color;
+    }
+
+    &.tyk-checkbox--is-disabled {
+      label {
+        color: $tyk-checkbox-theme-light-label-disabled-color;
+      }
+    }
+  }
+
+  &--theme-dark {
+    label {
+      color: $tyk-checkbox-theme-dark-label-color;
+    }
+
+    &.tyk-checkbox--is-disabled {
+      label {
+        color: $tyk-checkbox-theme-dark-label-disabled-color;
+      }
+    }
+  }
+}

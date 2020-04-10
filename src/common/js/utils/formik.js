@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const getValueFromPath = (obj, path) => {
+function getValueFromPath(obj, path) {
   // turn 'aaa.qqq[2].bbb[5][3].mmm' into ['aaa', 'qqq', '2', 'bbb', '5', '3', 'mmm']
   const indexes = path.split(/[\][.]/).filter(x => Boolean(x));
   return indexes.reduce((acc, v) => (acc ? acc[v] : acc), obj);
-};
+}
+
+function debounce(f, limit) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(f, limit, ...args);
+  };
+}
+
+const triggerFieldOnChange = debounce((field, e) => field.onChange(e), 200);
 
 /* eslint-disable react/prop-types */
 const wrapper = (Component, options) => ({ field, form, ...properties }) => {
+  const [myValue, setMyValue] = useState(field.value);
   const opts = {
     ...{
       getOnChangeProps: () => ({}),
@@ -15,20 +26,29 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     ...options,
   };
 
-  const onChange = (valueOrEvent) => {
-    const getValue = (v) => {
-      if (v && v.target) {
-        if (v.target.nodeName === 'INPUT' && (v.target.type === 'checkbox' || v.target.type === 'radio')) {
-          return v.target.checked;
-        }
-        return v.target.value;
+  const getValue = (v) => {
+    if (v && v.target) {
+      if (v.target.nodeName === 'INPUT' && (v.target.type === 'checkbox' || v.target.type === 'radio')) {
+        return v.target.checked;
       }
-      return v;
-    };
+      return v.target.value;
+    }
+    return v;
+  };
+
+  const onChange = (valueOrEvent) => {
     const value = getValue(valueOrEvent);
     const onChangeProps = opts.getOnChangeProps(value, field, form, properties);
-    field.onChange({ target: { name: field.name, value, ...onChangeProps } });
-    if (typeof properties.onChange === 'function') properties.onChange(onChangeProps.value || properties.value || value);
+
+    const newValue = onChangeProps.value || properties.value || value;
+    if (typeof properties.onChange === 'function') {
+      properties.onChange(newValue);
+    }
+    triggerFieldOnChange(
+      field,
+      { target: { name: field.name, value: newValue, ...onChangeProps } },
+    );
+    setMyValue(newValue);
   };
 
   const formError = (getValueFromPath(form.touched, field.name) || Boolean(form.submitCount))
@@ -42,7 +62,8 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
       {...properties}
       checked={typeof properties.value === 'string' ? field.value === properties.value : field.value}
       onChange={onChange}
-      input={{ value: field.value, onChange }}
+      value={myValue}
+      input={{ value: myValue, onChange }}
     />
   );
 };

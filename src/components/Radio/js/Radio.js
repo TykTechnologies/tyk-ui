@@ -5,6 +5,7 @@ export default class Radio extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
     inline: PropTypes.bool,
+    theme: PropTypes.string,
     input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
@@ -13,7 +14,9 @@ export default class Radio extends Component {
   };
 
   getCssClasses() {
-    const { inline, nospace } = this.props;
+    const {
+      inline, nospace, theme = '', disabled,
+    } = this.props;
     const cssClasses = [];
 
     if (inline) {
@@ -24,6 +27,14 @@ export default class Radio extends Component {
 
     if (nospace) {
       cssClasses.push('no-margin');
+    }
+
+    if (theme.trim()) {
+      cssClasses.push(...theme.split(' ').map(t => `tyk-radio--theme-${t}`));
+    }
+
+    if (disabled) {
+      cssClasses.push('tyk-radio--is-disabled');
     }
 
     return cssClasses.join(' ');
