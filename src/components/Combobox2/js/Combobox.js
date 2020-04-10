@@ -71,7 +71,7 @@ function Combobox(props) {
   const dropdownRef = useRef(null);
 
   const [value, setValue] = useState(getValueFromProp(propValue, propValues));
-  const [values, setValues] = useState(propValues);
+  const [values, setValues] = useState(propValues.map(v => normalizeValue(v)));
   const [searchValue, setSearchValue] = useState('');
   const [activeItem, setActiveItem] = useState(null);
   const [isOpened, setIsOpened] = useState(false);
@@ -90,6 +90,7 @@ function Combobox(props) {
       error && 'has-error',
       labelwidth && 'tyk-form-group--label-has-width',
       disabled && 'disabled',
+      expandMode && 'is-expand-mode',
     ].filter(Boolean).join(' ');
   }
 
@@ -216,6 +217,20 @@ function Combobox(props) {
     }
   }
 
+  function onClickCapture(e) {
+    if (!disabled) return;
+    if (!expandMode) {
+      e.stopPropagation();
+      return;
+    }
+
+    const triggerElement = rootRef.current.querySelector('.tyk-combobox2__values-container-trigger');
+    if (!triggerElement) return;
+
+    const isClickOnTrigger = triggerElement === e.target || triggerElement.contains(e.target);
+    if (!isClickOnTrigger) e.stopPropagation();
+  }
+
   function onTagMessage(message, data) {
     if (message === 'add') {
       addTag(data);
@@ -282,7 +297,10 @@ function Combobox(props) {
 
   useEffect(() => {
     if (propValues.length) {
-      const newValues = propValues.map(v => ({ ...v, selected: value.some(sv => sv.id === v.id) }));
+      const newValues = propValues.map(v => ({
+        ...normalizeValue(v),
+        selected: value.some(sv => sv.id === v.id),
+      }));
       setValues(newValues);
       setValue(value.map(v => newValues.find(nv => nv.id === v.id) || v));
     } else if (values.length) {
@@ -293,7 +311,10 @@ function Combobox(props) {
   useEffect(() => {
     const newValue = getValueFromProp(propValue, values);
     setValue(newValue);
-    setValues(values.map(v => ({ ...v, selected: newValue.some(nv => nv.id === v.id) })));
+    setValues(values.map(v => ({
+      ...normalizeValue(v),
+      selected: newValue.some(nv => nv.id === v.id),
+    })));
   }, [propValue]);
 
   useEffect(() => {
@@ -323,7 +344,12 @@ function Combobox(props) {
     `tyk-combobox2__current-values--${valuesExpanded ? 'expanded' : 'collapsed'}`,
   ].join(' ');
   return (
-    <div className={getCssClasses()} ref={rootRef}>
+    <div
+      className={getCssClasses()}
+      ref={rootRef}
+      tabIndex={disabled ? '-1' : '0'}
+      onClickCapture={onClickCapture}
+    >
       {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
       )}
@@ -332,10 +358,6 @@ function Combobox(props) {
         style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
       >
         <div className="tyk-form-control" ref={comboboxControlRef}>
-          {disabled
-            ? <div className="tyk-combobox2-disabled-overlay" />
-            : null
-          }
           <div className={currentValuesClasses}>
             <Value
               value={value}
@@ -360,13 +382,6 @@ function Combobox(props) {
               onKeyPress={executeTriggerAction}
             >
               <Icon type="arrow-down" />
-              {tags && filteredValues.length === 0 && !expandMode && (
-                <div
-                  className="disabled-overlay"
-                  onClick={e => e.stopPropagation()}
-                  role="none"
-                />
-              )}
             </div>
           )}
         </div>
