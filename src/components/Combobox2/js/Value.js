@@ -8,6 +8,7 @@ function Value(props) {
     max,
     tags,
     tagSeparators,
+    addTagOnBlur,
     placeholder,
     disabled,
     renderValue,
@@ -131,7 +132,7 @@ function Value(props) {
               }}
               onBlur={(e) => {
                 sendMessage('tag.input.blur', e.target.value);
-                entryFieldOnChange('');
+                if (addTagOnBlur) entryFieldOnChange('');
               }}
             />
             <span
