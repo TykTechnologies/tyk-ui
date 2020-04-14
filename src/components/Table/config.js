@@ -57,17 +57,7 @@ export const config = {
         date: {
           value: '01/01/2019',
         },
-        delete_btn: {
-          props: {
-            theme: 'danger',
-            size: 'sm',
-            onClick: () => console.log('Delete Btn Click'),
-          },
-          children: 'Delete',
-          events: {
-            onClick: () => console.log('Clicked the cell'),
-          },
-        },
+        delete_btn: null,
         input_test: {
           props: {
             type: 'number',

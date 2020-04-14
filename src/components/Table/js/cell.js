@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const Cell = ({ col, row }) => {
+  if (!row.values[col.id]) {
+    return <td />;
+  }
+
   if (col.type === 'string') {
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events
