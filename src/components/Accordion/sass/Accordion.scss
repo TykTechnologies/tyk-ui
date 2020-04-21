@@ -1,20 +1,67 @@
 @import './variables';
 
-.tyk-accordion {
-  &__item-header {
-    > button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      font-size: $accordion-item-header-font-size;
-      outline: none;
-      padding: $accordion-item-header-padding-y $accordion-item-header-padding-x;
-      width: 100%;
+%tyk-accordion__trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: $accordion-item-header-font-size;
+  outline: none;
+  padding: $accordion-item-header-padding-y $accordion-item-header-padding-x;
+  width: 100%;
 
-      .tyk-icon {
-        margin-left: auto;
-      }
+  .tyk-icon {
+    margin-left: auto;
+  }
+}
+
+.tyk-accordion {
+  &__item {
+    display: grid;
+
+    &--trigger-position-left {
+      grid-template-columns: $accordion-item-outside-trigger-width auto;
+      grid-template-areas:
+        "trigger header"
+        "trigger content";
+    }
+
+    &--trigger-position-right {
+      grid-template-columns: auto $accordion-item-outside-trigger-width;
+      grid-template-areas:
+        "header trigger"
+        "content trigger";
+    }
+
+    &--trigger-in-header {
+      grid-template-columns: auto;
+      grid-template-areas:
+        "header"
+        "content";
+    }
+  }
+
+  &__trigger-wrapper {
+    grid-area: trigger;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    .tyk-icon {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  &__trigger {
+    @extend %tyk-accordion__trigger;
+  }
+
+  &__item-header {
+    grid-area: header;
+
+    > button {
+      @extend %tyk-accordion__trigger;
     }
   }
 
@@ -34,5 +81,9 @@
       margin-left: auto;
       width: auto;
     }
+  }
+
+  &__item-content {
+    grid-area: content;
   }
 }

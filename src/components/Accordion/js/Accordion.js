@@ -8,6 +8,7 @@ const Accordion = (props) => {
     className,
     children,
     usearrowastrigger,
+    arrow = { position: 'right', expandToContent: false },
   } = props;
 
   const getCssClasses = () => {
@@ -25,6 +26,7 @@ const Accordion = (props) => {
       <AccordionContext.Provider
         value={{
           usearrowastrigger,
+          arrow,
         }}
       >
         {children}
@@ -42,6 +44,10 @@ Accordion.propTypes = {
   ]),
   className: PropTypes.string,
   usearrowastrigger: PropTypes.bool,
+  arrow: PropTypes.shape({
+    position: PropTypes.oneOf('left', 'right'),
+    expandToContent: PropTypes.bool,
+  }),
 };
 
 Accordion.defaultProps = {

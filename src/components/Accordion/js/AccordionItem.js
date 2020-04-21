@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
+import ItemTrigger from './AccordionItemTrigger';
 
 const AccordionItem = (props) => {
   const {
@@ -10,6 +12,7 @@ const AccordionItem = (props) => {
     className,
     disabled,
   } = props;
+  const { arrow } = useContext(AccordionContext);
   const [collapsedState, setCollapsedState] = useState(collapsed);
 
   const toggleChange = () => {
@@ -22,6 +25,12 @@ const AccordionItem = (props) => {
 
   const getCssClasses = () => {
     let cssClasses = ['tyk-accordion__item'];
+
+    if (!arrow.expandToContent) {
+      cssClasses.push('tyk-accordion__item--trigger-in-header');
+    } else {
+      cssClasses.push(`tyk-accordion__item--trigger-position-${arrow.position}`);
+    }
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
@@ -43,6 +52,9 @@ const AccordionItem = (props) => {
           toggleChange,
         }}
       >
+        {arrow.expandToContent && (
+          <ItemTrigger wrap />
+        )}
         {children}
       </AccordionItemContext.Provider>
     </div>
