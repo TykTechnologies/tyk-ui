@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from '../../Icon';
 import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
+import ItemTrigger from './AccordionItemTrigger';
 
 const AccordionItemHeader = (props) => {
   const {
@@ -11,7 +12,7 @@ const AccordionItemHeader = (props) => {
     children,
   } = props;
   const accordionItemContext = useContext(AccordionItemContext);
-  const accordionContext = useContext(AccordionContext);
+  const { usearrowastrigger, arrow } = useContext(AccordionContext);
   const {
     collapsed,
     disabled,
@@ -22,7 +23,7 @@ const AccordionItemHeader = (props) => {
   const getCssClasses = () => {
     let cssClasses = ['tyk-accordion__item-header'];
 
-    if (accordionContext.usearrowastrigger) {
+    if (usearrowastrigger) {
       cssClasses.push('tyk-accordion__arrow-trigger');
     }
 
@@ -38,7 +39,7 @@ const AccordionItemHeader = (props) => {
       className={getCssClasses()}
     >
       {
-        !accordionContext.usearrowastrigger
+        !usearrowastrigger
           ? (
             <button
               className={disabled ? 'tyk-accordion__trigger--disabled' : ''}
@@ -51,14 +52,13 @@ const AccordionItemHeader = (props) => {
           )
           : (
             <Fragment>
+              {!arrow.expandToContent && arrow.position === 'left' && (
+                <ItemTrigger />
+              )}
               <div>{children}</div>
-              <button
-                className={disabled ? 'tyk-accordion__trigger--disabled' : ''}
-                onClick={toggleChange}
-                type="button"
-              >
-                <Icon className="collapsable__arrow" type={iconType} />
-              </button>
+              {!arrow.expandToContent && arrow.position === 'right' && (
+                <ItemTrigger />
+              )}
             </Fragment>
           )
       }
