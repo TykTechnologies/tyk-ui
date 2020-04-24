@@ -14,10 +14,9 @@ function debounce(f, limit) {
   };
 }
 
-const executeDebounced = debounce(fn => fn(), 200);
-
 /* eslint-disable react/prop-types */
 const wrapper = (Component, options) => ({ field, form, ...properties }) => {
+  const [executeDebounced] = useState(() => debounce(fn => fn(), 200));
   const [myValue, setMyValue] = useState(field.value);
   const opts = {
     ...{
@@ -62,7 +61,7 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     <Component
       {...field}
       error={error}
-      isfield="true"
+      isfield
       {...properties}
       checked={typeof properties.value === 'string' ? field.value === properties.value : field.value}
       onChange={onChange}
