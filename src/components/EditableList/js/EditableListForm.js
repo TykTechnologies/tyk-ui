@@ -236,7 +236,7 @@ export default class EditableListForm extends Component {
     } = this.props;
 
     refs.forEach((ref) => {
-      if (ref.current.reset) {
+      if (ref.current?.reset) {
         ref.current.reset();
       }
     });
