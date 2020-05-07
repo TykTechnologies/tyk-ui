@@ -139,6 +139,8 @@
 
   .tyk-editable-list-item__text {
     display: block;
+    word-wrap: break-word;
+    word-break:break-all;
   }
 
   .tyk-editable-list-action__button {
