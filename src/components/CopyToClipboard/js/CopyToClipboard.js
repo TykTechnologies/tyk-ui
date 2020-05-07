@@ -25,7 +25,7 @@ const CopyToClipboard = (props) => {
         {children || display}
       </props.element>
       {!window.navigator.clipboard ? (
-        <textarea ref={txtRef} className="tyk-copy-to-clipboard" name="copy">
+        <textarea ref={txtRef} className="tyk-copy-to-clipboard" name="copy" value={copy}>
           {copy}
         </textarea>
       ) : null}
