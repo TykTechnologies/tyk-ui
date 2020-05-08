@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Input extends Component {
@@ -220,31 +220,29 @@ export default class Input extends Component {
     } = this.props;
 
     return (
-      <Fragment>
-        <div className={this.getCssClasses()}>
+      <div className={this.getCssClasses()}>
+        {
+          label
+            ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
+            : null
+        }
+        <div
+          className="tyk-form-control__wrapper"
+          style={this.getNonLabelWidth()}
+        >
           {
-            label
-              ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
+            inputgroupaddonleft || inputgroupaddonright
+              ? this.getInputGroupAddon()
+              : this.getInputComponent()
+          }
+          {
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
-          <div
-            className="tyk-form-control__wrapper"
-            style={this.getNonLabelWidth()}
-          >
-            {
-              inputgroupaddonleft || inputgroupaddonright
-                ? this.getInputGroupAddon()
-                : this.getInputComponent()
-            }
-            {
-              note
-                ? <p className="tyk-form-control__help-block">{ note }</p>
-                : null
-            }
-            { this.getInputError() }
-          </div>
+          { this.getInputError() }
         </div>
-      </Fragment>
+      </div>
     );
   }
 }
