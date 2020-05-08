@@ -8,6 +8,10 @@ export default class Checkbox extends Component {
     disabled: PropTypes.bool,
     inline: PropTypes.bool,
     theme: PropTypes.string,
+    error: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
     input: PropTypes.instanceOf(Object),
     label: PropTypes.string,
     name: PropTypes.string,
@@ -35,6 +39,17 @@ export default class Checkbox extends Component {
     return cssClasses.join(' ');
   }
 
+  displayError() {
+    const { error } = this.props;
+    if (!error) return null;
+
+    return (
+      <p className="tyk-form-control__error-message">
+        {error}
+      </p>
+    );
+  }
+
   render() {
     const {
       input, value, label, ...rest
@@ -43,15 +58,18 @@ export default class Checkbox extends Component {
       <div
         className={this.getCssClasses()}
       >
-        <label>
-          <input
-            checked={input ? input.value : value}
-            {...input}
-            {...rest}
-            type="checkbox"
-          />
-          {label}
-        </label>
+        <div className="tyk-form-control__wrapper">
+          <label>
+            <input
+              checked={input ? input.value : value}
+              {...input}
+              {...rest}
+              type="checkbox"
+            />
+            {label}
+          </label>
+          {this.displayError()}
+        </div>
       </div>
     );
   }
