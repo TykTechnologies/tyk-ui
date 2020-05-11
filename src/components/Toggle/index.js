@@ -48,7 +48,6 @@ export default class TestToggle extends Component {
               onDark
             >
               <Toggle.Item
-                label="Option"
                 name="option"
               />
             </Toggle>
@@ -61,7 +60,6 @@ export default class TestToggle extends Component {
               theme="success inline-label block"
             >
               <Toggle.Item
-                label="Option"
                 name="option"
               />
             </Toggle>
@@ -74,7 +72,6 @@ export default class TestToggle extends Component {
               size="sm"
             >
               <Toggle.Item
-                label="Option"
                 name="option"
               />
             </Toggle>

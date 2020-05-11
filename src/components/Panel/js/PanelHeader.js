@@ -49,7 +49,7 @@ export default class PanelHeader extends Component {
                 { children }
                 {
                   portalContext.collapsable
-                    ? <Icon className={`collapsable__arrow-${portalContext.isLeft ? 'left' : 'right'}`} type={iconType} />
+                    ? <div className={`collapsable__arrow-${portalContext.isLeft ? 'left' : 'right'}`}><Icon type={iconType} /></div>
                     : null
                 }
               </HeaderTag>

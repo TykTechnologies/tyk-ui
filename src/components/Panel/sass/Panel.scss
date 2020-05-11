@@ -140,12 +140,8 @@
   .collapsable__arrow-left {
     position: absolute;
     padding: 10px;
-    left: -5px;
+    left: 0px;
     top: calc(50% - 17px);
-
-    i {
-      float: right;
-    }
   }
 }
 
