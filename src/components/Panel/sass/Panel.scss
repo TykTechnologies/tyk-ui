@@ -127,7 +127,7 @@
     padding-right: $padding-x-right-panel-collapsable;
   }
 
-  .collapsable__arrow {
+  .collapsable__arrow-right {
     position: absolute;
     padding: 10px;
     right: 10px;
@@ -135,6 +135,16 @@
 
     i {
       float: left;
+    }
+  }
+  .collapsable__arrow-left {
+    position: absolute;
+    padding: 10px;
+    left: -5px;
+    top: calc(50% - 17px);
+
+    i {
+      float: right;
     }
   }
 }

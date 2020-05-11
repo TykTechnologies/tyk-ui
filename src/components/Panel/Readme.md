@@ -48,7 +48,7 @@ import Button from '../Button';
 </Panel>
 ```
 ```js
-<Panel theme="primary" collapsable={ true } collapsed={ true }>
+<Panel theme="primary" collapsable={ true } collapsed={ true } isLeft>
   <Panel.Header>Panel example</Panel.Header>
   <Panel.Body>
     Panel body content
