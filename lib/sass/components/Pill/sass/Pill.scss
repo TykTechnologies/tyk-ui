@@ -5,6 +5,7 @@
   font-size: text-scale('sm');
   margin: $pill-margin;
   padding: 6px 15px;
+  font-family: $font-family-regular;
 
   + .tyk-pill {
     margin-right: 10px;
@@ -67,7 +68,7 @@
   }
 
   &--warning {
-    background-color: theme-color('warning', 'base');
+    background-color: theme-color('warning', 'light');
     color: white;
   }
 

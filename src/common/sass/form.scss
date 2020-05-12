@@ -112,6 +112,7 @@
     background: $form-control-addon-background-color;
     border-top-right-radius: $general-border-radius;
     border-bottom-right-radius: $general-border-radius;
+    color: $text-color;
   }
 }
 
@@ -125,6 +126,7 @@
     background: $form-control-addon-background-color;
     border-top-left-radius: $general-border-radius;
     border-bottom-left-radius: $general-border-radius;
+    color: $text-color;
   }
 }
 
@@ -158,6 +160,7 @@
 }
 
 .tyk-form-control {
+  font-family: $font-family-medium;
   border: $form-control-border;
   background-color: white;
   color: $text-color;

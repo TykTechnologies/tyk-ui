@@ -11,6 +11,7 @@ const Panel = (props) => {
     collapsable,
     theme,
     onToggleCollapse,
+    collapsibleIconPosition = 'right',
   } = props;
   const [collapsedState, setCollapsedState] = useState(collapsed || false);
 
@@ -53,6 +54,7 @@ const Panel = (props) => {
           collapsed: collapsedState,
           onToggle: handleToggle,
           theme,
+          collapsibleIconPosition,
         }}
       >
         {
@@ -76,6 +78,7 @@ Panel.propTypes = {
   ]),
   className: PropTypes.string,
   collapsable: PropTypes.bool,
+  collapsibleIconPosition: PropTypes.string,
   collapsed: PropTypes.bool,
   theme: PropTypes.string,
   onToggleCollapse: PropTypes.func,

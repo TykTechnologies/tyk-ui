@@ -61,7 +61,11 @@ export default class ToggleItem extends Component {
             onChange={this.onChange.bind(this)}
             value={value}
           />
-          <span>{ label }</span>
+          {
+            label
+              ? <span>{ label }</span>
+              : <span className="empty-toggle"> </span>
+          }
           {
             context.type === 'single'
               ? <span className={ToggleItem.getNotchCssClasses(context)} />
