@@ -20,7 +20,11 @@ export default class Input extends Component {
       PropTypes.node,
       PropTypes.string,
     ]),
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+      PropTypes.node,
+    ]),
     labelwidth: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,
