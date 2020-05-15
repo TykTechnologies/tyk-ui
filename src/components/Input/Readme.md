@@ -1,11 +1,15 @@
 ```js
 <Input
-  label="This is a demo Input"
+  label="This is a demo Input with tooltip"
   name="input"
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
   onChange={ (e) => { console.log(e); }}
+  labelWithTooltip
+  tooltipText="abc"
+  tooltipIconType="question-circle"
+  tooltipColor="#505071"
 />
 ```
 ```js

@@ -95,6 +95,13 @@
   }
 }
 
+.tyk-form-group--label-has-tooltip > div > span {
+  margin-left: $form-control-input-tooltip-left-margin;
+  & i {
+    color: $form-control-input-tooltip-color;
+  }
+}
+
 .tyk-form-group--addon-right input {
   border-right: 0 !important;
 }

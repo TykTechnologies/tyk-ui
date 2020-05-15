@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Icon from '../../Icon';
+import Tooltip from '../../Tooltip';
 
 export default class Input extends Component {
   static propTypes = {
@@ -31,6 +33,12 @@ export default class Input extends Component {
       PropTypes.number,
       PropTypes.string,
     ]),
+    labelWithTooltip: PropTypes.bool,
+    tooltipText: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.string,
+    ]),
+    tooltipIconType: PropTypes.string,
   }
 
   static getAddon(content) {
@@ -117,6 +125,7 @@ export default class Input extends Component {
       labelwidth,
       inputgroupaddonleft,
       inputgroupaddonright,
+      labelWithTooltip,
     } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
@@ -133,6 +142,10 @@ export default class Input extends Component {
 
     if (inputgroupaddonright) {
       cssClasses.push('tyk-form-group--addon-right');
+    }
+
+    if (labelWithTooltip) {
+      cssClasses.push('tyk-form-group--label-has-tooltip');
     }
 
     if (labelwidth) {
@@ -210,6 +223,19 @@ export default class Input extends Component {
     }
   }
 
+  renderTooltip() {
+    const {
+      tooltipText,
+      tooltipIconType,
+    } = this.props;
+
+    return (
+      <Tooltip render={tooltipText}>
+        <Icon type={tooltipIconType} />
+      </Tooltip>
+    );
+  }
+
   render() {
     const {
       label,
@@ -217,14 +243,18 @@ export default class Input extends Component {
       inputgroupaddonleft,
       inputgroupaddonright,
       note,
+      labelWithTooltip,
     } = this.props;
 
     return (
       <div className={this.getCssClasses()}>
-        {
-          label
-            ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
-            : null
+        {label
+          && (
+            <div>
+              <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
+              {labelWithTooltip && this.renderTooltip()}
+            </div>
+          )
         }
         <div
           className="tyk-form-control__wrapper"
