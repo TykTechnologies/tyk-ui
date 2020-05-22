@@ -1,6 +1,8 @@
 import React, { Fragment, createRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
+import { toast } from '../../Toast';
+
 const CopyToClipboard = (props) => {
   const {
     display, copy, children, onCopy,
@@ -14,9 +16,11 @@ const CopyToClipboard = (props) => {
     if (!window.navigator.clipboard) {
       txtRef.current.select();
       document.execCommand('copy');
+      toast.notify('copied', { theme: 'success' });
       return;
     }
     window.navigator.clipboard.writeText(copy);
+    toast.notify('copied', { theme: 'success' });
   }, [onCopy, txtRef]);
 
   return (
