@@ -16,7 +16,14 @@ function debounce(f, limit) {
 
 /* eslint-disable react/prop-types */
 const wrapper = (Component, options) => ({ field, form, ...properties }) => {
-  const [executeDebounced] = useState(() => debounce(fn => fn(), 200));
+  const DEFAULT_DEBOUNCE_TIME_MS = 200;
+  const [executeDebounced] = useState(() => {
+    if (properties.debounce === false) return fn => fn();
+    const timeout = typeof properties.debounce === 'number'
+      ? properties.debounce
+      : DEFAULT_DEBOUNCE_TIME_MS;
+    return debounce(fn => fn(), timeout);
+  });
   const [myValue, setMyValue] = useState(field.value);
   const opts = {
     ...{
