@@ -52,6 +52,12 @@
         color: $panel-primary-label-color;
       }
     }
+
+    .tyk-toggle {
+      .tyk-toggle__label {
+        color: $panel-primary-label-color;
+      }
+    }
   }
 
   &--success {
