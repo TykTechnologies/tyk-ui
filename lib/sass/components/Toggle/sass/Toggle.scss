@@ -21,6 +21,10 @@
     flex-wrap: nowrap;
   }
 
+  &__list--has-error {
+    border: $error-border;
+  }
+
   & &__label {
     display: block;
     font-size: $toggle-label-font-size;

@@ -13,6 +13,7 @@ class Toggle extends Component {
     ]),
     className: PropTypes.string,
     disabled: PropTypes.bool,
+    error: PropTypes.string,
     onChange: PropTypes.func,
     label: PropTypes.string,
     labelwidth: PropTypes.string,
@@ -127,35 +128,47 @@ class Toggle extends Component {
       type,
       separated,
       value,
+      error,
     } = this.props;
 
     return (
-      <div className={this.getCssClasses()} ref={this.toggleRef}>
-        <ToggleContext.Provider
-          value={{
-            disabled,
-            onItemSelected: this.onItemSelected.bind(this),
-            saveSelectedRef: this.saveSelectedRef.bind(this),
-            separated,
-            type,
-            value,
-          }}
-        >
-          {
-            label
-              ? <label className="tyk-toggle__label" style={this.getLabelStyles()}>{label}</label>
-              : null
-          }
-          <ul className={`tyk-toggle__list tyk-toggle__list--${type}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
-            { children }
+      <>
+        <div className={this.getCssClasses()} ref={this.toggleRef}>
+          <ToggleContext.Provider
+            value={{
+              disabled,
+              onItemSelected: this.onItemSelected.bind(this),
+              saveSelectedRef: this.saveSelectedRef.bind(this),
+              separated,
+              type,
+              value,
+            }}
+          >
             {
-              type === 'multiple' && !separated
-                ? <li className="tyk-toggle__notch" ref={this.notchRef} style={this.positionNotch()} />
+              label
+                ? <label className="tyk-toggle__label" style={this.getLabelStyles()}>{label}</label>
                 : null
             }
-          </ul>
-        </ToggleContext.Provider>
-      </div>
+            <ul className={`tyk-toggle__list tyk-toggle__list--${type} ${error && 'tyk-toggle__list--has-error'}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
+              { children }
+              {
+                type === 'multiple' && !separated
+                  ? <li className="tyk-toggle__notch" ref={this.notchRef} style={this.positionNotch()} />
+                  : null
+              }
+            </ul>
+          </ToggleContext.Provider>
+        </div>
+        {
+          error && (
+            <p
+              className="tyk-form-control__error-message"
+            >
+              { error }
+            </p>
+          )
+        }
+      </>
     );
   }
 }

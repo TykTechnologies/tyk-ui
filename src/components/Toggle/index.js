@@ -45,6 +45,7 @@ export default class TestToggle extends Component {
               label="Is enabled?"
               theme="primary"
               size="lg"
+              error="My error"
               onDark
             >
               <Toggle.Item
