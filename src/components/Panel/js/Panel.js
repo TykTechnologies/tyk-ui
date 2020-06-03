@@ -24,8 +24,10 @@ const Panel = (props) => {
   const getCssClasses = () => {
     let cssClasses = ['tyk-panel'];
     const panelTheme = `tyk-panel--${theme || 'default'}`;
+    const collapsbleIconPosition = `tyk-panel__icon-collapse--${collapsibleIconPosition}`;
 
     cssClasses.push(panelTheme);
+    cssClasses.push(collapsbleIconPosition);
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));

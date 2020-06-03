@@ -11,7 +11,7 @@ import Button from '../Button';
     Panel body content
   </Panel.Body>
 </Panel>
-<Panel collapsable theme="success">
+<Panel collapsable theme="success" collapsibleIconPosition="left">
   {
     ({toggleCollapse}) => (
       <>
