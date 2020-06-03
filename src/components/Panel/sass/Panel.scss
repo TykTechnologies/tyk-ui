@@ -130,7 +130,14 @@
 
   &.collapsable {
     cursor: pointer;
-    padding-right: $padding-x-right-panel-collapsable;
+
+    .tyk-panel__icon-collapse--right & {
+      padding-right: $padding-x-right-panel-collapsable;
+    }
+
+    .tyk-panel__icon-collapse--left & {
+      padding-left: $padding-x-left-panel-collapsable;
+    }
   }
 
   .collapsable__arrow-right {
