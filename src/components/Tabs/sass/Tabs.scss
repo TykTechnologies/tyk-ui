@@ -22,7 +22,7 @@
 
         &.active button,
         button:hover {
-          border-bottom-color: theme-color('primary', 'base');
+          border-bottom-color: $tab-border-color;
           color: $tab-active-button-color;
         }
 

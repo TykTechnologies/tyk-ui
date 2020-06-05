@@ -167,12 +167,16 @@ const Tabs = (props) => {
     }
   };
 
-  const updateTab = (tabData) => {
+  const updateTab = (tabData, path) => {
     setTabs((prevTabs) => {
       const tempTabs = { ...prevTabs };
       tempTabs[tabData.id] = tabData;
       return tempTabs;
     });
+
+    if (tabData.selected) {
+      setCurrentSelectedPath(path, tabData);
+    }
   };
 
   const hideTab = (path) => {
