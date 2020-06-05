@@ -256,7 +256,7 @@ const Chart = (props) => {
     return () => {
       window.removeEventListener('resize', onResize);
     };
-  }, []);
+  }, [tykChartInstance]);
 
   useEffect(() => {
     setTykChartInstance(echarts.init(chartWrapperRef.current));
@@ -362,7 +362,9 @@ const Chart = (props) => {
     if (!tempStyle.height) {
       tempStyle.height = '300px';
     }
-
+    if (!tempStyle.width) {
+      tempStyle.width = '100%';
+    }
     return tempStyle;
   };
 
