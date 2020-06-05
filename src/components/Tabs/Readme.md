@@ -4,6 +4,7 @@ import Button from '../Button';
 
 const [showTab, setShowTab] = useState(true);
 const [displayTab3, setDisplayTab3] = useState(true);
+const [selectedTab, setSelectedTab] = useState('tab-1');
 <>
 <Button
   theme="default"
@@ -11,9 +12,21 @@ const [displayTab3, setDisplayTab3] = useState(true);
 >
   Toggle Tab 3 display
 </Button>
+<Button
+  theme="default"
+  onClick={() => setSelectedTab('tab-1')}
+>
+  Tab 1
+</Button>
+<Button
+  theme="default"
+  onClick={() => setSelectedTab('tab-2')}
+>
+  Tab 2
+</Button>
+{selectedTab}
 <Tabs
   id="group-tabs-1"
-  selected="tab-1"
 >
   {
     ({
@@ -36,7 +49,7 @@ const [displayTab3, setDisplayTab3] = useState(true);
       <Tabs.Tab
           id="tab-1"
           title="Tab 1"
-          selected={ true }
+          selected={ selectedTab === 'tab-1' }
         >
           <Tabs
             id="group-tabs-1.1"
@@ -45,7 +58,6 @@ const [displayTab3, setDisplayTab3] = useState(true);
             <Tabs.Tab
               id="tab-1.1"
               title="Tab 1.1"
-              selected={ true }
             >
               Tab 1.1
             </Tabs.Tab>
@@ -71,6 +83,7 @@ const [displayTab3, setDisplayTab3] = useState(true);
             <Tabs.Tab
               id="tab-2"
               title="Tab 2"
+              selected={ selectedTab === 'tab-2' }
             >
               Tab 2
             </Tabs.Tab>
