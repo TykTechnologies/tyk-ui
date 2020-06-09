@@ -41,7 +41,7 @@
     }
 
     .tyk-panel__body {
-        @include panel-variant($panel-primary-body-color);
+        @include panel-variant($panel-primary-body-color, $panel-primary-body-text-color);
       }
     .tyk-panel__header {
       border: $panel-primary-border-color;
