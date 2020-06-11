@@ -704,7 +704,7 @@ export default class Combobox extends Component {
                       onKeyDown={() => {}}
                     >
                       { this.getComboboxDisplayData() }
-                      <Icon type="arrow-down" />
+                      <Icon family="tykon" type="arrowdown" />
                     </li>
                   )
               }
