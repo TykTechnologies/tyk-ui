@@ -382,7 +382,7 @@ function Combobox(props) {
               onClick={executeTriggerAction}
               onKeyPress={executeTriggerAction}
             >
-              <Icon type="arrow-down" />
+              <Icon family="tykon" type="arrowdown" />
             </div>
           )}
         </div>
