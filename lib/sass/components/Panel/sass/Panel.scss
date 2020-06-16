@@ -37,7 +37,7 @@
     background-color: transparent;
 
     .tyk-panel__header {
-      @include panel-variant($panel-primary-header-color)
+      @include panel-variant($panel-primary-header-color, $panel-primary-header-text-color)
     }
 
     .tyk-panel__body {
