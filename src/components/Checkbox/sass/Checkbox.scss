@@ -3,6 +3,14 @@
 @import './variables';
 
 .tyk-checkbox {
+  label {
+    padding-left: map-get($spacing, 'xl');
+
+    input {
+      margin-left: -1 * map-get($spacing, 'xl');
+    }
+  }
+
   &--theme-light {
     label {
       color: $tyk-checkbox-theme-light-label-color;
