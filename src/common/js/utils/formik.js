@@ -64,6 +64,9 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     setMyValue(field.value);
   }, [field.value]);
 
+  // eslint-disable-next-line no-param-reassign
+  if (form.status?.disabled) properties.disabled = true;
+
   return (
     <Component
       {...field}
