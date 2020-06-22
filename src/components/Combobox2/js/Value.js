@@ -104,7 +104,13 @@ function Value(props) {
         key={v.id}
         theme="combobox"
       >
-        <button type="button" onClick={() => sendMessage('tag.remove', v.id)}>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            sendMessage('tag.remove', v.id);
+          }}
+        >
           <Icon type="times" />
         </button>
         <span title={v.name}>{ v.name }</span>
@@ -130,6 +136,7 @@ function Value(props) {
                 if (e.key === 'Enter') e.preventDefault();
                 entryFieldOnKeyDown(e.key, e.target.value);
               }}
+              onFocus={() => sendMessage('tag.input.focus')}
               onBlur={(e) => {
                 sendMessage('tag.input.blur', e.target.value);
                 if (addTagOnBlur) entryFieldOnChange('');
