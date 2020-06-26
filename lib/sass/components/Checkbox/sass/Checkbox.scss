@@ -3,11 +3,12 @@
 @import './variables';
 
 .tyk-checkbox {
+  $label-indent: 20px;
   label {
-    padding-left: map-get($spacing, 'xl');
+    padding-left: $label-indent;
 
     input {
-      margin-left: -1 * map-get($spacing, 'xl');
+      margin-left: -1 * $label-indent;
     }
   }
 
