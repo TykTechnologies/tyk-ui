@@ -97,7 +97,7 @@ function Combobox(props) {
   function getFilteredValues() {
     const defaultFn = (v, s) => v.name.toLowerCase().includes(s);
     const fn = matchItemFn || defaultFn;
-    const filteredValues = values.filter(v => fn(v, searchValue));
+    const filteredValues = values.filter(v => fn(v, searchValue.toLowerCase()));
     return filteredValues;
   }
 
