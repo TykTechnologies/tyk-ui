@@ -38,7 +38,7 @@ export default class PanelHeader extends Component {
       <PortalContext.Consumer>
         {
           (portalContext) => {
-            const HeaderTag = portalContext.theme === 'blank' ? 'h4' : 'div';
+            const HeaderTag = portalContext.theme === 'blank' ? 'h3' : 'div';
             const iconType = portalContext.collapsed ? 'chevron-down' : 'chevron-up';
 
             return (

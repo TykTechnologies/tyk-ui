@@ -55,3 +55,11 @@ import Button from '../Button';
   </Panel.Body>
 </Panel>
 ```
+```js
+<Panel theme="blank" collapsable={ true } collapsed={ true } isLeft>
+  <Panel.Header>Panel example</Panel.Header>
+  <Panel.Body>
+    Panel body content
+  </Panel.Body>
+</Panel>
+```

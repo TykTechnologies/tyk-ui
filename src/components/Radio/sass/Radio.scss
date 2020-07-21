@@ -3,6 +3,10 @@
 @import './variables';
 
 .tyk-radio {
+  label {
+    align-items: center;
+    display: flex;
+  }
   &--theme-light {
     label {
       color: $tyk-radio-theme-light-label-color;

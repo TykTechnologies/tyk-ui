@@ -220,7 +220,7 @@
       $padding-y-button-sm,
       $padding-x-button-sm,
       text-scale('xs'),
-      $line-height-button-sm,
+      line-height('xs'),
       $button-border-radius
     )
   }
@@ -230,7 +230,7 @@
       $padding-y-button-md,
       $padding-x-button-md,
       text-scale('sm'),
-      $line-height-button-md,
+      line-height('sm'),
       $button-border-radius
     )
   }
@@ -239,7 +239,7 @@
       $padding-y-button-lg,
       $padding-x-button-lg,
       text-scale('md'),
-      $line-height-button-lg,
+      line-height('md'),
       $button-border-radius
     )
   }
@@ -247,6 +247,7 @@
   &--icon-only {
     border-radius: $general-border-radius;
     padding: 0;
+    line-height: 24px;
     width: 24px;
 
     &:hover {

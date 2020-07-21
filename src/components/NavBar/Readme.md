@@ -6,6 +6,7 @@ import Button from '../Button';
     <a href="">Back to something</a>
   }
   title="Prct"
+  subtitle="This is a very long subtitle"
   left={
     <Tooltip
       render="prct"

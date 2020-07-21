@@ -132,6 +132,9 @@
 
 .tyk-form-control__error-message {
   color: $form-control-error-colour;
+  font-family: $font-family-regular;
+  font-size: text-scale('xs');
+  line-height: line-height('xs');
   margin-top: 5px;
   padding: $error-message-padding;
 }
@@ -160,12 +163,13 @@
 }
 
 .tyk-form-control {
-  font-family: $font-family-medium;
+  font-family: $font-family-regular;
+  font-size: text-scale('sm');
+  line-height: line-height('sm');
   border: $form-control-border;
   background-color: white;
   color: $text-color;
   display: block;
-  font-size: text-scale('base');
   height: $form-control-height;
   padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
   transition: all .2s linear;
@@ -184,7 +188,9 @@
   &__help-block {
     color: $help-block-color;
     font-style: $help-block-font-style;
-    font-size: text-scale('sm');
+    font-family: $font-family-regular;
+    font-size: text-scale('xs');
+    line-height: line-height('xs');
     padding: $help-block-padding;
     margin: 5px 0 0 0;
   }

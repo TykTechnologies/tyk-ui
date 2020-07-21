@@ -3,6 +3,10 @@
 @import './variables';
 
 .tyk-checkbox {
+  label {
+    align-items: center;
+    display: flex;
+  }
   &--theme-light {
     label {
       color: $tyk-checkbox-theme-light-label-color;

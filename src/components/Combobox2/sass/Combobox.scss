@@ -114,6 +114,9 @@
   }
 
   &__text-value {
+    font-family: $font-family-regular;
+    font-size: text-scale('sm');
+    line-height: line-height('sm');
     padding: 9px 5px;
     width: 100%;
     overflow: hidden;

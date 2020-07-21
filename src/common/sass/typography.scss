@@ -2,13 +2,99 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: $headings-margin-bottom;
   font-family: $headings-font-family;
   font-weight: $headings-font-weight;
-  line-height: $headings-line-height;
   color: $text-color;
 }
 
-h1 { font-size: text-scale('xxl'); }
-h2 { font-size: text-scale('xl'); }
-h3 { font-size: text-scale('lg'); }
-h4 { font-size: text-scale('md'); }
-h5 { font-size: text-scale('sm'); }
-h6 { font-size: text-scale('xs'); }
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  color: $label-color;
+}
+
+h1 {
+  font-size: text-scale('xxl');
+  line-height: line-height('xxl');
+}
+h2 {
+  font-size: text-scale('xl');
+  line-height: line-height('xl');
+}
+h3 {
+  font-size: text-scale('lg');
+  line-height: line-height('lg');
+}
+h4 {
+  font-size: text-scale('md');
+  line-height: line-height('md');
+}
+h5 {
+  font-size: text-scale('sm');
+  line-height: line-height('sm');
+}
+h6 {
+  font-size: text-scale('xs');
+  line-height: line-height('xs');
+}
+
+p,
+label {
+  font-size: text-scale('sm');
+  line-height: line-height('sm');
+  font-family: $font-family-regular;
+}
+
+strong {
+  font-family: $font-family-bold;
+}
+
+a {
+  color: theme-color('success', 'base');
+  font-family: $font-family-regular;
+  font-size: text-scale('sm');
+  text-decoration: underline;
+
+  &.link--bold {
+    font-family: $font-family-bold;
+  }
+}
+
+.font-family-regular {
+  font-family: $font-family-regular;
+}
+.font-family-medium {
+  font-family: $font-family-medium;
+}
+.font-family-bold {
+  font-family: $font-family-bold;
+}
+.heading-font-family-regular {
+  font-family: $headings-font-family-regular;
+}
+.heading-font-family-medium {
+  font-family: $headings-font-family-medium;
+}
+.heading-font-family-bold {
+  font-family: $headings-font-family-bold;
+}
+
+.text {
+  &--primary {
+    color: theme-color('primary', 'base');
+  }
+  &--danger {
+    color: theme-color('danger', 'base');
+  }
+  &--info {
+    color: theme-color('info', 'base');
+  }
+  &--medium {
+    font-family: $font-family-medium;
+  }
+  &--bold {
+    font-family: $font-family-bold;
+  }
+  &--upercase {
+    text-transform: uppercase;
+  }
+}

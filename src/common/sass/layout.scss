@@ -1,5 +1,14 @@
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: theme-color('background', 'base');
+  color: $text-color;
+  font-size: text-scale('sm');
+  line-height: line-height('sm');
+  font-family: $font-family-regular;
 }
 
 .tyk-main-wrapper {
