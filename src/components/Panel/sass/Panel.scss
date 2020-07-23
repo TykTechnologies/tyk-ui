@@ -143,20 +143,18 @@
   }
 
   .collapsable__arrow-right {
+    font-size: text-scale('sm');
     position: absolute;
     padding: 10px;
     right: 10px;
-    top: calc(50% - 17px);
-
-    i {
-      float: left;
-    }
+    top: calc(50% - 21px);
   }
   .collapsable__arrow-left {
+    font-size: text-scale('sm');
     position: absolute;
-    padding: 8px 0px 10px 15px;
+    padding: 8px 0px 10px 20px;
     left: 0px;
-    top: calc(50% - 17px);
+    top: calc(50% - 21px);
   }
 }
 

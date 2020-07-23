@@ -54,6 +54,7 @@
     }
   }
 
+  /*this needs to be removed*/
   &--extra-dark {
     @include form-group-variant(
       theme-color('background', 'extra-dark')
@@ -97,10 +98,12 @@
 
 .tyk-form-group--addon-right input {
   border-right: 0 !important;
+  padding-right: 0;
 }
 
 .tyk-form-group--addon-left input {
   border-left: 0 !important;
+  padding-left: 0;
 }
 
 .tyk-form-group--rounded-corners.tyk-form-group--addon-right {
@@ -131,12 +134,23 @@
 }
 
 .tyk-form-control__error-message {
-  color: $form-control-error-colour;
   font-family: $font-family-regular;
   font-size: text-scale('xs');
   line-height: line-height('xs');
   margin-top: 5px;
   padding: $error-message-padding;
+  position: relative;
+
+  &:before {
+    content: '!';
+    background: theme-color('danger', 'base');
+    color: white;
+    font-family: $font-family-bold;
+    border-radius: 8px;
+    display: inline-block;
+    margin-right: 5px;
+    padding: 0px 7px;
+  }
 }
 
 .tyk-input-group {
@@ -174,6 +188,16 @@
   padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
   transition: all .2s linear;
   width: 100%;
+
+  &[disabled] {
+    background-color: $form-control-disabled-background-color;
+
+    .tyk-input-group__addon {
+      background-color: $form-control-disabled-background-color;
+    }
+
+    cursor: not-allowed;
+  }
 
   &::placeholder {
     font-family: $form-control-placeholder-font-family;

@@ -72,10 +72,14 @@
     color: $text-color;
 
     &[disabled] {
-      border: $form-control-disabled-border;
+      border: 2px solid $border-color;
       background-color: $form-control-disabled-background-color;
       color: $form-control-disabled-color;
       cursor: not-allowed;
+
+      + .tyk-input-group__addon {
+        background-color: $form-control-disabled-background-color;
+      }
     }
 
     &::placeholder {
@@ -88,6 +92,15 @@
 
     &::-ms-input-placeholder {
       opacity: 0.8;
+    }
+  }
+  
+  &.tyk-form-group--addon-left {
+    .tyk-input-group__addon {
+      border-bottom: 2px solid $border-color;
+      border-left: 2px solid $border-color;
+      border-top: 2px solid $border-color;
+      color: $color;
     }
   }
 

@@ -29,19 +29,19 @@
 
   button {
     background: white;
-    border: 1px solid theme-color('background', 'light');
+    border: none;
     font-size: text-scale('sm');
     cursor: pointer;
     margin-left: -1px;
     padding: $pagination-button-padding;
 
     &:hover {
-      background-color: theme-color('background', 'light');
+      background-color: theme-color('success', 'light');
     }
   }
 
   .active button {
-    background-color: theme-color('primary', 'base');
+    background-color: theme-color('success', 'base');
     color: white;
   }
 }

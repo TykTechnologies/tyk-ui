@@ -44,7 +44,7 @@ export default class TestToggle extends Component {
               onChange={this.toggleOnChange}
               label="Is enabled?"
               theme="primary"
-              size="lg"
+              size="md"
               error="My error"
               onDark
             >
@@ -249,6 +249,7 @@ export default class TestToggle extends Component {
               onChange={this.toggleMultipleOnChange}
               theme="warning"
               type="multiple"
+              label="this is a toggle demo"
             >
               <Toggle.Item
                 label="short"

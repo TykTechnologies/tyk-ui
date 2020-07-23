@@ -7,7 +7,7 @@
 
 @mixin button-variant(
   $background,
-  $border: transparent,
+  $border: $background,
   $color: white,
   $hover-background: darken($background, 7.5%),
   $hover-border: darken($border, 10%),
@@ -15,8 +15,8 @@
   $active-border: darken($border, 12.5%),
 ) {
   background-color: $background;
-  border-color: $border;
   color: $color;
+  border: 2px solid $border;
 
   &:hover {
     background-color: $hover-background;

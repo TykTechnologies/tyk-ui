@@ -14,11 +14,14 @@
 
   &__pre {
     align-self: flex-end;
+    color: $text-color;
     flex-basis: 100%;
 
     a {
+      font-family: $font-family-bold;
       font-size: text-scale('xs');
       line-height: line-height('xs');
+      color: $text-color;
     }
   }
 
