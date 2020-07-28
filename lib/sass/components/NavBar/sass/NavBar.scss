@@ -14,11 +14,19 @@
 
   &__pre {
     align-self: flex-end;
+    color: $text-color;
     flex-basis: 100%;
+
+    a {
+      font-family: $font-family-bold;
+      font-size: text-scale('xs');
+      line-height: line-height('xs');
+      color: $text-color;
+    }
   }
 
-  &.tyk-nav-bar__with-tabs {
-    padding-bottom: 0;
+  &.tyk-nav-bar__with-tabs .tyk-tabs--default > ul li button {
+    padding-top: 0;
   }
 
   @media screen and (max-width: 1024px) {
@@ -54,7 +62,8 @@
 
     h1 {
       font-size: $nav-bar-header-font-size;
-      font-family: $headings-font-family;
+      font-family: $nav-bar-header-font-family;
+      line-height: $nav-bar-header-line-height;
       margin: 0;
       padding-right: 10px;
     }

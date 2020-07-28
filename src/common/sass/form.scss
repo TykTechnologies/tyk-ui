@@ -21,10 +21,14 @@
     outline: none;
 
     &:focus {
-      border-left: 10px solid theme-color('danger', 'dark');
+      border-left: 2px solid theme-color('danger', 'dark');
       border-color: theme-color('danger', 'dark');
       outline: none;
     }
+  }
+
+  label {
+    font-family: $font-family-medium;
   }
 
   &--inline {
@@ -161,7 +165,7 @@
   &__addon {
     align-items: center;
     background-color: $form-control-addon-background-color;
-    border: 1px solid theme-color('background', 'dark');
+    border: $form-control-border;
     display: flex;
     height: $form-control-height;
     padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
@@ -177,7 +181,7 @@
 }
 
 .tyk-form-control {
-  font-family: $font-family-regular;
+  font-family: $font-family-medium;
   font-size: text-scale('sm');
   line-height: line-height('sm');
   border: $form-control-border;
@@ -247,7 +251,7 @@ select {
   margin: 10px 0;
 
   label {
-    font-weight: normal;
+    font-family: $font-family-medium;
   }
 
   input {

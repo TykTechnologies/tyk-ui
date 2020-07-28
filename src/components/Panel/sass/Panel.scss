@@ -16,15 +16,24 @@
     border-bottom: 1px solid $panel-default-border-bottom-color;
     display: flex;
     font-family: $font-family-regular;
+
+    > .tyk-icon,
+    > .tyk-tooltip__wrapper {
+      margin-left: 5px;
+    }
   }
 
   .tyk-panel {
-    border: 1px solid theme-color('background', 'dark');
+    border: 2px solid theme-color('default', 'light');
     box-shadow: none;
     -webkit-box-shadow: none;
   }
 
   &--blank {
+    &.tyk-panel--collapsed {
+      margin-bottom: 40px;
+    }
+
     .tyk-panel__header {
       margin-bottom: -20px;
       padding: $padding-y-blank-panel-header $padding-x-panel-header;

@@ -8,12 +8,19 @@
   width: 100%;
 
     > thead th {
-      color: theme-color('foreground', 'light');
-      font-size: text-scale('sm');
+      color: $text-color;
+      font-size: text-scale('xs');
+      line-height: line-height('xs');
+      font-family: $font-family-bold;
+      text-transform: uppercase;
+
+      i {
+        font-size: text-scale('xs');
+      }
 
       .tyk-button {
         background: none;
-        color: theme-color('foreground', 'light');
+        color: theme-color('default', 'light');
         padding: 0;
       }
     }
@@ -23,11 +30,27 @@
     }
 
     > tbody td {
+      font-size: text-scale('sm');
+      line-height: line-height('sm');
+      font-family: $font-family-regular;
       padding: $table-td-padding-y $table-td-padding-x;
       vertical-align: middle;
-        input:not([type='checkbox']) {
-          margin-top: 15px;
-        }
+      input:not([type='checkbox']) {
+        margin-top: 15px;
+      }
+
+      a {
+        color: $text-color;
+        font-family: $font-family-medium;
+      }
+
+      label {
+        margin: 0;
+      }
+
+      input[type='checkbox'] {
+        margin: 0;
+      }
     }
 
     > tbody tr:nth-child(2n+1) {
@@ -65,6 +88,7 @@
 .header-sort {
   padding-left: 10px;
   padding-top: 5px;
+  vertical-align: middle;
 }
 
 .new-table-pagination {
@@ -72,7 +96,7 @@
   padding-top: 10px;
 }
 
-.selectable > div{
+.selectable > div {
   margin-left: 20px;
 }
 

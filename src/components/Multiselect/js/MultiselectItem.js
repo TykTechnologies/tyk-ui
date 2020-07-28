@@ -58,7 +58,7 @@ class MultiselectItem extends Component {
                 ? (
                   <li>
                     <div>
-                      <span>
+                      <span className="tyk-multiselect-item__name">
                         {
                           context.itemDisplayTemplate
                             ? context.itemDisplayTemplate(item)

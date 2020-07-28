@@ -1,10 +1,11 @@
-$toggle-font-family: $font-family-regular !default;
-$toggle-list-background-color: theme-color('background', 'dark') !default;
+$toggle-font-family: $font-family-bold !default;
+$toggle-list-background-color: theme-color('background', 'light') !default;
 $toggle-list-text-color: white !default;
 $toggle-list-background-color-on-dark: white !default;
 $toggle-list-text-color-on-dark: $text-color !default;
 $toggle-top: 4px !default;
 $toggle-bottom: 4px !default;
-$toggle-label-font-size: text-scale('md') !default;
+$toggle-label-font-size: text-scale('sm') !default;
+$toggle-label-font-family: $font-family-medium;
 $toggle-label-color: $label-color !default;
 $toggle-padding: 0 !default;

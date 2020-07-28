@@ -114,6 +114,9 @@
   }
 
   &__text-value {
+    font-family: $font-family-medium;
+    font-size: text-scale('sm');
+    line-height: line-height('sm');
     padding: 9px 5px;
     width: 100%;
     overflow: hidden;
@@ -156,7 +159,7 @@
 .tyk-combobox2__combobox-dropdown {
   display: flex;
   flex-direction: column;
-  border: 1px solid $form-default-color;
+  border: 2px solid $form-default-color;
   background-color: white;
 
   &.tyk-form-group--rounded-corners {
@@ -167,7 +170,7 @@
     background-color: white;
     position: sticky;
     top: 0;
-    padding: 10px 15px;
+    padding: 10px 20px;
 
     + .combobox-list {
       border-top: 1px solid $form-default-color;
@@ -180,7 +183,7 @@
     li {
       display: flex;
       cursor: pointer;
-      padding: 9px 15px;
+      padding: 9px 20px;
       transition: all .2s;
 
       &:hover,

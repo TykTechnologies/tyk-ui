@@ -67,6 +67,7 @@
   color: $text-color;
 
   > .tyk-form-control__wrapper > .tyk-form-control,
+  > .tyk-form-control__wrapper  > .tyk-file-input__wrapper > .tyk-form-control,
   > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control {
     border: 2px solid $border-color;
     color: $text-color;

@@ -349,6 +349,7 @@ export default class TestToggle extends Component {
               theme="warning-gradient"
               type="multiple"
               size="lg"
+              onDark
             >
               <Toggle.Item
                 label="short"

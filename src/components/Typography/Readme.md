@@ -21,4 +21,9 @@
 <a>link medium</a>
 <br />
 <a className="font-family-bold">link bold</a>
+<br/>
+<br/>
+<h2 className="section-title">Section title</h2>
+<h4 className="sub-section-title">Sub Section title</h4>
+<h5 className="section-group-title">Section Group title</h5>
 ```

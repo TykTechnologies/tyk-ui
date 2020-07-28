@@ -2,10 +2,14 @@
   align-items: center;
   border-radius: $general-border-radius;
   display: inline-flex;
-  font-size: text-scale('sm');
+  font-size: text-scale('xs');
   margin: $pill-margin;
   padding: 6px 15px;
-  font-family: $font-family-regular;
+  font-family: $font-family-medium;
+
+  i {
+    font-size: text-scale('xs');
+  }
 
   + .tyk-pill {
     margin-right: 10px;
@@ -30,50 +34,90 @@
   &--default {
     background-color: $default-pill-background-color;
     color: $default-pill-color;
+
+    i {
+      color: $default-pill-color;
+    }
   }
 
   &--default-outline {
     box-shadow: $default-outline-pill-box-shadow;
     color: $default-outline-pill-color;
+
+    i {
+      color: $default-pill-color;
+    }
   }
 
   &--primary {
     background-color: theme-color('primary', 'base');
     color: white;
+
+    i {
+      color: $default-pill-color;
+    }
   }
 
   &--primary-outline {
     box-shadow: inset 0px 0px 0px 2px theme-color('primary', 'base');
     color: $text-color;
+
+    i {
+      color: $text-color;
+    }
   }
 
   &--success {
     background-color: theme-color('success', 'base');
     color: white;
+
+    i {
+      color: white;
+    }
   }
 
   &--success-outline {
     box-shadow: inset 0px 0px 0px 2px theme-color('success', 'base');
     color: $text-color;
+
+    i {
+      color: $text-color;
+    }
   }
 
   &--danger {
     background-color: theme-color('danger', 'base');
     color: white;
+
+    i {
+      color: white;
+    }
   }
 
   &--danger-outline {
     box-shadow: inset 0px 0px 0px 2px theme-color('danger', 'base');
     color: $text-color;
+
+    i {
+      color: $text-color;
+    }
   }
 
   &--warning {
     background-color: theme-color('warning', 'light');
     color: white;
+
+    i {
+      color: white;
+    }
   }
 
   &--warning-outline {
     box-shadow: inset 0px 0px 0px 2px theme-color('warning', 'base');
     color: $text-color;
+
+    i {
+      color: $text-color;
+    }
   }
 }

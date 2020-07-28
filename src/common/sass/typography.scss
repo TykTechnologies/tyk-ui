@@ -48,14 +48,17 @@ strong {
   font-family: $font-family-bold;
 }
 
-a {
-  color: theme-color('success', 'base');
-  font-family: $font-family-regular;
-  font-size: text-scale('sm');
-  text-decoration: underline;
-
-  &.link--bold {
-    font-family: $font-family-bold;
+p,
+label {
+  a {
+    color: theme-color('success', 'base');
+    font-family: $font-family-regular;
+    font-size: text-scale('sm');
+    text-decoration: underline;
+  
+    &.link--bold {
+      font-family: $font-family-bold;
+    }
   }
 }
 
@@ -96,5 +99,36 @@ a {
   }
   &--upercase {
     text-transform: uppercase;
+  }
+}
+
+.section-title {
+  margin-bottom: 5px;
+
+  .tyk-icon {
+    margin-left: 5px;
+  }
+}
+
+.sub-section-title {
+  margin-bottom: 5px;
+  font-family: $font-family-medium;
+  font-size: text-scale('sm');
+  line-height: line-height('sm');
+
+  .tyk-icon {
+    margin-left: 5px;
+  }
+}
+
+.section-group-title {
+  margin-bottom: 5px;
+  font-family: $font-family-bold;
+  font-size: text-scale('xs');
+  line-height: line-height('xs');
+  text-transform: uppercase;
+
+  .tyk-icon {
+    margin-left: 5px;
   }
 }

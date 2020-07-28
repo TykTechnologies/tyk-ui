@@ -1,6 +1,10 @@
 .tyk-file-input__wrapper {
   position: relative;
 
+  > input {
+    padding: 6px 20px;
+  }
+
   > button {
     background: none;
     border: none;

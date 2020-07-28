@@ -82,6 +82,7 @@ const Tooltip = ({
       onBlur={() => setActive(false)}
       ref={sourceRef}
       key="0"
+      className="tyk-tooltip__wrapper"
       style={{
         display: 'inline-block',
         ...style,

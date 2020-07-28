@@ -1,6 +1,6 @@
 .tyk-tooltip-content {
   position: relative;
-  background-color: theme-color('foreground', 'light');
+  background-color: theme-color('primary', 'dark');
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
@@ -13,13 +13,13 @@
     left: calc(50% - 5px);
     border-width: 5px;
     border-style: solid;
-    border-color: theme-color('foreground', 'light') transparent transparent transparent;
+    border-color: theme-color('primary', 'dark') transparent transparent transparent;
   }
 }
 
 .tyk-tooltip__bottom {
   .tyk-tooltip-content:after {
-    border-color: transparent transparent theme-color('foreground', 'light') transparent;
+    border-color: transparent transparent theme-color('primary', 'dark') transparent;
     bottom: auto;
     top: -10px;
   }

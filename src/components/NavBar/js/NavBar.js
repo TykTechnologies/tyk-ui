@@ -54,7 +54,7 @@ export default class NavBar extends PureComponent {
                   <h1>{ title }</h1>
                   {
                     subtitle
-                      ? <p className="font-family-medium">{subtitle}</p>
+                      ? <p className="font-family-regular">{subtitle}</p>
                       : null
                   }
                 </div>

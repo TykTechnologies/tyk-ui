@@ -3,27 +3,12 @@
 @import './variables';
 
 .tyk-checkbox {
-  &--theme-light {
-    label {
-      color: $tyk-checkbox-theme-light-label-color;
-    }
-
-    &.tyk-checkbox--is-disabled {
-      label {
-        color: $tyk-checkbox-theme-light-label-disabled-color;
-      }
-    }
+  label {
+    align-items: center;
+    display: flex;
   }
 
-  &--theme-dark {
-    label {
-      color: $tyk-checkbox-theme-dark-label-color;
-    }
-
-    &.tyk-checkbox--is-disabled {
-      label {
-        color: $tyk-checkbox-theme-dark-label-disabled-color;
-      }
-    }
+  &--is-disabled label {
+    cursor: not-allowed;
   }
 }

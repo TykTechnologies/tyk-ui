@@ -1,29 +1,13 @@
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 @import './variables';
-
-.tyk-radio {
-  &--theme-light {
-    label {
-      color: $tyk-radio-theme-light-label-color;
-    }
-
-    &.tyk-radio--is-disabled {
-      label {
-        color: $tyk-radio-theme-light-label-disabled-color;
-      }
-    }
+.tyk-radio{
+  label {
+    align-items: center;
+    display: flex;
   }
 
-  &--theme-dark {
-    label {
-      color: $tyk-radio-theme-dark-label-color;
-    }
-
-    &.tyk-radio--is-disabled {
-      label {
-        color: $tyk-radio-theme-dark-label-disabled-color;
-      }
-    }
+  &--is-disabled label {
+    cursor: not-allowed;
   }
 }

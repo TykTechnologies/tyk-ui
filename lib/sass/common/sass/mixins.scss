@@ -67,15 +67,20 @@
   color: $text-color;
 
   > .tyk-form-control__wrapper > .tyk-form-control,
+  > .tyk-form-control__wrapper  > .tyk-file-input__wrapper > .tyk-form-control,
   > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control {
     border: 2px solid $border-color;
     color: $text-color;
 
     &[disabled] {
-      border: $form-control-disabled-border;
+      border: 2px solid $border-color;
       background-color: $form-control-disabled-background-color;
       color: $form-control-disabled-color;
       cursor: not-allowed;
+
+      + .tyk-input-group__addon {
+        background-color: $form-control-disabled-background-color;
+      }
     }
 
     &::placeholder {
@@ -90,12 +95,14 @@
       opacity: 0.8;
     }
   }
-
-  .tyk-form-control__help-block {
-    color: $help-block-color;
-    font-style: $help-block-font-style;
-    font-size: text-scale('sm');
-    padding: $help-block-padding;
+  
+  &.tyk-form-group--addon-left {
+    .tyk-input-group__addon {
+      border-bottom: 2px solid $border-color;
+      border-left: 2px solid $border-color;
+      border-top: 2px solid $border-color;
+      color: $color;
+    }
   }
 
   &.tyk-form-group--addon-right {

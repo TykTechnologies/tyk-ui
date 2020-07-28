@@ -1,17 +1,40 @@
 .tyk-multiselect {
   align-items: flex-start;
-  border: 1px solid theme-color('background', 'dark');
+  border-radius: $general-border-radius;
   flex-wrap: wrap;
   display: flex;
   margin-bottom: 20px;
   width: 100%;
 
+  /*FALLBACK FOR ANGULAR COMPONENTS*/
+  .input-group .input-group-addon + .form-control {
+    border-width: 1px !important;
+    border-left: none !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .input-group .input-group-addon {
+    background: transparent !important;
+    border-width: 1px !important;
+    border-right: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  /*END FALLBACK FOR ANGULAR COMPONENTS*/
+
   &.has-error {
-    border: 2px solid theme-color('danger', 'light');
+    border: 2px solid theme-color('danger', 'base');
   }
 
   &__header {
-    background-color: theme-color('foreground', 'base-dark');
+    background-color: theme-color('default', 'base');
+    border-top-left-radius: $general-border-radius;
+    border-top-right-radius: $general-border-radius;
     color: white;
     display: flex;
     width: 100%;
@@ -23,6 +46,10 @@
   }
 
   &__panel-wrapper {
+    border: $form-control-border;
+    border-top: none;
+    border-bottom-left-radius: $general-border-radius;
+    border-bottom-right-radius: $general-border-radius;
     display: flex;
     flex: 1;
     height: 265px;
@@ -37,7 +64,7 @@
     width: calc(50% + 1px);
 
     &:last-child {
-      border-left: 1px solid theme-color('background', 'dark');
+      border-left: $form-control-border;
       .tyk-form-group {
         margin-left: -1px;
         width: calc(100% + 2px);
@@ -59,8 +86,8 @@
       overflow-y: auto;
     }
 
-    li {
-      border-bottom: 1px solid theme-color('background', 'dark');
+    > li {
+      border-bottom: $form-control-border;
       display: flex;
       flex-direction: column;
       padding: 10px 15px;
@@ -81,12 +108,21 @@
     }
   }
 
+  &-item__name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .tyk-form-group {
     margin: 0;
   }
 
   .tyk-multiselect-item__controls {
+    display: flex;
     margin-left: auto;
+    flex-wrap: nowrap;
 
     .tyk-button {
       color: $text-color;

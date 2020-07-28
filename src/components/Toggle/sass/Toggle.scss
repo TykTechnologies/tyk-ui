@@ -28,6 +28,7 @@
 
   & &__label {
     display: block;
+    font-family: $toggle-label-font-family;
     font-size: $toggle-label-font-size;
     padding: $toggle-padding;
     width: 100%;
@@ -270,6 +271,7 @@
 
     label {
       cursor: pointer;
+      font-family: $toggle-font-family;
       position: relative;
       margin: 0;
       transition: all .2s ease;
