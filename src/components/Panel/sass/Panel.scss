@@ -11,6 +11,11 @@
   font-family: $font-family-medium;
   position: relative;
 
+  &.has-error,
+  & &.has-error {
+    border: 2px solid theme-color('danger', 'base');
+  }
+
   &__header {
     align-items: center;
     border-bottom: 1px solid $panel-default-border-bottom-color;

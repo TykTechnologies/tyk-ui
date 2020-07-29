@@ -66,3 +66,19 @@
     }
   }
 }
+
+ul.tyk-list--inline {
+  align-items: center;
+  display: flex;
+
+  li {
+    padding: 0 map-get($spacing, 'sm');
+  }
+
+  &.tyk-list--with-separator {
+
+    li:not(:first-child) {
+      border-left: 1px solid theme-color('default', 'base');
+    }
+  }
+}

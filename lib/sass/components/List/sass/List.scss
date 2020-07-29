@@ -19,6 +19,7 @@
   li {
     border-bottom: 1px solid theme-color('default', 'light');
     padding: 10px 20px;
+    font-family: $font-family-medium;
 
     &:last-child {
       border: none;
@@ -62,6 +63,22 @@
 
     li {
       border-color: theme-color('danger', 'light');
+    }
+  }
+}
+
+ul.tyk-list--inline {
+  align-items: center;
+  display: flex;
+
+  li {
+    padding: 0 map-get($spacing, 'sm');
+  }
+
+  &.tyk-list--with-separator {
+
+    li:not(:first-child) {
+      border-left: 1px solid theme-color('default', 'base');
     }
   }
 }

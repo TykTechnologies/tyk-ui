@@ -3,7 +3,7 @@
 
 .tyk-form-section__title {
   font-size: text-scale('base');
-  margin: 5px 0 15px 0;
+  margin: map-get($spacing, 'xs') 0 map-get($spacing, 'base') 0;
 
   &--light {
     color: theme-color('background', 'dark');

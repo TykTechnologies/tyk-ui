@@ -1,4 +1,4 @@
-$button-font-family: $font-family-medium !default;
+$button-font-family: $font-family-bold !default;
 $button-border-radius: 20px !default;
 
 $padding-y-button-sm: 3px !default;
@@ -21,6 +21,7 @@ $button-primary-gradient-start-color: theme-color('primary', 'base') !default;
 $button-primary-gradient-end-color: theme-color('primary', 'dark') !default;
 
 $button-success-color: theme-color('success', 'base') !default;
+$button-success-hover-color: theme-color('success', 'dark') !default;
 $button-success-gradient-start-color: theme-color('success', 'base') !default;
 $button-success-gradient-end-color: theme-color('success', 'dark') !default;
 
@@ -29,7 +30,7 @@ $button-danger-gradient-start-color: theme-color('danger', 'base') !default;
 $button-danger-gradient-end-color: theme-color('danger', 'dark') !default;
 
 $button-warning-color: theme-color('warning', 'base') !default;
-$button-warning-font-color: $text-color;
+$button-warning-font-color: white !default;
 $button-warning-gradient-start-color: theme-color('warning', 'base') !default;
 $button-warning-gradient-end-color: theme-color('warning', 'light') !default;
 

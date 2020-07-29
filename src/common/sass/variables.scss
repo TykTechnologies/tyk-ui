@@ -114,13 +114,13 @@ $text-settings: (
 ) !default;
 
 $spacing: (
-  'xs': 6px,
-  'sm': 8px,
-  'base': 12px,
-  'md': 14px,
-  'lg': 18px,
-  'xl': 22px,
-  'xxl': 32px
+  'xs': 5px,
+  'sm': 10px,
+  'base': 15px,
+  'md': 20px,
+  'lg': 25px,
+  'xl': 30px,
+  'xxl': 40px
 ) !default;
 
 $grid-gutter: 20px !default;
@@ -193,3 +193,17 @@ $default-outline-pill-box-shadow: inset 0px 0px 0px 2px theme-color('default', '
 $default-outline-pill-color: $text-color;
 
 $title-medium-font-size: 16px;
+
+//Buffers
+$bottom-buffer-large: 20px;
+$bottom-buffer-medium: 10px;
+$bottom-buffer-small: 5px;
+$top-buffer-large: 20px;
+$top-buffer-medium: 10px;
+$top-buffer-small: 5px;
+$right-buffer-large: 20px;
+$right-buffer-medium: 10px;
+$right-buffer-small: 5px;
+$left-buffer-large: 20px;
+$left-buffer-medium: 10px;
+$left-buffer-small: 5px;

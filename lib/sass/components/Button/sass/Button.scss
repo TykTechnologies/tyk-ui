@@ -58,9 +58,12 @@
     @include button-variant(
       white,
       transparent,
-      $text-color,
+      theme-color('default', 'base'),
       theme-color('background', 'dark'),
-      theme-color('background', 'dark')
+      theme-color('background', 'dark'),
+      theme-color('background', 'dark'),
+      theme-color('background', 'dark'),
+      white
     )
   }
 
@@ -90,7 +93,10 @@
   }
   &--success {
     @include button-variant(
-      $button-success-color
+      $button-success-color,
+      $button-success-color,
+      white,
+      $button-success-hover-color,
     )
 
     &-link {
@@ -219,8 +225,8 @@
     @include button-size(
       $padding-y-button-sm,
       $padding-x-button-sm,
-      text-scale('xs'),
-      line-height('xs'),
+      text-scale('sm'),
+      line-height('sm'),
       $button-border-radius
     )
   }

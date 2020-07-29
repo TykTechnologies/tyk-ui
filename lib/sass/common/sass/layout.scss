@@ -19,3 +19,14 @@ body {
 .tyk-main-content-wrapper {
   flex: 1;
 }
+
+.well {
+  background: transparent;
+  border: 2px solid theme-color('default', 'light');
+  border-radius: $general-border-radius;
+  box-shadow: none;
+
+  &.has-error {
+    border-color: theme-color('danger', 'base');
+  }
+}

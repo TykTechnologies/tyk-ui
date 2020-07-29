@@ -13,6 +13,7 @@
   $hover-border: darken($border, 10%),
   $active-background: darken($background, 10%),
   $active-border: darken($border, 12.5%),
+  $hover-color: $color
 ) {
   background-color: $background;
   color: $color;
@@ -20,7 +21,7 @@
 
   &:hover {
     background-color: $hover-background;
-    color: $color;
+    color: $hover-color;
   }
 }
 

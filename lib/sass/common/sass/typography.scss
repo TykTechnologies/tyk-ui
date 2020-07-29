@@ -48,17 +48,25 @@ strong {
   font-family: $font-family-bold;
 }
 
+a {
+  cursor: pointer;
+  color: $text-color;
+  font-family: $font-family-regular;
+  
+  &.link--bold {
+    font-family: $font-family-bold;
+  }
+
+  + a {
+    margin-left: 5px;
+  }
+}
+
 p,
 label {
   a {
-    color: theme-color('success', 'base');
-    font-family: $font-family-regular;
     font-size: text-scale('sm');
     text-decoration: underline;
-  
-    &.link--bold {
-      font-family: $font-family-bold;
-    }
   }
 }
 
@@ -97,7 +105,7 @@ label {
   &--bold {
     font-family: $font-family-bold;
   }
-  &--upercase {
+  &--uppercase {
     text-transform: uppercase;
   }
 }
@@ -113,8 +121,8 @@ label {
 .sub-section-title {
   margin-bottom: 5px;
   font-family: $font-family-medium;
-  font-size: text-scale('sm');
-  line-height: line-height('sm');
+  font-size: text-scale('md');
+  line-height: line-height('md');
 
   .tyk-icon {
     margin-left: 5px;
@@ -124,8 +132,8 @@ label {
 .section-group-title {
   margin-bottom: 5px;
   font-family: $font-family-bold;
-  font-size: text-scale('xs');
-  line-height: line-height('xs');
+  font-size: text-scale('sm');
+  line-height: line-height('sm');
   text-transform: uppercase;
 
   .tyk-icon {

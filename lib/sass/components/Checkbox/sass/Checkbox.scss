@@ -8,7 +8,10 @@
     display: flex;
   }
 
-  &--is-disabled label {
-    cursor: not-allowed;
+  &--is-disabled {
+    label, p {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 }

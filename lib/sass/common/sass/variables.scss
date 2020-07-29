@@ -48,7 +48,7 @@ $theme-colors: (
 ) !default;
 
 $text-color: #505071 !default;
-$label-color:  $text-color !default;
+$label-color:  theme-color('default', 'base') !default;
 
 $contrast-colors: (
   'dark': (
@@ -114,13 +114,13 @@ $text-settings: (
 ) !default;
 
 $spacing: (
-  'xs': 6px,
-  'sm': 8px,
-  'base': 12px,
-  'md': 14px,
-  'lg': 18px,
-  'xl': 22px,
-  'xxl': 32px
+  'xs': 5px,
+  'sm': 10px,
+  'base': 15px,
+  'md': 20px,
+  'lg': 25px,
+  'xl': 30px,
+  'xxl': 40px
 ) !default;
 
 $grid-gutter: 20px !default;
@@ -174,7 +174,7 @@ $form-control-placeholder-color: #A2A2CC !default;
 $form-control-disabled-background-color: theme-color('default', 'light') !default;
 $form-control-disabled-color: $text-color !default;
 $form-control-border-focus: 2px solid theme-color('default', 'base') !default;
-$form-control-placeholder-font-family: $font-family-regular !default;
+$form-control-placeholder-font-family: $font-family-medium !default;
 $form-control-error-colour: theme-color('danger', 'dark') !default;
 $form-default-color: theme-color('default', 'light') !default;
 $form-primary-color: theme-color('primary', 'base') !default;
@@ -182,14 +182,28 @@ $form-success-color: theme-color('success', 'base') !default;
 
 $error-border: 2px solid theme-color('danger', 'base') !default;
 $error-border-left: 2px solid theme-color('danger', 'dark') !default;
-$help-block-color: $text-color !default;
-$help-block-font-style: italic !default;
+$help-block-color: theme-color('default', 'base') !default;
+$help-block-font-style: normal !default;
 $help-block-padding: 0 0 0 $form-control-padding-left !default;
 $error-message-padding: 0 0 0 $form-control-padding-left !default;
-$default-pill-background-color: theme-color('foreground', 'light') !default;
+$default-pill-background-color: theme-color('default', 'base') !default;
 $default-pill-color: white !default;
 $pill-margin: 0 0 10px 0 !default;
 $default-outline-pill-box-shadow: inset 0px 0px 0px 2px theme-color('default', 'base');
 $default-outline-pill-color: $text-color;
 
 $title-medium-font-size: 16px;
+
+//Buffers
+$bottom-buffer-large: 20px;
+$bottom-buffer-medium: 10px;
+$bottom-buffer-small: 5px;
+$top-buffer-large: 20px;
+$top-buffer-medium: 10px;
+$top-buffer-small: 5px;
+$right-buffer-large: 20px;
+$right-buffer-medium: 10px;
+$right-buffer-small: 5px;
+$left-buffer-large: 20px;
+$left-buffer-medium: 10px;
+$left-buffer-small: 5px;
