@@ -31,7 +31,7 @@
 <Button theme="danger-outline">Push Me</Button> &ensp;
 <Button theme="default-outline">Push Me</Button> &ensp;
 ```
-*Gradient theme*
+<!-- *Gradient theme*
 ```js
 <Button theme="primary-gradient">Push Me</Button> &ensp;
 <Button theme="success-gradient">Push Me</Button> &ensp;
@@ -39,7 +39,7 @@
 <Button theme="warning-gradient">Push Me</Button> &ensp;
 <Button theme="danger-gradient">Push Me</Button> &ensp;
 <Button theme="default-gradient">Push Me</Button> &ensp;
-```
+``` -->
 
 **Button Disabled States**
 
@@ -62,7 +62,7 @@
 <Button theme="danger-outline" disabled={ true }>Push Me</Button> &ensp;
 <Button theme="default-outline" disabled={ true }>Push Me</Button> &ensp;
 ```
-*Gradient theme disabled*
+<!-- *Gradient theme disabled*
 ```js
 <Button theme="primary-gradient" disabled={ true }>Push Me</Button> &ensp;
 <Button theme="success-gradient" disabled={ true }>Push Me</Button> &ensp;
@@ -70,7 +70,7 @@
 <Button theme="warning-gradient" disabled={ true }>Push Me</Button> &ensp;
 <Button theme="danger-gradient" disabled={ true }>Push Me</Button> &ensp;
 <Button theme="default-gradient" disabled={ true }>Push Me</Button> &ensp;
-```
+``` -->
 **Button Sizes**
 ```js
 <Button size="sm" theme="primary">Push Me</Button> &ensp;

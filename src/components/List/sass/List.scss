@@ -19,6 +19,7 @@
   li {
     border-bottom: 1px solid theme-color('default', 'light');
     padding: 10px 20px;
+    font-family: $font-family-medium;
 
     &:last-child {
       border: none;
