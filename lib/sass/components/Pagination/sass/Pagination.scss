@@ -5,7 +5,7 @@
 .tyk-pagination {
   display: flex;
   list-style-type: none;
-  margin: map-get($spacing, 'xl') 0;
+  margin: map-get($spacing, 'sm') 0;
   padding: 0;
 
   li {

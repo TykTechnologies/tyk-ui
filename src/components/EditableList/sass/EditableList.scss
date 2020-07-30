@@ -160,3 +160,45 @@
 .tyk-editable-list-item__controls {
   text-align: right;
 }
+
+.tyk-editable-list-items.table {
+  background-color: white;
+  border-radius: $general-border-radius;
+  border: 2px solid theme-color('default', 'light');
+  padding: 0 !important;
+
+  li {
+    border-color: theme-color('default', 'light');
+
+    &:hover {
+      background: theme-color('background', 'light');
+    }
+  }
+
+  .tyk-editable-list-item__text {
+    background: transparent;
+  }
+
+  .tyk-editable-list-action__button {
+      background: theme-color('default', 'base');
+      border-radius: 6px;
+      margin-right: 10px;
+  }
+}
+
+.tyk-editable-list__header {
+    background-color: white;
+    border-top-left-radius: $general-border-radius;
+    border-top-right-radius: $general-border-radius;
+    border: 2px solid theme-color('default', 'light');
+    border-bottom: 1px solid theme-color('default', 'light') !important;
+    color: $text-color !important;
+    font-family: $font-family-bold;
+    margin-top: 10px;
+
+    & + .tyk-editable-list-items.table {
+        border-top: none;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}

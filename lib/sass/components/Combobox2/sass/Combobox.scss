@@ -216,3 +216,7 @@
 .tyk-combobox2__values-container-trigger {
   color: $text-color;
 }
+
+.tyk-combobox2__combobox-dropdown.tyk-form-group--rounded-corners {
+  z-index: 1081;
+}

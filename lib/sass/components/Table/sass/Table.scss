@@ -5,14 +5,31 @@
 .tyk-table {
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: white;
+  border-radius: $general-border-radius;
   width: 100%;
 
+    &__wrapper {
+      border: 2px solid theme-color('default', 'light');
+      border-radius: $general-border-radius;
+      overflow: auto;
+
+      &--no-border {
+        border: none
+      }
+    }
+
     > thead th {
+      border-right: 1px solid theme-color('default', 'light');
       color: $text-color;
-      font-size: text-scale('xs');
-      line-height: line-height('xs');
+      font-size: text-scale('sm');
+      line-height: line-height('sm');
       font-family: $font-family-bold;
       text-transform: uppercase;
+
+      &:last-child {
+        border-right: none;
+      }
 
       i {
         font-size: text-scale('xs');
@@ -20,7 +37,7 @@
 
       .tyk-button {
         background: none;
-        color: theme-color('default', 'light');
+        color: theme-color('default', 'base');
         padding: 0;
       }
     }
@@ -29,13 +46,29 @@
       padding: $table-th-padding;
     }
 
+    > tbody tr:hover {
+      background: theme-color('background', 'light');
+    }
+
     > tbody td {
+      border-right: 1px solid theme-color('default', 'light');
       font-size: text-scale('sm');
       line-height: line-height('sm');
       font-family: $font-family-regular;
       padding: $table-td-padding-y $table-td-padding-x;
+
+      &:last-child {
+        border-right: none;
+      }
+      
       vertical-align: middle;
-      input:not([type='checkbox']) {
+
+      &.fit {
+        white-space: nowrap;
+        width: 1%;
+      }
+
+      input:not([type='checkbox']):not([type='radio']) {
         margin-top: 15px;
       }
 
@@ -53,18 +86,32 @@
       }
     }
 
-    > tbody tr:nth-child(2n+1) {
-      background-color: theme-color('background', 'light');
+    tbody > tr {
+      border-top: 1px solid theme-color('default', 'light');
+      transition: all .4s linear;
+      border-radius: $general-border-radius;
+  
+      &.clickable {
+        cursor: pointer;
+      }
     }
 
     > tbody tr td:first-child,
     > thead tr th:first-child {
       padding-left: $table-first-last-padding;
+
+      &.with-icon {
+        padding-left: 15px;
+      }
     }
 
     > tbody tr td:last-child,
     > thead tr th:last-child {
       padding-right: $table-first-last-padding;
+
+      &.with-icon {
+        padding-right: 15px;
+      }
     }
 
     .tyk-pagination {
@@ -73,6 +120,14 @@
       li:first-child {
         margin-left: auto;
       }
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .wrap {
+      word-break: break-all;
     }
 }
 
@@ -93,7 +148,6 @@
 
 .new-table-pagination {
   float: right;
-  padding-top: 10px;
 }
 
 .selectable > div {
@@ -109,4 +163,9 @@
   position: sticky;
   top: 0;
   background-color: #ffffff;
+}
+
+.tyk-table.has-error,
+.tyk-table__wrapper.has-error {
+    border: 2px solid theme-color('danger', 'base') !important;
 }

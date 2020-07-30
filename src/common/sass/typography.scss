@@ -108,6 +108,15 @@ label {
   &--uppercase {
     text-transform: uppercase;
   }
+  &--ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+td.text-ellipsis {
+  max-width: 250px;
 }
 
 .section-title {

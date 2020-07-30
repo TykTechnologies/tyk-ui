@@ -102,3 +102,13 @@
 .clear-left {
   clear: left;
 }
+
+.flex-container {
+  display: flex;
+}
+
+.right-align-controls {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+}
