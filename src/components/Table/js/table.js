@@ -90,7 +90,7 @@ const Table = ({
     setOnChangeMsg('api');
   }, [state]);
 
-  if (!state || loading) {
+  if (!state) {
     return <Loader position="absolute" />;
   }
 
@@ -105,9 +105,13 @@ const Table = ({
     </table>
   );
 
+
   return (
     <tableContext.Provider value={{ state, sendMessage }}>
-      <div className={`scrollable ${state.styling?.className || ''}`} style={{ height: state.maxHeight ? state.maxHeight : 'auto' }}>
+      <div className={`scrollable ${state.styling?.className || ''}`} style={{ height: state.maxHeight ? state.maxHeight : 'auto', position: 'relative' }}>
+        {
+          loading && <Loader position="absolute" withbackground />
+        }
         {
           infiniteScrolling && state.pagination
             ? (
