@@ -3,6 +3,15 @@
 @import './variables';
 
 .tyk-checkbox {
+  $label-indent: 20px;
+  label {
+    padding-left: $label-indent;
+
+    input {
+      margin-left: -1 * $label-indent;
+    }
+  }
+
   &--theme-light {
     label {
       color: $tyk-checkbox-theme-light-label-color;

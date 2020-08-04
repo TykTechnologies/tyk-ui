@@ -97,7 +97,7 @@ function Combobox(props) {
   function getFilteredValues() {
     const defaultFn = (v, s) => v.name.toLowerCase().includes(s);
     const fn = matchItemFn || defaultFn;
-    const filteredValues = values.filter(v => fn(v, searchValue));
+    const filteredValues = values.filter(v => fn(v, searchValue.toLowerCase()));
     return filteredValues;
   }
 
@@ -266,6 +266,10 @@ function Combobox(props) {
       addTag(data);
       updateSearchValue('');
     }
+
+    if (message === 'input.focus') {
+      openDropdown();
+    }
   }
 
   function onMessage(message, data) {
@@ -358,7 +362,11 @@ function Combobox(props) {
         style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
       >
         <div className="tyk-form-control" ref={comboboxControlRef}>
-          <div className={currentValuesClasses}>
+          <div
+            className={currentValuesClasses}
+            onClick={openDropdown}
+            role="none"
+          >
             <Value
               value={value}
               max={max}
