@@ -3,6 +3,10 @@
   position: relative;
   vertical-align: middle;
 
+  label {
+    font-family: $font-family-medium;
+  }
+
   .tyk-button-group {
     display: flex;
 

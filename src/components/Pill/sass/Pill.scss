@@ -42,10 +42,10 @@
 
   &--default-outline {
     box-shadow: $default-outline-pill-box-shadow;
-    color: $default-outline-pill-color;
+    color: $text-color;
 
     i {
-      color: $default-pill-color;
+      color: $text-color;
     }
   }
 

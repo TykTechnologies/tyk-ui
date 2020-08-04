@@ -107,8 +107,21 @@
   display: flex;
 }
 
+.vertical-center-align {
+  align-items: center;
+}
+
+
 .right-align-controls {
   align-items: center;
   display: flex;
   margin-left: auto;
+}
+
+.inline-label {
+  margin-right: 15px;
+}
+
+.nowrap { 
+  white-space: nowrap;
 }
