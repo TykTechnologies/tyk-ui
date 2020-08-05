@@ -71,19 +71,22 @@
     @include button-variant(
       $button-primary-color,
       $button-primary-color,
-      $button-primary-text-color
+      $button-primary-text-color,
+      $button-primary-hover-color
 
     )
 
     &-link {
       @include button-variant-link(
-        $button-primary-color
+        theme-color('primary', 'base')
       )
     }
 
     &-outline {
       @include button-variant-outline(
-        $button-primary-color
+        $button-primary-color,
+        theme-color('primary', 'base'),
+        theme-color('primary', 'base')
       )
     }
 
@@ -123,7 +126,10 @@
   }
   &--danger {
     @include button-variant(
-      $button-danger-color
+      $button-danger-color,
+      $button-danger-color,
+      white,
+      $button-danger-hover-color
     )
 
     &-link {
@@ -201,7 +207,10 @@
 
   &--default {
     @include button-variant(
-      $button-default-color
+      $button-default-color,
+      $button-default-color,
+      white,
+      $button-default-hover-color
     )
 
     &-link {

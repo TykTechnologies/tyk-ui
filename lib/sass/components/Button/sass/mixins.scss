@@ -41,6 +41,7 @@
 
 @mixin button-variant-outline(
   $border,
+  $color: $border,
   $hover-color: white,
   $hover-background: $border,
   $hover-border: $border,
@@ -49,7 +50,7 @@
 ) {
   border: $general-border-width solid $border;
   background-color: white;
-  color: $border;
+  color: $color;
 
   &:hover {
     background-color: $border;
