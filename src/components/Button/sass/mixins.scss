@@ -17,7 +17,7 @@
 ) {
   background-color: $background;
   color: $color;
-  border: 2px solid $border;
+  border: $general-border-width solid $border;
 
   &:hover {
     background-color: $hover-background;
@@ -47,7 +47,7 @@
   $active-background: darken($border, 10%),
   $active-border: darken($border, 12.5%)
 ) {
-  border: 2px solid $border;
+  border: $general-border-width solid $border;
   background-color: white;
   color: $border;
 

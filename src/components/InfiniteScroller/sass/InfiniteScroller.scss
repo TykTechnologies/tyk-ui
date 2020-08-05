@@ -9,7 +9,7 @@
     bottom: 0;
     display: flex;
     left: 0;
-    padding: 15px 0;
+    padding: map-get($spacing, 'base') 0;
     right: 0;
     top: auto;
     width: 100%;

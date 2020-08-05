@@ -6,14 +6,13 @@
 .tyk-panel {
   background: white;
   border-radius: $panel-border-radius;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.10);
-  margin-bottom: 20px;
+  margin-bottom: map-get($spacing, 'md');
   font-family: $font-family-medium;
   position: relative;
 
   &.has-error,
   & &.has-error {
-    border: 2px solid theme-color('danger', 'base');
+    border: $general-border-width solid theme-color('danger', 'base');
   }
 
   &__header {
@@ -24,19 +23,19 @@
 
     > .tyk-icon,
     > .tyk-tooltip__wrapper {
-      margin-left: 5px;
+      margin-left: map-get($spacing, 'xs');
     }
   }
 
   .tyk-panel {
-    border: 2px solid theme-color('default', 'light');
+    border: $general-border-width solid theme-color('default', 'light');
     box-shadow: none;
     -webkit-box-shadow: none;
   }
 
   &--blank {
     &.tyk-panel--collapsed {
-      margin-bottom: 20px;
+      margin-bottom: map-get($spacing, 'md');
 
       .tyk-panel__header {
         margin-bottom: 0;
@@ -44,7 +43,7 @@
     }
 
     .tyk-panel__header {
-      margin-bottom: -20px;
+      margin-bottom: -map-get($spacing, 'md');
       padding: $padding-y-blank-panel-header $padding-x-panel-header;
       @include panel-variant(
         white,
@@ -163,14 +162,14 @@
   .collapsable__arrow-right {
     font-size: text-scale('sm');
     position: absolute;
-    padding: 10px;
-    right: 10px;
+    padding: map-get($spacing, 'sm');
+    right: map-get($spacing, 'sm');
     top: calc(50% - 21px);
   }
   .collapsable__arrow-left {
     font-size: text-scale('sm');
     position: absolute;
-    padding: 8px 0px 10px 20px;
+    padding: 8px 0px map-get($spacing, 'sm') map-get($spacing, 'md');
     left: 0px;
     top: calc(50% - 21px);
   }

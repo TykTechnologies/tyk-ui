@@ -1,4 +1,4 @@
 $tyk-combobox-pill-background: #F0F0F0 !default;
 $tyk-combobox-pill-color: $text-color !default;
-$combobox-disabled-border: 1px solid theme-color('background', 'dark') !default;
+$combobox-disabled-border: $general-border-width solid theme-color('background', 'dark') !default;
 $form-control-placeholder-color: $text-color !default;

@@ -1,6 +1,7 @@
 $font-path: '../fonts/' !default;
 $component-images-path: '../images' !default;
 $general-border-radius: 18px !default;
+$general-border-width: 2px !default;
 
 $theme-colors: (
   'default': (
@@ -10,7 +11,7 @@ $theme-colors: (
   ),
   'primary': (
     'base': #A2A2CC,
-    'light': #C3C3E5,
+    'light': #EDEDF9,
     'dark': #505071
   ),
   'success': (
@@ -123,7 +124,7 @@ $spacing: (
   'xxl': 40px
 ) !default;
 
-$grid-gutter: 20px !default;
+$grid-gutter: map-get($spacing, 'md') !default;
 $grid-max-width: 1200px + ($grid-gutter * 2) !default;
 $grid-columns: 12 !default;
 
@@ -162,14 +163,14 @@ $headings-line-height: $base-line-height !default;
 
 $form-group-margin-bottom: 15px !default;
 $form-control-height: 39px !default;
-$form-control-padding-left: 20px !default;
-$form-control-padding-right: 20px !default;
+$form-control-padding-left: map-get($spacing, 'md') !default;
+$form-control-padding-right: map-get($spacing, 'md') !default;
 $form-control-padding-top: 10px !default;
 $form-control-padding-bottom: 10px !default;
 $form-control-addon-background-color: white !default;
 $form-control-disabled-background-color: theme-color('background', 'light') !default;
-$form-control-border: 1px solid theme-color('default', 'light') !default;
-$form-control-disabled-border: 2px solid theme-color('default', 'light') !default;
+$form-control-border: $general-border-width solid theme-color('default', 'light') !default;
+$form-control-disabled-border: $general-border-width solid theme-color('default', 'light') !default;
 $form-control-placeholder-color: #A2A2CC !default;
 $form-control-disabled-background-color: theme-color('default', 'light') !default;
 $form-control-disabled-color: $text-color !default;
@@ -180,7 +181,7 @@ $form-default-color: theme-color('default', 'light') !default;
 $form-primary-color: theme-color('primary', 'base') !default;
 $form-success-color: theme-color('success', 'base') !default;
 
-$error-border: 2px solid theme-color('danger', 'base') !default;
+$error-border: $general-border-width solid theme-color('danger', 'base') !default;
 $error-border-left: 2px solid theme-color('danger', 'dark') !default;
 $help-block-color: theme-color('default', 'base') !default;
 $help-block-font-style: normal !default;
@@ -195,15 +196,15 @@ $default-outline-pill-color: $text-color;
 $title-medium-font-size: 16px;
 
 //Buffers
-$bottom-buffer-large: 20px;
+$bottom-buffer-large: map-get($spacing, 'md');
 $bottom-buffer-medium: 10px;
 $bottom-buffer-small: 5px;
-$top-buffer-large: 20px;
+$top-buffer-large: map-get($spacing, 'md');
 $top-buffer-medium: 10px;
 $top-buffer-small: 5px;
-$right-buffer-large: 20px;
+$right-buffer-large: map-get($spacing, 'md');
 $right-buffer-medium: 10px;
 $right-buffer-small: 5px;
-$left-buffer-large: 20px;
+$left-buffer-large: map-get($spacing, 'md');
 $left-buffer-medium: 10px;
 $left-buffer-small: 5px;

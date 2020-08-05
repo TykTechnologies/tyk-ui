@@ -1,14 +1,14 @@
 $button-font-family: $font-family-bold !default;
-$button-border-radius: 20px !default;
+$button-border-radius: map-get($spacing, 'md') !default;
 
 $padding-y-button-sm: 3px !default;
-$padding-x-button-sm: 23px !default;
+$padding-x-button-sm: map-get($spacing, 'base') !default;
 $padding-y-button-md: 8px !default;
 $padding-x-button-md: 23px !default;
 $padding-y-button-lg: 13px !default;
 $padding-x-button-lg: 23px !default;
 
-$line-height-button-sm: line-height('sm') !default;
+$line-height-button-sm: line-height('xs') !default;
 $line-height-button-md: line-height('md') !default;
 $line-height-button-lg: line-height('lg') !default;
 
@@ -16,7 +16,8 @@ $button-default-color: theme-color('default', 'base') !default;
 $button-default-gradient-start-color: theme-color('default', 'base') !default;
 $button-default-gradient-end-color: theme-color('default', 'dark') !default;
 
-$button-primary-color: theme-color('primary', 'base') !default;
+$button-primary-color: theme-color('primary', 'light') !default;
+$button-primary-text-color: $text-color !default;
 $button-primary-gradient-start-color: theme-color('primary', 'base') !default;
 $button-primary-gradient-end-color: theme-color('primary', 'dark') !default;
 

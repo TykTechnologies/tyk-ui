@@ -24,7 +24,7 @@
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
       padding-bottom: 11px;
-      padding: 10px 15px 11px 15px;
+      padding: map-get($spacing, 'sm') map-get($spacing, 'base') 11px map-get($spacing, 'base');
     }
   }
 
@@ -33,7 +33,7 @@
   }
 
   > span {
-    margin-left: 15px;
+    margin-left: map-get($spacing, 'base');
 
     &.inline-with-label {
       align-self: flex-end;
@@ -42,29 +42,29 @@
 }
 
 .tyk-editable-list__header {
-  padding-top: 15px;
+  padding-top: map-get($spacing, 'base');
   border-bottom: 1px solid theme-color('background', 'dark');
   color: $text-color;
   font-size: 11px;
-  padding-bottom: 15px;
+  padding-bottom: map-get($spacing, 'base');
   text-transform: uppercase;
 
   .tyk-row {
-    margin: 0 -10px 0 0;
+    margin: 0 -map-get($spacing, 'sm') 0 0;
   }
 }
 
 .tyk-editable-list-items {
   overflow: hidden;
   list-style: none;
-  padding: 20px 0 0 0;
+  padding: map-get($spacing, 'md') 0 0 0;
 
   .edit-mode-wrapper.table button {
     margin-top: 23px;
   }
 
   .tyk-row {
-    margin: 0 -10px 0 0;
+    margin: 0 -map-get($spacing, 'sm') 0 0;
   }
 
   button[disabled] {
@@ -88,14 +88,14 @@
       border: none;
       color: white;
       float: left;
-      margin-bottom: 10px;
-      margin-right: 15px;
-      padding: 0 15px;
+      margin-bottom: map-get($spacing, 'sm');
+      margin-right: map-get($spacing, 'base');
+      padding: 0 map-get($spacing, 'base');
       white-space: nowrap;
 
       .tyk-editable-list-item__text {
         color: $text-color;
-        padding: 5px 0;
+        padding: map-get($spacing, 'xs') 0;
       }
 
       .tyk-editable-list-action__button.on-edit {
@@ -109,7 +109,7 @@
 
     .tyk-editable-list-item__text {
       display: flex;
-      padding: 10px 0;
+      padding: map-get($spacing, 'sm') 0;
 
       > span {
         flex-grow: 1;
@@ -126,13 +126,13 @@
 
     .tyk-editable-list-items {
       overflow: hidden;
-      padding-bottom: 10px;
+      padding-bottom: map-get($spacing, 'sm');
     }
 
     .tyk-editable-list {
-      border-top: 5px solid theme-color('background', 'dark');
+      border-top: map-get($spacing, 'xs') solid theme-color('background', 'dark');
       background: theme-color('background', 'light');
-      padding: 10px 15px;
+      padding: map-get($spacing, 'sm') map-get($spacing, 'base');
     }
   }
 
@@ -147,7 +147,7 @@
     background: transparent;
 
     &.on-edit {
-      margin-left: 10px;
+      margin-left: map-get($spacing, 'sm');
     }
   }
 
@@ -164,7 +164,7 @@
 .tyk-editable-list-items.table {
   background-color: white;
   border-radius: $general-border-radius;
-  border: 2px solid theme-color('default', 'light');
+  border: $general-border-width solid theme-color('default', 'light');
   padding: 0 !important;
 
   li {
@@ -180,9 +180,9 @@
   }
 
   .tyk-editable-list-action__button {
-      background: theme-color('default', 'base');
       border-radius: 6px;
-      margin-right: 10px;
+      cursor: pointer;
+      margin-right: map-get($spacing, 'sm');
   }
 }
 
@@ -190,11 +190,11 @@
     background-color: white;
     border-top-left-radius: $general-border-radius;
     border-top-right-radius: $general-border-radius;
-    border: 2px solid theme-color('default', 'light');
+    border: $general-border-width solid theme-color('default', 'light');
     border-bottom: 1px solid theme-color('default', 'light') !important;
     color: $text-color !important;
     font-family: $font-family-bold;
-    margin-top: 10px;
+    margin-top: map-get($spacing, 'sm');
 
     & + .tyk-editable-list-items.table {
         border-top: none;

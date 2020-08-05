@@ -4,7 +4,7 @@
   display: inline-flex;
   font-size: text-scale('xs');
   margin: $pill-margin;
-  padding: 6px 15px;
+  padding: 6px map-get($spacing, 'base');
   font-family: $font-family-medium;
 
   i {
@@ -12,19 +12,19 @@
   }
 
   + .tyk-pill {
-    margin-right: 10px;
+    margin-right: map-get($spacing, 'sm');
   }
 
   button + span {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   span + button {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   &:first-child {
-    margin-right: 10px;
+    margin-right: map-get($spacing, 'sm');
   }
 
   &:last-child {

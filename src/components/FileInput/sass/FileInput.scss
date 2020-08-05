@@ -2,7 +2,7 @@
   position: relative;
 
   > input {
-    padding: 6px 20px;
+    padding: 6px map-get($spacing, 'md');
   }
 
   > button {
@@ -10,7 +10,7 @@
     border: none;
     cursor: pointer;
     position: absolute;
-    right: 15px;
+    right: map-get($spacing, 'base');
     top: 9px;
   }
 }

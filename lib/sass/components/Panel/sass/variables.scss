@@ -1,6 +1,6 @@
-$padding-y-panel-header: 10px !default;
+$padding-y-panel-header: map-get($spacing, 'sm') !default;
 $padding-x-panel-header: 25px !default;
-$padding-y-blank-panel-header: 20px !default;
+$padding-y-blank-panel-header: map-get($spacing, 'md') !default;
 $padding-panel-body: 25px !default;
 $padding-x-right-panel-collapsable: 48px !default;
 $padding-x-left-panel-collapsable: $padding-x-right-panel-collapsable !default;

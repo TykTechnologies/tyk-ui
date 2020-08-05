@@ -1,5 +1,5 @@
-$table-th-padding: 10px !default;
-$table-td-padding-y: 10px !default;
-$table-td-padding-x: 5px !default;
+$table-th-padding: map-get($spacing, 'sm') !default;
+$table-td-padding-y: map-get($spacing, 'sm') !default;
+$table-td-padding-x: map-get($spacing, 'xs') !default;
 $table-first-last-padding: 25px !default;
-$table-pagination-padding: 20px 25px !default;
+$table-pagination-padding: map-get($spacing, 'md') 25px !default;

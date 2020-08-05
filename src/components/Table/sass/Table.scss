@@ -10,7 +10,7 @@
   width: 100%;
 
     &__wrapper {
-      border: 2px solid theme-color('default', 'light');
+      border: $general-border-width solid theme-color('default', 'light');
       border-radius: $general-border-radius;
       overflow: auto;
 
@@ -69,7 +69,7 @@
       }
 
       input:not([type='checkbox']):not([type='radio']) {
-        margin-top: 15px;
+        margin-top: map-get($spacing, 'base');
       }
 
       a {
@@ -101,7 +101,7 @@
       padding-left: $table-first-last-padding;
 
       &.with-icon {
-        padding-left: 15px;
+        padding-left: map-get($spacing, 'base');
       }
     }
 
@@ -110,7 +110,7 @@
       padding-right: $table-first-last-padding;
 
       &.with-icon {
-        padding-right: 15px;
+        padding-right: map-get($spacing, 'base');
       }
     }
 
@@ -132,7 +132,7 @@
 }
 
 .tyk-table-search {
-  padding: 10px 25px 0 25px;
+  padding: map-get($spacing, 'sm') 25px 0 25px;
 
   label {
     font-size: text-scale('sm');
@@ -141,8 +141,8 @@
 }
 
 .header-sort {
-  padding-left: 10px;
-  padding-top: 5px;
+  padding-left: map-get($spacing, 'sm');
+  padding-top: map-get($spacing, 'xs');
   vertical-align: middle;
 }
 
@@ -151,7 +151,7 @@
 }
 
 .selectable > div {
-  margin-left: 20px;
+  margin-left: map-get($spacing, 'md');
 }
 
 .scrollable {
@@ -162,10 +162,9 @@
 .fixed-header {
   position: sticky;
   top: 0;
-  background-color: #ffffff;
 }
 
 .tyk-table.has-error,
 .tyk-table__wrapper.has-error {
-    border: 2px solid theme-color('danger', 'base') !important;
+    border: $general-border-width solid theme-color('danger', 'base') !important;
 }

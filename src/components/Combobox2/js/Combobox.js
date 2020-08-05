@@ -355,7 +355,7 @@ function Combobox(props) {
       )}
       <div
         className="tyk-form-control__wrapper"
-        style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
+        style={{ flexBasis: `calc(100% - ${labelwidth} - map-get($spacing, 'md'))` }}
       >
         <div className="tyk-form-control" ref={comboboxControlRef}>
           <div className={currentValuesClasses}>

@@ -13,7 +13,7 @@
   z-index: -1;
 
   .tyk-panel {
-    border: 1px solid theme-color('background', 'dark');
+    border: $general-border-width solid theme-color('background', 'dark');
     box-shadow: none;
     -webkit-box-shadow: none;
   }

@@ -3,7 +3,7 @@
   border-radius: $general-border-radius;
   flex-wrap: wrap;
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: map-get($spacing, 'md');
   width: 100%;
 
   /*FALLBACK FOR ANGULAR COMPONENTS*/
@@ -28,7 +28,7 @@
   /*END FALLBACK FOR ANGULAR COMPONENTS*/
 
   &.has-error {
-    border: 2px solid theme-color('danger', 'base');
+    border: $general-border-width solid theme-color('danger', 'base');
   }
 
   &__header {
@@ -40,7 +40,7 @@
     width: 100%;
 
     > div {
-      padding: 10px 15px;
+      padding: map-get($spacing, 'sm') map-get($spacing, 'base');
       width: 50%;
     }
   }
@@ -72,7 +72,7 @@
     }
 
     .tyk-message {
-      margin: 20px 20px 0 20px;
+      margin: map-get($spacing, 'md') map-get($spacing, 'md') 0 map-get($spacing, 'md');
     }
   }
 
@@ -90,7 +90,7 @@
       border-bottom: $form-control-border;
       display: flex;
       flex-direction: column;
-      padding: 10px 15px;
+      padding: map-get($spacing, 'sm') map-get($spacing, 'base');
 
       > div {
         align-items: start;
@@ -126,7 +126,7 @@
 
     .tyk-button {
       color: $text-color;
-      margin-left: 5px;
+      margin-left: map-get($spacing, 'xs');
 
       &:last-child {
         margin-left: 0;

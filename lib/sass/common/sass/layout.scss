@@ -22,7 +22,7 @@ body {
 
 .well {
   background: transparent;
-  border: 2px solid theme-color('default', 'light');
+  border: $general-border-width solid theme-color('default', 'light');
   border-radius: $general-border-radius;
   box-shadow: none;
 

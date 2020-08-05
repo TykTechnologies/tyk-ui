@@ -27,7 +27,7 @@
       cursor: auto;
       overflow: hidden;
       padding-right: 45px;
-      padding-bottom: 5px;
+      padding-bottom: map-get($spacing, 'xs');
       position: relative;
     }
   }
@@ -41,7 +41,7 @@
     border-radius: 0;
     color: $text-color;
     font-size: text-scale('base');
-    padding: 0 15px;
+    padding: 0 map-get($spacing, 'base');
     position: absolute;
     right: 0;
     top: 0;
@@ -54,12 +54,12 @@
 
   .pill {
     background-color: $tyk-combobox-pill-background;
-    border-radius: 10px;
+    border-radius: map-get($spacing, 'sm');
     color: $tyk-combobox-pill-color;
     float: left;
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
     margin-top: 6px;
-    padding: 5px 10px;
+    padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
 
     button {
       background: none;
@@ -69,7 +69,7 @@
     }
 
     i {
-      margin-right: 5px;
+      margin-right: map-get($spacing, 'xs');
     }
   }
 
@@ -77,7 +77,7 @@
     float: left;
     padding-right: 45px;
     height: 35px;
-    padding-bottom: 5px;
+    padding-bottom: map-get($spacing, 'xs');
 
     input {
       border: none;
@@ -105,7 +105,7 @@
 
 .tyk-combobox__list {
   background-color: white;
-  border: 1px solid $form-default-color;
+  border: $general-border-width solid $form-default-color;
   display: none;
   list-style-type: none;
   max-height: 255px;
@@ -130,7 +130,7 @@
   li {
     border-top: 1px solid $form-default-color;
     cursor: pointer;
-    padding: 10px 15px;
+    padding: map-get($spacing, 'sm') map-get($spacing, 'base');
     transition: all .2s;
 
     &:first-child {
@@ -159,7 +159,7 @@
     }
 
     i {
-      margin-right: 5px;
+      margin-right: map-get($spacing, 'xs');
     }
   }
 }

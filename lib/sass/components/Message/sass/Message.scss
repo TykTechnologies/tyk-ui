@@ -5,7 +5,7 @@
 
 .tyk-message {
   border-radius: $tyk-message-border-radius;
-  margin-bottom: 20px;
+  margin-bottom: map-get($spacing, 'md');
   padding: $tyk-message-padding-top $tyk-message-padding-right $tyk-message-padding-bottom $tyk-message-padding-left;
 
   &--default {

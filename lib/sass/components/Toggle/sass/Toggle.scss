@@ -9,7 +9,7 @@
   white-space: nowrap;
 
   &.block {
-    margin-bottom: 20px;
+    margin-bottom: map-get($spacing, 'md');
     width: 100%;
 
     + .tyk-toggle {
@@ -36,14 +36,14 @@
   }
 
   &.inline-label &__label {
-    margin-right: 10px;
+    margin-right: map-get($spacing, 'sm');
     width: auto;
   }
 
   + .tyk-button,
   + .tyk-dropdown,
   + .tyk-toggle {
-    margin-left: 10px
+    margin-left: map-get($spacing, 'sm')
   }
 
   &--disabled-true {
@@ -55,7 +55,7 @@
     .tyk-toggle__list--separated {
       display: flex;
       flex-direction: column;
-      margin-right: 20px;
+      margin-right: map-get($spacing, 'md');
 
       .tyk-toggle__item {
         background-color: $toggle-list-background-color;
@@ -257,8 +257,8 @@
     .tyk-toggle__list--separated & {
       background: tyk-toggle__list--separated;
       border-radius: 25px;
-      margin-bottom: 10px;
-      margin-right: 10px;
+      margin-bottom: map-get($spacing, 'sm');
+      margin-right: map-get($spacing, 'sm');
 
       &:last-child {
         margin-right: 0;
@@ -312,7 +312,7 @@
   }
 
   &--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
-    padding-left: 20px;
+    padding-left: map-get($spacing, 'md');
     padding-right: 35px;
 
     .tyk-toggle__item-notch {

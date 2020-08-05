@@ -35,7 +35,7 @@
           font-size: text-scale('sm');
           font-family: $tabs-font-familly;
           padding: $tab-button-padding;
-          margin-right: 20px;
+          margin-right: map-get($spacing, 'md');
           transition: all .2s linear;
           text-transform: uppercase;
 

@@ -30,7 +30,7 @@
   }
 
   @media screen and (max-width: 1024px) {
-    padding-left: 20px;
+    padding-left: map-get($spacing, 'md');
 
     .menu-opened & {
       transform: translate($nav-bar-animate-left);
@@ -65,11 +65,11 @@
       font-family: $nav-bar-header-font-family;
       line-height: $nav-bar-header-line-height;
       margin: 0;
-      padding-right: 10px;
+      padding-right: map-get($spacing, 'sm');
     }
 
     h4 {
-      padding-right: 10px;
+      padding-right: map-get($spacing, 'sm');
     }
 
     .tyk-nav-bar__container {

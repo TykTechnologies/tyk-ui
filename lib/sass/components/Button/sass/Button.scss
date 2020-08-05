@@ -21,15 +21,15 @@
   + .tyk-button,
   + .tyk-dropdown,
   + .tyk-toggle {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   span + i {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   i + span {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   &.disabled {
@@ -69,7 +69,10 @@
 
   &--primary {
     @include button-variant(
-      $button-primary-color
+      $button-primary-color,
+      $button-primary-color,
+      $button-primary-text-color
+
     )
 
     &-link {
@@ -225,8 +228,8 @@
     @include button-size(
       $padding-y-button-sm,
       $padding-x-button-sm,
-      text-scale('sm'),
-      line-height('sm'),
+      text-scale('xs'),
+      line-height('xs'),
       $button-border-radius
     )
   }
@@ -253,7 +256,7 @@
   &--icon-only {
     border-radius: $general-border-radius;
     padding: 0;
-    line-height: 20px;
+    line-height: map-get($spacing, 'md');
     width: 24px;
 
     &:hover {

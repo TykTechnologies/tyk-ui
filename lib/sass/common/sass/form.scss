@@ -43,7 +43,7 @@
     label {
       display: flex;
       white-space: nowrap;
-      margin-right: 20px;
+      margin-right: map-get($spacing, 'md');
       margin-top: 14px;
     }
 
@@ -240,7 +240,7 @@ select {
 
   > button {
     margin-left: 10px;
-    margin-bottom: 20px;
+    margin-bottom: map-get($spacing, 'md');
   }
 }
 
@@ -275,7 +275,7 @@ select {
 
   .tyk-form-group {
     flex: 1;
-    margin-left: 20px;
+    margin-left: map-get($spacing, 'md');
     min-width: 200px;
 
     &:first-child {
@@ -284,7 +284,7 @@ select {
   }
 
   > .tyk-button {
-    margin-left: 20px;
-    margin-bottom: 20px;
+    margin-left: map-get($spacing, 'md');
+    margin-bottom: map-get($spacing, 'md');
   }
 }
