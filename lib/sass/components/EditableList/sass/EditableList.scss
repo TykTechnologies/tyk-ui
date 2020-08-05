@@ -50,7 +50,7 @@
   text-transform: uppercase;
 
   .tyk-row {
-    margin: 0 -map-get($spacing, 'sm') 0 0;
+    margin: 0;
   }
 }
 
@@ -64,7 +64,7 @@
   }
 
   .tyk-row {
-    margin: 0 -map-get($spacing, 'sm') 0 0;
+    margin: 0;
   }
 
   button[disabled] {
@@ -79,15 +79,16 @@
   }
 
   li {
-    border-top: 1px solid theme-color('background', 'dark');
+    border-top: 1px solid theme-color('default', 'light');
     transition: all .2s linear;
 
     &.tyk-editable-list-item--inline {
-      background-color: theme-color('background', 'base');
+      background-color: theme-color('default', 'light');
       border-radius: 25px;
       border: none;
       color: white;
       float: left;
+      font-family: $font-family-medium;
       margin-bottom: map-get($spacing, 'sm');
       margin-right: map-get($spacing, 'base');
       padding: 0 map-get($spacing, 'base');
