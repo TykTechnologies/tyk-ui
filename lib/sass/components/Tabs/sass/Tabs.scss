@@ -24,6 +24,7 @@
         button:hover {
           border-bottom-color: $tab-border-color;
           color: $tab-active-button-color;
+          opacity: 1;
         }
 
         button {
@@ -37,7 +38,7 @@
           padding: $tab-button-padding;
           margin-right: map-get($spacing, 'md');
           transition: all .2s linear;
-          text-transform: uppercase;
+          opacity: 0.7;
 
           &:focus {
             outline: none;

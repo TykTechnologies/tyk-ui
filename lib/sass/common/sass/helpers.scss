@@ -43,7 +43,7 @@
 }
 
 .disabled-section {
-  color: theme-colo('default', 'light');
+  color: theme-color('default', 'light');
 }
 
 .top-buffer-large {
@@ -96,7 +96,7 @@
 
 .word-wrap {
   word-wrap: break-word;
-  word-break:break-all;
+  word-break: break-all;
 }
 
 .clear-left {

@@ -132,12 +132,12 @@
       color: white;
     }
     @include button-variant(
-      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
       transparent,
       white,
-      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
       transparent,
-      theme-color('success', 'base')
+      theme-color('success', 'dark')
     )
   }
 
@@ -257,7 +257,8 @@
     .tyk-toggle__list--separated & {
       background: tyk-toggle__list--separated;
       border-radius: 25px;
-      margin-bottom: map-get($spacing, 'sm');
+      margin-bottom: map-get($spacing, 'xs');
+      margin-top: map-get($spacing, 'xs');
       margin-right: map-get($spacing, 'sm');
 
       &:last-child {
