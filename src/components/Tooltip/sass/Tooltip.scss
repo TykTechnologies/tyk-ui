@@ -3,15 +3,15 @@
   background-color: theme-color('primary', 'dark');
   color: white;
   padding: 8px 16px;
-  border-radius: map-get($spacing, 'xs');
+  border-radius: 5px;
   left: -50%;
 
   &:after {
     content: '';
     position: absolute;
-    bottom: -map-get($spacing, 'sm');
+    bottom: -10px;
     left: calc(50% - 5px);
-    border-width: map-get($spacing, 'xs');
+    border-width: 5px;
     border-style: solid;
     border-color: theme-color('primary', 'dark') transparent transparent transparent;
   }
@@ -21,6 +21,6 @@
   .tyk-tooltip-content:after {
     border-color: transparent transparent theme-color('primary', 'dark') transparent;
     bottom: auto;
-    top: -map-get($spacing, 'sm');
+    top: -10px;
   }
 }

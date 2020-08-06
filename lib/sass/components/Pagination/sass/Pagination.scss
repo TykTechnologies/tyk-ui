@@ -31,7 +31,9 @@
     background: white;
     border: none;
     font-size: text-scale('sm');
+    font-family: $font-family-bold;
     cursor: pointer;
+    color: theme-color('default', 'base');
     margin-left: -1px;
     padding: $pagination-button-padding;
 
