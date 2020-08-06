@@ -5,10 +5,11 @@
   flex-wrap: wrap;
   font-family: $toggle-font-family;
   font-size: text-scale('sm');
+  line-height: line-height('sm');
   white-space: nowrap;
 
   &.block {
-    margin-bottom: 20px;
+    margin-bottom: map-get($spacing, 'md');
     width: 100%;
 
     + .tyk-toggle {
@@ -27,6 +28,7 @@
 
   & &__label {
     display: block;
+    font-family: $toggle-label-font-family;
     font-size: $toggle-label-font-size;
     padding: $toggle-padding;
     width: 100%;
@@ -34,14 +36,14 @@
   }
 
   &.inline-label &__label {
-    margin-right: 10px;
+    margin-right: map-get($spacing, 'sm');
     width: auto;
   }
 
   + .tyk-button,
   + .tyk-dropdown,
   + .tyk-toggle {
-    margin-left: 10px
+    margin-left: map-get($spacing, 'sm')
   }
 
   &--disabled-true {
@@ -53,7 +55,7 @@
     .tyk-toggle__list--separated {
       display: flex;
       flex-direction: column;
-      margin-right: 20px;
+      margin-right: map-get($spacing, 'md');
 
       .tyk-toggle__item {
         background-color: $toggle-list-background-color;
@@ -81,8 +83,16 @@
     background: $toggle-list-background-color-on-dark;
   }
 
+  &--default &__item--active span {
+    color: white;
+  }
+
   &--default &__list--single &__item--active,
   &--default &__list--separated &__item--active {
+    span {
+      color: white;
+    }
+
     @include button-variant(
       $button-default-color,
       transparent,
@@ -93,8 +103,15 @@
     )
   }
 
+  &--primary &__item--active span {
+    color: white;
+  }
+
   &--primary &__list--single &__item--active,
   &--primary &__list--separated &__item--active {
+    span {
+      color: white;
+    }
     @include button-variant(
       theme-color('primary', 'base'),
       transparent,
@@ -105,16 +122,27 @@
     )
   }
 
+  &--success &__item--active span {
+    color: white;
+  }
+
   &--success &__list--single &__item--active,
   &--success &__list--separated &__item--active {
+    span {
+      color: white;
+    }
     @include button-variant(
-      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
       transparent,
       white,
-      theme-color('success', 'base'),
+      theme-color('success', 'dark'),
       transparent,
-      theme-color('success', 'base')
+      theme-color('success', 'dark')
     )
+  }
+
+  &--danger &__item--active span {
+    color: white;
   }
 
   &--danger &__list--single &__item--active,
@@ -129,20 +157,31 @@
     )
   }
 
+  &--warning &__item--active span {
+    color: $text-color;
+  }
+
   &--warning &__list--single &__item--active,
   &--warning &__list--separated &__item--active {
     @include button-variant(
       theme-color('warning', 'base'),
       transparent,
-      theme-color('foreground', 'base-dark'),
+      $text-color,
       theme-color('warning', 'base'),
       transparent,
       theme-color('warning', 'base')
     )
   }
 
+
+  &--primary-gradient &__item--active span {
+    color: white;
+  }
   &--primary-gradient &__list--single &__item--active,
   &--primary-gradient &__list--separated &__item--active {
+    span {
+      color: white;
+    }
     @include button-variant-gradient(
       theme-color('primary', 'base'),
       theme-color('primary', 'dark'),
@@ -151,8 +190,14 @@
     )
   }
 
+  &--success-gradient &__item--active span {
+    color: white;
+  }
   &--success-gradient &__list--single &__item--active,
   &--success-gradient &__list--separated &__item--active {
+    span {
+      color: white;
+    }
     @include button-variant-gradient(
       theme-color('success', 'base'),
       theme-color('success', 'dark'),
@@ -161,8 +206,15 @@
     )
   }
 
+
+  &--danger-gradient &__item--active span {
+    color: white;
+  }
   &--danger-gradient &__list--single &__item--active,
   &--danger-gradient &__list--separated &__item--active {
+    span {
+      color: white;
+    }
     @include button-variant-gradient(
       theme-color('danger', 'base'),
       theme-color('danger', 'dark'),
@@ -171,12 +223,19 @@
     )
   }
 
+
+  &--warning-gradient &__item--active span {
+    color: white;
+  }
   &--warning-gradient &__list--single &__item--active,
   &--warning-gradient &__list--separated &__item--active {
+    span {
+      color: white;
+    }
     @include button-variant-gradient(
       theme-color('warning', 'light'),
       theme-color('warning', 'base'),
-      theme-color('foreground', 'base-dark'),
+      $text-color,
       false
     )
   }
@@ -198,8 +257,9 @@
     .tyk-toggle__list--separated & {
       background: tyk-toggle__list--separated;
       border-radius: 25px;
-      margin-bottom: 10px;
-      margin-right: 10px;
+      margin-bottom: map-get($spacing, 'xs');
+      margin-top: map-get($spacing, 'xs');
+      margin-right: map-get($spacing, 'sm');
 
       &:last-child {
         margin-right: 0;
@@ -212,6 +272,7 @@
 
     label {
       cursor: pointer;
+      font-family: $toggle-font-family;
       position: relative;
       margin: 0;
       transition: all .2s ease;
@@ -239,9 +300,9 @@
 
   &--sm label {
     @include button-size(
-      $padding-y-button-sm,
-      $padding-x-button-sm,
-      text-scale('xs'),
+      calc(#{$padding-y-button-sm} + 2px),
+      calc(#{$padding-x-button-sm} + 2px),
+      text-scale('sm'),
       $line-height-button-sm,
       $button-border-radius
     )
@@ -252,7 +313,7 @@
   }
 
   &--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
-    padding-left: 20px;
+    padding-left: map-get($spacing, 'md');
     padding-right: 35px;
 
     .tyk-toggle__item-notch {
@@ -262,20 +323,20 @@
 
   &--md label {
     @include button-size(
-      $padding-y-button-md,
-      $padding-x-button-md,
+      calc(#{$padding-y-button-md} + 2px),
+      calc(#{$padding-x-button-md} + 2px),
       text-scale('sm'),
-      $line-height-button-md,
+      $line-height-button-sm,
       $button-border-radius
     )
   }
 
   &--lg label {
     @include button-size(
-      $padding-y-button-lg,
-      $padding-x-button-lg,
-      text-scale('md'),
-      $line-height-button-lg,
+      calc(#{$padding-y-button-lg} + 2px),
+      calc(#{$padding-x-button-lg} + 2px),
+      text-scale('sm'),
+      $line-height-button-sm,
       $button-border-radius
     )
   }
@@ -374,7 +435,7 @@
     @include button-variant(
       theme-color('warning', 'base'),
       transparent,
-      theme-color('foreground', 'base-dark'),
+      $text-color,
       theme-color('warning', 'base'),
       transparent,
       theme-color('warning', 'base')
@@ -412,7 +473,7 @@
     @include button-variant-gradient(
       theme-color('warning', 'light'),
       theme-color('warning', 'base'),
-      theme-color('foreground', 'base-dark'),
+      $text-color,
       false
     )
   }

@@ -5,6 +5,7 @@
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
+  theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
 />
 ```
@@ -16,38 +17,22 @@
   placeholder="Please type something"
   type="text"
   inline={ true }
+  theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
 />
 ```
 ```js
-<Input
-  label="This is a demo Input"
-  name="input"
-  placeholder="DARK"
-  type="text"
-  theme="dark inline"
-  onChange={ (e) => { console.log(e); }}
-/>
 
 <Input
-  label="This is a demo Input"
+  label="Inline default theme input"
   name="input"
   placeholder="Please type something"
   type="text"
-  theme="success inline"
+  theme="default rounded-corners inline"
   onChange={ (e) => { console.log(e); }}
 />
 <Input
-  label="This is a demo Input"
-  name="input"
-  placeholder="Please type something"
-  type="text"
-  note="Some helpful message to be displayed on this Input"
-  theme="default inline rounded-corners"
-  onChange={ (e) => { console.log(e); }}
-/>
-<Input
-  label="This is a demo Input"
+  label="Inline primary theme input"
   name="input"
   placeholder="Please type something"
   type="text"
@@ -56,7 +41,7 @@
 />
 
 <Input
-  label="This is a demo Input"
+  label="Inline success theme input with label width of 60%"
   labelwidth="60%"
   name="input"
   placeholder="Please type something"
@@ -75,6 +60,7 @@
   placeholder="Please type something"
   type="text"
   onChange={ (e) => { console.log(e); }}
+  theme="rounded-corners"
 />
 ```
 ```js
@@ -99,6 +85,7 @@
   placeholder="Please type something"
   type="text"
   onChange={ (e) => { console.log(e); }}
+  theme="rounded-corners"
 />
 
 ```
@@ -109,30 +96,24 @@ import Icon from '../Icon';
     inputgroupaddonleft={
       <Icon type="search" />
     }
-    label="Input with addon"
+    label="Input with addon left"
     name="input"
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
+    theme="default rounded-corners"
   />
   <Input
     inputgroupaddonright={
       <Icon type="search" />
     }
+    disabled
+    label="Input with addon right and disabled"
     name="input"
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
-  />
-  <Input
-    inputgroupaddonright={
-      <Icon type="search" />
-    }
-    name="input"
-    placeholder="Please type something"
-    type="text"
-    onChange={ (e) => { console.log(e); }}
-    theme="extra-dark inline rounded-corners"
+    theme="default rounded-corners"
   />
 </div>
 ```

@@ -21,15 +21,15 @@
   + .tyk-button,
   + .tyk-dropdown,
   + .tyk-toggle {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   span + i {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   i + span {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 
   &.disabled {
@@ -58,26 +58,35 @@
     @include button-variant(
       white,
       transparent,
-      $text-color,
+      theme-color('default', 'base'),
       theme-color('background', 'dark'),
-      theme-color('background', 'dark')
+      theme-color('background', 'dark'),
+      theme-color('background', 'dark'),
+      theme-color('background', 'dark'),
+      white
     )
   }
 
   &--primary {
     @include button-variant(
-      $button-primary-color
+      $button-primary-color,
+      $button-primary-color,
+      $button-primary-text-color,
+      $button-primary-hover-color
+
     )
 
     &-link {
       @include button-variant-link(
-        $button-primary-color
+        theme-color('primary', 'base')
       )
     }
 
     &-outline {
       @include button-variant-outline(
-        $button-primary-color
+        $button-primary-color,
+        theme-color('primary', 'base'),
+        theme-color('primary', 'base')
       )
     }
 
@@ -90,7 +99,10 @@
   }
   &--success {
     @include button-variant(
-      $button-success-color
+      $button-success-color,
+      $button-success-color,
+      white,
+      $button-success-hover-color,
     )
 
     &-link {
@@ -114,7 +126,10 @@
   }
   &--danger {
     @include button-variant(
-      $button-danger-color
+      $button-danger-color,
+      $button-danger-color,
+      white,
+      $button-danger-hover-color
     )
 
     &-link {
@@ -192,7 +207,10 @@
 
   &--default {
     @include button-variant(
-      $button-default-color
+      $button-default-color,
+      $button-default-color,
+      white,
+      $button-default-hover-color
     )
 
     &-link {
@@ -220,7 +238,7 @@
       $padding-y-button-sm,
       $padding-x-button-sm,
       text-scale('xs'),
-      $line-height-button-sm,
+      line-height('xs'),
       $button-border-radius
     )
   }
@@ -230,7 +248,7 @@
       $padding-y-button-md,
       $padding-x-button-md,
       text-scale('sm'),
-      $line-height-button-md,
+      line-height('sm'),
       $button-border-radius
     )
   }
@@ -239,7 +257,7 @@
       $padding-y-button-lg,
       $padding-x-button-lg,
       text-scale('md'),
-      $line-height-button-lg,
+      line-height('md'),
       $button-border-radius
     )
   }
@@ -247,6 +265,7 @@
   &--icon-only {
     border-radius: $general-border-radius;
     padding: 0;
+    line-height: map-get($spacing, 'md');
     width: 24px;
 
     &:hover {

@@ -4,6 +4,6 @@
   $color: $text-color
 ) {
   background-color: $background;
-  border: 1px solid $border;
+  border: $general-border-width solid $border;
   color: $color;
 }

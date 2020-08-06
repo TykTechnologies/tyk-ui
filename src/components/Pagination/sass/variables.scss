@@ -1,2 +1,2 @@
-$pagination-border-radius: 4px !default;
-$pagination-button-padding: 10px 15px !default;
+$pagination-border-radius: $general-border-radius !default;
+$pagination-button-padding: map-get($spacing, 'sm') map-get($spacing, 'base') !default;

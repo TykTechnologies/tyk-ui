@@ -49,6 +49,7 @@ import Button from '../Button';
     minDate: "today",
     dateFormat: "Y-m-d"
   }}
+  theme="default rounded-corners"
 />
 ```
 ```js
@@ -64,6 +65,7 @@ import Button from '../Button';
     minDate: "today",
     dateFormat: "Y-m-d"
   }}
+  theme="default rounded-corners"
 />
 ```
 ```js
@@ -78,6 +80,7 @@ import Button from '../Button';
     enableTime: true,
     dateFormat: "Y-m-d H:i",
   }}
+  theme="default rounded-corners"
 />
 ```
 ```js
@@ -93,6 +96,7 @@ import Button from '../Button';
     enableTime: true,
     dateFormat: "Y-m-d H:i",
   }}
+  theme="default rounded-corners"
 />
 ```
 ```js
@@ -108,5 +112,6 @@ import Button from '../Button';
     enableTime: true,
     dateFormat: "Y-m-d H:i",
   }}
+  theme="default rounded-corners"
 />
 ```

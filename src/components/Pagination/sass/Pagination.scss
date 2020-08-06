@@ -5,7 +5,7 @@
 .tyk-pagination {
   display: flex;
   list-style-type: none;
-  margin: map-get($spacing, 'xl') 0;
+  margin: map-get($spacing, 'sm') 0;
   padding: 0;
 
   li {
@@ -24,24 +24,26 @@
   }
 
   span {
-    margin: 0 10px;
+    margin: 0 map-get($spacing, 'sm');
   }
 
   button {
     background: white;
-    border: 1px solid theme-color('background', 'light');
+    border: none;
     font-size: text-scale('sm');
+    font-family: $font-family-bold;
     cursor: pointer;
+    color: theme-color('default', 'base');
     margin-left: -1px;
     padding: $pagination-button-padding;
 
     &:hover {
-      background-color: theme-color('background', 'light');
+      background-color: theme-color('success', 'light');
     }
   }
 
   .active button {
-    background-color: theme-color('primary', 'base');
+    background-color: theme-color('success', 'base');
     color: white;
   }
 }

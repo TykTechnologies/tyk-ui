@@ -1,10 +1,10 @@
-$tyk-message-padding-top: 20px !default;
-$tyk-message-padding-right: 20px !default;
-$tyk-message-padding-bottom: 20px !default;
-$tyk-message-padding-left: 20px !default;
+$tyk-message-padding-top: map-get($spacing, 'md') !default;
+$tyk-message-padding-right: map-get($spacing, 'md') !default;
+$tyk-message-padding-bottom: map-get($spacing, 'md') !default;
+$tyk-message-padding-left: map-get($spacing, 'md') !default;
 $tyk-message-border-radius: $general-border-radius !default;
-$tyk-message-default-background: theme-color('background', 'light') !default;
-$tyk-message-default-border: theme-color('background', 'base') !default;
+$tyk-message-default-background: theme-color('default', 'light') !default;
+$tyk-message-default-border: theme-color('default', 'base') !default;
 $tyk-message-default-text-color: $text-color !default;
 $tyk-message-info-background: theme-color('info', 'light') !default;
 $tyk-message-info-border: theme-color('info', 'base') !default;

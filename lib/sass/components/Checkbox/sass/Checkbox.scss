@@ -3,8 +3,10 @@
 @import './variables';
 
 .tyk-checkbox {
-  $label-indent: 20px;
   label {
+    $label-indent: 20px;
+    align-items: center;
+    display: flex;
     padding-left: $label-indent;
 
     input {
@@ -24,15 +26,10 @@
     }
   }
 
-  &--theme-dark {
-    label {
-      color: $tyk-checkbox-theme-dark-label-color;
-    }
-
-    &.tyk-checkbox--is-disabled {
-      label {
-        color: $tyk-checkbox-theme-dark-label-disabled-color;
-      }
+  &--is-disabled {
+    label, p {
+      cursor: not-allowed;
+      opacity: 0.5;
     }
   }
 }

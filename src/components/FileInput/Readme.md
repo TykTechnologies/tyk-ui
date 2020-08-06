@@ -5,6 +5,7 @@
   name="input"
   note="Some helpful message to be displayed on this FileInput"
   placeholder="Please type something"
+  theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
 />
 ```
@@ -15,7 +16,7 @@
   name="input"
   note="Some helpful message to be displayed on this FileInput"
   placeholder="Please type something"
-  theme="default inline rounded-corners"
+  theme="default  rounded-corners"
   onChange={ (e) => { console.log(e); }}
 />
 ```
@@ -27,7 +28,7 @@
   name="input"
   note="Some helpful message to be displayed on this FileInput"
   placeholder="Please type something"
-  theme="default inline rounded-corners"
+  theme="default  rounded-corners"
   onChange={ (e) => { console.log(e); }}
 />
 ```

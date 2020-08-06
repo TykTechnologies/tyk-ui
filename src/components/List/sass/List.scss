@@ -1,5 +1,5 @@
 .tyk-list {
-  border: 1px solid theme-color('foreground', 'light');
+  border: $general-border-width solid theme-color('default', 'light');
   border-radius: $general-border-radius;
   font-size: text-scale('sm');
   list-style-type: none;
@@ -12,13 +12,14 @@
     display: flex;
 
     > label {
-      margin-right: 20px;
+      margin-right: map-get($spacing, 'md');
     }
   }
 
   li {
-    border-bottom: 1px solid theme-color('foreground', 'light');
-    padding: 10px 20px;
+    border-bottom: 1px solid theme-color('default', 'light');
+    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    font-family: $font-family-medium;
 
     &:last-child {
       border: none;
@@ -26,7 +27,7 @@
   }
 
   &--default {
-    border-color: theme-color('foreground', 'light');
+    border-color: theme-color('default', 'light');
   }
 
   &--primary {
@@ -34,7 +35,7 @@
 
     li {
       border-color: theme-color('primary', 'light');
-      color: theme-color('primary', 'base');
+      color: $text-color;
     }
   }
 
@@ -43,7 +44,7 @@
 
     li {
       border-color: theme-color('primary', 'light');
-      color: theme-color('primary', 'light');
+      color: $text-color;
     }
   }
 
@@ -58,10 +59,26 @@
 
   &--danger {
     border-color: theme-color('danger', 'base');
-    color: theme-color('danger', 'base');
+    color: $text-color;
 
     li {
       border-color: theme-color('danger', 'light');
+    }
+  }
+}
+
+ul.tyk-list--inline {
+  align-items: center;
+  display: flex;
+
+  li {
+    padding: 0 map-get($spacing, 'sm');
+  }
+
+  &.tyk-list--with-separator {
+
+    li:not(:first-child) {
+      border-left: 1px solid theme-color('default', 'base');
     }
   }
 }

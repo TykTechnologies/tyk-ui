@@ -11,21 +11,3 @@
 @import './common/sass/components';
 @import './common/sass/layout.scss';
 @import './common/sass/texts.scss';
-
-* {
-  box-sizing: border-box;
-}
-
-html, body {
-  color: $text-color;
-  font-size: text-scale('base');
-  font-family: 'robotoregular';
-}
-
-label {
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-family: $font-family-medium;
-  color: $label-color;
-}

@@ -2,4 +2,6 @@
   background-color: $background;
   border: none;
   color: $color;
+  font-size: text-scale('lg');
+  line-height: line-height('lg');
 }

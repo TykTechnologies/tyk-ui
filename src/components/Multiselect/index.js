@@ -26,7 +26,7 @@ export default class TestMultiselect extends Component {
 
   state = {
     items: [
-      { id: 1, name: 'item 1' },
+      { id: '5d933eb186341fac98fbfd198b327b5f995eafb14b56dfa2f3b2e24452b506d4baff25da4d0163e3514c994c', name: '5d933eb186341fac98fbfd198b327b5f995eafb14b56dfa2f3b2e24452b506d4baff25da4d0163e3514c994c' },
       { id: 2, name: 'item 2' },
       { id: 3, name: 'item 3' },
       { id: 4, name: 'item 4' },

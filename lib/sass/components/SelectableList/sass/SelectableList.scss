@@ -1,7 +1,9 @@
 .tyk-selectable-list {
-  margin-bottom: 20px;
+  margin-bottom: map-get($spacing, 'md');
+  width: 100%;
 
   li:not(.tyk-selectable-list__no-items-message) {
+    font-family: $font-family-medium;
     padding: 0;
 
     .tyk-message {
@@ -9,6 +11,7 @@
     }
 
     label {
+      font-family: $font-family-medium;
       margin: 0;
     }
 
@@ -16,7 +19,7 @@
       align-items: center;
       cursor: pointer;
       display: flex;
-      padding: 10px 20px;
+      padding: map-get($spacing, 'sm') map-get($spacing, 'md');
 
       input[type="checkbox"] {
         margin-left: auto;

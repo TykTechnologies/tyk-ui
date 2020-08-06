@@ -13,7 +13,7 @@
   z-index: -1;
 
   .tyk-panel {
-    border: 1px solid theme-color('background', 'dark');
+    border: $general-border-width solid theme-color('background', 'dark');
     box-shadow: none;
     -webkit-box-shadow: none;
   }
@@ -103,14 +103,14 @@
 }
 
 .tyk-modal__title {
-  font-family: $font-family-regular;
+  font-family: $font-family-medium;
   font-weight: 500;
   margin: 0;
   width: 100%;
 }
 
 .tyk-modal__backdrop {
-  background-color: theme-color('foreground', 'extra-dark');
+  background-color: theme-color('default', 'dark');
   border: none;
   bottom: 0;
   display: none;

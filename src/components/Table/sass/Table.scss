@@ -5,15 +5,39 @@
 .tyk-table {
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: white;
+  border-radius: $general-border-radius;
   width: 100%;
 
+    &__wrapper {
+      border: $general-border-width solid theme-color('default', 'light');
+      border-radius: $general-border-radius;
+      overflow: auto;
+
+      &--no-border {
+        border: none
+      }
+    }
+
     > thead th {
-      color: theme-color('foreground', 'light');
+      border-right: 1px solid theme-color('default', 'light');
+      color: $text-color;
       font-size: text-scale('sm');
+      line-height: line-height('sm');
+      font-family: $font-family-bold;
+      text-transform: uppercase;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      i {
+        font-size: text-scale('xs');
+      }
 
       .tyk-button {
         background: none;
-        color: theme-color('foreground', 'light');
+        color: theme-color('default', 'base');
         padding: 0;
       }
     }
@@ -22,26 +46,72 @@
       padding: $table-th-padding;
     }
 
-    > tbody td {
-      padding: $table-td-padding-y $table-td-padding-x;
-      vertical-align: middle;
-        input:not([type='checkbox']) {
-          margin-top: 15px;
-        }
+    > tbody tr:hover {
+      background: theme-color('background', 'light');
     }
 
-    > tbody tr:nth-child(2n+1) {
-      background-color: theme-color('background', 'light');
+    > tbody td {
+      border-right: 1px solid theme-color('default', 'light');
+      font-size: text-scale('sm');
+      line-height: line-height('sm');
+      font-family: $font-family-regular;
+      padding: $table-td-padding-y $table-td-padding-x;
+
+      &:last-child {
+        border-right: none;
+      }
+      
+      vertical-align: middle;
+
+      &.fit {
+        white-space: nowrap;
+        width: 1%;
+      }
+
+      input:not([type='checkbox']):not([type='radio']) {
+        margin-top: map-get($spacing, 'base');
+      }
+
+      a {
+        color: $text-color;
+        font-family: $font-family-medium;
+      }
+
+      label {
+        margin: 0;
+      }
+
+      input[type='checkbox'] {
+        margin: 0;
+      }
+    }
+
+    tbody > tr {
+      border-top: 1px solid theme-color('default', 'light');
+      transition: all .4s linear;
+      border-radius: $general-border-radius;
+  
+      &.clickable {
+        cursor: pointer;
+      }
     }
 
     > tbody tr td:first-child,
     > thead tr th:first-child {
       padding-left: $table-first-last-padding;
+
+      &.with-icon {
+        padding-left: map-get($spacing, 'base');
+      }
     }
 
     > tbody tr td:last-child,
     > thead tr th:last-child {
       padding-right: $table-first-last-padding;
+
+      &.with-icon {
+        padding-right: map-get($spacing, 'base');
+      }
     }
 
     .tyk-pagination {
@@ -51,10 +121,18 @@
         margin-left: auto;
       }
     }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .wrap {
+      word-break: break-all;
+    }
 }
 
 .tyk-table-search {
-  padding: 10px 25px 0 25px;
+  padding: map-get($spacing, 'sm') 25px 0 25px;
 
   label {
     font-size: text-scale('sm');
@@ -63,17 +141,17 @@
 }
 
 .header-sort {
-  padding-left: 10px;
-  padding-top: 5px;
+  padding-left: map-get($spacing, 'sm');
+  padding-top: map-get($spacing, 'xs');
+  vertical-align: middle;
 }
 
 .new-table-pagination {
   float: right;
-  padding-top: 10px;
 }
 
-.selectable > div{
-  margin-left: 20px;
+.selectable > div {
+  margin-left: map-get($spacing, 'md');
 }
 
 .scrollable {
@@ -84,5 +162,9 @@
 .fixed-header {
   position: sticky;
   top: 0;
-  background-color: #ffffff;
+}
+
+.tyk-table.has-error,
+.tyk-table__wrapper.has-error {
+    border: $general-border-width solid theme-color('danger', 'base') !important;
 }

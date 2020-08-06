@@ -1,4 +1,7 @@
-@include font-face('robotomedium', $font-path + 'roboto-medium-webfont');
-@include font-face('robotoregular', $font-path + 'roboto-regular-webfont');
-@include font-face('robotolight', $font-path + 'roboto-light-webfont');
+@include font-face('OpenSans-Bold', $font-path + 'OpenSans-Bold');
+@include font-face('OpenSans-SemiBold', $font-path + 'OpenSans-SemiBold');
+@include font-face('OpenSans-Regular', $font-path + 'OpenSans-Regular');
+@include font-face('smoolthan_bold', $font-path + 'smoolthan_bold-webfont');
+@include font-face('smoolthan_medium', $font-path + 'smoolthan_medium-webfont');
+@include font-face('smoolthan_regular', $font-path + 'smoolthan_regular-webfont');
 @include font-face('tykon', $font-path + 'tykon');

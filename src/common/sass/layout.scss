@@ -1,5 +1,14 @@
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: theme-color('background', 'base');
+  color: $text-color;
+  font-size: text-scale('sm');
+  line-height: line-height('sm');
+  font-family: $font-family-regular;
 }
 
 .tyk-main-wrapper {
@@ -9,4 +18,15 @@ body {
 
 .tyk-main-content-wrapper {
   flex: 1;
+}
+
+.well {
+  background: transparent;
+  border: $general-border-width solid theme-color('default', 'light');
+  border-radius: $general-border-radius;
+  box-shadow: none;
+
+  &.has-error {
+    border-color: theme-color('danger', 'base');
+  }
 }

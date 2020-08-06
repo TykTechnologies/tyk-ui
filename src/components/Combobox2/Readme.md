@@ -38,6 +38,7 @@ initialState = {
     loadMore,
     pageNumber: state.currentPage
   }}
+  theme="default rounded-corners"
 />
 ```
 ```js
@@ -78,7 +79,7 @@ initialState = {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default inline rounded-corners"
+  theme="default  rounded-corners"
   placeholder="Please select a value"
   labelwidth="40%"
 />
@@ -100,7 +101,7 @@ initialState = {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default inline rounded-corners"
+  theme="default  rounded-corners"
   placeholder="Please select a value"
   selectAll={{
     label: 'Select everything',
@@ -125,7 +126,7 @@ initialState = {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default inline rounded-corners"
+  theme="default  rounded-corners"
   placeholder="Please select a value"
   selectAll={{
     render: (isAllSelected, sendMessage) => (
@@ -156,7 +157,7 @@ initialState = {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default inline rounded-corners"
+  theme="default  rounded-corners"
   placeholder="Please select a value"
   selectAll={{
     label: 'Clear Filter',
@@ -183,6 +184,7 @@ initialState = {
   multiple={ true }
   max={3}
   name="combobox"
+  theme="default  rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -215,6 +217,7 @@ initialState = {
     tags={true}
     name="combobox"
     placeholder="Please select a value"
+    theme="default rounded-corners"
     expandMode={true}
   />
 </>
@@ -236,6 +239,7 @@ initialState = {
   tags={ true }
   tagSeparators={[' ', 'Enter', ':', '@']}
   name="combobox"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -256,6 +260,7 @@ initialState = {
   label="Combobox don't allow custom tags"
   tags={ true }
   name="combobox"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -302,6 +307,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
   label="Combobox custom List element"
   tags={ true }
   name="combobox"
+  theme="default inline rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -322,6 +328,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
   label="Custom Search Combobox"
   multiple={ true }
   name="combobox"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -342,26 +349,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
   label="Disabled Combobox"
   multiple={ true }
   name="combobox"
-  placeholder="Please select a value"
-/>
-```
-```js
-<Combobox2
-  error="Some strange error for Combobox"
-  values={[
-    { id: '', name: "None" },
-    { id: 'apione', name: 'API one'},
-    { id: 'apitwo', name: 'API two'},
-    { id: 'apithree', name: 'API three'},
-    { id: 'apifour', name: 'API four'},
-    { id: 'apifive', name: 'API five'},
-    { id: 'apisix', name: 'API six'},
-    { id: 'apiseven', name: 'API seven'},
-    { id: 'apieight', name: 'API eight'}
-  ]}
-  label="Combobox with error"
-  multiple={ true }
-  name="combobox"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -383,7 +371,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default inline rounded-corners"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -404,6 +392,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -438,6 +427,7 @@ import Icon from '../Icon';
     { id: 'api13', name: 'API 13', type:'users'}
   ]}
   label="Combobox with custom value renderer"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -468,6 +458,7 @@ import Icon from '../Icon';
     { id: 'api13', name: 'API 13', type:'users'}
   ]}
   label="Combobox with custom list item renderer"
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -525,6 +516,7 @@ import Icon from '../Icon';
   label="Combobox with custom list renderer"
   name="combobox"
   onChange={ (e) => { console.log(e); }}
+  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```

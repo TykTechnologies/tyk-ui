@@ -335,7 +335,7 @@ export default class Dropdown extends Component {
         {
           label
             ? (
-              <label className="title-label">
+              <label className="font-family-medium">
                 {label}
               </label>
             )

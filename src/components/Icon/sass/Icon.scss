@@ -1,5 +1,5 @@
 .tyk-icon {
   + .tyk-icon {
-    margin-left: 10px;
+    margin-left: map-get($spacing, 'sm');
   }
 }

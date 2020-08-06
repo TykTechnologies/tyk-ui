@@ -50,7 +50,7 @@
     flex-wrap: wrap;
     padding-top: 2px;
     padding-bottom: 2px;
-    padding-left: 10px;
+    padding-left: map-get($spacing, 'sm');
     max-width: calc(100% - #{$container-trigger-width});
 
     &.expand-mode {
@@ -68,9 +68,9 @@
       margin-top: 3px;
       margin-bottom: 3px;
       background-color: $tyk-combobox-pill-background;
-      border-radius: 10px;
+      border-radius: map-get($spacing, 'sm');
       color: $tyk-combobox-pill-color;
-      padding: 5px 10px;
+      padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
       max-width: 100%;
       max-height: 26px;
 
@@ -92,7 +92,7 @@
       }
 
       i {
-        margin-right: 5px;
+        margin-right: map-get($spacing, 'xs');
       }
     }
   }
@@ -114,6 +114,9 @@
   }
 
   &__text-value {
+    font-family: $font-family-medium;
+    font-size: text-scale('sm');
+    line-height: line-height('sm');
     padding: 9px 5px;
     width: 100%;
     overflow: hidden;
@@ -160,7 +163,7 @@
 .tyk-combobox2__combobox-dropdown {
   display: flex;
   flex-direction: column;
-  border: 1px solid $form-default-color;
+  border: $general-border-width solid $form-default-color;
   background-color: white;
 
   &.tyk-form-group--rounded-corners {
@@ -171,7 +174,7 @@
     background-color: white;
     position: sticky;
     top: 0;
-    padding: 10px 15px;
+    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
 
     + .combobox-list {
       border-top: 1px solid $form-default-color;
@@ -184,8 +187,9 @@
     li {
       display: flex;
       cursor: pointer;
-      padding: 9px 15px;
+      padding: 9px map-get($spacing, 'md');
       transition: all .2s;
+      font-family: $font-family-medium;
 
       &:hover,
       &.active {
@@ -202,7 +206,7 @@
       }
 
       i {
-        margin-right: 5px;
+        margin-right: map-get($spacing, 'xs');
       }
 
       .item-name {
@@ -215,4 +219,8 @@
 }
 .tyk-combobox2__values-container-trigger {
   color: $text-color;
+}
+
+.tyk-combobox2__combobox-dropdown.tyk-form-group--rounded-corners {
+  z-index: 1081;
 }
