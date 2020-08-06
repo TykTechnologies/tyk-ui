@@ -58,13 +58,6 @@
     }
   }
 
-  /*this needs to be removed*/
-  &--extra-dark {
-    @include form-group-variant(
-      theme-color('background', 'extra-dark')
-    );
-  }
-
   &--default {
     @include form-group-variant(
       $form-default-color,

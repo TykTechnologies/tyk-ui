@@ -29,7 +29,7 @@ const List = (props) => {
   const getListStyle = () => {
     const styleCopy = fromJS(style).toJS();
     if (labelwidth) {
-      styleCopy.flexBasis = `calc(100% - ${labelwidth} - map-get($spacing, 'md'))`;
+      styleCopy.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
 
     return styleCopy;

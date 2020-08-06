@@ -142,7 +142,7 @@ export default class Select extends Component {
     const styles = {};
 
     if (labelwidth) {
-      styles.flexBasis = `calc(100% - ${labelwidth} - map-get($spacing, 'md'))`;
+      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
 
     return styles;
