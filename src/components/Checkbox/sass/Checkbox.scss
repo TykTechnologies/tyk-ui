@@ -4,8 +4,26 @@
 
 .tyk-checkbox {
   label {
+    $label-indent: 20px;
     align-items: center;
     display: flex;
+    padding-left: $label-indent;
+
+    input {
+      margin-left: -1 * $label-indent;
+    }
+  }
+
+  &--theme-light {
+    label {
+      color: $tyk-checkbox-theme-light-label-color;
+    }
+
+    &.tyk-checkbox--is-disabled {
+      label {
+        color: $tyk-checkbox-theme-light-label-disabled-color;
+      }
+    }
   }
 
   &--is-disabled {

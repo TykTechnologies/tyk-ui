@@ -149,6 +149,10 @@
     &--expanded {
       transform: rotate(180deg);
     }
+
+    .tyk-icon {
+      height: 14px;
+    }
   }
 }
 
@@ -193,7 +197,7 @@
       }
 
       &.disabled {
-        color: $form-default-color;
+        color: $tyk-combobox-list-item-disabled-color;
         background-color: initial;
       }
 
