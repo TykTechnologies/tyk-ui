@@ -298,6 +298,10 @@
     color: $toggle-list-text-color-on-dark;
   }
 
+  &--on-dark &__item-notch--single {
+    background: theme-color('background', 'light');
+  }
+
   &--sm label {
     @include button-size(
       calc(#{$padding-y-button-sm} + 2px),

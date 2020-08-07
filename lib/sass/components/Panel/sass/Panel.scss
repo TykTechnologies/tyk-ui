@@ -6,7 +6,7 @@
 .tyk-panel {
   background: white;
   border-radius: $panel-border-radius;
-  margin-bottom: map-get($spacing, 'md');
+  margin-bottom: 20px;
   font-family: $font-family-medium;
   position: relative;
 
@@ -23,7 +23,7 @@
 
     > .tyk-icon,
     > .tyk-tooltip__wrapper {
-      margin-left: map-get($spacing, 'xs');
+      margin-left: 5px;
     }
   }
 
@@ -35,7 +35,7 @@
 
   &--blank {
     &.tyk-panel--collapsed {
-      margin-bottom: map-get($spacing, 'md');
+      margin-bottom: 20px;
 
       .tyk-panel__header {
         margin-bottom: 0;
@@ -43,7 +43,7 @@
     }
 
     .tyk-panel__header {
-      margin-bottom: -map-get($spacing, 'md');
+      margin-bottom: -20px;
       padding: $padding-y-blank-panel-header $padding-x-panel-header;
       @include panel-variant(
         white,
@@ -169,7 +169,7 @@
   .collapsable__arrow-left {
     font-size: text-scale('sm');
     position: absolute;
-    padding: 8px 0px map-get($spacing, 'sm') map-get($spacing, 'md');
+    padding: 8px 0px map-get($spacing, 'sm') 20px;
     left: 0px;
     top: calc(50% - 21px);
   }
@@ -183,6 +183,6 @@
   padding: map-get($spacing, 'lg');
 
   >:not(:first-child) {
-    margin-left: map-get($spacing, 'xs');
+    margin-left: 5px;
   }
 }
