@@ -149,6 +149,7 @@ Button.propTypes = {
   id: PropTypes.string,
   href: PropTypes.string,
   iconPosition: PropTypes.string, // left or right
+  iconFamily: PropTypes.string,
   iconOnly: PropTypes.bool,
   iconType: PropTypes.string,
   noStyle: PropTypes.bool,
