@@ -3,6 +3,7 @@
   border-radius: $general-border-radius;
   display: inline-flex;
   font-size: text-scale('xs');
+  line-height: 19px;
   margin: $pill-margin;
   padding: 6px map-get($spacing, 'base');
   font-family: $font-family-medium;

@@ -47,7 +47,7 @@
     }
 
     > tbody tr:hover {
-      background: theme-color('background', 'light');
+      background: rgba(theme-color('background', 'light'), 0.4);
     }
 
     > tbody td {
@@ -141,7 +141,7 @@
 }
 
 .header-sort {
-  padding-left: map-get($spacing, 'sm');
+  padding-left: 3px;
   padding-top: map-get($spacing, 'xs');
   vertical-align: middle;
 }

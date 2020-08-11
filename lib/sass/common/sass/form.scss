@@ -201,9 +201,15 @@
     color: $form-control-placeholder-color;
   }
 
-  &:focus {
+  &:focus,
+  &:active {
     outline: none;
-    border: $form-control-border-focus;
+    border: $form-control-border-focus !important;
+
+    + .tyk-input-group__addon {
+      border: $form-control-border-focus !important;
+      border-left: none !important;
+    }
   }
 
   &__help-block {
@@ -233,7 +239,7 @@ select {
 
   > button {
     margin-left: 10px;
-    margin-bottom: map-get($spacing, 'md');
+    margin-bottom: map-get($spacing, 'base');
   }
 }
 
@@ -278,6 +284,6 @@ select {
 
   > .tyk-button {
     margin-left: map-get($spacing, 'md');
-    margin-bottom: map-get($spacing, 'md');
+    margin-bottom: map-get($spacing, 'base');
   }
 }

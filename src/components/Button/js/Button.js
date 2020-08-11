@@ -11,6 +11,7 @@ const Button = React.forwardRef((props, ref) => {
     customButton,
     children,
     iconType,
+    iconFamily,
     iconPosition,
     iconOnly,
     id,
@@ -54,7 +55,7 @@ const Button = React.forwardRef((props, ref) => {
 
     return (
       (iconType && iPos === position)
-        ? <Icon type={iconType} />
+        ? <Icon family={iconFamily} type={iconType} />
         : null
     );
   };

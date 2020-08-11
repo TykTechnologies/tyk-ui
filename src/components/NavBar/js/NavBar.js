@@ -54,12 +54,12 @@ export default class NavBar extends PureComponent {
                   <h1>{ title }</h1>
                   {
                     subtitle
-                      ? <p className="font-family-regular">{subtitle}</p>
+                      ? <p className="font-family-medium">{subtitle}</p>
                       : null
                   }
                 </div>
               )
-              : null
+              : subtitle && <p className="font-family-medium">{subtitle}</p>
           }
           <div className="tyk-nav-bar__container">
             {

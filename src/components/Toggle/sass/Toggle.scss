@@ -306,8 +306,8 @@
     @include button-size(
       calc(#{$padding-y-button-sm} + 2px),
       calc(#{$padding-x-button-sm} + 2px),
-      text-scale('sm'),
-      $line-height-button-sm,
+      text-scale('xs'),
+      line-height('xs'),
       $button-border-radius
     )
   }
