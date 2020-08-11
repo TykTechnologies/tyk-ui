@@ -47,7 +47,7 @@
       padding: $padding-y-blank-panel-header $padding-x-panel-header;
       @include panel-variant(
         white,
-        $text-color
+        theme-color('default', 'base')
       );
     }
   }

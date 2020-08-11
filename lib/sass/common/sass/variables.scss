@@ -174,7 +174,7 @@ $form-control-disabled-border: $general-border-width solid theme-color('default'
 $form-control-placeholder-color: #A2A2CC !default;
 $form-control-disabled-background-color: theme-color('default', 'light') !default;
 $form-control-disabled-color: $text-color !default;
-$form-control-border-focus: 2px solid theme-color('default', 'base') !default;
+$form-control-border-focus: 2px solid theme-color('success', 'base') !default;
 $form-control-placeholder-font-family: $font-family-medium !default;
 $form-control-error-colour: theme-color('danger', 'dark') !default;
 $form-default-color: theme-color('default', 'light') !default;

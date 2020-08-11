@@ -1,5 +1,5 @@
 $nav-bar-background-color: white !default;
-$nav-bar-text-color: $text-color !default;
+$nav-bar-text-color: theme-color('default', 'base') !default;
 $nav-bar-padding-left: 265px !default;
 $nav-bar-animate-left: 245px !default;
 $nav-bar-top-padding: map-get($spacing, 'sm') !default;

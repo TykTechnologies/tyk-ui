@@ -328,17 +328,17 @@ export default class TestToggle extends Component {
               <Toggle.Item
                 label="short"
                 name="option"
-                value="option1"
+                value="FE team 1"
               />
               <Toggle.Item
                 label="medium name"
-                name="option"
-                value="option2"
+                name="FE team "
+                value="FE team 2"
               />
               <Toggle.Item
                 label="very long long name"
-                name="option"
-                value="option3"
+                name="FE team "
+                value="FE team 3s"
               />
             </Toggle>
             <br />
