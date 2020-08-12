@@ -13,4 +13,8 @@
       opacity: 0.5;
     }
   }
+
+  &__description-text {
+    padding: $radio-description-text-padding;
+  }
 }
