@@ -52,6 +52,11 @@ export default class PanelHeader extends Component {
                     ? <div className={`collapsable__arrow-${portalContext.collapsibleIconPosition}`}><Icon type={iconType} /></div>
                     : null
                 }
+                {portalContext.showValidationIcon ? (
+                  <div className="validation-icon-container">
+                    <Icon type={portalContext.isContentValid ? 'check-circle' : 'times-circle'} />
+                  </div>
+                ) : null}
               </HeaderTag>
             );
           }

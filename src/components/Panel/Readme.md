@@ -56,8 +56,8 @@ import Button from '../Button';
 </Panel>
 ```
 ```js
-<Panel theme="blank" collapsable={ true } collapsed={ true } isLeft>
-  <Panel.Header>Panel example</Panel.Header>
+<Panel theme="blank" collapsable={ true } collapsed={ true } collapsibleIconPosition="left" showValidationIcon isContentValid={false}>
+  <Panel.Header>Validation panel</Panel.Header>
   <Panel.Body>
     Panel body content
   </Panel.Body>
