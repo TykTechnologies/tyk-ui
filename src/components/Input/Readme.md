@@ -7,6 +7,7 @@
   type="text"
   theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
+  withCopyIcon
 />
 ```
 ```js

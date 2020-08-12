@@ -91,6 +91,20 @@
       border-radius: $general-border-radius;
     }
   }
+
+  &--with-copy-icon {
+    padding-right: map-get($spacing, 'xl');
+
+    & .tyk-form-control__wrapper {
+      position: relative;
+    }
+
+    & .input-copy-icon {
+      position: absolute;
+      right: -25px;
+      top: map-get($spacing, 'sm')
+    }
+  }
 }
 
 .tyk-form-group--addon-right input {

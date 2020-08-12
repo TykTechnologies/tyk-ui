@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Icon from '../../Icon';
+import CopyToClipboard from '../../CopyToClipboard';
+
 
 export default class Input extends Component {
   static propTypes = {
@@ -35,6 +38,7 @@ export default class Input extends Component {
       PropTypes.number,
       PropTypes.string,
     ]),
+    withCopyIcon: PropTypes.bool,
   }
 
   static getAddon(content) {
@@ -121,6 +125,7 @@ export default class Input extends Component {
       labelwidth,
       inputgroupaddonleft,
       inputgroupaddonright,
+      withCopyIcon,
     } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
@@ -145,6 +150,10 @@ export default class Input extends Component {
 
     if (error) {
       cssClasses.push('has-error');
+    }
+
+    if (withCopyIcon) {
+      cssClasses.push('tyk-form-group--with-copy-icon');
     }
 
     return cssClasses.join(' ');
@@ -221,7 +230,9 @@ export default class Input extends Component {
       inputgroupaddonleft,
       inputgroupaddonright,
       note,
+      withCopyIcon,
     } = this.props;
+    const { stateValue } = this.state;
 
     return (
       <div className={this.getCssClasses()}>
@@ -239,6 +250,15 @@ export default class Input extends Component {
               ? this.getInputGroupAddon()
               : this.getInputComponent()
           }
+          {withCopyIcon && (
+            <CopyToClipboard
+              copy={stateValue}
+              element={Icon}
+              type="copy"
+              family="tykon"
+              className="input-copy-icon"
+            />
+          )}
           {
             note
               ? <p className="tyk-form-control__help-block">{ note }</p>
