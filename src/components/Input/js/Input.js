@@ -38,11 +38,7 @@ export default class Input extends Component {
       PropTypes.number,
       PropTypes.string,
     ]),
-    withCopy: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element,
-      PropTypes.node,
-    ]),
+    withCopy: PropTypes.bool
   }
 
   static getAddon(content) {

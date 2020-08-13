@@ -11,7 +11,11 @@ export default class Radio extends Component {
     name: PropTypes.string,
     nospace: PropTypes.string,
     value: PropTypes.string,
-    description: PropTypes.string,
+    description: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+      PropTypes.node,
+    ]),
   };
 
   getCssClasses() {
