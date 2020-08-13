@@ -56,10 +56,20 @@ import Button from '../Button';
 </Panel>
 ```
 ```js
-<Panel theme="blank" collapsable={ true } collapsed={ true } collapsibleIconPosition="left" showValidationIcon isContentValid={false}>
-  <Panel.Header>Validation panel</Panel.Header>
+import Icon from '../Icon';
+<>
+<Panel theme="blank" collapsable={ true } collapsed={ true } collapsibleIconPosition="left">
+  <Panel.Header
+  customContent={
+    <div>
+      <Icon type={false ? 'check-circle' : 'times-circle'} />
+    </div>
+  }
+  >
+    Panel with custom header content
+  </Panel.Header>
   <Panel.Body>
     Panel body content
   </Panel.Body>
 </Panel>
-```
+</>

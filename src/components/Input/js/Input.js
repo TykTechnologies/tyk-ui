@@ -38,7 +38,11 @@ export default class Input extends Component {
       PropTypes.number,
       PropTypes.string,
     ]),
-    withCopyIcon: PropTypes.bool,
+    withCopy: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+      PropTypes.node,
+    ]),
   }
 
   static getAddon(content) {
@@ -125,7 +129,7 @@ export default class Input extends Component {
       labelwidth,
       inputgroupaddonleft,
       inputgroupaddonright,
-      withCopyIcon,
+      withCopy,
     } = this.props;
     const cssClasses = ['tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
@@ -152,7 +156,7 @@ export default class Input extends Component {
       cssClasses.push('has-error');
     }
 
-    if (withCopyIcon) {
+    if (withCopy) {
       cssClasses.push('tyk-form-group--with-copy-icon');
     }
 
@@ -230,9 +234,11 @@ export default class Input extends Component {
       inputgroupaddonleft,
       inputgroupaddonright,
       note,
-      withCopyIcon,
+      withCopy,
+      isfield,
     } = this.props;
     const { stateValue } = this.state;
+    const { value } = this.props;
 
     return (
       <div className={this.getCssClasses()}>
@@ -250,9 +256,9 @@ export default class Input extends Component {
               ? this.getInputGroupAddon()
               : this.getInputComponent()
           }
-          {withCopyIcon && (
+          {withCopy && (
             <CopyToClipboard
-              copy={stateValue}
+              copy={isfield ? value : stateValue}
               element={Icon}
               type="copy"
               family="tykon"

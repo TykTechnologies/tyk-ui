@@ -12,6 +12,11 @@ export default class PanelHeader extends Component {
       PropTypes.string,
     ]).isRequired,
     className: PropTypes.string,
+    customContent: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.node,
+      PropTypes.string,
+    ]),
   }
 
   getCssClasses(props) {
@@ -32,6 +37,7 @@ export default class PanelHeader extends Component {
   render() {
     const {
       children,
+      customContent,
     } = this.props;
 
     return (
@@ -52,11 +58,7 @@ export default class PanelHeader extends Component {
                     ? <div className={`collapsable__arrow-${portalContext.collapsibleIconPosition}`}><Icon type={iconType} /></div>
                     : null
                 }
-                {portalContext.showValidationIcon ? (
-                  <div className="validation-icon-container">
-                    <Icon type={portalContext.isContentValid ? 'check-circle' : 'times-circle'} />
-                  </div>
-                ) : null}
+                {customContent && (portalContext.getCustomHeaderContent(customContent))}
               </HeaderTag>
             );
           }

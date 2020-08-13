@@ -26,16 +26,9 @@
       margin-left: 5px;
     }
 
-    & .validation-icon-container {
-      margin-left: auto;
-
-      & .fa-times-circle {
-        color: theme-color('danger', 'base');
-      }
-
-      & .fa-check-circle {
-        color: theme-color('success', 'base');
-      }
+    &__custom_content {
+      display: flex;
+      flex-grow: 1;
     }
   }
 

@@ -12,8 +12,6 @@ const Panel = (props) => {
     theme,
     onToggleCollapse,
     collapsibleIconPosition = 'right',
-    isContentValid,
-    showValidationIcon,
   } = props;
   const [collapsedState, setCollapsedState] = useState(collapsed || false);
 
@@ -50,6 +48,12 @@ const Panel = (props) => {
     }
   };
 
+  const getCustomHeaderContent = content => (
+    <div className="tyk-panel__header__custom_content">
+      {content}
+    </div>
+  );
+
   return (
     <div className={getCssClasses()}>
       <PortalContext.Provider
@@ -58,9 +62,8 @@ const Panel = (props) => {
           collapsed: collapsedState,
           onToggle: handleToggle,
           theme,
-          isContentValid,
-          showValidationIcon,
           collapsibleIconPosition,
+          getCustomHeaderContent,
         }}
       >
         {
@@ -86,8 +89,6 @@ Panel.propTypes = {
   collapsable: PropTypes.bool,
   collapsibleIconPosition: PropTypes.string,
   collapsed: PropTypes.bool,
-  isContentValid: PropTypes.bool,
-  showValidationIcon: PropTypes.bool,
   theme: PropTypes.string,
   onToggleCollapse: PropTypes.func,
 };
