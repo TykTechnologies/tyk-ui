@@ -11,6 +11,11 @@ export default class Radio extends Component {
     name: PropTypes.string,
     nospace: PropTypes.string,
     value: PropTypes.string,
+    description: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element,
+      PropTypes.node,
+    ]),
   };
 
   getCssClasses() {
@@ -41,7 +46,9 @@ export default class Radio extends Component {
   }
 
   render() {
-    const { input, label, ...rest } = this.props;
+    const {
+      input, label, description, ...rest
+    } = this.props;
     return (
       <div
         className={this.getCssClasses()}
@@ -54,6 +61,7 @@ export default class Radio extends Component {
           />
           {label}
         </label>
+        <p className="tyk-form-control__help-block">{description}</p>
       </div>
     );
   }
