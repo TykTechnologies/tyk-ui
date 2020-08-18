@@ -11,7 +11,7 @@ export default class Radio extends Component {
     name: PropTypes.string,
     nospace: PropTypes.string,
     value: PropTypes.string,
-    description: PropTypes.oneOfType([
+    note: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element,
       PropTypes.node,
@@ -47,7 +47,7 @@ export default class Radio extends Component {
 
   render() {
     const {
-      input, label, description, ...rest
+      input, label, note, ...rest
     } = this.props;
     return (
       <div
@@ -61,7 +61,7 @@ export default class Radio extends Component {
           />
           {label}
         </label>
-        <p className="tyk-form-control__help-block">{description}</p>
+        <p className="tyk-form-control__help-block">{note}</p>
       </div>
     );
   }
