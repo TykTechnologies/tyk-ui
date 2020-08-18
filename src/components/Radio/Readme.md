@@ -3,7 +3,7 @@
 <Radio
   name="radio"
   label="This is a radio1"
-  description="Radio description"
+  note="Radio description"
 />
 <Radio
   name="radio"
