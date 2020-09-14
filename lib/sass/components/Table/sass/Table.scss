@@ -20,6 +20,7 @@
     }
 
     > thead th {
+      background: white;
       border-right: 1px solid theme-color('default', 'light');
       color: $text-color;
       font-size: text-scale('sm');
