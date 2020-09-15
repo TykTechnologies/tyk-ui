@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
 	defaultExample: false,
+	title: 'Tyk UI',
 	version,
 	styleguideDir: 'tyk-ui-styleguide',
 	ignore: [
@@ -30,8 +31,8 @@ module.exports = {
 	require: [
     path.join(__dirname, 'src/index.scss')
   ],
-	components: 'src/components/**/index.js',
-	resolver: require('react-docgen').resolver.findAllExportedComponentDefinitions,
+	// components: 'src/components/**/index.js',
+	// resolver: require('react-docgen').resolver.findAllExportedComponentDefinitions,
 	webpackConfig: {
 		module: {
 			rules: [
@@ -86,4 +87,73 @@ module.exports = {
 			],
 		},
 	},
+	pagePerSection: true,
+	sections: [
+		{
+			name: 'Getting Started',
+			content: 'docs/Documentation.md',
+			usageMode: 'collapse',
+			sections: [
+				{
+					name: 'Prerequisite',
+					content: 'docs/PreRequisite.md',
+				},
+				{
+					name: 'Contributing',
+					content: 'docs/AddingComponents.md',
+				},
+				{
+					name: 'Publishing',
+					content: 'docs/PublishingGuide.md',
+				},
+			],
+			sectionDepth: 2,
+		},
+		{
+			name: 'Theming',
+			content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Globals',
+			content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Font and Typography',
+			content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Hooks',
+			content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Layout',
+			content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Typography',
+			content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Components',
+			components: 'src/components/**/index.js',
+			usageMode: 'collapse',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Form',
+			content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+		{
+			name: 'Utilities',
+			// content: 'docs/Theming.md',
+			sectionDepth: 2,
+		},
+	]
 };
