@@ -1,4 +1,4 @@
-import Checkbox from '../Checkbox';
+import Checkbox from '../../form/Checkbox';
 import Button from '../Button';
 // import Icon from '../Icon';
 import { Input } from '../../form/Input';
