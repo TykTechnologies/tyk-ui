@@ -90,7 +90,7 @@
 
 ```
 ```js
-import Icon from '../Icon';
+import Icon from '../../components/Icon';
 <div>
   <Input
     inputgroupaddonleft={

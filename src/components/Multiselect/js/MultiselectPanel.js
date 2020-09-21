@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import { Input } from '../../Input';
+import { Input } from '../../../form/Input';
 import Icon from '../../Icon';
 import Message from '../../Message';
 import InfiniteScroller from '../../InfiniteScroller';

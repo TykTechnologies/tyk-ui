@@ -1,7 +1,7 @@
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 // import Icon from '../Icon';
-import { Input } from '../Input';
+import { Input } from '../../form/Input';
 import TextEllipsis from '../TextEllipsis';
 
 export const config = {

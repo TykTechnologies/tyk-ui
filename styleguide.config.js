@@ -142,12 +142,13 @@ module.exports = {
 		{
 			name: 'Components',
 			components: 'src/components/**/index.js',
-			usageMode: 'collapse',
+			tocMode: "collapse",
 			sectionDepth: 2,
+			
 		},
 		{
 			name: 'Form',
-			content: 'docs/Theming.md',
+			components: 'src/form/**/index.js',
 			sectionDepth: 2,
 		},
 		{

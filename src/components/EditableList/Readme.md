@@ -1,7 +1,7 @@
 ```js
 import { Combobox } from '../Combobox';
 import {Combobox2} from '../Combobox2';
-import {Input} from '../Input';
+import {Input} from '../../form/Input';
 import {DatePicker} from '../DatePicker';
 <EditableList
   label="Editable list inline display"
@@ -102,7 +102,7 @@ import { Combobox } from '../Combobox';
 ```
 ```js
 import { Combobox } from '../Combobox';
-import {Input} from '../Input';
+import {Input} from '../../form/Input';
 <EditableList
   label="Editable list table display"
   name="editableListInline"
@@ -153,7 +153,7 @@ import {Input} from '../Input';
 ```
 ```js
 import {Fragment} from 'react';
-import {Input} from '../Input';
+import {Input} from '../../form/Input';
 <Fragment>
   <EditableList
     label="Editable list append the results to another element"
