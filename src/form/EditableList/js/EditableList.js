@@ -7,9 +7,9 @@ import format from 'date-fns/format';
 import isDate from 'date-fns/isDate';
 
 import EditableListForm from './EditableListForm';
-import Column from '../../../components/Column';
+import Column from '../../../layout/Column';
 import Icon from '../../../components/Icon';
-import Row from '../../../components/Row';
+import Row from '../../../layout/Row';
 
 export default class EditableList extends Component {
   static propTypes = {

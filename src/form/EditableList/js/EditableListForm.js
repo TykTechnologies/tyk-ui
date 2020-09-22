@@ -2,8 +2,8 @@ import React, { Component, createRef } from 'react';
 import isEqual from 'react-fast-compare';
 import PropTypes from 'prop-types';
 
-import Column from '../../../components/Column';
-import Row from '../../../components/Row';
+import Column from '../../../layout/Column';
+import Row from '../../../layout/Row';
 import Button from '../../../components/Button';
 
 export default class EditableListForm extends Component {

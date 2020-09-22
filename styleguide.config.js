@@ -140,7 +140,8 @@ module.exports = {
 		},
 		{
 			name: 'Layout',
-			content: 'docs/Theming.md',
+			content: 'src/layout/Readme.md',
+			components: 'src/layout/**/index.js',
 			sectionDepth: 2,
 		},
 		{
