@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import echarts from 'echarts';
 import { fromJS } from 'immutable';
 
-import debounce from '../../../common/js/utils';
+import debounce from '../../../utils/debounce';
 import { usePrevious } from '../../../hooks';
 import Loader from '../../Loader';
 import Message from '../../Message';

@@ -162,7 +162,9 @@ module.exports = {
 		},
 		{
 			name: 'Utilities',
-			// content: 'docs/Theming.md',
+			components: 'src/utils/**/*.md',
+			usageMode: 'hide',
+			exampleMode: "collapse",
 			sectionDepth: 2,
 		},
 	]

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import Utils from '../../Utils';
+import debounce from '../../../utils/debounce';
 
 const FixedWrapper = (props) => {
   const {
@@ -30,11 +30,11 @@ const FixedWrapper = (props) => {
 
   useEffect(() => {
     if (showShadow) {
-      window.addEventListener('scroll', Utils.debounce(attachShadow, 100));
+      window.addEventListener('scroll', debounce(attachShadow, 100));
     }
 
     return () => {
-      window.removeEventListener('scroll', Utils.debounce(attachShadow, 100));
+      window.removeEventListener('scroll', debounce(attachShadow, 100));
     };
   }, [attachShadow, showShadow]);
 

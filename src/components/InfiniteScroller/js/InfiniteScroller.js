@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { PropTypes } from 'prop-types';
 
-import debounce from '../../../common/js/utils';
+import debounce from '../../../utils/debounce';
 import { usePrevious, useComponentSize } from '../../../hooks';
 import Loader from '../../Loader';
 
