@@ -4,7 +4,7 @@ import React, {
 import { PropTypes } from 'prop-types';
 
 import debounce from '../../../common/js/utils';
-import { usePrevious, useComponentSize } from '../../../common/js/hooks';
+import { usePrevious, useComponentSize } from '../../../hooks';
 import Loader from '../../Loader';
 
 const InfiniteScroller = (props) => {

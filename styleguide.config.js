@@ -74,6 +74,15 @@ module.exports = {
 	          },
 	          "sass-loader?sourceMap"
 	        ]
+				},
+				{
+	        test: /\.md$/,
+	        use: {
+	          loader: 'file-loader',
+	          options: {
+	            name: 'docs/[name].[ext]'
+	          }
+	        }
 	      },
 	      {
 	        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -126,7 +135,7 @@ module.exports = {
 		},
 		{
 			name: 'Hooks',
-			content: 'docs/Theming.md',
+			components: 'src/hooks/**/*.md',
 			sectionDepth: 2,
 		},
 		{

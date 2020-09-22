@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import TabContext from './TabContext';
-import { usePrevious } from '../../../common/js/hooks';
+import { usePrevious } from '../../../hooks';
 
 const TabContent = (props) => {
   const {

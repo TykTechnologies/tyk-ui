@@ -6,7 +6,7 @@ import echarts from 'echarts';
 import { fromJS } from 'immutable';
 
 import debounce from '../../../common/js/utils';
-import { usePrevious } from '../../../common/js/hooks';
+import { usePrevious } from '../../../hooks';
 import Loader from '../../Loader';
 import Message from '../../Message';
 

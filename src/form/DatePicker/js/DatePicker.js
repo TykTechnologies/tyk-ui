@@ -6,7 +6,7 @@ import flatpickr from 'flatpickr';
 import Icon from '../../../components/Icon';
 
 import '../../../../node_modules/flatpickr/dist/flatpickr.min.css';
-import { usePrevious } from '../../../common/js/hooks';
+import { usePrevious } from '../../../hooks';
 
 const DatePicker = (props) => {
   const {
