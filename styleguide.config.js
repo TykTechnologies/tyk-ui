@@ -145,7 +145,7 @@ module.exports = {
 		},
 		{
 			name: 'Typography',
-			content: 'docs/Theming.md',
+			content: 'src/typography/Readme.md',
 			sectionDepth: 2,
 		},
 		{
