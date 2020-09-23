@@ -100,16 +100,12 @@ module.exports = {
 	sections: [
 		{
 			name: 'Getting Started',
-			content: 'docs/Documentation.md',
+			content: 'docs/GettingStarted.md',
 			usageMode: 'collapse',
 			sections: [
 				{
-					name: 'Prerequisite',
-					content: 'docs/PreRequisite.md',
-				},
-				{
 					name: 'Contributing',
-					content: 'docs/AddingComponents.md',
+					content: 'docs/Contributing.md',
 				},
 				{
 					name: 'Publishing',
@@ -125,12 +121,12 @@ module.exports = {
 		},
 		{
 			name: 'Globals',
-			content: 'docs/Theming.md',
+			content: 'docs/Globals.md',
 			sectionDepth: 2,
 		},
 		{
 			name: 'Font and Typography',
-			content: 'docs/Theming.md',
+			content: 'docs/Fonts.md',
 			sectionDepth: 2,
 		},
 		{
