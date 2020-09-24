@@ -1,1 +1,0 @@
-This is a blank page please directly click on component / sub section
