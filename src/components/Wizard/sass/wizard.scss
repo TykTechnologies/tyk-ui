@@ -1,0 +1,11 @@
+.validation-container {
+  margin-left: auto;
+
+  & .fa-exclamation-circle {
+    color: theme-color('warning', 'base');
+  }
+
+  & .fa-check-circle {
+    color: theme-color('success', 'base');
+  }
+}
