@@ -6,28 +6,6 @@ module.exports = {
 	title: 'Tyk UI',
 	version,
 	styleguideDir: 'tyk-ui-styleguide',
-	ignore: [
-		'**/components/Collapsible/**/*.js',
-		'**/components/Column/**/*.js',
-		'**/components/Combobox/**/FieldCombobox.js',
-		'**/components/DateTimePicker/**/FieldDatetimePicker.js',
-		'**/components/Dropdown/**/DropdownItem.js',
-		'**/components/Dropdown/**/FieldDropdown.js',
-		'**/components/EditableList/**/EditableListForm.js',
-		'**/components/EditableList/**/FieldEditableList.js',
-		'**/components/FileInput/**/FieldFileInput.js',
-		'**/components/Input/**/FieldInput.js',
-		'**/components/Modal/**/ModalBody.js',
-		'**/components/Modal/**/ModalFooter.js',
-		'**/components/Modal/**/ModalHeader.js',
-		'**/components/Modal/**/ModalTitle.js',
-		'**/components/Pagination/**/FieldPagination.js',
-		'**/components/Panel/**/PanelBody.js',
-		'**/components/Panel/**/PanelHeader.js',
-		'**/components/Select/**/FieldSelect.js',
-		'**/components/Row/**/*.js',
-		'**/components/Tabs/**/Tab.js'
-	],
 	require: [
     path.join(__dirname, 'src/index.scss')
   ],
@@ -99,7 +77,6 @@ module.exports = {
 		{
 			name: 'Getting Started',
 			content: 'docs/GettingStarted.md',
-			usageMode: 'collapse',
 			sections: [
 				{
 					name: 'Contributing',
@@ -148,18 +125,22 @@ module.exports = {
 			components: 'src/components/**/index.js',
 			tocMode: "collapse",
 			sectionDepth: 2,
+			usageMode: 'expand',
+			exampleMode: 'expand'
 			
 		},
 		{
 			name: 'Form',
 			components: 'src/form/**/index.js',
 			sectionDepth: 2,
+			usageMode: 'expand',
+			exampleMode: 'expand'
 		},
 		{
 			name: 'Utilities',
 			components: 'src/utils/**/*.md',
-			usageMode: 'hide',
-			exampleMode: "collapse",
+			usageMode: 'expand',
+			exampleMode: 'expand',
 			sectionDepth: 2,
 		},
 	]

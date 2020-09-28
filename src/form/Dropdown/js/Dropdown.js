@@ -4,7 +4,7 @@ import React, {
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import Button from '../../Button';
+import Button from '../../../components/Button';
 
 const DropdownContext = createContext();
 

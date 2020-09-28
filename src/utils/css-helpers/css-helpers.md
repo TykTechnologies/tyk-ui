@@ -1,5 +1,4 @@
-### Available CSS Helpers
-```css
+```scss
 .right-align {
   text-align: right !important;
 }

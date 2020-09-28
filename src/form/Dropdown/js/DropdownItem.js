@@ -2,7 +2,7 @@ import React, { Component, cloneElement, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import { DropdownContext } from './Dropdown';
-import Icon from '../../Icon';
+import Icon from '../../../components/Icon';
 
 export default class DropdownItem extends Component {
   static propTypes = {

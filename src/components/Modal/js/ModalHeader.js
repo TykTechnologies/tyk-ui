@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../../Button';
-import { ModalContext } from './Modal';
+import { ModalContext } from '../modal-context';
 
 const ModalHeader = (props) => {
   const { children } = props;
