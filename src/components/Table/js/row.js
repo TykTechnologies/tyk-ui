@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import Checkbox from '../../../form/Checkbox';
+import Checkbox from '../../../form/components/Checkbox';
 import { Cell } from './cell';
 import { tableContext } from '../tableContext';
 

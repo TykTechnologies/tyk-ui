@@ -1,20 +1,11 @@
 // -- Components 
-// -- Forms 
-// -- Utils 
-
 @import '../../components/Accordion/sass/Accordion';
+@import '../../components/Tooltip/sass/Tooltip.scss';
 @import '../../components/Button/sass/Button';
 @import '../../components/ButtonGroup/sass/ButtonGroup';
 @import '../../components/Chart/sass/Chart';
-@import '../../form/Checkbox/sass/Checkbox';
 @import '../../components/Collapsible/sass/Collapsible';
-@import '../../form/Combobox/sass/Combobox';
-@import '../../form/Combobox2/sass/Combobox';
 @import '../../components/CopyToClipboard/sass/CopyToClipboard';
-@import '../../form/DatePicker/sass/DatePicker';
-@import '../../form/Dropdown/sass/Dropdown';
-@import '../../form/EditableList/sass/EditableList';
-@import '../../form/FileInput/sass/FileInput';
 @import '../../components/FixedWrapper/sass/FixedWrapper';
 @import '../../components/FloatingContainer/sass/FloatingContainer';
 @import '../../components/Icon/sass/Icon';
@@ -24,19 +15,27 @@
 @import '../../components/List/sass/List';
 @import '../../components/Message/sass/Message';
 @import '../../components/Modal/sass/Modal';
-@import '../../form/Multiselect/sass/Multiselect';
 @import '../../components/Navigation/sass/Navigation';
 @import '../../components/NavBar/sass/NavBar';
-@import '../../form/Pagination/sass/Pagination';
 @import '../../components/Panel/sass/Panel';
 @import '../../components/Pill/sass/Pill';
-@import '../../form/Radio/sass/Radio';
-@import '../../form/Select/sass/Select';
-@import '../../form/SelectableList/sass/SelectableList';
 @import '../../components/Sidebar/sass/Sidebar';
 @import '../../components/Table/sass/Table';
 @import '../../components/Tabs/sass/Tabs';
-@import '../../form/Textarea/sass/Textarea';
 @import '../../components/Toast/sass/Toast';
-@import '../../form/Toggle/sass/Toggle';
-@import '../../components/Tooltip/sass/Tooltip.scss';
+
+// -- Form Components
+@import '../../form/components/Combobox2/sass/Combobox';
+@import '../../form/components/Checkbox/sass/Checkbox';
+@import '../../form/components/Checkbox/sass/Checkbox';
+@import '../../form/components/DatePicker/sass/DatePicker';
+@import '../../form/components/Dropdown/sass/Dropdown';
+@import '../../form/components/EditableList/sass/EditableList';
+@import '../../form/components/FileInput/sass/FileInput';
+@import '../../form/components/Multiselect/sass/Multiselect';
+@import '../../form/components/Pagination/sass/Pagination';
+@import '../../form/components/Radio/sass/Radio';
+@import '../../form/components/Select//sass//Select';
+@import '../../form/components/SelectableList/sass/SelectableList';
+@import '../../form/components/Textarea/sass/Textarea';
+@import '../../form/components/Toggle/sass/Toggle';

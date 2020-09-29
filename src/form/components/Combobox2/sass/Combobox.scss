@@ -1,0 +1,226 @@
+@import '../../../../common/sass/variables';
+@import '../../../../common/sass/mixins';
+@import './variables';
+@import '../../../../components/FloatingContainer/sass/FloatingContainer';
+
+.tyk-combobox2 {
+  $container-trigger-width: 40px;
+  $values-default-height: 38px;
+  outline: none;
+
+  &.disabled {
+    .tyk-form-control {
+      border: $form-control-disabled-border;
+      background-color: $form-control-disabled-background-color;
+      color: $form-control-disabled-color;
+      cursor: not-allowed;
+    }
+
+    .tyk-combobox2__current-values .tyk-pill--combobox button {
+      cursor: not-allowed;
+    }
+
+    &:not(.is-expand-mode) .tyk-combobox2__values-container-trigger {
+      cursor: not-allowed;
+    }
+
+    .tyk-combobox2__entry-field {
+      background-color: transparent;
+      cursor: not-allowed;
+    }
+  }
+
+  .tyk-form-control {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    min-height: 40px;
+    height: auto;
+    padding: 0;
+
+    &:focus-within {
+      outline: none;
+      border: $form-control-border-focus;
+    }
+  }
+
+  &__current-values {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: map-get($spacing, 'sm');
+    max-width: calc(100% - #{$container-trigger-width});
+
+    &.expand-mode {
+      max-height: 1000px;
+      overflow: hidden;
+      transition: max-height 1s ease;
+    }
+
+    &--collapsed.expand-mode {
+      max-height: $values-default-height;
+      transition: max-height .2s ease;
+    }
+
+    .tyk-pill--combobox {
+      margin-top: 3px;
+      margin-bottom: 3px;
+      background-color: $tyk-combobox-pill-background;
+      border-radius: map-get($spacing, 'sm');
+      color: $tyk-combobox-pill-color;
+      padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
+      max-width: 100%;
+      max-height: 26px;
+
+      button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 23px;
+        outline: none;
+
+        + span {
+          margin-left: 0;
+        }
+      }
+
+      span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      i {
+        margin-right: map-get($spacing, 'xs');
+      }
+    }
+  }
+
+  &__entry-field {
+    border: none;
+    line-height: 30px;
+
+    &:focus,
+    &:active {
+      border: none;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $form-control-placeholder-color;
+      font-family: $form-control-placeholder-font-family;
+    }
+  }
+
+  &__text-value {
+    font-family: $font-family-medium;
+    font-size: text-scale('sm');
+    line-height: line-height('sm');
+    padding: 9px 5px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+    outline: none;
+
+    &.overflow-single {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.is-placeholder {
+      color: $form-control-placeholder-color;
+      font-family: $form-control-placeholder-font-family;
+    }
+  }
+
+  &__values-container-trigger {
+    position: relative;
+    flex-basis: $container-trigger-width;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    transition: all .2s;
+
+    &--expanded {
+      transform: rotate(180deg);
+    }
+
+    .tyk-icon {
+      height: 14px;
+    }
+  }
+}
+
+.tyk-form-group--rounded-corners .tyk-combobox2-disabled-overlay {
+  border-radius: calc(#{$general-border-radius} - 2px);
+}
+
+.tyk-combobox2__combobox-dropdown {
+  display: flex;
+  flex-direction: column;
+  border: $general-border-width solid $form-default-color;
+  background-color: white;
+
+  &.tyk-form-group--rounded-corners {
+    border-radius: $general-border-radius;
+  }
+
+  .tyk-combobox2__combobox-search {
+    background-color: white;
+    position: sticky;
+    top: 0;
+    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+
+    + .combobox-list {
+      border-top: 1px solid $form-default-color;
+    }
+  }
+
+  .tyk-combobox2__combobox-list {
+    max-height: 255px;
+
+    li {
+      display: flex;
+      cursor: pointer;
+      padding: 9px map-get($spacing, 'md');
+      transition: all .2s;
+      font-family: $font-family-medium;
+
+      &:hover,
+      &.active {
+        background-color: $tyk-combobox-list-item-hover-color;
+      }
+
+      &.disabled {
+        color: $tyk-combobox-list-item-disabled-color;
+        background-color: initial;
+      }
+
+      + li {
+        border-top: 1px solid $form-default-color;
+      }
+
+      i {
+        margin-right: map-get($spacing, 'xs');
+      }
+
+      .item-name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 16px;
+      }
+    }
+  }
+}
+.tyk-combobox2__values-container-trigger {
+  color: $text-color;
+}
+
+.tyk-combobox2__combobox-dropdown.tyk-form-group--rounded-corners {
+  z-index: 1081;
+}

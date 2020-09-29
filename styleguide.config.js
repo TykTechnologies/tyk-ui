@@ -131,10 +131,21 @@ module.exports = {
 		},
 		{
 			name: 'Form',
-			components: 'src/form/**/index.js',
+			sections: [
+				{
+					name: 'Components',
+					components: 'src/form/components/*/index.js',
+				},
+				{
+					name: 'Formik',
+					components: 'src/form/formik/*/index.js',
+				},
+				{
+					name: 'Redux-Form',
+					components: 'src/form/redux-form/*/index.js',
+				},
+			],
 			sectionDepth: 2,
-			usageMode: 'expand',
-			exampleMode: 'expand'
 		},
 		{
 			name: 'Utilities',

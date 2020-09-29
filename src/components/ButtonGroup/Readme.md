@@ -1,6 +1,6 @@
 ```js
 import Button from '../Button';
-import {Dropdown} from '../../form/Dropdown';
+import {Dropdown} from '../../form/components/Dropdown';
 <ButtonGroup
   label="Button Group"
 >
@@ -32,7 +32,7 @@ import {Dropdown} from '../../form/Dropdown';
 ```
 ```js
 import Button from '../Button';
-import {Dropdown} from '../../form/Dropdown';
+import {Dropdown} from '../../form/components/Dropdown';
 <ButtonGroup
   label="Button Group"
 >

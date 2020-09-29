@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Message from '../Message';
-import { Pagination } from '../../form/Pagination';
+import Pagination from '../../form/components/Pagination';
 import Loader from '../Loader';
 import InfiniteScroller from '../InfiniteScroller';
 import { Header } from './js/header';
