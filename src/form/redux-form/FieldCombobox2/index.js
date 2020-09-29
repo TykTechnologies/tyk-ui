@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import Combobox from '../../components/Combobox';
+import Combobox2 from '../../components/Combobox2';
 
-const FieldCombobox = (props) => {
+const FieldCombobox2 = (props) => {
   const { input, meta, validationmessages } = props;
 
   const getComboboxError = () => {
@@ -25,7 +25,7 @@ const FieldCombobox = (props) => {
   };
 
   return (
-    <Combobox
+    <Combobox2
       {...props}
       onChange={handleOnChange}
       value={!input.value ? input.value : input.value.toJS()}
@@ -34,10 +34,10 @@ const FieldCombobox = (props) => {
   );
 };
 
-export default FieldCombobox;
-
-FieldCombobox.propTypes = {
+FieldCombobox2.propTypes = {
   meta: PropTypes.instanceOf(Object),
   input: PropTypes.instanceOf(Object),
   validationmessages: PropTypes.instanceOf(Object),
 };
+
+export default FieldCombobox2;

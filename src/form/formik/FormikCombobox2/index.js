@@ -1,4 +1,4 @@
 import wrapper from '../../../utils/formik';
-import Combobox from '../../components/Combobox';
+import Combobox2 from '../../components/Combobox2';
 
-export default wrapper(Combobox);
+export default wrapper(Combobox2);

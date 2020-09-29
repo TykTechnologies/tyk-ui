@@ -7,8 +7,7 @@ export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as Collapsible } from './components/Collapsible';
 export { default as Chart } from './components/Chart';
 export { default as CopyToClipboard } from './components/CopyToClipboard';
-export { Confirm } from './components/Confirm';
-export { Dropdown, FieldDropdown } from './components/Dropdown';
+export { default as Confirm } from './components/Confirm';
 export { default as FixedWrapper } from './components/FixedWrapper';
 export { default as FloatingContainer } from './components/FloatingContainer';
 export { default as Icon } from './components/Icon';
@@ -20,12 +19,11 @@ export { default as Message } from './components/Message';
 export { default as Modal } from './components/Modal';
 export { default as NavBar } from './components/NavBar';
 export { default as Navigation } from './components/Navigation';
-export { Pagination, FieldPagination } from './components/Pagination';
 export { default as Panel } from './components/Panel';
 export { default as Pill } from './components/Pill';
 export { default as Tabs } from './components/Tabs';
 export { default as TextEllipsis } from './components/TextEllipsis';
-export { toast } from './components/Toast';
+export { default as toast } from './components/Toast';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Table } from './components/Table';
 
@@ -35,6 +33,7 @@ export { default as Row } from './layout/Row';
 
 // -- Form Components
 export { default as Checkbox } from './form/components/Checkbox';
+export { default as Dropdown } from './form/components/Dropdown';
 export { default as CodeEditor } from './form/components/CodeEditor';
 export { default as Combobox } from './form/components/Combobox';
 export { default as Combobox2 } from './form/components/Combobox2';
@@ -48,13 +47,14 @@ export { default as Select } from './form/components/Select';
 export { default as SelectableList } from './form/components/SelectableList';
 export { default as Textarea } from './form/components/Textarea';
 export { default as Toggle } from './form/components/Toggle';
+export { default as Pagination } from './form/components/Pagination';
 
 // -- Formik
 
 export { default as FormikCheckbox } from './form/formik/FormikCheckbox';
 export { default as FormikCodeEditor } from './form/formik/FormikCodeEditor';
 export { default as FormikCombobox } from './form/formik/FormikCombobox';
-export { default as FieldCombobox2 } from './form/formik/FormikCombobox2';
+export { default as FormikCombobox2 } from './form/formik/FormikCombobox2';
 export { default as FormikDatePicker } from './form/formik/FormikDatePicker';
 export { default as FormikEditableList } from './form/formik/FormikEditableList';
 export { default as FormikFileInput } from './form/formik/FormikFileInput';
@@ -70,6 +70,8 @@ export { default as FormikToggle } from './form/formik/FormikToggle';
 
 export { default as FieldCodeEditor } from './form/redux-form/FieldCodeEditor';
 export { default as FieldCombobox } from './form/redux-form/FieldCombobox';
+export { default as FieldDropdown } from './form/redux-form/FieldDropdown';
+export { default as FieldPagination } from './form/redux-form/FieldPagination';
 export { default as FieldCombobox2 } from './form/redux-form/FieldCombobox2';
 export { default as FieldDatePicker } from './form/redux-form/FieldDatePicker';
 export { default as FieldEditableList } from './form/redux-form/FieldEditableList';
