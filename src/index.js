@@ -33,21 +33,52 @@ export { default as Table } from './components/Table';
 export { default as Column } from './layout/Column';
 export { default as Row } from './layout/Row';
 
-// -- Form
-export { default as Checkbox, FormikCheckbox } from './form/Checkbox';
-export { CodeEditor, FieldCodeEditor, FormikCodeEditor } from './form/CodeEditor';
-export { Combobox, FieldCombobox, FormikCombobox } from './form/Combobox';
-export { Combobox2, FormikCombobox2, FieldCombobox2 } from './form/Combobox2';
-export { DatePicker, FieldDatePicker, FormikDatePicker } from './form/DatePicker';
-export { EditableList, FieldEditableList, FormikEditableList } from './form/EditableList';
-export { FileInput, FieldFileInput, FormikFileInput } from './form/FileInput';
-export { Input, FieldInput, FormikInput } from './form/Input';
-export { Multiselect, FieldMultiselect, FormikMultiselect } from './form/Multiselect';
-export { default as Radio, FormikRadio } from './form/Radio';
-export { Select, FieldSelect, FormikSelect } from './form/Select';
-export { SelectableList, FieldSelectableList, FormikSelectableList } from './form/SelectableList';
-export { default as Textarea, FormikTextarea } from './form/Textarea';
-export { Toggle, FieldToggle, FormikToggle } from './form/Toggle';
+// -- Form Components
+export { default as Checkbox } from './form/components/Checkbox';
+export { default as CodeEditor } from './form/components/CodeEditor';
+export { default as Combobox } from './form/components/Combobox';
+export { default as Combobox2 } from './form/components/Combobox2';
+export { default as DatePicker } from './form/components/DatePicker';
+export { default as EditableList } from './form/components/EditableList';
+export { default as FileInput } from './form/components/FileInput';
+export { default as Input } from './form/components/Input';
+export { default as Multiselect } from './form/components/Multiselect';
+export { default as Radio } from './form/components/Radio';
+export { default as Select } from './form/components/Select';
+export { default as SelectableList } from './form/components/SelectableList';
+export { default as Textarea } from './form/components/Textarea';
+export { default as Toggle } from './form/components/Toggle';
+
+// -- Formik
+
+export { default as FormikCheckbox } from './form/formik/FormikCheckbox';
+export { default as FormikCodeEditor } from './form/formik/FormikCodeEditor';
+export { default as FormikCombobox } from './form/formik/FormikCombobox';
+export { default as FieldCombobox2 } from './form/formik/FormikCombobox2';
+export { default as FormikDatePicker } from './form/formik/FormikDatePicker';
+export { default as FormikEditableList } from './form/formik/FormikEditableList';
+export { default as FormikFileInput } from './form/formik/FormikFileInput';
+export { default as FormikInput } from './form/formik/FormikInput';
+export { default as FormikMultiselect } from './form/formik/FormikMultiselect';
+export { default as FormikRadio } from './form/formik/FormikRadio';
+export { default as FormikSelect } from './form/formik/FormikSelect';
+export { default as FormikSelectableList } from './form/formik/FormikSelectableList';
+export { default as FormikTextarea } from './form/formik/FormikTextarea';
+export { default as FormikToggle } from './form/formik/FormikToggle';
+
+// Redux - Form
+
+export { default as FieldCodeEditor } from './form/redux-form/FieldCodeEditor';
+export { default as FieldCombobox } from './form/redux-form/FieldCombobox';
+export { default as FieldCombobox2 } from './form/redux-form/FieldCombobox2';
+export { default as FieldDatePicker } from './form/redux-form/FieldDatePicker';
+export { default as FieldEditableList } from './form/redux-form/FieldEditableList';
+export { default as FieldFileInput } from './form/redux-form/FieldFileInput';
+export { default as FieldInput } from './form/redux-form/FieldInput';
+export { default as FieldMultiselect } from './form/redux-form/FieldMultiselect';
+export { default as FieldSelect } from './form/redux-form/FieldSelect';
+export { default as FieldSelectableList } from './form/redux-form/FieldSelectableList';
+export { default as FieldToggle } from './form/redux-form/FieldToggle';
 
 // -- Utils
 export { default as usePrevious } from './hooks/usePrevious';
