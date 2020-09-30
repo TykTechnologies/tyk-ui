@@ -1,7 +1,7 @@
-import Checkbox from '../Checkbox';
+import Checkbox from '../../form/components/Checkbox';
 import Button from '../Button';
 // import Icon from '../Icon';
-import { Input } from '../Input';
+import Input from '../../form/components/Input';
 import TextEllipsis from '../TextEllipsis';
 
 export const config = {
@@ -195,7 +195,7 @@ export const config = {
     perPage: 5,
     current: 1,
   },
-  maxHeight: '200px',
+  maxHeight: '320px',
   styling: {
     className: 'tyk-table__wrapper',
   },

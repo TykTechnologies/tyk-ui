@@ -1,50 +1,90 @@
 import './index.scss';
 
+// -- Components
 export { default as Accordion } from './components/Accordion';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
-export { default as Checkbox, FormikCheckbox } from './components/Checkbox';
-export { CodeEditor, FieldCodeEditor, FormikCodeEditor } from './components/CodeEditor';
 export { default as Collapsible } from './components/Collapsible';
 export { default as Chart } from './components/Chart';
-export { default as Column } from './components/Column';
 export { default as CopyToClipboard } from './components/CopyToClipboard';
-export { Combobox, FieldCombobox, FormikCombobox } from './components/Combobox';
-export { Combobox2, FormikCombobox2, FieldCombobox2 } from './components/Combobox2';
-export { Confirm } from './components/Confirm';
-export { DatePicker, FieldDatePicker, FormikDatePicker } from './components/DatePicker';
-export { Dropdown, FieldDropdown } from './components/Dropdown';
-export { EditableList, FieldEditableList, FormikEditableList } from './components/EditableList';
-export { FileInput, FieldFileInput, FormikFileInput } from './components/FileInput';
+export { default as Confirm } from './components/Confirm';
 export { default as FixedWrapper } from './components/FixedWrapper';
 export { default as FloatingContainer } from './components/FloatingContainer';
 export { default as Icon } from './components/Icon';
 export { default as InfiniteScroller } from './components/InfiniteScroller';
 export { default as InfoNote } from './components/InfoNote';
-export { Input, FieldInput, FormikInput } from './components/Input';
 export { default as List } from './components/List';
 export { default as Loader } from './components/Loader';
 export { default as Message } from './components/Message';
 export { default as Modal } from './components/Modal';
-export { Multiselect, FieldMultiselect, FormikMultiselect } from './components/Multiselect';
 export { default as NavBar } from './components/NavBar';
 export { default as Navigation } from './components/Navigation';
-export { Pagination, FieldPagination } from './components/Pagination';
 export { default as Panel } from './components/Panel';
 export { default as Pill } from './components/Pill';
-export { default as Radio, FormikRadio } from './components/Radio';
-export { default as Row } from './components/Row';
-export { Select, FieldSelect, FormikSelect } from './components/Select';
-export { SelectableList, FieldSelectableList, FormikSelectableList } from './components/SelectableList';
 export { default as Tabs } from './components/Tabs';
-export { default as Textarea, FormikTextarea } from './components/Textarea';
 export { default as TextEllipsis } from './components/TextEllipsis';
-export { toast } from './components/Toast';
+export { default as toast } from './components/Toast';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Table } from './components/Table';
-export { Toggle, FieldToggle, FormikToggle } from './components/Toggle';
-export { default as usePrevious } from './common/js/hooks/usePrevious';
-export { default as useTimeout } from './common/js/hooks/useTimeout';
-export { default as useInterval } from './common/js/hooks/useInterval';
-export { default as useEventListener } from './common/js/hooks/useEventListener';
-export { default as useComponentSize } from './common/js/hooks/useComponentSize';
+
+// -- Layout
+export { default as Column } from './layout/Column';
+export { default as Row } from './layout/Row';
+
+// -- Form Components
+export { default as Checkbox } from './form/components/Checkbox';
+export { default as Dropdown } from './form/components/Dropdown';
+export { default as CodeEditor } from './form/components/CodeEditor';
+export { default as Combobox } from './form/components/Combobox';
+export { default as Combobox2 } from './form/components/Combobox2';
+export { default as DatePicker } from './form/components/DatePicker';
+export { default as EditableList } from './form/components/EditableList';
+export { default as FileInput } from './form/components/FileInput';
+export { default as Input } from './form/components/Input';
+export { default as Multiselect } from './form/components/Multiselect';
+export { default as Radio } from './form/components/Radio';
+export { default as Select } from './form/components/Select';
+export { default as SelectableList } from './form/components/SelectableList';
+export { default as Textarea } from './form/components/Textarea';
+export { default as Toggle } from './form/components/Toggle';
+export { default as Pagination } from './form/components/Pagination';
+
+// -- Formik
+
+export { default as FormikCheckbox } from './form/formik/FormikCheckbox';
+export { default as FormikCodeEditor } from './form/formik/FormikCodeEditor';
+export { default as FormikCombobox } from './form/formik/FormikCombobox';
+export { default as FormikCombobox2 } from './form/formik/FormikCombobox2';
+export { default as FormikDatePicker } from './form/formik/FormikDatePicker';
+export { default as FormikEditableList } from './form/formik/FormikEditableList';
+export { default as FormikFileInput } from './form/formik/FormikFileInput';
+export { default as FormikInput } from './form/formik/FormikInput';
+export { default as FormikMultiselect } from './form/formik/FormikMultiselect';
+export { default as FormikRadio } from './form/formik/FormikRadio';
+export { default as FormikSelect } from './form/formik/FormikSelect';
+export { default as FormikSelectableList } from './form/formik/FormikSelectableList';
+export { default as FormikTextarea } from './form/formik/FormikTextarea';
+export { default as FormikToggle } from './form/formik/FormikToggle';
+
+// Redux - Form
+
+export { default as FieldCodeEditor } from './form/redux-form/FieldCodeEditor';
+export { default as FieldCombobox } from './form/redux-form/FieldCombobox';
+export { default as FieldDropdown } from './form/redux-form/FieldDropdown';
+export { default as FieldPagination } from './form/redux-form/FieldPagination';
+export { default as FieldCombobox2 } from './form/redux-form/FieldCombobox2';
+export { default as FieldDatePicker } from './form/redux-form/FieldDatePicker';
+export { default as FieldEditableList } from './form/redux-form/FieldEditableList';
+export { default as FieldFileInput } from './form/redux-form/FieldFileInput';
+export { default as FieldInput } from './form/redux-form/FieldInput';
+export { default as FieldMultiselect } from './form/redux-form/FieldMultiselect';
+export { default as FieldSelect } from './form/redux-form/FieldSelect';
+export { default as FieldSelectableList } from './form/redux-form/FieldSelectableList';
+export { default as FieldToggle } from './form/redux-form/FieldToggle';
+
+// -- Utils
+export { default as usePrevious } from './hooks/usePrevious';
+export { default as useTimeout } from './hooks/useTimeout';
+export { default as useInterval } from './hooks/useInterval';
+export { default as useEventListener } from './hooks/useEventListener';
+export { default as useComponentSize } from './hooks/useComponentSize';

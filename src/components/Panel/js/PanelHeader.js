@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../../Icon';
-import { PortalContext } from './Panel';
+import { PortalContext } from '../panel-context';
 
 export default class PanelHeader extends Component {
   static propTypes = {

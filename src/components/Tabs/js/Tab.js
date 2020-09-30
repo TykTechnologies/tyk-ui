@@ -2,7 +2,7 @@ import React, {
   Fragment, useContext, useEffect, useState,
 } from 'react';
 import PropTypes from 'prop-types';
-import { TabsContext } from './Tabs';
+import { TabsContext } from '../tabs-context';
 import TabContext from './TabContext';
 import TabContent from './TabContent';
 
