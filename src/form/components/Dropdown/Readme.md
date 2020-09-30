@@ -15,7 +15,7 @@
     (
       <span>
         <span>22, Feb 2016</span>
-        <span> > </span>
+        <span> {'>'} </span>
         <span>22, Feb 2016</span>
       </span>
     )
