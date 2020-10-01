@@ -28,7 +28,7 @@ import Accordion from '../Accordion';
 					          <Icon type="exclamation-circle" />
 					      }
 						  </div>
-							<Button theme="success" onClick={() => navigate('next', sectionNo)}>Next Navigate</Button>
+							<Button theme="success" onClick={() => navigate('next')}>Next Navigate</Button>
 							<Button theme="success" onClick={() => checkIsValid()} >Validate</Button>
 		        </Collapsible>
           </>
@@ -47,8 +47,8 @@ import Accordion from '../Accordion';
 		          collapsed={currentSection !== sectionNo}
 		        >
 	          	<div>2</div>
-							<Button theme="success" onClick={() => navigate('previous',sectionNo)} >Previous</Button>
-							<Button theme="success" onClick={() => navigate('next', sectionNo)}>Next</Button>
+							<Button theme="success" onClick={() => navigate('previous')} >Previous</Button>
+							<Button theme="success" onClick={() => navigate('next')}>Next</Button>
 		        </Collapsible>
           </>
         );
@@ -66,8 +66,8 @@ import Accordion from '../Accordion';
 		          collapsed={currentSection !== sectionNo}
 		        >
 	          	<div>3</div>
-							<Button theme="success" onClick={() => navigate('previous', sectionNo)}>Previous</Button>
-							<Button theme="success" onClick={() => navigate('next', sectionNo)}>Next</Button>
+							<Button theme="success" onClick={() => navigate('previous')}>Previous</Button>
+							<Button theme="success" onClick={() => navigate('next')}>Next</Button>
 		        </Collapsible>
           </>
         );
@@ -99,13 +99,13 @@ import Accordion from '../Accordion';
 				              <Panel.Body>
 													<Button
 														theme="success"
-														onClick={() => navigate('previous', sectionNo)}
+														onClick={() => navigate('previous')}
 														>
 														Previous
 													</Button>
 													<Button
 														theme="success"
-														onClick={() => navigate('next', sectionNo)}
+														onClick={() => navigate('next')}
 														>
 														Next
 													</Button>
@@ -143,7 +143,7 @@ import Accordion from '../Accordion';
 				              <Panel.Body>
 													<Button
 														theme="success"
-														onClick={() => navigate('previous', sectionNo)}
+														onClick={() => navigate('previous')}
 														>
 														Previous
 													</Button>

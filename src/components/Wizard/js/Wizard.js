@@ -4,9 +4,9 @@ import WizardContext from './WizardContext';
 
 const Wizard = ({ children }) => {
   const [currentSection, setCurrentSection] = useState(0);
-  const navigate = (adjacent, sectionNo) => {
-    if (adjacent === 'next') return setCurrentSection(sectionNo + 1);
-    return setCurrentSection(sectionNo - 1);
+  const navigate = (adjacent) => {
+    if (adjacent === 'next') return setCurrentSection(currentSection + 1);
+    return setCurrentSection(currentSection - 1);
   };
   return (
     <>
