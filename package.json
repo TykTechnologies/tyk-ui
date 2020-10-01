@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/TykTechnologies/tyk-ui/issues"
   },
-  "homepage": "https://github.com/TykTechnologies/tyk-ui#readme",
+  "homepage": "https://tyktechnologies.github.io/tyk-ui-styleguide/",
   "publishConfig": {
     "access": "restricted"
   },

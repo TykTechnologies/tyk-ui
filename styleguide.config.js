@@ -1,14 +1,17 @@
 const { version } = require('./package');
 const path = require('path');
+const {styles, theme} = require('./styleguide.styles');
 
 module.exports = {
 	defaultExample: false,
-	title: 'Tyk UI',
-	version,
+	title: `Tyk UI ${version}`,
 	styleguideDir: 'tyk-ui-styleguide',
 	require: [
     path.join(__dirname, 'src/index.scss')
-  ],
+	],
+	styleguideComponents: {
+    Logo: path.join(__dirname, 'lib/logo')
+  },
 	webpackConfig: {
 		module: {
 			rules: [
@@ -73,6 +76,8 @@ module.exports = {
 		},
 	},
 	pagePerSection: true,
+	styles,
+	theme,
 	sections: [
 		{
 			name: 'Getting Started',

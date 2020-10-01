@@ -1,19 +1,18 @@
-
-- 
-
-
-
 Tyk-ui is our private library of reusable presentational UI components. 
-
 
 ### **Installing library with npm**
 
 - *Pre-installation steps*
 Before installing the library, bear in mind that this is a private npm module, therefore in order to have access to it follow next steps:
 
-  - Create an account on `https://www.npmjs.com/`
+  - Create an account on <a href="https://www.npmjs.com/signup">npm</a>
   - Give your username to any owner of the `tyk-ui` library, so that you can be added as a member of the project
-  - Run `npm adduser` locally
+  - Add npm user locally
+
+  ```static
+  npm adduser
+  ```
+
   - Follow next steps
 
 ### **Installation**
@@ -21,6 +20,7 @@ Before installing the library, bear in mind that this is a private npm module, t
 ```html
 npm install --save @tyk-technologies/tyk-ui
 ```
+
 
 ```md
 Note that this is a private package so you'll need to be added as a member to the tyk-technologies org and then run `npm adduser` which will ask you for your npm credentials

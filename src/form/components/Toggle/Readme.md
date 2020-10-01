@@ -1,20 +1,19 @@
 ```js
 import React, { Component, Fragment } from 'react';
 
-import Toggle from './js/Toggle';
 import ToggleItemWrapper from './js/ToggleItemWrapper';
 
 import Row from '../../../layout/Row';
 import Column from '../../../layout/Column';
 
 class TestToggle extends Component {
-  state = {
-    active: false,
-    activeMultiple: 'option2',
-  };
 
   constructor(props) {
     super(props);
+    this.state = {
+    active: false,
+    activeMultiple: 'option2',
+  };
     this.toggleMultipleOnChange = this.toggleMultipleOnChange.bind(this);
     this.toggleOnChange = this.toggleOnChange.bind(this);
   }
