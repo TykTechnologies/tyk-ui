@@ -1,6 +1,3 @@
-- 
-
-
 Contributions to the current library are welcome, so please follow these steps each time you want to make a change:
 
 - Create a GH issue / RFC, describing the necessary changes [here](https://github.com/TykTechnologies/tyk-ui/issues/new).
