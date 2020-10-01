@@ -49,5 +49,4 @@ export { default as useInterval } from './common/js/hooks/useInterval';
 export { default as useEventListener } from './common/js/hooks/useEventListener';
 export { default as useComponentSize } from './common/js/hooks/useComponentSize';
 export { default as Wizard } from './components/Wizard';
-export { default as Section } from './components/Wizard';
 

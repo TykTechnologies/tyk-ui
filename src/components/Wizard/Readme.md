@@ -6,7 +6,7 @@ import Panel from '../Panel';
 import Accordion from '../Accordion';
 
 <Wizard>
-	<Wizard.Section sectionNo={1}>
+	<Wizard.Section>
     {
       (sectionProps) => {
       	const { currentSection, sectionNo, navigate, valid, setContentValidation } = sectionProps;
@@ -36,7 +36,7 @@ import Accordion from '../Accordion';
       }
     }
 	</Wizard.Section>
-	<Wizard.Section sectionNo={2}>
+	<Wizard.Section>
     {
       (sectionProps) => {
       	const { currentSection, sectionNo, navigate, valid } = sectionProps;
@@ -55,7 +55,7 @@ import Accordion from '../Accordion';
       }
     }
 	</Wizard.Section>
-	<Wizard.Section sectionNo={3}>
+	<Wizard.Section>
     {
       (sectionProps) => {
       	const { currentSection, sectionNo, navigate, valid } = sectionProps;
@@ -74,10 +74,10 @@ import Accordion from '../Accordion';
       }
     }
 	</Wizard.Section>
-	<Wizard.Section sectionNo={4}>
+	<Wizard.Section>
     {
       (sectionProps) => {
-      	const { currentSection, sectionNo, navigate, valid, onPanelCollapse, setContentValidation } = sectionProps;
+      	const { currentSection, sectionNo, navigate, valid, setContentValidation } = sectionProps;
       	const checkIsValid = () => {
 				  setContentValidation(true);
 				}
@@ -89,9 +89,6 @@ import Accordion from '../Accordion';
 				        collapsable
 				        collapsed={currentSection !== sectionNo}
 				        theme="blank"
-				        onToggleCollapse={() => {
-				          onPanelCollapse(sectionNo);
-				        }}
 				      >
 				        {
 				          () => (
@@ -122,10 +119,10 @@ import Accordion from '../Accordion';
       }
     }
 	</Wizard.Section>
-	<Wizard.Section sectionNo={5}>
+	<Wizard.Section>
     {
       (sectionProps) => {
-      	const { currentSection, sectionNo, navigate, valid, onPanelCollapse, setContentValidation } = sectionProps;
+      	const { currentSection, sectionNo, navigate, valid, setContentValidation } = sectionProps;
       	const checkIsValid = () => {
 				  setContentValidation(true);
 				}
@@ -136,9 +133,6 @@ import Accordion from '../Accordion';
 				        collapsable
 				        collapsed={currentSection !== sectionNo}
 				        theme="blank"
-				        onToggleCollapse={() => {
-				          onPanelCollapse(sectionNo);
-				        }}
 				      >
 				        {
 				          () => (

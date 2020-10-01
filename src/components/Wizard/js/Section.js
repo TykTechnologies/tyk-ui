@@ -5,19 +5,16 @@ import WizardContext from './WizardContext';
 const Section = ({ children, sectionNo }) => {
   const {
     currentSection,
-    onPanelCollapse,
     navigate,
   } = useContext(WizardContext);
   const [valid, setValid] = useState(false);
   const setContentValidation = (validity) => {
     setValid(validity);
   };
-
   return (
     <>
       {children({
         currentSection,
-        onPanelCollapse,
         navigate,
         sectionNo,
         valid,
