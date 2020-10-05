@@ -64,7 +64,6 @@ eg.
 ```
 
 ### 2. Rows (`value.rows`)
-- 
 ```md
 rows[n].values
 ```
@@ -107,8 +106,6 @@ rows[n].events
 
 You render a table that is selectable by row using the following configuration options. You can also subscribe to row select or all rows selected event of table using following messages
 
-- - `row.selected`
-
 ```md
 selectable.position
 ```
@@ -137,14 +134,10 @@ value.maxHeight
 ```md
 value.styling.className
 ```
-
 - You can customize the table wrapper using this
 
 
-
-
 ### Interactive Table Component
-- 
 ```jsx
 import {Fragment, useState} from 'react';
 
@@ -364,7 +357,6 @@ const config = {
 
 
 ## Advanced Usage
-- 
 
 ### Table Api
 
@@ -377,9 +369,19 @@ To get current table state
 To get current state of table
 
 ### FAQ's
-- 
 
-```html
-Can I attach an event to only one specific cell in the table 
+#### 1. Can I attach an event to only one specific cell in the table 
+
+Yes, you can add events or custom styles to a specific cell using `events` and `styling` for the cell. 
+
+Syntax
+```js static
+value.rows[index][col_id].events = {
+  // your events
+  onClick: () => console.log('Cell Clicked');
+}
 ```
-Yes, you can add events or custom styles to a specific cell using `events` and `styling` for the cell
+
+```md
+Note : Click on `Freemium Policy (A)` in the above interactive table example and check the developer console and rows config `(value.rows[0].values.name)` for code 
+```
