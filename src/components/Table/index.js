@@ -8,6 +8,11 @@ import { Header } from './js/header';
 import { Body } from './js/body';
 import { tableContext } from './tableContext';
 
+/**
+ * This is tyk's table component used to render a data in a tabular view.
+ * See the example configuration object below to understand how to hydrate the table component
+ */
+
 const Table = ({
   value, onChange, noDataMessage, loading, infiniteScrolling,
 }) => {
@@ -143,11 +148,60 @@ const Table = ({
 };
 
 Table.propTypes = {
-  value: PropTypes.instanceOf(Object),
+  /** Configuration object used to render the component */
+  value: PropTypes.shape({
+    /** Configuration for table columns */
+    columns: PropTypes.arrayOf(PropTypes.shape({
+      /** Unique id of the column */
+      id: PropTypes.string.isRequired,
+      /** Name of the column */
+      name: PropTypes.string,
+      /** Type of  column, String by default */
+      type: PropTypes.oneOfType([
+        /** Just renders cell data of type strings */
+        PropTypes.string,
+        /** Render cell of elements (eg. Input / Button) */
+        PropTypes.element,
+      ]),
+      sortable: PropTypes.oneOfType([
+        /** Make Column sortable */
+        PropTypes.bool,
+        /** Configure sorting behaviour */
+        PropTypes.shape({
+          /** Set default sorting direction ASC / DESC */
+          default: PropTypes.string,
+        }),
+      ]),
+    })),
+    /** Configuration for table rows */
+    rows: PropTypes.arrayOf(PropTypes.shape({})),
+    /** Configuration to make table rows selectable */
+    selectable: PropTypes.shape({}),
+    /** Renders pagination for table if the object is missing / empty no pagination is rendered. */
+    pagination: PropTypes.shape({}),
+    /** Sets maximum height for table container. */
+    maxHeight: PropTypes.string,
+    /** Styling for the table container. */
+    styling: PropTypes.shape({
+      /** It's recommended to add styles to a class and pass the class in this object */
+      className: PropTypes.string,
+    }),
+  }).isRequired,
+  /** Callback executed with message and value when there are changes on table */
   onChange: PropTypes.func,
+  /** Renders a <Message /> component with the given message when `config.rows` is empty */
   noDataMessage: PropTypes.string,
+  /** Show placeholder loader */
   loading: PropTypes.bool,
+  /** Adds infinite scroller on page and calls `onChange` with `pagination.change` message */
   infiniteScrolling: PropTypes.bool,
+};
+
+Table.defaultProps = {
+  loading: false,
+  infiniteScrolling: false,
+  noDataMessage: 'No Data Available',
+  onChange: null,
 };
 
 export default Table;
