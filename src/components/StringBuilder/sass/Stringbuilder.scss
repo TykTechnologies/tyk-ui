@@ -1,0 +1,43 @@
+$padding: 2px;
+
+* {
+  box-sizing: border-box;
+}
+
+.string-builder{
+  position: relative;
+  overflow: auto;
+  font: 14px sans-serif;
+  border: 1px solid lightgrey;
+  display: block;
+}
+
+.string-builder__input {
+  background: none;
+  border: none;
+  font: inherit;
+  display: block;
+  padding: $padding;
+  width: 100%;
+}
+.string-builder__styled {
+  position: absolute;
+  top: $padding;
+  left: $padding;
+  color: transparent;
+  // z-index: -1;
+  white-space: pre;
+}
+
+
+.string-builder__highlight {
+  background: yellow;
+  border-radius: 2px;
+  color: black;
+  box-shadow: 0 0 0 1px #ff2ecc;
+}
+
+body {
+  max-width: 200px;
+  margin: 1em auto;
+}
