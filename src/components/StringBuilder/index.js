@@ -5,7 +5,7 @@ import Button from '../Button';
 
 const TokenizedString = ({ tokens }) => {
   console.log('>>>>', { tokens });
-  return tokens?.map(token => <Pill theme="default">{token.name}</Pill>);
+  return tokens?.map(token => (token.isSpecial ? <Pill theme="default">{token.name}</Pill> : <span>{token.name}</span>));
 };
 
 const StringBuilder = () => {
@@ -22,11 +22,12 @@ const StringBuilder = () => {
   ];
 
   useEffect(() => {
-    console.log({ value, tokens });
+    // console.log({ value, tokens });
   }, [value, tokens]);
 
   const addOption = (option) => {
-    setTokens([...tokens, option]);
+    console.log('addOption>>>>', { value });
+    setTokens([...tokens, { id: value, name: value }, { ...option, isSpecial: true }]);
     setValue(value + option.id);
   };
 
@@ -41,7 +42,7 @@ const StringBuilder = () => {
         ref={inputRef}
       />
       <div className="string-builder__styled">
-        {value}
+        {/* {value} */}
         <TokenizedString
           tokens={tokens}
           string={value}
