@@ -1,8 +1,3 @@
-$padding: 2px;
-
-* {
-  box-sizing: border-box;
-}
 
 .string-builder{
   position: relative;
@@ -17,13 +12,13 @@ $padding: 2px;
   border: none;
   font: inherit;
   display: block;
-  padding: $padding;
+  padding: 4px;
   width: 100%;
 }
 .string-builder__styled {
   position: absolute;
-  top: $padding;
-  left: $padding;
+  top: 4px;
+  left: 4px;
   color: transparent;
   // z-index: -1;
   white-space: pre;
