@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+
+/**
+ * Radio can be used when a user needs to select at most one value from a multiple options.
+ */
 export default class Radio extends Component {
   static propTypes = {
+    /** Used to disable the element */
     disabled: PropTypes.bool,
+    /** Align radio with in same line with other elements */
     inline: PropTypes.bool,
+    /** Set a theme for radio */
     theme: PropTypes.string,
     input: PropTypes.instanceOf(Object),
+    /** Adds label to the radio input */
     label: PropTypes.string,
+    /** Set name for the radio input */
     name: PropTypes.string,
-    nospace: PropTypes.string,
+    /** If set to true removes margin by adding `no-margin` class */
+    nospace: PropTypes.bool,
+    /** Set initial value for the radio input */
     value: PropTypes.string,
+    /** Add note at the bottom of the radio input */
     note: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.element,
