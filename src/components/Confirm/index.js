@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import Modal from '../Modal';
 
+/**
+ * Confirm component can be used to open a dialog (<Modal />) before a specific action
+ */
+
 const Confirm = (props) => {
   const {
     children,
@@ -78,9 +82,13 @@ const Confirm = (props) => {
 };
 
 Confirm.propTypes = {
+  /** Sets the text for primary / confirmation  button on opened modal */
   confirmBtnText: PropTypes.string,
+  /** Sets the text for danger / abort button on opened modal */
   cancelBtnText: PropTypes.string,
+  /** Sets the title for the opened modal */
   title: PropTypes.string,
+  /** Sets the description for the opened modal */
   description: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.element,
