@@ -119,6 +119,9 @@ module.exports = {
 			content: 'src/layout/Readme.md',
 			components: 'src/layout/**/index.js',
 			sectionDepth: 2,
+			tocMode: "collapse",
+			usageMode: 'expand',
+			exampleMode: 'expand'
 		},
 		{
 			name: 'Typography',
@@ -132,7 +135,6 @@ module.exports = {
 			sectionDepth: 2,
 			usageMode: 'expand',
 			exampleMode: 'expand'
-			
 		},
 		{
 			name: 'Form',

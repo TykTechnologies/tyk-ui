@@ -97,7 +97,13 @@ const Tooltip = ({
 
 Tooltip.propTypes = {
   children: PropTypes.node.isRequired,
+  /** custom styles to apply on hovered element */
   style: PropTypes.instanceOf(Object),
+  /** describes where the tooltip should be displayed in relation
+   * whith the hovered element: top, bottom, left, right
+   */
+  position: PropTypes.string,
+  /** content of the tooltip, can be a string or a React node element */
   render: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
