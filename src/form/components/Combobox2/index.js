@@ -23,36 +23,74 @@ function getValueFromProp(value, values) {
   return [normalizeValue(value, values)];
 }
 
+/**
+ * Dropdown-like component that can display selected values as regular text, tags, or in a custom way.
+ * You can select values from a list or type in new ones.
+ */
 function Combobox2(props) {
   const {
+    /** The value of the component. It can be a string, an array, or an object with an `id` property. */
     value: propValue,
+    /** An array of selectable values. */
     values: propValues = [],
+    /** If set to `single` it will display the values on a single line with an ellipsis at the end. */
     valueOverflow = 'single',
     label = '',
     labelwidth,
+    /** Enables the display of values as `Pill` components that can be removed without opening the dropdown. */
     tags = false,
+    /** A list of characters that will trigger the creation of a tag when typed. */
     tagSeparators = [' ', 'Enter'],
+    /** If set to true a tag will be created whenever the component loses focus and there is something typed in. */
     addTagOnBlur = false,
+    /** The number of values that can be selected. */
     max: maxProp,
+    /** Shorthand for max=Infinity */
     multiple = false,
     placeholder = '',
     theme,
     note = '',
     error = '',
     disabled = false,
+    /** If `true` it allows entering values that are not in the list. */
     allowCustomValues = true,
+    /** A function used for filtering elements displayed in the list when typing in. */
     searchItem: matchItemFn,
+    /** A custom component that will be used to display a value. */
     renderValue,
+    /** A custom component that will be used to display an item in the dropdown list. */
     renderListItem,
+    /** A custom component that will be used to display the entire content of the dropdown. */
     renderList: renderListProp,
+    /** Alias for `renderList` used for backwards compatibility with the old Combobox component. */
     CustomListComponent,
     onChange = () => {},
+    /** Config object passed to the internal floating container component. */
     floatingContainerConfig,
+    /**
+     * If set to `true` whenever the user clicks on the dropdown trigger the selected values container
+     * will expand to show all selected values instead of opening the dropdown.
+     */
     expandMode,
+    /** Config object passed to the internal infinite scroller component. */
     infiniteScrollerConfig,
+    /** Toggles the display of the dropdown trigger. */
     displayDropdownTrigger = true,
+    /**
+     * If a boolean it will toggle the select all functionality from the dropdown.
+     * It can also be an object with the shape `{ label, show, mode, render }`.
+     * label - A string displayed as the select all option
+     * show - It can be one of `['always', 'notSameState']`.
+     *    `always` means the option will always be displayed.
+     *    `notSameState` means it will be displayed only if the list items are not all with the same state (depending on the `mode` value)
+     * mode - It can be one of `['select', 'unselect']` and makes sense only when the `show` property is `notSameState`
+     *    `select` means the select all option will only be displayed if not all items are selected
+     *    `unselect` means the option will be displayed if no items are selected
+     */
     selectAll,
+    /** It `true` the dropdown will close after selecting a value. */
     closeOnSelect,
+    /** Toggles the display of the search input from the dropdown. */
     showSearch = false,
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
