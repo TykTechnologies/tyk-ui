@@ -1,17 +1,32 @@
 import React, { useEffect, useState, useRef } from 'react';
+import usePrevious from '../../hooks/usePrevious';
 import FloatingContainer from '../FloatingContainer';
+import Tooltip from '../Tooltip';
 import Pill from '../Pill';
 import Button from '../Button';
 
 const TokenizedString = ({ tokens }) => {
-  console.log('>>>>', { tokens });
-  return tokens?.map(token => (token.isSpecial ? <Pill theme="default">{token.name}</Pill> : <span>{token.name}</span>));
+  console.log('');
+  return tokens?.map(token => (token.isSpecial ? (
+    <Tooltip
+      render={'{{.arguments.id}}'}
+      position="top"
+    >
+      <Pill theme="default">{token.name}</Pill>
+      {' '}
+    </Tooltip>
+  ) : <span>{token.name}</span>));
 };
 
+
+/**
+ * String builder component used to build one single string using the given options
+ */
 const StringBuilder = () => {
   const [value, setValue] = useState('');
   const [tokens, setTokens] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
+  const prevValue = usePrevious(value);
 
   const inputRef = useRef();
 
@@ -26,8 +41,12 @@ const StringBuilder = () => {
   }, [value, tokens]);
 
   const addOption = (option) => {
-    console.log('addOption>>>>', { value });
-    setTokens([...tokens, { id: value, name: value }, { ...option, isSpecial: true }]);
+    console.log('addOption>>>>', { value, option, prevValue });
+    if (!tokens.length) {
+      setTokens([...tokens, { id: value, name: value }, { ...option, isSpecial: true }]);
+    } else {
+      setTokens([...tokens, { ...option, isSpecial: true }]);
+    }
     setValue(value + option.id);
   };
 
