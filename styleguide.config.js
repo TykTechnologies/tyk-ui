@@ -132,7 +132,6 @@ module.exports = {
 			sectionDepth: 2,
 			usageMode: 'expand',
 			exampleMode: 'expand'
-			
 		},
 		{
 			name: 'Form',
@@ -140,6 +139,8 @@ module.exports = {
 				{
 					name: 'Components',
 					components: 'src/form/components/*/index.js',
+					usageMode: 'expand',
+					exampleMode: 'expand'
 				},
 				{
 					name: 'Formik',
