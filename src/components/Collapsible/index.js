@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { useEventListener, useComponentSize } from '../../hooks';
 
+/**
+ * Collpasible is a component that helps you to collapse/expand any type of content
+ */
 const Collapsible = (props) => {
   const {
     className,
@@ -86,7 +89,9 @@ Collapsible.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  /** Describes if the content of Collapsible should be hidden or not */
   collapsed: PropTypes.bool,
+  /** Css classes that can be passed to the Collapsible element */
   className: PropTypes.string,
 };
 
