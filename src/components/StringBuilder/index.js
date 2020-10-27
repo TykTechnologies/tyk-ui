@@ -1,110 +1,114 @@
 import React, { useEffect, useState, useRef } from 'react';
-import usePrevious from '../../hooks/usePrevious';
-import FloatingContainer from '../FloatingContainer';
-import Tooltip from '../Tooltip';
-import Pill from '../Pill';
-import Button from '../Button';
+import PropTypes from 'prop-types';
 
-const TokenizedString = ({ tokens }) => {
-  console.log('');
-  return tokens?.map(token => (token.isSpecial ? (
-    <Tooltip
-      render={'{{.arguments.id}}'}
-      position="top"
-    >
-      <Pill theme="default">{token.name}</Pill>
-      {' '}
-    </Tooltip>
-  ) : <span>{token.name}</span>));
-};
 
+import { StringInput } from './js/string-input';
+import { TokenizedString } from './js/tokenized-string';
+import { OptionsList } from './js/options-list';
+
+const tempOptions = [
+  {
+    id: '{{.arguments.id}}',
+    name: 'arguments: id',
+    desc: 'Argument Id',
+    className: 'data_source_argument',
+  },
+  {
+    id: '{{.object.name}}',
+    name: 'User: name',
+    desc: 'name on type User',
+    className: 'data_source_object',
+  },
+];
 
 /**
- * String builder component used to build one single string using the given options
+ * - String builder component used to build one single string using the given options.
+ * - This component can be useful from UX perspective,
+ * when user needs to build any string which might contain complex values which are error prone.
+ * - `<StringBuilder />` abstracts the complex values by supplying them
+ * as selectable options in more user friendly format with description for user.
  */
-const StringBuilder = () => {
-  const [value, setValue] = useState('');
-  const [tokens, setTokens] = useState([]);
+
+const StringBuilder = ({ onChange, value = '' }) => {
+  const options = tempOptions;
+  const [tokenValue, setTokenValue] = useState(value);
   const [showOptions, setShowOptions] = useState(false);
-  const prevValue = usePrevious(value);
+  const [tokenString, setTokenString] = useState('');
+  const [tokens, setTokens] = useState([]);
 
   const inputRef = useRef();
 
-  const options = [
-    { id: '{{.arguments.id}}', name: 'argument: id', theme: 'primary' },
-    { id: '{{.object.name}}', name: 'object: id', theme: 'success' },
-    { id: '{{.object.xyz}}', name: 'object: xyz' },
-  ];
+  // Execute callback on value change
+  useEffect(() => {
+    if (onChange) {
+      onChange(tokenValue);
+    }
+    console.log({
+      tokenValue,
+      options,
+      setTokenValue,
+    });
+  }, [tokenValue]);
 
   useEffect(() => {
-    // console.log({ value, tokens });
-  }, [value, tokens]);
+    setTokens(tokenString.split(/__TOKEN__(.*?)__TOKEN__/g));
+  }, [tokenString]);
 
-  const addOption = (option) => {
-    console.log('addOption>>>>', { value, option, prevValue });
-    if (!tokens.length) {
-      setTokens([...tokens, { id: value, name: value }, { ...option, isSpecial: true }]);
-    } else {
-      setTokens([...tokens, { ...option, isSpecial: true }]);
-    }
-    setValue(value + option.id);
+
+  const handleInputChange = (e) => {
+    console.log('handleInputChange', e);
+    setTokenValue(e.target.value);
+  };
+
+  const handleOptionSelection = (option) => {
+    // setTokenValue(`${tokenValue}${option.id}`);
+    const tokenizedString = `${tokenValue}__TOKEN__${option.id}__TOKEN__`;
+    setTokenString(tokenizedString);
   };
 
   return (
     <div className="string-builder">
-      <input
-        className="string-builder__input"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        onFocus={() => setShowOptions(true)}
-        onBlur={() => setShowOptions(false)}
-        ref={inputRef}
+      <StringInput
+        setShowOptions={setShowOptions}
+        tokenValue={tokenValue}
+        handleInputChange={handleInputChange}
+        inputRef={inputRef}
       />
-      <div className="string-builder__styled">
-        {/* {value} */}
-        <TokenizedString
-          tokens={tokens}
-          string={value}
-        />
-        {/* {value} */}
-        {/* <span className="string-builder__highlight">token</span> */}
-        {/* <Pill theme="default">
-          pill in input
-          <Button
-            noStyle
-            iconOnly
-            iconType="times"
-            size="fit"
-            type="button"
-          />
-        </Pill> */}
-      </div>
-      {showOptions && (
-        <FloatingContainer element={inputRef} size="matchElement">
-          <br />
-          <div className="url-builder__options">
-            {options.map(option => (
-              <Pill key={option.id} theme={option.theme || 'default'}>
-                <span
-                  onMouseDown={() => addOption(option)}
-                  role="none"
-                >
-                  {option.name}
-                </span>
-                <Button
-                  noStyle
-                  iconOnly
-                  iconType="times"
-                  size="fit"
-                  type="button"
-                />
-              </Pill>
-            ))}
-          </div>
-        </FloatingContainer>
-      )}
+      <TokenizedString
+        tokens={tokens}
+        options={options}
+      />
+      <OptionsList
+        showOptions={showOptions}
+        options={options}
+        handleOptionSelection={handleOptionSelection}
+        inputRef={inputRef}
+      />
     </div>
   );
 };
 
+StringBuilder.propTypes = {
+  // options: PropTypes.arrayOf({
+  //   id: PropTypes.string.isRequired,
+  //   name: PropTypes.string.isRequired,
+  //   className: PropTypes.string,
+  // }),
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+};
+
+StringBuilder.defaultProps = {
+  onChange: null,
+  value: '',
+  // options: [],
+};
+
 export default StringBuilder;
+
+/**
+ * TODO :
+ * 1. Error handling and validation.
+ * 2. Backspace detection.
+ * 3. Foreign item detection
+ */
