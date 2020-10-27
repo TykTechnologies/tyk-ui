@@ -1,7 +1,7 @@
 ```jsx
 
 <StringBuilder
-  value="http://sample.com"
+  value="http://sample.com/{{.arguments.id}}"
   options={[
   {
     id: '{{.arguments.id}}',

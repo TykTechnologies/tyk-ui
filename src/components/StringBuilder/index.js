@@ -57,6 +57,18 @@ const StringBuilder = ({ options, onChange, value = '' }) => {
     setTokenString(tokenizedString);
   };
 
+  const handleKeyDown = (e) => {
+    // Handle Delete / Backspace
+    if (e.keyCode === 8) {
+      const lastToken = tokens[tokens?.length - 2];
+      const lastCharsInString = tokenValue.slice(-lastToken?.length);
+      if (lastToken === lastCharsInString) {
+        e.preventDefault();
+        setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
+      }
+    }
+  };
+
   return (
     <div className="string-builder">
       <StringInput
@@ -64,6 +76,7 @@ const StringBuilder = ({ options, onChange, value = '' }) => {
         tokenValue={tokenValue}
         handleInputChange={handleInputChange}
         inputRef={inputRef}
+        handleKeyDown={handleKeyDown}
       />
       <TokenizedString
         tokens={tokens}
@@ -80,12 +93,12 @@ const StringBuilder = ({ options, onChange, value = '' }) => {
 };
 
 StringBuilder.propTypes = {
-  options: PropTypes.arrayOf({
+  options: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     className: PropTypes.string,
     desc: PropTypes.string,
-  }),
+  })),
   onChange: PropTypes.func,
   value: PropTypes.string,
 };

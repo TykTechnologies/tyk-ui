@@ -8,6 +8,7 @@ const StringInput = ({
   tokenValue,
   handleInputChange,
   inputRef,
+  handleKeyDown,
 }) => (
   <textarea
     className="string-builder__input"
@@ -15,6 +16,7 @@ const StringInput = ({
     onChange={handleInputChange}
     onFocus={() => setShowOptions(true)}
     onBlur={() => setShowOptions(false)}
+    onKeyDown={handleKeyDown}
     ref={inputRef}
   />
 );
@@ -23,6 +25,7 @@ StringInput.propTypes = {
   setShowOptions: PropTypes.func,
   tokenValue: PropTypes.string,
   handleInputChange: PropTypes.func,
+  handleKeyDown: PropTypes.func,
   inputRef: PropTypes.instanceOf(Object),
 };
 
