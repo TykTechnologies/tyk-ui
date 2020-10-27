@@ -6,8 +6,6 @@ import FloatingContainer from '../../FloatingContainer';
 export const OptionsList = ({
   options, showOptions, handleOptionSelection, inputRef,
 }) => {
-  console.log({ options, showOptions });
-
   if (!showOptions) {
     return null;
   }

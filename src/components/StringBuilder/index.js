@@ -1,25 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import { usePrevious } from '../../hooks';
+
 
 import { StringInput } from './js/string-input';
 import { TokenizedString } from './js/tokenized-string';
 import { OptionsList } from './js/options-list';
-
-const tempOptions = [
-  {
-    id: '{{.arguments.id}}',
-    name: 'arguments: id',
-    desc: 'Argument Id',
-    className: 'data_source_argument',
-  },
-  {
-    id: '{{.object.name}}',
-    name: 'User: name',
-    desc: 'name on type User',
-    className: 'data_source_object',
-  },
-];
 
 /**
  * - String builder component used to build one single string using the given options.
@@ -29,12 +16,14 @@ const tempOptions = [
  * as selectable options in more user friendly format with description for user.
  */
 
-const StringBuilder = ({ onChange, value = '' }) => {
-  const options = tempOptions;
+const StringBuilder = ({ options, onChange, value = '' }) => {
   const [tokenValue, setTokenValue] = useState(value);
   const [showOptions, setShowOptions] = useState(false);
-  const [tokenString, setTokenString] = useState('');
+  const [tokenString, setTokenString] = useState(value);
   const [tokens, setTokens] = useState([]);
+  const [prevTokenValue, setPrevTokenValue] = useState('');
+
+  const prevTokenString = usePrevious(tokenString);
 
   const inputRef = useRef();
 
@@ -43,26 +32,28 @@ const StringBuilder = ({ onChange, value = '' }) => {
     if (onChange) {
       onChange(tokenValue);
     }
-    console.log({
-      tokenValue,
-      options,
-      setTokenValue,
-    });
   }, [tokenValue]);
 
   useEffect(() => {
-    setTokens(tokenString.split(/__TOKEN__(.*?)__TOKEN__/g));
+    const splitTokens = tokenString.split(/__TOKEN__(.*?)__TOKEN__/g);
+    const splitTokensStr = splitTokens.join('');
+    setTokens(splitTokens);
+    setTokenValue(splitTokensStr);
+    setPrevTokenValue(splitTokensStr);
   }, [tokenString]);
 
 
   const handleInputChange = (e) => {
-    console.log('handleInputChange', e);
     setTokenValue(e.target.value);
   };
 
   const handleOptionSelection = (option) => {
-    // setTokenValue(`${tokenValue}${option.id}`);
-    const tokenizedString = `${tokenValue}__TOKEN__${option.id}__TOKEN__`;
+    let newInput = '';
+    if (prevTokenString && prevTokenString !== value) {
+      /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
+      newInput = prevTokenString + tokenValue.split(prevTokenValue)[1];
+    }
+    const tokenizedString = `${newInput || tokenValue}__TOKEN__${option.id}__TOKEN__`;
     setTokenString(tokenizedString);
   };
 
@@ -89,11 +80,12 @@ const StringBuilder = ({ onChange, value = '' }) => {
 };
 
 StringBuilder.propTypes = {
-  // options: PropTypes.arrayOf({
-  //   id: PropTypes.string.isRequired,
-  //   name: PropTypes.string.isRequired,
-  //   className: PropTypes.string,
-  // }),
+  options: PropTypes.arrayOf({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    desc: PropTypes.string,
+  }),
   onChange: PropTypes.func,
   value: PropTypes.string,
 };
@@ -101,7 +93,7 @@ StringBuilder.propTypes = {
 StringBuilder.defaultProps = {
   onChange: null,
   value: '',
-  // options: [],
+  options: [],
 };
 
 export default StringBuilder;
