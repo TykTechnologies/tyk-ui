@@ -10,7 +10,7 @@ const StringInput = ({
   inputRef,
   handleKeyDown,
 }) => (
-  <textarea
+  <input
     className="string-builder__input"
     value={tokenValue}
     onChange={handleInputChange}

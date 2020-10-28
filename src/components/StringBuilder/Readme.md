@@ -2,6 +2,7 @@
 
 <StringBuilder
   value="http://sample.com/{{.arguments.id}}"
+  onChange={(v) => console.log("Value", v)}
   options={[
   {
     id: '{{.arguments.id}}',

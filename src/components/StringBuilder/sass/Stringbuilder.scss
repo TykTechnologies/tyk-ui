@@ -17,8 +17,9 @@
   height: 25px;
 }
 .string-builder__styled {
+  font: inherit;
   position: absolute;
-  top: 4px;
+  top: 4.5px;
   left: 4px;
   color: transparent;
   // z-index: -1;
@@ -58,4 +59,15 @@ body {
 
 .url-builder__options_description{
   color: gray;
+}
+
+
+// FOR EXAMPLE DEMO 
+
+.data_source_argument {
+  color: red;
+}
+
+.data_source_object {
+  color: aqua;
 }
