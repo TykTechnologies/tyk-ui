@@ -8,6 +8,11 @@ import ModalFooter from './js/ModalFooter';
 import ModalBody from './js/ModalBody';
 import ModalHeader from './js/ModalHeader';
 import ModalTitle from './js/ModalTitle';
+/**
+ * Modals add dialogs confirmation boxes, notifications, or completely custom content
+ * - only one Modal can be opened at a time
+ * - are unmounted when Modal is closed
+ */
 
 export default class Modal extends Component {
   static propTypes = {
@@ -16,8 +21,11 @@ export default class Modal extends Component {
       PropTypes.node,
       PropTypes.string,
     ]),
+    /** If true the Modal will be by default opened */
     opened: PropTypes.bool,
+    /** Callback method when the Modal is closed */
     onClose: PropTypes.func,
+    /** Width of the Moda: md or lg */
     size: PropTypes.string,
   };
 

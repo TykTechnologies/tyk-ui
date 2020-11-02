@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import debounce from '../../utils/debounce';
-
+/**
+ * FixedWrapper component, keeps all its children in a fix position on the page,
+ * even if the scroll position changes
+ * i.e: The top navigation bar of a page sits within FixedWrapper component
+ */
 const FixedWrapper = (props) => {
   const {
     children,
@@ -51,7 +55,11 @@ FixedWrapper.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  /** Css classes that can be passed to the FixedWraper element */
   className: PropTypes.string,
+  /** If true, bottom shadow on the FixedWrapper component
+   * is being displayed when scroll happens
+   */
   showShadow: PropTypes.bool,
 };
 

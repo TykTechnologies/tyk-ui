@@ -15,6 +15,11 @@ function debounce(f, limit) {
 }
 
 /* eslint-disable react/prop-types */
+/**
+ * A wrapper function that "prepares" a tyk-ui form component to be used with the formik library.
+ * It handles things like setting the value of the component, change events, error state,
+ * and also has a default debounce time for when the change event is triggered.
+ */
 const wrapper = (Component, options) => ({ field, form, ...properties }) => {
   const DEFAULT_DEBOUNCE_TIME_MS = 200;
   const [executeDebounced] = useState(() => {

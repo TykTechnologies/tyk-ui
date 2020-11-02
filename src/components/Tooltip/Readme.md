@@ -1,18 +1,18 @@
-#### Using string as render props
+Using string as render props
 ```js
 <Tooltip render="Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello" position="bottom">
   Hover Over Me 1
 </Tooltip>
 ```
 
-#### Using JSX as render props
+Using JSX as render props
 ```js
 <Tooltip render={<div>Hello</div>}>
   Hover Over Me 2
 </Tooltip>
 ```
 
-#### Using JSX as children
+Using JSX as children
 ```js
 import Button from '../Button';
 <Tooltip render="You Just Hovered Me !" position="bottom">
@@ -20,7 +20,7 @@ import Button from '../Button';
 </Tooltip>
 ```
 
-#### Huge text
+Long text in a tooltip
 ```js
 import Button from '../Button';
 <Tooltip render="Loremipsumdolorsitametconsectetur,adipisicingelit.Doloremquearchitectoveritatisveniamat,cumeosdoloreslaborumimpedit.Inventore,voluptate.Maximefacilisexplicaboquamassumendaaspernaturducimusofficiaminusomnis?"position="bottom">

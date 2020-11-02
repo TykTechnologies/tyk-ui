@@ -122,6 +122,9 @@ module.exports = {
 			content: 'src/layout/Readme.md',
 			components: 'src/layout/**/index.js',
 			sectionDepth: 2,
+			tocMode: "collapse",
+			usageMode: 'expand',
+			exampleMode: 'expand'
 		},
 		{
 			name: 'Typography',
@@ -135,7 +138,6 @@ module.exports = {
 			sectionDepth: 2,
 			usageMode: 'expand',
 			exampleMode: 'expand'
-			
 		},
 		{
 			name: 'Form',
@@ -143,6 +145,8 @@ module.exports = {
 				{
 					name: 'Components',
 					components: 'src/form/components/*/index.js',
+					usageMode: 'expand',
+					exampleMode: 'expand'
 				},
 				{
 					name: 'Formik',

@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+
+/**
+ * - Checkboxes are used when a user needs to select one or more values from a series of options.
+ * - They can be also be used as a binary toggle but consider radio instead.
+ * - Can be used with Formik respectively (FormikCheckbox)
+ */
 export default class Checkbox extends Component {
   static propTypes = {
+    /** Disable a checkbox */
     disabled: PropTypes.bool,
+    /** Align checkbox with in same line with other elements */
     inline: PropTypes.bool,
+    /** Set a theme for checkbox */
     theme: PropTypes.string,
+    /** Set an error state for checkbox if boolean will show just icon without message */
     error: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool,
     ]),
     input: PropTypes.instanceOf(Object),
+    /** Adds a label to checkbox */
     label: PropTypes.string,
+    /** Set a name for checkbox */
     name: PropTypes.string,
+    /** Set initial value for checkbox */
     value: PropTypes.string,
+    /** Make checkbox checked by default */
+    checked: PropTypes.string,
+    /** Callback function executed on change of checkbox */
+    onChange: PropTypes.func,
   };
 
   getCssClasses() {

@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 
 import toast from '../Toast';
 
+/**
+ * - CopyToClipboard is used to copy string for a user.
+ * - Can be used normally with a text or a custom components (Eg. Button, Icon, etc)
+ */
+
 const CopyToClipboard = (props) => {
   const {
     display, copy, children, onCopy,
@@ -38,9 +43,13 @@ const CopyToClipboard = (props) => {
 };
 
 CopyToClipboard.propTypes = {
+  /** Callback function executed after text is copied */
   onCopy: PropTypes.func,
-  copy: PropTypes.string,
-  display: PropTypes.string,
+  /** Text to be copied */
+  copy: PropTypes.string.isRequired,
+  /** Text to be displayed */
+  display: PropTypes.string.isRequired,
+  /** Children of custom element if you are using any custom element */
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.string,

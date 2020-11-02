@@ -1,7 +1,6 @@
--
+Tyk UI grid system uses a series of rows, and columns to layout and align content. It’s built with flexbox and is fully responsive. Below is an example and an in-depth look at how the grid comes together.
 
-- Following is a grid representation of layout using rows and columns. 
-- Expand the code section for more details.
+Following is a grid representation of layout using rows and columns. 
 ```jsx
 import React from 'react';
 import Column from './Column';
