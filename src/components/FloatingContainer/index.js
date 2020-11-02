@@ -14,28 +14,35 @@ function FloatingContainer(props) {
     /** A DOM element that the floating container will be displayed relative to. */
     element,
     /** The size of the container.
-     * If `auto` the size will be determined by its contents.
-     * If `matchElement` it will take the width or the height of the element depending on the `displayAxis` prop.
-     * It can also be a function that returns a number representing the width or the height in pixels.
+     * - If `auto` the size will be determined by its contents.
+     * - If `matchElement` it will take the width or the height of the element
+     * depending on the `displayAxis` prop.
+     * - It can also be a function that returns a
+     * number representing the width or the height in pixels.
      */
     size = 'auto',
     /**
-     * If `auto` the component will try to determine where to display the container relative to the element (top, bottom, left, right).
-     * It can also be one of top, bottom, left, right, to force the floating container to always be displayed in that position.
+     * - If `auto` the component will try to determine where to display the container
+     * relative to the element (top, bottom, left, right).
+     * - It can also be one of top, bottom, left, right,
+     * to force the floating container to always be displayed in that position.
      */
     forceDisplay = 'auto',
     /**
-     * It can be `vertical` or `horizontal`. It specifies the axis where it will be displayed when `forceDisplay` is `auto`.
+     * It can be `vertical` or `horizontal`.
+     * It specifies the axis where it will be displayed when `forceDisplay` is `auto`.
      */
     displayAxis = 'vertical',
     /**
-     * The distance between the element and the floating container. It can be positive or negative.
+     * The distance between the element and the floating container.
+     * It can be positive or negative.
      */
     offset = 0,
     className,
     children,
     /**
-     * A reference for the container. Used in cases where you need some DOM control from outside the component.
+     * A reference for the container.
+     * Used in cases where you need some DOM control from outside the component.
      */
     passedRef,
     /**
