@@ -1,3 +1,20 @@
+/**
+ * TODO :
+ * 1. Error handling and validation with styling and message.
+ * 2. Backspace detection. (Done)
+ * 3. Foreign item detection
+ * 4. Mid string manipulation
+ * 5. Copy paste
+ * 6. Clear input and selection
+ * 7. Leftover input (happening at random)
+ * 8. CSS Classes fix
+ */
+
+/**
+ * TODO :: BUGS
+  * - Adding one token right after another messes things up
+*/
+
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,7 +41,9 @@ const initialValueToTokenString = (value, options) => {
  * as selectable options in more user friendly format with description for user.
  */
 
-const StringBuilder = ({ options, onChange, value }) => {
+const StringBuilder = ({
+  options, onChange, value, theme, error, disabled,
+}) => {
   const [tokenValue, setTokenValue] = useState(value);
   const [showOptions, setShowOptions] = useState(false);
   const [tokenString, setTokenString] = useState(initialValueToTokenString(value, options));
@@ -97,25 +116,46 @@ const StringBuilder = ({ options, onChange, value }) => {
     }
   };
 
+  function getThemeClasses() {
+    const themes = theme ? theme.split(' ') : [];
+    return themes.map(iTheme => `tyk-form-group--${iTheme}`);
+  }
+
+  function getCssClasses() {
+    return [
+      'tyk-form-group',
+      ...getThemeClasses(),
+      error && 'has-error',
+      disabled && 'disabled',
+    ].filter(Boolean).join(' ');
+  }
+
   return (
-    <div className="string-builder">
-      <StringInput
-        setShowOptions={setShowOptions}
-        tokenValue={tokenValue}
-        handleInputChange={handleInputChange}
-        inputRef={inputRef}
-        handleKeyDown={handleKeyDown}
-      />
-      <TokenizedString
-        tokens={tokens}
-        options={options}
-      />
-      <OptionsList
-        showOptions={showOptions}
-        options={options}
-        handleOptionSelection={handleOptionSelection}
-        inputRef={inputRef}
-      />
+    <div className={getCssClasses()}>
+      <div className="string-builder">
+        <div
+          className="tyk-form-control__wrapper"
+        >
+          <div className="tyk-form-control">
+            <StringInput
+              setShowOptions={setShowOptions}
+              tokenValue={tokenValue}
+              handleInputChange={handleInputChange}
+              inputRef={inputRef}
+              handleKeyDown={handleKeyDown}
+              disabled={disabled}
+            />
+            <TokenizedString tokens={tokens} options={options} />
+            <OptionsList
+              showOptions={true || showOptions}
+              options={options}
+              handleOptionSelection={handleOptionSelection}
+              inputRef={inputRef}
+              getThemeClasses={getThemeClasses}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -136,21 +176,19 @@ StringBuilder.propTypes = {
   onChange: PropTypes.func,
   /** Initial value */
   value: PropTypes.string,
+  /** Disable input */
+  disabled: PropTypes.bool,
+  /** Show error state (w/ or w/o message) */
+  error: PropTypes.string,
+  /** Component theme */
+  theme: PropTypes.string,
 };
 
 StringBuilder.defaultProps = {
   onChange: null,
   value: '',
   options: [],
+  theme: 'default',
 };
 
 export default StringBuilder;
-
-/**
- * TODO :
- * 1. Error handling and validation.
- * 2. Backspace detection. (Done)
- * 3. Foreign item detection
- * 4. Mid string manipulation
- * 5. Copy paste
- */

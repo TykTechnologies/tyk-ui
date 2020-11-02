@@ -9,8 +9,10 @@ const StringInput = ({
   handleInputChange,
   inputRef,
   handleKeyDown,
+  disabled,
 }) => (
   <input
+    disabled={disabled}
     className="string-builder__input"
     value={tokenValue}
     onChange={handleInputChange}
@@ -27,6 +29,7 @@ StringInput.propTypes = {
   handleInputChange: PropTypes.func,
   handleKeyDown: PropTypes.func,
   inputRef: PropTypes.instanceOf(Object),
+  disabled: PropTypes.bool,
 };
 
 export { StringInput };

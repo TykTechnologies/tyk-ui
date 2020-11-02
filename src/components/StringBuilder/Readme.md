@@ -3,6 +3,7 @@
 <StringBuilder
   value="http://sample.com/{{.arguments.id}}"
   onChange={(v) => console.log("Value", v)}
+  theme="default rounded-corners"
   options={[
   {
     id: '{{.arguments.id}}',
