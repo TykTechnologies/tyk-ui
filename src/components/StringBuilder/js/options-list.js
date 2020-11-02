@@ -22,10 +22,10 @@ export const OptionsList = ({
         >
           {options.map(option => (
             <li key={option.id} onMouseDown={() => handleOptionSelection(option)}>
-              <span className="url-builder__options_name">{option.name}</span>
+              <span className={`url-builder__options_name ${option.className}`}>{option.name}</span>
               {option.desc && (
                 <span className="url-builder__options_description">
-                  {'  '}
+                  &nbsp;&nbsp;
                   {option.desc}
                 </span>
               )}

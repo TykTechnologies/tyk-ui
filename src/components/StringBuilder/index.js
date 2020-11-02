@@ -8,6 +8,7 @@
  * 6. Clear input and selection
  * 7. Leftover input (happening at random)
  * 8. CSS Classes fix
+ * 9. Placeholder
  */
 
 /**
@@ -147,7 +148,7 @@ const StringBuilder = ({
             />
             <TokenizedString tokens={tokens} options={options} />
             <OptionsList
-              showOptions={true || showOptions}
+              showOptions={showOptions}
               options={options}
               handleOptionSelection={handleOptionSelection}
               inputRef={inputRef}

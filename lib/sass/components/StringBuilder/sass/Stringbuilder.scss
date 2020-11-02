@@ -1,9 +1,8 @@
+@import '../../../common/sass/variables';
 
 .string-builder{
   position: relative;
   overflow: auto;
-  // font: 14px sans-serif;
-  // border: 1px solid lightgrey;
   display: block;
 }
 
@@ -35,11 +34,6 @@
   border-radius: 2px;
   color: black;
   box-shadow: 0 0 0 1px #ff2ecc;
-}
-
-body {
-  max-width: 200px;
-  margin: 1em auto;
 }
 
 .special_token {
@@ -101,8 +95,8 @@ body {
       }
 
       &.disabled {
-        color: red; // TODO : CHANGE THIS
-        background-color: initial;
+        color: red; 
+        background-color: red;
       }
 
       + li {
@@ -126,9 +120,9 @@ body {
 // FOR EXAMPLE DEMO 
 
 .data_source_argument {
-  color: red;
+  color: blue;
 }
 
 .data_source_object {
-  color: aqua;
+  color: pink;
 }
