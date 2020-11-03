@@ -65,7 +65,7 @@
     max-height: 255px;
 
     li {
-      display: flex;
+      // display: flex;
       cursor: pointer;
       padding: 9px map-get($spacing, 'md');
       transition: all .2s;

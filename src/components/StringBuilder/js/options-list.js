@@ -18,10 +18,9 @@ export const OptionsList = ({
 
   useEffect(() => {
     if (filterValue) {
-      const newFilteredOptions = options.filter((option) => {
-        console.log({ option });
-        return option.name.toLowerCase().includes(filterValue.toLowerCase());
-      });
+      const newFilteredOptions = options.filter(
+        option => option.name.toLowerCase().includes(filterValue.toLowerCase()),
+      );
       setFilteredOptions(newFilteredOptions);
     }
   }, [filterValue]);
@@ -42,7 +41,7 @@ export const OptionsList = ({
             <input
               className="tyk-form-control"
               value={filterValue}
-              placeholder="enter search term"
+              placeholder="Search parameter"
               onChange={(e) => {
                 filterList(e.target.value);
                 setFilterValue(e.target.value);
@@ -71,7 +70,7 @@ export const OptionsList = ({
               </span>
               {option.desc && (
                 <span className="url-builder__options_description">
-                  &nbsp;&nbsp;
+                  &nbsp; : &nbsp;
                   {option.desc}
                 </span>
               )}
