@@ -2,7 +2,7 @@
 
 .string-builder{
   position: relative;
-  overflow: auto;
+  // overflow: auto;
   display: block;
 }
 
@@ -12,6 +12,7 @@
   font: inherit;
   display: block;
   width: 100%;
+  padding-bottom: 5px;
   &:focus,
   &:active {
     border: none;
@@ -21,7 +22,7 @@
 .string-builder__styled {
   font: inherit;
   position: absolute;
-  top: 12.5px;
+  top: 36.5px;
   left: 24px;
   color: transparent;
   // z-index: -1;
@@ -95,6 +96,10 @@
       }
     }
   }
+}
+
+.string-builder-error {
+  padding-top: 5px;
 }
 
 

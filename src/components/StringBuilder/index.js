@@ -1,19 +1,17 @@
 /**
- * TODO :
- * 1. Error handling and validation with styling and message.
- * 2. Backspace detection. (Done)
- * 3. Foreign item detection
- * 4. Mid string manipulation
- * 5. Copy paste
- * 6. Clear input and selection
- * 7. Leftover input (happening at random)
- * 8. CSS Classes fix
- * 9. Placeholder
+ * TODO :: Implementation
+ * 1. Foreign item detection
+ * 2. Search Functionality
+ * 3. Trigger dropdown on custom input
  */
 
 /**
  * TODO :: BUGS
   * - Adding one token right after another messes things up
+  * - Clear input and selection
+  * - Copy paste error
+  * - Leftover input (happening at random)
+  * - Mid string manipulation
 */
 
 import React, { useEffect, useState, useRef } from 'react';
@@ -40,11 +38,22 @@ const initialValueToTokenString = (value, options) => {
  * when user needs to build any string which might contain complex values which are error prone.
  * - `<StringBuilder />` abstracts the complex values by supplying them
  * as selectable options in more user friendly format with description for user.
+ * - Wire-frames : https://miro.com/app/board/o9J_kipLWwA=/
  */
 
-const StringBuilder = ({
-  options, onChange, value, theme, error, disabled,
-}) => {
+const StringBuilder = (props) => {
+  const {
+    options,
+    onChange,
+    value,
+    theme,
+    error,
+    disabled,
+    note,
+    label,
+    labelwidth,
+    placeholder,
+  } = props;
   const [tokenValue, setTokenValue] = useState(value);
   const [showOptions, setShowOptions] = useState(false);
   const [tokenString, setTokenString] = useState(initialValueToTokenString(value, options));
@@ -132,19 +141,20 @@ const StringBuilder = ({
   }
 
   return (
-    <div className={getCssClasses()}>
-      <div className="string-builder">
-        <div
-          className="tyk-form-control__wrapper"
-        >
+    <div className="string-builder" ref={inputRef}>
+      {label && (
+        <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+      )}
+      <div className={getCssClasses()}>
+        <div className="tyk-form-control__wrapper">
           <div className="tyk-form-control">
             <StringInput
               setShowOptions={setShowOptions}
               tokenValue={tokenValue}
               handleInputChange={handleInputChange}
-              inputRef={inputRef}
               handleKeyDown={handleKeyDown}
               disabled={disabled}
+              placeholder={placeholder}
             />
             <TokenizedString tokens={tokens} options={options} />
             <OptionsList
@@ -154,6 +164,10 @@ const StringBuilder = ({
               inputRef={inputRef}
               getThemeClasses={getThemeClasses}
             />
+            {note && <p className="tyk-form-control__help-block">{note}</p>}
+            {error && error !== 'true' && error !== 'false' && (
+              <p className="tyk-form-control__error-message">{error}</p>
+            )}
           </div>
         </div>
       </div>
@@ -183,6 +197,14 @@ StringBuilder.propTypes = {
   error: PropTypes.string,
   /** Component theme */
   theme: PropTypes.string,
+  /** Footnote for component */
+  note: PropTypes.string,
+  /** Label for component */
+  label: PropTypes.string,
+  /** Label Width for component */
+  labelwidth: PropTypes.string,
+  /** Placeholder for component */
+  placeholder: PropTypes.string,
 };
 
 StringBuilder.defaultProps = {
