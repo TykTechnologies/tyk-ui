@@ -17,12 +17,14 @@ export const OptionsList = ({
   const [filteredOptions, setFilteredOptions] = useState(options);
 
   useEffect(() => {
-    if (filterValue) {
-      const newFilteredOptions = options.filter(
-        option => option.name.toLowerCase().includes(filterValue.toLowerCase()),
-      );
-      setFilteredOptions(newFilteredOptions);
+    if (filterValue === '') {
+      setFilteredOptions(options);
+      return;
     }
+    const newFilteredOptions = options.filter(
+      option => option.name.toLowerCase().includes(filterValue.toLowerCase()),
+    );
+    setFilteredOptions(newFilteredOptions);
   }, [filterValue]);
 
   if (!showOptions) {

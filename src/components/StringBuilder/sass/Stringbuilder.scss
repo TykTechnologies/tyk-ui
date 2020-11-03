@@ -22,7 +22,7 @@
 .string-builder__styled {
   font: inherit;
   position: absolute;
-  top: 36.5px;
+  top: calc(100% - 26px);
   left: 24px;
   color: transparent;
   // z-index: -1;
