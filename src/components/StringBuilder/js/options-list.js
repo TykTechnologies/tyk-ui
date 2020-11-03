@@ -65,7 +65,7 @@ export const OptionsList = ({
               key={option.id}
               onMouseDown={() => handleOptionSelection(option)}
             >
-              <span className={`url-builder__options_name ${option.className}`}>
+              <span className={`url-builder__options_name ${option.className || 'default-option-name'}`}>
                 {option.name}
               </span>
               {option.desc && (

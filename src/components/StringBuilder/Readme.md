@@ -14,13 +14,13 @@
     id: '{{.arguments.id}}',
     name: 'id',
     desc: 'Argument Id',
-    className: 'data_source_argument',
+    // className: 'data_source_argument',
   },
   {
     id: '{{.object.name}}',
     name: 'name',
     desc: 'name on type User',
-    className: 'data_source_object',
+    // className: 'data_source_object',
   },
    {
     "_id": "5fa10a723d2f88494052e80f",

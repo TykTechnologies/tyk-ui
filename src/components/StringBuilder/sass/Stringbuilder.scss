@@ -33,7 +33,6 @@
 
 .url-builder__options_name {
   font-weight: 10px;
-  color: blue;
 }
 
 .url-builder__options_description{
@@ -102,14 +101,6 @@
   padding-right: 10px;
 }
 
-
-
-// FOR EXAMPLE Component 
-
-.data_source_argument {
-  color: blue;
-}
-
-.data_source_object {
-  color: pink;
+.default-option-name {
+  color: green;
 }
