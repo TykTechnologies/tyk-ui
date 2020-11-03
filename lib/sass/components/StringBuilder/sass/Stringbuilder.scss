@@ -27,6 +27,10 @@
   color: transparent;
   // z-index: -1;
   white-space: pre;
+  border: none;
+  > input {
+    border: none;
+  }
 }
 
 

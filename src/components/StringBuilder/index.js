@@ -117,8 +117,11 @@ const StringBuilder = (props) => {
     const lastCharsInString = tokenValue.slice(-lastToken?.length);
     if (lastToken === lastCharsInString) {
       e.preventDefault();
+      console.log({ tokenString, lastCharsInString, lastToken });
       setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
+      return;
     }
+    setTokenString(tokenString.slice(0, -1));
   };
 
   const handleKeyDown = (e) => {
