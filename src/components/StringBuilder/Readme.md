@@ -5,7 +5,8 @@
   error="you have an error"
   // note="you also have a note"
   label="URL Builder"
-  value="http://sample.com/{{.arguments.id}}"
+  // value="http://sample.com/{{.arguments.id}}"
+  value="http://sample.com/{{.arguments.userId}}?id={{.arguments.userId}}"
   placeholder="Please enter your url"
   onChange={(v) => console.log("Value", v)}
   theme="default rounded-corners"
@@ -20,6 +21,12 @@
     id: '{{.object.name}}',
     name: 'name',
     desc: 'name on type User',
+    // className: 'data_source_object',
+  },
+  {
+    id: '{{.arguments.userId}}',
+    name: 'userId',
+    desc: 'id on type User',
     // className: 'data_source_object',
   },
    {

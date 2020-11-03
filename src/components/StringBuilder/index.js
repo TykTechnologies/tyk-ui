@@ -27,7 +27,7 @@ import { OptionsList } from './js/options-list';
 const initialValueToTokenString = (value, options) => {
   let tempStr = value;
   options.forEach((option) => {
-    tempStr = tempStr.replace(option.id, `__TOKEN__${option.id}__TOKEN__`);
+    tempStr = tempStr.replaceAll(option.id, `__TOKEN__${option.id}__TOKEN__`);
   });
   return tempStr;
 };
