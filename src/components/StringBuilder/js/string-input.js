@@ -17,10 +17,8 @@ const StringInput = ({
     value={tokenValue}
     onChange={handleInputChange}
     onFocus={() => setShowOptions(true)}
-    onBlur={() => setShowOptions(false)}
     onKeyDown={handleKeyDown}
     placeholder={placeholder}
-    // onPaste={e => console.log('PASTE >>>>', { e }, e.target)}
     onPaste={e => console.log('PASTE >>>>', { e }, e.target)}
   />
 );

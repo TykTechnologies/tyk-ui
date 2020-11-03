@@ -53,6 +53,7 @@ const StringBuilder = (props) => {
     label,
     labelwidth,
     placeholder,
+    allowSearch,
   } = props;
   const [tokenValue, setTokenValue] = useState(value);
   const [showOptions, setShowOptions] = useState(false);
@@ -126,19 +127,21 @@ const StringBuilder = (props) => {
     }
   };
 
-  function getThemeClasses() {
+  const getThemeClasses = () => {
     const themes = theme ? theme.split(' ') : [];
     return themes.map(iTheme => `tyk-form-group--${iTheme}`);
-  }
+  };
 
-  function getCssClasses() {
-    return [
-      'tyk-form-group',
-      ...getThemeClasses(),
-      error && 'has-error',
-      disabled && 'disabled',
-    ].filter(Boolean).join(' ');
-  }
+  const getCssClasses = () => [
+    'tyk-form-group',
+    ...getThemeClasses(),
+    error && 'has-error',
+    disabled && 'disabled',
+  ].filter(Boolean).join(' ');
+
+  const filterList = (v) => {
+    console.log('FILTER', { v });
+  };
 
   return (
     <div className="string-builder" ref={inputRef}>
@@ -155,6 +158,7 @@ const StringBuilder = (props) => {
               handleKeyDown={handleKeyDown}
               disabled={disabled}
               placeholder={placeholder}
+              allowSearch={allowSearch}
             />
             <TokenizedString tokens={tokens} options={options} />
             <OptionsList
@@ -163,6 +167,9 @@ const StringBuilder = (props) => {
               handleOptionSelection={handleOptionSelection}
               inputRef={inputRef}
               getThemeClasses={getThemeClasses}
+              filterList={filterList}
+              setShowOptions={setShowOptions}
+              allowSearch={allowSearch}
             />
             {note && <p className="tyk-form-control__help-block">{note}</p>}
             {error && error !== 'true' && error !== 'false' && (
@@ -205,6 +212,8 @@ StringBuilder.propTypes = {
   labelwidth: PropTypes.string,
   /** Placeholder for component */
   placeholder: PropTypes.string,
+  /** Allow users to search from options */
+  allowSearch: PropTypes.bool,
 };
 
 StringBuilder.defaultProps = {

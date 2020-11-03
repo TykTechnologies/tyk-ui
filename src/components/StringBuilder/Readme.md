@@ -1,6 +1,7 @@
 ```jsx
 
 <StringBuilder
+  allowSearch
   error="you have an error"
   // note="you also have a note"
   label="URL Builder"
