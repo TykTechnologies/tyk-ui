@@ -41,6 +41,7 @@ export const OptionsList = ({
         {allowSearch && (
           <div className="string-builder-search">
             <input
+              autoFocus
               className="tyk-form-control"
               value={filterValue}
               placeholder="Search parameter"

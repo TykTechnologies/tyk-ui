@@ -8,11 +8,19 @@
 /**
  * TODO :: BUGS
   * - Adding one token right after another messes things up
+  * - Backspacing
   * - Clear input and selection
   * - Copy paste error
   * - Leftover input (happening at random)
-  * - Mid string manipulation
+  * - Mid string manipulation (block click and detect cursor position)
 */
+
+/**
+ * Following approaches to try to fix the long string issue
+ * - 1. Try to somehow align two elements perfectly
+ * - 2. Try using inputs instead of spans
+ * - 3. Try with div element `contentEditable` property
+ */
 
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -47,11 +55,11 @@ const StringBuilder = (props) => {
     onChange,
     value,
     theme,
-    error,
+    // error,
     disabled,
-    note,
-    label,
-    labelwidth,
+    // note,
+    // label,
+    // labelwidth,
     placeholder,
     allowSearch,
   } = props;
@@ -103,6 +111,7 @@ const StringBuilder = (props) => {
     }
     const tokenizedString = `${newInput || tokenValue}__TOKEN__${option.id}__TOKEN__`;
     setTokenString(tokenizedString);
+    setShowOptions(false);
   };
 
   /**
@@ -117,16 +126,23 @@ const StringBuilder = (props) => {
     const lastCharsInString = tokenValue.slice(-lastToken?.length);
     if (lastToken === lastCharsInString) {
       e.preventDefault();
-      console.log({ tokenString, lastCharsInString, lastToken });
-      setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
-      return;
+      // console.log({ tokenString, lastCharsInString, lastToken });
+      // setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
+      // return;
     }
-    setTokenString(tokenString.slice(0, -1));
+    // setTokenString(tokenString.slice(0, -1));
   };
 
   const handleKeyDown = (e) => {
+    console.log('e.keyCode', e.keyCode);
     if (e.keyCode === 8) {
       handleBackSpace(e);
+    }
+
+    // TODO : Make the trigger dynamic
+    if (e.keyCode === 219) {
+      e.preventDefault();
+      setShowOptions(true);
     }
   };
 
@@ -135,52 +151,53 @@ const StringBuilder = (props) => {
     return themes.map(iTheme => `tyk-form-group--${iTheme}`);
   };
 
-  const getCssClasses = () => [
-    'tyk-form-group',
-    ...getThemeClasses(),
-    error && 'has-error',
-    disabled && 'disabled',
-  ].filter(Boolean).join(' ');
+  // const getCssClasses = () => [
+  //   'tyk-form-group',
+  //   ...getThemeClasses(),
+  //   error && 'has-error',
+  //   disabled && 'disabled',
+  // ].filter(Boolean).join(' ');
 
   const filterList = (v) => {
     console.log('FILTER', { v });
   };
 
   return (
-    <div className="string-builder" ref={inputRef}>
-      {label && (
+    <div className="string-builder">
+      {/* {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
       )}
       <div className={getCssClasses()}>
         <div className="tyk-form-control__wrapper">
-          <div className="tyk-form-control">
-            <StringInput
-              setShowOptions={setShowOptions}
-              tokenValue={tokenValue}
-              handleInputChange={handleInputChange}
-              handleKeyDown={handleKeyDown}
-              disabled={disabled}
-              placeholder={placeholder}
-              allowSearch={allowSearch}
-            />
-            <TokenizedString tokens={tokens} options={options} />
-            <OptionsList
-              showOptions={showOptions}
-              options={options}
-              handleOptionSelection={handleOptionSelection}
-              inputRef={inputRef}
-              getThemeClasses={getThemeClasses}
-              filterList={filterList}
-              setShowOptions={setShowOptions}
-              allowSearch={allowSearch}
-            />
-            {note && <p className="tyk-form-control__help-block">{note}</p>}
+          <div className="tyk-form-control"> */}
+      <StringInput
+        setShowOptions={setShowOptions}
+        tokenValue={tokenValue}
+        handleInputChange={handleInputChange}
+        handleKeyDown={handleKeyDown}
+        disabled={disabled}
+        placeholder={placeholder}
+        allowSearch={allowSearch}
+        inputRef={inputRef}
+      />
+      <TokenizedString tokens={tokens} options={options} />
+      <OptionsList
+        showOptions={showOptions}
+        options={options}
+        handleOptionSelection={handleOptionSelection}
+        inputRef={inputRef}
+        getThemeClasses={getThemeClasses}
+        filterList={filterList}
+        setShowOptions={setShowOptions}
+        allowSearch={allowSearch}
+      />
+      {/* {note && <p className="tyk-form-control__help-block">{note}</p>}
             {error && error !== 'true' && error !== 'false' && (
               <p className="tyk-form-control__error-message">{error}</p>
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -204,15 +221,15 @@ StringBuilder.propTypes = {
   /** Disable input */
   disabled: PropTypes.bool,
   /** Show error state (w/ or w/o message) */
-  error: PropTypes.string,
+  // error: PropTypes.string,
   /** Component theme */
   theme: PropTypes.string,
   /** Footnote for component */
-  note: PropTypes.string,
+  // note: PropTypes.string,
   /** Label for component */
-  label: PropTypes.string,
+  // label: PropTypes.string,
   /** Label Width for component */
-  labelwidth: PropTypes.string,
+  // labelwidth: PropTypes.string,
   /** Placeholder for component */
   placeholder: PropTypes.string,
   /** Allow users to search from options */

@@ -7,10 +7,12 @@
 }
 
 .string-builder__input {
-  background: none;
-  border: none;
+  background: white;
+  position: absolute;
+  border: 1px solid red;
   font: inherit;
   display: block;
+  z-index: 1;
   width: 100%;
   padding-bottom: 5px;
   &:focus,
@@ -22,12 +24,14 @@
 .string-builder__styled {
   font: inherit;
   position: absolute;
-  top: calc(100% - 26px);
-  left: 24px;
+  // top: calc(100% - 26px); // INPUT
+  top: calc(100% - -2px); // TA
+  left: 2px; // TA
+  // left: 24px; // INPUT
   color: transparent;
-  // z-index: -1;
-  white-space: pre;
-  border: none;
+  z-index: 2;
+  // white-space: pre;
+  border: 1px solid blue;
   > input {
     border: none;
   }

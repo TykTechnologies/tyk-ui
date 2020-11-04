@@ -2,34 +2,45 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-
 const StringInput = ({
-  setShowOptions,
+  // setShowOptions,
   tokenValue,
   handleInputChange,
   handleKeyDown,
   disabled,
   placeholder,
-}) => (
-  <input
-    disabled={disabled}
-    className="string-builder__input"
-    value={tokenValue}
-    onChange={handleInputChange}
-    onFocus={() => setShowOptions(true)}
-    onKeyDown={handleKeyDown}
-    placeholder={placeholder}
-    onPaste={e => console.log('PASTE >>>>', { e }, e.target)}
-  />
-);
+  inputRef,
+}) => {
+  const autoGrow = (e) => {
+    e.target.style.height = 'inherit';
+    e.target.style.height = `${e.target.scrollHeight + 5}px`;
+  };
+
+  return (
+    <textarea
+      disabled={disabled}
+      className="string-builder__input"
+      value={tokenValue}
+      onChange={handleInputChange}
+      // onFocus={() => setShowOptions(true)}
+      // onBlur={() => setShowOptions(false)}
+      onKeyDown={handleKeyDown}
+      onKeyUp={autoGrow}
+      placeholder={placeholder}
+      onPaste={e => console.log('PASTE >>>>', { e }, e.target)}
+      ref={inputRef}
+    />
+  );
+};
 
 StringInput.propTypes = {
-  setShowOptions: PropTypes.func,
+  // setShowOptions: PropTypes.func,
   tokenValue: PropTypes.string,
   handleInputChange: PropTypes.func,
   handleKeyDown: PropTypes.func,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
+  inputRef: PropTypes.element,
 };
 
 export { StringInput };
