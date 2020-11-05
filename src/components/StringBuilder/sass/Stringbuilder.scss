@@ -7,12 +7,18 @@
 }
 
 .string-builder__input {
-  background: none;
+  word-break: break-all;
+  resize: none;
+  overflow: hidden;
+  background:transparent;
+  position: absolute;
   border: none;
   font: inherit;
   display: block;
+  z-index: 1;
   width: 100%;
-  padding-bottom: 5px;
+  padding: 0px;
+  width: calc(100% - 35px);
   &:focus,
   &:active {
     border: none;
@@ -22,18 +28,26 @@
 .string-builder__styled {
   font: inherit;
   position: absolute;
-  top: 36.5px;
-  left: 24px;
+  pointer-events: none;
+  width: calc(100% - 35px);
+  // width: 100%;
+  // top: calc(100% - 26px); // INPUT
+  // top: calc(100% - -2px); // TA
+  // left: 2px; // TA
+  // left: 24px; // INPUT
   color: transparent;
-  // z-index: -1;
-  white-space: pre;
+  z-index: 2;
+  // white-space: pre;
+  border: none;
+  word-wrap: break-word;
+  word-break: break-all;
+
 }
 
 
 
 .url-builder__options_name {
   font-weight: 10px;
-  color: blue;
 }
 
 .url-builder__options_description{
@@ -65,7 +79,7 @@
     max-height: 255px;
 
     li {
-      display: flex;
+      // display: flex;
       cursor: pointer;
       padding: 9px map-get($spacing, 'md');
       transition: all .2s;
@@ -98,17 +112,14 @@
   }
 }
 
-.string-builder-error {
-  padding-top: 5px;
+.string-builder-footer {
+  margin-top: 30px;
 }
 
-
-// FOR EXAMPLE Component 
-
-.data_source_argument {
-  color: blue;
+.string-builder-search {
+  padding-right: 10px;
 }
 
-.data_source_object {
-  color: pink;
+.default-option-name {
+  color: green;
 }

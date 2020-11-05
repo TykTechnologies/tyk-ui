@@ -2,16 +2,23 @@
 
 .string-builder{
   position: relative;
-  overflow: auto;
+  // overflow: auto;
   display: block;
 }
 
 .string-builder__input {
-  background: none;
+  word-break: break-all;
+  resize: none;
+  overflow: hidden;
+  background:transparent;
+  position: absolute;
   border: none;
   font: inherit;
   display: block;
+  z-index: 1;
   width: 100%;
+  padding: 0px;
+  width: calc(100% - 35px);
   &:focus,
   &:active {
     border: none;
@@ -21,37 +28,26 @@
 .string-builder__styled {
   font: inherit;
   position: absolute;
-  top: 12.5px;
-  left: 24px;
+  pointer-events: none;
+  width: calc(100% - 35px);
+  // width: 100%;
+  // top: calc(100% - 26px); // INPUT
+  // top: calc(100% - -2px); // TA
+  // left: 2px; // TA
+  // left: 24px; // INPUT
   color: transparent;
-  // z-index: -1;
-  white-space: pre;
+  z-index: 2;
+  // white-space: pre;
+  border: none;
+  word-wrap: break-word;
+  word-break: break-all;
+
 }
 
 
-.string-builder__highlight {
-  background: yellow;
-  border-radius: 2px;
-  color: black;
-  box-shadow: 0 0 0 1px #ff2ecc;
-}
-
-.special_token {
-  color: rgb(92, 120, 211);
-}
-
-.url-builder__options {
-  background: white;
-
-  li {
-    padding: 8px 5px;
-    border-bottom: 1px solid black;
-  } 
-}
 
 .url-builder__options_name {
   font-weight: 10px;
-  color: blue;
 }
 
 .url-builder__options_description{
@@ -83,7 +79,7 @@
     max-height: 255px;
 
     li {
-      display: flex;
+      // display: flex;
       cursor: pointer;
       padding: 9px map-get($spacing, 'md');
       transition: all .2s;
@@ -116,13 +112,14 @@
   }
 }
 
-
-// FOR EXAMPLE DEMO 
-
-.data_source_argument {
-  color: blue;
+.string-builder-footer {
+  margin-top: 30px;
 }
 
-.data_source_object {
-  color: pink;
+.string-builder-search {
+  padding-right: 10px;
+}
+
+.default-option-name {
+  color: green;
 }

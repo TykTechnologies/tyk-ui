@@ -7,7 +7,7 @@ export const TokenizedString = ({ tokens, options }) => {
       const matchedOption = options.find(option => option.id === token);
       if (matchedOption) {
         return (
-          <span key={token} className={`special_token ${matchedOption.className || ''}`}>
+          <span key={token} className={`${matchedOption.className || 'default-option-name'}`}>
             {matchedOption.id}
           </span>
         );
