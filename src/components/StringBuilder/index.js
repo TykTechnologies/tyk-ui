@@ -8,11 +8,19 @@
 /**
  * TODO :: BUGS
   * - Adding one token right after another messes things up
+  * - Backspacing
   * - Clear input and selection
   * - Copy paste error
   * - Leftover input (happening at random)
-  * - Mid string manipulation
+  * - Mid string manipulation (block click and detect cursor position)
 */
+
+/**
+ * Following approaches to try to fix the long string issue
+ * - 1. Try to somehow align two elements perfectly
+ * - 2. Try using inputs instead of spans
+ * - 3. Try with div element `contentEditable` property
+ */
 
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -54,12 +62,14 @@ const StringBuilder = (props) => {
     labelwidth,
     placeholder,
     allowSearch,
+    dropdownTriggerKey,
   } = props;
   const [tokenValue, setTokenValue] = useState(value);
+  const [stringBuilderHeight, setStringBuilderHeight] = useState('');
   const [showOptions, setShowOptions] = useState(false);
   const [tokenString, setTokenString] = useState(initialValueToTokenString(value, options));
   const [tokens, setTokens] = useState([]);
-  const [prevTokenValue, setPrevTokenValue] = useState('');
+  const [prevTokenValue, setPrevTokenValue] = useState();
 
   const prevTokenString = usePrevious(tokenString);
 
@@ -103,31 +113,7 @@ const StringBuilder = (props) => {
     }
     const tokenizedString = `${newInput || tokenValue}__TOKEN__${option.id}__TOKEN__`;
     setTokenString(tokenizedString);
-  };
-
-  /**
-   *
-   * @param {*} e : Event
-   * Handle backspace event
-   * - If the last thing added by user was a token prevent default and
-   * remove the entire token instead of single character, else continue with default behaviour
-   */
-  const handleBackSpace = (e) => {
-    const lastToken = tokens[tokens?.length - 2];
-    const lastCharsInString = tokenValue.slice(-lastToken?.length);
-    if (lastToken === lastCharsInString) {
-      e.preventDefault();
-      console.log({ tokenString, lastCharsInString, lastToken });
-      setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
-      return;
-    }
-    setTokenString(tokenString.slice(0, -1));
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 8) {
-      handleBackSpace(e);
-    }
+    setShowOptions(false);
   };
 
   const getThemeClasses = () => {
@@ -153,15 +139,22 @@ const StringBuilder = (props) => {
       )}
       <div className={getCssClasses()}>
         <div className="tyk-form-control__wrapper">
-          <div className="tyk-form-control">
+          <div
+            className="tyk-form-control"
+            style={{ height: stringBuilderHeight }}
+          >
             <StringInput
               setShowOptions={setShowOptions}
               tokenValue={tokenValue}
               handleInputChange={handleInputChange}
-              handleKeyDown={handleKeyDown}
               disabled={disabled}
               placeholder={placeholder}
               allowSearch={allowSearch}
+              inputRef={inputRef}
+              tokens={tokens}
+              dropdownTriggerKey={dropdownTriggerKey}
+              setStringBuilderHeight={setStringBuilderHeight}
+              stringBuilderHeight={stringBuilderHeight}
             />
             <TokenizedString tokens={tokens} options={options} />
             <OptionsList
@@ -174,10 +167,12 @@ const StringBuilder = (props) => {
               setShowOptions={setShowOptions}
               allowSearch={allowSearch}
             />
-            {note && <p className="tyk-form-control__help-block">{note}</p>}
-            {error && error !== 'true' && error !== 'false' && (
-              <p className="tyk-form-control__error-message">{error}</p>
-            )}
+            <div style={{ marginTop: stringBuilderHeight || '30px' }}>
+              {note && <p className="tyk-form-control__help-block">{note}</p>}
+              {error && error !== 'true' && error !== 'false' && (
+                <p className="tyk-form-control__error-message">{error}</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -215,6 +210,8 @@ StringBuilder.propTypes = {
   labelwidth: PropTypes.string,
   /** Placeholder for component */
   placeholder: PropTypes.string,
+  /** Key To trigger dropdown */
+  dropdownTriggerKey: PropTypes.string,
   /** Allow users to search from options */
   allowSearch: PropTypes.bool,
 };
