@@ -2,14 +2,15 @@
 
 <StringBuilder
   allowSearch
-  // error="you have an error"
+  error="you have an error"
   // note="you also have a note"
   label="URL Builder"
-  // value="http://sample.com/{{.arguments.id}}"
+  // value="http://sample.com/{{.arguments.userId}}?id={{.arguments.userId}}&name={{.object.name}}/alphabrovodeltacharlieanddelta-{{.object.location}}/alfhadsflhasdiufgysudagfiasdgfyiduasgfisadfhoisudhfo/{{.object.name}}/location}}/alfhadsflhasdiufgysudagfiasdgfyiduasgfisadfhoisudhfo/{{.object.name}}/location}}/alfhadsflhasdiufgysudagfiasdgfyiduasgfisadfhoisudhfo/{{.object.name}}"
   value="http://sample.com/{{.arguments.userId}}?id={{.arguments.userId}}"
   placeholder="Please enter your url"
   onChange={(v) => console.log("Value", v)}
   theme="default rounded-corners"
+  dropdownTriggerKey="{"
   options={[
   {
     id: '{{.arguments.id}}',

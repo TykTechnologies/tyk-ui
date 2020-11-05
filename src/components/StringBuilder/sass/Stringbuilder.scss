@@ -7,8 +7,10 @@
 }
 
 .string-builder__input {
+  word-break: break-all;
+  resize: none;
   overflow: hidden;
-  background:white;
+  background:transparent;
   position: absolute;
   border: none;
   font: inherit;
@@ -16,6 +18,7 @@
   z-index: 1;
   width: 100%;
   padding: 0px;
+  width: calc(100% - 35px);
   &:focus,
   &:active {
     border: none;
@@ -26,7 +29,8 @@
   font: inherit;
   position: absolute;
   pointer-events: none;
-  width: 100%;
+  width: calc(100% - 35px);
+  // width: 100%;
   // top: calc(100% - 26px); // INPUT
   // top: calc(100% - -2px); // TA
   // left: 2px; // TA
@@ -35,7 +39,8 @@
   z-index: 2;
   // white-space: pre;
   border: none;
-  word-wrap: break-word
+  word-wrap: break-word;
+  word-break: break-all;
 
 }
 
@@ -105,6 +110,10 @@
       }
     }
   }
+}
+
+.string-builder-footer {
+  margin-top: 30px;
 }
 
 .string-builder-search {

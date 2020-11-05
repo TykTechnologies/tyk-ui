@@ -7,14 +7,18 @@
 }
 
 .string-builder__input {
-  background: white;
+  word-break: break-all;
+  resize: none;
+  overflow: hidden;
+  background:transparent;
   position: absolute;
-  border: 1px solid red;
+  border: none;
   font: inherit;
   display: block;
   z-index: 1;
   width: 100%;
-  padding-bottom: 5px;
+  padding: 0px;
+  width: calc(100% - 35px);
   &:focus,
   &:active {
     border: none;
@@ -24,17 +28,20 @@
 .string-builder__styled {
   font: inherit;
   position: absolute;
+  pointer-events: none;
+  width: calc(100% - 35px);
+  // width: 100%;
   // top: calc(100% - 26px); // INPUT
-  top: calc(100% - -2px); // TA
-  left: 2px; // TA
+  // top: calc(100% - -2px); // TA
+  // left: 2px; // TA
   // left: 24px; // INPUT
   color: transparent;
   z-index: 2;
   // white-space: pre;
-  border: 1px solid blue;
-  > input {
-    border: none;
-  }
+  border: none;
+  word-wrap: break-word;
+  word-break: break-all;
+
 }
 
 
@@ -103,6 +110,10 @@
       }
     }
   }
+}
+
+.string-builder-footer {
+  margin-top: 30px;
 }
 
 .string-builder-search {

@@ -55,19 +55,21 @@ const StringBuilder = (props) => {
     onChange,
     value,
     theme,
-    // error,
+    error,
     disabled,
-    // note,
-    // label,
-    // labelwidth,
+    note,
+    label,
+    labelwidth,
     placeholder,
     allowSearch,
+    dropdownTriggerKey,
   } = props;
   const [tokenValue, setTokenValue] = useState(value);
+  const [stringBuilderHeight, setStringBuilderHeight] = useState('');
   const [showOptions, setShowOptions] = useState(false);
   const [tokenString, setTokenString] = useState(initialValueToTokenString(value, options));
   const [tokens, setTokens] = useState([]);
-  const [prevTokenValue, setPrevTokenValue] = useState('');
+  const [prevTokenValue, setPrevTokenValue] = useState();
 
   const prevTokenString = usePrevious(tokenString);
 
@@ -114,90 +116,66 @@ const StringBuilder = (props) => {
     setShowOptions(false);
   };
 
-  /**
-   *
-   * @param {*} e : Event
-   * Handle backspace event
-   * - If the last thing added by user was a token prevent default and
-   * remove the entire token instead of single character, else continue with default behaviour
-   */
-  const handleBackSpace = (e) => {
-    const lastToken = tokens[tokens?.length - 2];
-    const lastCharsInString = tokenValue.slice(-lastToken?.length);
-    if (lastToken === lastCharsInString) {
-      e.preventDefault();
-      // console.log({ tokenString, lastCharsInString, lastToken });
-      // setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
-      // return;
-    }
-    // setTokenString(tokenString.slice(0, -1));
-  };
-
-  const handleKeyDown = (e) => {
-    console.log('e.keyCode', e.keyCode);
-    if (e.keyCode === 8) {
-      handleBackSpace(e);
-    }
-
-    // TODO : Make the trigger dynamic
-    if (e.keyCode === 219) {
-      e.preventDefault();
-      setShowOptions(true);
-    }
-  };
-
   const getThemeClasses = () => {
     const themes = theme ? theme.split(' ') : [];
     return themes.map(iTheme => `tyk-form-group--${iTheme}`);
   };
 
-  // const getCssClasses = () => [
-  //   'tyk-form-group',
-  //   ...getThemeClasses(),
-  //   error && 'has-error',
-  //   disabled && 'disabled',
-  // ].filter(Boolean).join(' ');
+  const getCssClasses = () => [
+    'tyk-form-group',
+    ...getThemeClasses(),
+    error && 'has-error',
+    disabled && 'disabled',
+  ].filter(Boolean).join(' ');
 
   const filterList = (v) => {
     console.log('FILTER', { v });
   };
 
   return (
-    <div className="string-builder">
-      {/* {label && (
+    <div className="string-builder" ref={inputRef}>
+      {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
       )}
       <div className={getCssClasses()}>
         <div className="tyk-form-control__wrapper">
-          <div className="tyk-form-control"> */}
-      <StringInput
-        setShowOptions={setShowOptions}
-        tokenValue={tokenValue}
-        handleInputChange={handleInputChange}
-        handleKeyDown={handleKeyDown}
-        disabled={disabled}
-        placeholder={placeholder}
-        allowSearch={allowSearch}
-        inputRef={inputRef}
-      />
-      <TokenizedString tokens={tokens} options={options} />
-      <OptionsList
-        showOptions={showOptions}
-        options={options}
-        handleOptionSelection={handleOptionSelection}
-        inputRef={inputRef}
-        getThemeClasses={getThemeClasses}
-        filterList={filterList}
-        setShowOptions={setShowOptions}
-        allowSearch={allowSearch}
-      />
-      {/* {note && <p className="tyk-form-control__help-block">{note}</p>}
-            {error && error !== 'true' && error !== 'false' && (
-              <p className="tyk-form-control__error-message">{error}</p>
-            )}
+          <div
+            className="tyk-form-control"
+            style={{ height: stringBuilderHeight }}
+          >
+            <StringInput
+              setShowOptions={setShowOptions}
+              tokenValue={tokenValue}
+              handleInputChange={handleInputChange}
+              disabled={disabled}
+              placeholder={placeholder}
+              allowSearch={allowSearch}
+              inputRef={inputRef}
+              tokens={tokens}
+              dropdownTriggerKey={dropdownTriggerKey}
+              setStringBuilderHeight={setStringBuilderHeight}
+              stringBuilderHeight={stringBuilderHeight}
+            />
+            <TokenizedString tokens={tokens} options={options} />
+            <OptionsList
+              showOptions={showOptions}
+              options={options}
+              handleOptionSelection={handleOptionSelection}
+              inputRef={inputRef}
+              getThemeClasses={getThemeClasses}
+              filterList={filterList}
+              setShowOptions={setShowOptions}
+              allowSearch={allowSearch}
+            />
+            <div style={{ marginTop: stringBuilderHeight || '30px' }}>
+              {note && <p className="tyk-form-control__help-block">{note}</p>}
+              {error && error !== 'true' && error !== 'false' && (
+                <p className="tyk-form-control__error-message">{error}</p>
+              )}
+            </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
@@ -221,17 +199,19 @@ StringBuilder.propTypes = {
   /** Disable input */
   disabled: PropTypes.bool,
   /** Show error state (w/ or w/o message) */
-  // error: PropTypes.string,
+  error: PropTypes.string,
   /** Component theme */
   theme: PropTypes.string,
   /** Footnote for component */
-  // note: PropTypes.string,
+  note: PropTypes.string,
   /** Label for component */
-  // label: PropTypes.string,
+  label: PropTypes.string,
   /** Label Width for component */
-  // labelwidth: PropTypes.string,
+  labelwidth: PropTypes.string,
   /** Placeholder for component */
   placeholder: PropTypes.string,
+  /** Key To trigger dropdown */
+  dropdownTriggerKey: PropTypes.string,
   /** Allow users to search from options */
   allowSearch: PropTypes.bool,
 };
