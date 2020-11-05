@@ -7,7 +7,7 @@ export const OptionsList = ({
   options,
   showOptions,
   handleOptionSelection,
-  inputRef,
+  containerRef,
   getThemeClasses,
   filterList,
   setShowOptions,
@@ -35,7 +35,7 @@ export const OptionsList = ({
     <>
       <FloatingContainer
         className={`string-builder-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
-        element={inputRef}
+        element={containerRef}
         size="matchElement"
       >
         {allowSearch && (
@@ -92,6 +92,6 @@ OptionsList.propTypes = {
   getThemeClasses: PropTypes.func,
   filterList: PropTypes.func,
   setShowOptions: PropTypes.func,
-  inputRef: PropTypes.instanceOf(Object),
+  containerRef: PropTypes.instanceOf(Object),
   allowSearch: PropTypes.bool,
 };

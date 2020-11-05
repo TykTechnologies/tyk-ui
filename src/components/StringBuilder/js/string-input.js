@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger, no-console */ // TODO: REMOVE THIS
 import React, { useEffect, useState, useRef } from 'react';
 
 import PropTypes from 'prop-types';
@@ -12,6 +13,9 @@ const StringInput = ({
   dropdownTriggerKey,
   setStringBuilderHeight,
   stringBuilderHeight,
+  setTokenString,
+  tokenString,
+  showOptions,
 }) => {
   const [contextMaxLength, setContentMaxLength] = useState(tokenValue.length + 5);
   const inputRef = useRef();
@@ -23,10 +27,10 @@ const StringInput = ({
   }, []);
 
   const autoGrow = (e) => {
-    if (contextMaxLength - 10 < tokenValue.length) {
+    if (contextMaxLength - 1 < tokenValue.length) {
       const newHeight = `${e.target.scrollHeight + 3}px`;
       setStringBuilderHeight(newHeight);
-      setContentMaxLength(contextMaxLength + 10);
+      setContentMaxLength(contextMaxLength + 15);
     }
   };
 
@@ -42,45 +46,58 @@ const StringInput = ({
     const lastCharsInString = tokenValue.slice(-lastToken?.length);
     if (lastToken === lastCharsInString) {
       e.preventDefault();
-      // console.log({ tokenString, lastCharsInString, lastToken });
-      // setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
-      // return;
+      setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
+      return;
     }
-    // setTokenString(tokenString.slice(0, -1));
+    setTokenString(tokenString.slice(0, -1));
   };
 
-  // const handleOnFocus = (e) => {
-  //   e.selectionEnd = e.selectionStart;
-  // };
-
   const handleKeyDown = (e) => {
-    console.log(e.key);
+    console.log({
+      e,
+      KEY: e.key,
+      Start: e.target.selectionStart,
+      END: e.target.selectionEnd,
+    });
+    if (e.key === dropdownTriggerKey && !showOptions) {
+      e.preventDefault();
+      setShowOptions(true);
+      return;
+    }
     if (e.key === 'Enter') {
       e.preventDefault();
+      return;
     }
     if (e.key === 'Backspace') {
       handleBackSpace(e);
+      return;
     }
-    if (e.key === dropdownTriggerKey) {
-      e.preventDefault();
-      setShowOptions(true);
+    if (String(e.key).length === 1) {
+      setTokenString(`${tokenString}${e.key}`);
     }
+  };
+
+  const handleOnClick = (e) => {
+    console.log({
+      Start: e.target.selectionStart,
+      END: e.target.selectionEnd,
+    });
   };
 
   return (
     <textarea
+      spellCheck={false}
       disabled={disabled}
       className="string-builder__input"
       value={tokenValue}
+      onClick={handleOnClick}
       onChange={handleInputChange}
-      // onFocus={handleOnFocus}
       onKeyDown={handleKeyDown}
       onKeyUp={autoGrow}
       placeholder={placeholder}
       onPaste={e => console.log('PASTE >>>>', { e }, e.target)}
       ref={inputRef}
       style={{ height: stringBuilderHeight }}
-      spellCheck={false}
       maxLength={contextMaxLength}
     />
   );
@@ -92,10 +109,12 @@ StringInput.propTypes = {
   handleInputChange: PropTypes.func,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
+  tokenString: PropTypes.string,
   stringBuilderHeight: PropTypes.string,
   dropdownTriggerKey: PropTypes.string,
   setStringBuilderHeight: PropTypes.func,
-  // inputRef: PropTypes.element,
+  setTokenString: PropTypes.func,
+  showOptions: PropTypes.bool,
   tokens: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

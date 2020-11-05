@@ -1,8 +1,6 @@
 /**
  * TODO :: Implementation
  * 1. Foreign item detection
- * 2. Search Functionality
- * 3. Trigger dropdown on custom input
  */
 
 /**
@@ -73,7 +71,7 @@ const StringBuilder = (props) => {
 
   const prevTokenString = usePrevious(tokenString);
 
-  const inputRef = useRef();
+  const containerRef = useRef();
 
   // Execute callback on value change
   useEffect(() => {
@@ -96,6 +94,7 @@ const StringBuilder = (props) => {
 
 
   const handleInputChange = (e) => {
+    console.log({ e, target: e.target });
     setTokenValue(e.target.value);
   };
 
@@ -133,7 +132,7 @@ const StringBuilder = (props) => {
   };
 
   return (
-    <div className="string-builder" ref={inputRef}>
+    <div className="string-builder" ref={containerRef}>
       {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
       )}
@@ -150,18 +149,20 @@ const StringBuilder = (props) => {
               disabled={disabled}
               placeholder={placeholder}
               allowSearch={allowSearch}
-              inputRef={inputRef}
               tokens={tokens}
               dropdownTriggerKey={dropdownTriggerKey}
               setStringBuilderHeight={setStringBuilderHeight}
               stringBuilderHeight={stringBuilderHeight}
+              setTokenString={setTokenString}
+              tokenString={tokenString}
+              showOptions={showOptions}
             />
             <TokenizedString tokens={tokens} options={options} />
             <OptionsList
               showOptions={showOptions}
               options={options}
               handleOptionSelection={handleOptionSelection}
-              inputRef={inputRef}
+              containerRef={containerRef}
               getThemeClasses={getThemeClasses}
               filterList={filterList}
               setShowOptions={setShowOptions}
