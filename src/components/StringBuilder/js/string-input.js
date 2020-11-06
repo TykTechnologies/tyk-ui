@@ -47,7 +47,7 @@ const StringInput = ({
    */
   const handleBackSpace = (e) => {
     // -- START :: Handle backspacing when cursor is at the end of the string
-    if (e.target.selectionEnd === tokenString.length) {
+    if (e.target.selectionEnd === tokenValue.length) {
       const lastToken = tokens[tokens?.length - 2];
       const lastCharsInString = tokenValue.slice(-lastToken?.length);
       if (lastToken === lastCharsInString) {
