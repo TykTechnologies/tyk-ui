@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger, no-console */ // TODO: REMOVE THIS
 /**
  * TODO :: Implementation
  * 1. Foreign item detection
@@ -6,10 +7,9 @@
 
 /**
  * TODO :: BUGS
-  * - Adding one token right after another messes things ups
   * - Clear input and selection
-  * - Improve dropdown UX
   * - Copy paste error : Support copy paste, cmd + c messes the input
+  * - Input with same tokens and backspacing
 */
 
 import React, { useEffect, useState, useRef } from 'react';

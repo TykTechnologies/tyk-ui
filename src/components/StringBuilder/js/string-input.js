@@ -7,7 +7,6 @@ import { stringToTokenString } from './service';
 const StringInput = ({
   setShowOptions,
   tokenValue,
-  handleInputChange,
   disabled,
   placeholder,
   tokens,
@@ -44,10 +43,12 @@ const StringInput = ({
    * Handle backspace event
    * - If the last thing added by user was a token prevent default and
    * remove the entire token instead of single character, else continue with default behaviour
+   * - Also handles if the string is manipulated from middle
    */
   const handleBackSpace = (e) => {
+    const { selectionEnd } = e.target;
     // -- START :: Handle backspacing when cursor is at the end of the string
-    if (e.target.selectionEnd === tokenValue.length) {
+    if (selectionEnd === tokenValue.length) {
       const lastToken = tokens[tokens?.length - 2];
       const lastCharsInString = tokenValue.slice(-lastToken?.length);
       if (lastToken === lastCharsInString) {
@@ -61,22 +62,44 @@ const StringInput = ({
     // -- END :: Handle backspacing when cursor is at the end of the string
 
     // -- START :: Handle backspacing when cursor is in between
-    console.log('MID_STRING_MANIPULATION ::::: c');
-
+    console.log('MID_STRING_MANIPULATION');
+    const stringBeforeCursor = tokenValue.substring(0, selectionEnd);
+    const stringAfterCursor = tokenValue.slice(selectionEnd);
+    const newTokenValue = `${stringBeforeCursor.slice(0, -1)}${stringAfterCursor}`;
+    const newTokenizedString = stringToTokenString(newTokenValue, options);
+    setTokenString(newTokenizedString);
     // -- END :: Handle backspacing when cursor is in between
   };
 
+  const addCharacterToTokenString = (text, selectionStart) => {
+    // debugger;
+    // Cursor is at end
+    if (selectionStart === tokenValue.length) {
+      setTokenString(`${tokenString}${text}`);
+      return;
+    }
+
+    // Cursor is in middle of string
+    const newTokenValue = tokenValue.slice(0, selectionStart)
+      + text
+      + tokenValue.slice(selectionStart);
+
+    const newTokenizedString = stringToTokenString(newTokenValue, options);
+    setTokenString(newTokenizedString);
+  };
+
   const handleKeyDown = (e) => {
+    // debugger;
     const { key, target } = e;
     const { selectionStart, value } = target;
-    // console.log({
-    //   e,
-    //   KEY: e.key,
-    //   Start: e.target.selectionStart,
-    //   END: e.target.selectionEnd,
-    //   value,
-    // });
-    setTokenValue(value);
+    console.log({
+      e,
+      KEY: e.key,
+      Start: e.target.selectionStart,
+      END: e.target.selectionEnd,
+      value,
+      setTokenValue,
+    });
     if (key === dropdownTriggerKey && !showOptions) {
       e.preventDefault();
       setShowOptions(true);
@@ -90,30 +113,22 @@ const StringInput = ({
       handleBackSpace(e);
       return;
     }
-    if (String(e.key).length === 1) {
-      // Cursor is at end
-      if (selectionStart === tokenValue.length) {
-        setTokenString(`${tokenString}${e.key}`);
-        return;
+    if (!e.metaKey && !e.altKey && !e.ctrlKey) {
+      if (String(key).length === 1 || key === 'Space') {
+        let text = key;
+        if (key === 'Space') {
+          text = ' ';
+        }
+        addCharacterToTokenString(text, selectionStart);
       }
-      // Cursor is in middle of string
-      const newTokenValue = tokenValue.slice(0, selectionStart)
-        + e.key
-        + tokenValue.slice(selectionStart);
-
-      const newTokensisedString = stringToTokenString(newTokenValue, options);
-      setTokenString(newTokensisedString);
-
-      console.log('NEW_TOKEN_STRING >>>', { newTokensisedString });
     }
   };
 
-  const handleOnClick = (e) => {
-    console.log('CLICKED >> ', { e });
-    // console.log({
-    //   Start: e.target.selectionStart,
-    //   END: e.target.selectionEnd,
-    // });
+  const handleOnChange = (e) => {
+    if (showOptions) {
+      setShowOptions(false);
+    }
+    setTokenValue(e.target.value);
   };
 
   return (
@@ -122,12 +137,10 @@ const StringInput = ({
       disabled={disabled}
       className="string-builder__input"
       value={tokenValue}
-      onClick={handleOnClick}
-      onChange={handleInputChange}
+      onChange={handleOnChange}
       onKeyDown={handleKeyDown}
       onKeyUp={autoGrow}
       placeholder={placeholder}
-      onPaste={e => console.log('PASTE >>>>', { e }, e.target)}
       ref={inputRef}
       style={{ height: stringBuilderHeight }}
       maxLength={contextMaxLength}
@@ -138,7 +151,6 @@ const StringInput = ({
 StringInput.propTypes = {
   setShowOptions: PropTypes.func,
   tokenValue: PropTypes.string,
-  handleInputChange: PropTypes.func,
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   tokenString: PropTypes.string,
