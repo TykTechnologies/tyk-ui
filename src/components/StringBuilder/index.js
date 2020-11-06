@@ -78,11 +78,6 @@ const StringBuilder = (props) => {
   }, [tokenString]);
 
 
-  // const handleInputChange = (e) => {
-  //   console.log({ e, target: e.target });
-  //   setTokenValue(e.target.value);
-  // };
-
   /**
    *
    * @param {*} option : Option object for selected option from dropdown
@@ -112,10 +107,6 @@ const StringBuilder = (props) => {
     disabled && 'disabled',
   ].filter(Boolean).join(' ');
 
-  const filterList = (v) => {
-    console.log('FILTER', { v });
-  };
-
   return (
     <div className="string-builder" ref={containerRef}>
       {label && (
@@ -130,7 +121,6 @@ const StringBuilder = (props) => {
             <StringInput
               setShowOptions={setShowOptions}
               tokenValue={tokenValue}
-              // handleInputChange={handleInputChange}
               disabled={disabled}
               placeholder={placeholder}
               allowSearch={allowSearch}
@@ -144,14 +134,16 @@ const StringBuilder = (props) => {
               options={options}
               setTokenValue={setTokenValue}
             />
-            <TokenizedString tokens={tokens} options={options} />
+            <TokenizedString
+              tokens={tokens}
+              options={options}
+            />
             <OptionsList
               showOptions={showOptions}
               options={options}
               handleOptionSelection={handleOptionSelection}
               containerRef={containerRef}
               getThemeClasses={getThemeClasses}
-              filterList={filterList}
               setShowOptions={setShowOptions}
               allowSearch={allowSearch}
             />

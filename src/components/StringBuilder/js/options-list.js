@@ -9,7 +9,6 @@ export const OptionsList = ({
   handleOptionSelection,
   containerRef,
   getThemeClasses,
-  filterList,
   setShowOptions,
   allowSearch,
 }) => {
@@ -46,14 +45,13 @@ export const OptionsList = ({
               value={filterValue}
               placeholder="Search parameter"
               onChange={(e) => {
-                filterList(e.target.value);
                 setFilterValue(e.target.value);
               }}
               onKeyDown={(e) => {
                 if (
                   e.key === 'Escape'
                   || e.key === 'ArrowUp'
-                  || e.key === 'ArrowDown'
+                  // || e.key === 'ArrowDown'
                   || e.key === 'Enter'
                 ) {
                   setShowOptions(false);
@@ -90,7 +88,6 @@ OptionsList.propTypes = {
   showOptions: PropTypes.bool,
   handleOptionSelection: PropTypes.func,
   getThemeClasses: PropTypes.func,
-  filterList: PropTypes.func,
   setShowOptions: PropTypes.func,
   containerRef: PropTypes.instanceOf(Object),
   allowSearch: PropTypes.bool,
