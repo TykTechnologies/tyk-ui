@@ -1,24 +1,16 @@
 /**
  * TODO :: Implementation
  * 1. Foreign item detection
+ * 2. Mid string manipulation (block click and detect cursor position)
  */
 
 /**
  * TODO :: BUGS
-  * - Adding one token right after another messes things up
-  * - Backspacing
+  * - Adding one token right after another messes things ups
   * - Clear input and selection
-  * - Copy paste error
-  * - Leftover input (happening at random)
-  * - Mid string manipulation (block click and detect cursor position)
+  * - Improve dropdown UX
+  * - Copy paste error : Support copy paste, cmd + c messes the input
 */
-
-/**
- * Following approaches to try to fix the long string issue
- * - 1. Try to somehow align two elements perfectly
- * - 2. Try using inputs instead of spans
- * - 3. Try with div element `contentEditable` property
- */
 
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
@@ -29,14 +21,7 @@ import { usePrevious } from '../../hooks';
 import { StringInput } from './js/string-input';
 import { TokenizedString } from './js/tokenized-string';
 import { OptionsList } from './js/options-list';
-
-const initialValueToTokenString = (value, options) => {
-  let tempStr = value;
-  options.forEach((option) => {
-    tempStr = tempStr.replaceAll(option.id, `__TOKEN__${option.id}__TOKEN__`);
-  });
-  return tempStr;
-};
+import { stringToTokenString } from './js/service';
 
 /**
  * - String builder component used to build one single string using the given options.
@@ -65,7 +50,7 @@ const StringBuilder = (props) => {
   const [tokenValue, setTokenValue] = useState(value);
   const [stringBuilderHeight, setStringBuilderHeight] = useState('');
   const [showOptions, setShowOptions] = useState(false);
-  const [tokenString, setTokenString] = useState(initialValueToTokenString(value, options));
+  const [tokenString, setTokenString] = useState(stringToTokenString(value, options));
   const [tokens, setTokens] = useState([]);
   const [prevTokenValue, setPrevTokenValue] = useState();
 
@@ -93,10 +78,10 @@ const StringBuilder = (props) => {
   }, [tokenString]);
 
 
-  const handleInputChange = (e) => {
-    console.log({ e, target: e.target });
-    setTokenValue(e.target.value);
-  };
+  // const handleInputChange = (e) => {
+  //   console.log({ e, target: e.target });
+  //   setTokenValue(e.target.value);
+  // };
 
   /**
    *
@@ -145,7 +130,7 @@ const StringBuilder = (props) => {
             <StringInput
               setShowOptions={setShowOptions}
               tokenValue={tokenValue}
-              handleInputChange={handleInputChange}
+              // handleInputChange={handleInputChange}
               disabled={disabled}
               placeholder={placeholder}
               allowSearch={allowSearch}
@@ -156,6 +141,8 @@ const StringBuilder = (props) => {
               setTokenString={setTokenString}
               tokenString={tokenString}
               showOptions={showOptions}
+              options={options}
+              setTokenValue={setTokenValue}
             />
             <TokenizedString tokens={tokens} options={options} />
             <OptionsList

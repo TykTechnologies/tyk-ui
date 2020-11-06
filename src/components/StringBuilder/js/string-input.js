@@ -1,7 +1,8 @@
 /* eslint-disable no-debugger, no-console */ // TODO: REMOVE THIS
 import React, { useEffect, useState, useRef } from 'react';
-
 import PropTypes from 'prop-types';
+
+import { stringToTokenString } from './service';
 
 const StringInput = ({
   setShowOptions,
@@ -16,11 +17,14 @@ const StringInput = ({
   setTokenString,
   tokenString,
   showOptions,
+  options,
+  setTokenValue,
 }) => {
   const [contextMaxLength, setContentMaxLength] = useState(tokenValue.length + 5);
   const inputRef = useRef();
 
   useEffect(() => {
+    // Set height if initial value exists
     if (tokenValue) {
       setStringBuilderHeight(`${(inputRef.current.scrollHeight + 20)}px`);
     }
@@ -42,46 +46,74 @@ const StringInput = ({
    * remove the entire token instead of single character, else continue with default behaviour
    */
   const handleBackSpace = (e) => {
-    const lastToken = tokens[tokens?.length - 2];
-    const lastCharsInString = tokenValue.slice(-lastToken?.length);
-    if (lastToken === lastCharsInString) {
-      e.preventDefault();
-      setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
+    // -- START :: Handle backspacing when cursor is at the end of the string
+    if (e.target.selectionEnd === tokenString.length) {
+      const lastToken = tokens[tokens?.length - 2];
+      const lastCharsInString = tokenValue.slice(-lastToken?.length);
+      if (lastToken === lastCharsInString) {
+        e.preventDefault();
+        setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
+        return;
+      }
+      setTokenString(tokenString.slice(0, -1));
       return;
     }
-    setTokenString(tokenString.slice(0, -1));
+    // -- END :: Handle backspacing when cursor is at the end of the string
+
+    // -- START :: Handle backspacing when cursor is in between
+    console.log('MID_STRING_MANIPULATION ::::: c');
+
+    // -- END :: Handle backspacing when cursor is in between
   };
 
   const handleKeyDown = (e) => {
-    console.log({
-      e,
-      KEY: e.key,
-      Start: e.target.selectionStart,
-      END: e.target.selectionEnd,
-    });
-    if (e.key === dropdownTriggerKey && !showOptions) {
+    const { key, target } = e;
+    const { selectionStart, value } = target;
+    // console.log({
+    //   e,
+    //   KEY: e.key,
+    //   Start: e.target.selectionStart,
+    //   END: e.target.selectionEnd,
+    //   value,
+    // });
+    setTokenValue(value);
+    if (key === dropdownTriggerKey && !showOptions) {
       e.preventDefault();
       setShowOptions(true);
       return;
     }
-    if (e.key === 'Enter') {
+    if (key === 'Enter') {
       e.preventDefault();
       return;
     }
-    if (e.key === 'Backspace') {
+    if (key === 'Backspace') {
       handleBackSpace(e);
       return;
     }
     if (String(e.key).length === 1) {
-      setTokenString(`${tokenString}${e.key}`);
+      // Cursor is at end
+      if (selectionStart === tokenValue.length) {
+        setTokenString(`${tokenString}${e.key}`);
+        return;
+      }
+      // Cursor is in middle of string
+      const newTokenValue = tokenValue.slice(0, selectionStart)
+        + e.key
+        + tokenValue.slice(selectionStart);
+
+      const newTokensisedString = stringToTokenString(newTokenValue, options);
+      setTokenString(newTokensisedString);
+
+      console.log('NEW_TOKEN_STRING >>>', { newTokensisedString });
     }
   };
 
   const handleOnClick = (e) => {
-    console.log({
-      Start: e.target.selectionStart,
-      END: e.target.selectionEnd,
-    });
+    console.log('CLICKED >> ', { e });
+    // console.log({
+    //   Start: e.target.selectionStart,
+    //   END: e.target.selectionEnd,
+    // });
   };
 
   return (
@@ -114,8 +146,10 @@ StringInput.propTypes = {
   dropdownTriggerKey: PropTypes.string,
   setStringBuilderHeight: PropTypes.func,
   setTokenString: PropTypes.func,
+  setTokenValue: PropTypes.func,
   showOptions: PropTypes.bool,
-  tokens: PropTypes.arrayOf(PropTypes.shape({
+  tokens: PropTypes.arrayOf(PropTypes.string),
+  options: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     className: PropTypes.string,
