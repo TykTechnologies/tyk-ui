@@ -19,13 +19,16 @@ const StringInput = ({
   options,
   setTokenValue,
 }) => {
-  const [contextMaxLength, setContentMaxLength] = useState(tokenValue.length + 5);
+  const [contextMaxLength, setContentMaxLength] = useState(
+    tokenValue.length + 5,
+  );
+  const [isPasteEvent, setIsPasteEvent] = useState(false);
   const inputRef = useRef();
 
   useEffect(() => {
     // Set height if initial value exists
     if (tokenValue) {
-      setStringBuilderHeight(`${(inputRef.current.scrollHeight + 20)}px`);
+      setStringBuilderHeight(`${inputRef.current.scrollHeight + 20}px`);
     }
   }, []);
 
@@ -53,7 +56,9 @@ const StringInput = ({
       const lastCharsInString = tokenValue.slice(-lastToken?.length);
       if (lastToken === lastCharsInString) {
         e.preventDefault();
-        setTokenString(tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length));
+        setTokenString(
+          tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length),
+        );
         return;
       }
       setTokenString(tokenString.slice(0, -1));
@@ -62,17 +67,18 @@ const StringInput = ({
     // -- END :: Handle backspacing when cursor is at the end of the string
 
     // -- START :: Handle backspacing when cursor is in between
-    console.log('MID_STRING_MANIPULATION');
     const stringBeforeCursor = tokenValue.substring(0, selectionEnd);
     const stringAfterCursor = tokenValue.slice(selectionEnd);
-    const newTokenValue = `${stringBeforeCursor.slice(0, -1)}${stringAfterCursor}`;
+    const newTokenValue = `${stringBeforeCursor.slice(
+      0,
+      -1,
+    )}${stringAfterCursor}`;
     const newTokenizedString = stringToTokenString(newTokenValue, options);
     setTokenString(newTokenizedString);
     // -- END :: Handle backspacing when cursor is in between
   };
 
   const addCharacterToTokenString = (text, selectionStart) => {
-    // debugger;
     // Cursor is at end
     if (selectionStart === tokenValue.length) {
       setTokenString(`${tokenString}${text}`);
@@ -80,26 +86,16 @@ const StringInput = ({
     }
 
     // Cursor is in middle of string
-    const newTokenValue = tokenValue.slice(0, selectionStart)
+    const newTokenValue = tokenValue.slice(0, selectionStart - 1)
       + text
-      + tokenValue.slice(selectionStart);
+      + tokenValue.slice(selectionStart - 1);
 
     const newTokenizedString = stringToTokenString(newTokenValue, options);
     setTokenString(newTokenizedString);
   };
 
   const handleKeyDown = (e) => {
-    // debugger;
-    const { key, target } = e;
-    const { selectionStart, value } = target;
-    console.log({
-      e,
-      KEY: e.key,
-      Start: e.target.selectionStart,
-      END: e.target.selectionEnd,
-      value,
-      setTokenValue,
-    });
+    const { key } = e;
     if (key === dropdownTriggerKey && !showOptions) {
       e.preventDefault();
       setShowOptions(true);
@@ -110,25 +106,44 @@ const StringInput = ({
       return;
     }
     if (key === 'Backspace') {
+      e.preventDefault();
       handleBackSpace(e);
-      return;
     }
-    if (!e.metaKey && !e.altKey && !e.ctrlKey) {
-      if (String(key).length === 1 || key === 'Space') {
-        let text = key;
-        if (key === 'Space') {
-          text = ' ';
-        }
-        addCharacterToTokenString(text, selectionStart);
-      }
+    if (e.metaKey && key === 'x') {
+      setTokenString('');
     }
   };
 
   const handleOnChange = (e) => {
+    const { target } = e;
+    const { selectionStart, value } = target;
+
     if (showOptions) {
       setShowOptions(false);
     }
-    setTokenValue(e.target.value);
+    setTokenValue(value);
+    if (value && !isPasteEvent) {
+      const text = value.charAt(selectionStart - 1);
+      addCharacterToTokenString(text, selectionStart);
+    }
+    setIsPasteEvent(false);
+  };
+
+  const handlePasteEvent = (e) => {
+    const { clipboardData } = e;
+    const { selectionStart, selectionEnd } = e.target;
+    setIsPasteEvent(true);
+    let pasteString = clipboardData.getData('text/plain');
+    if (selectionStart !== selectionEnd) {
+      pasteString = tokenValue.slice(0, selectionStart)
+        + pasteString
+        + tokenValue.slice(selectionEnd, tokenValue.length);
+      const newTokenString = stringToTokenString(pasteString, options);
+      setTokenString(newTokenString);
+      return;
+    }
+    const newTokenString = stringToTokenString(pasteString, options);
+    addCharacterToTokenString(newTokenString, selectionStart);
   };
 
   return (
@@ -144,6 +159,7 @@ const StringInput = ({
       ref={inputRef}
       style={{ height: stringBuilderHeight }}
       maxLength={contextMaxLength}
+      onPaste={handlePasteEvent}
     />
   );
 };
@@ -161,12 +177,14 @@ StringInput.propTypes = {
   setTokenValue: PropTypes.func,
   showOptions: PropTypes.bool,
   tokens: PropTypes.arrayOf(PropTypes.string),
-  options: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    desc: PropTypes.string,
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      className: PropTypes.string,
+      desc: PropTypes.string,
+    }),
+  ),
 };
 
 export { StringInput };
