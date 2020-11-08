@@ -40,6 +40,12 @@ const StringInput = ({
     }
   };
 
+  const setCursorPos = (pos) => {
+    setTimeout(() => {
+      inputRef.current.setSelectionRange(pos, pos);
+    }, 20);
+  };
+
   /**
    *
    * @param {*} e : Event
@@ -49,7 +55,8 @@ const StringInput = ({
    * - Also handles if the string is manipulated from middle
    */
   const handleBackSpace = (e) => {
-    const { selectionEnd } = e.target;
+    const { selectionEnd, selectionStart } = e.target;
+    console.log({ selectionEnd, selectionStart });
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
       const lastToken = tokens[tokens?.length - 2];
@@ -69,12 +76,29 @@ const StringInput = ({
     // -- START :: Handle backspacing when cursor is in between
     const stringBeforeCursor = tokenValue.substring(0, selectionEnd);
     const stringAfterCursor = tokenValue.slice(selectionEnd);
+
+    const tokenStringForStringBeforeCursor = stringToTokenString(stringBeforeCursor, options);
+
+    // -- IF the string before cursor is a token
+    if (tokenStringForStringBeforeCursor.endsWith('__TOKEN__')) {
+      e.preventDefault();
+      const splitTokens = tokenString.split(/__TOKEN__(.*?)__TOKEN__/g);
+      const lastToken = splitTokens[splitTokens.length - 2];
+      const newTokenValue = `${stringBeforeCursor.slice(0, -(lastToken.length))}${stringAfterCursor}`;
+      const newTokenizedString = stringToTokenString(newTokenValue, options);
+      setTokenString(newTokenizedString);
+      setCursorPos(selectionEnd - lastToken.length);
+      return;
+    }
+
+
     const newTokenValue = `${stringBeforeCursor.slice(
       0,
       -1,
     )}${stringAfterCursor}`;
     const newTokenizedString = stringToTokenString(newTokenValue, options);
     setTokenString(newTokenizedString);
+    setCursorPos(selectionEnd - 1);
     // -- END :: Handle backspacing when cursor is in between
   };
 
