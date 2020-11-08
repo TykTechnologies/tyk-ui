@@ -132,7 +132,8 @@
   color: blueviolet;
 }
 
-.invalid_token{
-  background-color: brown;
-  color: white;
+.invalid_token {
+  border: 0.1px solid red;
+  border-radius: 5px;
+  pointer-events: all;
 }
