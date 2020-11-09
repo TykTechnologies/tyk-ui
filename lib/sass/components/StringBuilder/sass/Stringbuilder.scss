@@ -112,6 +112,22 @@
   }
 }
 
+.invalid_token {
+  // border: 1px solid #EA4766;
+  // outline: 1px solid #EA4766;
+  // outline-style: auto;
+  box-shadow: 0px 0px 0px 1px #EA4766 inset;
+  border-radius: 5px;
+  pointer-events: all;
+  background: #FFBBC5;
+  color: #EA4766;
+  padding: 3px 0px;
+  .invalid_token--icon {
+    margin-left: 2px;
+    color: #EA4766;
+  }
+}
+
 .string-builder-footer {
   margin-top: 30px;
 }
@@ -124,15 +140,11 @@
   color: green;
 }
 
+
 // TODO :: Remove This 
 .data_source_argument {
   color: pink;
 }
 .data_source_object {
   color: blueviolet;
-}
-
-.invalid_token{
-  background-color: brown;
-  color: white;
 }

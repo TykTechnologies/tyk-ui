@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from '../../Tooltip';
-// import Button from '../../Button';
 
-export const TokenizedString = ({ tokens, options }) => {
-  const hasDuplicates = +new Set(tokens).size !== tokens.length;
+export const TokenizedString = (props) => {
+  const {
+    tokens, options,
+  } = props;
+
+  /**
+   * hasDuplicates : used to avoid duplicate keys in map :
+   * having duplicate tokens causes invalid renders.
+   * eg: http://alpaha.com/{{.agruments.id}}/id={{.arguments.id}}
+   * `{{.arguments.id}}` is repeated twice : maybe edge case but quite possible
+   */
+
+  const hasDuplicates = new Set(tokens).size !== tokens.length;
 
   const allTokens = tokens
     && tokens.map((token) => {
@@ -26,7 +36,6 @@ export const TokenizedString = ({ tokens, options }) => {
       const invalidToken = token.match(/({.*?})/g);
       if (invalidToken) {
         const splitTokens = token.split(invalidToken);
-        console.log({ token, splitTokens, invalidToken });
         return (
           <span key={`${token}${hasDuplicates && Math.random()}`}>
             <span>{splitTokens[0]}</span>
@@ -34,7 +43,9 @@ export const TokenizedString = ({ tokens, options }) => {
               render="invalid token detected"
               position="top"
             >
-              <span className="invalid_token">{invalidToken}</span>
+              <span className="invalid_token">
+                {invalidToken}
+              </span>
             </Tooltip>
             <span>{splitTokens[1]}</span>
           </span>

@@ -1,15 +1,9 @@
 /* eslint-disable no-debugger, no-console */ // TODO: REMOVE THIS
-/**
- * TODO :: Implementation
- * 1. Foreign item detection
- * 2. Mid string manipulation (block click and detect cursor position)
- */
 
 /**
  * TODO :: BUGS
-  * - Clear input and selection
-  * - Copy paste error : Support copy paste, cmd + c messes the input
-  * - Input with same tokens and backspacing
+  * - Invalid id styling messes up the next added token
+  * -
 */
 
 import React, { useEffect, useState, useRef } from 'react';
