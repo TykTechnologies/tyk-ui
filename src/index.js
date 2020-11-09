@@ -26,7 +26,6 @@ export { default as TextEllipsis } from './components/TextEllipsis';
 export { default as toast } from './components/Toast';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Table } from './components/Table';
-export { default as StringBuilder } from './components/StringBuilder';
 
 // -- Layout
 export { default as Column } from './layout/Column';
@@ -49,6 +48,7 @@ export { default as SelectableList } from './form/components/SelectableList';
 export { default as Textarea } from './form/components/Textarea';
 export { default as Toggle } from './form/components/Toggle';
 export { default as Pagination } from './form/components/Pagination';
+export { default as StringBuilder } from './components/StringBuilder';
 
 // -- Formik
 
@@ -66,6 +66,8 @@ export { default as FormikSelect } from './form/formik/FormikSelect';
 export { default as FormikSelectableList } from './form/formik/FormikSelectableList';
 export { default as FormikTextarea } from './form/formik/FormikTextarea';
 export { default as FormikToggle } from './form/formik/FormikToggle';
+export { default as FormikStringBuilder } from './form/formik/FormikStringBuilder';
+
 
 // Redux - Form
 
