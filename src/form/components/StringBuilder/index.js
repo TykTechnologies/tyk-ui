@@ -9,7 +9,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import { usePrevious } from '../../hooks';
+import { usePrevious } from '../../../hooks';
 
 
 import { StringInput } from './js/string-input';
