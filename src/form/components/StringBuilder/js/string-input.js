@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger, no-console */ // TODO: REMOVE THIS
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { stringToTokenString } from './service';
@@ -18,23 +18,25 @@ const StringInput = ({
   showOptions,
   options,
   setTokenValue,
+  inputRef,
+  setInputInFocus,
+  invalidTokenRegex,
 }) => {
   const [contextMaxLength, setContentMaxLength] = useState(
     tokenValue.length + 5,
   );
   const [isPasteEvent, setIsPasteEvent] = useState(false);
-  const inputRef = useRef();
 
   useEffect(() => {
     // Set height if initial value exists
     if (tokenValue) {
-      setStringBuilderHeight(`${inputRef.current.scrollHeight + 20}px`);
+      setStringBuilderHeight(inputRef.current.scrollHeight + 20);
     }
   }, []);
 
   const autoGrow = (e) => {
     if (contextMaxLength - 1 < tokenValue.length) {
-      const newHeight = `${e.target.scrollHeight + 3}px`;
+      const newHeight = e.target.scrollHeight + 3;
       setStringBuilderHeight(newHeight);
       setContentMaxLength(contextMaxLength + 15);
     }
@@ -55,17 +57,22 @@ const StringInput = ({
    * - Also handles if the string is manipulated from middle
    */
   const handleBackSpace = (e) => {
-    const { selectionEnd, selectionStart } = e.target;
-    console.log({ selectionEnd, selectionStart });
+    const { selectionEnd } = e.target;
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
       const lastToken = tokens[tokens?.length - 2];
       const lastCharsInString = tokenValue.slice(-lastToken?.length);
-      if (lastToken === lastCharsInString) {
+      if (lastToken === lastCharsInString && !invalidTokenRegex) {
         e.preventDefault();
         setTokenString(
           tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length),
         );
+        return;
+      }
+      if (invalidTokenRegex) {
+        const newTokenValue = tokenValue.slice(0, -1);
+        const newTokenStr = stringToTokenString(newTokenValue, options);
+        setTokenString(newTokenStr);
         return;
       }
       setTokenString(tokenString.slice(0, -1));
@@ -170,6 +177,11 @@ const StringInput = ({
     addCharacterToTokenString(newTokenString, selectionStart);
   };
 
+  const handleOnFocus = () => {
+    setInputInFocus(true);
+    setShowOptions(false);
+  };
+
   return (
     <textarea
       spellCheck={false}
@@ -181,9 +193,11 @@ const StringInput = ({
       onKeyUp={autoGrow}
       placeholder={placeholder}
       ref={inputRef}
-      style={{ height: stringBuilderHeight }}
+      style={{ height: `${stringBuilderHeight}px` }}
       maxLength={contextMaxLength}
       onPaste={handlePasteEvent}
+      onFocus={handleOnFocus}
+      onBlur={() => setInputInFocus(false)}
     />
   );
 };
@@ -199,6 +213,7 @@ StringInput.propTypes = {
   setStringBuilderHeight: PropTypes.func,
   setTokenString: PropTypes.func,
   setTokenValue: PropTypes.func,
+  setInputInFocus: PropTypes.func,
   showOptions: PropTypes.bool,
   tokens: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(
@@ -209,6 +224,8 @@ StringInput.propTypes = {
       desc: PropTypes.string,
     }),
   ),
+  inputRef: PropTypes.element,
+  invalidTokenRegex: PropTypes.string,
 };
 
 export { StringInput };

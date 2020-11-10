@@ -4,7 +4,7 @@ import Tooltip from '../../../../components/Tooltip';
 
 export const TokenizedString = (props) => {
   const {
-    tokens, options,
+    tokens, options, disabled, invalidTokenRegex,
   } = props;
 
   /**
@@ -19,8 +19,27 @@ export const TokenizedString = (props) => {
   const allTokens = tokens
     && tokens.map((token) => {
       if (options) {
-        // if token matches option
         const matchedOption = options.find(option => option.id === token);
+        // if invalid token
+        if (invalidTokenRegex && !matchedOption) {
+          const invalidToken = token.match(invalidTokenRegex);
+          if (invalidToken) {
+            if (invalidToken.length === 1) {
+              const splitTokens = token.split(invalidToken);
+              return (
+                <span key={`${token}${hasDuplicates && Math.random()}`}>
+                  <span>{splitTokens[0]}</span>
+                  <Tooltip render="invalid token detected" position="top">
+                    <span className="invalid_token">{invalidToken}</span>
+                  </Tooltip>
+                  <span>{splitTokens[1]}</span>
+                </span>
+              );
+            }
+          }
+        }
+        // if token matches option
+
         if (matchedOption) {
           return (
             <span
@@ -32,33 +51,24 @@ export const TokenizedString = (props) => {
           );
         }
       }
-      // if invalid token
-      const invalidToken = token.match(/({.*?})/g);
-      if (invalidToken) {
-        const splitTokens = token.split(invalidToken);
-        return (
-          <span key={`${token}${hasDuplicates && Math.random()}`}>
-            <span>{splitTokens[0]}</span>
-            <Tooltip
-              render="invalid token detected"
-              position="top"
-            >
-              <span className="invalid_token">
-                {invalidToken}
-              </span>
-            </Tooltip>
-            <span>{splitTokens[1]}</span>
-          </span>
-        );
-      }
       return (
         <span key={`${token}${hasDuplicates && Math.random()}`}>{token}</span>
       );
     });
-  return <div className="string-builder__styled">{allTokens}</div>;
+  return (
+    <div
+      className={`string-builder__styled ${
+        disabled && 'string-builder__disabled'
+      }`}
+    >
+      {allTokens}
+    </div>
+  );
 };
 
 TokenizedString.propTypes = {
   tokens: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  disabled: PropTypes.bool,
+  invalidTokenRegex: PropTypes.string,
 };

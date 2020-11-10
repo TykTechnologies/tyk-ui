@@ -26,6 +26,10 @@ export const OptionsList = ({
     setFilteredOptions(newFilteredOptions);
   }, [filterValue]);
 
+  useEffect(() => {
+    setFilteredOptions(options);
+  }, [options]);
+
   if (!showOptions) {
     return null;
   }
@@ -89,6 +93,6 @@ OptionsList.propTypes = {
   handleOptionSelection: PropTypes.func,
   getThemeClasses: PropTypes.func,
   setShowOptions: PropTypes.func,
-  containerRef: PropTypes.instanceOf(Object),
+  containerRef: PropTypes.element,
   allowSearch: PropTypes.bool,
 };

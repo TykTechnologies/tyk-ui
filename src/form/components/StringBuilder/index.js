@@ -2,19 +2,19 @@
 
 /**
  * TODO :: BUGS
-  * - Invalid id styling messes up the next added token
-  * -
-*/
+ * - Invalid id styling messes up the next added token
+ * -
+ */
 
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { usePrevious } from '../../../hooks';
 
-
 import { StringInput } from './js/string-input';
 import { TokenizedString } from './js/tokenized-string';
 import { OptionsList } from './js/options-list';
+import { StringBuilderFooter } from './js/string-builder-footer';
 import { stringToTokenString } from './js/service';
 
 /**
@@ -40,17 +40,22 @@ const StringBuilder = (props) => {
     placeholder,
     allowSearch,
     dropdownTriggerKey,
+    invalidTokenRegex,
   } = props;
   const [tokenValue, setTokenValue] = useState(value);
   const [stringBuilderHeight, setStringBuilderHeight] = useState('');
   const [showOptions, setShowOptions] = useState(false);
-  const [tokenString, setTokenString] = useState(stringToTokenString(value, options));
+  const [tokenString, setTokenString] = useState(
+    stringToTokenString(value, options),
+  );
   const [tokens, setTokens] = useState([]);
   const [prevTokenValue, setPrevTokenValue] = useState();
+  const [inputInFocus, setInputInFocus] = useState(false);
 
   const prevTokenString = usePrevious(tokenString);
 
   const containerRef = useRef();
+  const inputRef = useRef();
 
   // Execute callback on value change
   useEffect(() => {
@@ -58,6 +63,10 @@ const StringBuilder = (props) => {
       onChange(tokenValue);
     }
   }, [tokenValue]);
+
+  useEffect(() => {
+    setTokenValue(value);
+  }, [value]);
 
   /**
    * Split string into tokens and set string value w/o __TOKEN__
@@ -71,7 +80,6 @@ const StringBuilder = (props) => {
     setPrevTokenValue(splitTokensStr);
   }, [tokenString]);
 
-
   /**
    *
    * @param {*} option : Option object for selected option from dropdown
@@ -84,9 +92,14 @@ const StringBuilder = (props) => {
       /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
       newInput = prevTokenString + tokenValue.split(prevTokenValue)[1];
     }
-    const tokenizedString = `${newInput || tokenValue}__TOKEN__${option.id}__TOKEN__`;
+    const tokenizedString = `${newInput || tokenValue}__TOKEN__${
+      option.id
+    }__TOKEN__`;
     setTokenString(tokenizedString);
     setShowOptions(false);
+    setTimeout(() => {
+      inputRef.current.focus();
+    }, 20);
   };
 
   const getThemeClasses = () => {
@@ -99,20 +112,25 @@ const StringBuilder = (props) => {
     ...getThemeClasses(),
     error && 'has-error',
     disabled && 'disabled',
-  ].filter(Boolean).join(' ');
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <div className="string-builder" ref={containerRef}>
-      {label && (
-        <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
-      )}
       <div className={getCssClasses()}>
+        {label && (
+          <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
+        )}
         <div className="tyk-form-control__wrapper">
           <div
-            className="tyk-form-control"
-            style={{ height: stringBuilderHeight }}
+            className={`tyk-form-control ${
+              disabled && 'string-builder__disabled'
+            }`}
+            style={{ height: `${stringBuilderHeight}px` }}
           >
             <StringInput
+              setInputInFocus={setInputInFocus}
               setShowOptions={setShowOptions}
               tokenValue={tokenValue}
               disabled={disabled}
@@ -127,10 +145,14 @@ const StringBuilder = (props) => {
               showOptions={showOptions}
               options={options}
               setTokenValue={setTokenValue}
+              inputRef={inputRef}
+              invalidTokenRegex={invalidTokenRegex}
             />
             <TokenizedString
               tokens={tokens}
               options={options}
+              disabled={disabled}
+              invalidTokenRegex={invalidTokenRegex}
             />
             <OptionsList
               showOptions={showOptions}
@@ -141,12 +163,13 @@ const StringBuilder = (props) => {
               setShowOptions={setShowOptions}
               allowSearch={allowSearch}
             />
-            <div style={{ marginTop: stringBuilderHeight || '30px' }}>
-              {note && <p className="tyk-form-control__help-block">{note}</p>}
-              {error && error !== 'true' && error !== 'false' && (
-                <p className="tyk-form-control__error-message">{error}</p>
-              )}
-            </div>
+            <StringBuilderFooter
+              error={error}
+              note={note}
+              inputInFocus={inputInFocus}
+              stringBuilderHeight={stringBuilderHeight}
+              dropdownTriggerKey={dropdownTriggerKey}
+            />
           </div>
         </div>
       </div>
@@ -156,16 +179,18 @@ const StringBuilder = (props) => {
 
 StringBuilder.propTypes = {
   /** Options to render in the list */
-  options: PropTypes.arrayOf(PropTypes.shape({
-    /** id is the value that will be appended to the string on selection */
-    id: PropTypes.string.isRequired,
-    /** name of option (view) */
-    name: PropTypes.string.isRequired,
-    /** to style / highlight the token */
-    className: PropTypes.string,
-    /** description of option */
-    desc: PropTypes.string,
-  })),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** id is the value that will be appended to the string on selection */
+      id: PropTypes.string.isRequired,
+      /** name of option (view) */
+      name: PropTypes.string.isRequired,
+      /** to style / highlight the token */
+      className: PropTypes.string,
+      /** description of option */
+      desc: PropTypes.string,
+    }),
+  ),
   /** Callback executed on change of string value */
   onChange: PropTypes.func,
   /** Initial value */
@@ -186,6 +211,8 @@ StringBuilder.propTypes = {
   placeholder: PropTypes.string,
   /** Key To trigger dropdown */
   dropdownTriggerKey: PropTypes.string,
+  /** Regex to detect invalid tokens */
+  invalidTokenRegex: PropTypes.string,
   /** Allow users to search from options */
   allowSearch: PropTypes.bool,
 };

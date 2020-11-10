@@ -48,7 +48,7 @@ export { default as SelectableList } from './form/components/SelectableList';
 export { default as Textarea } from './form/components/Textarea';
 export { default as Toggle } from './form/components/Toggle';
 export { default as Pagination } from './form/components/Pagination';
-export { default as StringBuilder } from './components/StringBuilder';
+export { default as StringBuilder } from './form/components/StringBuilder';
 
 // -- Formik
 

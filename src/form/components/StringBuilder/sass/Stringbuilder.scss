@@ -41,9 +41,14 @@
   border: none;
   word-wrap: break-word;
   word-break: break-all;
-
+  
 }
 
+.string-builder__disabled{
+  background-color: $form-control-disabled-background-color !important;
+  color: $form-control-disabled-color;
+  cursor: not-allowed;
+}
 
 
 .url-builder__options_name {
@@ -126,6 +131,13 @@
     margin-left: 2px;
     color: #EA4766;
   }
+}
+
+.string_builder_trigger {
+  background-color: $form-control-disabled-background-color;
+  border-radius: 5px;
+  padding: 1px 6px;
+  margin: 0px 4px;
 }
 
 .string-builder-footer {
