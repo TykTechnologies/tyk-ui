@@ -14,7 +14,7 @@ export const StringBuilderFooter = (props) => {
           : '30px',
       }}
     >
-      {inputInFocus && (
+      {inputInFocus && !error && (
         <p className="tyk-form-control__help-block">
           <span>
             Enter

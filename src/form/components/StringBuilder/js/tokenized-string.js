@@ -9,7 +9,7 @@ export const TokenizedString = (props) => {
 
   /**
    * hasDuplicates : used to avoid duplicate keys in map :
-   * having duplicate tokens causes invalid renders.
+   * having duplicate tokens causes invalid unpredictable react renders.
    * eg: http://alpaha.com/{{.agruments.id}}/id={{.arguments.id}}
    * `{{.arguments.id}}` is repeated twice : maybe edge case but quite possible
    */
@@ -70,5 +70,5 @@ TokenizedString.propTypes = {
   tokens: PropTypes.arrayOf(PropTypes.string),
   options: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   disabled: PropTypes.bool,
-  invalidTokenRegex: PropTypes.string,
+  invalidTokenRegex: PropTypes.instanceOf(RegExp),
 };

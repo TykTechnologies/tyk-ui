@@ -123,7 +123,7 @@
   // outline-style: auto;
   box-shadow: 0px 0px 0px 1px #EA4766 inset;
   border-radius: 5px;
-  pointer-events: all;
+  // pointer-events: all;
   background: #FFBBC5;
   color: #EA4766;
   padding: 3px 0px;
@@ -141,7 +141,12 @@
 }
 
 .string-builder-footer {
-  padding: none;
+  > .tyk-form-control__error-message {
+    padding: 0px !important;
+  }
+  > .tyk-form-control__help-block{
+    padding: 0px !important;
+  }
 }
 
 .string-builder-search {

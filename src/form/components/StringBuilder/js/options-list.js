@@ -93,6 +93,6 @@ OptionsList.propTypes = {
   handleOptionSelection: PropTypes.func,
   getThemeClasses: PropTypes.func,
   setShowOptions: PropTypes.func,
-  containerRef: PropTypes.element,
+  containerRef: PropTypes.instanceOf(Object),
   allowSearch: PropTypes.bool,
 };

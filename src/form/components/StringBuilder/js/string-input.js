@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger, no-console */ // TODO: REMOVE THIS
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -22,10 +21,8 @@ const StringInput = ({
   setInputInFocus,
   invalidTokenRegex,
   name,
+  contextMaxLength,
 }) => {
-  const [contextMaxLength, setContentMaxLength] = useState(
-    tokenValue.length + 5,
-  );
   const [isPasteEvent, setIsPasteEvent] = useState(false);
 
   useEffect(() => {
@@ -34,14 +31,6 @@ const StringInput = ({
       setStringBuilderHeight(inputRef.current.scrollHeight + 20);
     }
   }, []);
-
-  const autoGrow = (e) => {
-    if (contextMaxLength - 1 < tokenValue.length) {
-      const newHeight = e.target.scrollHeight + 3;
-      setStringBuilderHeight(newHeight);
-      setContentMaxLength(contextMaxLength + 15);
-    }
-  };
 
   /**
    *
@@ -57,7 +46,7 @@ const StringInput = ({
     if (selectionEnd === tokenValue.length) {
       const lastToken = tokens[tokens?.length - 2];
       const lastCharsInString = tokenValue.slice(-lastToken?.length);
-      if (lastToken === lastCharsInString && !invalidTokenRegex) {
+      if (lastToken === lastCharsInString) {
         e.preventDefault();
         setTokenString(
           tokenString.slice(0, -`__TOKEN__${lastCharsInString}__TOKEN__`.length),
@@ -174,7 +163,6 @@ const StringInput = ({
 
   const handleOnFocus = () => {
     setInputInFocus(true);
-    // setShowOptions(false);
   };
 
   return (
@@ -183,9 +171,8 @@ const StringInput = ({
       disabled={disabled}
       className="string-builder__input"
       value={tokenValue}
-      onChange={handleOnChange}
-      onKeyDown={handleKeyDown}
-      onKeyUp={autoGrow}
+      onChange={e => handleOnChange(e)}
+      onKeyDown={e => handleKeyDown(e)}
       placeholder={placeholder}
       name={name}
       ref={inputRef}
@@ -204,7 +191,7 @@ StringInput.propTypes = {
   disabled: PropTypes.bool,
   placeholder: PropTypes.string,
   tokenString: PropTypes.string,
-  stringBuilderHeight: PropTypes.string,
+  stringBuilderHeight: PropTypes.number,
   dropdownTriggerKey: PropTypes.string,
   setStringBuilderHeight: PropTypes.func,
   setTokenString: PropTypes.func,
@@ -220,9 +207,10 @@ StringInput.propTypes = {
       desc: PropTypes.string,
     }),
   ),
-  inputRef: PropTypes.element,
-  invalidTokenRegex: PropTypes.string,
+  inputRef: PropTypes.instanceOf(Object),
+  invalidTokenRegex: PropTypes.instanceOf(RegExp),
   name: PropTypes.string,
+  contextMaxLength: PropTypes.number,
 };
 
 export { StringInput };

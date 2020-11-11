@@ -3,9 +3,9 @@
 <StringBuilder
   allowSearch
   // disabled
-  error="you have an error"
+  // error="you have an error"
   label="URL Builder"
-  value="http://helloWorld.com/{{.object.name}}/ALPHA/{id}"
+  value="http://helloWorld.com/{{.object.name}}"
   placeholder="Please enter your url"
   onChange={(v) => console.log("Value", {v})}
   theme="default rounded-corners"

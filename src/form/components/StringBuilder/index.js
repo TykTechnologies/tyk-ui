@@ -1,11 +1,3 @@
-/* eslint-disable no-debugger, no-console */ // TODO: REMOVE THIS
-
-/**
- * TODO :: BUGS
- * - Invalid id styling messes up the next added token
- * - Error State render
- */
-
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
@@ -44,10 +36,13 @@ const StringBuilder = (props) => {
     name,
   } = props;
   const [tokenValue, setTokenValue] = useState(value);
-  const [stringBuilderHeight, setStringBuilderHeight] = useState('');
+  const [stringBuilderHeight, setStringBuilderHeight] = useState();
   const [showOptions, setShowOptions] = useState(false);
   const [tokenString, setTokenString] = useState(
     stringToTokenString(value, options),
+  );
+  const [contextMaxLength, setContentMaxLength] = useState(
+    tokenValue.length + 5,
   );
   const [tokens, setTokens] = useState([]);
   const [prevTokenValue, setPrevTokenValue] = useState();
@@ -80,6 +75,15 @@ const StringBuilder = (props) => {
     setTokenValue(splitTokensStr);
     setPrevTokenValue(splitTokensStr);
   }, [tokenString]);
+
+  useEffect(() => {
+    // Auto Grow Input
+    if (contextMaxLength - 3 < tokenValue.length) {
+      const newHeight = inputRef.current.scrollHeight + 3;
+      setStringBuilderHeight(newHeight);
+      setContentMaxLength(contextMaxLength + 25);
+    }
+  }, [tokenString, tokenValue]);
 
   /**
    *
@@ -165,6 +169,8 @@ const StringBuilder = (props) => {
               inputRef={inputRef}
               invalidTokenRegex={invalidTokenRegex}
               name={name}
+              contextMaxLength={contextMaxLength}
+              setContentMaxLength={setContentMaxLength}
             />
             <TokenizedString
               tokens={tokens}
@@ -230,7 +236,7 @@ StringBuilder.propTypes = {
   /** Key To trigger dropdown */
   dropdownTriggerKey: PropTypes.string,
   /** Regex to detect invalid tokens */
-  invalidTokenRegex: PropTypes.string,
+  invalidTokenRegex: PropTypes.instanceOf(RegExp),
   /** Allow users to search from options */
   allowSearch: PropTypes.bool,
   name: PropTypes.string,
