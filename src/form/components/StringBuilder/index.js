@@ -3,7 +3,7 @@
 /**
  * TODO :: BUGS
  * - Invalid id styling messes up the next added token
- * -
+ * - Error State render
  */
 
 import React, { useEffect, useState, useRef } from 'react';
@@ -15,7 +15,7 @@ import { StringInput } from './js/string-input';
 import { TokenizedString } from './js/tokenized-string';
 import { OptionsList } from './js/options-list';
 import { StringBuilderFooter } from './js/string-builder-footer';
-import { stringToTokenString } from './js/service';
+import { stringToTokenString, setCursorPos } from './js/service';
 
 /**
  * - String builder component used to build one single string using the given options.
@@ -41,6 +41,7 @@ const StringBuilder = (props) => {
     allowSearch,
     dropdownTriggerKey,
     invalidTokenRegex,
+    name,
   } = props;
   const [tokenValue, setTokenValue] = useState(value);
   const [stringBuilderHeight, setStringBuilderHeight] = useState('');
@@ -88,9 +89,25 @@ const StringBuilder = (props) => {
    */
   const handleOptionSelection = (option) => {
     let newInput = '';
+    const { selectionStart } = inputRef.current;
     if (prevTokenString && prevTokenString !== value) {
       /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
       newInput = prevTokenString + tokenValue.split(prevTokenValue)[1];
+    }
+    // Adding token in Middle
+    if (selectionStart !== tokenValue.length) {
+      const newTokenValue = tokenValue.slice(0, selectionStart)
+        + option.id
+        + tokenValue.slice(selectionStart);
+
+      const newTokenizedString = stringToTokenString(newTokenValue, options);
+      setTokenString(newTokenizedString);
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 20);
+      setShowOptions(false);
+      setCursorPos(inputRef, selectionStart + option.id.length);
+      return;
     }
     const tokenizedString = `${newInput || tokenValue}__TOKEN__${
       option.id
@@ -147,6 +164,7 @@ const StringBuilder = (props) => {
               setTokenValue={setTokenValue}
               inputRef={inputRef}
               invalidTokenRegex={invalidTokenRegex}
+              name={name}
             />
             <TokenizedString
               tokens={tokens}
@@ -215,6 +233,7 @@ StringBuilder.propTypes = {
   invalidTokenRegex: PropTypes.string,
   /** Allow users to search from options */
   allowSearch: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 StringBuilder.defaultProps = {

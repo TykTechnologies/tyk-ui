@@ -7,6 +7,7 @@ export const StringBuilderFooter = (props) => {
   } = props;
   return (
     <div
+      className="string-builder-footer"
       style={{
         marginTop: stringBuilderHeight
           ? `${stringBuilderHeight - 8}px`

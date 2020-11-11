@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { stringToTokenString } from './service';
+import { stringToTokenString, setCursorPos } from './service';
 
 const StringInput = ({
   setShowOptions,
@@ -21,6 +21,7 @@ const StringInput = ({
   inputRef,
   setInputInFocus,
   invalidTokenRegex,
+  name,
 }) => {
   const [contextMaxLength, setContentMaxLength] = useState(
     tokenValue.length + 5,
@@ -40,12 +41,6 @@ const StringInput = ({
       setStringBuilderHeight(newHeight);
       setContentMaxLength(contextMaxLength + 15);
     }
-  };
-
-  const setCursorPos = (pos) => {
-    setTimeout(() => {
-      inputRef.current.setSelectionRange(pos, pos);
-    }, 20);
   };
 
   /**
@@ -94,7 +89,7 @@ const StringInput = ({
       const newTokenValue = `${stringBeforeCursor.slice(0, -(lastToken.length))}${stringAfterCursor}`;
       const newTokenizedString = stringToTokenString(newTokenValue, options);
       setTokenString(newTokenizedString);
-      setCursorPos(selectionEnd - lastToken.length);
+      setCursorPos(inputRef, selectionEnd - lastToken.length);
       return;
     }
 
@@ -105,7 +100,7 @@ const StringInput = ({
     )}${stringAfterCursor}`;
     const newTokenizedString = stringToTokenString(newTokenValue, options);
     setTokenString(newTokenizedString);
-    setCursorPos(selectionEnd - 1);
+    setCursorPos(inputRef, selectionEnd - 1);
     // -- END :: Handle backspacing when cursor is in between
   };
 
@@ -179,7 +174,7 @@ const StringInput = ({
 
   const handleOnFocus = () => {
     setInputInFocus(true);
-    setShowOptions(false);
+    // setShowOptions(false);
   };
 
   return (
@@ -192,6 +187,7 @@ const StringInput = ({
       onKeyDown={handleKeyDown}
       onKeyUp={autoGrow}
       placeholder={placeholder}
+      name={name}
       ref={inputRef}
       style={{ height: `${stringBuilderHeight}px` }}
       maxLength={contextMaxLength}
@@ -226,6 +222,7 @@ StringInput.propTypes = {
   ),
   inputRef: PropTypes.element,
   invalidTokenRegex: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export { StringInput };
