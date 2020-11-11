@@ -73,7 +73,7 @@ const StringInput = ({
     // -- IF the string before cursor is a token
     if (tokenStringForStringBeforeCursor.endsWith('__TOKEN__')) {
       e.preventDefault();
-      const splitTokens = tokenString.split(/__TOKEN__(.*?)__TOKEN__/g);
+      const splitTokens = tokenStringForStringBeforeCursor.split(/__TOKEN__(.*?)__TOKEN__/g);
       const lastToken = splitTokens[splitTokens.length - 2];
       const newTokenValue = `${stringBeforeCursor.slice(0, -(lastToken.length))}${stringAfterCursor}`;
       const newTokenizedString = stringToTokenString(newTokenValue, options);
