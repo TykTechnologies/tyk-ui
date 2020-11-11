@@ -98,24 +98,19 @@ const StringBuilder = (props) => {
       /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
       newInput = prevTokenString + tokenValue.split(prevTokenValue)[1];
     }
+    let tokenizedString = '';
     // Adding token in Middle
     if (selectionStart !== tokenValue.length) {
       const newTokenValue = tokenValue.slice(0, selectionStart)
         + option.id
         + tokenValue.slice(selectionStart);
-
-      const newTokenizedString = stringToTokenString(newTokenValue, options);
-      setTokenString(newTokenizedString);
-      setTimeout(() => {
-        inputRef.current.focus();
-      }, 20);
-      setShowOptions(false);
+      tokenizedString = stringToTokenString(newTokenValue, options);
       setCursorPos(inputRef, selectionStart + option.id.length);
-      return;
+    } else {
+      tokenizedString = `${newInput || tokenValue}__TOKEN__${
+        option.id
+      }__TOKEN__`;
     }
-    const tokenizedString = `${newInput || tokenValue}__TOKEN__${
-      option.id
-    }__TOKEN__`;
     setTokenString(tokenizedString);
     setShowOptions(false);
     setTimeout(() => {
@@ -235,7 +230,7 @@ StringBuilder.propTypes = {
   placeholder: PropTypes.string,
   /** Key To trigger dropdown */
   dropdownTriggerKey: PropTypes.string,
-  /** Regex to detect invalid tokens */
+  /** Regex to detect invalid tokens in the value */
   invalidTokenRegex: PropTypes.instanceOf(RegExp),
   /** Allow users to search from options */
   allowSearch: PropTypes.bool,
