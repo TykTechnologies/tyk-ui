@@ -2,7 +2,6 @@
 
 .string-builder{
   position: relative;
-  // overflow: auto;
   display: block;
 }
 
@@ -30,14 +29,8 @@
   position: absolute;
   pointer-events: none;
   width: calc(100% - 35px);
-  // width: 100%;
-  // top: calc(100% - 26px); // INPUT
-  // top: calc(100% - -2px); // TA
-  // left: 2px; // TA
-  // left: 24px; // INPUT
   color: transparent;
   z-index: 2;
-  // white-space: pre;
   border: none;
   word-wrap: break-word;
   word-break: break-all;
@@ -63,14 +56,14 @@
   display: flex;
   flex-direction: column;
   border: $general-border-width solid $form-default-color;
-  background-color: white;
+  background-color: #ffffff;
 
   &.tyk-form-group--rounded-corners {
     border-radius: $general-border-radius;
   }
 
   .string-builder-search {
-    background-color: white;
+    background-color: #ffffff;
     position: sticky;
     top: 0;
     padding: map-get($spacing, 'sm') map-get($spacing, 'md');
@@ -84,7 +77,6 @@
     max-height: 255px;
 
     li {
-      // display: flex;
       cursor: pointer;
       padding: 9px map-get($spacing, 'md');
       transition: all .2s;
@@ -93,11 +85,6 @@
       &:hover,
       &.active {
         background-color: $form-default-color;
-      }
-
-      &.disabled {
-        color: red; 
-        background-color: red;
       }
 
       + li {
@@ -118,18 +105,15 @@
 }
 
 .invalid_token {
-  // border: 1px solid #EA4766;
-  // outline: 1px solid #EA4766;
-  // outline-style: auto;
-  box-shadow: 0px 0px 0px 1px #EA4766 inset;
+  box-shadow: 0px 0px 0px 1px theme-color('danger', 'dark') inset;
   border-radius: 5px;
-  // pointer-events: all;
-  background: #FFBBC5;
-  color: #EA4766;
+  background: theme-color('danger', 'light');
+  color: theme-color('danger', 'dark');
   padding: 3px 0px;
+  pointer-events: all;
   .invalid_token--icon {
     margin-left: 2px;
-    color: #EA4766;
+    color: theme-color('danger', 'dark');
   }
 }
 
@@ -158,7 +142,7 @@
 }
 
 
-// TODO :: Remove This 
+// NOTE :: FOR DEMO ONLY
 .data_source_argument {
   color: pink;
 }
