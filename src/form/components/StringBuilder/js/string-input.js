@@ -53,8 +53,9 @@ const StringInput = ({
         );
         return;
       }
-      if (invalidTokenRegex) {
-        const newTokenValue = tokenValue.slice(0, -1);
+      if (tokenValue.endsWith('      ')) {
+        const invalidToken = tokenValue.match(invalidTokenRegex);
+        const newTokenValue = tokenValue.slice(0, -`  ${invalidToken[0]}      `.length);
         const newTokenStr = stringToTokenString(newTokenValue, options);
         setTokenString(newTokenStr);
         return;
@@ -79,6 +80,17 @@ const StringInput = ({
       const newTokenizedString = stringToTokenString(newTokenValue, options);
       setTokenString(newTokenizedString);
       setCursorPos(inputRef, selectionEnd - lastToken.length);
+      return;
+    }
+
+    const invalidToken = stringBeforeCursor.match(invalidTokenRegex);
+    // If Token is Invalid Token
+    if (invalidToken.length === 1) {
+      e.preventDefault();
+      const newTokenValue = `${stringBeforeCursor.replaceAll(invalidTokenRegex, '').trim()}${stringAfterCursor}`;
+      const newTokenizedString = stringToTokenString(newTokenValue, options);
+      setTokenString(newTokenizedString);
+      setCursorPos(inputRef, selectionEnd - `  ${invalidToken[0]}      `.length);
       return;
     }
 

@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from '../../../../components/Tooltip';
+import InvalidToken from './invalid-token';
+// import Tooltip from '../../../../components/Tooltip';
+// import Icon from '../../../../components/Icon';
 
 export const TokenizedString = (props) => {
   const {
-    tokens, options, disabled, invalidTokenRegex,
+    tokens,
+    options,
+    disabled,
+    invalidTokenRegex,
+    findInvalidTokenSubstitute,
   } = props;
 
   /**
@@ -22,20 +28,24 @@ export const TokenizedString = (props) => {
         const matchedOption = options.find(option => option.id === token);
         // if invalid token
         if (invalidTokenRegex && !matchedOption) {
-          const invalidToken = token.match(invalidTokenRegex);
-          if (invalidToken) {
-            if (invalidToken.length === 1) {
-              const splitTokens = token.split(invalidToken);
-              return (
-                <span key={`${token}${hasDuplicates && Math.random()}`}>
-                  <span>{splitTokens[0]}</span>
-                  <Tooltip render="invalid token detected" position="top">
-                    <span className="invalid_token">{invalidToken}</span>
-                  </Tooltip>
-                  <span>{splitTokens[1]}</span>
-                </span>
-              );
-            }
+          const matchedTokens = token.replaceAll(' ', '').split(invalidTokenRegex);
+          console.log({ matchedTokens, token });
+          if (matchedTokens?.length > 1) {
+            return (
+              <span key={`${token}${hasDuplicates && Math.random()}`}>
+                {matchedTokens.map((tkn) => {
+                  if (tkn.match(invalidTokenRegex)) {
+                    return (
+                      <InvalidToken
+                        token={tkn}
+                        findInvalidTokenSubstitute={findInvalidTokenSubstitute}
+                      />
+                    );
+                  }
+                  return (<span>{`${tkn} `}</span>);
+                })}
+              </span>
+            );
           }
         }
         // if token matches option
@@ -71,4 +81,5 @@ TokenizedString.propTypes = {
   options: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
   disabled: PropTypes.bool,
   invalidTokenRegex: PropTypes.instanceOf(RegExp),
+  findInvalidTokenSubstitute: PropTypes.func,
 };

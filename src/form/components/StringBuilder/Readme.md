@@ -5,12 +5,13 @@
   // disabled
   // error="you have an error"
   label="URL Builder"
-  value="http://helloWorld.com/{{.object.name}}"
+  // value="http://helloWorld.com/{{.object.name}}/{id}/asasd/{{.object.location}}"
+  value="http://helloWorld.com/{{.object.name}}/{name}/asdka/{id}"
   placeholder="Please enter your url"
   onChange={(v) => console.log("Value", {v})}
   theme="default rounded-corners"
   dropdownTriggerKey="{"
-  invalidTokenRegex={/({.*?})/g}
+  invalidTokenRegex={/({\w.*?\w})/g}
   options={[
   {
     "id": "{{.arguments.userId}}",

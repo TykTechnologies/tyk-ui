@@ -11,9 +11,15 @@ export const OptionsList = ({
   getThemeClasses,
   setShowOptions,
   allowSearch,
+  initialSearchValue,
 }) => {
-  const [filterValue, setFilterValue] = useState('');
+  console.log({ initialSearchValue });
+  const [filterValue, setFilterValue] = useState(initialSearchValue);
   const [filteredOptions, setFilteredOptions] = useState(options);
+
+  useEffect(() => {
+    setFilterValue(initialSearchValue);
+  }, [initialSearchValue]);
 
   useEffect(() => {
     if (filterValue === '') {
@@ -95,4 +101,5 @@ OptionsList.propTypes = {
   setShowOptions: PropTypes.func,
   containerRef: PropTypes.instanceOf(Object),
   allowSearch: PropTypes.bool,
+  initialSearchValue: PropTypes.string,
 };

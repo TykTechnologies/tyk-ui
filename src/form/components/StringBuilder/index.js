@@ -35,18 +35,19 @@ const StringBuilder = (props) => {
     invalidTokenRegex,
     name,
   } = props;
-  const [tokenValue, setTokenValue] = useState(value);
+  const newVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
+  const [tokenValue, setTokenValue] = useState(newVal);
   const [stringBuilderHeight, setStringBuilderHeight] = useState();
   const [showOptions, setShowOptions] = useState(false);
-  const [tokenString, setTokenString] = useState(
-    stringToTokenString(value, options),
-  );
+  const [tokenString, setTokenString] = useState(stringToTokenString(newVal, options));
   const [contextMaxLength, setContentMaxLength] = useState(
     tokenValue.length + 5,
   );
   const [tokens, setTokens] = useState([]);
   const [prevTokenValue, setPrevTokenValue] = useState();
   const [inputInFocus, setInputInFocus] = useState(false);
+  const [initialSearchValue, setInitialSearchValue] = useState('');
+  const [selectedInvalidToken, setSelectedInvalidToken] = useState(null);
 
   const prevTokenString = usePrevious(tokenString);
 
@@ -56,12 +57,14 @@ const StringBuilder = (props) => {
   // Execute callback on value change
   useEffect(() => {
     if (onChange) {
-      onChange(tokenValue);
+      onChange(tokenValue.replaceAll(' ', ''));
     }
   }, [tokenValue]);
 
   useEffect(() => {
-    setTokenValue(value);
+    const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
+    setTokenValue(tempVal);
+    setTokenString(stringToTokenString(tempVal, options));
   }, [value]);
 
   /**
@@ -94,13 +97,13 @@ const StringBuilder = (props) => {
   const handleOptionSelection = (option) => {
     let newInput = '';
     const { selectionStart } = inputRef.current;
-    if (prevTokenString && prevTokenString !== value) {
+    if (prevTokenString && prevTokenString !== value && !selectedInvalidToken) {
       /* eslint prefer-destructuring: ["error", {VariableDeclarator: {object: true}}] */
       newInput = prevTokenString + tokenValue.split(prevTokenValue)[1];
     }
     let tokenizedString = '';
     // Adding token in Middle
-    if (selectionStart !== tokenValue.length) {
+    if (selectionStart !== tokenValue.length && !selectedInvalidToken) {
       const newTokenValue = tokenValue.slice(0, selectionStart)
         + option.id
         + tokenValue.slice(selectionStart);
@@ -110,6 +113,15 @@ const StringBuilder = (props) => {
       tokenizedString = `${newInput || tokenValue}__TOKEN__${
         option.id
       }__TOKEN__`;
+    }
+    if (selectedInvalidToken) {
+      tokenizedString = tokenString.replace(
+        `  ${selectedInvalidToken}      `,
+        `__TOKEN__${option.id}__TOKEN__`,
+      );
+      setSelectedInvalidToken(null);
+      setInitialSearchValue('');
+      // return;
     }
     setTokenString(tokenizedString);
     setShowOptions(false);
@@ -131,6 +143,12 @@ const StringBuilder = (props) => {
   ]
     .filter(Boolean)
     .join(' ');
+
+  const findInvalidTokenSubstitute = (invalidToken) => {
+    setSelectedInvalidToken(invalidToken);
+    setInitialSearchValue(invalidToken.replace(/[^a-zA-Z ]/g, ''));
+    setShowOptions(true);
+  };
 
   return (
     <div className="string-builder" ref={containerRef}>
@@ -172,6 +190,7 @@ const StringBuilder = (props) => {
               options={options}
               disabled={disabled}
               invalidTokenRegex={invalidTokenRegex}
+              findInvalidTokenSubstitute={findInvalidTokenSubstitute}
             />
             <OptionsList
               showOptions={showOptions}
@@ -181,6 +200,7 @@ const StringBuilder = (props) => {
               getThemeClasses={getThemeClasses}
               setShowOptions={setShowOptions}
               allowSearch={allowSearch}
+              initialSearchValue={initialSearchValue}
             />
             <StringBuilderFooter
               error={error}
