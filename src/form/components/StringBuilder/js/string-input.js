@@ -55,7 +55,7 @@ const StringInput = ({
       }
       if (tokenValue.endsWith('      ')) {
         const invalidToken = tokenValue.match(invalidTokenRegex);
-        const newTokenValue = tokenValue.slice(0, -`  ${invalidToken[0]}      `.length);
+        const newTokenValue = tokenValue.slice(0, -`  ${invalidToken[invalidToken.length - 1]}      `.length);
         const newTokenStr = stringToTokenString(newTokenValue, options);
         setTokenString(newTokenStr);
         return;
@@ -85,7 +85,7 @@ const StringInput = ({
 
     const invalidToken = stringBeforeCursor.match(invalidTokenRegex);
     // If Token is Invalid Token
-    if (invalidToken.length === 1) {
+    if (invalidToken?.length === 1) {
       e.preventDefault();
       const newTokenValue = `${stringBeforeCursor.replaceAll(invalidTokenRegex, '').trim()}${stringAfterCursor}`;
       const newTokenizedString = stringToTokenString(newTokenValue, options);
