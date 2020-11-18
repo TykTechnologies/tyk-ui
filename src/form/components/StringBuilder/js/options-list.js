@@ -13,7 +13,6 @@ export const OptionsList = ({
   allowSearch,
   initialSearchValue,
 }) => {
-  console.log({ initialSearchValue });
   const [filterValue, setFilterValue] = useState(initialSearchValue);
   const [filteredOptions, setFilteredOptions] = useState(options);
 

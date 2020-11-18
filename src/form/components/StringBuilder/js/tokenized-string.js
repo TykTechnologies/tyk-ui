@@ -29,7 +29,6 @@ export const TokenizedString = (props) => {
         // if invalid token
         if (invalidTokenRegex && !matchedOption) {
           const matchedTokens = token.replaceAll(' ', '').split(invalidTokenRegex);
-          console.log({ matchedTokens, token });
           if (matchedTokens?.length > 1) {
             return (
               <span key={`${token}${hasDuplicates && Math.random()}`}>
