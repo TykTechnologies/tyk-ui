@@ -35,11 +35,10 @@ const StringBuilder = (props) => {
     invalidTokenRegex,
     name,
   } = props;
-  const newVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
-  const [tokenValue, setTokenValue] = useState(newVal);
+  const [tokenValue, setTokenValue] = useState(value);
   const [stringBuilderHeight, setStringBuilderHeight] = useState();
   const [showOptions, setShowOptions] = useState(false);
-  const [tokenString, setTokenString] = useState(stringToTokenString(newVal, options));
+  const [tokenString, setTokenString] = useState(stringToTokenString(value, options));
   const [contextMaxLength, setContentMaxLength] = useState(
     tokenValue.length + 5,
   );
@@ -62,9 +61,11 @@ const StringBuilder = (props) => {
   }, [tokenValue]);
 
   useEffect(() => {
-    const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
-    setTokenValue(tempVal);
-    setTokenString(stringToTokenString(tempVal, options));
+    if (invalidTokenRegex) {
+      const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
+      setTokenValue(tempVal);
+      setTokenString(stringToTokenString(tempVal, options));
+    }
   }, [value]);
 
   /**

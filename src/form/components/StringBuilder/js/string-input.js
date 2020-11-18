@@ -85,7 +85,7 @@ const StringInput = ({
 
     const invalidToken = stringBeforeCursor.match(invalidTokenRegex);
     // If Token is Invalid Token
-    if (invalidToken?.length === 1) {
+    if (invalidToken?.[0] && invalidToken.length === 1) {
       e.preventDefault();
       const newTokenValue = `${stringBeforeCursor.replaceAll(invalidTokenRegex, '').trim()}${stringAfterCursor}`;
       const newTokenizedString = stringToTokenString(newTokenValue, options);
@@ -93,7 +93,6 @@ const StringInput = ({
       setCursorPos(inputRef, selectionEnd - `  ${invalidToken[0]}      `.length);
       return;
     }
-
 
     const newTokenValue = `${stringBeforeCursor.slice(
       0,
