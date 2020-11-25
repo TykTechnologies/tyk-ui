@@ -122,7 +122,6 @@ const StringBuilder = (props) => {
       );
       setSelectedInvalidToken(null);
       setInitialSearchValue('');
-      // return;
     }
     setTokenString(tokenizedString);
     setShowOptions(false);

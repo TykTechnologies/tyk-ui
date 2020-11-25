@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InvalidToken from './invalid-token';
-// import Tooltip from '../../../../components/Tooltip';
-// import Icon from '../../../../components/Icon';
 
 export const TokenizedString = (props) => {
   const {
