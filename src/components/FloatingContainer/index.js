@@ -34,7 +34,8 @@ function FloatingContainer(props) {
      */
     displayAxis = 'vertical',
     /**
-     * The distance between the element and the floating container. It can be positive or negative.
+     * The distance between the element and the floating container.
+     * It can be positive or negative.
      */
     offset = 0,
     className,

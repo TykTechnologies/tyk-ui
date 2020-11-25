@@ -67,7 +67,8 @@ function Combobox2(props) {
     renderListItem,
     /** A custom component that will be used to display the entire content of the dropdown. */
     renderList: renderListProp,
-    /** Alias for `renderList` used for backwards compatibility with the old Combobox component. */
+    /** Alias for `renderList`
+     * used for backwards compatibility with the old Combobox component. */
     CustomListComponent,
     onChange = () => {},
     /** Config object passed to the internal floating container component. */
