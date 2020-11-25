@@ -1,6 +1,6 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
@@ -78,18 +78,18 @@
     "lodash": "^4.17.15",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
+    "react": "^17.0.0",
     "react-ace": "^6.6.0",
     "react-datetime": "^2.16.3",
     "react-datetime-picker": "^2.9.0",
     "react-docgen": "^4.1.1",
-    "react-dom": "^16.13.0",
+    "react-dom": "^17.0.0",
     "react-fast-compare": "^3.0.1",
     "react-transition-group": "^2.9.0",
     "resize-observer-polyfill": "^1.5.1"
   },
   "peerDependencies": {
-    "react": "^16.8.5",
-    "react-dom": "^16.8.5"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   }
 }

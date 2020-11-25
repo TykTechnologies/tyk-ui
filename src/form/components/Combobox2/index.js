@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+simport React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import ResizeObserver from 'resize-observer-polyfill';
@@ -24,31 +24,29 @@ function getValueFromProp(value, values) {
 }
 
 /**
- * Dropdown-like component that can display selected values as regular text, tags,
- * or in a custom way.
+ * Dropdown-like component that can display selected values as regular text,
+ *  tags, or in a custom way.
  * You can select values from a list or type in new ones.
  */
 function Combobox2(props) {
   const {
-    /** The value of the component. It can be a string,
-     * an array, or an object with an `id` property.
-     * */
+    /** The value of the component. It can be a string, an array,
+     *  or an object with an `id` property. */
     value: propValue,
     /** An array of selectable values. */
     values: propValues = [],
-    /** If set to `single` it will display the values
-     * on a single line with an ellipsis at the end.
-     * */
+    /** If set to `single` it will display the values on a single line
+     *  with an ellipsis at the end. */
     valueOverflow = 'single',
     label = '',
     labelwidth,
-    /** Enables the display of values as `Pill` components
-     * that can be removed without opening the dropdown. */
+    /** Enables the display of values as `Pill` components that can be
+     *  removed without opening the dropdown. */
     tags = false,
     /** A list of characters that will trigger the creation of a tag when typed. */
     tagSeparators = [' ', 'Enter'],
-    /** If set to true a tag will be created whenever the component
-     *  loses focus and there is something typed in. */
+    /** If set to true a tag will be created whenever the component loses focus
+     *  and there is something typed in. */
     addTagOnBlur = false,
     /** The number of values that can be selected. */
     max: maxProp,
@@ -76,8 +74,8 @@ function Combobox2(props) {
     /** Config object passed to the internal floating container component. */
     floatingContainerConfig,
     /**
-     * If set to `true` whenever the user clicks on the
-     * dropdown trigger the selected values container
+     * If set to `true` whenever the user clicks on the dropdown trigger
+     * the selected values container
      * will expand to show all selected values instead of opening the dropdown.
      */
     expandMode,
@@ -91,11 +89,12 @@ function Combobox2(props) {
      * label - A string displayed as the select all option
      * show - It can be one of `['always', 'notSameState']`.
      *    `always` means the option will always be displayed.
-     *    `notSameState` means it will be displayed
-     *     only if the list items are not all with the same state (depending on the `mode` value)
-     * mode - It can be one of `['select', 'unselect']` and
-     *     makes sense only when the `show` property is `notSameState`
-     *    `select` means the select all option will only be displayed if not all items are selected
+     *    `notSameState` means it will be displayed only if the list items are
+     * not all with the same state (depending on the `mode` value)
+     * mode - It can be one of `['select', 'unselect']` and makes sense only
+     * when the `show` property is `notSameState`
+     *    `select` means the select all option will only be displayed if not all
+     * items are selected
      *    `unselect` means the option will be displayed if no items are selected
      */
     selectAll,
