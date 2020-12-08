@@ -65,3 +65,11 @@ $component-images-path: "~@tyk-technologies/tyk-ui/lib/images/";
 ```md
 NOTE : For projects that don't SASS but just pure css we are also exposing the compiled styles.
 ```
+### Testing on local 
+
+- You can test the changes on your local dev environment by replacing the your `@tyk-technologies/tyk-ui/lib` with newly built lib 
+
+eg 
+```md
+cp -a lib/. /Users/me/go/src/github.com/TykTechnologies/tyk-analytics/webclient/node_modules/@tyk-technologies/tyk-ui/lib
+```
