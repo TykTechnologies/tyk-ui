@@ -135,7 +135,10 @@ value.maxHeight
 value.styling.className
 ```
 - You can customize the table wrapper using this
-
+##### Existing classes
+- `tyk-table__wrapper`, this will wrap your table with borders
+- `tyk-table__wrapper--no-border`, will remove wrapping borders
+- `tyk-table__wrapper--no-innner-right-borders`, will remove the right border of `th` and `td`
 
 ### Interactive Table Component
 ```jsx

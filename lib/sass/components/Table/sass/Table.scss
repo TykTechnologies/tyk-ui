@@ -17,6 +17,13 @@
       &--no-border {
         border: none
       }
+
+      &--no-innner-right-borders {
+        & .tyk-table > thead th,
+        & .tyk-table > tbody td {
+          border-right: none;
+        }
+      }
     }
 
     > thead th {
