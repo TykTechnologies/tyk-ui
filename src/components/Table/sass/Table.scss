@@ -18,7 +18,7 @@
         border: none
       }
 
-      &.no-innner-right-borders {
+      &.no-innner-horizontal-borders {
         & .tyk-table > thead th,
         & .tyk-table > tbody td {
           border-right: none;

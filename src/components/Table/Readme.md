@@ -138,7 +138,7 @@ value.styling.className
 ##### Existing classes
 - `tyk-table__wrapper`, this will wrap your table with borders
 - `tyk-table__wrapper--no-border`, will remove wrapping borders
-- `tyk-table__wrapper no-innner-right-borders`, will remove the right border of `th` and `td`
+- `tyk-table__wrapper no-innner-horizontal-borders`, will remove the horizontal border of `th` and `td`
 
 ### Interactive Table Component
 ```jsx
@@ -342,7 +342,7 @@ const config = {
   },
   maxHeight: '320px',
   styling: {
-    className: 'tyk-table__wrapper no-innner-right-borders',
+    className: 'tyk-table__wrapper no-innner-horizontal-borders',
   },
 };
 
