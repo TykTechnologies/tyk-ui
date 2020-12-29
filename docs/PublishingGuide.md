@@ -13,6 +13,10 @@ npm run build-prod
 npm i
 ```
 
+```static
+git add . 
+```
+
 - Commit and Push changes
 ```static
 git commit -m "bump version"
