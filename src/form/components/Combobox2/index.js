@@ -102,6 +102,7 @@ function Combobox2(props) {
     closeOnSelect,
     /** Toggles the display of the search input from the dropdown. */
     showSearch = false,
+    ...restProps
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
@@ -401,6 +402,7 @@ function Combobox2(props) {
       ref={rootRef}
       tabIndex={disabled ? '-1' : '0'}
       onClickCapture={onClickCapture}
+      {...restProps}
     >
       {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
