@@ -8,7 +8,7 @@ import AccordionContext from './js/AccordionContext';
 
 const Accordion = (props) => {
   const {
-    className = 'aaa',
+    className,
     children,
     usearrowastrigger,
     arrow = { position: 'right', expandToContent: false },
