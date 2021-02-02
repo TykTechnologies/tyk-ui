@@ -156,6 +156,7 @@ const StringInput = ({
   };
 
   const handlePasteEvent = (e) => {
+    e.preventDefault();
     const { clipboardData } = e;
     const { selectionStart, selectionEnd } = e.target;
     setIsPasteEvent(true);
