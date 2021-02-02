@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
 import ItemTrigger from './AccordionItemTrigger';
 
-const AccordionItem = (props) => {
+const AccordionItem = forwardRef((props, ref) => {
   const {
     collapsed,
     children,
@@ -44,7 +44,7 @@ const AccordionItem = (props) => {
   };
 
   return (
-    <div className={getCssClasses()}>
+    <div ref={ref} className={getCssClasses()}>
       <AccordionItemContext.Provider
         value={{
           collapsed: collapsedState,
@@ -59,7 +59,7 @@ const AccordionItem = (props) => {
       </AccordionItemContext.Provider>
     </div>
   );
-};
+});
 
 AccordionItem.propTypes = {
   children: PropTypes.oneOfType([

@@ -40,7 +40,7 @@ const Collapsible = (props) => {
   };
 
   useEffect(() => {
-    if (!collapsed && refContainerSize?.height) {
+    if (!collapsed) {
       setHeight(refContainerSize.height);
     }
   }, [refContainerSize.height]);
