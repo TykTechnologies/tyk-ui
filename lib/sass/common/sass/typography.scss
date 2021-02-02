@@ -103,6 +103,9 @@ label {
   &--info {
     color: theme-color('info', 'base');
   }
+  &-warning {
+    color: theme-color('warning', 'base');
+  }
   &--medium {
     font-family: $font-family-medium;
   }

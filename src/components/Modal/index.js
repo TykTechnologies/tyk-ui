@@ -71,7 +71,9 @@ export default class Modal extends Component {
   }
 
   render() {
-    const { children, opened } = this.props;
+    const {
+      children, opened, onClose, size, ...restProps
+    } = this.props;
 
     return (
       <Fragment>
@@ -82,7 +84,7 @@ export default class Modal extends Component {
               timeout={100}
               classNames="appear"
             >
-              <div className={this.getCssClasses()}>
+              <div className={this.getCssClasses()} {...restProps}>
                 <div className={`tyk-modal__dialog ${this.getModalSize()}`}>
                   <div className="tyk-modal__content">
                     <ModalContext.Provider
