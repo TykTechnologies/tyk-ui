@@ -398,11 +398,11 @@ function Combobox2(props) {
   ].join(' ');
   return (
     <div
-      className={getCssClasses()}
       ref={rootRef}
       tabIndex={disabled ? '-1' : '0'}
       onClickCapture={onClickCapture}
       {...restProps}
+      className={getCssClasses()}
     >
       {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
