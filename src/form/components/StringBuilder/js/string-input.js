@@ -62,7 +62,6 @@ const StringInput = ({
       setCursorPos(inputRef, selectionEnd);
       return;
     }
-    // eslint-disable-next-line
     const newTokenValue = `${stringBeforeCursor}${stringAfterCursor.substr(1)}`;
     const newTokenizedString = stringToTokenString(newTokenValue, options);
     setTokenString(newTokenizedString);
