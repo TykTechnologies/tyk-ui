@@ -35,6 +35,43 @@ const StringInput = ({
   /**
    *
    * @param {*} e : Event
+   * Handle delete event (fn + delete on mac)
+   */
+
+  const handleDelete = (e) => {
+    const { selectionEnd } = e.target;
+    if (selectionEnd === tokenValue.length) {
+      // - Cursor is at the end of input
+      return;
+    }
+
+    const stringBeforeCursor = tokenValue.substring(0, selectionEnd);
+    const stringAfterCursor = tokenValue.slice(selectionEnd);
+
+    const tokenStringForStringAfterCursor = stringToTokenString(
+      stringAfterCursor,
+      options,
+    );
+    if (tokenStringForStringAfterCursor.startsWith('__TOKEN__')) {
+      // If string before delete is a token
+      const splitTokens = tokenStringForStringAfterCursor.split(/__TOKEN__(.*?)__TOKEN__/g).filter(t => t !== '');
+      const firstToken = splitTokens[0];
+      const newTokenValue = `${stringBeforeCursor}${stringAfterCursor.substr(firstToken.length)}`;
+      const newTokenizedString = stringToTokenString(newTokenValue, options);
+      setTokenString(newTokenizedString);
+      setCursorPos(inputRef, selectionEnd);
+      return;
+    }
+    // eslint-disable-next-line
+    const newTokenValue = `${stringBeforeCursor}${stringAfterCursor.substr(1)}`;
+    const newTokenizedString = stringToTokenString(newTokenValue, options);
+    setTokenString(newTokenizedString);
+    setCursorPos(inputRef, selectionEnd);
+  };
+
+  /**
+   *
+   * @param {*} e : Event
    * Handle backspace event
    * - If the last thing added by user was a token prevent default and
    * remove the entire token instead of single character, else continue with default behaviour
@@ -134,6 +171,10 @@ const StringInput = ({
     if (key === 'Backspace') {
       e.preventDefault();
       handleBackSpace(e);
+    }
+    if (key === 'Delete') {
+      e.preventDefault();
+      handleDelete(e);
     }
     if (e.metaKey && key === 'x') {
       setTokenString('');

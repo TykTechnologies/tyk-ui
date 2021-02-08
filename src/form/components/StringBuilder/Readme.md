@@ -7,7 +7,7 @@
   label="URL Builder"
   // value="http://helloWorld.com/{{.object.name}}/{id}/asasd/{{.object.location}}"
   // value="http://helloWorld.com/{{.object.name}}/{name}/asdka/{id}"
-  value="https://petstore.swagger.io/v2/pet/{{.arguments.id}}"
+  value="https://petstore.swagger.io/v2/pet/{{.arguments.id}}/XdXd/{{.arguments.id}}"
   placeholder="Please enter your url"
   onChange={(v) => console.log("Value", {v})}
   theme="default rounded-corners"
