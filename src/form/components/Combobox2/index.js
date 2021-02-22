@@ -440,7 +440,13 @@ function Combobox2(props) {
               onClick={executeTriggerAction}
               onKeyPress={executeTriggerAction}
             >
-              <Icon family="tykon" type="arrowdown" />
+              {expandMode
+                ? (
+                  <Icon type={valuesExpanded ? 'compress-arrows-alt' : 'expand-arrows-alt'} />
+                )
+                : (
+                  <Icon family="tykon" type="arrowdown" />
+                )}
             </div>
           )}
         </div>
