@@ -18,7 +18,7 @@ const Collapsible = (props) => {
   const contentContainer = useRef(null);
   const collapseWrapper = useRef(null);
   const [contentContainerStyle, setContentContainerStyle] = useState({
-    height: 'auto',
+    height: (collapsed) ? 0 : 'auto',
   });
 
   const refContainerSize = useComponentSize(contentContainer);
@@ -38,12 +38,6 @@ const Collapsible = (props) => {
   const onExit = () => {
     setHeight(0);
   };
-
-  useEffect(() => {
-    const height = (collapsed) ? 0 : getHeight();
-
-    setHeight(height);
-  }, []);
 
   useEffect(() => {
     if (!collapsed) {

@@ -144,7 +144,7 @@ function Combobox2(props) {
   }
 
   function getFilteredValues() {
-    const defaultFn = (v, s) => v.name.toLowerCase().includes(s);
+    const defaultFn = (v, s) => v?.name?.toLowerCase()?.includes(s);
     const fn = matchItemFn || defaultFn;
     const filteredValues = values.filter(v => fn(v, searchValue.toLowerCase()));
     return filteredValues;
@@ -398,11 +398,11 @@ function Combobox2(props) {
   ].join(' ');
   return (
     <div
-      className={getCssClasses()}
       ref={rootRef}
       tabIndex={disabled ? '-1' : '0'}
       onClickCapture={onClickCapture}
       {...restProps}
+      className={getCssClasses()}
     >
       {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>

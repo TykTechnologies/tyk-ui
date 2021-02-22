@@ -61,11 +61,9 @@ const StringBuilder = (props) => {
   }, [tokenValue]);
 
   useEffect(() => {
-    if (invalidTokenRegex) {
-      const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
-      setTokenValue(tempVal);
-      setTokenString(stringToTokenString(tempVal, options));
-    }
+    const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
+    setTokenValue(tempVal);
+    setTokenString(stringToTokenString(tempVal, options));
   }, [value]);
 
   /**
