@@ -60,6 +60,7 @@ initialState = {
   note="Some note on the combobox"
   theme="default inline rounded-corners"
   placeholder="Please select a value"
+  required
 />
 ```
 ```js
@@ -273,7 +274,6 @@ const CustomComponent = React.forwardRef((props, ref) => {
     handleListItemClick,
     getListItemCssClasses,
   } = props;
-  console.log(':::', props);
 
   return (
     <div className={className} ref={ref}>
