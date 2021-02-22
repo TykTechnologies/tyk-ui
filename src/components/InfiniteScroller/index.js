@@ -61,7 +61,9 @@ const InfiniteScroller = (props) => {
     }
 
     return () => {
-      containerRef.current.removeEventListener('scroll', scrollHandler);
+      if (containerRef && containerRef.current) {
+        containerRef.current.removeEventListener('scroll', scrollHandler);
+      }
     };
   }, [containerRef, scrollHandler]);
 
