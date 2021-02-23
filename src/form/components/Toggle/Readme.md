@@ -79,6 +79,7 @@ class TestToggle extends Component {
               value={active}
               onChange={this.toggleOnChange}
               theme="warning"
+              size="lg"
             >
               <Toggle.Item
                 label="Option"

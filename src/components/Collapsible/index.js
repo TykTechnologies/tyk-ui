@@ -13,6 +13,7 @@ const Collapsible = (props) => {
     className,
     collapsed,
     children,
+    ...rest
   } = props;
 
   const contentContainer = useRef(null);
@@ -67,6 +68,7 @@ const Collapsible = (props) => {
         style={contentContainerStyle}
       >
         <div
+          {...rest}
           className={className}
           ref={contentContainer}
         >

@@ -244,6 +244,7 @@
     color: $toggle-list-text-color;
     text-transform: uppercase;
     z-index: 2;
+    border: 2px solid transparent;
 
     &:first-child {
       border-top-left-radius: 25px;
@@ -284,7 +285,7 @@
 
     .tyk-toggle__list--single &--active {
       label {
-        padding-left: 30px;
+        padding-left: 25px;
         padding-right: 45px;
 
         .tyk-toggle__item-notch {
@@ -317,7 +318,7 @@
   }
 
   &--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
-    padding-left: map-get($spacing, 'md');
+    padding-left: 17px;
     padding-right: 35px;
 
     .tyk-toggle__item-notch {
@@ -350,7 +351,7 @@
   }
 
   &--lg .tyk-toggle__list--single .tyk-toggle__item--active label {
-    padding-left: 30px;
+    padding-left: 25px;
     padding-right: 45px;
 
     .tyk-toggle__item-notch {

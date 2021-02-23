@@ -58,10 +58,10 @@ class Column extends PureComponent {
   }
 
   render() {
-    const { children, id } = this.props;
+    const { children, id, ...props } = this.props;
 
     return (
-      <div className={this.getCssClasses()} id={id}>
+      <div {...props} className={this.getCssClasses()} id={id}>
         { children }
       </div>
     );

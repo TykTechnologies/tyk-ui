@@ -26,6 +26,22 @@ class ToastCreator {
       this.createNotification(message, options);
     }
   }
+
+  danger(message, options) {
+    this.notify(message, { ...options, theme: 'danger' });
+  }
+
+  success(message, options) {
+    this.notify(message, { ...options, theme: 'success' });
+  }
+
+  warning(message, options) {
+    this.notify(message, { ...options, theme: 'warning' });
+  }
+
+  info(message, options) {
+    this.notify(message, { ...options, theme: 'info' });
+  }
 }
 
 const toast = new ToastCreator();
