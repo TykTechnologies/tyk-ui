@@ -102,6 +102,9 @@ function Combobox2(props) {
     closeOnSelect,
     /** Toggles the display of the search input from the dropdown. */
     showSearch = false,
+    /** If it is required and can only select one value once you have something
+     * selected you will not be able to deselect */
+    required = false,
     ...restProps
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
@@ -193,6 +196,7 @@ function Combobox2(props) {
 
   function removeTag(id) {
     const listValueIndex = values.findIndex(lv => lv.id === id);
+    if (required && max === 1) return;
     if (listValueIndex !== -1) {
       setValues([
         ...values.slice(0, listValueIndex),
@@ -206,8 +210,10 @@ function Combobox2(props) {
   function selectValue({ id }) {
     const val = values.find(v => v.id === id);
     if (val.selected) {
-      updateValue(value.filter(v => v.id !== val.id));
-      setValues(values.map(v => (v.id === val.id ? { ...v, selected: false } : v)));
+      if (!required || max !== 1) {
+        updateValue(value.filter(v => v.id !== val.id));
+        setValues(values.map(v => (v.id === val.id ? { ...v, selected: false } : v)));
+      }
     } else if (value.length < max) {
       updateValue([...value, val]);
       setValues(values.map(v => (v.id === val.id ? { ...v, selected: true } : v)));
@@ -440,7 +446,13 @@ function Combobox2(props) {
               onClick={executeTriggerAction}
               onKeyPress={executeTriggerAction}
             >
-              <Icon family="tykon" type="arrowdown" />
+              {expandMode
+                ? (
+                  <Icon type={valuesExpanded ? 'compress-arrows-alt' : 'expand-arrows-alt'} />
+                )
+                : (
+                  <Icon family="tykon" type="arrowdown" />
+                )}
             </div>
           )}
         </div>
@@ -531,6 +543,7 @@ Combobox2.propTypes = {
   ]),
   closeOnSelect: PropTypes.bool,
   showSearch: PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 export default Combobox2;

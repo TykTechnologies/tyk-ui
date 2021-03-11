@@ -265,7 +265,7 @@ const Chart = (props) => {
         tykChartInstance.dispose();
       }
     };
-  }, []);
+  }, [chartWrapperRef.current]);
 
   const eventCallBack = (e) => {
     if (onChange) {
@@ -297,6 +297,7 @@ const Chart = (props) => {
     };
   }, [eventCallBack, tykChartInstance]);
 
+  const prevInstance = usePrevious(tykChartInstance);
   const prevOption = usePrevious(option);
   const prevType = usePrevious(type);
   const prevSeries = usePrevious(series);
@@ -304,9 +305,10 @@ const Chart = (props) => {
     if (
       tykChartInstance
       && (
-        !fromJS(prevOption).equals(fromJS(option))
+        !fromJS(prevInstance)?.equals?.(fromJS(tykChartInstance))
+        || !fromJS(prevOption)?.equals?.(fromJS(option))
         || (prevType !== type)
-        || !fromJS(prevSeries).equals(fromJS(series))
+        || !fromJS(prevSeries).equals?.(fromJS(series))
       )
     ) {
       tykChartInstance.clear();
@@ -317,7 +319,7 @@ const Chart = (props) => {
         dataZoomSelectActive: true,
       });
     }
-  }, [option, series, type]);
+  }, [tykChartInstance, option, series, type]);
 
   useEffect(() => {
     if (tykChartInstance && highlight) {

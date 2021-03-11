@@ -14,7 +14,7 @@ module.exports = {
 	},
 	template: {
 		favicon: 'https://tyk.io/wp-content/uploads/2019/08/cropped-favicon-384x384.png'
-	}, 
+	},
 	webpackConfig: {
 		module: {
 			rules: [
