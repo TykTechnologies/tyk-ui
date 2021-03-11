@@ -13,6 +13,7 @@
     showLineNumbers: true,
     tabSize: 2
   }}
+  disableValidation
   value=""
 />
 ```
