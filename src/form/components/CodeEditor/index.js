@@ -15,6 +15,7 @@ import 'brace/theme/github';
 export default class CodeEditor extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    disableValidation: PropTypes.bool,
     id: PropTypes.string,
     error: PropTypes.oneOfType([
       PropTypes.string,
@@ -29,6 +30,7 @@ export default class CodeEditor extends Component {
     onChange: PropTypes.func,
     theme: PropTypes.string,
     value: PropTypes.string,
+    setOptions: PropTypes.instanceOf(Object),
   }
 
   constructor(props) {
@@ -116,7 +118,14 @@ export default class CodeEditor extends Component {
       id,
       label,
       note,
+      disableValidation = false,
+      setOptions = null,
     } = this.props;
+
+    const finalSetOptions = {
+      ...setOptions,
+      ...disableValidation && { useWorker: false },
+    };
 
     return (
       <Fragment>
@@ -134,6 +143,15 @@ export default class CodeEditor extends Component {
               onBlur={this.handleOnBlur}
               theme="github"
               editorProps={{ $blockScrolling: true }}
+              onLoad={(editorInstance) => {
+                // eslint-disable-next-line
+                editorInstance.container.style.resize = 'both';
+                // mouseup = css resize end
+                document.addEventListener('mouseup', () => (
+                  editorInstance.resize()
+                ));
+              }}
+              setOptions={finalSetOptions}
             />
             {
               note
