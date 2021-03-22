@@ -4,6 +4,8 @@ import 'brace';
 import AceEditor from 'react-ace';
 
 import 'brace/mode/javascript';
+import 'brace/mode/golang';
+import 'brace/mode/python';
 import 'brace/mode/css';
 import 'brace/mode/json';
 import 'brace/mode/xml';
