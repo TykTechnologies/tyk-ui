@@ -167,7 +167,11 @@ export default class Dropdown extends Component {
       return;
     }
 
-    const { scrollTop } = document.documentElement;
+    const scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop,
+      window.scrollY,
+    );
     const el = this.dropdownRef.current;
     const elHeight = el.clientHeight;
     const dropdownHeight = dropdownEl ? dropdownEl.clientHeight : 0;
