@@ -21,6 +21,8 @@ export default class Modal extends Component {
       PropTypes.node,
       PropTypes.string,
     ]),
+    /** If set on true, the Modal won't close when clicking on the overlay or by pressing ESC key */
+    disableCloseCommands: PropTypes.bool,
     /** If true the Modal will be by default opened */
     opened: PropTypes.bool,
     /** Callback method when the Modal is closed */
@@ -72,7 +74,7 @@ export default class Modal extends Component {
 
   render() {
     const {
-      children, opened, onClose, size, ...restProps
+      children, disableCloseCommands, opened, onClose, size, ...restProps
     } = this.props;
 
     return (
@@ -111,7 +113,7 @@ export default class Modal extends Component {
             >
               <button
                 className={this.getBackdropCssClasses()}
-                onClick={this.closeModal}
+                onClick={!disableCloseCommands && this.closeModal}
                 onKeyDown={() => {}}
                 type="button"
               />
