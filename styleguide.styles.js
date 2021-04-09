@@ -173,7 +173,9 @@ const styles = {
         fontSize: theme.fontSize.small,
         fontFamily: theme.fontFamily.monospace,
         marginLeft: rhythm(0.25),
-        opacity: 0.5
+        opacity: 0.5,
+        display: 'flex',
+        justifyContent: 'center'
       }
     },
     sidebar: {
