@@ -43,6 +43,7 @@ export default class Combobox extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     labelwidth: PropTypes.string,
     multiple: PropTypes.bool,

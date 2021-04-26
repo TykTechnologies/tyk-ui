@@ -16,6 +16,7 @@ export default class Select extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     labelwidth: PropTypes.string,
     name: PropTypes.string,

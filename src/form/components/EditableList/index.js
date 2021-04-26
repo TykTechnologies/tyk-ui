@@ -23,6 +23,7 @@ export default class EditableList extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     value: PropTypes.oneOfType([
       PropTypes.instanceOf(Array),

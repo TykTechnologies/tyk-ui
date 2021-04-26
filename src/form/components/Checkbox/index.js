@@ -27,6 +27,7 @@ export default class Checkbox extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     /** Set a name for checkbox */
     name: PropTypes.string,

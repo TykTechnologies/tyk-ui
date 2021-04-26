@@ -55,6 +55,7 @@ export default class Dropdown extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     listclassnames: PropTypes.string,
     onClose: PropTypes.func,

@@ -21,6 +21,7 @@ class Toggle extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     labelwidth: PropTypes.string,
     theme: PropTypes.string,

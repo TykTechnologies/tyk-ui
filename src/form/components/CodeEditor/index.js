@@ -28,6 +28,7 @@ export default class CodeEditor extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     labelwidth: PropTypes.string,
     mode: PropTypes.string,

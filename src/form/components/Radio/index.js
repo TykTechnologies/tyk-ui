@@ -20,6 +20,7 @@ export default class Radio extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     /** Set name for the radio input */
     name: PropTypes.string,

@@ -9,6 +9,7 @@ export default class ToggleItem extends Component {
       PropTypes.node,
       PropTypes.element,
       PropTypes.func,
+      PropTypes.string,
     ]),
     name: PropTypes.string,
     value: PropTypes.string,
