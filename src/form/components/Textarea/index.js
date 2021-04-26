@@ -6,7 +6,12 @@ export default class Textarea extends Component {
     disabled: PropTypes.bool,
     input: PropTypes.instanceOf(Object),
     error: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     labelwidth: PropTypes.string,
     name: PropTypes.string,
     note: PropTypes.string,

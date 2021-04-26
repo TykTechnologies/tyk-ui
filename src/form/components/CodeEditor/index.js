@@ -23,7 +23,12 @@ export default class CodeEditor extends Component {
       PropTypes.string,
       PropTypes.bool,
     ]),
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     labelwidth: PropTypes.string,
     mode: PropTypes.string,
     name: PropTypes.string,

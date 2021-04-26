@@ -38,7 +38,12 @@ export default class Combobox extends Component {
     disabled: PropTypes.bool,
     error: PropTypes.string,
     id: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     labelwidth: PropTypes.string,
     multiple: PropTypes.bool,
     max: PropTypes.number,

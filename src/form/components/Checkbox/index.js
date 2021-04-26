@@ -22,7 +22,12 @@ export default class Checkbox extends Component {
     ]),
     input: PropTypes.instanceOf(Object),
     /** Adds a label to checkbox */
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     /** Set a name for checkbox */
     name: PropTypes.string,
     /** Set initial value for checkbox */

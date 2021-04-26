@@ -117,7 +117,12 @@ List.propTypes = {
   selectAll: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
-      label: PropTypes.string,
+      label: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
+        PropTypes.element,
+        PropTypes.func,
+      ]),
       mode: PropTypes.oneOf(['select', 'unselect']),
       show: PropTypes.oneOf(['always', 'notSameState']),
       render: PropTypes.func,

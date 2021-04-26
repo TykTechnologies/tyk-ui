@@ -50,7 +50,12 @@ export default class Dropdown extends Component {
     className: PropTypes.string,
     display: PropTypes.string,
     hasCustomContent: PropTypes.bool,
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     listclassnames: PropTypes.string,
     onClose: PropTypes.func,
     onSelect: PropTypes.func,
