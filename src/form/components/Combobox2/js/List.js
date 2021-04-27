@@ -122,6 +122,7 @@ List.propTypes = {
         PropTypes.node,
         PropTypes.element,
         PropTypes.func,
+        PropTypes.string,
       ]),
       mode: PropTypes.oneOf(['select', 'unselect']),
       show: PropTypes.oneOf(['always', 'notSameState']),

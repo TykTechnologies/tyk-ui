@@ -258,6 +258,7 @@ DatePicker.propTypes = {
     PropTypes.node,
     PropTypes.element,
     PropTypes.func,
+    PropTypes.string,
   ]),
   labelwidth: PropTypes.string,
   note: PropTypes.string,

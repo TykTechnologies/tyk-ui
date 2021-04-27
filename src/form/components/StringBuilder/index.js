@@ -246,6 +246,7 @@ StringBuilder.propTypes = {
     PropTypes.node,
     PropTypes.element,
     PropTypes.func,
+    PropTypes.string,
   ]),
   /** Label Width for component */
   labelwidth: PropTypes.string,

@@ -8,6 +8,15 @@
 <h4>Heading four</h4>
 <h5>Heading five</h5>
 ```
+**Colors**
+```js
+<h3 className="text--success">Heading three</h3>
+<h3 className="text--danger">Heading three</h3>
+<h3 className="text--warning">Heading three</h3>
+<h3 className="text--default">Heading three</h3>
+<h3 className="text--default-light">Heading three</h3>
+<h3 className="text--primary">Heading three</h3>
+```
 **Dashboard Usage**
 ```js
 <h1>H1. Product Page Header</h1>
