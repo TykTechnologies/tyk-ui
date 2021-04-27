@@ -506,7 +506,13 @@ Combobox2.propTypes = {
   renderList: PropTypes.func,
   disabled: PropTypes.bool,
   error: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
   labelwidth: PropTypes.string,
   max: PropTypes.number,
   multiple: PropTypes.bool,
@@ -535,7 +541,13 @@ Combobox2.propTypes = {
   selectAll: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
-      label: PropTypes.string,
+      label: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
+        PropTypes.element,
+        PropTypes.func,
+        PropTypes.string,
+      ]),
       mode: PropTypes.oneOf(['select', 'unselect']),
       show: PropTypes.oneOf(['always', 'notSameState']),
       render: PropTypes.func,

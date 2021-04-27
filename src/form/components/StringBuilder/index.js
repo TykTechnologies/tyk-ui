@@ -241,7 +241,13 @@ StringBuilder.propTypes = {
   /** Footnote for component */
   note: PropTypes.string,
   /** Label for component */
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
   /** Label Width for component */
   labelwidth: PropTypes.string,
   /** Placeholder for component */

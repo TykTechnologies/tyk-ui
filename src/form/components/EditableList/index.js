@@ -18,7 +18,13 @@ export default class EditableList extends Component {
     error: PropTypes.string,
     config: PropTypes.instanceOf(Object),
     onChange: PropTypes.func,
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string,
+    ]),
     value: PropTypes.oneOfType([
       PropTypes.instanceOf(Array),
       PropTypes.instanceOf(Object),

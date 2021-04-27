@@ -15,7 +15,13 @@ export default class Radio extends Component {
     theme: PropTypes.string,
     input: PropTypes.instanceOf(Object),
     /** Adds label to the radio input */
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string,
+    ]),
     /** Set name for the radio input */
     name: PropTypes.string,
     /** If set to true removes margin by adding `no-margin` class */

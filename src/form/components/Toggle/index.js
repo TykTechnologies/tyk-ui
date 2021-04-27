@@ -16,7 +16,13 @@ class Toggle extends Component {
     disabled: PropTypes.bool,
     error: PropTypes.string,
     onChange: PropTypes.func,
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string,
+    ]),
     labelwidth: PropTypes.string,
     theme: PropTypes.string,
     type: PropTypes.string, // single || multiple

@@ -253,7 +253,13 @@ DatePicker.propTypes = {
   ]),
   disabled: PropTypes.bool,
   id: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
   labelwidth: PropTypes.string,
   note: PropTypes.string,
   onChange: PropTypes.oneOfType([

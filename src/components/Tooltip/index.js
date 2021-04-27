@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import PropTypes from 'prop-types';
 
 const Tooltip = ({
-  render, children, position = 'top', style,
+  render, children, position = 'top', style, ...props
 }) => {
   const [active, setActive] = useState(false);
 
@@ -87,6 +87,7 @@ const Tooltip = ({
         display: 'inline-block',
         ...style,
       }}
+      {...props}
     >
       {children}
     </span>

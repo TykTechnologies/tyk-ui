@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 export default class ToggleItem extends Component {
   static propTypes = {
     context: PropTypes.instanceOf(Object),
-    label: PropTypes.string,
+    label: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.node),
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.func,
+      PropTypes.string,
+    ]),
     name: PropTypes.string,
     value: PropTypes.string,
   };
