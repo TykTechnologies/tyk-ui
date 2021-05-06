@@ -520,3 +520,32 @@ import Icon from '../../../components/Icon';
   placeholder="Please select a value"
 />
 ```
+```js
+<Combobox2
+  values={[
+   {id: 201, name: '201'}
+  ]}
+  label="Validate that a tag is a number before adding the value"
+  tags={ true }
+  tagSeparators={[' ', 'Enter', ':', '@']}
+  name="combobox"
+  theme="default rounded-corners"
+  placeholder="Please select a value"
+  validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
+/>
+```
+
+```js
+<Combobox2
+  values={[
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  label="Validate that a tag is a number before adding the value"
+  multiple
+  name="combobox"
+  theme="default rounded-corners"
+  placeholder="Please select a value"
+  validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
+/>
+```

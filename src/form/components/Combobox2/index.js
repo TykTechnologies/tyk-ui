@@ -105,6 +105,10 @@ function Combobox2(props) {
     /** If it is required and can only select one value once you have something
      * selected you will not be able to deselect */
     required = false,
+    /** Validates newly added value before adding it to the selected values.
+     * Returns an error string in case of error otherwise it returns undefined
+     */
+    validateOnChange = () => { },
     ...restProps
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
@@ -128,6 +132,7 @@ function Combobox2(props) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpened, setIsOpened] = useState(false);
   const [valuesExpanded, setValuesExpanded] = useState(false);
+  const [localValidationError, setLocalValidationError] = useState('');
 
   function getThemeClasses() {
     const themes = theme ? theme.split(' ') : [];
@@ -139,7 +144,7 @@ function Combobox2(props) {
       'tyk-form-group',
       'tyk-combobox2',
       ...getThemeClasses(),
-      error && 'has-error',
+      (error || localValidationError) && 'has-error',
       labelwidth && 'tyk-form-group--label-has-width',
       disabled && 'disabled',
       expandMode && 'is-expand-mode',
@@ -171,9 +176,15 @@ function Combobox2(props) {
     if (newSearchValue && !isOpened) openDropdown();
   }
 
-  function updateValue(newValue) {
-    setValue(newValue);
-    onChange(max === 1 && !tags ? (newValue[0] || null) : newValue);
+  function isValidValue(newValues, lastValue) {
+    const localError = validateOnChange(newValues, lastValue);
+    setLocalValidationError(localError);
+    return localError === undefined;
+  }
+
+  function updateValue(newValues) {
+    setValue(newValues);
+    onChange(max === 1 && !tags ? (newValues[0] || null) : newValues);
   }
 
   function addTag(val) {
@@ -182,15 +193,26 @@ function Combobox2(props) {
     if (value.some(({ name }) => name === val)) return;
 
     const listValueIndex = values.findIndex(lv => lv.name === val);
+    let newValue;
+    let finalValues;
+
     if (listValueIndex === -1) {
-      if (allowCustomValues) updateValue([...value, { id: val, name: val }]);
+      if (allowCustomValues) {
+        newValue = { id: val, name: val };
+        finalValues = [...value, newValue];
+      }
     } else {
       setValues([
         ...values.slice(0, listValueIndex),
         { ...values[listValueIndex], selected: true },
         ...values.slice(listValueIndex + 1),
       ]);
-      updateValue([...value, values[listValueIndex]]);
+      newValue = values[listValueIndex];
+      finalValues = [...value, values[listValueIndex]];
+    }
+
+    if (isValidValue(finalValues, newValue)) {
+      updateValue(finalValues);
     }
   }
 
@@ -209,17 +231,25 @@ function Combobox2(props) {
 
   function selectValue({ id }) {
     const val = values.find(v => v.id === id);
+    let finalValues;
+    let selectedValues;
+
     if (val.selected) {
       if (!required || max !== 1) {
-        updateValue(value.filter(v => v.id !== val.id));
-        setValues(values.map(v => (v.id === val.id ? { ...v, selected: false } : v)));
+        finalValues = value.filter(v => v.id !== val.id);
+        selectedValues = values.map(v => (v.id === val.id ? { ...v, selected: false } : v));
       }
     } else if (value.length < max) {
-      updateValue([...value, val]);
-      setValues(values.map(v => (v.id === val.id ? { ...v, selected: true } : v)));
+      finalValues = [...value, val];
+      selectedValues = values.map(v => (v.id === val.id ? { ...v, selected: true } : v));
     } else if (max === 1) {
-      updateValue([val]);
-      setValues(values.map(v => ({ ...v, selected: v.id === val.id })));
+      finalValues = [val];
+      selectedValues = values.map(v => ({ ...v, selected: v.id === val.id }));
+    }
+
+    if (isValidValue(finalValues, val)) {
+      updateValue(finalValues);
+      setValues(selectedValues);
     }
 
     if (max === 1 || closeOnSelect) {
@@ -489,8 +519,8 @@ function Combobox2(props) {
         {note && (
           <p className="tyk-form-control__help-block">{note}</p>
         )}
-        {error && error !== 'true' && error !== 'false' && (
-          <p className="tyk-form-control__error-message">{error}</p>
+        {((error && error !== 'true' && error !== 'false') || Boolean(localValidationError)) && (
+          <p className="tyk-form-control__error-message">{error || localValidationError}</p>
         )}
       </div>
     </div>
@@ -556,6 +586,7 @@ Combobox2.propTypes = {
   closeOnSelect: PropTypes.bool,
   showSearch: PropTypes.bool,
   required: PropTypes.bool,
+  validateOnChange: PropTypes.func,
 };
 
 export default Combobox2;
