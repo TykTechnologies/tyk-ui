@@ -212,11 +212,10 @@ function Combobox2(props) {
       finalValues = [...value, values[listValueIndex]];
     }
 
-    if(selectedValues) {
-      setValues(selectedValues);
-    }
-
     if (isValidValue(finalValues, newValue)) {
+      if(selectedValues) {
+        setValues(selectedValues);
+      }
       updateValue(finalValues);
     }
   }
