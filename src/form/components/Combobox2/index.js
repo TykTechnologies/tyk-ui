@@ -195,6 +195,7 @@ function Combobox2(props) {
     const listValueIndex = values.findIndex(lv => lv.name === val);
     let newValue;
     let finalValues;
+    let selectedValues;
 
     if (listValueIndex === -1) {
       if (allowCustomValues) {
@@ -202,13 +203,17 @@ function Combobox2(props) {
         finalValues = [...value, newValue];
       }
     } else {
-      setValues([
+      selectedValues = [
         ...values.slice(0, listValueIndex),
         { ...values[listValueIndex], selected: true },
         ...values.slice(listValueIndex + 1),
-      ]);
+      ];
       newValue = values[listValueIndex];
       finalValues = [...value, values[listValueIndex]];
+    }
+
+    if(selectedValues) {
+      setValues(selectedValues);
     }
 
     if (isValidValue(finalValues, newValue)) {
