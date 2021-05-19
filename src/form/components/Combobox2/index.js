@@ -213,7 +213,7 @@ function Combobox2(props) {
     }
 
     if (isValidValue(finalValues, newValue)) {
-      if(selectedValues) {
+      if (selectedValues) {
         setValues(selectedValues);
       }
       updateValue(finalValues);
