@@ -12,6 +12,32 @@
 ```
 ```js
 <Input2
+  label="Disabled"
+  disabled
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  theme="default rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+  value="prct"
+/>
+```
+```js
+<Input2
+  label="Read only"
+  name="input"
+  note="Some helpful message to be displayed on this Input"
+  placeholder="Please type something"
+  type="text"
+  theme="default rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+  value="prct"
+  readOnly
+/>
+```
+```js
+<Input2
   label="This is a demo Input"
   name="input"
   note="Some helpful message to be displayed on this Input"

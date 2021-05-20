@@ -60,3 +60,17 @@
 />
 
 ```
+```js
+<Textarea
+  readOnly={ true }
+  label="This is a read only Textarea"
+  name="input"
+  note="Some helpful message to be displayed on this Textarea"
+  placeholder="Please type something"
+  type="text"
+  rows="10"
+  value="hElLo hOw aRe yOu, EvErYtHiNg iS FiNe. ThAnKs a lOt fOr tHe hElP WiTh aLl tHiS FrOnTeNd sTuFf.hElLo hOw aRe yOu, EvErYtHiNg iS FiNe. ThAnKs a lOt fOr tHe hElP WiTh aLl tHiS FrOnTeNd sTuFf."
+  onChange={ (e) => { console.log(e); }}
+/>
+
+```

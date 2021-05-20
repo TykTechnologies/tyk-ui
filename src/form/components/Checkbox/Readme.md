@@ -12,3 +12,10 @@
   disabled
 />
 ```
+```js
+<Checkbox
+  label="This is a readOnly checkbox"
+  error="Please fix the error"
+  readOnly
+/>
+```

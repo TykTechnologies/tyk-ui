@@ -1,6 +1,7 @@
 import React, {
   Fragment, useEffect, useState, useRef, useCallback,
 } from 'react';
+import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import flatpickr from 'flatpickr';
 import Icon from '../../../components/Icon';
@@ -12,6 +13,7 @@ const DatePicker = (props) => {
   const {
     children,
     disabled,
+    readOnly = false,
     error,
     id,
     label,
@@ -222,23 +224,29 @@ const DatePicker = (props) => {
                   ? <label htmlFor={id} style={getLabelStyles()}>{ label }</label>
                   : null
               }
-              <div
-                className="tyk-form-control__wrapper flatpickr"
-                style={getNonLabelWidth()}
-              >
-                <div className="tyk-input-group">
-                  {getInputField()}
+              {!readOnly && (
+                <div
+                  className="tyk-form-control__wrapper flatpickr"
+                  style={getNonLabelWidth()}
+                >
+                  <div className="tyk-input-group">
+                    {getInputField()}
+                  </div>
+                  {
+                    note
+                      ? <p className="tyk-form-control__help-block">{ note }</p>
+                      : null
+                  }
+                  { getInputError() }
                 </div>
-                {
-                  note
-                    ? <p className="tyk-form-control__help-block">{ note }</p>
-                    : null
-                }
-                { getInputError() }
-              </div>
+              )}
             </div>
           )
       }
+      <div>
+        {readOnly && !value && '-'}
+        {readOnly && value && format(value, config.dateFormat || 'd/m/Y')}
+      </div>
     </Fragment>
   );
 };
@@ -252,6 +260,7 @@ DatePicker.propTypes = {
     PropTypes.func,
   ]),
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
   id: PropTypes.string,
   label: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

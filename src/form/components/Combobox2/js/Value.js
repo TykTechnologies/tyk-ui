@@ -15,6 +15,7 @@ function Value(props) {
     valueOverflow,
     focus,
     onMessage: sendMessage,
+    readOnly,
   } = props;
   const INPUT_MIN_WIDTH = 60;
   const inputRef = useRef(null);
@@ -65,6 +66,8 @@ function Value(props) {
   }
 
   function textValue(val, isPlaceholder = false) {
+    if (readOnly) return val || '-';
+
     const classes = [
       'tyk-combobox2__text-value',
       `overflow-${valueOverflow}`,
@@ -119,6 +122,10 @@ function Value(props) {
   }
 
   function getTags() {
+    if (readOnly) {
+      return textValue(value.map(v => v.name).join(', '));
+    }
+
     return (
       <>
         {value.map(renderTag)}

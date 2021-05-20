@@ -45,8 +45,9 @@ export default class ToggleItem extends Component {
 
   onChange(event) {
     const { context, value } = this.props;
+    const { disabled, readOnly } = context;
 
-    if (context.disabled) {
+    if (disabled || readOnly) {
       return;
     }
 

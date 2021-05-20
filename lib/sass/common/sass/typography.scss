@@ -160,3 +160,24 @@ td.text-ellipsis {
     margin-left: 5px;
   }
 }
+
+.text {
+  &--default-light {
+    color: theme-color('default', 'light') !important;
+  }
+  &--default {
+    color: theme-color('default', 'base') !important;
+  }
+  &--primary {
+    color: theme-color('primary', 'base') !important;
+  }
+  &--danger {
+    color: theme-color('danger', 'base') !important;
+  }
+  &--success {
+    color: theme-color('success', 'base') !important;
+  }
+  &--warning {
+    color: theme-color('warning', 'base') !important;
+  }
+}

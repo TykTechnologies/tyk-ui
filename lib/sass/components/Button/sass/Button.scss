@@ -52,7 +52,7 @@
     text-scale('sm'),
     $line-height-button-md,
     $button-border-radius
-  )
+  );
 
   &--white {
     @include button-variant(
@@ -64,7 +64,7 @@
       theme-color('background', 'dark'),
       theme-color('background', 'dark'),
       white
-    )
+    );
   }
 
   &--primary {
@@ -73,13 +73,12 @@
       $button-primary-color,
       $button-primary-text-color,
       $button-primary-hover-color
-
-    )
+    );
 
     &-link {
       @include button-variant-link(
         theme-color('primary', 'base')
-      )
+      );
     }
 
     &-outline {
@@ -87,14 +86,14 @@
         $button-primary-color,
         theme-color('primary', 'base'),
         theme-color('primary', 'base')
-      )
+      );
     }
 
     &-gradient {
       @include button-variant-gradient(
         $button-primary-gradient-start-color,
         $button-primary-gradient-end-color
-      )
+      );
     }
   }
   &--success {
@@ -103,25 +102,25 @@
       $button-success-color,
       white,
       $button-success-hover-color,
-    )
+    );
 
     &-link {
       @include button-variant-link(
         $button-success-color
-      )
+      );
     }
 
     &-outline {
       @include button-variant-outline(
         $button-success-color
-      )
+      );
     }
 
     &-gradient {
       @include button-variant-gradient(
         $button-success-gradient-start-color,
         $button-success-gradient-end-color
-      )
+      );
     }
   }
   &--danger {
@@ -130,25 +129,25 @@
       $button-danger-color,
       white,
       $button-danger-hover-color
-    )
+    );
 
     &-link {
       @include button-variant-link(
         $button-danger-color
-      )
+      );
     }
 
     &-outline {
       @include button-variant-outline(
         $button-danger-color
-      )
+      );
     }
 
     &-gradient {
       @include button-variant-gradient(
         $button-danger-gradient-start-color,
         $button-danger-gradient-end-color
-      )
+      );
     }
   }
 
@@ -157,18 +156,18 @@
       $button-warning-color,
       transparent,
       $button-warning-font-color
-    )
+    );
 
     &-link {
       @include button-variant-link(
         $button-warning-color
-      )
+      );
     }
 
     &-outline {
       @include button-variant-outline(
         $button-warning-color
-      )
+      );
     }
 
     &-gradient {
@@ -176,24 +175,24 @@
         $button-warning-gradient-start-color,
         $button-warning-gradient-end-color,
         $button-warning-font-color
-      )
+      );
     }
   }
   &--info {
     @include button-variant(
       $button-info-color
-    )
+    );
 
     &-link {
       @include button-variant-link(
         $button-info-color
-      )
+      );
     }
 
     &-outline {
       @include button-variant-outline(
         $button-info-color
-      )
+      );
     }
 
     &-gradient {
@@ -201,7 +200,7 @@
         $button-info-gradient-start-color,
         $button-info-gradient-end-color,
         $button-info-font-color
-      )
+      );
     }
   }
 
@@ -211,25 +210,25 @@
       $button-default-color,
       white,
       $button-default-hover-color
-    )
+    );
 
     &-link {
       @include button-variant-link(
         $text-color
-      )
+      );
     }
 
     &-outline {
       @include button-variant-outline(
         $button-default-color
-      )
+      );
     }
 
     &-gradient {
       @include button-variant-gradient(
         $button-default-gradient-start-color,
         $button-default-gradient-end-color
-      )
+      );
     }
   }
 
@@ -240,7 +239,7 @@
       text-scale('xs'),
       line-height('xs'),
       $button-border-radius
-    )
+    );
   }
 
   &--md {
@@ -250,7 +249,7 @@
       text-scale('sm'),
       line-height('sm'),
       $button-border-radius
-    )
+    );
   }
   &--lg {
     @include button-size(
@@ -259,7 +258,7 @@
       text-scale('md'),
       line-height('md'),
       $button-border-radius
-    )
+    );
   }
 
   &--icon-only {

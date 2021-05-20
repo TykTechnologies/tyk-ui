@@ -367,6 +367,62 @@ class TestToggle extends Component {
               />
             </Toggle>
           </Column>
+          <Column size="md-12">
+            <Toggle
+                value={activeMultiple}
+                label="Disabled toggle"
+                disabled
+                onChange={this.toggleMultipleOnChange}
+                theme="warning-gradient"
+                type="multiple"
+                size="lg"
+                onDark
+              >
+                <Toggle.Item
+                  label="short"
+                  name="option"
+                  value="option1"
+                />
+                <Toggle.Item
+                  label="medium name"
+                  name="option"
+                  value="option2"
+                />
+                <Toggle.Item
+                  label="very long long name"
+                  name="option"
+                  value="option3"
+                />
+              </Toggle>
+          </Column>
+          <Column size="md-12">
+            <Toggle
+                value={activeMultiple}
+                label="Read Only toggle"
+                readOnly
+                onChange={this.toggleMultipleOnChange}
+                theme="warning-gradient"
+                type="multiple"
+                size="lg"
+                onDark
+              >
+                <Toggle.Item
+                  label="short"
+                  name="option"
+                  value="option1"
+                />
+                <Toggle.Item
+                  label="medium name"
+                  name="option"
+                  value="option2"
+                />
+                <Toggle.Item
+                  label="very long long name"
+                  name="option"
+                  value="option3"
+                />
+              </Toggle>
+          </Column>
         </Row>
       </Fragment>
     );

@@ -1,11 +1,15 @@
 ```js
 import Button from '../../../components/Button';
+import {useState} from 'react';
+
+const [date, setDate] = useState(null);
 <DatePicker
   label="Custom date picker trigger"
   name="datepicker"
   note="Some note on the datepicker"
-  onChange={ (value) => { console.log(value) }}
+  onChange={ setDate }
   placeholder="Please select a value"
+  value={date}
   config={{
     minDate: "today",
     dateFormat: "Y-m-d"
@@ -24,16 +28,34 @@ import Button from '../../../components/Button';
 </DatePicker>
 ```
 ```js
+import {useState} from 'react';
+
+const [date, setDate] = useState(new Date());
 <DatePicker
   label="Default Date picker"
   name="datepicker"
   note="Some note on the datepicker"
-  onChange={ (value) => { console.log(value) }}
+  onChange={ setDate }
   placeholder="Please select a value"
   config={{
     minDate: "today",
     dateFormat: "Y-m-d"
   }}
+  value={date}
+  theme="default rounded-corners"
+/>
+```
+```js
+import {useState} from 'react';
+
+const [date, setDate] = useState(new Date());
+<DatePicker
+  label="Read only datepicker"
+  config={{
+    minDate: "today"
+  }}
+  readOnly
+  value={date}
   theme="default rounded-corners"
 />
 ```

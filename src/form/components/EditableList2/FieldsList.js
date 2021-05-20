@@ -4,6 +4,8 @@ import Button from '../../../components/Button';
 
 const FieldsList = ({
   fields,
+  disabled,
+  readOnly,
   errors,
   components,
   onChange,
@@ -22,17 +24,27 @@ const FieldsList = ({
             /* eslint-disable-next-line */
             onChange={onChange.bind(null, index)}
             error={errors?.[index]}
+            disabled={disabled || fields[index]?.props?.disabled}
+            readOnly={readOnly || fields[index]?.props?.readOnly}
           />
         </div>
       ))
     }
-    <div className="editable-list__item-cell editable-list__item-action">
-      <Button iconOnly iconType="trash-alt" theme="primary-link" onClick={onDelete} />
+    <div className={`editable-list__item-cell editable-list__item-action ${readOnly && 'editable-list__item-action--read-only'}`}>
+      <Button
+        iconOnly
+        iconType="trash-alt"
+        theme="primary-link"
+        onClick={onDelete}
+        disabled={readOnly || disabled}
+      />
     </div>
   </li>
 );
 
 FieldsList.propTypes = {
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
   fields: PropTypes.instanceOf(Array),
   errors: PropTypes.instanceOf(Array),
   components: PropTypes.instanceOf(Array),

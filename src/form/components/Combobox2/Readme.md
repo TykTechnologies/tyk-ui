@@ -549,3 +549,72 @@ import Icon from '../../../components/Icon';
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />
 ```
+```js
+<Combobox2
+  values={[
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  value={[
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  readOnly
+  label="Read only mode multiple"
+  multiple
+  name="combobox"
+  theme="default rounded-corners"
+  placeholder="Please select a value"
+  validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
+/>
+```
+```js
+<Combobox2
+  values={[
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  value={[
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  readOnly
+  label="Read only mode tags"
+  tags
+  name="combobox"
+  theme="default rounded-corners"
+  placeholder="Please select a value"
+  validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
+/>
+```
+```js
+<Combobox2
+  values={[
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  value={{id: 201, name: '201'}}
+  readOnly
+  label="Read only mode single"
+  tags
+  name="combobox"
+  theme="default rounded-corners"
+  placeholder="Please select a value"
+  validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
+/>
+```
+```js
+<Combobox2
+  values={[
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  readOnly
+  label="Read only mode no value"
+  tags
+  name="combobox"
+  theme="default rounded-corners"
+  placeholder="Please select a value"
+  validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
+/>
+```
