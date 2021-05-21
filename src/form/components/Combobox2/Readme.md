@@ -58,7 +58,7 @@ initialState = {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default inline rounded-corners"
+  theme="default rounded-corners"
   placeholder="Please select a value"
   required
 />

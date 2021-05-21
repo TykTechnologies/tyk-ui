@@ -122,10 +122,6 @@ function Value(props) {
   }
 
   function getTags() {
-    if (readOnly) {
-      return textValue(value.map(v => v.name).join(', '));
-    }
-
     return (
       <>
         {value.map(renderTag)}
@@ -166,6 +162,10 @@ function Value(props) {
   useEffect(() => {
     if (focus && inputRef.current) inputRef.current.focus();
   }, [focus]);
+
+  if (readOnly) {
+    return <div>{textValue(value.map(v => v.name).join(', '))}</div>;
+  }
 
   if (tags) return getTags();
   if (renderValue) {
