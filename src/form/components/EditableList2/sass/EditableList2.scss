@@ -8,6 +8,11 @@
       margin-left: auto;
     }
   }
+
+  &__wrapper.has-error &__list{
+    border: $general-border-width solid theme-color('danger', 'base');
+  }
+
   &__list {
     border: $general-border-width solid theme-color('default', 'light');
     border-radius: $general-border-radius;
@@ -83,6 +88,7 @@
       }
 
       &--read-only {
+        color: theme-color("default", "light");
         align-items: center;
         
         .tyk-button {

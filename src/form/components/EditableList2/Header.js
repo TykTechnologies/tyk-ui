@@ -7,7 +7,11 @@ const Header = ({
   label, addButtonName, onAddRow, disabled, readOnly,
 }) => (
   <div className="editable-list__header">
-    {label && <label>{label}</label>}
+    {
+      label
+        ? <label>{ label }</label>
+        : null
+    }
     {!disabled && !readOnly && (
       <Button
         theme="primary rounded-corners"
@@ -24,7 +28,11 @@ Header.propTypes = {
   readOnly: PropTypes.bool,
   onAddRow: PropTypes.func,
   addButtonName: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.node,
+  ]),
 };
 
 export default Header;

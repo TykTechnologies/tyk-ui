@@ -10,6 +10,7 @@
   };
 
   const formikRequired = withErrorMessage(Boolean);
+  const isRequired = formikRequired('This field is required');
 
   <EditableList2
     onChange={setValue}
@@ -17,7 +18,7 @@
     label="Map Client to Policy"
     addButtonName="Add Client"
     readOnly={false}
-    error=""
+    error="An error occured"
     fields={[
       {
         component: Input2,
@@ -30,7 +31,8 @@
           label: 'Claim name',
           theme: 'default rounded-corners',
           placeholder: 'Enter claim name',
-          validate: formikRequired('This field is required')
+          value: '',
+          validate: isRequired
         } 
       },
       {
@@ -44,7 +46,8 @@
           label: 'Policy',
           theme: 'default rounded-corners',
           placeholder: 'Add Policy',
-          validate: formikRequired('This field is required')
+          value: '',
+          validate: isRequired
         } 
       }
     ]}

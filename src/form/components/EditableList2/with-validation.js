@@ -25,11 +25,7 @@ const withValidation = Component => ({
     onChange(value, isValid);
   }, [validate, onChange]);
 
-  return (
-    <>
-      <Component {...rest} onChange={onFieldChange} error={internalError || error} />
-    </>
-  );
+  return <Component {...rest} onChange={onFieldChange} error={internalError || error} />;
 };
 
 export default withValidation;

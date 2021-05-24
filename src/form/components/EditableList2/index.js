@@ -7,6 +7,10 @@ import FieldsList from './FieldsList';
 import validateValues from './validate-values';
 import withValidation from './with-validation';
 
+let id = 1;
+/* eslint-disable-next-line */
+const getUID = prefix => `${prefix}-${id++}`;
+
 /**
  * Editable list is a component, that lists rows of form elements (can have n elements on a row),
  * and stores the values of all the rows in an Array list
@@ -15,7 +19,9 @@ const EditableList2 = ({
   addButtonName,
   disabled,
   readOnly,
-  fields, label,
+  fields,
+  label,
+  error,
   value = [],
   onChange = () => {},
 }) => {
@@ -31,6 +37,7 @@ const EditableList2 = ({
       const tempValue = [...tempValueArr[rowIndex]];
       tempValue[fieldIndex] = componentValue;
       tempValueArr[rowIndex] = tempValue;
+      tempValueArr[rowIndex].id = value[rowIndex].id;
     }
 
     if (internalErrors?.[rowIndex]?.[fieldIndex] && isValid) {
@@ -58,9 +65,12 @@ const EditableList2 = ({
       return;
     }
 
+    const newValue = [...new Array(fields.length)];
+    newValue.id = getUID('row');
+
     onChange([
       ...value && value,
-      [...new Array(fields.length)],
+      newValue,
     ]);
   };
 
@@ -74,7 +84,7 @@ const EditableList2 = ({
   };
 
   return (
-    <div className="editable-list__wrapper">
+    <div className={`editable-list__wrapper tyk-form-group tyk-form-group--default ${error ? 'has-error' : ''}`}>
       <Header
         disabled={disabled}
         readOnly={readOnly}
@@ -84,21 +94,34 @@ const EditableList2 = ({
       />
       <ul className="editable-list__list">
         {(value || [[]]).map((v, i) => (
-          <FieldsList
-            disabled={disabled}
-            readOnly={readOnly}
-            fields={fields}
-            /* eslint-disable-next-line */
+          <>
+            <FieldsList
+              /* eslint-disable-next-line */
+              key={v.id || i}
+              disabled={disabled}
+              readOnly={readOnly}
+              fields={fields}
+              /* eslint-disable-next-line */
             onChange={updateRowValue.bind(null, i)}
-            /* eslint-disable-next-line */
+              /* eslint-disable-next-line */
             onDelete={deleteRow.bind(null, i)}
-            value={v}
-            errors={internalErrors?.[i]}
-            components={Components}
-          />
+              value={v}
+              errors={internalErrors?.[i]}
+              components={Components}
+            />
+          </>
         ))}
-        <ListHeader fields={fields} />
+        <ListHeader fields={fields} readOnly={readOnly} />
       </ul>
+      {(error && error !== 'true' && error !== 'false')
+        ? (
+          <p
+            className="tyk-form-control__error-message"
+          >
+            { error }
+          </p>
+        )
+        : null}
     </div>
   );
 };
@@ -116,7 +139,11 @@ EditableList2.propTypes = {
   /** Name of the Add button. By default has 'Add value' */
   addButtonName: PropTypes.string,
   /** Label of Editable list, is displayed above the list and inline with the Add button */
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.node,
+  ]),
   /** Array of form elements that you want the list to have
    * Each field is an object points to the Form element component that you want to use,
    * the props you want to apply on it,
@@ -153,6 +180,7 @@ EditableList2.propTypes = {
    * each column will have the value format depending on the component type)
    */
   value: PropTypes.oneOfType([PropTypes.instanceOf(Object), PropTypes.instanceOf(Array)]),
+  error: PropTypes.string,
 };
 
 export default EditableList2;
