@@ -57,6 +57,8 @@ function Combobox2(props) {
     note = '',
     error = '',
     disabled = false,
+    /** hides the UI form element and displayes just the value as text */
+    readOnly = false,
     /** If `true` it allows entering values that are not in the list. */
     allowCustomValues = true,
     /** A function used for filtering elements displayed in the list when typing in. */
@@ -105,6 +107,10 @@ function Combobox2(props) {
     /** If it is required and can only select one value once you have something
      * selected you will not be able to deselect */
     required = false,
+    /** Validates newly added value before adding it to the selected values.
+     * Returns an error string in case of error otherwise it returns undefined
+     */
+    validateOnChange = () => { },
     ...restProps
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
@@ -128,6 +134,7 @@ function Combobox2(props) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpened, setIsOpened] = useState(false);
   const [valuesExpanded, setValuesExpanded] = useState(false);
+  const [localValidationError, setLocalValidationError] = useState('');
 
   function getThemeClasses() {
     const themes = theme ? theme.split(' ') : [];
@@ -139,7 +146,7 @@ function Combobox2(props) {
       'tyk-form-group',
       'tyk-combobox2',
       ...getThemeClasses(),
-      error && 'has-error',
+      (error || localValidationError) && 'has-error',
       labelwidth && 'tyk-form-group--label-has-width',
       disabled && 'disabled',
       expandMode && 'is-expand-mode',
@@ -171,9 +178,15 @@ function Combobox2(props) {
     if (newSearchValue && !isOpened) openDropdown();
   }
 
-  function updateValue(newValue) {
-    setValue(newValue);
-    onChange(max === 1 && !tags ? (newValue[0] || null) : newValue);
+  function isValidValue(newValues, lastValue) {
+    const localError = validateOnChange(newValues, lastValue);
+    setLocalValidationError(localError);
+    return localError === undefined;
+  }
+
+  function updateValue(newValues) {
+    setValue(newValues);
+    onChange(max === 1 && !tags ? (newValues[0] || null) : newValues);
   }
 
   function addTag(val) {
@@ -182,15 +195,30 @@ function Combobox2(props) {
     if (value.some(({ name }) => name === val)) return;
 
     const listValueIndex = values.findIndex(lv => lv.name === val);
+    let newValue;
+    let finalValues;
+    let selectedValues;
+
     if (listValueIndex === -1) {
-      if (allowCustomValues) updateValue([...value, { id: val, name: val }]);
+      if (allowCustomValues) {
+        newValue = { id: val, name: val };
+        finalValues = [...value, newValue];
+      }
     } else {
-      setValues([
+      selectedValues = [
         ...values.slice(0, listValueIndex),
         { ...values[listValueIndex], selected: true },
         ...values.slice(listValueIndex + 1),
-      ]);
-      updateValue([...value, values[listValueIndex]]);
+      ];
+      newValue = values[listValueIndex];
+      finalValues = [...value, values[listValueIndex]];
+    }
+
+    if (isValidValue(finalValues, newValue)) {
+      if (selectedValues) {
+        setValues(selectedValues);
+      }
+      updateValue(finalValues);
     }
   }
 
@@ -209,17 +237,25 @@ function Combobox2(props) {
 
   function selectValue({ id }) {
     const val = values.find(v => v.id === id);
+    let finalValues;
+    let selectedValues;
+
     if (val.selected) {
       if (!required || max !== 1) {
-        updateValue(value.filter(v => v.id !== val.id));
-        setValues(values.map(v => (v.id === val.id ? { ...v, selected: false } : v)));
+        finalValues = value.filter(v => v.id !== val.id);
+        selectedValues = values.map(v => (v.id === val.id ? { ...v, selected: false } : v));
       }
     } else if (value.length < max) {
-      updateValue([...value, val]);
-      setValues(values.map(v => (v.id === val.id ? { ...v, selected: true } : v)));
+      finalValues = [...value, val];
+      selectedValues = values.map(v => (v.id === val.id ? { ...v, selected: true } : v));
     } else if (max === 1) {
-      updateValue([val]);
-      setValues(values.map(v => ({ ...v, selected: v.id === val.id })));
+      finalValues = [val];
+      selectedValues = values.map(v => ({ ...v, selected: v.id === val.id }));
+    }
+
+    if (isValidValue(finalValues, val)) {
+      updateValue(finalValues);
+      setValues(selectedValues);
     }
 
     if (max === 1 || closeOnSelect) {
@@ -413,86 +449,99 @@ function Combobox2(props) {
       {label && (
         <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
       )}
-      <div
-        className="tyk-form-control__wrapper"
-        style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
-      >
-        <div className="tyk-form-control" ref={comboboxControlRef}>
-          <div
-            className={currentValuesClasses}
-            onClick={openDropdown}
-            role="none"
-          >
-            <Value
-              value={value}
-              max={max}
-              tags={tags}
-              tagSeparators={tagSeparators}
-              addTagOnBlur={addTagOnBlur}
-              allowCustomValues={allowCustomValues}
-              placeholder={placeholder}
-              disabled={disabled}
-              valueOverflow={valueOverflow}
-              renderValue={renderValue}
-              focus={isOpened}
-              onMessage={onMessage}
-            />
-          </div>
-          {displayDropdownTrigger && (
+      {!readOnly && (
+        <div
+          className="tyk-form-control__wrapper"
+          style={{ flexBasis: `calc(100% - ${labelwidth} - 20px)` }}
+        >
+          <div className="tyk-form-control" ref={comboboxControlRef}>
             <div
-              className={`tyk-combobox2__values-container-trigger${valuesExpanded ? ' tyk-combobox2__values-container-trigger--expanded' : ''}`}
-              role="button"
-              tabIndex={disabled ? -1 : 0}
-              onClick={executeTriggerAction}
-              onKeyPress={executeTriggerAction}
+              className={currentValuesClasses}
+              onClick={openDropdown}
+              role="none"
             >
-              {expandMode
-                ? (
-                  <Icon type={valuesExpanded ? 'compress-arrows-alt' : 'expand-arrows-alt'} />
-                )
-                : (
-                  <Icon family="tykon" type="arrowdown" />
-                )}
+              <Value
+                value={value}
+                max={max}
+                tags={tags}
+                tagSeparators={tagSeparators}
+                addTagOnBlur={addTagOnBlur}
+                allowCustomValues={allowCustomValues}
+                placeholder={placeholder}
+                disabled={disabled}
+                valueOverflow={valueOverflow}
+                renderValue={renderValue}
+                focus={isOpened}
+                onMessage={onMessage}
+                readOnly={readOnly}
+              />
             </div>
+            {displayDropdownTrigger && (
+              <div
+                className={`tyk-combobox2__values-container-trigger${valuesExpanded ? ' tyk-combobox2__values-container-trigger--expanded' : ''}`}
+                role="button"
+                tabIndex={disabled ? -1 : 0}
+                onClick={executeTriggerAction}
+                onKeyPress={executeTriggerAction}
+              >
+                {expandMode
+                  ? (
+                    <Icon type={valuesExpanded ? 'compress-arrows-alt' : 'expand-arrows-alt'} />
+                  )
+                  : (
+                    <Icon family="tykon" type="arrowdown" />
+                  )}
+              </div>
+            )}
+          </div>
+          {isOpened && (!tags || filteredValues.length > 0) && (
+            <FloatingContainer
+              element={comboboxControlRef}
+              size="matchElement"
+              className={`tyk-combobox2__combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
+              ref={dropdownRef}
+              {...floatingContainerConfig}
+              infiniteScrollerConfig={infiniteScrollerConfig}
+            >
+              {renderList ? (
+                renderList(filteredValues, {
+                  tags,
+                  searchValue,
+                  activeItem,
+                  sendMessage: onMessage,
+                })
+              ) : (
+                <List
+                  showSearch={showSearch}
+                  values={filteredValues}
+                  tags={tags}
+                  searchValue={searchValue}
+                  activeItem={activeItem}
+                  onMessage={onMessage}
+                  renderListItem={renderListItem}
+                  selectAll={selectAll}
+                />
+              )}
+            </FloatingContainer>
+          )}
+          {note && (
+            <p className="tyk-form-control__help-block">{note}</p>
+          )}
+          {((error && error !== 'true' && error !== 'false') || Boolean(localValidationError)) && (
+            <p className="tyk-form-control__error-message">{error || localValidationError}</p>
           )}
         </div>
-        {isOpened && (!tags || filteredValues.length > 0) && (
-          <FloatingContainer
-            element={comboboxControlRef}
-            size="matchElement"
-            className={`tyk-combobox2__combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
-            ref={dropdownRef}
-            {...floatingContainerConfig}
-            infiniteScrollerConfig={infiniteScrollerConfig}
-          >
-            {renderList ? (
-              renderList(filteredValues, {
-                tags,
-                searchValue,
-                activeItem,
-                sendMessage: onMessage,
-              })
-            ) : (
-              <List
-                showSearch={showSearch}
-                values={filteredValues}
-                tags={tags}
-                searchValue={searchValue}
-                activeItem={activeItem}
-                onMessage={onMessage}
-                renderListItem={renderListItem}
-                selectAll={selectAll}
-              />
-            )}
-          </FloatingContainer>
-        )}
-        {note && (
-          <p className="tyk-form-control__help-block">{note}</p>
-        )}
-        {error && error !== 'true' && error !== 'false' && (
-          <p className="tyk-form-control__error-message">{error}</p>
-        )}
-      </div>
+      )}
+      {readOnly && (
+        <div>
+          <Value
+            value={value}
+            tags={tags}
+            renderValue={renderValue}
+            readOnly={readOnly}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -505,6 +554,8 @@ Combobox2.propTypes = {
   renderListItem: PropTypes.func,
   renderList: PropTypes.func,
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  ReadOnly: PropTypes.bool,
   error: PropTypes.string,
   label: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -556,6 +607,7 @@ Combobox2.propTypes = {
   closeOnSelect: PropTypes.bool,
   showSearch: PropTypes.bool,
   required: PropTypes.bool,
+  validateOnChange: PropTypes.func,
 };
 
 export default Combobox2;

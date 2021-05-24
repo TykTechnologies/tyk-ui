@@ -9,6 +9,8 @@ export default class Radio extends Component {
   static propTypes = {
     /** Used to disable the element */
     disabled: PropTypes.bool,
+    /** Readonly prop behaves the same as disabled on radio elements */
+    readOnly: PropTypes.bool,
     /** Align radio with in same line with other elements */
     inline: PropTypes.bool,
     /** Set a theme for radio */
@@ -38,7 +40,7 @@ export default class Radio extends Component {
 
   getCssClasses() {
     const {
-      inline, nospace, theme = '', disabled,
+      inline, nospace, theme = '', disabled, readOnly,
     } = this.props;
     const cssClasses = [];
 
@@ -56,7 +58,7 @@ export default class Radio extends Component {
       cssClasses.push(...theme.split(' ').map(t => `tyk-radio--theme-${t}`));
     }
 
-    if (disabled) {
+    if (readOnly || disabled) {
       cssClasses.push('tyk-radio--is-disabled');
     }
 
@@ -65,7 +67,7 @@ export default class Radio extends Component {
 
   render() {
     const {
-      input, label, note, ...rest
+      input, label, note, disabled, readOnly, ...rest
     } = this.props;
     return (
       <div
@@ -76,6 +78,7 @@ export default class Radio extends Component {
             {...input}
             {...rest}
             type="radio"
+            disabled={readOnly || disabled}
           />
           {label}
         </label>

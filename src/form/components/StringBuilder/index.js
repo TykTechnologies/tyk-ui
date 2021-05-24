@@ -26,6 +26,7 @@ const StringBuilder = (props) => {
     theme,
     error,
     disabled,
+    readOnly,
     note,
     label,
     labelwidth,
@@ -154,61 +155,66 @@ const StringBuilder = (props) => {
         {label && (
           <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
         )}
-        <div className="tyk-form-control__wrapper">
-          <div
-            className={`tyk-form-control ${
+        {!readOnly && (
+          <div className="tyk-form-control__wrapper">
+            <div
+              className={`tyk-form-control ${
               disabled && 'string-builder__disabled'
             }`}
-            style={{ height: `${stringBuilderHeight}px` }}
-          >
-            <StringInput
-              setInputInFocus={setInputInFocus}
-              setShowOptions={setShowOptions}
-              tokenValue={tokenValue}
-              disabled={disabled}
-              placeholder={placeholder}
-              allowSearch={allowSearch}
-              tokens={tokens}
-              dropdownTriggerKey={dropdownTriggerKey}
-              setStringBuilderHeight={setStringBuilderHeight}
-              stringBuilderHeight={stringBuilderHeight}
-              setTokenString={setTokenString}
-              tokenString={tokenString}
-              showOptions={showOptions}
-              options={options}
-              setTokenValue={setTokenValue}
-              inputRef={inputRef}
-              invalidTokenRegex={invalidTokenRegex}
-              name={name}
-              contextMaxLength={contextMaxLength}
-              setContentMaxLength={setContentMaxLength}
-            />
-            <TokenizedString
-              tokens={tokens}
-              options={options}
-              disabled={disabled}
-              invalidTokenRegex={invalidTokenRegex}
-              findInvalidTokenSubstitute={findInvalidTokenSubstitute}
-            />
-            <OptionsList
-              showOptions={showOptions}
-              options={options}
-              handleOptionSelection={handleOptionSelection}
-              containerRef={containerRef}
-              getThemeClasses={getThemeClasses}
-              setShowOptions={setShowOptions}
-              allowSearch={allowSearch}
-              initialSearchValue={initialSearchValue}
-            />
-            <StringBuilderFooter
-              error={error}
-              note={note}
-              inputInFocus={inputInFocus}
-              stringBuilderHeight={stringBuilderHeight}
-              dropdownTriggerKey={dropdownTriggerKey}
-            />
+              style={{ height: `${stringBuilderHeight}px` }}
+            >
+              <StringInput
+                setInputInFocus={setInputInFocus}
+                setShowOptions={setShowOptions}
+                tokenValue={tokenValue}
+                disabled={disabled}
+                placeholder={placeholder}
+                allowSearch={allowSearch}
+                tokens={tokens}
+                dropdownTriggerKey={dropdownTriggerKey}
+                setStringBuilderHeight={setStringBuilderHeight}
+                stringBuilderHeight={stringBuilderHeight}
+                setTokenString={setTokenString}
+                tokenString={tokenString}
+                showOptions={showOptions}
+                options={options}
+                setTokenValue={setTokenValue}
+                inputRef={inputRef}
+                invalidTokenRegex={invalidTokenRegex}
+                name={name}
+                contextMaxLength={contextMaxLength}
+                setContentMaxLength={setContentMaxLength}
+              />
+              <TokenizedString
+                tokens={tokens}
+                options={options}
+                disabled={disabled}
+                invalidTokenRegex={invalidTokenRegex}
+                findInvalidTokenSubstitute={findInvalidTokenSubstitute}
+              />
+              <OptionsList
+                showOptions={showOptions}
+                options={options}
+                handleOptionSelection={handleOptionSelection}
+                containerRef={containerRef}
+                getThemeClasses={getThemeClasses}
+                setShowOptions={setShowOptions}
+                allowSearch={allowSearch}
+                initialSearchValue={initialSearchValue}
+              />
+              <StringBuilderFooter
+                error={error}
+                note={note}
+                inputInFocus={inputInFocus}
+                stringBuilderHeight={stringBuilderHeight}
+                dropdownTriggerKey={dropdownTriggerKey}
+              />
+            </div>
           </div>
-        </div>
+        )}
+        {
+          readOnly && <div>{value || '-'}</div>
+        }
       </div>
     </div>
   );
@@ -234,6 +240,8 @@ StringBuilder.propTypes = {
   value: PropTypes.string,
   /** Disable input */
   disabled: PropTypes.bool,
+  /** Read Only prop removes the form element and displays just the value */
+  readOnly: PropTypes.bool,
   /** Show error state (w/ or w/o message) */
   error: PropTypes.string,
   /** Component theme */

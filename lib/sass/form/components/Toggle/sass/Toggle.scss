@@ -100,7 +100,7 @@
       $button-default-color,
       transparent,
       $button-default-color
-    )
+    );
   }
 
   &--primary &__item--active span {
@@ -119,7 +119,7 @@
       theme-color('primary', 'base'),
       transparent,
       theme-color('primary', 'base')
-    )
+    );
   }
 
   &--success &__item--active span {
@@ -138,7 +138,7 @@
       theme-color('success', 'dark'),
       transparent,
       theme-color('success', 'dark')
-    )
+    );
   }
 
   &--danger &__item--active span {
@@ -154,7 +154,7 @@
       theme-color('danger', 'base'),
       transparent,
       theme-color('danger', 'base')
-    )
+    );
   }
 
   &--warning &__item--active span {
@@ -170,7 +170,7 @@
       theme-color('warning', 'base'),
       transparent,
       theme-color('warning', 'base')
-    )
+    );
   }
 
 
@@ -187,7 +187,7 @@
       theme-color('primary', 'dark'),
       white,
       false
-    )
+    );
   }
 
   &--success-gradient &__item--active span {
@@ -203,7 +203,7 @@
       theme-color('success', 'dark'),
       white,
       false
-    )
+    );
   }
 
 
@@ -220,7 +220,7 @@
       theme-color('danger', 'dark'),
       white,
       false
-    )
+    );
   }
 
 
@@ -237,7 +237,7 @@
       theme-color('warning', 'base'),
       $text-color,
       false
-    )
+    );
   }
 
   &__item {
@@ -310,7 +310,7 @@
       text-scale('xs'),
       line-height('xs'),
       $button-border-radius
-    )
+    );
   }
 
   &--sm &__list--single label {
@@ -333,7 +333,7 @@
       text-scale('sm'),
       $line-height-button-sm,
       $button-border-radius
-    )
+    );
   }
 
   &--lg label {
@@ -343,7 +343,7 @@
       text-scale('sm'),
       $line-height-button-sm,
       $button-border-radius
-    )
+    );
   }
 
   &--lg &__list--single label {
@@ -400,7 +400,7 @@
       $button-default-color,
       transparent,
       $button-default-color
-    )
+    );
   }
 
   &--primary &__notch {
@@ -411,7 +411,7 @@
       theme-color('primary', 'base'),
       transparent,
       theme-color('primary', 'base')
-    )
+    );
   }
 
   &--success &__notch {
@@ -422,7 +422,7 @@
       theme-color('success', 'base'),
       transparent,
       theme-color('success', 'base')
-    )
+    );
   }
 
   &--danger &__notch {
@@ -433,7 +433,7 @@
       theme-color('danger', 'base'),
       transparent,
       theme-color('danger', 'base')
-    )
+    );
   }
 
   &--warning &__notch {
@@ -444,7 +444,7 @@
       theme-color('warning', 'base'),
       transparent,
       theme-color('warning', 'base')
-    )
+    );
   }
 
   &--primary-gradient &__notch {
@@ -453,7 +453,7 @@
       theme-color('primary', 'dark'),
       white,
       false
-    )
+    );
   }
 
   &--success-gradient &__notch {
@@ -462,7 +462,7 @@
       theme-color('success', 'dark'),
       white,
       false
-    )
+    );
   }
 
   &--danger-gradient &__notch {
@@ -471,7 +471,7 @@
       theme-color('danger', 'dark'),
       white,
       false
-    )
+    );
   }
 
   &--warning-gradient &__notch {
@@ -480,7 +480,7 @@
       theme-color('warning', 'base'),
       $text-color,
       false
-    )
+    );
   }
 }
 

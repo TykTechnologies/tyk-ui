@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class Select extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     id: PropTypes.string,
     isfield: PropTypes.bool,
     error: PropTypes.oneOfType([
@@ -197,6 +198,8 @@ export default class Select extends Component {
       label,
       id,
       note,
+      readOnly,
+      value,
     } = this.props;
 
     return (
@@ -207,20 +210,23 @@ export default class Select extends Component {
               ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
               : null
           }
-          <div
-            className="tyk-form-control__wrapper"
-            style={this.getNonLabelWidth()}
-          >
-            {
-              this.getSelectComponent()
-            }
-            {
-              note
-                ? <p className="tyk-form-control__help-block">{ note }</p>
-                : null
-            }
-            { this.getSelectError() }
-          </div>
+          {!readOnly && (
+            <div
+              className="tyk-form-control__wrapper"
+              style={this.getNonLabelWidth()}
+            >
+              {
+                this.getSelectComponent()
+              }
+              {
+                note
+                  ? <p className="tyk-form-control__help-block">{ note }</p>
+                  : null
+              }
+              { this.getSelectError() }
+            </div>
+          )}
+          {readOnly && <div>{value || '-'}</div>}
         </div>
       </Fragment>
     );

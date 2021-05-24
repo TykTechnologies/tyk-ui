@@ -17,6 +17,7 @@ import 'brace/theme/github';
 export default class CodeEditor extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     disableValidation: PropTypes.bool,
     id: PropTypes.string,
     error: PropTypes.oneOfType([
@@ -128,6 +129,8 @@ export default class CodeEditor extends Component {
       note,
       disableValidation = false,
       setOptions = null,
+      disabled,
+      readOnly,
     } = this.props;
 
     const finalSetOptions = {
@@ -151,6 +154,7 @@ export default class CodeEditor extends Component {
               onBlur={this.handleOnBlur}
               theme="github"
               editorProps={{ $blockScrolling: true }}
+              readOnly={readOnly || disabled}
               onLoad={(editorInstance) => {
                 // eslint-disable-next-line
                 editorInstance.container.style.resize = 'both';

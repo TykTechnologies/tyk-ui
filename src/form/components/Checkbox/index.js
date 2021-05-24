@@ -11,6 +11,8 @@ export default class Checkbox extends Component {
   static propTypes = {
     /** Disable a checkbox */
     disabled: PropTypes.bool,
+    /** Readonly prop behaves the same as disable on checkboxes */
+    readOnly: PropTypes.bool,
     /** Align checkbox with in same line with other elements */
     inline: PropTypes.bool,
     /** Set a theme for checkbox */
@@ -40,7 +42,9 @@ export default class Checkbox extends Component {
   };
 
   getCssClasses() {
-    const { inline, disabled, theme = '' } = this.props;
+    const {
+      inline, disabled, readOnly, theme = '',
+    } = this.props;
     const cssClasses = [];
 
     cssClasses.push('tyk-checkbox');
@@ -53,7 +57,7 @@ export default class Checkbox extends Component {
       cssClasses.push(...theme.split(' ').map(t => `tyk-checkbox--theme-${t}`));
     }
 
-    if (disabled) {
+    if (disabled || readOnly) {
       cssClasses.push('tyk-checkbox--is-disabled');
     }
 

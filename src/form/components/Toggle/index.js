@@ -14,6 +14,7 @@ class Toggle extends Component {
     ]),
     className: PropTypes.string,
     disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     error: PropTypes.string,
     onChange: PropTypes.func,
     label: PropTypes.oneOfType([
@@ -66,6 +67,7 @@ class Toggle extends Component {
     const {
       className,
       disabled,
+      readOnly,
       size,
       theme,
       direction,
@@ -74,7 +76,7 @@ class Toggle extends Component {
 
     let cssClasses = [
       'tyk-toggle',
-      `tyk-toggle--disabled-${disabled}`,
+      `tyk-toggle--disabled-${readOnly || disabled}`,
       `tyk-toggle--${size || 'md'}`,
       `tyk-toggle--${theme}`,
       `tyk-toggle--${direction}`,
@@ -131,6 +133,7 @@ class Toggle extends Component {
     const {
       children,
       disabled,
+      readOnly,
       label,
       type,
       separated,
@@ -144,6 +147,7 @@ class Toggle extends Component {
           <ToggleContext.Provider
             value={{
               disabled,
+              readOnly,
               onItemSelected: this.onItemSelected.bind(this),
               saveSelectedRef: this.saveSelectedRef.bind(this),
               separated,

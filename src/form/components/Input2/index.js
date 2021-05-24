@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const Input2 = ({
   error,
   onChange,
+  readOnly,
   id,
   inputgroupaddonleft,
   inputgroupaddonright,
@@ -119,28 +120,38 @@ const Input2 = ({
           ? <label htmlFor={id} style={getLabelStyles()}>{ label }</label>
           : null
       }
-      <div
-        className="tyk-form-control__wrapper"
-        style={getNonLabelWidth()}
-      >
-        {
-          inputgroupaddonleft || inputgroupaddonright
-            ? getInputGroupAddon()
-            : getInputElement()
-        }
-        {
-          note
-            ? <p className="tyk-form-control__help-block">{ note }</p>
-            : null
-        }
-        { getInputError() }
-      </div>
+      {!readOnly && (
+        <div
+          className="tyk-form-control__wrapper"
+          style={getNonLabelWidth()}
+        >
+          {
+            inputgroupaddonleft || inputgroupaddonright
+              ? getInputGroupAddon()
+              : getInputElement()
+          }
+          {
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
+              : null
+          }
+          { getInputError() }
+        </div>
+      )}
+      {
+        readOnly && (
+          <div>
+            {value || '-'}
+          </div>
+        )
+      }
     </div>
   );
 };
 
 Input2.propTypes = {
   disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
   id: PropTypes.string,
   error: PropTypes.oneOfType([
     PropTypes.string,

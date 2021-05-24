@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class Textarea extends Component {
   static propTypes = {
     disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     input: PropTypes.instanceOf(Object),
     error: PropTypes.string,
     label: PropTypes.oneOfType([
@@ -87,6 +88,7 @@ export default class Textarea extends Component {
       label,
       note,
       value,
+      readOnly,
       ...rest
     } = this.props;
 
@@ -98,24 +100,27 @@ export default class Textarea extends Component {
               ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
               : null
           }
-          <div
-            className="tyk-form-control__wrapper"
-            style={this.getNonLabelWidth()}
-          >
-            <textarea
-              className="tyk-form-control"
-              {...rest}
-              {...input}
+          {!readOnly && (
+            <div
+              className="tyk-form-control__wrapper"
+              style={this.getNonLabelWidth()}
             >
-              { value }
-            </textarea>
-            {
-              note
-                ? <p className="tyk-form-control__help-block">{ note }</p>
-                : null
-            }
-            {this.getTextareaError()}
-          </div>
+              <textarea
+                className="tyk-form-control"
+                {...rest}
+                {...input}
+              >
+                { value }
+              </textarea>
+              {
+                note
+                  ? <p className="tyk-form-control__help-block">{ note }</p>
+                  : null
+              }
+              {this.getTextareaError()}
+            </div>
+          )}
+          {readOnly && <div>{value || '-'}</div>}
         </div>
       </Fragment>
     );

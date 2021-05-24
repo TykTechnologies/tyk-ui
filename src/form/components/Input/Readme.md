@@ -7,6 +7,8 @@
   type="text"
   theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
+  value="prct"
+  readOnly
 />
 ```
 ```js
