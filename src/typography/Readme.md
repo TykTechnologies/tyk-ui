@@ -17,7 +17,12 @@
 <h3 className="text--default-light">Heading three</h3>
 <h3 className="text--primary">Heading three</h3>
 ```
-**Dashboard Usage**
+**A special class can be applied in order to use the `Open Sans` font:**
+```js
+<h1 class="font-family-medium">Heading 1</h1>
+<h2 class="font-family-bold">Heading 2</h2>
+```
+**More examples & Dashboard Usage**
 ```js
 <h1>H1. Product Page Header</h1>
 <h2>H2. Form Section Header</h2>

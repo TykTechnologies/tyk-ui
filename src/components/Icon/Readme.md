@@ -1,3 +1,5 @@
+## With ReactJS
+
 ```js
 import Icon from './index';
 <div>
@@ -48,3 +50,10 @@ import Icon from './index';
   <Icon family="tykon" type="x" />
 </div>
 ```
+
+## With HTML
+An icon can be defined as follows, e.g the icon of type "filter"
+```js
+<i class="tyk-icon tykon tykon-filter"></i>
+```
+All icon types refered in the above list.

@@ -1,5 +1,7 @@
 **Button Themes**
 
+## With ReactJS
+
 *Default theme*
 ```js
 <Button theme="primary">Push Me</Button> &ensp;
@@ -82,4 +84,30 @@
 <Button size="md" theme="primary" onClick={(e) => {
   console.log('Button has been clicked', e);
 }}>Click me & Check the console</Button>
+```
+
+## With HTML
+To start with, `tyk-button` class must always be used, as it will give the button the main styling.
+```html
+<button class="tyk-button" </button>
+```
+ Then it is used as a "prefix" followed by double hyphen to apply:
+- *Coloring*: Refers to the `theme` attribute mentioned above
+```css
+tyk-button--danger
+```
+- *Sizing*: More info in the table on the top of the page. 
+```css
+tyk-button--md
+```
+- *Theming*: Just use the main class as a prefix with a double hyphen followed by the theme name.
+```css
+tyk-button--primary-link
+```
+
+Lastly, a disabled state where you should just add ```disabled``` to its class.
+
+So a full button of a primary color, default theme and of size medium would be
+```html
+<button class="tyk-button tyk-button--danger tyk-button--md" type="button"> </button>
 ```

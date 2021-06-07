@@ -1,5 +1,6 @@
 **Panel**
 
+## With ReactJS
 *Panel themes*
 ```js
 import Button from '../Button';
@@ -63,3 +64,18 @@ import Button from '../Button';
   </Panel.Body>
 </Panel>
 ```
+
+## With HTML
+To start with, `tyk-panel` class must always be used, as it will give the element the main styling.
+Then it is used as a "prefix" followed by double hyphen to define the main container and double underscore to define the header and body containers.
+
+So a complete panel of theme "primary" should be defined as below:
+```js
+<div class="tyk-panel tyk-panel--primary">
+  <div class="tyk-panel__header">Panel Header</div>
+  <div class="tyk-panel__body">Panel body content</div>
+</div>
+```
+
+All available theme colors are refered in the "Panel Themes" section above.
+
