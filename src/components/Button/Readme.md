@@ -89,7 +89,7 @@
 ## With HTML
 To start with, `tyk-button` class must always be used, as it will give the button the main styling.
 ```html
-<button class="tyk-button" </button>
+<button class="tyk-button"> </button>
 ```
  Then it is used as a "prefix" followed by double hyphen to apply:
 - *Coloring*: Refers to the `theme` attribute mentioned above
