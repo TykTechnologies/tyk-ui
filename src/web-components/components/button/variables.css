@@ -1,0 +1,48 @@
+:root {
+  --tyk-button-font-family: var(--tyk-font-family-bold);
+  --tyk-button-border-radius: var(--tyk-spacing-md);
+
+  --tyk-padding-y-button-sm: 3px;
+  --tyk-padding-x-button-sm: var(--tyk-spacing-base);
+  --tyk-padding-y-button-md: 8px;
+  --tyk-padding-x-button-md: 23px;
+  --tyk-padding-y-button-lg: 13px;
+  --tyk-padding-x-button-lg: 23px;
+
+  --tyk-line-height-button-sm: var(--tyk-xs-line-height);
+  --tyk-line-height-button-md: var(--tyk-md-line-height);
+  --tyk-line-height-button-lg: var(--tyk-lg-line-height);
+
+  --tyk-button-default-color: var(--tyk-color-default-base);
+  --tyk-button-default-hover-color: var(--tyk-color-default-dark);
+  --tyk-button-default-gradient-start-color: var(--tyk-color-default-base);
+  --tyk-button-default-gradient-end-color: var(--tyk-color-default-dark);
+
+  --tyk-button-primary-color: var(--tyk-color-primary-light);
+  --tyk-button-primary-hover-color: var(--tyk-color-default-light);
+  --tyk-button-primary-text-color: --tyk-text-color;
+  --tyk-button-primary-gradient-start-color: var(--tyk-color-primary-base);
+  --tyk-button-primary-gradient-end-color: var(--tyk-color-primary-dark);
+
+  --tyk-button-success-color: var(--tyk-color-success-base);
+  --tyk-button-success-hover-color: var(--tyk-color-success-dark);
+  --tyk-button-success-gradient-start-color: var(--tyk-color-success-base);
+  --tyk-button-success-gradient-end-color: var(--tyk-color-success-dark);
+
+  --tyk-button-danger-color: var(--tyk-color-danger-base);
+  --tyk-button-danger-hover-color: var(--tyk-color-danger-dark);
+  --tyk-button-danger-gradient-start-color: var(--tyk-color-danger-base);
+  --tyk-button-danger-gradient-end-color: var(--tyk-color-danger-dark);
+
+  --tyk-button-warning-color: var(--tyk-color-warning-base);
+  --tyk-button-warning-font-color: white;
+  --tyk-button-warning-gradient-start-color: var(--tyk-color-warning-base);
+  --tyk-button-warning-gradient-end-color: var(--tyk-color-warning-light);
+
+  --tyk-button-info-color: var(--tyk-color-info-base);
+  --tyk-button-info-font-color: --tyk-text-color;
+  --tyk-button-info-gradient-start-color: var(--tyk-color-info-base);
+  --tyk-button-info-gradient-end-color: var(--tyk-color-info-light);
+
+  --tyk-button-icon-only-background-hover: var(--tyk-color-background-light);
+}

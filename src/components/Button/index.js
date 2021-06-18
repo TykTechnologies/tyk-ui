@@ -2,6 +2,7 @@
 
 import React, { Fragment, cloneElement } from 'react';
 import PropTypes from 'prop-types';
+import '../../web-components/components/button';
 
 import Icon from '../Icon';
 /**
@@ -117,7 +118,10 @@ const Button = React.forwardRef((props, ref) => {
 
 
   return (
-    getButtonType()
+    <>
+      {getButtonType()}
+      {/* <tyk-button>abc</tyk-button> */}
+    </>
   );
 });
 

@@ -1,0 +1,153 @@
+:root {
+  --tyk-general-border-radius: 18px;
+  --tyk-general-border-width: 2px;
+
+  --tyk-color-default-base: #36364C;
+  --tyk-color-default-light: #C3C3E5;
+  --tyk-color-default-dark: #505071;
+  --tyk-color-primary-base: #A2A2CC;
+  --tyk-color-primary-light: #EDEDF9;
+  --tyk-color-primary-dark: #505071;
+  --tyk-color-success-base: #00d9ba;
+  --tyk-color-success-light: #C2F2E9;
+  --tyk-color-success-dark: #00B798;
+  --tyk-color-info-base: #82BBC6;
+  --tyk-color-info-light: #D3EBEF;
+  --tyk-color-danger-base: #FF6C7D;
+  --tyk-color-danger-extra-light: #F5CCD1;
+  --tyk-color-danger-light: #FFBBC5;
+  --tyk-color-danger-dark: #EA4766;
+  --tyk-color-warning-base: #D6B218;
+  --tyk-color-warning-light: #FFE885;
+  --tyk-color-foreground-base: #393939;
+  --tyk-color-foreground-base-dark: #22272B;
+  --tyk-color-foreground-light: #5a5a68;
+  --tyk-color-foreground-dark: #161B20;
+  --tyk-color-foreground-extra-dark: #0A0D10;
+  --tyk-color-backround-base: #E1E1E1;
+  --tyk-color-backround-light: #EDEDF9;
+  --tyk-color-backround-dark: #43435B;
+  --tyk-color-backround-extra-dark: #0A0D10;
+
+  --tyk-text-color: var(--tyk-color-primary-dark);
+  --tyk-label-color: var(--tyk-color-default-base);
+
+  --tyk-contrast-color-dark-primary: rgb(255, 255, 255);
+  --tyk-contrast-color-dark-secondary: rgba(255, 255, 255, .70);
+  --tyk-contrast-color-dark-disabled: rgba(255, 255, 255, .5);
+  --tyk-contrast-color-dark-hint: rgba(255, 255, 255, .12);
+  --tyk-contrast-color-light-primary: rgba(0, 0, 0, .87);
+  --tyk-contrast-color-light-secondary: rgba(0, 0, 0, .54);
+  --tyk-contrast-color-light-disabled: rgba(0, 0, 0, .38);
+  --tyk-contrast-color-light-hint: rgba(0, 0, 0, .12);
+
+  --tyk-xs-line-height: 16px;
+  --tyk-sm-line-height: 19px;
+  --tyk-md-line-height: 22px;
+  --tyk-lg-line-height: 23px;
+  --tyk-xl-line-height: 24px;
+  --tyk-xxl-line-height: 30px;
+
+  --tyk-xs-font-size: 12px;
+  --tyk-sm-font-size: 14px;
+  --tyk-md-font-size: 16px;
+  --tyk-lg-font-size: 17px;
+  --tyk-xl-font-size: 20px;
+  --tyk-xxl-font-size: 25px;
+
+  --tyk-base-font-size: var(--tyk-sm-font-size);
+  --tyk-base-line-height: var(--tyk-sm-line-height);
+
+  --tyk-text-xs-font-size: var(--tyk-xs-font-size);
+  --tyk-text-xs-line-height: var(--tyk-xs-line-height);
+  --tyk-text-sm-font-size: var(--tyk-sm-font-size);
+  --tyk-text-sm-line-height: var(--tyk-sm-line-height);
+  --tyk-text-base-font-size: var(--tyk-base-font-size);
+  --tyk-text-base-line-height: var(--tyk-base-line-height);
+  --tyk-text-md-font-size: var(--tyk-md-font-size);
+  --tyk-text-md-line-height: var(--tyk-md-line-height);
+  --tyk-text-lg-font-size: var(--tyk-lg-font-size);
+  --tyk-text-lg-line-height: var(--tyk-lg-line-height);
+  --tyk-text-xl-font-size: var(--tyk-xl-font-size);
+  --tyk-text-xl-line-height: var(--tyk-xl-line-height);
+  --tyk-text-xxl-font-size: var(--tyk-xxl-font-size);
+  --tyk-text-xxl-line-height: var(--tyk-xxl-line-height);
+
+  --tyk-spacing-xs: 5px;
+  --tyk-spacing-sm: 10px;
+  --tyk-spacing-base: 15px;
+  --tyk-spacing-md: 20px;
+  --tyk-spacing-lg: 25px;
+  --tyk-spacing-xl: 30px;
+  --tyk-spacing-xxl: 40px;
+
+  --tyk-grid-gutter: var(--tyk-spacing-md);
+  --tyk-grid-max-width: 1200px + calc(var(--tyk-grid-gutter) * 2);
+  --tyk-grid-columns: 12;
+
+  --tyk-breakpoint-xs: 420px;
+  --tyk-breakpoint-sm: 768px;
+  --tyk-breakpoint-md: 1024px;
+  --tyk-breakpoint-lg: 1248px;
+
+  --tyk-font-family-regular: 'OpenSans-regular';
+  --tyk-font-family-medium: 'OpenSans-SemiBold';
+  --tyk-font-family-bold: 'OpenSans-Bold';
+
+  --tyk-headings-color: #36364C;
+  --tyk-headings-font-family-regular: 'smoolthan_regular';
+  --tyk-headings-font-family-medium: 'smoolthan_medium';
+  --tyk-headings-font-family-bold: 'smoolthan_bold';
+
+  --tyk-headings-margin-bottom: 15px;
+  --tyk-headings-font-family: var(--tyk-headings-font-family-medium);
+  --tyk-headings-font-weight: 500;
+  --tyk-headings-line-height: var(--tyk-base-line-height);
+
+  --tyk-form-group-margin-bottom: 15px;
+  --tyk-form-control-height: 39px;
+  --tyk-form-control-padding-left: var(--tyk-spacing-md);
+  --tyk-form-control-padding-right: var(--tyk-spacing-md);
+  --tyk-form-control-padding-top: 10px;
+  --tyk-form-control-padding-bottom: 10px;
+  --tyk-form-control-addon-background-color: white;
+  --tyk-form-control-disabled-background-color: var(--tyk-color-background-light);
+  --tyk-form-control-border: var(--tyk-general-border-width) solid var(--tyk-color-default-light);
+  --tyk-form-control-disabled-border: var(--tyk-general-border-width) solid var(--tyk-color-default-light);
+  --tyk-form-control-placeholder-color: #A2A2CC;
+  --tyk-form-control-disabled-background-color: var(--tyk-color-default-light);
+  --tyk-form-control-disabled-color: var(--tyk-text-color);
+  --tyk-form-control-border-focus: 2px solid var(--tyk-color-success-base);
+  --tyk-form-control-placeholder-font-family: var(--tyk-font-family-medium);
+  --tyk-form-control-error-colour: var(--tyk-color-danger-dark);
+  --tyk-form-default-color: var(--tyk-color-default-light);
+  --tyk-form-primary-color: var(--tyk-color-primary-base);
+  --tyk-form-success-color: var(--tyk-color-success-base);
+
+  --tyk-error-border: var(--tyk-general-border-width) solid var(--tyk-color-danger-base);
+  --tyk-error-border-left: 2px solid var(--tyk-color-danger-dark);
+  --tyk-help-block-color: var(--tyk-color-default-base);
+  --tyk-help-block-font-style: normal;
+  --tyk-help-block-padding: 0 0 0 var(--tyk-form-control-padding-left);
+  --tyk-error-message-padding: 0 0 0 var(--tyk-form-control-padding-left);
+  --tyk-default-pill-background-color: var(--tyk-color-default-base);
+  --tyk-default-pill-color: white;
+  --tyk-pill-margin: 0 0 10px 0;
+  --tyk-default-outline-pill-box-shadow: inset 0px 0px 0px 2px var(--tyk-color-default-base);
+  --tyk-default-outline-pill-color: var(--tyk-text-color);
+
+  --tyk-title-medium-font-size: 16px;
+
+  --tyk-bottom-buffer-large: var(--tyk-spacing-md);
+  --tyk-bottom-buffer-medium: 10px;
+  --tyk-bottom-buffer-small: 5px;
+  --tyk-top-buffer-large: var(--tyk-spacing-md);
+  --tyk-top-buffer-medium: 10px;
+  --tyk-top-buffer-small: 5px;
+  --tyk-right-buffer-large: var(--tyk-spacing-md);
+  --tyk-right-buffer-medium: 10px;
+  --tyk-right-buffer-small: 5px;
+  --tyk-left-buffer-large: var(--tyk-spacing-md);
+  --tyk-left-buffer-medium: 10px;
+  --tyk-left-buffer-small: 5px;
+}

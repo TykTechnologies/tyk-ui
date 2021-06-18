@@ -12,6 +12,8 @@
     "jsx-a11y/no-autofocus": false,
     "jsx-a11y/no-noninteractive-element-interactions": false,
     "jsx-a11y/anchor-is-valid": false,
+    "lines-between-class-members": "off",
+    "max-len": "warn",
     "no-console": 0,
     "import/prefer-default-export": 0,
     "indent": ["error", 2, {
@@ -21,5 +23,8 @@
   "globals": {
     "window": true,
     "document": true
+  },
+  "env": {
+    "browser": true
   }
 }

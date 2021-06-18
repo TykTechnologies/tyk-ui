@@ -11,6 +11,35 @@
 <Button theme="default">Push Me</Button> &ensp;
 <Button theme="white">Push Me</Button> &ensp;
 <Button>Push Me</Button>
+
+<tyk-button onclick="javascript: console.log('vbnm')" theme="primary">
+  <tyk-icon slot="left-icon" family="tykon" type="profile"></tyk-icon>
+  <span>yo <b>bu</b>tton</span>
+  <tyk-icon slot="right-icon" family="tykon" type="profile"></tyk-icon>
+</tyk-button>
+
+<tyk-button onclick="javascript: console.log('vbnm')" theme="primary">
+  <tyk-icon family="tykon" type="profile"></tyk-icon>
+  <span>yo button</span>
+  <tyk-icon family="tykon" type="profile"></tyk-icon>
+</tyk-button>
+
+<tyk-button onclick="javascript: console.log('vbn22m')" theme="primary">
+  yodll
+</tyk-button>
+
+<tyk-button onclick="javascript: console.log('vbnm')" theme="primary">
+  <tyk-icon slot="left-icon" family="tykon" type="profile"></tyk-icon>
+</tyk-button>
+
+<tyk-button
+  href="http://leeloo.ro"
+  size="sm"
+  noStyle
+  theme="primary"
+>
+  je suis anchor
+</tyk-button>
 ```
 *Link theme*
 ```js
