@@ -35,6 +35,7 @@ const StringBuilder = (props) => {
     dropdownTriggerKey,
     invalidTokenRegex,
     name,
+    wrapperClassName = '',
   } = props;
   const [tokenValue, setTokenValue] = useState(value);
   const [stringBuilderHeight, setStringBuilderHeight] = useState();
@@ -150,7 +151,7 @@ const StringBuilder = (props) => {
   };
 
   return (
-    <div className="string-builder" ref={containerRef}>
+    <div className={`string-builder ${wrapperClassName}`} ref={containerRef}>
       <div className={getCssClasses()}>
         {label && (
           <label style={{ flexBasis: labelwidth || 'auto' }}>{label}</label>
@@ -267,6 +268,7 @@ StringBuilder.propTypes = {
   /** Allow users to search from options */
   allowSearch: PropTypes.bool,
   name: PropTypes.string,
+  wrapperClassName: PropTypes.string,
 };
 
 StringBuilder.defaultProps = {
