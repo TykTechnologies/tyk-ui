@@ -2,7 +2,7 @@
   import React, {useState} from 'react';
   import Input2 from '../Input2';
 
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState([]);
 
   const withErrorMessage = fn => (errorMessage, ...args) => (value) => {
     const result = fn(value, ...args);
@@ -13,6 +13,7 @@
   const isRequired = formikRequired('This field is required');
 
   <EditableList2
+    hideOnEmpty={false}
     onChange={setValue}
     value={value}
     label="Map Client to Policy"
