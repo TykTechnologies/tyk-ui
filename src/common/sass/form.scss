@@ -161,7 +161,7 @@
     border: $form-control-border;
     display: flex;
     height: $form-control-height;
-    padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
+    padding: $form-control-addon-padding-top $form-control-addon-padding-right $form-control-addon-padding-bottom $form-control-addon-padding-left;
 
     &:first-child {
       border-right: 0;
