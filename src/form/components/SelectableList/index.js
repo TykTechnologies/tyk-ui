@@ -16,6 +16,7 @@ const SelectableList = (props) => {
     onChange,
     theme,
     primaryKey,
+    wrapperClassName = '',
   } = props;
 
   const handleOnSelect = (event) => {
@@ -61,7 +62,7 @@ const SelectableList = (props) => {
   );
 
   return (
-    <List {...props} theme={theme || 'default'} className="tyk-selectable-list">
+    <List {...props} theme={theme || 'default'} className={`tyk-selectable-list ${wrapperClassName}`}>
       {
         !items.length
           ? (
@@ -119,6 +120,7 @@ SelectableList.propTypes = {
     PropTypes.string,
   ]),
   theme: PropTypes.string,
+  wrapperClassName: PropTypes.string,
 };
 
 SelectableList.defaultProps = {

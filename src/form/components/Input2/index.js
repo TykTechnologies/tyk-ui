@@ -13,6 +13,7 @@ const Input2 = ({
   note,
   theme,
   value,
+  wrapperClassName = '',
   ...rest
 }, ref) => {
   const inputRef = useRef();
@@ -54,7 +55,7 @@ const Input2 = ({
   );
 
   const getCssClasses = () => {
-    const cssClasses = ['tyk-form-group'];
+    const cssClasses = [wrapperClassName, 'tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
     if (themes.length) {
@@ -182,6 +183,7 @@ Input2.propTypes = {
     PropTypes.number,
     PropTypes.string,
   ]),
+  wrapperClassName: PropTypes.string,
 };
 
 export default forwardRef(Input2);

@@ -33,6 +33,7 @@ class Multiselect extends Component {
     note: PropTypes.string,
     maxSelections: PropTypes.number,
     value: PropTypes.instanceOf(Array),
+    wrapperClassName: PropTypes.string,
   };
 
   state = {
@@ -76,8 +77,8 @@ class Multiselect extends Component {
   }
 
   getCssClasses() {
-    const { error } = this.props;
-    const cssClasses = ['tyk-multiselect'];
+    const { error, wrapperClassName = '' } = this.props;
+    const cssClasses = [wrapperClassName, 'tyk-multiselect'];
 
     if (error) {
       cssClasses.push('has-error');

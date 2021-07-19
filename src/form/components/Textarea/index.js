@@ -21,11 +21,14 @@ export default class Textarea extends Component {
     id: PropTypes.string,
     theme: PropTypes.string,
     value: PropTypes.string,
+    wrapperClassName: PropTypes.string,
   };
 
   getCssClasses() {
-    const { error, theme, labelwidth } = this.props;
-    const cssClasses = ['tyk-form-group'];
+    const {
+      error, theme, labelwidth, wrapperClassName = '',
+    } = this.props;
+    const cssClasses = [wrapperClassName, 'tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
     if (themes.length) {

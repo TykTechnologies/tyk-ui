@@ -111,6 +111,7 @@ function Combobox2(props) {
      * Returns an error string in case of error otherwise it returns undefined
      */
     validateOnChange = () => { },
+    wrapperClassName = '',
     ...restProps
   } = props;
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
@@ -143,6 +144,7 @@ function Combobox2(props) {
 
   function getCssClasses() {
     return [
+      wrapperClassName,
       'tyk-form-group',
       'tyk-combobox2',
       ...getThemeClasses(),
@@ -608,6 +610,7 @@ Combobox2.propTypes = {
   showSearch: PropTypes.bool,
   required: PropTypes.bool,
   validateOnChange: PropTypes.func,
+  wrapperClassName: PropTypes.string,
 };
 
 export default Combobox2;

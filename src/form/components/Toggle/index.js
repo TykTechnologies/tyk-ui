@@ -35,6 +35,7 @@ class Toggle extends Component {
       PropTypes.string,
     ]),
     onDark: PropTypes.bool,
+    wrapperClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -72,9 +73,11 @@ class Toggle extends Component {
       theme,
       direction,
       onDark,
+      wrapperClassName = '',
     } = this.props;
 
     let cssClasses = [
+      wrapperClassName,
       'tyk-toggle',
       `tyk-toggle--disabled-${readOnly || disabled}`,
       `tyk-toggle--${size || 'md'}`,
