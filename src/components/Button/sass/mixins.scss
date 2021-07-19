@@ -49,7 +49,7 @@
   $active-border: darken($border, 12.5%)
 ) {
   border: $general-border-width solid $border;
-  background-color: white;
+  background-color: transparent;
   color: $color;
 
   &:hover {
@@ -61,7 +61,7 @@
     color: $border;
 
     &:hover {
-      background-color: white;
+      background-color: transparent;
       color: $border;
     }
   }
