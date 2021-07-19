@@ -25,6 +25,7 @@ const EditableList2 = ({
   value = [],
   onChange = () => {},
   hideOnEmpty = true,
+  wrapperClassName = '',
 }) => {
   const [internalErrors, setInteranlErrors] = useState(null);
 
@@ -85,7 +86,7 @@ const EditableList2 = ({
   };
 
   return (
-    <div className={`editable-list__wrapper tyk-form-group tyk-form-group--default ${error ? 'has-error' : ''}`}>
+    <div className={`editable-list__wrapper tyk-form-group tyk-form-group--default ${error ? 'has-error' : ''} ${wrapperClassName}`}>
       <Header
         disabled={disabled}
         readOnly={readOnly}
@@ -182,6 +183,7 @@ EditableList2.propTypes = {
   ]),
   error: PropTypes.string,
   hideOnEmpty: PropTypes.bool,
+  wrapperClassName: PropTypes.string,
 };
 
 export default EditableList2;

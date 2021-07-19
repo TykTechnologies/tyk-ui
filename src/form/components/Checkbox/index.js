@@ -39,13 +39,16 @@ export default class Checkbox extends Component {
     checked: PropTypes.string,
     /** Callback function executed on change of checkbox */
     onChange: PropTypes.func,
+    /** CSS classes added to the wrapper of the component */
+    wrapperClassName: PropTypes.string,
   };
 
   getCssClasses() {
     const {
-      inline, disabled, readOnly, theme = '',
+      inline, disabled, readOnly, theme = '', wrapperClassName = '',
     } = this.props;
-    const cssClasses = [];
+
+    const cssClasses = [wrapperClassName];
 
     cssClasses.push('tyk-checkbox');
 

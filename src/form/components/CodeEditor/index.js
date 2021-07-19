@@ -40,6 +40,7 @@ export default class CodeEditor extends Component {
     theme: PropTypes.string,
     value: PropTypes.string,
     setOptions: PropTypes.instanceOf(Object),
+    wrapperClassName: PropTypes.string,
   }
 
   constructor(props) {
@@ -64,8 +65,10 @@ export default class CodeEditor extends Component {
   }
 
   getCssClasses() {
-    const { error, theme, labelwidth } = this.props;
-    const cssClasses = ['tyk-form-group'];
+    const {
+      error, theme, labelwidth, wrapperClassName = '',
+    } = this.props;
+    const cssClasses = [wrapperClassName, 'tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
     if (themes.length) {

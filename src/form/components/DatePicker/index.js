@@ -25,6 +25,7 @@ const DatePicker = (props) => {
     theme,
     config,
     value,
+    wrapperClassName = '',
   } = props;
   const [pickerInstance, setPickerInstance] = useState(null);
   const dateRef = useRef(null);
@@ -103,7 +104,7 @@ const DatePicker = (props) => {
   }, [prevValue, value, pickerInstance]);
 
   const getCssClasses = () => {
-    const cssClasses = ['tyk-form-group tyk-form-group--addon-right'];
+    const cssClasses = [wrapperClassName, 'tyk-form-group tyk-form-group--addon-right'];
     const themes = theme ? theme.split(' ') : [];
 
     if (themes.length) {
@@ -290,6 +291,7 @@ DatePicker.propTypes = {
     PropTypes.instanceOf(Object),
     PropTypes.string,
   ]),
+  wrapperClassName: PropTypes.string,
 };
 
 DatePicker.defaultProps = {

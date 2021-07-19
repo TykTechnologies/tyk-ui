@@ -68,6 +68,7 @@ export default class Dropdown extends Component {
     stopButtonTextChange: PropTypes.bool,
     showTriggerButton: PropTypes.bool,
     showCheckmark: PropTypes.bool,
+    wrapperClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -218,8 +219,9 @@ export default class Dropdown extends Component {
       btnGroupSize,
       className,
       btnTheme,
+      wrapperClassName = '',
     } = this.props;
-    let cssClasses = ['tyk-dropdown'];
+    let cssClasses = [wrapperClassName, 'tyk-dropdown'];
 
     cssClasses.push(`theme-${btnTheme || 'default'}`);
 
