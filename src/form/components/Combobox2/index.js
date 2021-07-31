@@ -239,8 +239,8 @@ function Combobox2(props) {
 
   function selectValue({ id }) {
     const val = values.find(v => v.id === id);
-    let finalValues;
-    let selectedValues;
+    let finalValues = value;
+    let selectedValues = values;
 
     if (val.selected) {
       if (!required || max !== 1) {
