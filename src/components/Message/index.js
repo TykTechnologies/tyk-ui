@@ -30,7 +30,7 @@ function Message({
         { children }
       </div>
       {onClose && (
-        <Icon family="tykon" type="x" onClick={onClose ?? (() => {})} />
+        <Icon family="tykon" type="x" onClick={onClose} />
       )}
     </div>
   );

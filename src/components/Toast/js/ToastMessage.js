@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from '../../Button';
 import Message from '../../Message';
 import { useTimeout } from '../../../hooks';
 
@@ -26,14 +25,11 @@ const ToastMessage = (props) => {
   useTimeout(() => handleClose(index), opts.delay);
 
   return (
-    <Message className="tyk-toast__message" theme={opts.theme}>
-      <Button
-        className="tyk-toast-message__button"
-        iconOnly
-        iconType="times"
-        // eslint-disable-next-line react/jsx-no-bind
-        onClick={handleClose.bind(null, index)}
-      />
+    <Message
+      className="tyk-toast__message"
+      theme={opts.theme}
+      onClose={() => handleClose(index)}
+    >
       {children}
     </Message>
   );
