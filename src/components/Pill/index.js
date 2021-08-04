@@ -12,10 +12,10 @@ const Pill = (props) => {
   } = props;
 
   const getCssClasses = () => {
-    let cssClasses = [`tyk-pill tyk-pill--${theme}`];
+    let cssClasses = ['tyk-pill', ...theme.split(' ').map(t => `tyk-pill--${t}`)];
 
     if (className) {
-      cssClasses = cssClasses.concat(className.split(' '));
+      cssClasses = cssClasses.concat(className);
     }
 
     return cssClasses.join(' ');

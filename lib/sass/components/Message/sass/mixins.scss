@@ -6,4 +6,8 @@
   background-color: $background;
   border: $general-border-width solid $border;
   color: $color;
+
+  & > .tyk-icon:first-child {
+    background-color: $border;
+  }
 }

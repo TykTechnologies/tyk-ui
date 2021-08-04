@@ -1,100 +1,72 @@
-import React, { useState, useRef } from 'react';
-import ReactDom from 'react-dom';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const Tooltip = ({
-  render, children, position = 'top', style, ...props
-}) => {
-  const [active, setActive] = useState(false);
+import FloatingContainer from '../FloatingContainer';
+import Icon from '../Icon';
 
-  const id = 'tyk-tooltip';
-  let domNode = document.querySelector(`#${id}`);
-  if (!domNode) {
-    domNode = document.createElement('div');
-    domNode.setAttribute('id', id);
-    document.body.appendChild(domNode);
-  }
-
-  const sourceRef = useRef(domNode);
+function Tooltip({
+  render, children, position = 'top', style, closable, ...props
+}) {
+  const [isActive, setIsActive] = useState(false);
+  const wrapperRef = useRef(null);
   const tooltipRef = useRef(null);
-
-  const getOffsetTop = (element) => {
-    let offsetTop = 0;
-
-    while (element) {
-      offsetTop += element.offsetTop;
-      // eslint-disable-next-line no-param-reassign
-      element = element.offsetParent;
+  const activeEvents = closable
+    ? {
+      onClick: () => setIsActive(true),
     }
-    return offsetTop;
-  };
-
-  const getTooltipStyles = () => {
-    const {
-      top, left, width, height,
-    } = sourceRef.current.getBoundingClientRect();
-    const tooltipOffsetTop = getOffsetTop(sourceRef.current);
-    const tooltipLeft = left + width / 2 + window.scrollX;
-    const internalStyle = {
-      position: 'absolute',
-      left: tooltipLeft,
-      zIndex: '99999',
-      maxWidth: '450px',
-      overflowWrap: 'break-word',
+    : {
+      onMouseEnter: () => setIsActive(true),
+      onMouseLeave: () => setIsActive(false),
+      onFocus: () => setIsActive(true),
+      onBlur: () => setIsActive(false),
     };
 
-    if (position === 'bottom') {
-      internalStyle.top = `${tooltipOffsetTop + height + 8}px`;
-    }
+  function handleDocumentClick(e) {
+    if (tooltipRef.current?.contains?.(e.target)) return;
+    setIsActive(false);
+  }
 
-    if (position === 'top') {
-      internalStyle.bottom = `${window.innerHeight - top - window.scrollY + 8}px`;
-    }
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick, true);
+    return () => document.removeEventListener('click', handleDocumentClick, true);
+  }, []);
 
-    return internalStyle;
-  };
-
-  const renderToolTip = () => {
-    if (active) {
-      return (
-        ReactDom.createPortal(
-          <div
-            className={`tyk-tooltip__${position}`}
-            style={getTooltipStyles()}
-            ref={tooltipRef}
-          >
-            <div className="tyk-tooltip-content">
-              {render}
-            </div>
-          </div>,
-          domNode,
-        )
-      );
-    }
-    return null;
-  };
-
-  const source = (
-    <span
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
-      onFocus={() => setActive(true)}
-      onBlur={() => setActive(false)}
-      ref={sourceRef}
-      key="0"
+  return (
+    <div
       className="tyk-tooltip__wrapper"
-      style={{
-        display: 'inline-block',
-        ...style,
-      }}
+      style={{ display: 'inline-block', ...style }}
+      ref={wrapperRef}
+      {...activeEvents}
       {...props}
     >
       {children}
-    </span>
+      {isActive && (
+        <FloatingContainer
+          element={wrapperRef}
+          forceDisplay={position}
+          offset={20}
+        >
+          <div className="tyk-tooltip" ref={tooltipRef}>
+            <Icon family="tykon" type="help" />
+            <div className="tyk-tooltip__content">
+              {render}
+            </div>
+            {closable && (
+              <Icon
+                family="tykon"
+                type="x"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsActive(false);
+                }}
+              />
+            )}
+          </div>
+        </FloatingContainer>
+      )}
+    </div>
   );
-
-  return [source, renderToolTip()];
-};
+}
 
 Tooltip.propTypes = {
   children: PropTypes.node.isRequired,
@@ -109,6 +81,10 @@ Tooltip.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  /** if `true` the tooltip is activated on click and an "x" is displayed to close it;
+   * if `false` the tooltip is activated on hover and it closes when no longer hovering
+  */
+  closable: PropTypes.bool,
 };
 
 export default Tooltip;

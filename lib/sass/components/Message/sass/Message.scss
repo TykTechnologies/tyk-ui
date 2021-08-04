@@ -4,9 +4,35 @@
 @import './variables';
 
 .tyk-message {
+  display: flex;
+  align-items: center;
   border-radius: $tyk-message-border-radius;
   margin-bottom: map-get($spacing, 'md');
   padding: $tyk-message-padding-top $tyk-message-padding-right $tyk-message-padding-bottom $tyk-message-padding-left;
+
+  &__content {
+    flex-grow: 1;
+    margin-left: map-get($spacing, 'md');
+  }
+
+  > .tyk-icon:first-child {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+
+    &:before {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  > .tyk-icon:last-child {
+    cursor: pointer;
+  }
 
   &--default {
     @include message-variant(
@@ -14,6 +40,10 @@
       $tyk-message-default-border,
       $tyk-message-default-text-color
     );
+
+    > .tyk-icon:first-child {
+      transform: rotate(180deg);
+    }
   }
 
   &--info {
