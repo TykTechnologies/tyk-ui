@@ -13,11 +13,13 @@
   &__content {
     flex-grow: 1;
     margin-left: map-get($spacing, 'md');
+    margin-right: map-get($spacing, 'md');
   }
 
   > .tyk-icon:first-child {
     width: 32px;
     height: 32px;
+    flex-shrink: 0;
     border-radius: 50%;
     color: white;
 

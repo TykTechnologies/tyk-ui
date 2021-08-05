@@ -77,15 +77,13 @@
 
     &-link {
       @include button-variant-link(
-        theme-color('primary', 'base')
+        $button-primary-color
       );
     }
 
     &-outline {
       @include button-variant-outline(
         $button-primary-color,
-        theme-color('primary', 'base'),
-        theme-color('primary', 'base')
       );
     }
 
