@@ -22,13 +22,19 @@
     }
   }
 
-  > .tyk-icon:last-child {
-    cursor: pointer;
+  > .tyk-icon + .tyk-tooltip__content {
+    margin-left: map-get($spacing, 'md');
   }
 
   &__content {
-    margin-left: map-get($spacing, 'md');
-    margin-right: map-get($spacing, 'md');
     color: theme-color('default', 'dark');
+
+    + .tyk-icon {
+      margin-left: map-get($spacing, 'md');
+    }
+  }
+
+  > .tyk-icon:last-child {
+    cursor: pointer;
   }
 }

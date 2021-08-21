@@ -5,7 +5,13 @@ import FloatingContainer from '../FloatingContainer';
 import Icon from '../Icon';
 
 function Tooltip({
-  render, children, position = 'top', style, closable, ...props
+  render,
+  children,
+  position = 'top',
+  style,
+  icon = false,
+  closable,
+  ...props
 }) {
   const [isActive, setIsActive] = useState(false);
   const wrapperRef = useRef(null);
@@ -47,7 +53,13 @@ function Tooltip({
           offset={20}
         >
           <div className="tyk-tooltip" ref={tooltipRef}>
-            <Icon family="tykon" type="help" />
+            {icon && (
+              icon === true ? (
+                <Icon family="tykon" type="help" />
+              ) : (
+                icon
+              )
+            )}
             <div className="tyk-tooltip__content">
               {render}
             </div>
@@ -80,6 +92,13 @@ Tooltip.propTypes = {
   render: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string,
+  ]),
+  /** if `true` displays the "question mark" icon;
+   * optionally you can pass a different icon
+  */
+  icon: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.node,
   ]),
   /** if `true` the tooltip is activated on click and an "x" is displayed to close it;
    * if `false` the tooltip is activated on hover and it closes when no longer hovering
