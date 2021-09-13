@@ -1,17 +1,5 @@
 Tyk-ui is our library of reusable presentational UI components. The full list of components and their documentation can be checked here:
-https://tyktechnologies.github.io/tyk-ui-styleguide/
-
-## Local setup
-
-**Installing library with npm**
-
-*Pre-installation steps*
-Before installing the library, bear in mind that this is a private npm module, therefore in order to have access to it follow next steps:
-
-  - Create an account on `https://www.npmjs.com/`
-  - Give your username to any owner of the `tyk-ui` library, so that you can be added as a member of the project
-  - Run `npm adduser` locally
-  - Follow next steps
+https://nifty-johnson-6002dd.netlify.app/
 
 *Installation*
 ```javascript
