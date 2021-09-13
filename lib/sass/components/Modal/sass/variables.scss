@@ -1,4 +1,6 @@
-$tyk-modal-header-padding: map-get($spacing, 'lg') !default;
 $tyk-modal-body-padding: map-get($spacing, 'lg') !default;
 $tyk-modal-footer-padding: map-get($spacing, 'lg') !default;
+// Deprecated Modal.Header and Modal.Title
+$tyk-modal-header-padding: map-get($spacing, 'lg') !default;
 $tyk-modal-borders-color: theme-color('background', 'light') !default;
+// End of deprecated styles
