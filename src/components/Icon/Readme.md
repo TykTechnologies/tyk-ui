@@ -46,5 +46,9 @@ import Icon from './index';
   <Icon family="tykon" type="undo" />
   <Icon family="tykon" type="warning" />
   <Icon family="tykon" type="x" />
+  <Icon family="tykon" type="waiting" />
+  <Icon family="tykon" type="fullscreen" />
+  <Icon family="tykon" type="fullscreen-exit" />
+  <Icon family="tykon" type="time" />
 </div>
 ```
