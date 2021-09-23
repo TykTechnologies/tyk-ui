@@ -36,13 +36,14 @@ export default class Radio extends Component {
       PropTypes.element,
       PropTypes.node,
     ]),
+    wrapperClassName: PropTypes.string,
   };
 
   getCssClasses() {
     const {
-      inline, nospace, theme = '', disabled, readOnly,
+      inline, nospace, theme = '', disabled, readOnly, wrapperClassName = '',
     } = this.props;
-    const cssClasses = [];
+    const cssClasses = [wrapperClassName];
 
     if (inline) {
       cssClasses.push('tyk-radio--inline');

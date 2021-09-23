@@ -1,26 +1,40 @@
-.tyk-tooltip-content {
-  position: relative;
-  background-color: theme-color('primary', 'dark');
-  color: white;
-  padding: 8px 16px;
-  border-radius: 5px;
-  left: -50%;
+.tyk-tooltip {
+  display: flex;
+  align-items: center;
+  background-color: theme-color('primary', 'light');
+  border: 2px solid theme-color('primary', 'base');
+  border-radius: $general-border-radius;
+  padding: map-get($spacing, 'md');
 
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: calc(50% - 5px);
-    border-width: 5px;
-    border-style: solid;
-    border-color: theme-color('primary', 'dark') transparent transparent transparent;
+  > .tyk-icon:first-child {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    background-color: theme-color('default', 'base-light');
+
+    &:before {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
   }
-}
 
-.tyk-tooltip__bottom {
-  .tyk-tooltip-content:after {
-    border-color: transparent transparent theme-color('primary', 'dark') transparent;
-    bottom: auto;
-    top: -10px;
+  > .tyk-icon + .tyk-tooltip__content {
+    margin-left: map-get($spacing, 'md');
+  }
+
+  &__content {
+    color: theme-color('default', 'dark');
+
+    + .tyk-icon {
+      margin-left: map-get($spacing, 'md');
+    }
+  }
+
+  > .tyk-icon:last-child {
+    cursor: pointer;
   }
 }

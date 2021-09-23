@@ -24,6 +24,8 @@ const EditableList2 = ({
   error,
   value = [],
   onChange = () => {},
+  hideOnEmpty = true,
+  wrapperClassName = '',
 }) => {
   const [internalErrors, setInteranlErrors] = useState(null);
 
@@ -75,7 +77,7 @@ const EditableList2 = ({
   };
 
   const deleteRow = (index) => {
-    if (!value || value.length === 1) {
+    if (!value) {
       return;
     }
     const tempValue = [...value];
@@ -84,7 +86,7 @@ const EditableList2 = ({
   };
 
   return (
-    <div className={`editable-list__wrapper tyk-form-group tyk-form-group--default ${error ? 'has-error' : ''}`}>
+    <div className={`editable-list__wrapper tyk-form-group tyk-form-group--default ${error ? 'has-error' : ''} ${wrapperClassName}`}>
       <Header
         disabled={disabled}
         readOnly={readOnly}
@@ -92,36 +94,32 @@ const EditableList2 = ({
         addButtonName={addButtonName}
         onAddRow={onAddRow}
       />
-      <ul className="editable-list__list">
-        {(value || [[]]).map((v, i) => (
-          <>
-            <FieldsList
-              /* eslint-disable-next-line */
-              key={v.id || i}
-              disabled={disabled}
-              readOnly={readOnly}
-              fields={fields}
-              /* eslint-disable-next-line */
-            onChange={updateRowValue.bind(null, i)}
-              /* eslint-disable-next-line */
-            onDelete={deleteRow.bind(null, i)}
-              value={v}
-              errors={internalErrors?.[i]}
-              components={Components}
-            />
-          </>
-        ))}
-        <ListHeader fields={fields} readOnly={readOnly} />
-      </ul>
-      {(error && error !== 'true' && error !== 'false')
-        ? (
-          <p
-            className="tyk-form-control__error-message"
-          >
-            { error }
-          </p>
-        )
-        : null}
+      {value?.length || !hideOnEmpty ? (
+        <ul className="editable-list__list">
+          {(value || [[]]).map((v, i) => (
+            <>
+              <FieldsList
+                /* eslint-disable-next-line */
+                key={v.id || i}
+                disabled={disabled}
+                readOnly={readOnly}
+                fields={fields}
+                /* eslint-disable-next-line */
+                onChange={updateRowValue.bind(null, i)}
+                /* eslint-disable-next-line */
+                onDelete={deleteRow.bind(null, i)}
+                value={v}
+                errors={internalErrors?.[i]}
+                components={Components}
+              />
+            </>
+          ))}
+          <ListHeader fields={fields} readOnly={readOnly} />
+        </ul>
+      ) : null}
+      {error && error !== 'true' && error !== 'false' ? (
+        <p className="tyk-form-control__error-message">{error}</p>
+      ) : null}
     </div>
   );
 };
@@ -179,8 +177,13 @@ EditableList2.propTypes = {
    * of Arrays (List of column values,
    * each column will have the value format depending on the component type)
    */
-  value: PropTypes.oneOfType([PropTypes.instanceOf(Object), PropTypes.instanceOf(Array)]),
+  value: PropTypes.oneOfType([
+    PropTypes.instanceOf(Object),
+    PropTypes.instanceOf(Array),
+  ]),
   error: PropTypes.string,
+  hideOnEmpty: PropTypes.bool,
+  wrapperClassName: PropTypes.string,
 };
 
 export default EditableList2;

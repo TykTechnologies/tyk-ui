@@ -3,6 +3,8 @@
 @import './variables';
 
 .tyk-modal {
+  --theme-header-height: 15px;
+  --theme-header-icon-size: 65px;
   align-items: center;
   bottom: 0;
   left: 0;
@@ -39,6 +41,50 @@
       margin-top: 0;
     }
   }
+
+  &__theme-header {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: var(--theme-header-height);
+    border-top-left-radius: $general-border-radius;
+    border-top-right-radius: $general-border-radius;
+
+    .tyk-icon {
+      position: absolute;
+      left: calc(50% - var(--theme-header-icon-size) / 2);
+      top: calc((var(--theme-header-icon-size) - var(--theme-header-height)) / -2);
+      width: var(--theme-header-icon-size);
+      height: var(--theme-header-icon-size);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: text-scale('xxl');
+      color: white;
+    }
+  }
+
+  &--theme-warning {
+    .tyk-modal__theme-header {
+      background-color: theme-color('warning', 'base');
+
+      .tyk-icon {
+        background-color: theme-color('warning', 'base');
+      }
+    }
+  }
+
+  &--theme-danger {
+    .tyk-modal__theme-header {
+      background-color: theme-color('danger', 'base');
+
+      .tyk-icon {
+        background-color: theme-color('danger', 'base');
+      }
+    }
+  }
 }
 
 .tyk-modal__dialog {
@@ -69,21 +115,9 @@
   width: 100%;
 }
 
-.tyk-modal__header {
-  align-items: center;
-  border-bottom: 1px solid $tyk-modal-borders-color;
-  display: flex;
-  padding: $tyk-modal-header-padding;
-  width: 100%;
-
-  button {
-    margin-left: auto;
-    padding: 0 5px;
-  }
-}
-
 .tyk-modal__body {
-  padding: $tyk-modal-body-padding;
+  --padding-top: calc(#{$tyk-modal-body-padding} + (var(--theme-header-icon-size) - var(--theme-header-height)) / 2);
+  padding: var(--padding-top) $tyk-modal-body-padding $tyk-modal-body-padding;
 
   &.no-padding {
     padding: 0;
@@ -92,7 +126,6 @@
 
 .tyk-modal__footer {
   align-items: center;
-  border-top: 1px solid $tyk-modal-borders-color;
   display: flex;
   justify-content: flex-end;
   padding: $tyk-modal-footer-padding;
@@ -100,13 +133,6 @@
   >:not(:first-child) {
     margin-left: map-get($spacing, 'xs');
   }
-}
-
-.tyk-modal__title {
-  font-family: $font-family-medium;
-  font-weight: 500;
-  margin: 0;
-  width: 100%;
 }
 
 .tyk-modal__backdrop {
@@ -131,3 +157,34 @@
     opacity: 0.5;
   }
 }
+
+/* Deprecated Modal.Header and Modal.Title */
+.tyk-modal__header {
+  --padding-top: calc(#{$tyk-modal-header-padding} + (var(--theme-header-icon-size) - var(--theme-header-height)) / 2);
+  padding: var(--padding-top) $tyk-modal-header-padding $tyk-modal-header-padding;
+  align-items: center;
+  border-bottom: 1px solid $tyk-modal-borders-color;
+  display: flex;
+  width: 100%;
+
+  .tyk-modal--theme-none & {
+    padding-top: $tyk-modal-header-padding;
+  }
+
+  button {
+    margin-left: auto;
+    padding: 0 5px;
+  }
+
+  + .tyk-modal__body {
+    padding-top: $tyk-modal-body-padding;
+  }
+}
+
+.tyk-modal__title {
+  font-family: $font-family-medium;
+  font-weight: 500;
+  margin: 0;
+  width: 100%;
+}
+/* End of deprecated styles */

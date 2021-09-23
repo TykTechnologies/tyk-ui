@@ -30,6 +30,7 @@ export default class Select extends Component {
       PropTypes.string,
       PropTypes.object,
     ]),
+    wrapperClassName: PropTypes.string,
   }
 
   constructor(props) {
@@ -112,8 +113,10 @@ export default class Select extends Component {
   }
 
   getCssClasses() {
-    const { error, labelwidth, theme } = this.props;
-    const cssClasses = ['tyk-form-group'];
+    const {
+      error, labelwidth, theme, wrapperClassName = '',
+    } = this.props;
+    const cssClasses = [wrapperClassName, 'tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
     if (themes.length) {

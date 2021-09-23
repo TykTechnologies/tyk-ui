@@ -8,6 +8,10 @@
   padding: 6px map-get($spacing, 'base');
   font-family: $font-family-medium;
 
+  &--square {
+    border-radius: 8px;
+  }
+
   i {
     font-size: text-scale('xs');
   }
@@ -115,6 +119,24 @@
 
   &--warning-outline {
     box-shadow: inset 0px 0px 0px 2px theme-color('warning', 'base');
+    color: $text-color;
+
+    i {
+      color: $text-color;
+    }
+  }
+
+  &--info {
+    background-color: theme-color('info', 'base');
+    color: white;
+
+    i {
+      color: white;
+    }
+  }
+
+  &--info-outline {
+    box-shadow: inset 0px 0px 0px 2px theme-color('info', 'base');
     color: $text-color;
 
     i {

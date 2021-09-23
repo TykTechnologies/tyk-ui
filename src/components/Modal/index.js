@@ -1,135 +1,125 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 
-import { ModalContext } from './modal-context';
+import Icon from '../Icon';
 import ModalFooter from './js/ModalFooter';
 import ModalBody from './js/ModalBody';
-import ModalHeader from './js/ModalHeader';
-import ModalTitle from './js/ModalTitle';
+
 /**
  * Modals add dialogs confirmation boxes, notifications, or completely custom content
  * - only one Modal can be opened at a time
  * - are unmounted when Modal is closed
  */
+function Modal({
+  children,
+  theme = 'none',
+  disableCloseCommands = false,
+  opened = false,
+  onClose = () => {},
+  size = 'md',
+  ...restProps
+}) {
+  const modalClasses = [
+    'tyk-modal',
+    `tyk-modal--theme-${theme}`,
+    opened && 'opened',
+  ].filter(Boolean).join(' ');
 
-export default class Modal extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-    /** If set on true, the Modal won't close when clicking on the overlay or by pressing ESC key */
-    disableCloseCommands: PropTypes.bool,
-    /** If true the Modal will be by default opened */
-    opened: PropTypes.bool,
-    /** Callback method when the Modal is closed */
-    onClose: PropTypes.func,
-    /** Width of the Moda: md or lg */
-    size: PropTypes.string,
-  };
+  const backdropClasses = [
+    'tyk-modal__backdrop',
+    opened && 'opened',
+  ].filter(Boolean).join(' ');
 
-  constructor(props) {
-    super(props);
-    this.closeModal = this.closeModal.bind(this);
-  }
+  const themeIcon = {
+    warning: 'warning',
+    danger: 'delete',
+  }[theme];
 
-  getBackdropCssClasses() {
-    const { opened } = this.props;
-    const cssClasses = ['tyk-modal__backdrop'];
-
-    if (opened) {
-      cssClasses.push('opened');
-    }
-
-    return cssClasses.join(' ');
-  }
-
-  getCssClasses() {
-    const { opened } = this.props;
-    const cssClasses = ['tyk-modal'];
-
-    if (opened) {
-      cssClasses.push('opened');
-    }
-
-    return cssClasses.join(' ');
-  }
-
-  getModalSize() {
-    const { size } = this.props;
-
-    return `tyk-modal--${size || 'md'}`;
-  }
-
-  closeModal() {
-    const { onClose } = this.props;
-
-    if (onClose && typeof onClose === 'function') {
-      onClose();
-    }
-  }
-
-  render() {
-    const {
-      children, disableCloseCommands, opened, onClose, size, ...restProps
-    } = this.props;
-
-    return (
-      <Fragment>
-        {
-          ReactDOM.createPortal(
-            <CSSTransition
-              in={opened}
-              timeout={100}
-              classNames="appear"
-            >
-              <div className={this.getCssClasses()} {...restProps}>
-                <div className={`tyk-modal__dialog ${this.getModalSize()}`}>
-                  <div className="tyk-modal__content">
-                    <ModalContext.Provider
-                      value={{
-                        opened,
-                        closeModal: this.closeModal,
-                      }}
-                    >
-                      { children }
-                    </ModalContext.Provider>
-                  </div>
+  return (
+    <>
+      {
+        ReactDOM.createPortal(
+          <CSSTransition
+            in={opened}
+            timeout={100}
+            classNames="appear"
+          >
+            <div className={modalClasses} {...restProps}>
+              <div className={`tyk-modal__dialog tyk-modal--${size}`}>
+                <div className="tyk-modal__content">
+                  {theme !== 'none' && (
+                    <div className="tyk-modal__theme-header">
+                      <Icon family="tykon" type={themeIcon} />
+                    </div>
+                  )}
+                  { children }
                 </div>
               </div>
-            </CSSTransition>,
-            document.querySelector('body'),
-          )
-        }
-        {
-          ReactDOM.createPortal(
-            <CSSTransition
-              in={opened}
-              timeout={100}
-              classNames="fade"
-            >
-              <button
-                className={this.getBackdropCssClasses()}
-                onClick={!disableCloseCommands && this.closeModal}
-                onKeyDown={() => {}}
-                type="button"
-              />
-            </CSSTransition>,
-            document.querySelector('body'),
-          )
-        }
-      </Fragment>
-    );
-  }
+            </div>
+          </CSSTransition>,
+          document.querySelector('body'),
+        )
+      }
+      {
+        ReactDOM.createPortal(
+          <CSSTransition
+            in={opened}
+            timeout={100}
+            classNames="fade"
+          >
+            <button
+              className={backdropClasses}
+              onClick={() => !disableCloseCommands && onClose()}
+              onKeyDown={() => {}}
+              type="button"
+            />
+          </CSSTransition>,
+          document.querySelector('body'),
+        )
+      }
+    </>
+  );
 }
-
-export { ModalContext };
-
 
 Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
-Modal.Header = ModalHeader;
-Modal.Title = ModalTitle;
+/* eslint-disable-next-line */
+Modal.Header = ({ children }) => {
+  console.warn('%cModal.Header%c is deprecated.', 'font-weight: bold', '');
+  return (
+    <div className="tyk-modal__header">
+      { children }
+    </div>
+  );
+};
+/* eslint-disable-next-line */
+Modal.Title = ({ children }) => {
+  console.warn('%cModal.Title%c is deprecated.', 'font-weight: bold', '');
+  return (
+    <h4 className="tyk-modal__title">
+      { children }
+    </h4>
+  );
+};
+
+Modal.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+  /** one of "warning", "danger", "none"; default is "none" */
+  theme: PropTypes.string,
+  /** If set on true, the Modal won't close when clicking on the overlay or by pressing ESC key */
+  disableCloseCommands: PropTypes.bool,
+  /** If true the Modal will be by default opened */
+  opened: PropTypes.bool,
+  /** Callback method when the Modal is closed */
+  onClose: PropTypes.func,
+  /** Width of the Moda: md or lg */
+  size: PropTypes.string,
+};
+
+export default Modal;

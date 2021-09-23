@@ -6,6 +6,7 @@ $general-border-width: 2px !default;
 $theme-colors: (
   'default': (
     'base': #36364C,
+    'base-light': #7A79A1,
     'light': #C3C3E5,
     'dark': #505071
   ),
@@ -31,7 +32,8 @@ $theme-colors: (
   ),
   'warning': (
     'base': #D6B218,
-    'light': #FFE885
+    'light': #FFE885,
+    'dark': #C58C11
   ),
   'foreground': (
     'base': #393939,
@@ -168,6 +170,10 @@ $form-control-padding-right: map-get($spacing, 'md') !default;
 $form-control-padding-top: 10px !default;
 $form-control-padding-bottom: 10px !default;
 $form-control-addon-background-color: white !default;
+$form-control-addon-padding-top: 10px !default;
+$form-control-addon-padding-bottom: 10px !default;
+$form-control-addon-padding-left: 10px !default;
+$form-control-addon-padding-right: 10px !default;
 $form-control-disabled-background-color: theme-color('background', 'light') !default;
 $form-control-border: $general-border-width solid theme-color('default', 'light') !default;
 $form-control-disabled-border: $general-border-width solid theme-color('default', 'light') !default;

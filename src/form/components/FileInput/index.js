@@ -26,6 +26,7 @@ export default class FileInput extends Component {
     placeholder: PropTypes.string,
     theme: PropTypes.string,
     value: PropTypes.instanceOf(Object),
+    wrapperClassName: PropTypes.string,
   }
 
   constructor(props) {
@@ -37,8 +38,10 @@ export default class FileInput extends Component {
   }
 
   getCssClasses() {
-    const { error, theme, labelwidth } = this.props;
-    const cssClasses = ['tyk-form-group'];
+    const {
+      error, theme, labelwidth, wrapperClassName = '',
+    } = this.props;
+    const cssClasses = [wrapperClassName, 'tyk-form-group'];
     const themes = theme ? theme.split(' ') : [];
 
     if (themes.length) {
