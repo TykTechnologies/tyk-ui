@@ -1,10 +1,12 @@
 .tyk-tooltip {
+  --tooltip-max-width: 450px;
   display: flex;
   align-items: center;
   background-color: theme-color('primary', 'light');
   border: 2px solid theme-color('primary', 'base');
   border-radius: $general-border-radius;
   padding: map-get($spacing, 'md');
+  max-width: var(--tooltip-max-width);
 
   > .tyk-icon:first-child {
     width: 32px;

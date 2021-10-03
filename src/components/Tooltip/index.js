@@ -6,6 +6,7 @@ import Icon from '../Icon';
 
 function Tooltip({
   render,
+  className,
   children,
   position = 'top',
   style,
@@ -52,7 +53,7 @@ function Tooltip({
           forceDisplay={position}
           offset={20}
         >
-          <div className="tyk-tooltip" ref={tooltipRef}>
+          <div className={`tyk-tooltip ${className}`} ref={tooltipRef}>
             {icon && (
               icon === true ? (
                 <Icon family="tykon" type="help" />
@@ -93,6 +94,8 @@ Tooltip.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  /** additional tooltip classes */
+  className: PropTypes.string,
   /** if `true` displays the "question mark" icon;
    * optionally you can pass a different icon
   */
