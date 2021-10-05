@@ -1,5 +1,6 @@
+@import './variables';
+
 .tyk-tooltip {
-  --tooltip-max-width: 450px;
   display: flex;
   align-items: center;
   background-color: theme-color('primary', 'light');
