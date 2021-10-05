@@ -1,58 +1,11 @@
+import styles from './button.wc.css';
+
 const template = document.createElement('template');
-template.innerHTML = `
-  <style>
-    :host {
-      display: inline-block;
-    }
-
-    .tyk-button {
-      background-color: transparent;
-      border: none;
-      color: white;
-      cursor: pointer;
-      display: inline-block;
-      font-family: var(--tyk-button-font-family);
-      text-align: center;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all .2s linear;
-      user-select: none;
-      vertical-align: middle;
-      white-space: nowrap;
-
-      padding: var(--tyk-padding-y-button-md) var(--tyk-padding-x-button-md);
-      font-size: var(--tyk-text-sm-font-size);
-      line-height: var(--tyk-line-height-button-md);
-      border-radius: var(--tyk-button-border-radius);
-    }
-
-    .tyk-buton.disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-    }
-
-    .tyk-button:hover {
-      color: white;
-      text-decoration: none;
-    }
-
-    .tyk-button:focus {
-      outline: none;
-    }
-
-    .theme--primary {
-      background-color: var(--tyk-button-primary-color);
-      color: var(--tyk-button-primary-text-color);
-      border: var(--tyk-general-border-width) solid var(--tyk-button-primary-color);
-    }
-    .theme--primary:hover {
-      background-color: var(--tyk-button-primary-hover-color);
-      color: var(--tyk-button-primary-text-color);
-    }
-  </style>
-`;
+template.innerHTML = `<style>${styles}</style>`;
 
 class Button extends HTMLElement {
+  static get formAssociated() { return true; }
+
   static get observedAttributes() {
     return [
       'classname',
@@ -69,7 +22,8 @@ class Button extends HTMLElement {
   constructor() {
     super();
 
-    this.sroot = this.attachShadow({ mode: 'open' });
+    this.internals = this.attachInternals();
+    this.sroot = this.attachShadow({ mode: 'closed' });
     this.sroot.append(template.content.cloneNode(true));
   }
 
@@ -96,11 +50,21 @@ class Button extends HTMLElement {
 
   connectedCallback() {
     this.render();
+
+    this.addEventListener('click', this.maybeSubmit);
+
+    this.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') this.maybeSubmit();
+    });
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    if (oldVal !== newVal) {
-      this.render();
+    if (oldVal !== newVal) this.render();
+  }
+
+  maybeSubmit() {
+    if (this.type === 'submit' && this.internals.form) {
+      this.internals.form.requestSubmit();
     }
   }
 
@@ -117,7 +81,7 @@ class Button extends HTMLElement {
       this.size ? `size--${this.size}` : 'size--md',
       this.disabled && 'disabled',
       this.display,
-      this.theme && `theme--${this.theme}`,
+      ...(this.theme ? this.theme.split(' ').map(t => `theme--${t}`) : []),
       !hasContent && 'icon-only',
       hasIcon && `icon-${hasRightIcon ? 'right' : 'left'}`,
       this.noStyle && 'no-style',
@@ -130,6 +94,7 @@ class Button extends HTMLElement {
     let elem;
 
     Array.from(this.children).slice(1).forEach((ch) => { ch.style.marginLeft = '5px'; }); // eslint-disable-line
+
     if (this.href) {
       if (anchor) {
         elem = anchor;
@@ -152,12 +117,12 @@ class Button extends HTMLElement {
       elem.setAttribute('type', this.type ?? 'button');
     }
 
-    // elem.append(...this.children);
     elem.innerHTML = '<div><slot name="left-icon"></slot><slot></slot><slot name="right-icon"></slot></div>';
-    elem.setAttribute('disabled', this.disabled);
-    elem.addEventListener('click', () => {
-      console.log('wtf');
-    });
+
+    this.tabIndex = this.getAttribute('tabindex') ?? 0;
+
+    if (this.disabled) elem.setAttribute('disabled', true);
+    else elem.removeAttribute('disabled');
 
     elem.classList.remove(...elem.classList);
     elem.classList.add(...this.getClasses());

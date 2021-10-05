@@ -8,6 +8,7 @@
     "@babel/plugin-transform-async-to-generator",
     "@babel/plugin-transform-runtime",
     "@babel/syntax-export-extensions",
-    "@babel/plugin-proposal-optional-chaining"
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-syntax-import-assertions"
   ]
 }

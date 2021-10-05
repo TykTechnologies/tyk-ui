@@ -1,3 +1,5 @@
+import 'element-internals-polyfill';
+
 import './index.scss';
 
 // -- Components

@@ -1,5 +1,120 @@
 **Button Themes**
 
+*Web Component*
+```js
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', columnGap: '10px', rowGap: '10px' }}>
+  <div style={{ gridRow: 'auto / span 2' }}>Default</div>
+  <tyk-button theme="default">Push Me</tyk-button>
+  <tyk-button theme="default link">Push Me</tyk-button>
+  <tyk-button theme="default outline">Push Me</tyk-button>
+  <tyk-button theme="default gradient">Push Me</tyk-button>
+  <tyk-button theme="default" disabled>Push Me</tyk-button>
+  <tyk-button theme="default link" disabled>Push Me</tyk-button>
+  <tyk-button theme="default outline" disabled>Push Me</tyk-button>
+  <tyk-button theme="default gradient" disabled>Push Me</tyk-button>
+
+  <div style={{ gridRow: 'auto / span 2' }}>Primary</div>
+  <tyk-button theme="primary">Push Me</tyk-button>
+  <tyk-button theme="primary link">Push Me</tyk-button>
+  <tyk-button theme="primary outline">Push Me</tyk-button>
+  <tyk-button theme="primary gradient">Push Me</tyk-button>
+  <tyk-button theme="primary" disabled>Push Me</tyk-button>
+  <tyk-button theme="primary link" disabled>Push Me</tyk-button>
+  <tyk-button theme="primary outline" disabled>Push Me</tyk-button>
+  <tyk-button theme="primary gradient" disabled>Push Me</tyk-button>
+
+  <div style={{ gridRow: 'auto / span 2' }}>Success</div>
+  <tyk-button theme="success">Push Me</tyk-button>
+  <tyk-button theme="success link">Push Me</tyk-button>
+  <tyk-button theme="success outline">Push Me</tyk-button>
+  <tyk-button theme="success gradient">Push Me</tyk-button>
+  <tyk-button theme="success" disabled>Push Me</tyk-button>
+  <tyk-button theme="success link" disabled>Push Me</tyk-button>
+  <tyk-button theme="success outline" disabled>Push Me</tyk-button>
+  <tyk-button theme="success gradient" disabled>Push Me</tyk-button>
+
+  <div style={{ gridRow: 'auto / span 2' }}>Warning</div>
+  <tyk-button theme="warning">Push Me</tyk-button>
+  <tyk-button theme="warning link">Push Me</tyk-button>
+  <tyk-button theme="warning outline">Push Me</tyk-button>
+  <tyk-button theme="warning gradient">Push Me</tyk-button>
+  <tyk-button theme="warning" disabled>Push Me</tyk-button>
+  <tyk-button theme="warning link" disabled>Push Me</tyk-button>
+  <tyk-button theme="warning outline" disabled>Push Me</tyk-button>
+  <tyk-button theme="warning gradient" disabled>Push Me</tyk-button>
+
+  <div style={{ gridRow: 'auto / span 2' }}>Danger</div>
+  <tyk-button theme="danger">Push Me</tyk-button>
+  <tyk-button theme="danger link">Push Me</tyk-button>
+  <tyk-button theme="danger outline">Push Me</tyk-button>
+  <tyk-button theme="danger gradient">Push Me</tyk-button>
+  <tyk-button theme="danger" disabled>Push Me</tyk-button>
+  <tyk-button theme="danger link" disabled>Push Me</tyk-button>
+  <tyk-button theme="danger outline" disabled>Push Me</tyk-button>
+  <tyk-button theme="danger gradient" disabled>Push Me</tyk-button>
+
+  <div style={{ gridRow: 'auto / span 2' }}>Info</div>
+  <tyk-button theme="info">Push Me</tyk-button>
+  <tyk-button theme="info link">Push Me</tyk-button>
+  <tyk-button theme="info outline">Push Me</tyk-button>
+  <tyk-button theme="info gradient">Push Me</tyk-button>
+  <tyk-button theme="info" disabled>Push Me</tyk-button>
+  <tyk-button theme="info link" disabled>Push Me</tyk-button>
+  <tyk-button theme="info outline" disabled>Push Me</tyk-button>
+  <tyk-button theme="info gradient" disabled>Push Me</tyk-button>
+</div>
+```
+*Web Component with Icons*
+```js
+<tyk-button theme="primary">
+  <tyk-icon family="tykon" type="profile"></tyk-icon>
+  <span>Icon Left</span>
+</tyk-button>
+{' '}
+<tyk-button theme="primary">
+  <span>Icon Right</span>
+  <tyk-icon family="tykon" type="profile"></tyk-icon>
+</tyk-button>
+{' '}
+<tyk-button theme="primary">
+  <tyk-icon family="tykon" type="profile"></tyk-icon>
+  <span>Icon Both Sides</span>
+  <tyk-icon family="tykon" type="profile"></tyk-icon>
+</tyk-button>
+{' '}
+<tyk-button theme="primary">
+  <tyk-icon slot="left-icon" family="tykon" type="profile"></tyk-icon>
+</tyk-button>
+```
+*Web Component Form Submission*
+```js
+<form onSubmit={function (e) {
+  e.preventDefault();
+  console.log('form submitted with value', e.target.elements.email.value);
+}}>
+<label>
+  <div>Email</div>
+  <input type="text" name="email" />
+</label>
+<br />
+<tyk-button class="my-button" onClick={() => console.log('on click handler')} theme="primary" type="submit">
+  submit form
+</tyk-button>
+</form>
+```
+*Web Component as Link*
+```js
+<tyk-button href="http://tyk.io" noStyle>
+  Go to Tyk website
+</tyk-button>
+```
+*Web Component sizes*
+```js
+<tyk-button theme="success" size="sm">Push Me</tyk-button>{' '}
+<tyk-button theme="success" size="md">Push Me</tyk-button>{' '}
+<tyk-button theme="success" size="lg">Push Me</tyk-button>
+```
+
 *Default theme*
 ```js
 <Button theme="primary">Push Me</Button> &ensp;
@@ -11,35 +126,6 @@
 <Button theme="default">Push Me</Button> &ensp;
 <Button theme="white">Push Me</Button> &ensp;
 <Button>Push Me</Button>
-
-<tyk-button onclick="javascript: console.log('vbnm')" theme="primary">
-  <tyk-icon slot="left-icon" family="tykon" type="profile"></tyk-icon>
-  <span>yo <b>bu</b>tton</span>
-  <tyk-icon slot="right-icon" family="tykon" type="profile"></tyk-icon>
-</tyk-button>
-
-<tyk-button onclick="javascript: console.log('vbnm')" theme="primary">
-  <tyk-icon family="tykon" type="profile"></tyk-icon>
-  <span>yo button</span>
-  <tyk-icon family="tykon" type="profile"></tyk-icon>
-</tyk-button>
-
-<tyk-button onclick="javascript: console.log('vbn22m')" theme="primary">
-  yodll
-</tyk-button>
-
-<tyk-button onclick="javascript: console.log('vbnm')" theme="primary">
-  <tyk-icon slot="left-icon" family="tykon" type="profile"></tyk-icon>
-</tyk-button>
-
-<tyk-button
-  href="http://leeloo.ro"
-  size="sm"
-  noStyle
-  theme="primary"
->
-  je suis anchor
-</tyk-button>
 ```
 *Link theme*
 ```js

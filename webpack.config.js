@@ -28,15 +28,15 @@ module.exports = {
           },
         },
       },
-      {
-        enforce: 'pre',
-        test: /.js?$/,
-        include: [
-          path.resolve(__dirname, 'src'),
-        ],
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
+      // {
+      //   enforce: 'pre',
+      //   test: /.js?$/,
+      //   include: [
+      //     path.resolve(__dirname, 'src'),
+      //   ],
+      //   exclude: /node_modules/,
+      //   loader: 'eslint-loader',
+      // },
       {
         test: /\.js?$/,
         include: [
@@ -57,7 +57,12 @@ module.exports = {
         ],
       },
       {
+        test: /\.wc\.css$/,
+        use: [{ loader: 'raw-loader' }],
+      },
+      {
         test: /\.css$/,
+        exclude: /\.wc\.css$/,
         use: [
           {
             loader: 'style-loader',
@@ -74,8 +79,8 @@ module.exports = {
               debug: true,
               engine: 'postcss',
             },
-          }
-        ]
+          },
+        ],
       },
       {
         test: /\.scss$/,

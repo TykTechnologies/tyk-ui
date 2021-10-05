@@ -3,6 +3,7 @@
   --tyk-general-border-width: 2px;
 
   --tyk-color-default-base: #36364C;
+  --tyk-color-default-base-light: #7A79A1;
   --tyk-color-default-light: #C3C3E5;
   --tyk-color-default-dark: #505071;
   --tyk-color-primary-base: #A2A2CC;
@@ -19,15 +20,16 @@
   --tyk-color-danger-dark: #EA4766;
   --tyk-color-warning-base: #D6B218;
   --tyk-color-warning-light: #FFE885;
+  --tyk-color-warning-dark: #C58C11;
   --tyk-color-foreground-base: #393939;
   --tyk-color-foreground-base-dark: #22272B;
   --tyk-color-foreground-light: #5a5a68;
   --tyk-color-foreground-dark: #161B20;
   --tyk-color-foreground-extra-dark: #0A0D10;
-  --tyk-color-backround-base: #E1E1E1;
-  --tyk-color-backround-light: #EDEDF9;
-  --tyk-color-backround-dark: #43435B;
-  --tyk-color-backround-extra-dark: #0A0D10;
+  --tyk-color-background-base: #E1E1E1;
+  --tyk-color-background-light: #EDEDF9;
+  --tyk-color-background-dark: #43435B;
+  --tyk-color-background-extra-dark: #0A0D10;
 
   --tyk-text-color: var(--tyk-color-primary-dark);
   --tyk-label-color: var(--tyk-color-default-base);

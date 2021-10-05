@@ -18,9 +18,9 @@
   --tyk-button-default-gradient-start-color: var(--tyk-color-default-base);
   --tyk-button-default-gradient-end-color: var(--tyk-color-default-dark);
 
-  --tyk-button-primary-color: var(--tyk-color-primary-light);
-  --tyk-button-primary-hover-color: var(--tyk-color-default-light);
-  --tyk-button-primary-text-color: --tyk-text-color;
+  --tyk-button-primary-color: var(--tyk-color-default-base-light);
+  --tyk-button-primary-hover-color: var(--tyk-color-default-dark);
+  --tyk-button-primary-text-color: white;
   --tyk-button-primary-gradient-start-color: var(--tyk-color-primary-base);
   --tyk-button-primary-gradient-end-color: var(--tyk-color-primary-dark);
 
@@ -36,6 +36,7 @@
 
   --tyk-button-warning-color: var(--tyk-color-warning-base);
   --tyk-button-warning-font-color: white;
+  --tyk-button-warning-hover-color: var(--tyk-color-warning-dark);
   --tyk-button-warning-gradient-start-color: var(--tyk-color-warning-base);
   --tyk-button-warning-gradient-end-color: var(--tyk-color-warning-light);
 
