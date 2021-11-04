@@ -1,0 +1,7 @@
+$tabs-default-content-padding: 25px !default;
+$tab-button-padding: map-get($spacing, 'sm') 2px 3px 2px !default;
+$tab-button-margin: 0px !default;
+$tabs-font-familly: $font-family-medium !default;
+$tab-button-color: $text-color !default;
+$tab-active-button-color: $text-color !default;
+$tab-border-color: theme-color('success', 'base') !default;

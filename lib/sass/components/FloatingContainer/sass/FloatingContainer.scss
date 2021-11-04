@@ -1,0 +1,6 @@
+.floating-container {
+  position: fixed;
+  top: -9999px;
+  overflow: auto;
+  z-index: 1000;
+}

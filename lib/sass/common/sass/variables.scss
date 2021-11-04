@@ -1,0 +1,216 @@
+$font-path: '../fonts/' !default;
+$component-images-path: '../images' !default;
+$general-border-radius: 18px !default;
+$general-border-width: 2px !default;
+
+$theme-colors: (
+  'default': (
+    'base': #36364C,
+    'base-light': #7A79A1,
+    'light': #C3C3E5,
+    'dark': #505071
+  ),
+  'primary': (
+    'base': #A2A2CC,
+    'light': #EDEDF9,
+    'dark': #505071
+  ),
+  'success': (
+    'base': #00d9ba,
+    'light': #C2F2E9,
+    'dark': #00B798
+  ),
+  'info': (
+    'base': #82BBC6,
+    'light': #D3EBEF
+  ),
+  'danger': (
+    'base': #FF6C7D,
+    'extra-light': #F5CCD1,
+    'light': #FFBBC5,
+    'dark': #EA4766
+  ),
+  'warning': (
+    'base': #D6B218,
+    'light': #FFE885,
+    'dark': #C58C11
+  ),
+  'foreground': (
+    'base': #393939,
+    'base-dark': #22272B,
+    'light': #5a5a68,
+    'dark': #161B20,
+    'extra-dark': #0A0D10
+  ),
+  'background': (
+    'base': #E1E1E1,
+    'light': #EDEDF9,
+    'dark': #43435B,
+    'extra-dark': #0A0D10
+  )
+) !default;
+
+$text-color: #505071 !default;
+$label-color:  theme-color('default', 'base') !default;
+
+$contrast-colors: (
+  'dark': (
+    'primary': rgb(255, 255, 255),
+    'secondary': rgba(255, 255, 255, .70),
+    'disabled': rgba(255, 255, 255, .5),
+    'hint': rgba(255, 255, 255, .12)
+  ),
+  'light': (
+    'primary': rgba(0, 0, 0, .87),
+    'secondary': rgba(0, 0, 0, .54),
+    'disabled': rgba(0, 0, 0, .38),
+    'hint': rgba(0, 0, 0, .12)
+  ),
+) !default;
+
+$xs-line-height: 16px;
+$sm-line-height: 19px;
+$md-line-height: 22px;
+$lg-line-height: 23px;
+$xl-line-height: 24px;
+$xxl-line-height: 30px;
+
+$xs-font-size: 12px;
+$sm-font-size: 14px;
+$md-font-size: 16px;
+$lg-font-size: 17px;
+$xl-font-size: 20px;
+$xxl-font-size: 25px;
+
+$base-font-size: $sm-font-size !default;
+$base-line-height: $sm-line-height !default;
+
+$text-settings: (
+  'xs': (
+    font-size: $xs-font-size,
+    line-height: $xs-line-height
+  ),
+  'sm': (
+    font-size: $sm-font-size,
+    line-height: $sm-line-height
+  ),
+  'base': (
+    font-size: $md-font-size,
+    line-height: $md-line-height
+  ),
+  'md': (
+    font-size: $md-font-size,
+    line-height: $md-line-height
+  ),
+  'lg': (
+    font-size: $lg-font-size,
+    line-height: $lg-line-height
+  ),
+  'xl': (
+    font-size: $xl-font-size,
+    line-height: $xl-line-height
+  ),
+  'xxl': (
+    font-size: $xxl-font-size,
+    line-height: $xxl-line-height
+  )
+) !default;
+
+$spacing: (
+  'xs': 5px,
+  'sm': 10px,
+  'base': 15px,
+  'md': 20px,
+  'lg': 25px,
+  'xl': 30px,
+  'xxl': 40px
+) !default;
+
+$grid-gutter: map-get($spacing, 'md') !default;
+$grid-max-width: 1200px + ($grid-gutter * 2) !default;
+$grid-columns: 12 !default;
+
+$breakpoint-xs: 420px !default;
+$breakpoint-sm: 768px !default;
+$breakpoint-md: 1024px !default;
+$breakpoint-lg: 1248px !default;
+
+$breakpoints: (
+  "xs": $breakpoint-xs,
+  "sm": $breakpoint-sm,
+  "md": $breakpoint-md,
+  "lg": $breakpoint-lg
+);
+
+$grid-breakpoints: (
+  'lg' '(min-width: ' + $breakpoint-lg + ')',
+  'md' '(min-width: ' + $breakpoint-md + ') and (max-width: ' + ($breakpoint-lg - 1) + ')',
+  'sm' '(min-width: ' + ($breakpoint-sm + 1) + ') and (max-width:' + ($breakpoint-md - 1) + ')',
+  'xs' '(max-width: ' + $breakpoint-sm + ')'
+) !default;
+
+$font-family-regular: 'OpenSans-regular' !default;
+$font-family-medium: 'OpenSans-SemiBold' !default;
+$font-family-bold: 'OpenSans-Bold' !default;
+
+$headings-color: #36364C !default;
+$headings-font-family-regular: 'smoolthan_regular' !default;
+$headings-font-family-medium: 'smoolthan_medium' !default;
+$headings-font-family-bold: 'smoolthan_bold' !default;
+
+$headings-margin-bottom: 15px !default;
+$headings-font-family: $headings-font-family-medium !default;
+$headings-font-weight: 500 !default;
+$headings-line-height: $base-line-height !default;
+
+$form-group-margin-bottom: 15px !default;
+$form-control-height: 39px !default;
+$form-control-padding-left: map-get($spacing, 'md') !default;
+$form-control-padding-right: map-get($spacing, 'md') !default;
+$form-control-padding-top: 10px !default;
+$form-control-padding-bottom: 10px !default;
+$form-control-addon-background-color: white !default;
+$form-control-addon-padding-top: 10px !default;
+$form-control-addon-padding-bottom: 10px !default;
+$form-control-addon-padding-left: 10px !default;
+$form-control-addon-padding-right: 10px !default;
+$form-control-disabled-background-color: theme-color('background', 'light') !default;
+$form-control-border: $general-border-width solid theme-color('default', 'light') !default;
+$form-control-disabled-border: $general-border-width solid theme-color('default', 'light') !default;
+$form-control-placeholder-color: #A2A2CC !default;
+$form-control-disabled-background-color: theme-color('default', 'light') !default;
+$form-control-disabled-color: $text-color !default;
+$form-control-border-focus: 2px solid theme-color('success', 'base') !default;
+$form-control-placeholder-font-family: $font-family-medium !default;
+$form-control-error-colour: theme-color('danger', 'dark') !default;
+$form-default-color: theme-color('default', 'light') !default;
+$form-primary-color: theme-color('primary', 'base') !default;
+$form-success-color: theme-color('success', 'base') !default;
+
+$error-border: $general-border-width solid theme-color('danger', 'base') !default;
+$error-border-left: 2px solid theme-color('danger', 'dark') !default;
+$help-block-color: theme-color('default', 'base') !default;
+$help-block-font-style: normal !default;
+$help-block-padding: 0 0 0 $form-control-padding-left !default;
+$error-message-padding: 0 0 0 $form-control-padding-left !default;
+$default-pill-background-color: theme-color('default', 'base') !default;
+$default-pill-color: white !default;
+$pill-margin: 0 0 10px 0 !default;
+$default-outline-pill-box-shadow: inset 0px 0px 0px 2px theme-color('default', 'base');
+$default-outline-pill-color: $text-color;
+
+$title-medium-font-size: 16px;
+
+//Buffers
+$bottom-buffer-large: map-get($spacing, 'md');
+$bottom-buffer-medium: 10px;
+$bottom-buffer-small: 5px;
+$top-buffer-large: map-get($spacing, 'md');
+$top-buffer-medium: 10px;
+$top-buffer-small: 5px;
+$right-buffer-large: map-get($spacing, 'md');
+$right-buffer-medium: 10px;
+$right-buffer-small: 5px;
+$left-buffer-large: map-get($spacing, 'md');
+$left-buffer-medium: 10px;
+$left-buffer-small: 5px;

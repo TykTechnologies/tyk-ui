@@ -1,0 +1,82 @@
+@import '../../../common/sass/variables';
+@import '../../../common/sass/mixins';
+@import './mixins';
+@import './variables';
+
+.tyk-message {
+  display: flex;
+  align-items: center;
+  border-radius: $tyk-message-border-radius;
+  margin-bottom: map-get($spacing, 'md');
+  padding: $tyk-message-padding-top $tyk-message-padding-right $tyk-message-padding-bottom $tyk-message-padding-left;
+
+  &__content {
+    flex-grow: 1;
+    margin-left: map-get($spacing, 'md');
+    margin-right: map-get($spacing, 'md');
+  }
+
+  > .tyk-icon:first-child {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    color: white;
+
+    &:before {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  > .tyk-icon:last-child {
+    cursor: pointer;
+  }
+
+  &--default {
+    @include message-variant(
+      $tyk-message-default-background,
+      $tyk-message-default-border,
+      $tyk-message-default-text-color
+    );
+
+    > .tyk-icon:first-child {
+      transform: rotate(180deg);
+    }
+  }
+
+  &--info {
+    @include message-variant(
+      $tyk-message-info-background,
+      $tyk-message-info-border,
+      $tyk-message-info-text-color
+    );
+  }
+
+  &--success {
+    @include message-variant(
+      $tyk-message-success-background,
+      $tyk-message-success-border,
+      $tyk-message-success-text-color
+    );
+  }
+
+  &--warning {
+    @include message-variant(
+      $tyk-message-warning-background,
+      $tyk-message-warning-border,
+      $tyk-message-warning-text-color
+    );
+  }
+
+  &--danger {
+    @include message-variant(
+      $tyk-message-danger-background,
+      $tyk-message-danger-border,
+      $tyk-message-danger-text-color
+    );
+  }
+}

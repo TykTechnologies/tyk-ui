@@ -1,0 +1,136 @@
+.tyk-multiselect {
+  align-items: flex-start;
+  border-radius: $general-border-radius;
+  flex-wrap: wrap;
+  display: flex;
+  margin-bottom: map-get($spacing, 'md');
+  width: 100%;
+
+  /*FALLBACK FOR ANGULAR COMPONENTS*/
+  .input-group .input-group-addon + .form-control {
+    border-width: 1px !important;
+    border-left: none !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .input-group .input-group-addon {
+    background: transparent !important;
+    border-width: 1px !important;
+    border-right: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  /*END FALLBACK FOR ANGULAR COMPONENTS*/
+
+  &.has-error {
+    border: $general-border-width solid theme-color('danger', 'base');
+  }
+
+  &__header {
+    background-color: theme-color('default', 'base');
+    border-top-left-radius: $general-border-radius;
+    border-top-right-radius: $general-border-radius;
+    color: white;
+    display: flex;
+    width: 100%;
+
+    > div {
+      padding: map-get($spacing, 'sm') map-get($spacing, 'base');
+      width: 50%;
+    }
+  }
+
+  &__panel-wrapper {
+    border: $form-control-border;
+    border-top: none;
+    border-bottom-left-radius: $general-border-radius;
+    border-bottom-right-radius: $general-border-radius;
+    display: flex;
+    flex: 1;
+    height: 265px;
+    width: 100%;
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 -1px;
+    position: relative;
+    width: calc(50% + 1px);
+
+    &:last-child {
+      border-left: $form-control-border;
+      .tyk-form-group {
+        margin-left: -1px;
+        width: calc(100% + 2px);
+      }
+    }
+
+    .tyk-message {
+      margin: map-get($spacing, 'md') map-get($spacing, 'md') 0 map-get($spacing, 'md');
+    }
+  }
+
+  &__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    &--scroll {
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    > li {
+      border-bottom: $form-control-border;
+      display: flex;
+      flex-direction: column;
+      padding: map-get($spacing, 'sm') map-get($spacing, 'base');
+
+      > div {
+        align-items: start;
+        display: flex;
+        width: 100%;
+      }
+
+      .loading {
+        justify-content: center;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &-item__name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tyk-form-group {
+    margin: 0;
+  }
+
+  .tyk-multiselect-item__controls {
+    display: flex;
+    margin-left: auto;
+    flex-wrap: nowrap;
+
+    .tyk-button {
+      color: $text-color;
+      margin-left: map-get($spacing, 'xs');
+
+      &:last-child {
+        margin-left: 0;
+      }
+    }
+  }
+}

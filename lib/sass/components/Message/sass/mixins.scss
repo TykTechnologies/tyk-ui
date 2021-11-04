@@ -1,0 +1,13 @@
+@mixin message-variant(
+  $background,
+  $border: transparent,
+  $color: $text-color
+) {
+  background-color: $background;
+  border: $general-border-width solid $border;
+  color: $color;
+
+  & > .tyk-icon:first-child {
+    background-color: $border;
+  }
+}

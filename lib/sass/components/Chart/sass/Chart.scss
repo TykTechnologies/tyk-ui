@@ -1,0 +1,9 @@
+.tyk-chart__wrapper {
+  position: relative;
+}
+
+.tyk-chart--no-data,
+.tyk-chart--loading-chart {
+  filter: blur(map-get($spacing, 'sm'));
+  -webkit-filter: blur(map-get($spacing, 'sm'));
+}
