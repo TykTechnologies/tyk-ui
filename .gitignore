@@ -1,2 +1,4 @@
 node_modules
 tyk-ui-styleguide
+coverage
+.nyc_output
