@@ -19,3 +19,9 @@
   readOnly
 />
 ```
+```js
+<Checkbox
+  label="This is a checkbox with note"
+  note="This is a very interesting checkbox"
+/>
+```

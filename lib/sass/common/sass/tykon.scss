@@ -145,4 +145,15 @@
 .tykon-x:before {
   content: "\58";
 }
-
+.tykon-waiting:before {
+  content: "\54";
+}
+.tykon-fullscreen:before {
+  content: "\e000";
+}
+.tykon-fullscreen-exit:before {
+  content: "\e001";
+}
+.tykon-time:before {
+  content: "\74";
+}
