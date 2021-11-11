@@ -9,7 +9,9 @@
     "build": "npx --max_old_space_size=4096 styleguidist build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build"
+    "styleguide:build": "styleguidist build",
+    "cy:open": "cypress open-ct",
+    "cy:run": "cypress run-ct"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,16 @@
   "publishConfig": {
     "access": "restricted"
   },
+  "nyc": {
+    "all": true,
+    "include": "src/**/*.js",
+    "exclude": [
+      "src/hooks",
+      "src/utils",
+      "src/form/formik",
+      "src/form/redux-form"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "7.10.5",
     "@babel/parser": "7.10.5",
@@ -39,25 +51,31 @@
     "@babel/preset-react": "^7.8.3",
     "@babel/traverse": "^7.8.4",
     "@babel/types": "^7.8.3",
+    "@cypress/code-coverage": "^3.9.11",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-istanbul": "^6.1.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
+    "cypress": "^8.6.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-loader": "2.1.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "file-loader": "^2.0.0",
     "glob": "^7.1.6",
+    "html-webpack-plugin": "^4.5.1",
     "mini-css-extract-plugin": "^0.4.5",
     "postcss-loader": "^3.0.0",
     "react-styleguidist": "10.6.2",
     "resolve-url-loader": "^3.1.1",
+    "sass": "^1.43.3",
     "sass-loader": "^7.3.1",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
@@ -68,6 +86,8 @@
   "dependencies": {
     "@babel/plugin-proposal-optional-chaining": "7.8.3",
     "@babel/runtime": "^7.8.4",
+    "@cypress/react": "^5.10.1",
+    "@cypress/webpack-dev-server": "^1.7.0",
     "@material-ui/core": "^3.9.3",
     "brace": "^0.11.1",
     "date-fns": "^2.21.3",
