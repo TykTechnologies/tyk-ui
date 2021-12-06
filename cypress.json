@@ -1,0 +1,9 @@
+{
+  "baseUrl": "http://localhost:6060",
+  "includeShadowDom": true,
+  "video": false,
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "**/*.test.js"
+  }
+}

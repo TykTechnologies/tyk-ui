@@ -198,7 +198,7 @@ function Combobox2(props) {
 
     const listValueIndex = values.findIndex(lv => lv.name === val);
     let newValue;
-    let finalValues;
+    let finalValues = [...value];
     let selectedValues;
 
     if (listValueIndex === -1) {

@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "plugins": ["react-hooks"],
+  "plugins": ["react-hooks", "cypress"],
   "rules": {
     "no-use-before-define": ["error", { "functions": false }],
     "react-hooks/rules-of-hooks": "error",
@@ -20,6 +20,11 @@
   },
   "globals": {
     "window": true,
-    "document": true
+    "document": true,
+    "Cypress": true,
+    "cy": true,
+    "describe": true,
+    "it": true,
+    "expect": true
   }
 }
