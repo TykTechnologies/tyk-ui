@@ -141,7 +141,7 @@ const Input2 = ({
       )}
       {
         readOnly && (
-          <div>
+          <div className="tyk-form-control--readonly">
             {value || '-'}
           </div>
         )
