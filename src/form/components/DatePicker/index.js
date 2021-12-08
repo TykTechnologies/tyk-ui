@@ -244,7 +244,7 @@ const DatePicker = (props) => {
             </div>
           )
       }
-      <div>
+      <div className="tyk-form-control--readonly">
         {readOnly && !value && '-'}
         {readOnly && value && format(value, config.dateFormat || 'd/m/Y')}
       </div>

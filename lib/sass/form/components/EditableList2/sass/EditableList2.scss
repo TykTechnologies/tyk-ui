@@ -45,7 +45,14 @@
 
     &-cell {
       border-left: 1px solid theme-color('default', 'light');
+      overflow: hidden;
       padding: 0 10px;
+
+      .tyk-form-control--readonly {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+      }
 
       &:first-child {
         border-left: none;

@@ -252,7 +252,7 @@ export default class Input extends Component {
           </div>
         )}
         {
-          readOnly && <div>{value || '-'}</div>
+          readOnly && <div className="tyk-form-control--readonly">{value || '-'}</div>
         }
       </div>
     );
