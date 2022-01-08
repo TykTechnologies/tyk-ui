@@ -23,4 +23,5 @@ const useEventListener = (eventName, handler, element) => {
   }, [eventName, element]);
 };
 
+/** @component */
 export default useEventListener;

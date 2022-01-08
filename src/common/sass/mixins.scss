@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @function theme-color($key: 'primary', $variant: 'base') {
   $map: map-get($theme-colors, $key);
   @return map-get($map, $variant);
@@ -50,12 +52,12 @@
 @mixin grid-loop($name) {
   @for $i from 0 through $grid-columns {
     .tyk-col--#{$name}-#{$i} {
-      flex-basis: calc(#{percentage($i / $grid-columns)} - #{$grid-gutter});
-      max-width: calc(#{percentage($i / $grid-columns)} - #{$grid-gutter});
+      flex-basis: calc(#{percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
+      max-width: calc(#{percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
     }
 
     .tyk-col--offset-#{$name}-#{$i} {
-      margin-left: percentage($i / $grid-columns);
+      margin-left: percentage(math.div($i, $grid-columns));
     }
   }
 }
@@ -95,7 +97,7 @@
       opacity: 0.8;
     }
   }
-  
+
   &.tyk-form-group--addon-left {
     .tyk-input-group__addon {
       border-bottom: 2px solid $border-color;

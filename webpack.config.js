@@ -74,8 +74,8 @@ module.exports = {
               debug: true,
               engine: 'postcss',
             },
-          }
-        ]
+          },
+        ],
       },
       {
         test: /\.scss$/,

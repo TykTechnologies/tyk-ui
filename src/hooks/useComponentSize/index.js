@@ -40,4 +40,5 @@ const useComponentSize = (ref) => {
   return ComponentSize;
 };
 
+/** @component */
 export default useComponentSize;

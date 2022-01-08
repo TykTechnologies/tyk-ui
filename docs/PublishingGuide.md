@@ -1,7 +1,7 @@
 *In order to publish the changes, please do the following*
 - After PR merge, make a new build and generates prod code of the library
 
-```static
+```shell static
 npm run build-prod
 ```
 
@@ -9,20 +9,20 @@ npm run build-prod
 
 - Regenerate the `package-lock.json` file
 
-```static
+```shell static
 npm i
 ```
 
-```static
-git add . 
+```shell static
+git add .
 ```
 
 - Commit and Push changes
-```static
+```shell static
 git commit -m "bump version"
 ```
 
 - Publish the package to npm
-```static
-npm publish 
+```shell static
+npm publish
 ```

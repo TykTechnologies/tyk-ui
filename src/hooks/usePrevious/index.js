@@ -8,4 +8,5 @@ const usePrevious = (value) => {
   return ref.current;
 };
 
+/** @component */
 export default usePrevious;
