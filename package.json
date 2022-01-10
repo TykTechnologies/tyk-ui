@@ -1,6 +1,6 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "2.2.11",
+  "version": "2.2.12",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
@@ -69,6 +69,7 @@
     "eslint-plugin-react": "7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "file-loader": "^2.0.0",
+    "formik": "^2.2.9",
     "glob": "^7.1.6",
     "html-webpack-plugin": "^4.5.1",
     "mini-css-extract-plugin": "^0.4.5",
