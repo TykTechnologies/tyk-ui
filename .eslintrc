@@ -1,5 +1,6 @@
 {
   "parser": "@babel/eslint-parser",
+  "requireConfigFile": false,
   "extends": ["airbnb", "plugin:cypress/recommended"],
   "plugins": ["react-hooks"],
   "rules": {

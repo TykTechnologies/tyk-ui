@@ -13,8 +13,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './lib/'),
     filename: '[name].js',
-    library: 'TykUI',
-    libraryTarget: 'commonjs2',
+    library: {
+      type: 'commonjs2'
+    }
   },
   module: {
     rules: [
