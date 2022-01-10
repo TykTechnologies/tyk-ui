@@ -1,5 +1,4 @@
 import { useCallback, useState, useLayoutEffect } from 'react';
-import ResizeObserver from 'resize-observer-polyfill';
 
 const getSize = (el) => {
   if (!el) {

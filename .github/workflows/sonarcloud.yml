@@ -14,7 +14,7 @@ jobs:
     - name: install
       run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install
     - name: test
-      run: npm run cy:run
+      run: npm test
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:

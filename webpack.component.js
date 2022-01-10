@@ -8,35 +8,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        exclude: [/images/],
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[ext]',
-          },
-        },
-      },
-      {
         test: /\.js?$/,
         include: [
           path.resolve(__dirname, 'src'),
         ],
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: ['istanbul'],
-          },
-        },
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
         use: [
+          '@jsdevtools/coverage-istanbul-loader',
           {
-            loader: 'file-loader',
+            loader: 'esbuild-loader',
             options: {
-              name: 'images/[name].[ext]',
+              loader: 'jsx',
+              target: 'es2015',
             },
           },
         ],
@@ -44,54 +27,50 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              debug: true,
-              engine: 'postcss',
-            },
-          },
+          'style-loader',
+          'css-loader',
         ],
       },
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              debug: true,
-              engine: 'postcss',
-            },
-          },
+          'resolve-url-loader',
           {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              sourceMapContents: false,
             },
           },
         ],
       },
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        exclude: [/images/],
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
+        },
+      },
     ],
   },
   devtool: 'source-map',
-  stats: 'verbose',
+  devServer: {
+    client: {
+      overlay: false,
+    },
+  },
 };

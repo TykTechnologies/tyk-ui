@@ -19,22 +19,17 @@ module.exports = {
     module: {
       rules: [
         {
-          enforce: 'pre',
-          test: /.js?$/,
+          test: /\.js?$/,
           include: [
             path.resolve(__dirname, 'src'),
+            path.resolve(__dirname, 'logo'),
           ],
           exclude: /node_modules/,
-          loader: 'eslint-loader',
+          loader: 'esbuild-loader',
           options: {
-            fix: true,
+            loader: 'jsx',
+            target: 'es2015',
           },
-        },
-        {
-          test: /\.js?$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          options: { babelrcRoots: ['.', '../'] },
         },
         {
           test: /\.css$/,
@@ -49,25 +44,20 @@ module.exports = {
             'style-loader',
             'css-loader',
             'resolve-url-loader',
-            'sass-loader?sourceMap',
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
           ],
         },
         {
-          test: /\.md$/,
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: 'docs/[name].[ext]',
-            },
-          },
-        },
-        {
           test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: 'fonts/[name].[ext]',
-            },
+          exclude: [/images/],
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[name][ext]',
           },
         },
       ],
@@ -142,7 +132,7 @@ module.exports = {
     {
       name: 'Form Components',
       content: 'src/form/Readme.md',
-      components: 'src/form/components/*/index.js',
+      components: 'src/form/components/**/index.js',
       usageMode: 'expand',
       exampleMode: 'expand',
       sectionDepth: 2,

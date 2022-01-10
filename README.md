@@ -17,7 +17,7 @@ $component-images-path: "~@tyk-technologies/tyk-ui/lib/images/";
 @import '~@tyk-technologies/tyk-ui/lib/sass/index';
 ```
 *NOTE*:
-For projects that don't SASS but just pure css we are also exposing the compiled styles.
+For projects that don't use SASS but just pure css we are also exposing the compiled styles.
 ```html
 <link rel="stylesheet" type="text/css" href="node_modules/@tyk-technologies/tyk-ui/tyk-ui.css">
 ```
