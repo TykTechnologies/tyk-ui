@@ -3,8 +3,8 @@ import { mount } from '@cypress/react';
 import StringBuilder from './index';
 import '../../../index.scss';
 
-describe('Button', () => {
-  it('renders the component with proper classes and attributes based on props', () => {
+describe('StringBuilder', () => {
+  it('renders the component with proper classes and attributes based on props and tests basic functionality', () => {
     const onChangeMock = cy.stub();
     const initialVal = 'https://petstore.swagger.io/v2/pet/{{.arguments.id}}/XdXd/{{.arguments.id}}';
     const options = [
