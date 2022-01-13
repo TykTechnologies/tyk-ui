@@ -1,4 +1,4 @@
-Tyk-ui is library of reusable presentational UI components. 
+Tyk-ui is library of reusable presentational UI components.
 
 ### **Installation**
 
@@ -45,11 +45,11 @@ $component-images-path: "~@tyk-technologies/tyk-ui/lib/images/";
 ```md
 NOTE : For projects that don't SASS but just pure css we are also exposing the compiled styles.
 ```
-### Testing on local 
+### Testing on local
 
-- You can test the changes on your local dev environment by replacing the your `@tyk-technologies/tyk-ui/lib` with newly built lib 
+- You can test the changes on your local dev environment by replacing the your `@tyk-technologies/tyk-ui/lib` with newly built lib
 
-eg 
+eg
 ```md
 cp -a lib/. /Users/me/go/src/github.com/TykTechnologies/tyk-analytics/webclient/node_modules/@tyk-technologies/tyk-ui/lib
 ```
