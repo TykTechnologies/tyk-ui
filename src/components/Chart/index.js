@@ -2,15 +2,16 @@ import React, {
   useState, useEffect, useRef, memo,
 } from 'react';
 import PropTypes from 'prop-types';
-import echarts from 'echarts';
+import * as echarts from 'echarts';
 import { fromJS } from 'immutable';
 
 import debounce from '../../utils/debounce';
 import { usePrevious } from '../../hooks';
 import Loader from '../Loader';
 import Message from '../Message';
+import worldMap from './maps/world.json';
 
-echarts.registerMap('world', require('echarts/map/json/world.json'));
+echarts.registerMap('world', worldMap);
 
 const Chart = (props) => {
   const {
