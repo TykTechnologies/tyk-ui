@@ -54,7 +54,7 @@
     "css-loader": "6.5.1",
     "cypress": "9.2.1",
     "esbuild-loader": "2.18.0",
-    "eslint": "8.6.0",
+    "eslint": "8.7.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.25.4",
@@ -63,12 +63,12 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-webpack-plugin": "3.1.1",
     "html-webpack-plugin": "5.5.0",
-    "mini-css-extract-plugin": "2.4.6",
+    "mini-css-extract-plugin": "2.5.1",
     "react-styleguidist": "11.1.8",
     "resolve-url-loader": "4.0.0",
     "sass-loader": "12.4.0",
     "style-loader": "3.3.1",
-    "webpack": "5.65.0",
+    "webpack": "5.66.0",
     "webpack-cli": "4.9.1",
     "webpack-dev-server": "4.7.3"
   },
@@ -88,6 +88,6 @@
     "react-dom": "17.0.2",
     "react-fast-compare": "3.2.0",
     "react-transition-group": "4.4.2",
-    "sass": "1.47.0"
+    "sass": "1.48.0"
   }
 }
