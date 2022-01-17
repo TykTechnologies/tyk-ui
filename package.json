@@ -1,6 +1,6 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "2.2.13",
+  "version": "2.2.15",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
@@ -45,6 +45,7 @@
     "@babel/core": "7.16.7",
     "@babel/eslint-parser": "7.16.5",
     "@babel/plugin-syntax-export-extensions": "7.0.0-beta.32",
+    "@babel/preset-react": "7.16.7",
     "@cypress/code-coverage": "3.9.12",
     "@cypress/react": "5.12.1",
     "@cypress/webpack-dev-server": "1.8.0",

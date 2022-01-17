@@ -56,3 +56,10 @@ Tooltips can be displayed on the left or on the right of the "trigger" element.
   Hover Me Too
 </Tooltip>
 ```
+
+Tooltip opened by default through the `isOpened` prop
+```js
+<Tooltip render="This tooltip is opened without user interaction" position="bottom" isOpened>
+  No user interaction needed
+</Tooltip>
+```
