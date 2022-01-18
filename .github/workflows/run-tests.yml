@@ -31,6 +31,8 @@ jobs:
           ${{ runner.os }}-
     - name: install
       run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install
+    - name: cypress install
+      run: npx cypress install
     - name: test
       run: npm test
     - name: SonarCloud Scan
