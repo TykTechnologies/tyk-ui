@@ -1,0 +1,1 @@
+useInterval docs

@@ -29,12 +29,13 @@
   $color: white
 ) {
   background-color: transparent;
-  border-color: transparent;
+  border: $general-border-width solid transparent;
   color: $color;
 
   &:hover {
     background-color: transparent;
     color: $color;
+    border-color: $color;
     text-decoration: underline;
   }
 }

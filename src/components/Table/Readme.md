@@ -6,7 +6,7 @@ Table component depends on `value` prop which consist of following schema.
 
 ```json
 {
-  "columns": [{}], 
+  "columns": [{}],
   "rows": [{}],
   "selectable" : {},
   "pagination": {
@@ -45,7 +45,7 @@ columns[n].sortable
 ```
 - Gives sorting capabilities for to the table and can be extended to change the default sorting behavior.
 
-eg. 
+eg.
 ```json
 
 // Make table sortable
@@ -54,7 +54,7 @@ eg.
   "sortable": true
 }
 
-// Make table sortable and change the default sortable direction to Ascending 
+// Make table sortable and change the default sortable direction to Ascending
 "column" :  {
   //...
   "sortable": {
@@ -68,7 +68,7 @@ eg.
 rows[n].values
 ```
 
-- Defines the the values to be rendered for the table. You can also pass props and values using this if your `columns[n].type` is a custom component. 
+- Defines the the values to be rendered for the table. You can also pass props and values using this if your `columns[n].type` is a custom component.
 - Values is an object who's keys should match the `columns[n].id` for table to understand what values need to be rendered under what column
 - You can consider rows[n].values[{yourColumnId}] as a single cell which you can completely customize
 
@@ -347,7 +347,7 @@ const config = {
 };
 
 
-<Table 
+<Table
   value={config}
   onChange={
     (message, data, tableApi) => {
@@ -365,7 +365,7 @@ const config = {
 
 You access the table api directly to `get` and `set` table state by accessing the third arg passed to `onChange`
 
-- `api.getState` 
+- `api.getState`
 To get current table state
 
 - `api.setState`
@@ -373,9 +373,9 @@ To get current state of table
 
 ### FAQ's
 
-#### 1. Can I attach an event to only one specific cell in the table 
+#### 1. Can I attach an event to only one specific cell in the table
 
-Yes, you can add events or custom styles to a specific cell using `events` and `styling` for the cell. 
+Yes, you can add events or custom styles to a specific cell using `events` and `styling` for the cell.
 
 Syntax
 ```js static
@@ -386,5 +386,5 @@ value.rows[index][col_id].events = {
 ```
 
 ```md
-Note : Click on `Freemium Policy (A)` in the above interactive table example and check the developer console and rows config `(value.rows[0].values.name)` for code 
+Note : Click on `Freemium Policy (A)` in the above interactive table example and check the developer console and rows config `(value.rows[0].values.name)` for code
 ```

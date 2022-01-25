@@ -19,31 +19,21 @@ module.exports = {
   webpackConfig: {
     module: {
       rules: [
-        // {
-        //   enforce: 'pre',
-        //   test: /.js?$/,
-        //   include: [
-        //     path.resolve(__dirname, 'src'),
-        //   ],
-        //   exclude: /node_modules/,
-        //   loader: 'eslint-loader',
-        //   options: {
-        //     fix: true,
-        //   },
-        // },
         {
           test: /\.js?$/,
+          include: [
+            path.resolve(__dirname, 'src'),
+            path.resolve(__dirname, 'logo'),
+          ],
           exclude: /node_modules/,
-          loader: 'babel-loader',
-          options: { babelrcRoots: ['.', '../'] },
-        },
-        {
-          test: /\.wc\.css$/,
-          loader: 'raw-loader',
+          loader: 'esbuild-loader',
+          options: {
+            loader: 'jsx',
+            target: 'es2015',
+          },
         },
         {
           test: /\.css$/,
-          exclude: /\.wc\.css$/,
           use: [
             'style-loader',
             'css-loader',
@@ -54,31 +44,21 @@ module.exports = {
           use: [
             'style-loader',
             'css-loader',
+            'resolve-url-loader',
             {
-              loader: 'resolve-url-loader',
+              loader: 'sass-loader',
               options: {
-                debug: true,
+                sourceMap: true,
               },
             },
-            'sass-loader?sourceMap',
           ],
         },
         {
-          test: /\.md$/,
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: 'docs/[name].[ext]',
-            },
-          },
-        },
-        {
           test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-          use: {
-            loader: 'file-loader',
-            options: {
-              name: 'fonts/[name].[ext]',
-            },
+          exclude: [/images/],
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[name][ext]',
           },
         },
       ],
@@ -120,8 +100,13 @@ module.exports = {
     },
     {
       name: 'Hooks',
-      components: 'src/hooks/**/*.md',
+      content: 'src/hooks/Readme.md',
+      components: 'src/hooks/**/index.js',
+      ignore: 'src/hooks/index.js',
       sectionDepth: 2,
+      tocMode: 'collapse',
+      usageMode: 'expand',
+      exampleMode: 'expand',
     },
     {
       name: 'Layout',
@@ -146,31 +131,23 @@ module.exports = {
       exampleMode: 'expand',
     },
     {
-      name: 'Form',
-      sections: [
-        {
-          name: 'Components',
-          components: 'src/form/components/*/index.js',
-          usageMode: 'expand',
-          exampleMode: 'expand',
-        },
-        {
-          name: 'Formik',
-          components: 'src/form/formik/*/index.js',
-        },
-        {
-          name: 'Redux-Form',
-          components: 'src/form/redux-form/*/index.js',
-        },
-      ],
+      name: 'Form Components',
+      content: 'src/form/Readme.md',
+      components: 'src/form/components/**/index.js',
+      usageMode: 'expand',
+      exampleMode: 'expand',
       sectionDepth: 2,
     },
     {
       name: 'Utilities',
-      components: 'src/utils/**/*.md',
       usageMode: 'expand',
       exampleMode: 'expand',
       sectionDepth: 2,
+      sections: [
+        { name: 'CSS Helpers', content: 'src/utils/css-helpers/Readme.md' },
+        { name: 'debounce', content: 'src/utils/debounce/Readme.md' },
+        { name: 'formik', content: 'src/utils/formik/Readme.md' },
+      ],
     },
   ],
 };

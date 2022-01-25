@@ -214,7 +214,7 @@ const StringBuilder = (props) => {
           </div>
         )}
         {
-          readOnly && <div>{value || '-'}</div>
+          readOnly && <div className="tyk-form-control--readonly">{value || '-'}</div>
         }
       </div>
     </div>

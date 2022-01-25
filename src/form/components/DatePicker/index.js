@@ -4,9 +4,9 @@ import React, {
 import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import flatpickr from 'flatpickr';
-import Icon from '../../../components/Icon';
+import 'flatpickr/dist/flatpickr.min.css';
 
-import '../../../../node_modules/flatpickr/dist/flatpickr.min.css';
+import Icon from '../../../components/Icon';
 import { usePrevious } from '../../../hooks';
 
 const DatePicker = (props) => {
@@ -244,7 +244,7 @@ const DatePicker = (props) => {
             </div>
           )
       }
-      <div>
+      <div className="tyk-form-control--readonly">
         {readOnly && !value && '-'}
         {readOnly && value && format(value, config.dateFormat || 'd/m/Y')}
       </div>

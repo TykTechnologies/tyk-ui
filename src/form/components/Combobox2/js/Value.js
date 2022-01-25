@@ -164,7 +164,7 @@ function Value(props) {
   }, [focus]);
 
   if (readOnly) {
-    return <div>{textValue(value.map(v => v.name).join(', '))}</div>;
+    return <div className="tyk-form-control--readonly">{textValue(value.map(v => v.name).join(', '))}</div>;
   }
 
   if (tags) return getTags();

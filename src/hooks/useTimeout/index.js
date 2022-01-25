@@ -22,4 +22,5 @@ const useTimeout = (callback, delay) => {
   [delay]);
 };
 
+/** @component */
 export default useTimeout;

@@ -142,7 +142,7 @@ const StringInput = ({
 
   const addCharacterToTokenString = (text, selectionStart) => {
     // Cursor is at end
-    if (selectionStart === tokenValue.length) {
+    if (selectionStart - 1 === tokenValue.length) {
       setTokenString(`${tokenString}${text}`);
       return;
     }

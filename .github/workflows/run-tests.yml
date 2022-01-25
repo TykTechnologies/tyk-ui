@@ -1,0 +1,51 @@
+# This workflow will run for all PRs opened against master
+
+name: Run Tests
+
+on:
+  - pull_request
+
+jobs:
+  test:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: cache node modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-test-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-test-${{ matrix.node-version }}
+          ${{ runner.os }}-
+    - name: install
+      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install
+    - name: cypress install
+      run: npx cypress install
+    - name: test
+      run: npm test
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: .
+        args: >
+          -Dsonar.organization=tyktechnologies
+          -Dsonar.projectKey=TykTechnologies_tyk-ui
+          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+          -Dsonar.eslint.eslintconfigpath=.eslintrc
+
+    env:
+      CI: true
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

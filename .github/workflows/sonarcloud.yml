@@ -1,0 +1,29 @@
+name: SonarCloud
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: install
+      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install
+    - name: test
+      run: npm test
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: .
+        args: >
+          -Dsonar.organization=tyktechnologies
+          -Dsonar.projectKey=TykTechnologies_tyk-ui
+          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+          -Dsonar.eslint.eslintconfigpath=.eslintrc
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

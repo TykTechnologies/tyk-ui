@@ -1,60 +1,35 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-const entries = {};
-entries['tyk-ui'] = path.resolve(__dirname, 'src/index.js');
-entries.index = path.resolve(__dirname, 'src/index.js');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: entries,
+  entry: {
+    'tyk-ui': path.resolve(__dirname, 'src/index.js'),
+    index: path.resolve(__dirname, 'src/index.js'),
+  },
   output: {
     path: path.resolve(__dirname, './lib/'),
     filename: '[name].js',
-    library: 'TykUI',
-    libraryTarget: 'commonjs2',
+    library: {
+      type: 'commonjs2'
+    }
   },
   module: {
     rules: [
-      {
-        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        exclude: [/images/],
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: 'fonts/[name].[ext]',
-          },
-        },
-      },
-      // {
-      //   enforce: 'pre',
-      //   test: /.js?$/,
-      //   include: [
-      //     path.resolve(__dirname, 'src'),
-      //   ],
-      //   exclude: /node_modules/,
-      //   loader: 'eslint-loader',
-      // },
       {
         test: /\.js?$/,
         include: [
           path.resolve(__dirname, 'src'),
         ],
         exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'images/[name].[ext]',
-            },
-          },
-        ],
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'jsx',
+          target: 'es2015',
+        },
       },
       {
         test: /\.wc\.css$/,
@@ -64,69 +39,71 @@ module.exports = {
         test: /\.css$/,
         exclude: /\.wc\.css$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              debug: true,
-              engine: 'postcss',
-            },
-          },
+          'style-loader',
+          'css-loader',
         ],
       },
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              debug: true,
-              engine: 'postcss',
-            },
-          },
+          'resolve-url-loader',
           {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              sourceMapContents: false,
             },
           },
         ],
       },
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        exclude: [/images/],
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        exclude: [/fonts/],
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
+        },
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      new ESBuildMinifyPlugin({
+        target: 'es2015',
+        css: true,
+      }),
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    new OptimizeCSSAssetsPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: 'src/**/*.scss',
-        to: 'sass/',
-        transformPath(targetPath) {
-          return targetPath.replace('src/', '');
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: '**/*.scss',
+          to: 'sass/',
+          context: 'src/',
         },
-      },
-    ], {
-      debug: true,
+      ],
+    }),
+    new ESLintPlugin({
+      fix: true,
+      lintDirtyModulesOnly: true,
     }),
   ],
   devtool: 'source-map',

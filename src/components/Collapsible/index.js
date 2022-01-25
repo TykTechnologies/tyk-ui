@@ -18,11 +18,11 @@ const Collapsible = (props) => {
 
   const contentContainer = useRef(null);
   const collapseWrapper = useRef(null);
+  const refContainerSize = useComponentSize(contentContainer);
   const [contentContainerStyle, setContentContainerStyle] = useState({
+    // eslint-disable-next-line
     height: (collapsed) ? 0 : 'auto',
   });
-
-  const refContainerSize = useComponentSize(contentContainer);
 
   const setHeight = (height) => {
     setContentContainerStyle({
@@ -41,7 +41,10 @@ const Collapsible = (props) => {
   };
 
   useEffect(() => {
-    if (!collapsed) {
+    if (!collapsed
+      && refContainerSize?.height
+      && contentContainerStyle.height !== refContainerSize?.height
+    ) {
       setHeight(refContainerSize.height);
     }
   }, [refContainerSize.height]);

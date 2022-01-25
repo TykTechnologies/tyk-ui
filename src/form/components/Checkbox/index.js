@@ -22,6 +22,8 @@ export default class Checkbox extends Component {
       PropTypes.string,
       PropTypes.bool,
     ]),
+    /** Adds additional information under the checkbox element */
+    note: PropTypes.string,
     input: PropTypes.instanceOf(Object),
     /** Adds a label to checkbox */
     label: PropTypes.oneOfType([
@@ -78,6 +80,17 @@ export default class Checkbox extends Component {
     );
   }
 
+  displayNote() {
+    const { note } = this.props;
+    if (!note) return null;
+
+    return (
+      <p className="tyk-form-control__help-block">
+        {note}
+      </p>
+    );
+  }
+
   render() {
     const {
       input, value, label, ...rest
@@ -96,6 +109,7 @@ export default class Checkbox extends Component {
             />
             {label}
           </label>
+          {this.displayNote()}
           {this.displayError()}
         </div>
       </div>

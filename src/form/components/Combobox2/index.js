@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import ResizeObserver from 'resize-observer-polyfill';
 import Icon from '../../../components/Icon';
 import FloatingContainer from '../../../components/FloatingContainer';
 
@@ -198,7 +197,7 @@ function Combobox2(props) {
 
     const listValueIndex = values.findIndex(lv => lv.name === val);
     let newValue;
-    let finalValues;
+    let finalValues = [...value];
     let selectedValues;
 
     if (listValueIndex === -1) {

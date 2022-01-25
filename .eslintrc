@@ -1,21 +1,32 @@
 {
-  "parser": "babel-eslint",
-  "extends": "airbnb",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "ecmaVersion": 2021,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+  "extends": ["airbnb", "plugin:cypress/recommended"],
   "plugins": ["react-hooks"],
   "rules": {
     "no-use-before-define": ["error", { "functions": false }],
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/require-default-props": false,
-    "jsx-a11y/label-has-for": false,
-    "jsx-a11y/label-has-associated-control": false,
-    "jsx-a11y/no-autofocus": false,
-    "jsx-a11y/no-noninteractive-element-interactions": false,
-    "jsx-a11y/anchor-is-valid": false,
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "lines-between-class-members": "off",
     "max-len": "warn",
-    "no-console": 0,
-    "import/prefer-default-export": 0,
+    "no-console": "off",
+    "import/prefer-default-export": "off",
     "indent": ["error", 2, {
       "ignoredNodes": ["TemplateLiteral"]
     }]
@@ -25,6 +36,7 @@
     "document": true
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   }
 }

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .editable-list {
   &__header {
     align-items: center;
@@ -45,7 +47,14 @@
 
     &-cell {
       border-left: 1px solid theme-color('default', 'light');
+      overflow: hidden;
       padding: 0 10px;
+
+      .tyk-form-control--readonly {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+      }
 
       &:first-child {
         border-left: none;
@@ -68,7 +77,7 @@
       &--size-#{$i} {
         display: flex;
         flex-grow: #{$i + 1};
-        $my_width: #{$i/12*100%};
+        $my_width: #{math.div($i, 12) * 100%};
         width: $my_width;
       }
     }
@@ -90,7 +99,7 @@
       &--read-only {
         color: theme-color("default", "light");
         align-items: center;
-        
+
         .tyk-button {
           margin-top: 0;
         }
