@@ -127,6 +127,7 @@ function Combobox2(props) {
   const rootRef = useRef(null);
   const comboboxControlRef = useRef(null);
   const dropdownRef = useRef(null);
+  const listRef = useRef(null);
 
   const [value, setValue] = useState(getValueFromProp(propValue, propValues));
   const [values, setValues] = useState(propValues.map(v => normalizeValue(v)));
@@ -509,10 +510,12 @@ function Combobox2(props) {
                   tags,
                   searchValue,
                   activeItem,
+                  listRef,
                   sendMessage: onMessage,
                 })
               ) : (
                 <List
+                  listRef={listRef}
                   showSearch={showSearch}
                   values={filteredValues}
                   tags={tags}

@@ -1,13 +1,13 @@
 ```js { "props": { "className": "checks" } }
-import { useRef } from 'react';
-const initialState = {
+import { useRef, useState } from 'react';
+const el = useRef(null);
+const [state, setState] = useState({
   isOpened: false,
   size: 'auto',
   offset: 0,
   forceDisplay: 'auto',
   displayAxis: 'vertical'
-};
-const el = useRef(null);
+});
 const updateState = newState => setState({...newState, isOpened: false});
 const updateStateProp = prop => e => updateState({[prop]: e.target.value});
 const onSizeChange = updateStateProp('size');
