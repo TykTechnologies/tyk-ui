@@ -7,7 +7,7 @@ import debounce from '../../utils/debounce';
 import { usePrevious, useComponentSize } from '../../hooks';
 import Loader from '../Loader';
 
-const InfiniteScroller = (props) => {
+function InfiniteScroller(props) {
   const [showLoader, setShowLoader] = useState(false);
   const containerRef = useRef(null);
   const {
@@ -21,7 +21,7 @@ const InfiniteScroller = (props) => {
   const refChildSize = useComponentSize(refChild);
 
   useEffect(() => {
-    if (initialLoad && loadMore && typeof loadMore === 'function') {
+    if (initialLoad && typeof loadMore === 'function') {
       setShowLoader(false);
       loadMore(pageNumber);
     }
@@ -40,7 +40,7 @@ const InfiniteScroller = (props) => {
   }, [containerRef, refChildSize.height]);
 
   const loadMoreData = useCallback(() => {
-    if (loadMore && typeof loadMore === 'function' && hasMore) {
+    if (hasMore && typeof loadMore === 'function') {
       loadMore(pageNumber + 1);
       setShowLoader(true);
     } else {
@@ -117,7 +117,7 @@ const InfiniteScroller = (props) => {
       }
     </div>
   );
-};
+}
 
 InfiniteScroller.propTypes = {
   children: PropTypes.oneOfType([

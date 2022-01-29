@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../../../../components/Icon';
 
 function List(props) {
   const {
+    listRef,
     tags,
     values,
     searchValue,
@@ -13,8 +14,6 @@ function List(props) {
     selectAll,
     showSearch,
   } = props;
-
-  const listRef = useRef(null);
 
   useEffect(() => {
     if (!listRef.current) return;
@@ -108,6 +107,7 @@ function List(props) {
 }
 
 List.propTypes = {
+  listRef: PropTypes.instanceOf(Object),
   tags: PropTypes.bool,
   values: PropTypes.instanceOf(Array),
   searchValue: PropTypes.string,

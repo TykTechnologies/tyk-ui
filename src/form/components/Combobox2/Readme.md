@@ -1,6 +1,12 @@
 
 ```js
+import { useState } from 'react';
+
 const ITEMS_PAGE_SIZE = 10;
+const [state, setState] = useState({
+  currentPage: 1,
+  values: getNewValues()
+});
 function getNewValues() {
   const vs = [];
   for (let i = 1; i <= ITEMS_PAGE_SIZE; i++) {
@@ -18,10 +24,7 @@ function loadMore(p) {
     ]
   });
 }
-initialState = {
-  currentPage: 1,
-  values: getNewValues()
-};
+
 <Combobox2
   values={state.values}
   value={'apitwo'}
