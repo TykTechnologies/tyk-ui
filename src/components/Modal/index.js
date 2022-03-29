@@ -19,13 +19,14 @@ function Modal({
   opened = false,
   onClose = () => {},
   size = 'md',
+  className='',
   ...restProps
 }) {
   const modalClasses = [
     'tyk-modal',
     `tyk-modal--theme-${theme}`,
     opened && 'opened',
-  ].filter(Boolean).join(' ');
+  ].concat(className.split(' ')).filter(Boolean).join(' ');
 
   const backdropClasses = [
     'tyk-modal__backdrop',
@@ -36,6 +37,8 @@ function Modal({
     warning: 'warning',
     danger: 'delete',
   }[theme];
+  
+  console.log(className);
 
   return (
     <>
@@ -110,6 +113,7 @@ Modal.propTypes = {
     PropTypes.node,
     PropTypes.string,
   ]),
+  className: PropTypes.string,
   /** one of "warning", "danger", "none"; default is "none" */
   theme: PropTypes.string,
   /** If set on true, the Modal won't close when clicking on the overlay or by pressing ESC key */
