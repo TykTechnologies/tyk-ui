@@ -27,7 +27,7 @@ const Example = () => {
       <Button onClick={() => setShowModal(true)} theme="success">
         Open Modal
       </Button>
-      <Modal opened={showModal} onClose={() => setShowModal(false)} theme={theme}>
+      <Modal className="custom-modal-class" opened={showModal} onClose={() => setShowModal(false)} theme={theme}>
         {showDeprecated && (
           <Modal.Header>
             <Modal.Title>Save your changes before leaving?</Modal.Title>
