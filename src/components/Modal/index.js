@@ -37,8 +37,6 @@ function Modal({
     warning: 'warning',
     danger: 'delete',
   }[theme];
-  
-  console.log(className);
 
   return (
     <>

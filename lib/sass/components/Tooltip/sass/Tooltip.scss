@@ -31,6 +31,8 @@
 
   &__content {
     color: theme-color('default', 'dark');
+    word-break: break-all;
+    word-wrap: break-word;
 
     + .tyk-icon {
       margin-left: map-get($spacing, 'md');

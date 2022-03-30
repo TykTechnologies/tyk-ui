@@ -1,6 +1,13 @@
 Using string as render props
 ```js
-<Tooltip render="Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello" position="bottom">
+<Tooltip render="eyJvcmciOiI2MTNmM2E5Mzg2MzQxZjJmYzk0YjA1ODEiLCJpZCI6IjQyZTA0MTBjNjNjZDQ0YmZhM2IzYmEyMmJjMWQ0ZTJkIiwiaCI6Im11cm11cjY0In0=" position="bottom">
+  Hover Over Me 1
+</Tooltip>
+```
+
+Using string as render props
+```js
+<Tooltip render="Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello" position="bottom">
   Hover Over Me 1
 </Tooltip>
 ```
