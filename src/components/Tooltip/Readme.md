@@ -70,3 +70,34 @@ Tooltip opened by default through the `isOpened` prop
   No user interaction needed
 </Tooltip>
 ```
+
+Tooltip inside a Modal component
+```js
+import React, { useState } from 'react';
+import Button from '../Button';
+import Modal from '../Modal';
+
+const Example = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setShowModal(true)} theme="success">
+        Open Modal
+      </Button>
+      <Modal opened={showModal} onClose={() => setShowModal(false)} theme="success">
+        <Modal.Body>
+          <Tooltip render="Tooltip component inside a modal component">
+            Hover me
+          </Tooltip>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button theme="primary-outline" onClick={() => setShowModal(false)}>Close</Button>
+          <Button theme="success" onClick={() => setShowModal(false)}>Save</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
+<Example />
+```
