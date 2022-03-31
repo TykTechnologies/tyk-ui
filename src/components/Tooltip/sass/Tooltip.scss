@@ -6,7 +6,6 @@
   background-color: theme-color('primary', 'light');
   border: 2px solid theme-color('primary', 'base');
   border-radius: $general-border-radius;
-  padding: map-get($spacing, 'md');
   max-width: var(--tooltip-max-width);
 
   > .tyk-icon:first-child {
@@ -31,6 +30,7 @@
 
   &__content {
     color: theme-color('default', 'dark');
+    padding: map-get($spacing, 'md');
     word-break: break-all;
     word-wrap: break-word;
 
