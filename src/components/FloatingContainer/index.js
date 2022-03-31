@@ -59,7 +59,6 @@ function FloatingContainer(props) {
   const contentWrapperRef = useRef(null);
 
   function determineDisplay() {
-    console.log('wtf preferred', preferredPosition);
     const target = element.current;
     const container = floatingContainerRef.current;
     if (!container) return preferredPosition ?? displayAxis === 'vertical' ? 'bottom' : 'right';
