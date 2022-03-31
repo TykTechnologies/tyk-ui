@@ -34,6 +34,10 @@ function FloatingContainer(props) {
      */
     displayAxis = 'vertical',
     /**
+     * If there is space on both sides of the axis preffer this side.
+     */
+    preferredPosition,
+    /**
      * The distance between the element and the floating container.
      * It can be positive or negative.
      */
@@ -55,9 +59,10 @@ function FloatingContainer(props) {
   const contentWrapperRef = useRef(null);
 
   function determineDisplay() {
+    console.log('wtf preferred', preferredPosition);
     const target = element.current;
     const container = floatingContainerRef.current;
-    if (!container) return displayAxis === 'vertical' ? 'bottom' : 'right';
+    if (!container) return preferredPosition ?? displayAxis === 'vertical' ? 'bottom' : 'right';
 
     if (displayAxis === 'vertical') {
       const { top } = target.getBoundingClientRect();
@@ -65,6 +70,9 @@ function FloatingContainer(props) {
       const topSpace = top;
       const bottomSpace = windowHeight - top - target.offsetHeight;
       const hasBottomSpace = bottomSpace > container.scrollHeight;
+      const hasTopSpace = topSpace > container.scrollHeight;
+      if (preferredPosition === 'top' && hasTopSpace) return 'top';
+      if (preferredPosition === 'bottom' && hasBottomSpace) return 'bottom';
       return hasBottomSpace || bottomSpace > topSpace ? 'bottom' : 'top';
     }
 
@@ -73,6 +81,9 @@ function FloatingContainer(props) {
     const leftSpace = left;
     const rightSpace = windowWidth - left - target.offsetWidth;
     const hasRightSpace = rightSpace > container.offsetWidth;
+    const hasLeftSpace = leftSpace > container.offsetWidth;
+    if (preferredPosition === 'left' && hasLeftSpace) return 'left';
+    if (preferredPosition === 'right' && hasLeftSpace) return 'right';
     return hasRightSpace || rightSpace > leftSpace ? 'right' : 'left';
   }
 
@@ -179,6 +190,7 @@ FloatingContainer.propTypes = {
   offset: PropTypes.number,
   forceDisplay: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
   displayAxis: PropTypes.oneOf(['vertical', 'horizontal']),
+  preferredPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
 };
 
