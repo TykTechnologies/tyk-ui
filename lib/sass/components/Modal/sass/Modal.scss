@@ -27,7 +27,7 @@
 
   &.opened {
     display: flex;
-    z-index: 1080;
+    z-index: $modal-z-index;
 
     .tyk-modal__dialog {
       opacity: 1;
@@ -145,7 +145,7 @@
   right: 0;
   top: 0;
   width: 100%;
-  z-index: 1079;
+  z-index: $modal-z-index - 1;
 
   &.opened {
     display: block;
