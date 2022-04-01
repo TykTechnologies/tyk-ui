@@ -10,7 +10,7 @@ function Tooltip({
   render,
   className,
   children,
-  position = 'top',
+  position = 'auto',
   style,
   icon = false,
   closable,
@@ -62,6 +62,7 @@ function Tooltip({
         <FloatingContainer
           element={wrapperRef}
           forceDisplay={position}
+          preferredPosition="top"
           offset={20}
         >
           <div className={classes} ref={tooltipRef}>
