@@ -1,5 +1,9 @@
 # GitHub Actions
 
+## build-and-publish.yml
+
+Builds the lib directory and publishes the new version.
+
 ## run-tests.yml
 
 Runs the unit tests for the current repo.
