@@ -37,10 +37,10 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@master
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
-          with:
-            message: Update lib to version "${{ steps.package-version.outputs.current-version}}"
-            committer_name: tyk-ui bot
-            committer_email: tyk-ui-bot@tyk.io
+        with:
+          message: Update lib to version ${{ steps.package-version.outputs.current-version}}
+          committer_name: tyk-ui bot
+          committer_email: tyk-ui-bot@tyk.io
       - name: Publish lib to npm
         run: |
           echo "running npm publish"
