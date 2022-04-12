@@ -35,12 +35,12 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
+      - name: Push to protected branch
+        uses: CasperWA/push-protected@v2
         with:
-          message: Update lib to version ${{ steps.package-version.outputs.current-version}}
-          committer_name: tyk-ui bot
-          committer_email: tyk-ui-bot@tyk.io
+          token: ${{ secrets.TYK_UI_TOKEN }}
+          branch: master
+          unprotect_reviews: true
       - name: Publish lib to npm
         uses: JS-DevTools/npm-publish@v1
         with:
