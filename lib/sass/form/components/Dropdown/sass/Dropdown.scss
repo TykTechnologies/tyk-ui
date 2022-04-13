@@ -31,38 +31,6 @@
 
   &__trigger {
     position: relative;
-
-    // &--opened {
-    //   &:before {
-    //     content: '';
-    //     bottom: -12px;
-    //     border-left: 8px solid transparent;
-    //     border-right: 8px solid transparent;
-    //     border-bottom: 8px solid $tyk-dropdown-item-background;
-    //     // -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
-    //     // filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
-    //     height: 0px;
-    //     left: 50%;
-    //     margin-left: -8px;
-    //     position: absolute;
-    //     width: 0px;
-    //   }
-    //   &:after {
-    //     content: '';
-    //     bottom: -12px;
-    //     border-left: 6px solid transparent;
-    //     border-right: 6px solid transparent;
-    //     border-bottom: 6px solid $tyk-dropdown-item-background;
-    //     // -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
-    //     // filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5));
-    //     height: 0px;
-    //     left: calc(50% + 2px);
-    //     margin-left: -8px;
-    //     position: absolute;
-    //     width: 0px;
-    //     z-index: 1001;
-    //   }
-    // }
   }
 
   &.theme-list .tyk-button {
@@ -93,7 +61,7 @@
   margin-top: 3px;
   overflow: hidden;
   padding: 0;
-  z-index: 1000;
+  z-index: 1081;
 
   .tyk-panel {
     margin: 0;
