@@ -2,7 +2,7 @@
 
 ## build-and-publish.yml
 
-Builds the lib directory and publishes the new version.
+Builds the lib directory and publishes the new version to npm.
 
 ## run-tests.yml
 
