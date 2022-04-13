@@ -35,6 +35,8 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
+      - name: Mark /github/workspace as a safe directory
+        run: git config --global --add safe.directory /github/workspace
       - name: Push to protected branch
         uses: CasperWA/push-protected@v2
         with:
