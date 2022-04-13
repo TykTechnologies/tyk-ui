@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  build-lib:
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -19,13 +19,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ secrets.TYK_UI_TOKEN }}
       - name: Use node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
-          npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm ci
+          npm config set //registry.npmjs.org/:_authToken "${{ secrets.NPM_TOKEN }}" && npm ci
       - name: Run production build
         run: |
           npm run build-prod
@@ -35,12 +36,14 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: Update lib to version ${{ steps.package-version.outputs.current-version}}
-          committer_name: tyk-ui bot
-          committer_email: tyk-ui-bot@tyk.io
-      - name: Publish lib to npm
+      - name: Push to protected branch
         run: |
-          echo "running npm publish"
+          git config --local user.email "tyk-ui-bot@tyk.io"
+          git config --local user.name "tyk-ui bot"
+          git add .
+          git commit -m "Update lib to version ${{ steps.package-version.outputs.current-version}}"
+          git push
+
+    env:
+      CI: true
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
