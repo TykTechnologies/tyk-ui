@@ -18,7 +18,7 @@ import { stringToTokenString, setCursorPos } from './js/service';
  * - Wire-frames : https://miro.com/app/board/o9J_kipLWwA=/
  */
 
-const StringBuilder = (props) => {
+function StringBuilder(props) {
   const {
     options,
     onChange,
@@ -63,7 +63,7 @@ const StringBuilder = (props) => {
   }, [tokenValue]);
 
   useEffect(() => {
-    const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
+    const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  {body}      ') : value;
     setTokenValue(tempVal);
     setTokenString(stringToTokenString(tempVal, options));
   }, [value]);
@@ -132,7 +132,7 @@ const StringBuilder = (props) => {
 
   const getThemeClasses = () => {
     const themes = theme ? theme.split(' ') : [];
-    return themes.map(iTheme => `tyk-form-group--${iTheme}`);
+    return themes.map((iTheme) => `tyk-form-group--${iTheme}`);
   };
 
   const getCssClasses = () => [
@@ -219,7 +219,7 @@ const StringBuilder = (props) => {
       </div>
     </div>
   );
-};
+}
 
 StringBuilder.propTypes = {
   /** Options to render in the list */

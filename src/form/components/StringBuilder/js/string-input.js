@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { stringToTokenString, setCursorPos } from './service';
 
-const StringInput = ({
+function StringInput({
   setShowOptions,
   tokenValue,
   disabled,
@@ -22,7 +22,7 @@ const StringInput = ({
   invalidTokenRegex,
   name,
   contextMaxLength,
-}) => {
+}) {
   const [isPasteEvent, setIsPasteEvent] = useState(false);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const StringInput = ({
     );
     if (tokenStringForStringAfterCursor.startsWith('__TOKEN__')) {
       // If string before delete is a token
-      const splitTokens = tokenStringForStringAfterCursor.split(/__TOKEN__(.*?)__TOKEN__/g).filter(t => t !== '');
+      const splitTokens = tokenStringForStringAfterCursor.split(/__TOKEN__(.*?)__TOKEN__/g).filter((t) => t !== '');
       const firstToken = splitTokens[0];
       const newTokenValue = `${stringBeforeCursor}${stringAfterCursor.substr(firstToken.length)}`;
       const newTokenizedString = stringToTokenString(newTokenValue, options);
@@ -77,7 +77,18 @@ const StringInput = ({
    * - Also handles if the string is manipulated from middle
    */
   const handleBackSpace = (e) => {
-    const { selectionEnd } = e.target;
+    const { selectionEnd, selectionStart, value } = e.target;
+
+    // -- START ::  Handle highlighted text deletion
+    const selectedText = value.substring(selectionStart, selectionEnd);
+    if (selectedText.length > 1) {
+      const newTokenStr = stringToTokenString(tokenValue.replace(selectedText, ''), options);
+      setTokenString(newTokenStr);
+      setCursorPos(inputRef, selectionStart);
+      return;
+    }
+    // -- END ::  Handle highlighted text deletion
+
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
       const lastToken = tokens[tokens?.length - 2];
@@ -223,8 +234,8 @@ const StringInput = ({
       disabled={disabled}
       className="string-builder__input"
       value={tokenValue}
-      onChange={e => handleOnChange(e)}
-      onKeyDown={e => handleKeyDown(e)}
+      onChange={(e) => handleOnChange(e)}
+      onKeyDown={(e) => handleKeyDown(e)}
       placeholder={placeholder}
       name={name}
       ref={inputRef}
@@ -235,7 +246,7 @@ const StringInput = ({
       onBlur={() => setInputInFocus(false)}
     />
   );
-};
+}
 
 StringInput.propTypes = {
   setShowOptions: PropTypes.func,
