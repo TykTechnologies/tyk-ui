@@ -76,18 +76,20 @@ function StringInput({
    * remove the entire token instead of single character, else continue with default behaviour
    * - Also handles if the string is manipulated from middle
    */
-  const handleBackSpace = (e) => {
-    const { selectionEnd, selectionStart, value } = e.target;
+  const handleBackSpace = (e, selectedText, key) => {
+    const { selectionEnd, selectionStart } = e.target;
 
-    // -- START ::  Handle highlighted text deletion
-    const selectedText = value.substring(selectionStart, selectionEnd);
+    // -- START ::  Handle highlighted text deletion / replacement
     if (selectedText.length > 1) {
-      const newTokenStr = stringToTokenString(tokenValue.replace(selectedText, ''), options);
+      const newStr = tokenValue.substring(0, selectionStart)
+        + key
+        + tokenValue.substring(selectionEnd);
+      const newTokenStr = stringToTokenString(newStr, options);
       setTokenString(newTokenStr);
-      setCursorPos(inputRef, selectionStart);
+      setCursorPos(inputRef, key ? selectionStart + 1 : selectionStart);
       return;
     }
-    // -- END ::  Handle highlighted text deletion
+    // -- END ::  Handle highlighted text deletion / replacement
 
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
@@ -169,6 +171,9 @@ function StringInput({
 
   const handleKeyDown = (e) => {
     const { key } = e;
+    const { selectionEnd, selectionStart, value } = e.target;
+    const selectedText = value.substring(selectionStart, selectionEnd);
+
     if (key === dropdownTriggerKey && !showOptions) {
       e.preventDefault();
       setShowOptions(true);
@@ -178,9 +183,9 @@ function StringInput({
       e.preventDefault();
       return;
     }
-    if (key === 'Backspace') {
+    if (selectedText.length || key === 'Backspace') {
       e.preventDefault();
-      handleBackSpace(e);
+      handleBackSpace(e, selectedText, key.length > 1 ? '' : key);
     }
     if (key === 'Delete') {
       e.preventDefault();
