@@ -28,7 +28,8 @@ function StringInput({
   useEffect(() => {
     // Set height if initial value exists
     if (tokenValue) {
-      setStringBuilderHeight(inputRef.current.scrollHeight + 20);
+      const tokenLen = tokenValue.length > 50 ? tokenValue.length / 5 : 0;
+      setStringBuilderHeight(inputRef.current.scrollHeight + tokenLen);
     }
   }, []);
 
@@ -76,20 +77,8 @@ function StringInput({
    * remove the entire token instead of single character, else continue with default behaviour
    * - Also handles if the string is manipulated from middle
    */
-  const handleBackSpace = (e, selectedText, key) => {
-    const { selectionEnd, selectionStart } = e.target;
-
-    // -- START ::  Handle highlighted text deletion / replacement
-    if (selectedText.length > 1) {
-      const newStr = tokenValue.substring(0, selectionStart)
-        + key
-        + tokenValue.substring(selectionEnd);
-      const newTokenStr = stringToTokenString(newStr, options);
-      setTokenString(newTokenStr);
-      setCursorPos(inputRef, key ? selectionStart + 1 : selectionStart);
-      return;
-    }
-    // -- END ::  Handle highlighted text deletion / replacement
+  const handleBackSpace = (e) => {
+    const { selectionEnd } = e.target;
 
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
@@ -169,6 +158,25 @@ function StringInput({
     setTokenString(newTokenizedString);
   };
 
+  // -- START ::  Handle highlighted text deletion / replacement
+  const handleTextSelection = (e, selectedText, key) => {
+    const allowedKeys = ['Delete', 'Backspace'];
+    if (key.length > 1 && allowedKeys.indexOf(key) === -1) {
+      return;
+    }
+    const { selectionEnd, selectionStart } = e.target;
+    const substitute = key.length > 1 ? '' : key;
+    if (selectedText.length > 1) {
+      const newStr = tokenValue.substring(0, selectionStart)
+        + substitute
+        + tokenValue.substring(selectionEnd);
+      const newTokenStr = stringToTokenString(newStr, options);
+      setTokenString(newTokenStr);
+      setCursorPos(inputRef, substitute.length ? selectionStart + 1 : selectionStart);
+    }
+  };
+  // -- END ::  Handle highlighted text deletion / replacement
+
   const handleKeyDown = (e) => {
     const { key } = e;
     const { selectionEnd, selectionStart, value } = e.target;
@@ -183,7 +191,7 @@ function StringInput({
       e.preventDefault();
       return;
     }
-    if (selectedText.length || key === 'Backspace') {
+    if (key === 'Backspace') {
       e.preventDefault();
       handleBackSpace(e, selectedText, key.length > 1 ? '' : key);
     }
@@ -193,6 +201,10 @@ function StringInput({
     }
     if (e.metaKey && key === 'x') {
       setTokenString('');
+    }
+    if (selectedText) {
+      e.preventDefault();
+      handleTextSelection(e, selectedText, key);
     }
   };
 
