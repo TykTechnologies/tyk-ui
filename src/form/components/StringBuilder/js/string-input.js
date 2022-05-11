@@ -193,7 +193,7 @@ function StringInput({
     }
     if (key === 'Backspace') {
       e.preventDefault();
-      handleBackSpace(e, selectedText, key.length > 1 ? '' : key);
+      handleBackSpace(e);
     }
     if (key === 'Delete') {
       e.preventDefault();
