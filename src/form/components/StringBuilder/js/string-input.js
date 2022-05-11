@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { stringToTokenString, setCursorPos } from './service';
 
-const StringInput = ({
+function StringInput({
   setShowOptions,
   tokenValue,
   disabled,
@@ -22,13 +22,14 @@ const StringInput = ({
   invalidTokenRegex,
   name,
   contextMaxLength,
-}) => {
+}) {
   const [isPasteEvent, setIsPasteEvent] = useState(false);
 
   useEffect(() => {
     // Set height if initial value exists
     if (tokenValue) {
-      setStringBuilderHeight(inputRef.current.scrollHeight + 20);
+      const tokenLen = tokenValue.length > 50 ? tokenValue.length / 5 : 0;
+      setStringBuilderHeight(inputRef.current.scrollHeight + tokenLen);
     }
   }, []);
 
@@ -54,7 +55,7 @@ const StringInput = ({
     );
     if (tokenStringForStringAfterCursor.startsWith('__TOKEN__')) {
       // If string before delete is a token
-      const splitTokens = tokenStringForStringAfterCursor.split(/__TOKEN__(.*?)__TOKEN__/g).filter(t => t !== '');
+      const splitTokens = tokenStringForStringAfterCursor.split(/__TOKEN__(.*?)__TOKEN__/g).filter((t) => t !== '');
       const firstToken = splitTokens[0];
       const newTokenValue = `${stringBeforeCursor}${stringAfterCursor.substr(firstToken.length)}`;
       const newTokenizedString = stringToTokenString(newTokenValue, options);
@@ -78,6 +79,7 @@ const StringInput = ({
    */
   const handleBackSpace = (e) => {
     const { selectionEnd } = e.target;
+
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
       const lastToken = tokens[tokens?.length - 2];
@@ -156,8 +158,30 @@ const StringInput = ({
     setTokenString(newTokenizedString);
   };
 
+  // -- START ::  Handle highlighted text deletion / replacement
+  const handleTextSelection = (e, selectedText, key) => {
+    const allowedKeys = ['Delete', 'Backspace'];
+    if (key.length > 1 && allowedKeys.indexOf(key) === -1) {
+      return;
+    }
+    const { selectionEnd, selectionStart } = e.target;
+    const substitute = key.length > 1 ? '' : key;
+    if (selectedText.length > 1) {
+      const newStr = tokenValue.substring(0, selectionStart)
+        + substitute
+        + tokenValue.substring(selectionEnd);
+      const newTokenStr = stringToTokenString(newStr, options);
+      setTokenString(newTokenStr);
+      setCursorPos(inputRef, substitute.length ? selectionStart + 1 : selectionStart);
+    }
+  };
+  // -- END ::  Handle highlighted text deletion / replacement
+
   const handleKeyDown = (e) => {
     const { key } = e;
+    const { selectionEnd, selectionStart, value } = e.target;
+    const selectedText = value.substring(selectionStart, selectionEnd);
+
     if (key === dropdownTriggerKey && !showOptions) {
       e.preventDefault();
       setShowOptions(true);
@@ -177,6 +201,10 @@ const StringInput = ({
     }
     if (e.metaKey && key === 'x') {
       setTokenString('');
+    }
+    if (selectedText) {
+      e.preventDefault();
+      handleTextSelection(e, selectedText, key);
     }
   };
 
@@ -223,8 +251,8 @@ const StringInput = ({
       disabled={disabled}
       className="string-builder__input"
       value={tokenValue}
-      onChange={e => handleOnChange(e)}
-      onKeyDown={e => handleKeyDown(e)}
+      onChange={(e) => handleOnChange(e)}
+      onKeyDown={(e) => handleKeyDown(e)}
       placeholder={placeholder}
       name={name}
       ref={inputRef}
@@ -235,7 +263,7 @@ const StringInput = ({
       onBlur={() => setInputInFocus(false)}
     />
   );
-};
+}
 
 StringInput.propTypes = {
   setShowOptions: PropTypes.func,
