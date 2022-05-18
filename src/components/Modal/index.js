@@ -20,6 +20,7 @@ function Modal({
   onClose = () => {},
   size = 'md',
   className='',
+  showBackdrop=true,
   ...restProps
 }) {
   const modalClasses = [
@@ -63,8 +64,7 @@ function Modal({
           document.querySelector('body'),
         )
       }
-      {
-        ReactDOM.createPortal(
+      {showBackdrop && ReactDOM.createPortal(
           <CSSTransition
             in={opened}
             timeout={100}
@@ -122,6 +122,7 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   /** Width of the Moda: md or lg */
   size: PropTypes.string,
+  showBackdrop: PropTypes.bool
 };
 
 export default Modal;
