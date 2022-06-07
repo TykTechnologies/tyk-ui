@@ -13,9 +13,9 @@ import { tableContext } from './tableContext';
  * See the example configuration object below to understand how to hydrate the table component
  */
 
-const Table = ({
+function Table({
   value, onChange, noDataMessage, loading, infiniteScrolling,
-}) => {
+}) {
   const [state, setState] = useState(null);
   const [onChangeMsg, setOnChangeMsg] = useState('api');
   const itemsListRef = useRef(null);
@@ -32,7 +32,7 @@ const Table = ({
   const selectAllRows = (data) => {
     setState({
       ...state,
-      rows: state.rows.map(row => ({ ...row, selected: data })),
+      rows: state.rows.map((row) => ({ ...row, selected: data })),
     });
   };
 
@@ -61,7 +61,7 @@ const Table = ({
 
   const api = {
     getState: () => state,
-    setState: newState => setState(newState),
+    setState: (newState) => setState(newState),
   };
 
   const sendMessage = (message, data) => {
@@ -123,7 +123,7 @@ const Table = ({
               <InfiniteScroller
                 refChild={itemsListRef}
                 hasMore={state.pagination.totalPages > state.pagination.current}
-                loadMore={num => sendMessage('pagination.change', num)}
+                loadMore={(num) => sendMessage('pagination.change', num)}
                 pageNumber={state.pagination.current - 1}
                 initialLoad={false}
               >
@@ -139,13 +139,13 @@ const Table = ({
             value={state.pagination.current - 1}
             nrItemsOnPage={state.pagination.perPage - 1}
             totalNrOfPages={state.pagination.totalPages - 1}
-            onChange={num => sendMessage('pagination.change', num)}
+            onChange={(num) => sendMessage('pagination.change', num)}
           />
         </div>
       )}
     </tableContext.Provider>
   );
-};
+}
 
 Table.propTypes = {
   /** Configuration object used to render the component */
@@ -162,6 +162,8 @@ Table.propTypes = {
         PropTypes.string,
         /** Render cell of elements (eg. Input / Button) */
         PropTypes.element,
+        /** Render a custom function/component */
+        PropTypes.func,
       ]),
       sortable: PropTypes.oneOfType([
         /** Make Column sortable */

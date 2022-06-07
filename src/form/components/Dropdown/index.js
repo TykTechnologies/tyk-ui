@@ -40,7 +40,11 @@ export default class Dropdown extends Component {
     btnSize: PropTypes.string,
     btnGroupSize: PropTypes.string,
     btnTheme: PropTypes.string,
-    btnTitle: PropTypes.string,
+    btnTitle: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.element,
+      PropTypes.string,
+    ]),
     customBtnTitle: PropTypes.oneOfType([
       PropTypes.node,
       PropTypes.element,

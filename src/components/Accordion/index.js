@@ -6,7 +6,7 @@ import AccordionItemContent from './js/AccordionItemContent';
 import AccordionContext from './js/AccordionContext';
 
 
-const Accordion = (props) => {
+function Accordion(props) {
   const {
     className,
     children,
@@ -48,7 +48,7 @@ Accordion.propTypes = {
   className: PropTypes.string,
   usearrowastrigger: PropTypes.bool,
   arrow: PropTypes.shape({
-    position: PropTypes.oneOf('left', 'right'),
+    position: PropTypes.oneOf(['left', 'right']),
     expandToContent: PropTypes.bool,
   }),
 };
