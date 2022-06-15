@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const Input2 = ({
+const Input2 = forwardRef(({
   error,
   onChange,
   readOnly,
@@ -148,7 +148,7 @@ const Input2 = ({
       }
     </div>
   );
-};
+});
 
 Input2.propTypes = {
   disabled: PropTypes.bool,
@@ -186,4 +186,4 @@ Input2.propTypes = {
   wrapperClassName: PropTypes.string,
 };
 
-export default forwardRef(Input2);
+export default Input2;

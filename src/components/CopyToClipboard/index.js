@@ -48,7 +48,7 @@ CopyToClipboard.propTypes = {
   /** Text to be copied */
   copy: PropTypes.string.isRequired,
   /** Text to be displayed */
-  display: PropTypes.string.isRequired,
+  display: PropTypes.string,
   /** Children of custom element if you are using any custom element */
   children: PropTypes.oneOfType([
     PropTypes.element,
