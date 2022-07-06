@@ -28,6 +28,7 @@ function InfiniteScroller(props) {
   }, [initialLoad]);
 
   const shouldLoad = useCallback(() => {
+    if (!containerRef.current) return false;
     const { clientHeight, scrollTop } = containerRef.current;
 
     return (
@@ -66,7 +67,6 @@ function InfiniteScroller(props) {
       }
     };
   }, [containerRef, scrollHandler]);
-
 
   // if content resets (page number resets) scroll to top
   useEffect(() => {
