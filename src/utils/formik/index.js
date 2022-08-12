@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import config from '../config/config';
+
 function getValueFromPath(obj, path) {
   // turn 'aaa.qqq[2].bbb[5][3].mmm' into ['aaa', 'qqq', '2', 'bbb', '5', '3', 'mmm']
   const indexes = path.split(/[\][.]/).filter(Boolean);
@@ -21,7 +23,7 @@ function debounce(f, limit) {
  * and also has a default debounce time for when the change event is triggered.
  */
 const wrapper = (Component, options) => ({ field, form, ...properties }) => {
-  const DEFAULT_DEBOUNCE_TIME_MS = 200;
+  const DEFAULT_DEBOUNCE_TIME_MS = typeof config.DEBOUNCE === 'number' ? config.DEBOUNCE : 200;
   const [myValue, setMyValue] = useState(field.value);
   const opts = {
     getOnChangeProps: () => ({}),
@@ -30,7 +32,12 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
   };
   const executeDebounced = (() => {
     const fn = (f) => f();
-    if (properties.debounce === false) return fn;
+    if (
+      properties.debounce === false
+      || (config.DEBOUNCE === false && !properties.debounce)
+    ) {
+      return fn;
+    }
 
     const timeout = typeof properties.debounce === 'number'
       ? properties.debounce
