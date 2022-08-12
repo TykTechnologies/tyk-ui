@@ -23,7 +23,7 @@ function debounce(f, limit) {
  * and also has a default debounce time for when the change event is triggered.
  */
 const wrapper = (Component, options) => ({ field, form, ...properties }) => {
-  const DEFAULT_DEBOUNCE_TIME_MS = typeof config.DEBOUNCE === 'number' ? config.DEBOUNCE : 200;
+  const DEFAULT_DEBOUNCE_TIME_MS = typeof config.FORM_DEBOUNCE === 'number' ? config.FORM_DEBOUNCE : 200;
   const [myValue, setMyValue] = useState(field.value);
   const opts = {
     getOnChangeProps: () => ({}),
@@ -34,7 +34,7 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     const fn = (f) => f();
     if (
       properties.debounce === false
-      || (config.DEBOUNCE === false && !properties.debounce)
+      || (config.FORM_DEBOUNCE === false && !properties.debounce)
     ) {
       return fn;
     }

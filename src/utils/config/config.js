@@ -1,5 +1,5 @@
 const config = {
-  DEBOUNCE: 200,
+  FORM_DEBOUNCE: 200,
 };
 
 export function setConfig(key, val) {
