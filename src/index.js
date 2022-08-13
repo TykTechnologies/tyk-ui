@@ -72,7 +72,6 @@ export { default as FormikTextarea } from './form/formik/FormikTextarea';
 export { default as FormikToggle } from './form/formik/FormikToggle';
 export { default as FormikStringBuilder } from './form/formik/FormikStringBuilder';
 
-
 // Redux - Form
 
 export { default as FieldCodeEditor } from './form/redux-form/FieldCodeEditor';
@@ -95,3 +94,4 @@ export { default as useTimeout } from './hooks/useTimeout';
 export { default as useInterval } from './hooks/useInterval';
 export { default as useEventListener } from './hooks/useEventListener';
 export { default as useComponentSize } from './hooks/useComponentSize';
+export { setConfig } from './utils/config/config';
