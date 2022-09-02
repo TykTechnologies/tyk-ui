@@ -1,0 +1,15 @@
+.monaco-code-editor {
+  .tyk-form-control {
+    border-radius: $general-border-radius;
+    height: auto;
+    padding: 0;
+  }
+
+  .monaco-editor {
+    border-radius: 18px;
+  }
+
+  .overflow-guard {
+    border-radius: $general-border-radius;
+  }
+}
