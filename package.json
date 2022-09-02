@@ -1,6 +1,6 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "2.2.26",
+  "version": "2.2.31",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
@@ -44,7 +44,6 @@
   "devDependencies": {
     "@babel/core": "7.16.7",
     "@babel/eslint-parser": "7.16.5",
-    "@babel/plugin-syntax-export-extensions": "7.0.0-beta.32",
     "@babel/preset-react": "7.16.7",
     "@cypress/code-coverage": "3.9.12",
     "@cypress/react": "5.12.1",
@@ -90,5 +89,9 @@
     "react-fast-compare": "3.2.0",
     "react-transition-group": "4.4.2",
     "sass": "1.48.0"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
   }
 }

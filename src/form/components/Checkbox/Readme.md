@@ -25,3 +25,8 @@
   note="This is a very interesting checkbox"
 />
 ```
+```js
+<Checkbox
+  label="This is a checkbox with a very very long label that spans on multiple rows to test for the position of the checkbox input in relation to the label."
+/>
+```

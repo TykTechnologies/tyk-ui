@@ -36,9 +36,15 @@ export default class Checkbox extends Component {
     /** Set a name for checkbox */
     name: PropTypes.string,
     /** Set initial value for checkbox */
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
     /** Make checkbox checked by default */
-    checked: PropTypes.string,
+    checked: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+    ]),
     /** Callback function executed on change of checkbox */
     onChange: PropTypes.func,
     /** CSS classes added to the wrapper of the component */

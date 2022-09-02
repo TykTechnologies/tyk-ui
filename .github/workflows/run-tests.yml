@@ -30,7 +30,7 @@ jobs:
           ${{ runner.os }}-test-${{ matrix.node-version }}
           ${{ runner.os }}-
     - name: install
-      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install
+      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install --force
     - name: cypress install
       run: npx cypress install
     - name: test
