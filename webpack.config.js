@@ -1,4 +1,5 @@
 const path = require('path');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
@@ -24,7 +25,7 @@ module.exports = {
         include: [
           path.resolve(__dirname, 'src'),
         ],
-        exclude: /node_modules/,
+        exclude: /(node_modules\/monaco-editor)/,
         loader: 'esbuild-loader',
         options: {
           loader: 'jsx',
@@ -72,7 +73,7 @@ module.exports = {
         generator: {
           filename: 'images/[name][ext]',
         },
-      },
+      }
     ],
   },
   optimization: {
@@ -84,6 +85,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new MonacoWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),

@@ -1,6 +1,6 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "2.2.31",
+  "version": "2.2.32",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@babel/core": "7.16.7",
     "@babel/eslint-parser": "7.16.5",
+    "@babel/preset-env": "7.18.10",
     "@babel/preset-react": "7.16.7",
     "@cypress/code-coverage": "3.9.12",
     "@cypress/react": "5.12.1",
@@ -63,6 +64,7 @@
     "eslint-webpack-plugin": "3.1.1",
     "html-webpack-plugin": "5.5.0",
     "mini-css-extract-plugin": "2.5.2",
+    "monaco-editor-webpack-plugin": "7.0.1",
     "react-styleguidist": "11.1.8",
     "resolve-url-loader": "5.0.0",
     "sass-loader": "12.4.0",
@@ -79,6 +81,7 @@
     "flatpickr": "4.6.9",
     "immutable": "4.0.0",
     "lodash": "4.17.21",
+    "monaco-editor": "0.34.0",
     "prop-types": "15.8.1",
     "react": "17.0.2",
     "react-ace": "6.6.0",

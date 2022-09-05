@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Editor from '@monaco-editor/react';
+import * as monaco from 'monaco-editor';
+import Editor, { loader } from '@monaco-editor/react';
+
+loader.config({ monaco });
 
 const MonacoCodeEditor = ({
   error,
