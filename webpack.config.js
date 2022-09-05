@@ -25,7 +25,7 @@ module.exports = {
         include: [
           path.resolve(__dirname, 'src'),
         ],
-        exclude: /(node_modules\/monaco-editor)/,
+        exclude: /(node_modules)/,
         loader: 'esbuild-loader',
         options: {
           loader: 'jsx',

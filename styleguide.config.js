@@ -28,7 +28,7 @@ module.exports = {
             path.resolve(__dirname, 'src'),
             path.resolve(__dirname, 'logo'),
           ],
-          exclude: /(node_modules\/monaco-editor)/,
+          exclude: /(node_modules)/,
           loader: 'esbuild-loader',
           options: {
             loader: 'jsx',
