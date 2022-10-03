@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import config from '../config/config';
 
@@ -30,7 +30,8 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     hasIsFieldProp: false,
     ...options,
   };
-  const executeDebounced = (() => {
+
+  const executeDebounced = useCallback((() => {
     const fn = (f) => f();
     if (
       properties.debounce === false
@@ -38,12 +39,11 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     ) {
       return fn;
     }
-
     const timeout = typeof properties.debounce === 'number'
       ? properties.debounce
       : DEFAULT_DEBOUNCE_TIME_MS;
     return debounce(fn, timeout);
-  })();
+  })(), []);
 
   const getValue = (v) => {
     if (v && v.target) {
