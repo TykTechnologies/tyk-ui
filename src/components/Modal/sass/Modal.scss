@@ -30,6 +30,8 @@
     z-index: $modal-z-index;
 
     .tyk-modal__dialog {
+      display: flex;
+      max-height: 92vh;
       opacity: 1;
       pointer-events: all;
     }
@@ -116,6 +118,8 @@
 }
 
 .tyk-modal__body {
+  flex: 1;
+  overflow: auto;
   --padding-top: calc(#{$tyk-modal-body-padding} + (var(--theme-header-icon-size) - var(--theme-header-height)) / 2);
   padding: var(--padding-top) $tyk-modal-body-padding $tyk-modal-body-padding;
 

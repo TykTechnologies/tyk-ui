@@ -16,7 +16,8 @@ module.exports = {
     filename: '[name].js',
     library: {
       type: 'commonjs2'
-    }
+    },
+    publicPath: ''
   },
   module: {
     rules: [
