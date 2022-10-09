@@ -1,4 +1,3 @@
-
 import React, {
   Component, createRef,
 } from 'react';
@@ -53,6 +52,7 @@ export default class Dropdown extends Component {
     btnGroup: PropTypes.bool,
     className: PropTypes.string,
     display: PropTypes.string,
+    disabled: PropTypes.bool,
     hasCustomContent: PropTypes.bool,
     label: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -338,6 +338,7 @@ export default class Dropdown extends Component {
       showDropdownIcon,
       showTriggerButton,
       showCheckmark,
+      disabled = false,
     } = this.props;
     const {
       selectedItem,
@@ -369,6 +370,7 @@ export default class Dropdown extends Component {
                 iconPosition="right"
                 size={btnSize || 'md'}
                 type="button"
+                disabled={disabled}
                 ref={this.dropdownButtonRef}
               >
                 { customBtnTitle || this.getBtnTitle() }
