@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import ToastContainer from './js/ToastContainer';
 /**
  * Toast is a service that displays dialogs
@@ -14,7 +14,8 @@ class ToastCreator {
     const el = document.createElement('div');
     el.className = 'tyk-toast';
     document.body.appendChild(el);
-    ReactDOM.render(<ToastContainer notify={this.bindNotify} />, el);
+    const root = createRoot(el);
+    root.render(<ToastContainer notify={this.bindNotify} />);
   }
 
   bindNotify = (fn) => {

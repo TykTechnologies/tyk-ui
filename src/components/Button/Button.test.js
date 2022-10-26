@@ -1,5 +1,4 @@
 import React from 'react';
-import { mount } from '@cypress/react';
 import '../../index.scss';
 import Button from './index';
 
@@ -7,21 +6,21 @@ describe('Button', () => {
   const buttonText = 'click me';
 
   it('renders the component with proper classes and attributes based on props', () => {
-    mount(
-      <Button
-        type="submit"
-        className="foo bar"
-        theme="success"
-        display="inline"
-        iconOnly
-        size="lg"
-        noStyle
-      >
-        {buttonText}
-      </Button>,
-    );
-
-    cy.get('.tyk-button')
+    cy
+      .mount(
+        <Button
+          type="submit"
+          className="foo bar"
+          theme="success"
+          display="inline"
+          iconOnly
+          size="lg"
+          noStyle
+        >
+          {buttonText}
+        </Button>,
+      )
+      .get('.tyk-button')
       .should('have.class', 'tyk-button--success')
       .and('have.class', 'foo')
       .and('have.class', 'bar')
@@ -33,18 +32,18 @@ describe('Button', () => {
   });
 
   it('renders an icon in the correct position', () => {
-    mount(
-      <Button
-        theme="default"
-        iconType="copy"
-        iconFamily="tykon"
-        iconPosition="right"
-      >
-        {buttonText}
-      </Button>,
-    );
-
-    cy.get('.tyk-button')
+    cy
+      .mount(
+        <Button
+          theme="default"
+          iconType="copy"
+          iconFamily="tykon"
+          iconPosition="right"
+        >
+          {buttonText}
+        </Button>,
+      )
+      .get('.tyk-button')
       .should('have.class', 'icon-right')
 
       .get('.tyk-icon')
@@ -54,29 +53,30 @@ describe('Button', () => {
 
   it('renders a custom "button"', () => {
     const customButtonText = 'custom button';
-    mount(
-      <Button
-        theme="default"
-        customButton={<span>{customButtonText}</span>}
-      >
-        {buttonText}
-      </Button>,
-    );
-
+    cy
+      .mount(
+        <Button
+          theme="default"
+          customButton={<span>{customButtonText}</span>}
+        >
+          {buttonText}
+        </Button>,
+      );
     cy.contains(buttonText).should('not.exist');
     cy.contains(customButtonText);
   });
 
   it('renders an anchor', () => {
     const url = 'https://tyk.io';
-    mount(
-      <Button
-        theme="default"
-        href={url}
-      >
-        {buttonText}
-      </Button>,
-    );
+    cy
+      .mount(
+        <Button
+          theme="default"
+          href={url}
+        >
+          {buttonText}
+        </Button>,
+      );
 
     cy.contains(buttonText)
       .should('match', 'a')
@@ -86,14 +86,15 @@ describe('Button', () => {
   it('should call the onClick callback', () => {
     const onClick = cy.stub();
 
-    mount(
-      <Button
-        theme="default"
-        onClick={onClick}
-      >
-        {buttonText}
-      </Button>,
-    );
+    cy
+      .mount(
+        <Button
+          theme="default"
+          onClick={onClick}
+        >
+          {buttonText}
+        </Button>,
+      );
 
     cy.contains(buttonText)
       .click()
@@ -103,15 +104,16 @@ describe('Button', () => {
   it('should not call the onClick callback if disabled', () => {
     const onClick = cy.stub();
 
-    mount(
-      <Button
-        theme="default"
-        disabled
-        onClick={onClick}
-      >
-        {buttonText}
-      </Button>,
-    );
+    cy
+      .mount(
+        <Button
+          theme="default"
+          disabled
+          onClick={onClick}
+        >
+          {buttonText}
+        </Button>,
+      );
 
     cy.contains(buttonText)
       .click({ force: true })

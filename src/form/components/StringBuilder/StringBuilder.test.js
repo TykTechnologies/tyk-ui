@@ -1,5 +1,4 @@
 import React from 'react';
-import { mount } from '@cypress/react';
 import StringBuilder from './index';
 import '../../../index.scss';
 
@@ -15,7 +14,7 @@ describe('StringBuilder', () => {
         className: 'data_source_argument',
       },
     ];
-    mount(
+    cy.mount(
       <StringBuilder
         label="URL Builder"
         value={initialVal}

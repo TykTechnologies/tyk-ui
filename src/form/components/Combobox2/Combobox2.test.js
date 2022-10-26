@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { mount } from '@cypress/react';
 import '../../../index.scss';
 import Combobox2 from './index';
 
@@ -34,7 +33,7 @@ describe('Combobox2', () => {
     const error = 'Something went wrong';
     const labelWidth = '200px';
 
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value={selectedItem.id}
@@ -87,9 +86,9 @@ describe('Combobox2', () => {
       ['item3'],
       [{ id: 'item4' }],
     ];
-    const getItemNameById = id => items.find(i => i.id === id).name;
+    const getItemNameById = (id) => items.find((i) => i.id === id).name;
 
-    const Comp = () => {
+    function Comp() {
       const [index, setIndex] = useState(0);
       return (
         <>
@@ -101,10 +100,10 @@ describe('Combobox2', () => {
           />
         </>
       );
-    };
-    mount(<Comp />);
+    }
+    cy.mount(<Comp />);
 
-    const changeValueAndCheck = id => cy
+    const changeValueAndCheck = (id) => cy
       .contains('change value')
       .click()
       .get(`.${classes.textValue}`)
@@ -120,12 +119,12 @@ describe('Combobox2', () => {
 
   it('valueOverflow controls the display of the values on single or multiple lines', () => {
     const singleHeight = 32;
-    const Comp = () => {
+    function Comp() {
       const [valueOverflow, setValueOverflow] = useState('multiple');
       return (
         <div style={{ width: '200px' }}>
           <label>
-            <input id="single-checkbox" type="checkbox" onChange={e => setValueOverflow(e.target.checked ? 'single' : 'multiple')} />
+            <input id="single-checkbox" type="checkbox" onChange={(e) => setValueOverflow(e.target.checked ? 'single' : 'multiple')} />
             <span>Single</span>
           </label>
           <Combobox2
@@ -136,8 +135,8 @@ describe('Combobox2', () => {
           />
         </div>
       );
-    };
-    mount(<Comp />);
+    }
+    cy.mount(<Comp />);
 
     cy.get(`.${classes.textValue}`)
       .invoke('css', 'height').then(parseFloat)
@@ -152,7 +151,7 @@ describe('Combobox2', () => {
   });
 
   it('can render tags', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value={[]}
@@ -178,7 +177,7 @@ describe('Combobox2', () => {
   });
 
   it('respects the disabled state', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value="item1"
@@ -194,7 +193,7 @@ describe('Combobox2', () => {
   });
 
   it('only renders text in readonly mode', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value="item1"
@@ -210,7 +209,7 @@ describe('Combobox2', () => {
   });
 
   it('can accept only values that exist in the list', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value="item1"
@@ -234,7 +233,7 @@ describe('Combobox2', () => {
   });
 
   it('can display a search input in the list and filter items by a custom function', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value="item1"
@@ -259,13 +258,13 @@ describe('Combobox2', () => {
   });
 
   it('can use custom components to display a value of the component or an item in the dropdown list', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value={['item1', 'item3']}
         multiple
-        renderValue={v => <span className="custom-value">{v.name}</span>}
-        renderListItem={i => <span className="custom-item">{i.name}</span>}
+        renderValue={(v) => <span className="custom-value">{v.name}</span>}
+        renderListItem={(i) => <span className="custom-item">{i.name}</span>}
       />,
     );
 
@@ -283,14 +282,14 @@ describe('Combobox2', () => {
   });
 
   it('can render a custom component in place of the entire content of the dropdown', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value={['item1', 'item3']}
         multiple
-        renderList={values => (
+        renderList={(values) => (
           <div className="custom-list">
-            {values.map(item => (
+            {values.map((item) => (
               <span key={item.id} className="custom-item">{item.name}</span>
             ))}
           </div>
@@ -310,17 +309,19 @@ describe('Combobox2', () => {
 
   it('in expand mode when clicking on the dropdown trigger the value container expands instead of displaying the dropdown', () => {
     const normalHeight = 38;
-    const Comp = () => (
-      <div style={{ width: '300px' }}>
-        <Combobox2
-          values={items}
-          value={['item1', 'item2', 'item3', 'item4', 'item5']}
-          tags
-          expandMode
-        />
-      </div>
-    );
-    mount(<Comp />);
+    function Comp() {
+      return (
+        <div style={{ width: '300px' }}>
+          <Combobox2
+            values={items}
+            value={['item1', 'item2', 'item3', 'item4', 'item5']}
+            tags
+            expandMode
+          />
+        </div>
+      );
+    }
+    cy.mount(<Comp />);
 
     cy.get(`.${classes.valueContainer}`)
       .invoke('css', 'height')
@@ -336,7 +337,7 @@ describe('Combobox2', () => {
   });
 
   it('the dropdown trigger can be displayed or not', () => {
-    const Comp = () => {
+    function Comp() {
       const [displayTrigger, setDisplayTrigger] = useState(true);
       return (
         <>
@@ -345,7 +346,7 @@ describe('Combobox2', () => {
               id="display-trigger"
               type="checkbox"
               checked={displayTrigger}
-              onChange={e => setDisplayTrigger(e.target.checked)}
+              onChange={(e) => setDisplayTrigger(e.target.checked)}
             />
             <span>display trigger</span>
           </label>
@@ -356,8 +357,8 @@ describe('Combobox2', () => {
           />
         </>
       );
-    };
-    mount(<Comp />);
+    }
+    cy.mount(<Comp />);
 
     cy.get(`.${classes.trigger}`)
       .should('exist')
@@ -369,7 +370,7 @@ describe('Combobox2', () => {
   });
 
   it('handles keyboard navigation in the list', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value=""
@@ -409,7 +410,7 @@ describe('Combobox2', () => {
   });
 
   it('can display a "select all" item in the dropdown', () => {
-    mount(
+    cy.mount(
       <Combobox2
         values={items}
         value=""

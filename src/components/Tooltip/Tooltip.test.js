@@ -1,5 +1,4 @@
 import React from 'react';
-import { mount } from '@cypress/react';
 import '../../index.scss';
 import Icon from '../Icon';
 import Tooltip from './index';
@@ -25,7 +24,7 @@ describe('Tooltip', () => {
 
   it('basics: render, className, style', () => {
     const customClass = 'my-tooltip';
-    mount(<Component render="hello!" className={customClass} style={{ border: '1px solid rgb(255, 0, 0)' }} />);
+    cy.mount(<Component render="hello!" className={customClass} style={{ border: '1px solid rgb(255, 0, 0)' }} />);
 
     cy.get(`.${classes.floatingContainer}`)
       .should('not.exist')
@@ -58,32 +57,32 @@ describe('Tooltip', () => {
         .should(`be.${compare}`, val);
     }
 
-    mount(<Component render="hello!" position="top" />);
+    cy.mount(<Component render="hello!" position="top" />);
     getContentOffset('top')
       .then((contentTop) => assertWrapper('top', 'gt', contentTop));
 
-    mount(<Component render="hello!" position="bottom" />);
+    cy.mount(<Component render="hello!" position="bottom" />);
     getContentOffset('top')
       .then((contentTop) => assertWrapper('top', 'lt', contentTop));
 
-    mount(<Component render="hello!" position="left" />);
+    cy.mount(<Component render="hello!" position="left" />);
     getContentOffset('left')
       .then((contentLeft) => assertWrapper('left', 'gt', contentLeft));
 
-    mount(<Component render="hello!" position="right" />);
+    cy.mount(<Component render="hello!" position="right" />);
     getContentOffset('left')
       .then((contentLeft) => assertWrapper('left', 'lt', contentLeft));
   });
 
   it('can display a "help" icon or a custom icon', () => {
-    mount(<Component render="hello" icon />);
+    cy.mount(<Component render="hello" icon />);
     cy.get(`.${classes.content}`)
       .trigger('mouseover')
       .get(`.${classes.tooltip}`)
       .find(`.${classes.iconHelp}`)
       .should('exist');
 
-    mount(<Component render="hello" icon={<Icon family="tykon" type="check" />} />);
+    cy.mount(<Component render="hello" icon={<Icon family="tykon" type="check" />} />);
     cy.get(`.${classes.content}`)
       .trigger('mouseover')
       .get(`.${classes.tooltip} .${classes.iconHelp}`)
@@ -93,7 +92,7 @@ describe('Tooltip', () => {
   });
 
   it('can be triggered by clicking', () => {
-    mount(<Component render="hello" closable />);
+    cy.mount(<Component render="hello" closable />);
     cy.get(`.${classes.content}`)
       .click()
       .get(`.${classes.tooltip}`)
@@ -105,7 +104,7 @@ describe('Tooltip', () => {
   });
 
   it('can be opened programatically with the prop "isOpened"', () => {
-    mount(<Component render="hello" isOpened />);
+    cy.mount(<Component render="hello" isOpened />);
     cy.get(`.${classes.tooltip}`)
       .should('exist');
   });
