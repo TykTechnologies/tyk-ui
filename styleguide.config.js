@@ -1,7 +1,6 @@
 const path = require('path');
 const { version } = require('./package.json');
 const { styles, theme } = require('./styleguide.styles');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
   defaultExample: false,
@@ -17,9 +16,6 @@ module.exports = {
     favicon: 'https://tyk.io/wp-content/uploads/2019/08/cropped-favicon-384x384.png',
   },
   webpackConfig: {
-    plugins: [
-      new MonacoWebpackPlugin(),
-    ],
     module: {
       rules: [
         {
