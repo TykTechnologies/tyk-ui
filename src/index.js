@@ -35,7 +35,6 @@ export { default as Row } from './layout/Row';
 export { default as Checkbox } from './form/components/Checkbox';
 export { default as Dropdown } from './form/components/Dropdown';
 export { default as CodeEditor } from './form/components/CodeEditor';
-export { default as MonacoCodeEditor } from './form/components/MonacoCodeEditor';
 export { default as Combobox } from './form/components/Combobox';
 export { default as Combobox2 } from './form/components/Combobox2';
 export { default as DatePicker } from './form/components/DatePicker';
@@ -57,7 +56,6 @@ export { default as StringBuilder } from './form/components/StringBuilder';
 
 export { default as FormikCheckbox } from './form/formik/FormikCheckbox';
 export { default as FormikCodeEditor } from './form/formik/FormikCodeEditor';
-export { default as FormikMonacoCodeEditor } from './form/formik/FormikMonacoCodeEditor';
 export { default as FormikCombobox } from './form/formik/FormikCombobox';
 export { default as FormikCombobox2 } from './form/formik/FormikCombobox2';
 export { default as FormikDatePicker } from './form/formik/FormikDatePicker';

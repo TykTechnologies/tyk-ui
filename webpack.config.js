@@ -1,5 +1,4 @@
 const path = require('path');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
@@ -86,7 +85,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new MonacoWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
