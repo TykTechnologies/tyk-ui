@@ -71,6 +71,7 @@ export { default as FormikSelectableList } from './form/formik/FormikSelectableL
 export { default as FormikTextarea } from './form/formik/FormikTextarea';
 export { default as FormikToggle } from './form/formik/FormikToggle';
 export { default as FormikStringBuilder } from './form/formik/FormikStringBuilder';
+export { default as FormikWrapper } from './utils/formik';
 
 // Redux - Form
 
