@@ -1,8 +1,14 @@
 Using string as render props
 ```js
+<div style={{
+  display: 'flex',
+  alignItems: 'flex-end',
+  justifyContent: 'flex-end'
+}}>
 <Tooltip render="eyJvcmciOiI2MTNmM2E5Mzg2MzQxZjJmYzk0YjA1ODEiLCJpZCI6IjQyZTA0MTBjNjNjZDQ0YmZhM2IzYmEyMmJjMWQ0ZTJkIiwiaCI6Im11cm11cjY0In0=">
   Hover Over Me 1
 </Tooltip>
+</div>
 ```
 
 Using string as render props

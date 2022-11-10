@@ -101,6 +101,7 @@ function FloatingContainer(props) {
       container.style.left = (size === 'auto'
         ? `${targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2}px`
         : `${targetPosition.left}px`);
+
       if (size === 'matchElement') {
         container.style.width = `${target.offsetWidth}px`;
       } else if (typeof size === 'function') {
@@ -148,6 +149,10 @@ function FloatingContainer(props) {
         container.style.height = `${size(target.offsetHeight)}px`;
       }
       container.style.maxWidth = `${window.innerWidth - targetPosition.left - target.offsetWidth - offset}px`;
+    }
+
+    if (parseFloat(container.style.left.replace('px', '')) < 0) {
+      container.style.left = '5px';
     }
   }
 
