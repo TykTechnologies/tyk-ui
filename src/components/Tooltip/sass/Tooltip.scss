@@ -31,7 +31,7 @@
 
   &__content {
     color: theme-color('default', 'dark');
-    word-break: break-all;
+    word-break: break-word;
     word-wrap: break-word;
 
     + .tyk-icon {
