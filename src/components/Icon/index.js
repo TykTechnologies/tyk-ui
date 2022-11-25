@@ -1,40 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Icon extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    family: PropTypes.string,
-    type: PropTypes.string.isRequired,
-  };
-
-  getCssClasses() {
-    const {
-      className,
-      family,
-      type,
-    } = this.props;
-
-    const cssClasses = ['tyk-icon'];
+function Icon({
+  className,
+  family,
+  type,
+  ...rest
+}) {
+  function getCSSClasses() {
     const fontFamily = family || 'fa';
 
-    cssClasses.push(fontFamily);
-    cssClasses.push(`${fontFamily}-${type}`);
-
-    return cssClasses
-      .concat([className] || [])
-      .join(' ');
-  }
-
-  render() {
-    const {
+    return [
+      'tyk-icon',
+      fontFamily,
+      `${fontFamily}-${type}`,
       className,
-      family,
-      type,
-      ...rest
-    } = this.props;
-    return (
-      <i className={this.getCssClasses()} {...rest} />
-    );
+    ].filter(Boolean).join(' ');
   }
+
+  return <i className={getCSSClasses()} {...rest} />;
 }
+
+Icon.propTypes = {
+  className: PropTypes.string,
+  family: PropTypes.string,
+  type: PropTypes.string.isRequired,
+};
+
+export default Icon;

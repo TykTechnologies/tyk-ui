@@ -29,7 +29,6 @@ import Icon from './index';
   <Icon family="tykon" type="draft" />
   <Icon family="tykon" type="edit" />
   <Icon family="tykon" type="filter" />
-  <Icon family="tykon" type="graph2" />
   <Icon family="tykon" type="help" />
   <Icon family="tykon" type="label" />
   <Icon family="tykon" type="link" />
