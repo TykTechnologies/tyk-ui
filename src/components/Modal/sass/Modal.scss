@@ -68,6 +68,16 @@
     }
   }
 
+  &--theme-success {
+    .tyk-modal__theme-header {
+      background-color: theme-color('success', 'base');
+
+      .tyk-icon {
+        background-color: theme-color('success', 'base');
+      }
+    }
+  }
+
   &--theme-warning {
     .tyk-modal__theme-header {
       background-color: theme-color('warning', 'base');

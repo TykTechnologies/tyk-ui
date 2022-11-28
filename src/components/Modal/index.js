@@ -19,8 +19,8 @@ function Modal({
   opened = false,
   onClose = () => {},
   size = 'md',
-  className='',
-  showBackdrop=true,
+  className = '',
+  showBackdrop = true,
   ...restProps
 }) {
   const modalClasses = [
@@ -35,6 +35,7 @@ function Modal({
   ].filter(Boolean).join(' ');
 
   const themeIcon = {
+    success: 'check',
     warning: 'warning',
     danger: 'delete',
   }[theme];
@@ -65,21 +66,21 @@ function Modal({
         )
       }
       {showBackdrop && ReactDOM.createPortal(
-          <CSSTransition
-            in={opened}
-            timeout={100}
-            classNames="fade"
-          >
-            <button
-              className={backdropClasses}
-              onClick={() => !disableCloseCommands && onClose()}
-              onKeyDown={() => {}}
-              type="button"
-            />
-          </CSSTransition>,
-          document.querySelector('body'),
-        )
-      }
+        <CSSTransition
+          in={opened}
+          timeout={100}
+          classNames="fade"
+        >
+          <button
+            className={backdropClasses}
+            onClick={() => !disableCloseCommands && onClose()}
+            onKeyDown={() => {}}
+            type="button"
+            aria-label="Close"
+          />
+        </CSSTransition>,
+        document.querySelector('body'),
+      )}
     </>
   );
 }
@@ -112,7 +113,7 @@ Modal.propTypes = {
     PropTypes.string,
   ]),
   className: PropTypes.string,
-  /** one of "warning", "danger", "none"; default is "none" */
+  /** one of "success", "warning", "danger", "none"; default is "none" */
   theme: PropTypes.string,
   /** If set on true, the Modal won't close when clicking on the overlay or by pressing ESC key */
   disableCloseCommands: PropTypes.bool,
@@ -122,7 +123,7 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   /** Width of the Moda: md or lg */
   size: PropTypes.string,
-  showBackdrop: PropTypes.bool
+  showBackdrop: PropTypes.bool,
 };
 
 export default Modal;
