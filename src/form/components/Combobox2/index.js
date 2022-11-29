@@ -18,7 +18,7 @@ function normalizeValue(value, values) {
 
 function getValueFromProp(value, values) {
   if (!value) return [];
-  if (Array.isArray(value)) return value.map(v => normalizeValue(v, values));
+  if (Array.isArray(value)) return value.map((v) => normalizeValue(v, values));
   return [normalizeValue(value, values)];
 }
 
@@ -118,7 +118,7 @@ function Combobox2(props) {
     ? (values, { sendMessage }) => (
       <CustomListComponent
         filteredValues={values}
-        handleListItemClick={index => sendMessage('value.select', { item: values[index] })}
+        handleListItemClick={(index) => sendMessage('value.select', { item: values[index] })}
         getListItemCssClasses={() => {}}
       />
     )
@@ -130,7 +130,7 @@ function Combobox2(props) {
   const listRef = useRef(null);
 
   const [value, setValue] = useState(getValueFromProp(propValue, propValues));
-  const [values, setValues] = useState(propValues.map(v => normalizeValue(v)));
+  const [values, setValues] = useState(propValues.map((v) => normalizeValue(v)));
   const [searchValue, setSearchValue] = useState('');
   const [activeItem, setActiveItem] = useState(null);
   const [isOpened, setIsOpened] = useState(false);
@@ -139,7 +139,7 @@ function Combobox2(props) {
 
   function getThemeClasses() {
     const themes = theme ? theme.split(' ') : [];
-    return themes.map(iTheme => `tyk-form-group--${iTheme}`);
+    return themes.map((iTheme) => `tyk-form-group--${iTheme}`);
   }
 
   function getCssClasses() {
@@ -158,7 +158,7 @@ function Combobox2(props) {
   function getFilteredValues() {
     const defaultFn = (v, s) => v?.name?.toLowerCase()?.includes(s);
     const fn = matchItemFn || defaultFn;
-    const filteredValues = values.filter(v => fn(v, searchValue.toLowerCase()));
+    const filteredValues = values.filter((v) => fn(v, searchValue.toLowerCase()));
     return filteredValues;
   }
 
@@ -174,7 +174,7 @@ function Combobox2(props) {
 
   function updateSearchValue(newSearchValue) {
     setSearchValue(newSearchValue);
-    if (activeItem && getFilteredValues().every(fv => fv.id !== activeItem.id)) {
+    if (activeItem && getFilteredValues().every((fv) => fv.id !== activeItem.id)) {
       setActiveItem(null);
     }
     if (newSearchValue && !isOpened) openDropdown();
@@ -196,7 +196,7 @@ function Combobox2(props) {
     if (value.length >= max) return;
     if (value.some(({ name }) => name === val)) return;
 
-    const listValueIndex = values.findIndex(lv => lv.name === val);
+    const listValueIndex = values.findIndex((lv) => lv.name === val);
     let newValue;
     let finalValues = [...value];
     let selectedValues;
@@ -225,7 +225,7 @@ function Combobox2(props) {
   }
 
   function removeTag(id) {
-    const listValueIndex = values.findIndex(lv => lv.id === id);
+    const listValueIndex = values.findIndex((lv) => lv.id === id);
     if (required && max === 1) return;
     if (listValueIndex !== -1) {
       setValues([
@@ -234,25 +234,25 @@ function Combobox2(props) {
         ...values.slice(listValueIndex + 1),
       ]);
     }
-    updateValue(value.filter(v => v.id !== id));
+    updateValue(value.filter((v) => v.id !== id));
   }
 
   function selectValue({ id }) {
-    const val = values.find(v => v.id === id);
+    const val = values.find((v) => v.id === id);
     let finalValues = value;
     let selectedValues = values;
 
     if (val.selected) {
       if (!required || max !== 1) {
-        finalValues = value.filter(v => v.id !== val.id);
-        selectedValues = values.map(v => (v.id === val.id ? { ...v, selected: false } : v));
+        finalValues = value.filter((v) => v.id !== val.id);
+        selectedValues = values.map((v) => (v.id === val.id ? { ...v, selected: false } : v));
       }
     } else if (value.length < max) {
       finalValues = [...value, val];
-      selectedValues = values.map(v => (v.id === val.id ? { ...v, selected: true } : v));
+      selectedValues = values.map((v) => (v.id === val.id ? { ...v, selected: true } : v));
     } else if (max === 1) {
       finalValues = [val];
-      selectedValues = values.map(v => ({ ...v, selected: v.id === val.id }));
+      selectedValues = values.map((v) => ({ ...v, selected: v.id === val.id }));
     }
 
     if (isValidValue(finalValues, val)) {
@@ -268,29 +268,29 @@ function Combobox2(props) {
   function selectAllValues(selected) {
     if (values.length > max) return;
     updateValue(selected ? [...values] : []);
-    setValues(values.map(v => ({ ...v, selected })));
+    setValues(values.map((v) => ({ ...v, selected })));
     if (closeOnSelect) closeDropdown();
   }
 
   function moveUpActiveItem() {
-    const visibleItems = getFilteredValues().filter(v => !v.disabled);
+    const visibleItems = getFilteredValues().filter((v) => !v.disabled);
     if (visibleItems.length === 0) return;
     if (activeItem === null || visibleItems.length === 1) {
       setActiveItem(visibleItems[visibleItems.length - 1]);
       return;
     }
-    const activeIndex = visibleItems.findIndex(v => v.id === activeItem.id);
+    const activeIndex = visibleItems.findIndex((v) => v.id === activeItem.id);
     setActiveItem(visibleItems[activeIndex > 0 ? activeIndex - 1 : visibleItems.length - 1]);
   }
 
   function moveDownActiveItem() {
-    const visibleItems = getFilteredValues().filter(v => !v.disabled);
+    const visibleItems = getFilteredValues().filter((v) => !v.disabled);
     if (visibleItems.length === 0) return;
     if (activeItem === null || visibleItems.length === 1) {
       setActiveItem(visibleItems[0]);
       return;
     }
-    const activeIndex = visibleItems.findIndex(v => v.id === activeItem.id);
+    const activeIndex = visibleItems.findIndex((v) => v.id === activeItem.id);
     setActiveItem(visibleItems[activeIndex < visibleItems.length - 1 ? activeIndex + 1 : 0]);
   }
 
@@ -394,12 +394,12 @@ function Combobox2(props) {
 
   useEffect(() => {
     if (propValues.length) {
-      const newValues = propValues.map(v => ({
+      const newValues = propValues.map((v) => ({
         ...normalizeValue(v),
-        selected: value.some(sv => sv.id === v.id),
+        selected: value.some((sv) => sv.id === v.id),
       }));
       setValues(newValues);
-      setValue(val => val.map(v => newValues.find(nv => nv.id === v.id) || v));
+      setValue((val) => val.map((v) => newValues.find((nv) => nv.id === v.id) || v));
     } else if (values.length) {
       setValues([]);
     }
@@ -408,9 +408,9 @@ function Combobox2(props) {
   useEffect(() => {
     const newValue = getValueFromProp(propValue, values);
     setValue(newValue);
-    setValues(vals => vals.map(v => ({
+    setValues((vals) => vals.map((v) => ({
       ...normalizeValue(v),
-      selected: newValue.some(nv => nv.id === v.id),
+      selected: newValue.some((nv) => nv.id === v.id),
     })));
   }, [propValue]);
 
@@ -502,6 +502,7 @@ function Combobox2(props) {
               size="matchElement"
               className={`tyk-combobox2__combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
               ref={dropdownRef}
+              displayAxis="vertical"
               {...floatingContainerConfig}
               infiniteScrollerConfig={infiniteScrollerConfig}
             >
