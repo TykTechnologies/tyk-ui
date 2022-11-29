@@ -10,7 +10,7 @@
 
   &.disabled {
     .tyk-form-control {
-      border: $form-control-disabled-border;
+      border: $form-control-disabled-border !important;
       background-color: $form-control-disabled-background-color;
       color: $form-control-disabled-color;
       cursor: not-allowed;
