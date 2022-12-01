@@ -98,7 +98,7 @@ function FloatingContainer(props) {
     if (hasBottomSpace && positionedVerticallyFitsInViewport) return 'bottom';
     if (hasRightSpace && positionedHorizontallyFitsInViewport) return 'right';
     if (hasLeftSpace && positionedHorizontallyFitsInViewport) return 'left';
-    return 'right';
+    return preferredPosition ?? 'bottom';
   }
 
   function adjustPosition() {
