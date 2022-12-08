@@ -36,7 +36,7 @@ import Button from '../Button';
 Long text in a tooltip
 ```js
 import Button from '../Button';
-<Tooltip render="Loremipsumdolorsitametconsectetur,adipisicingelit.Doloremquearchitectoveritatisveniamat,cumeosdoloreslaborumimpedit.Inventore,voluptate.Maximefacilisexplicaboquamassumendaaspernaturducimusofficiaminusomnis?"position="bottom">
+<Tooltip render="Loremipsumdolorsitametconsectetur,adipisicingelit.Doloremquearchitectoveritatisveniamat,cumeosdoloreslaborumimpedit.Inventore,voluptate.Maximefacilisexplicaboquamassumendaaspernaturducimusofficiaminusomnis?" position="bottom">
   <Button theme="primary" size="sm">Hover Me or Not </Button>
 </Tooltip>
 ```
