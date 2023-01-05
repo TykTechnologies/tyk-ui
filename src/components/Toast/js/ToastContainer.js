@@ -13,16 +13,16 @@ const ToastContainer = (props) => {
 
   const updateNotifications = (message, options) => {
     const msgID = Math.floor(Math.random() * 1000000);
-    console.log('ADD MESSAGE:', message, msgID);
-    const tempMessages = {...messages};
-
-    tempMessages[msgID] = {
-      message,
-      options,
-    };
-    console.log('PUSH MESSAGE (msg nr):', Object.keys({...tempMessages}).length);
-    console.log('SET MESSAGES LIST:', {...tempMessages});
-    setMessages(tempMessages);
+    console.log('PUSH MESSAGE (msg nr):', Object.keys({...messages}).length);
+    console.log('SET MESSAGES LIST:', {...messages});
+    
+    setMessages((prevMessages) => ({
+      ...prevMessages,
+      [msgID]: {
+        message,
+        options,
+      }
+    }));
   };
 
   useEffect(() => {
