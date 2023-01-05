@@ -6,22 +6,22 @@ import PropTypes from 'prop-types';
 import ToastMessage from './ToastMessage';
 
 const ToastContainer = (props) => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState({});
   const {
     notify,
   } = props;
 
   const updateNotifications = (message, options) => {
-    console.log('ADD MESSAGE:', message);
-    const tempMessages = messages.slice(0);
+    const msgID = Math.floor(Math.random() * 1000000);
+    console.log('ADD MESSAGE:', message, msgID);
+    const tempMessages = {...messages};
 
-    console.log('PUSH MESSAGE (msg nr):', tempMessages.slice(0).length);
-    tempMessages.push({
+    tempMessages[msgID] = {
       message,
       options,
-    });
-
-    console.log('SET MESSAGES LIST:', tempMessages.slice(0));
+    };
+    console.log('PUSH MESSAGE (msg nr):', Object.keys({...tempMessages}).length);
+    console.log('SET MESSAGES LIST:', {...tempMessages});
     setMessages(tempMessages);
   };
 
@@ -31,27 +31,27 @@ const ToastContainer = (props) => {
 
   const onMessageClosed = (index) => {
     console.log('REMOVE MESSAGE at position:', index);
-    const tempMessages = messages.slice(0);
-    tempMessages[index] = null;
-    console.log('AFTER REMOVE:', tempMessages.slice(0));
+    const tempMessages = {...messages};
+    delete tempMessages[index];
+    console.log('AFTER REMOVE:', {...tempMessages});
     setMessages(tempMessages);
   };
 
   return (
     <div className="tyk-toast__container">
       {
-        messages.map((msg, index) => (
-          msg
+        Object.keys(messages).map((msgID) => (
+          messages[msgID]
             ? (
               <ToastMessage
-                options={msg.options}
+                options={messages[msgID].options}
                 // eslint-disable-next-line react/jsx-no-bind
-                onClose={onMessageClosed.bind(null, index)}
-                index={index}
+                onClose={onMessageClosed.bind(null, msgID)}
+                index={msgID}
                 // eslint-disable-next-line react/no-array-index-key
-                key={index}
+                key={msgID}
               >
-                {msg.message}
+                {messages[msgID].message}
               </ToastMessage>
             )
             : null
