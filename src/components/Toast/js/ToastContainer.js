@@ -12,11 +12,16 @@ const ToastContainer = (props) => {
   } = props;
 
   const updateNotifications = (message, options) => {
+    console.log('ADD MESSAGE:', message);
     const tempMessages = messages.slice(0);
+
+    console.log('PUSH MESSAGE (msg nr):', tempMessages.slice(0).length);
     tempMessages.push({
       message,
       options,
     });
+
+    console.log('SET MESSAGES LIST:', tempMessages.slice(0));
     setMessages(tempMessages);
   };
 
@@ -25,8 +30,10 @@ const ToastContainer = (props) => {
   }, [messages]);
 
   const onMessageClosed = (index) => {
+    console.log('REMOVE MESSAGE at position:', index);
     const tempMessages = messages.slice(0);
     tempMessages[index] = null;
+    console.log('AFTER REMOVE:', tempMessages.slice(0));
     setMessages(tempMessages);
   };
 
