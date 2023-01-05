@@ -13,8 +13,6 @@ const ToastContainer = (props) => {
 
   const updateNotifications = (message, options) => {
     const msgID = Math.floor(Math.random() * 1000000);
-    console.log('PUSH MESSAGE (msg nr):', Object.keys({...messages}).length);
-    console.log('SET MESSAGES LIST:', {...messages});
     
     setMessages((prevMessages) => ({
       ...prevMessages,
@@ -30,11 +28,12 @@ const ToastContainer = (props) => {
   }, [messages]);
 
   const onMessageClosed = (index) => {
-    console.log('REMOVE MESSAGE at position:', index);
     const tempMessages = {...messages};
     delete tempMessages[index];
-    console.log('AFTER REMOVE:', {...tempMessages});
-    setMessages(tempMessages);
+    setMessages((prevMessages) => {
+      const { [index]: messageToBeRemoved, ...restMessages } = prevMessages;
+      return restMessages;
+    });
   };
 
   return (
