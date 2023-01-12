@@ -1,11 +1,10 @@
 import React from 'react';
-import { mount } from '@cypress/react';
 import '../../../index.scss';
 import Input2 from './index';
 
 describe('Input2', () => {
   it('sets theme classes and input value', () => {
-    mount(
+    cy.mount(
       <Input2
         theme="default rounded-corners"
         value="my value"
@@ -19,7 +18,7 @@ describe('Input2', () => {
   });
 
   it('displays the label with the correct width', () => {
-    mount(
+    cy.mount(
       <Input2
         theme="default inline rounded-corners"
         label="my label"
@@ -33,7 +32,7 @@ describe('Input2', () => {
   });
 
   it('displays errors and notes', () => {
-    mount(
+    cy.mount(
       <Input2
         theme="default rounded-corners"
         error={(
@@ -55,7 +54,7 @@ describe('Input2', () => {
   });
 
   it('supports both left and right addons', () => {
-    mount(
+    cy.mount(
       <Input2
         inputgroupaddonleft={<span>left addon</span>}
         inputgroupaddonright={<span>right addon</span>}
@@ -80,7 +79,7 @@ describe('Input2', () => {
   it('calls onChange callback with the current value', () => {
     const onChange = cy.stub();
 
-    mount(
+    cy.mount(
       <Input2
         onChange={onChange}
       />,
@@ -94,7 +93,7 @@ describe('Input2', () => {
   });
 
   it('renders no input in readonly mode', () => {
-    mount(
+    cy.mount(
       <Input2
         value="my value"
         readOnly

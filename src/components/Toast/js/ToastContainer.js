@@ -6,18 +6,21 @@ import PropTypes from 'prop-types';
 import ToastMessage from './ToastMessage';
 
 const ToastContainer = (props) => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState({});
   const {
     notify,
   } = props;
 
   const updateNotifications = (message, options) => {
-    const tempMessages = messages.slice(0);
-    tempMessages.push({
-      message,
-      options,
-    });
-    setMessages(tempMessages);
+    const msgID = Math.floor(Math.random() * 1000000);
+    
+    setMessages((prevMessages) => ({
+      ...prevMessages,
+      [msgID]: {
+        message,
+        options,
+      }
+    }));
   };
 
   useEffect(() => {
@@ -25,26 +28,29 @@ const ToastContainer = (props) => {
   }, [messages]);
 
   const onMessageClosed = (index) => {
-    const tempMessages = messages.slice(0);
-    tempMessages[index] = null;
-    setMessages(tempMessages);
+    const tempMessages = {...messages};
+    delete tempMessages[index];
+    setMessages((prevMessages) => {
+      const { [index]: messageToBeRemoved, ...restMessages } = prevMessages;
+      return restMessages;
+    });
   };
 
   return (
     <div className="tyk-toast__container">
       {
-        messages.map((msg, index) => (
-          msg
+        Object.keys(messages).map((msgID) => (
+          messages[msgID]
             ? (
               <ToastMessage
-                options={msg.options}
+                options={messages[msgID].options}
                 // eslint-disable-next-line react/jsx-no-bind
-                onClose={onMessageClosed.bind(null, index)}
-                index={index}
+                onClose={onMessageClosed.bind(null, msgID)}
+                index={msgID}
                 // eslint-disable-next-line react/no-array-index-key
-                key={index}
+                key={msgID}
               >
-                {msg.message}
+                {messages[msgID].message}
               </ToastMessage>
             )
             : null
