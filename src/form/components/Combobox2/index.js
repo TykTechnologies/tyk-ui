@@ -27,92 +27,43 @@ function getValueFromProp(value, values) {
  *  tags, or in a custom way.
  * You can select values from a list or type in new ones.
  */
-function Combobox2(props) {
-  const {
-    /** The value of the component. It can be a string, an array,
-     *  or an object with an `id` property. */
-    value: propValue,
-    /** An array of selectable values. */
-    values: propValues = [],
-    /** If set to `single` it will display the values on a single line
-     *  with an ellipsis at the end. */
-    valueOverflow = 'single',
-    label = '',
-    labelwidth,
-    /** Enables the display of values as `Pill` components that can be
-     *  removed without opening the dropdown. */
-    tags = false,
-    /** A list of characters that will trigger the creation of a tag when typed. */
-    tagSeparators = [' ', 'Enter'],
-    /** If set to true a tag will be created whenever the component loses focus
-     *  and there is something typed in. */
-    addTagOnBlur = false,
-    /** The number of values that can be selected. */
-    max: maxProp,
-    /** Shorthand for max=Infinity */
-    multiple = false,
-    placeholder = '',
-    theme,
-    note = '',
-    error = '',
-    disabled = false,
-    /** hides the UI form element and displayes just the value as text */
-    readOnly = false,
-    /** If `true` it allows entering values that are not in the list. */
-    allowCustomValues = true,
-    /** A function used for filtering elements displayed in the list when typing in. */
-    searchItem: matchItemFn,
-    /** A custom component that will be used to display a value. */
-    renderValue,
-    /** A custom component that will be used to display an item in the dropdown list. */
-    renderListItem,
-    /** A custom component that will be used to display the entire content of the dropdown. */
-    renderList: renderListProp,
-    /** Alias for `renderList`
-     * used for backwards compatibility with the old Combobox component. */
-    CustomListComponent,
-    onChange = () => {},
-    /** Config object passed to the internal floating container component. */
-    floatingContainerConfig,
-    /**
-     * If set to `true` whenever the user clicks on the dropdown trigger
-     * the selected values container
-     * will expand to show all selected values instead of opening the dropdown.
-     */
-    expandMode,
-    /** Config object passed to the internal infinite scroller component. */
-    infiniteScrollerConfig,
-    /** Toggles the display of the dropdown trigger. */
-    displayDropdownTrigger = true,
-    /**
-     * If a boolean it will toggle the select all functionality from the dropdown.
-     * It can also be an object with the shape `{ label, show, mode, render }`.
-     * label - A string displayed as the select all option
-     * show - It can be one of `['always', 'notSameState']`.
-     *    `always` means the option will always be displayed.
-     *    `notSameState` means it will be displayed only if the list items are
-     * not all with the same state (depending on the `mode` value)
-     * mode - It can be one of `['select', 'unselect']` and makes sense only
-     * when the `show` property is `notSameState`
-     *    `select` means the select all option will only be displayed if not all
-     * items are selected
-     *    `unselect` means the option will be displayed if no items are selected
-     */
-    selectAll,
-    /** It `true` the dropdown will close after selecting a value. */
-    closeOnSelect,
-    /** Toggles the display of the search input from the dropdown. */
-    showSearch = false,
-    /** If it is required and can only select one value once you have something
-     * selected you will not be able to deselect */
-    required = false,
-    /** Validates newly added value before adding it to the selected values.
-     * Returns an error string in case of error otherwise it returns undefined
-     */
-    validateOnChange = () => { },
-    wrapperClassName = '',
-    ...restProps
-  } = props;
+function Combobox2({
+  value: propValue,
+  values: propValues = [],
+  valueOverflow = 'single',
+  label = '',
+  labelwidth,
+  tags = false,
+  tagSeparators = [' ', 'Enter'],
+  addTagOnBlur = false,
+  max: maxProp,
+  multiple = false,
+  placeholder = '',
+  theme,
+  note = '',
+  error = '',
+  disabled = false,
+  readOnly = false,
+  allowCustomValues = true,
+  searchItem: matchItemFn,
+  renderValue,
+  renderListItem,
+  renderList: renderListProp,
+  CustomListComponent,
+  onBeforeChange = () => true,
+  onChange = () => {},
+  floatingContainerConfig,
+  expandMode,
+  infiniteScrollerConfig,
+  displayDropdownTrigger = true,
+  selectAll,
+  closeOnSelect,
+  showSearch = false,
+  required = false,
+  validateOnChange = () => {},
+  wrapperClassName = '',
+  ...restProps
+}) {
   const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
   const renderList = CustomListComponent
     ? (values, { sendMessage }) => (
@@ -198,13 +149,13 @@ function Combobox2(props) {
 
     const listValueIndex = values.findIndex((lv) => lv.name === val);
     let newValue;
-    let finalValues = [...value];
+    let finalValue = [...value];
     let selectedValues;
 
     if (listValueIndex === -1) {
       if (allowCustomValues) {
         newValue = { id: val, name: val };
-        finalValues = [...value, newValue];
+        finalValue = [...value, newValue];
       }
     } else {
       selectedValues = [
@@ -213,20 +164,25 @@ function Combobox2(props) {
         ...values.slice(listValueIndex + 1),
       ];
       newValue = values[listValueIndex];
-      finalValues = [...value, values[listValueIndex]];
+      finalValue = [...value, values[listValueIndex]];
     }
 
-    if (isValidValue(finalValues, newValue)) {
+    if (isValidValue(finalValue, newValue) && onBeforeChange(value, finalValue)) {
       if (selectedValues) {
         setValues(selectedValues);
       }
-      updateValue(finalValues);
+      updateValue(finalValue);
     }
   }
 
   function removeTag(id) {
-    const listValueIndex = values.findIndex((lv) => lv.id === id);
     if (required && max === 1) return;
+
+    const listValueIndex = values.findIndex((lv) => lv.id === id);
+    const newValue = value.filter((v) => v.id !== id);
+
+    if (!onBeforeChange(value, newValue)) return;
+
     if (listValueIndex !== -1) {
       setValues([
         ...values.slice(0, listValueIndex),
@@ -234,29 +190,29 @@ function Combobox2(props) {
         ...values.slice(listValueIndex + 1),
       ]);
     }
-    updateValue(value.filter((v) => v.id !== id));
+    updateValue(newValue);
   }
 
   function selectValue({ id }) {
     const val = values.find((v) => v.id === id);
-    let finalValues = value;
+    let finalValue = value;
     let selectedValues = values;
 
     if (val.selected) {
       if (!required || max !== 1) {
-        finalValues = value.filter((v) => v.id !== val.id);
+        finalValue = value.filter((v) => v.id !== val.id);
         selectedValues = values.map((v) => (v.id === val.id ? { ...v, selected: false } : v));
       }
     } else if (value.length < max) {
-      finalValues = [...value, val];
+      finalValue = [...value, val];
       selectedValues = values.map((v) => (v.id === val.id ? { ...v, selected: true } : v));
     } else if (max === 1) {
-      finalValues = [val];
+      finalValue = [val];
       selectedValues = values.map((v) => ({ ...v, selected: v.id === val.id }));
     }
 
-    if (isValidValue(finalValues, val)) {
-      updateValue(finalValues);
+    if (isValidValue(finalValue, val) && onBeforeChange(value, finalValue)) {
+      updateValue(finalValue);
       setValues(selectedValues);
     }
 
@@ -267,7 +223,11 @@ function Combobox2(props) {
 
   function selectAllValues(selected) {
     if (values.length > max) return;
-    updateValue(selected ? [...values] : []);
+    const newValue = selected ? [...values] : [];
+
+    if (!onBeforeChange(value, newValue)) return;
+
+    updateValue(newValue);
     setValues(values.map((v) => ({ ...v, selected })));
     if (closeOnSelect) closeDropdown();
   }
@@ -552,15 +512,22 @@ function Combobox2(props) {
 }
 
 Combobox2.propTypes = {
+  /** If `true` it allows entering values that are not in the list. */
   allowCustomValues: PropTypes.bool,
+  /** Alias for `renderList`
+   * used for backwards compatibility with the old Combobox component. */
   CustomListComponent: PropTypes.elementType,
+  /** A function used for filtering elements displayed in the list when typing in. */
   searchItem: PropTypes.func,
+  /** A custom component that will be used to display a value. */
   renderValue: PropTypes.func,
+  /** A custom component that will be used to display an item in the dropdown list. */
   renderListItem: PropTypes.func,
+  /** A custom component that will be used to display the entire content of the dropdown. */
   renderList: PropTypes.func,
   disabled: PropTypes.bool,
+  /** hides the UI form element and displayes just the value as text */
   readOnly: PropTypes.bool,
-  ReadOnly: PropTypes.bool,
   error: PropTypes.string,
   label: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -570,30 +537,69 @@ Combobox2.propTypes = {
     PropTypes.string,
   ]),
   labelwidth: PropTypes.string,
+  /** The maximum number of values that can be selected/added. */
   max: PropTypes.number,
+  /** Shorthand for max=Infinity */
   multiple: PropTypes.bool,
   note: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.element,
     PropTypes.string,
   ]),
+  /**
+   * Callback called before changing the value of the component.
+   * The value change will succeed only if the callback's return value is truthy.
+   * The callback is called with two arguments: 1) the previous value, 2) the next value */
+  onBeforeChange: PropTypes.func,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  /** Enables the display of values as `Pill` components that can be
+   *  removed without opening the dropdown. */
   tags: PropTypes.bool,
+  /** A list of characters that will trigger the creation of a tag when typed. */
   tagSeparators: PropTypes.arrayOf(PropTypes.string),
+  /** If set to true a tag will be created whenever the component loses focus
+   *  and there is something typed in. */
   addTagOnBlur: PropTypes.bool,
   theme: PropTypes.string,
+  /** The value of the component. It can be a string, an array,
+   *  or an object with an `id` property. */
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Array),
     PropTypes.instanceOf(Object),
   ]),
+  /** An array of selectable values. */
   values: PropTypes.instanceOf(Array),
+  /** Config object passed to the internal floating container component. */
   floatingContainerConfig: PropTypes.instanceOf(Object),
+  /** If set to `single` it will display the values on a single line
+   *  with an ellipsis at the end. */
   valueOverflow: PropTypes.oneOf(['single', 'multiple']),
+  /**
+   * If set to `true` whenever the user clicks on the dropdown trigger
+   * the selected values container
+   * will expand to show all selected values instead of opening the dropdown.
+   */
   expandMode: PropTypes.bool,
+  /** Config object passed to the internal infinite scroller component. */
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
+  /** Toggles the display of the dropdown trigger. */
   displayDropdownTrigger: PropTypes.bool,
+  /**
+   * If a boolean it will toggle the select all functionality from the dropdown.
+   * It can also be an object with the shape `{ label, show, mode, render }`.
+   * label - A string displayed as the select all option
+   * show - It can be one of `['always', 'notSameState']`.
+   *    `always` means the option will always be displayed.
+   *    `notSameState` means it will be displayed only if the list items are
+   * not all with the same state (depending on the `mode` value)
+   * mode - It can be one of `['select', 'unselect']` and makes sense only
+   * when the `show` property is `notSameState`
+   *    `select` means the select all option will only be displayed if not all
+   * items are selected
+   *    `unselect` means the option will be displayed if no items are selected
+   */
   selectAll: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.shape({
@@ -609,9 +615,16 @@ Combobox2.propTypes = {
       render: PropTypes.func,
     }),
   ]),
+  /** It `true` the dropdown will close after selecting a value. */
   closeOnSelect: PropTypes.bool,
+  /** Toggles the display of the search input from the dropdown. */
   showSearch: PropTypes.bool,
+  /** If it is required and can only select one value once you have something
+   * selected you will not be able to deselect */
   required: PropTypes.bool,
+  /** Validates newly added value before adding it to the selected values.
+   * Returns an error string in case of error otherwise it returns undefined
+   */
   validateOnChange: PropTypes.func,
   wrapperClassName: PropTypes.string,
 };
