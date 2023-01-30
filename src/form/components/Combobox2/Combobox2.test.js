@@ -459,4 +459,72 @@ describe('Combobox2', () => {
       .get(`.${classes.tag}`)
       .should('have.length', 0);
   });
+
+  describe('does not update value if onBeforeChange returns falsy values', () => {
+    it('when selecting a value', () => {
+      const previousItem = items[0];
+      cy.mount(
+        <Combobox2
+          values={items}
+          value={[previousItem]}
+          theme="default rounded-corners"
+          onBeforeChange={() => false}
+        />,
+      );
+
+      cy.get(`.${classes.trigger}`)
+        .click()
+        .get(`.${classes.dropdownList} li`)
+        .eq(1)
+        .click()
+        .get(`.${classes.textValue}`)
+        .should('have.text', previousItem.name);
+    });
+
+    it('when adding a tag', () => {
+      const item = items[0];
+      cy.mount(
+        <Combobox2
+          values={items}
+          value={[item]}
+          tags
+          tagSeparators={[' ', '.']}
+          addTagOnBlur
+          theme="default rounded-corners"
+          onBeforeChange={() => false}
+        />,
+      );
+
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.get(`.${classes.entryField}`)
+        .type('aaa')
+        .blur()
+        .wait(1000)
+        .get('.tyk-pill:last-of-type')
+        .should('have.text', item.name);
+    });
+
+    it('when removing a tag', () => {
+      const item = items[1];
+      cy.mount(
+        <Combobox2
+          values={items}
+          value={[item]}
+          tags
+          tagSeparators={[' ', '.']}
+          addTagOnBlur
+          theme="default rounded-corners"
+          onBeforeChange={() => false}
+        />,
+      );
+
+      cy.get(`.${classes.entryField}`)
+        .type('{backspace}')
+        .blur()
+        .get('.tyk-pill')
+        .should('have.length', 1)
+        .filter(':last-of-type')
+        .should('have.text', item.name);
+    });
+  });
 });
