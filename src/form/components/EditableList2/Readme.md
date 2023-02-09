@@ -121,20 +121,21 @@
     error=""
     value={value}
     fields={[
-      {
+      (rowIndex, columnIndex) => ({
         component: Input2,
         styles: {
           width: "200px",
         },
         size: 4,
         props: {
+          key: `${rowIndex}-${columnIndex}`,
           name: 'input',
           label: 'Claim name',
           theme: 'default rounded-corners',
           placeholder: 'Enter claim name',
           validate: formikRequired('This field is required')
         } 
-      },
+      }),
       {
         component: Combobox2,
         size: 8,
