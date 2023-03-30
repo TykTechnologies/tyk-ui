@@ -7,13 +7,13 @@ const useEventListener = (eventName, handler, element) => {
   }, [handler]);
 
   useEffect(() => {
-    const isSupported = element && element.addEventListener;
+    const isSupported = element?.addEventListener;
     if (!isSupported) {
       // eslint-disable-next-line consistent-return
       return;
     }
 
-    const eventListener = event => savedHandler.current(event);
+    const eventListener = (event) => savedHandler.current(event);
     element.addEventListener(eventName, eventListener);
 
     // eslint-disable-next-line consistent-return
