@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../index.scss';
 import Input2 from './index';
 
 describe('Input2', () => {
