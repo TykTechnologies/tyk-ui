@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../index.scss';
 import Icon from '../Icon';
 import Tooltip from './index';
 

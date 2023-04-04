@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../../index.scss';
 import Combobox2 from './index';
 
 describe('Combobox2', () => {

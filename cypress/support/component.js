@@ -22,6 +22,7 @@ import '@cypress/code-coverage/support';
 // require('./commands')
 
 import { mount } from 'cypress/react18';
+import '../../src/index.scss';
 
 Cypress.Commands.add('mount', mount);
 

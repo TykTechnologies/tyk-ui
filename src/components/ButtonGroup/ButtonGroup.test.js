@@ -1,7 +1,36 @@
+import React from 'react';
 import ButtonGroup from './index';
+import Button from '../Button';
 
 describe('ButtonGroup', () => {
-  it('TODO', () => {
-    expect(true).to.equal(true);
+  const wrapperSelector = '.tyk-button-group__wrapper';
+
+  it('renders the component with proper classes', () => {
+    cy
+      .mount(
+        <ButtonGroup className="foo bar">
+          <Button theme="default">button 1</Button>
+          <Button theme="default">button 2</Button>
+        </ButtonGroup>,
+      )
+      .get(wrapperSelector)
+      .should('have.class', 'foo')
+      .and('have.class', 'bar');
+  });
+
+  it('can have a label', () => {
+    const labelText = 'My Label';
+
+    cy
+      .mount(
+        <ButtonGroup className="foo bar" label={labelText}>
+          <Button theme="default">button 1</Button>
+          <Button theme="default">button 2</Button>
+        </ButtonGroup>,
+      )
+      .get(wrapperSelector)
+      .find('label')
+      .should('exist')
+      .and('have.text', labelText);
   });
 });

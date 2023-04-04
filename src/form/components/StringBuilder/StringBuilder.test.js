@@ -1,6 +1,5 @@
 import React from 'react';
 import StringBuilder from './index';
-import '../../../index.scss';
 
 describe('StringBuilder', () => {
   it('renders the component with proper classes and attributes based on props and tests basic functionality', () => {
