@@ -6,16 +6,14 @@ import { CSSTransition } from 'react-transition-group';
 import { useEventListener, useComponentSize } from '../../hooks';
 
 /**
- * Collpasible is a component that helps you to collapse/expand any type of content
+ * Collapsible is a component that helps you to collapse/expand any type of content
  */
-const Collapsible = (props) => {
-  const {
-    className,
-    collapsed,
-    children,
-    ...rest
-  } = props;
-
+function Collapsible({
+  className,
+  collapsed,
+  children,
+  ...rest
+}) {
   const contentContainer = useRef(null);
   const collapseWrapper = useRef(null);
   const refContainerSize = useComponentSize(contentContainer);
@@ -52,10 +50,11 @@ const Collapsible = (props) => {
   const onWindowResize = useCallback(() => {
     if (!collapsed && contentContainer.current) {
       setHeight(getHeight());
+      collapseWrapper.current.style.height = `${getHeight()}px`;
     }
   }, [collapsed, contentContainer.current]);
 
-  useEventListener('resize', onWindowResize);
+  useEventListener('resize', onWindowResize, window);
 
   return (
     <CSSTransition
@@ -80,7 +79,7 @@ const Collapsible = (props) => {
       </div>
     </CSSTransition>
   );
-};
+}
 
 Collapsible.propTypes = {
   children: PropTypes.oneOfType([
@@ -90,7 +89,7 @@ Collapsible.propTypes = {
   ]),
   /** Describes if the content of Collapsible should be hidden or not */
   collapsed: PropTypes.bool,
-  /** Css classes that can be passed to the Collapsible element */
+  /** CSS classes that can be passed to the Collapsible element */
   className: PropTypes.string,
 };
 
