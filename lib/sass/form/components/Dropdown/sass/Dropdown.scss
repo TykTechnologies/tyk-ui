@@ -63,6 +63,10 @@
   padding: 0;
   z-index: 1081;
 
+  &.tyk-dropdown--scrollable {
+    overflow: auto;
+  }
+
   .tyk-panel {
     margin: 0;
   }

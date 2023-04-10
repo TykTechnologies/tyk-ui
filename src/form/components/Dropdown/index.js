@@ -72,6 +72,7 @@ export default class Dropdown extends Component {
     stopButtonTextChange: PropTypes.bool,
     showTriggerButton: PropTypes.bool,
     showCheckmark: PropTypes.bool,
+    maxHeight: PropTypes.string,
     wrapperClassName: PropTypes.string,
   };
 
@@ -250,8 +251,13 @@ export default class Dropdown extends Component {
       display,
       listclassnames,
       position,
+      maxHeight,
     } = this.props;
     let cssClasses = ['tyk-dropdown-menu', 'tyk-dropdown'];
+
+    if(maxHeight) {
+      cssClasses.push('tyk-dropdown--scrollable');
+    }
 
     if (opened) {
       cssClasses.push('opened');
@@ -339,6 +345,7 @@ export default class Dropdown extends Component {
       showTriggerButton,
       showCheckmark,
       disabled = false,
+      maxHeight,
     } = this.props;
     const {
       selectedItem,
@@ -394,6 +401,13 @@ export default class Dropdown extends Component {
                       <DropdownWrapperTag
                         className={this.getCssClasses()}
                         ref={this.dropdownListRef}
+                        {
+                          ...maxHeight && {
+                            style: {
+                              maxHeight,
+                            },
+                          }
+                        }
                       >
                         {
                           (typeof children === 'function')
