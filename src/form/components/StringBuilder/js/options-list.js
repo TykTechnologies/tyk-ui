@@ -45,7 +45,6 @@ export const OptionsList = ({
         className={`string-builder-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
         element={containerRef}
         size="matchElement"
-        displayAxis="vertical"
       >
         {allowSearch && (
           <div className="string-builder-search">

@@ -6,9 +6,9 @@ const [state, setState] = useState({
   size: 'auto',
   offset: 0,
   forceDisplay: 'auto',
-  displayAxis: 'auto'
+  displayAxis: 'vertical'
 });
-const updateState = newState => setState(currState => ({...currState, ...newState, isOpened: false}));
+const updateState = newState => setState({...newState, isOpened: false});
 const updateStateProp = prop => e => updateState({[prop]: e.target.value});
 const onSizeChange = updateStateProp('size');
 const onForceDisplayChange = updateStateProp('forceDisplay');
@@ -41,7 +41,6 @@ const onAxisChange = updateStateProp('displayAxis');
   </div>
   <div>
     <label>Display axis:</label>
-    <label><input type="radio" name="displayAxis" value="auto" disabled={state.forceDisplay !== 'auto'} checked={state.displayAxis === 'auto'} onChange={onAxisChange} />auto</label>
     <label><input type="radio" name="displayAxis" value="vertical" disabled={state.forceDisplay !== 'auto'} checked={state.displayAxis === 'vertical'} onChange={onAxisChange} />vertical</label>
     <label><input type="radio" name="displayAxis" value="horizontal" disabled={state.forceDisplay !== 'auto'} checked={state.displayAxis === 'horizontal'} onChange={onAxisChange} />horizontal</label>
   </div>
@@ -56,7 +55,7 @@ const onAxisChange = updateStateProp('displayAxis');
       backgroundColor: 'orange'
     }}
   >
-    <button onClick={() => setState(currState => ({ ...currState, isOpened: !state.isOpened }))}>{state.isOpened ? 'Close' : 'Open'}</button>
+    <button onClick={() => setState({ isOpened: !state.isOpened })}>{state.isOpened ? 'Close' : 'Open'}</button>
   </div>
   {state.isOpened && (
     <FloatingContainer
@@ -73,7 +72,7 @@ const onAxisChange = updateStateProp('displayAxis');
           height: '100%'
         }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        the content of the floating container (everything pink)
       </div>
     </FloatingContainer>
   )}

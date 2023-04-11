@@ -29,10 +29,10 @@ function FloatingContainer(props) {
      */
     forceDisplay = 'auto',
     /**
-     * It can be `auto`, `vertical` or `horizontal`. It specifies the axis where
+     * It can be `vertical` or `horizontal`. It specifies the axis where
      * it will be displayed when `forceDisplay` is `auto`.
      */
-    displayAxis = 'auto',
+    displayAxis = 'vertical',
     /**
      * If there is space on both sides of the axis preffer this side.
      */
@@ -63,42 +63,27 @@ function FloatingContainer(props) {
     const container = floatingContainerRef.current;
     if (!container) return preferredPosition ?? displayAxis === 'vertical' ? 'bottom' : 'right';
 
-    const { left, top } = target.getBoundingClientRect();
-    const topSpace = top;
-    const bottomSpace = window.innerHeight - top - target.offsetHeight;
-    const leftSpace = left;
-    const rightSpace = window.innerWidth - left - target.offsetWidth;
-    const hasTopSpace = topSpace > container.scrollHeight;
-    const hasBottomSpace = bottomSpace > container.scrollHeight;
-    const hasLeftSpace = leftSpace > container.offsetWidth;
-    const hasRightSpace = rightSpace > container.offsetWidth;
-    const positionedVerticallyFitsInViewport = left + target.offsetWidth / 2 - container.offsetWidth / 2 > 0; // eslint-disable-line max-len
-    const positionedHorizontallyFitsInViewport = top + target.offsetHeight / 2 - container.scrollHeight / 2 > 0; // eslint-disable-line max-len
-
-    if (
-      displayAxis === 'vertical'
-      || (
-        displayAxis === 'auto'
-        && (hasTopSpace || hasBottomSpace)
-        && positionedVerticallyFitsInViewport
-      )
-    ) {
+    if (displayAxis === 'vertical') {
+      const { top } = target.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const topSpace = top;
+      const bottomSpace = windowHeight - top - target.offsetHeight;
+      const hasBottomSpace = bottomSpace > container.scrollHeight;
+      const hasTopSpace = topSpace > container.scrollHeight;
       if (preferredPosition === 'top' && hasTopSpace) return 'top';
       if (preferredPosition === 'bottom' && hasBottomSpace) return 'bottom';
       return hasBottomSpace || bottomSpace > topSpace ? 'bottom' : 'top';
     }
 
-    if (displayAxis === 'horizontal') {
-      if (preferredPosition === 'left' && hasLeftSpace) return 'left';
-      if (preferredPosition === 'right' && hasLeftSpace) return 'right';
-      return hasRightSpace || rightSpace > leftSpace ? 'right' : 'left';
-    }
-
-    if (hasTopSpace && positionedVerticallyFitsInViewport) return 'top';
-    if (hasBottomSpace && positionedVerticallyFitsInViewport) return 'bottom';
-    if (hasRightSpace && positionedHorizontallyFitsInViewport) return 'right';
-    if (hasLeftSpace && positionedHorizontallyFitsInViewport) return 'left';
-    return preferredPosition ?? 'bottom';
+    const { left } = target.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+    const leftSpace = left;
+    const rightSpace = windowWidth - left - target.offsetWidth;
+    const hasRightSpace = rightSpace > container.offsetWidth;
+    const hasLeftSpace = leftSpace > container.offsetWidth;
+    if (preferredPosition === 'left' && hasLeftSpace) return 'left';
+    if (preferredPosition === 'right' && hasLeftSpace) return 'right';
+    return hasRightSpace || rightSpace > leftSpace ? 'right' : 'left';
   }
 
   function adjustPosition() {
@@ -165,6 +150,10 @@ function FloatingContainer(props) {
       }
       container.style.maxWidth = `${window.innerWidth - targetPosition.left - target.offsetWidth - offset}px`;
     }
+
+    if (parseFloat(container.style.left.replace('px', '')) < 0) {
+      container.style.left = '5px';
+    }
   }
 
   useEffect(() => {
@@ -204,7 +193,7 @@ FloatingContainer.propTypes = {
   ]),
   offset: PropTypes.number,
   forceDisplay: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
-  displayAxis: PropTypes.oneOf(['auto', 'vertical', 'horizontal']),
+  displayAxis: PropTypes.oneOf(['vertical', 'horizontal']),
   preferredPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
 };

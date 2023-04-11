@@ -10,7 +10,7 @@ For example calling **`toast.notify('message', { theme: 'success' })`** and **`t
 import toast from './index.js'
 const TestToast = () => (
   <>
-    <button type="button" onClick={() => {toast.success('success'); toast.success('success');}}>CLICK Success</button>
+    <button type="button" onClick={() => toast.success('success')}>CLICK Success</button>
     <button type="button" onClick={() => toast.danger('danger')}>CLICK Danger</button>
     <button type="button" onClick={() => toast.warning('warning')}>CLICK Warning</button>
     <button type="button" onClick={() => toast.info('info')}>CLICK Info</button>

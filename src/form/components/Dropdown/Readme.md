@@ -7,32 +7,6 @@
 ```
 
 ```js
-<Dropdown label="Period" name="period" btnTitle="Dropdown" maxHeight="200px">
-  <Dropdown.Item key="1" eventKey="1" title="First" />
-  <Dropdown.Item key="2" eventKey="2" title="Second" />
-  <Dropdown.Item key="3" eventKey="3" title="Third" />
-  <Dropdown.Item key="1" eventKey="1" title="First" />
-  <Dropdown.Item key="2" eventKey="2" title="Second" />
-  <Dropdown.Item key="3" eventKey="3" title="Third" />
-  <Dropdown.Item key="1" eventKey="1" title="First" />
-  <Dropdown.Item key="2" eventKey="2" title="Second" />
-  <Dropdown.Item key="3" eventKey="3" title="Third" />
-  <Dropdown.Item key="1" eventKey="1" title="First" />
-  <Dropdown.Item key="2" eventKey="2" title="Second" />
-  <Dropdown.Item key="3" eventKey="3" title="Third" />
-  <Dropdown.Item key="1" eventKey="1" title="First" />
-  <Dropdown.Item key="2" eventKey="2" title="Second" />
-  <Dropdown.Item key="3" eventKey="3" title="Third" />
-  <Dropdown.Item key="1" eventKey="1" title="First" />
-  <Dropdown.Item key="2" eventKey="2" title="Second" />
-  <Dropdown.Item key="3" eventKey="3" title="Third" />
-  <Dropdown.Item key="1" eventKey="1" title="First" />
-  <Dropdown.Item key="2" eventKey="2" title="Second" />
-  <Dropdown.Item key="3" eventKey="3" title="Third" />
-</Dropdown>
-```
-
-```js
 <Dropdown
   appendTo="#dropdownContainer1"
   label="Period"

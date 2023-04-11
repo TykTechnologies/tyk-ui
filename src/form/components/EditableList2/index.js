@@ -55,11 +55,7 @@ const EditableList2 = ({
   const hasErrors = errors => Boolean(errors?.flat()?.filter(Boolean).length);
 
   const Components = useMemo(
-    () => fields.map(field => {
-      let tempField = typeof field === 'function' ? field() : field;
-
-      return withValidation(tempField?.component || <></>)
-    }),
+    () => fields.map(field => withValidation(field?.component || <></>)),
     [],
   );
 
@@ -105,7 +101,6 @@ const EditableList2 = ({
               <FieldsList
                 /* eslint-disable-next-line */
                 key={v.id || i}
-                rowIndex={i}
                 disabled={disabled}
                 readOnly={readOnly}
                 fields={fields}
