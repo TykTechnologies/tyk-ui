@@ -1,42 +1,34 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import AccordionItem from './js/AccordionItem';
 import AccordionItemHeader from './js/AccordionItemHeader';
 import AccordionItemContent from './js/AccordionItemContent';
 import AccordionContext from './js/AccordionContext';
 
-
-function Accordion(props) {
-  const {
+function Accordion({
+  className,
+  children,
+  usearrowastrigger,
+  arrow = { position: 'right', expandToContent: false },
+}) {
+  const classes = [
+    'tyk-accordion',
     className,
-    children,
+  ].filter(Boolean).join(' ');
+
+  const contextValue = useMemo(() => ({
     usearrowastrigger,
-    arrow = { position: 'right', expandToContent: false },
-  } = props;
-
-  const getCssClasses = () => {
-    let cssClasses = ['tyk-accordion'];
-
-    if (className) {
-      cssClasses = cssClasses.concat(className.split(' '));
-    }
-
-    return cssClasses.join(' ');
-  };
+    arrow,
+  }), [usearrowastrigger, arrow]);
 
   return (
-    <div className={getCssClasses()}>
-      <AccordionContext.Provider
-        value={{
-          usearrowastrigger,
-          arrow,
-        }}
-      >
+    <div className={classes}>
+      <AccordionContext.Provider value={contextValue}>
         {children}
       </AccordionContext.Provider>
     </div>
   );
-};
+}
 
 Accordion.propTypes = {
   children: PropTypes.oneOfType([

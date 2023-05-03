@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../index.scss';
 import Collapsible from './index';
 
 describe('Collapsible', () => {

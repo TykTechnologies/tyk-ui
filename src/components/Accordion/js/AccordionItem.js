@@ -1,57 +1,47 @@
-import React, { useState, useContext, forwardRef } from 'react';
+import React, {
+  useMemo, useState, useContext, forwardRef,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
 import ItemTrigger from './AccordionItemTrigger';
 
-const AccordionItem = forwardRef((props, ref) => {
-  const {
-    collapsed,
-    children,
-    className,
-    disabled,
-  } = props;
+function AccordionItem({
+  collapsed: collapsedProp,
+  children,
+  className,
+  disabled,
+}, ref) {
   const { arrow } = useContext(AccordionContext);
-  const [collapsedState, setCollapsedState] = useState(collapsed);
+  const [collapsed, setCollapsed] = useState(collapsedProp);
 
   const toggleChange = () => {
     if (disabled) {
       return;
     }
 
-    setCollapsedState(!collapsedState);
+    setCollapsed(!collapsed);
   };
 
-  const getCssClasses = () => {
-    let cssClasses = ['tyk-accordion__item'];
+  const classes = useMemo(() => [
+    'tyk-accordion__item',
+    arrow.expandToContent
+      ? `tyk-accordion__item--trigger-position-${arrow.position}`
+      : 'tyk-accordion__item--trigger-in-header',
+    className,
+    collapsed === false && 'tyk-accordion__item--active',
+  ].filter(Boolean).join(' '), [arrow, className, collapsed]);
 
-    if (!arrow.expandToContent) {
-      cssClasses.push('tyk-accordion__item--trigger-in-header');
-    } else {
-      cssClasses.push(`tyk-accordion__item--trigger-position-${arrow.position}`);
-    }
-
-    if (className) {
-      cssClasses = cssClasses.concat(className.split(' '));
-    }
-
-    if (collapsedState === false) {
-      cssClasses.push('tyk-accordion__item--active');
-    }
-
-    return cssClasses.join(' ');
-  };
+  const contextValue = useMemo(() => ({
+    collapsed,
+    disabled,
+    toggleChange,
+  }), [collapsed, disabled, toggleChange]);
 
   return (
-    <div ref={ref} className={getCssClasses()}>
-      <AccordionItemContext.Provider
-        value={{
-          collapsed: collapsedState,
-          disabled,
-          toggleChange,
-        }}
-      >
+    <div ref={ref} className={classes}>
+      <AccordionItemContext.Provider value={contextValue}>
         {arrow.expandToContent && (
           <ItemTrigger wrap />
         )}
@@ -59,7 +49,7 @@ const AccordionItem = forwardRef((props, ref) => {
       </AccordionItemContext.Provider>
     </div>
   );
-});
+}
 
 AccordionItem.propTypes = {
   children: PropTypes.oneOfType([
@@ -77,4 +67,4 @@ AccordionItem.defaultProps = {
   collapsed: false,
 };
 
-export default AccordionItem;
+export default forwardRef(AccordionItem);

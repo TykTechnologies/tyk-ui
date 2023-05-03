@@ -4,13 +4,8 @@ import PropTypes from 'prop-types';
 import Icon from '../../Icon';
 import AccordionItemContext from './AccordionItemContext';
 
-function ItemTrigger(props) {
-  const { wrap } = props;
-  const {
-    collapsed,
-    disabled,
-    toggleChange,
-  } = useContext(AccordionItemContext);
+function ItemTrigger({ wrap }) {
+  const { collapsed, disabled, toggleChange } = useContext(AccordionItemContext);
 
   const iconType = collapsed ? 'chevron-down' : 'chevron-up';
   const classes = [
