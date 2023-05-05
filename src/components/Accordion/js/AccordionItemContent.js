@@ -4,33 +4,22 @@ import PropTypes from 'prop-types';
 import Collapsible from '../../Collapsible';
 import AccordionItemContext from './AccordionItemContext';
 
-const AccordionItemContent = (props) => {
-  const {
-    children,
+function AccordionItemContent({ children, className }) {
+  const { collapsed } = useContext(AccordionItemContext);
+
+  const classes = [
+    'tyk-accordion__item-content',
     className,
-  } = props;
-  const accordionItemContext = useContext(AccordionItemContext);
-
-  const getCssClasses = () => {
-    let cssClasses = ['tyk-accordion__item-content'];
-
-    if (className) {
-      cssClasses = cssClasses.concat(className.split(' '));
-    }
-
-    return cssClasses.join(' ');
-  };
+  ].filter(Boolean).join(' ');
 
   return (
-    <div className={getCssClasses()}>
-      <Collapsible
-        collapsed={accordionItemContext.collapsed}
-      >
+    <div className={classes}>
+      <Collapsible collapsed={collapsed}>
         { children }
       </Collapsible>
     </div>
   );
-};
+}
 
 AccordionItemContent.propTypes = {
   children: PropTypes.oneOfType([

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../../Icon';
@@ -6,38 +6,18 @@ import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
 import ItemTrigger from './AccordionItemTrigger';
 
-const AccordionItemHeader = (props) => {
-  const {
-    className,
-    children,
-  } = props;
-  const accordionItemContext = useContext(AccordionItemContext);
+function AccordionItemHeader({ className, children }) {
+  const { collapsed, disabled, toggleChange } = useContext(AccordionItemContext);
   const { usearrowastrigger, arrow } = useContext(AccordionContext);
-  const {
-    collapsed,
-    disabled,
-    toggleChange,
-  } = accordionItemContext;
-  const iconType = !collapsed ? 'chevron-up' : 'chevron-down';
-
-  const getCssClasses = () => {
-    let cssClasses = ['tyk-accordion__item-header'];
-
-    if (usearrowastrigger) {
-      cssClasses.push('tyk-accordion__arrow-trigger');
-    }
-
-    if (className) {
-      cssClasses = cssClasses.concat(className.split(' '));
-    }
-
-    return cssClasses.join(' ');
-  };
+  const iconType = collapsed ? 'chevron-down' : 'chevron-up';
+  const classes = [
+    'tyk-accordion__item-header',
+    usearrowastrigger && 'tyk-accordion__arrow-trigger',
+    className,
+  ].filter(Boolean).join(' ');
 
   return (
-    <div
-      className={getCssClasses()}
-    >
+    <div className={classes}>
       {
         !usearrowastrigger
           ? (
@@ -51,7 +31,7 @@ const AccordionItemHeader = (props) => {
             </button>
           )
           : (
-            <Fragment>
+            <>
               {!arrow.expandToContent && arrow.position === 'left' && (
                 <ItemTrigger />
               )}
@@ -59,13 +39,12 @@ const AccordionItemHeader = (props) => {
               {!arrow.expandToContent && arrow.position === 'right' && (
                 <ItemTrigger />
               )}
-            </Fragment>
+            </>
           )
       }
-
     </div>
   );
-};
+}
 
 AccordionItemHeader.propTypes = {
   children: PropTypes.oneOfType([

@@ -2,7 +2,7 @@
 <Accordion
   className="test-accordion-class"
   usearrowastrigger={ true }
-   arrow={{position: 'left'}}
+  arrow={{position: 'left'}}
 >
   <Accordion.Item disabled>
     <Accordion.Item.Header>
