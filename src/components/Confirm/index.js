@@ -7,8 +7,7 @@ import Modal from '../Modal';
 /**
  * Confirm component can be used to open a dialog (<Modal />) before a specific action
  */
-
-const Confirm = (props) => {
+function Confirm(props) {
   const {
     children,
     title,
@@ -26,7 +25,7 @@ const Confirm = (props) => {
     }
     setOpen(true);
     setCallback(() => () => callbackFunc(...args));
-    if (cancelCallback) {
+    if (cancelCallbackFunc) {
       setCancelCallback(() => () => cancelCallbackFunc(...args));
     }
   };
@@ -56,10 +55,8 @@ const Confirm = (props) => {
         opened={open}
         onClose={cancel}
       >
-        <Modal.Header>
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
         <Modal.Body>
+          <h4>{title}</h4>
           {description}
         </Modal.Body>
         <Modal.Footer>
@@ -79,7 +76,7 @@ const Confirm = (props) => {
       </Modal>
     </>
   );
-};
+}
 
 Confirm.propTypes = {
   /** Sets the text for primary / confirmation  button on opened modal */
@@ -95,6 +92,7 @@ Confirm.propTypes = {
     PropTypes.string,
     PropTypes.object,
     PropTypes.node,
+    PropTypes.func,
   ]),
 };
 

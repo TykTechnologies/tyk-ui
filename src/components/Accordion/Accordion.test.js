@@ -2,7 +2,7 @@ import React from 'react';
 
 import Accordion from './index';
 
-describe('AccordionItem', () => {
+describe('Accordion', () => {
   const selectors = {
     accordion: '.tyk-accordion',
   };
