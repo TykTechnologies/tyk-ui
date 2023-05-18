@@ -7,17 +7,16 @@ import debounce from '../../utils/debounce';
 import { usePrevious, useComponentSize } from '../../hooks';
 import Loader from '../Loader';
 
-function InfiniteScroller(props) {
+function InfiniteScroller({
+  children,
+  hasMore,
+  initialLoad,
+  loadMore,
+  pageNumber,
+  refChild,
+}) {
   const [showLoader, setShowLoader] = useState(false);
   const containerRef = useRef(null);
-  const {
-    children,
-    hasMore,
-    initialLoad,
-    loadMore,
-    pageNumber,
-    refChild,
-  } = props;
   const refChildSize = useComponentSize(refChild);
 
   useEffect(() => {
@@ -57,15 +56,8 @@ function InfiniteScroller(props) {
   }, 200), [loadMoreData, shouldLoad]);
 
   useEffect(() => {
-    if (containerRef && containerRef.current) {
-      containerRef.current.addEventListener('scroll', scrollHandler);
-    }
-
-    return () => {
-      if (containerRef && containerRef.current) {
-        containerRef.current.removeEventListener('scroll', scrollHandler);
-      }
-    };
+    containerRef.current?.addEventListener('scroll', scrollHandler);
+    return () => containerRef.current?.removeEventListener('scroll', scrollHandler);
   }, [containerRef, scrollHandler]);
 
   // if content resets (page number resets) scroll to top
@@ -97,24 +89,16 @@ function InfiniteScroller(props) {
   }, [containerRef, refChildSize, refChild, hasMore]);
 
   return (
-    <div
-      className="tyk-infinite-scroller"
-    >
+    <div className="tyk-infinite-scroller">
       <div
         className="tyk-infinite-scroller__wrapper"
         ref={containerRef}
       >
         { children }
       </div>
-      {
-        showLoader
-          ? (
-            <Loader
-              position="absolute"
-            />
-          )
-          : null
-      }
+      {showLoader && (
+        <Loader position="absolute" />
+      )}
     </div>
   );
 }
