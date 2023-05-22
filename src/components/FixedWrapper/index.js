@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import debounce from '../../utils/debounce';
@@ -7,16 +7,10 @@ import debounce from '../../utils/debounce';
  * even if the scroll position changes
  * i.e: The top navigation bar of a page sits within FixedWrapper component
  */
-const FixedWrapper = (props) => {
-  const {
-    children,
-    className,
-    showShadow,
-  } = props;
-
+function FixedWrapper({ children, className, showShadow }) {
   const fixedWrapperRef = useRef(null);
 
-  const attachShadow = () => {
+  const attachShadow = useCallback(() => {
     const element = fixedWrapperRef.current;
 
     if (!element) {
@@ -24,30 +18,30 @@ const FixedWrapper = (props) => {
     }
 
     if (window.scrollY) {
-      if (!element.classList.contains('tyk-fixed-wrapper--scrolled')) {
-        element.classList.add('tyk-fixed-wrapper--scrolled');
-      }
+      element.classList.add('tyk-fixed-wrapper--scrolled');
     } else {
       element.classList.remove('tyk-fixed-wrapper--scrolled');
     }
-  };
+  }, [fixedWrapperRef.current]);
+
+  const debouncedAttachShadow = useCallback(debounce(attachShadow, 100), [attachShadow]);
 
   useEffect(() => {
     if (showShadow) {
-      window.addEventListener('scroll', debounce(attachShadow, 100));
+      window.addEventListener('scroll', debouncedAttachShadow);
     }
 
     return () => {
-      window.removeEventListener('scroll', debounce(attachShadow, 100));
+      window.removeEventListener('scroll', debouncedAttachShadow);
     };
-  }, [attachShadow, showShadow]);
+  }, [debouncedAttachShadow, showShadow]);
 
   return (
     <div className={`tyk-fixed-wrapper ${className}`} ref={fixedWrapperRef}>
       { children }
     </div>
   );
-};
+}
 
 FixedWrapper.propTypes = {
   children: PropTypes.oneOfType([
