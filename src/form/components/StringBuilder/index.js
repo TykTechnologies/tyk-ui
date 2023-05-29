@@ -64,8 +64,8 @@ function StringBuilder(props) {
 
   useEffect(() => {
     const tempVal = invalidTokenRegex ? value.replaceAll(invalidTokenRegex, '  $&      ') : value;
-    setTokenValue(tempVal);
-    setTokenString(stringToTokenString(tempVal, options));
+    setTokenValue(() => tempVal);
+    setTokenString(() => stringToTokenString(tempVal, options));
   }, [value]);
 
   /**
@@ -75,17 +75,17 @@ function StringBuilder(props) {
   useEffect(() => {
     const splitTokens = tokenString.split(/__TOKEN__(.*?)__TOKEN__/g);
     const splitTokensStr = splitTokens.join('');
-    setTokens(splitTokens);
-    setTokenValue(splitTokensStr);
-    setPrevTokenValue(splitTokensStr);
+    setTokens(() => splitTokens);
+    setTokenValue(() => splitTokensStr);
+    setPrevTokenValue(() => splitTokensStr);
   }, [tokenString]);
 
   useEffect(() => {
     // Auto Grow Input
     if (contextMaxLength - 3 < tokenValue.length) {
       const newHeight = inputRef.current.scrollHeight + 3;
-      setStringBuilderHeight(newHeight);
-      setContentMaxLength(contextMaxLength + 25);
+      setStringBuilderHeight(() => newHeight);
+      setContentMaxLength(() => contextMaxLength + 25);
     }
   }, [tokenString, tokenValue]);
 
@@ -120,11 +120,11 @@ function StringBuilder(props) {
         `  ${selectedInvalidToken}      `,
         `__TOKEN__${option.id}__TOKEN__`,
       );
-      setSelectedInvalidToken(null);
-      setInitialSearchValue('');
+      setSelectedInvalidToken(() => null);
+      setInitialSearchValue(() => '');
     }
-    setTokenString(tokenizedString);
-    setShowOptions(false);
+    setTokenString(() => tokenizedString);
+    setShowOptions(() => false);
     setTimeout(() => {
       inputRef.current.focus();
     }, 20);
@@ -145,9 +145,9 @@ function StringBuilder(props) {
     .join(' ');
 
   const findInvalidTokenSubstitute = (invalidToken) => {
-    setSelectedInvalidToken(invalidToken);
-    setInitialSearchValue(invalidToken.replace(/[^a-zA-Z ]/g, ''));
-    setShowOptions(true);
+    setSelectedInvalidToken(() => invalidToken);
+    setInitialSearchValue(() => invalidToken.replace(/[^a-zA-Z ]/g, ''));
+    setShowOptions(() => true);
   };
 
   return (

@@ -260,6 +260,11 @@ const Chart = (props) => {
   }, [tykChartInstance]);
 
   useEffect(() => {
+
+    if(!chartWrapperRef?.current) {
+      return;
+    }
+    
     setTykChartInstance(echarts.init(chartWrapperRef.current));
     return () => {
       if (tykChartInstance) {
@@ -296,7 +301,7 @@ const Chart = (props) => {
         tykChartInstance.off('click', debouncedMethod);
       }
     };
-  }, [eventCallBack, tykChartInstance]);
+  }, [tykChartInstance]);
 
   const prevInstance = usePrevious(tykChartInstance);
   const prevOption = usePrevious(option);
