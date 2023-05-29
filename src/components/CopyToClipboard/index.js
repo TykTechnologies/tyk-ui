@@ -1,4 +1,4 @@
-import React, { Fragment, createRef, useCallback } from 'react';
+import React, { createRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import toast from '../Toast';
@@ -8,10 +8,9 @@ import toast from '../Toast';
  * - Can be used normally with a text or a custom components (Eg. Button, Icon, etc)
  */
 
-const CopyToClipboard = (props) => {
-  const {
-    display, copy, children, onCopy,
-  } = props;
+function CopyToClipboard({
+  display, copy, children, onCopy, element: Element, ...rest
+}) {
   const txtRef = createRef();
   const handleClick = useCallback(() => {
     if (onCopy) {
@@ -21,26 +20,26 @@ const CopyToClipboard = (props) => {
     if (!window.navigator.clipboard) {
       txtRef.current.select();
       document.execCommand('copy');
-      toast.notify('copied', { theme: 'success' });
+      toast.success('copied');
       return;
     }
     window.navigator.clipboard.writeText(copy);
-    toast.notify('copied', { theme: 'success' });
+    toast.success('copied');
   }, [onCopy, txtRef]);
 
   return (
-    <Fragment>
-      <props.element onClick={handleClick} onKeyUp={handleClick} {...props}>
+    <>
+      <Element onClick={handleClick} onKeyUp={handleClick} {...rest}>
         {children || display}
-      </props.element>
+      </Element>
       {!window.navigator.clipboard ? (
         <textarea ref={txtRef} className="tyk-copy-to-clipboard" name="copy" value={copy}>
           {copy}
         </textarea>
       ) : null}
-    </Fragment>
+    </>
   );
-};
+}
 
 CopyToClipboard.propTypes = {
   /** Callback function executed after text is copied */
@@ -49,6 +48,13 @@ CopyToClipboard.propTypes = {
   copy: PropTypes.string.isRequired,
   /** Text to be displayed */
   display: PropTypes.string,
+  /** Element to wrap the content with */
+  element: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   /** Children of custom element if you are using any custom element */
   children: PropTypes.oneOfType([
     PropTypes.element,
