@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import Message from '../Message';
 
-const InfoNote = (props) => {
-  const { children } = props;
-
+function InfoNote({ children }) {
   return (
     <div className="tyk-info-note">
       <Message theme="info">
@@ -13,7 +11,7 @@ const InfoNote = (props) => {
       </Message>
     </div>
   );
-};
+}
 
 InfoNote.propTypes = {
   children: PropTypes.oneOfType([
