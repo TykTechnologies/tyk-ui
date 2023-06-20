@@ -7,7 +7,6 @@ import DropdownItem from './js/DropdownItem';
 import Button from '../../../components/Button';
 import { DropdownContext } from './dropdown-context';
 
-
 export default class Dropdown extends Component {
   static isElemInRightView(el, dropdownWidth) {
     const windowWidth = window.innerWidth;
@@ -101,7 +100,7 @@ export default class Dropdown extends Component {
     this.dropdownListRef = createRef();
     this.dropdownButtonRef = createRef();
     this.onSelectItem = this.onSelectItem.bind(this);
-    this.openDropdown = this.openDropdown.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
@@ -130,7 +129,7 @@ export default class Dropdown extends Component {
       && open === true
       && !opened
     ) {
-      this.openDropdown();
+      this.toggleDropdown();
     }
 
     if (
@@ -206,7 +205,6 @@ export default class Dropdown extends Component {
       customLeft = left + el.clientWidth - dropdownWidth;
     }
 
-
     if (position !== 'relative') {
       dropdownEl.style.top = `${customTop}px`;
       if (display !== 'block') {
@@ -255,7 +253,7 @@ export default class Dropdown extends Component {
     } = this.props;
     let cssClasses = ['tyk-dropdown-menu', 'tyk-dropdown'];
 
-    if(maxHeight) {
+    if (maxHeight) {
       cssClasses.push('tyk-dropdown--scrollable');
     }
 
@@ -293,23 +291,6 @@ export default class Dropdown extends Component {
     return btnTitle;
   }
 
-  openDropdown() {
-    const {
-      opened,
-    } = this.state;
-    if (opened) {
-      this.setState({
-        opened: false,
-      });
-
-      return;
-    }
-
-    this.setState({
-      opened: true,
-    });
-  }
-
   closeDropdown() {
     const { onClose } = this.props;
 
@@ -319,6 +300,21 @@ export default class Dropdown extends Component {
       if (onClose) {
         onClose();
       }
+    });
+  }
+
+  toggleDropdown() {
+    const {
+      opened,
+    } = this.state;
+    if (opened) {
+      this.closeDropdown();
+
+      return;
+    }
+
+    this.setState({
+      opened: true,
     });
   }
 
@@ -372,7 +368,7 @@ export default class Dropdown extends Component {
               <Button
                 className={`tyk-dropdown__trigger ${(opened) ? 'tyk-dropdown__trigger--opened ' : ' '} ${btnClassName}`}
                 theme={btnTheme || 'default'}
-                onClick={this.openDropdown}
+                onClick={this.toggleDropdown}
                 iconType={showDropdownIcon ? 'chevron-down' : null}
                 iconPosition="right"
                 size={btnSize || 'md'}
