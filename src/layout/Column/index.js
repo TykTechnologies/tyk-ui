@@ -20,7 +20,7 @@ class Column extends PureComponent {
     /**
     * Specifies the size of the column within a Row (values must be between 1 - 12)
     */
-    size: PropTypes.string,
+    size: PropTypes.string.isRequired,
     /**
     * Specifies the left gap a column can have within a Row (values must be between 1 - 12)
     */
@@ -31,7 +31,7 @@ class Column extends PureComponent {
       PropTypes.object,
       PropTypes.node,
     ]),
-  }
+  };
 
   getCssClasses() {
     const {
