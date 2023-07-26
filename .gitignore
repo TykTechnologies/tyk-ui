@@ -3,3 +3,4 @@ tyk-ui-styleguide
 coverage
 .nyc_output
 *DS_Store
+.idea/
