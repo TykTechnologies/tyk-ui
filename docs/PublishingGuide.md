@@ -17,12 +17,12 @@ npm i
 git add .
 ```
 
-- Commit and Push changes
+- Commit, Push and Merge changes
 ```shell static
 git commit -m "bump version"
 ```
 
-- Publish the package to npm
+- On the ```Master``` branch Publish the package to npm
 ```shell static
 npm publish
 ```
