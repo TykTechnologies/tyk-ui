@@ -211,42 +211,42 @@ const Chart = (props) => {
   const buildChartOptions = (selectedType, selectedOptions, selectedSeries) => {
     let finalOpts = {};
     switch (selectedType) {
-    case 'pie': {
-      finalOpts = pieChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+      case 'pie': {
+        finalOpts = pieChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
 
-      selectedSeries.forEach((entry) => {
-        finalOpts.series.push(pieChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
-      });
+        selectedSeries.forEach((entry) => {
+          finalOpts.series.push(pieChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+        });
 
-      break;
-    }
-
-    case 'geo': {
-      finalOpts = geoChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
-
-      selectedSeries.forEach((entry) => {
-        finalOpts.series.push(geoChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
-      });
-
-      break;
-    }
-
-    default: {
-      finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
-      if (Array.isArray(selectedOptions.yAxis)) {
-        finalOpts.yAxis = selectedOptions.yAxis;
+        break;
       }
 
-      selectedSeries.forEach((entry, index) => {
-        const seriesData = Object.assign(
-          {},
-          lineBarChart.seriesDefault.toJS(),
-          seriesConfig[index], entry,
-        );
-        finalOpts.series.push(seriesData);
-      });
-      break;
-    }
+      case 'geo': {
+        finalOpts = geoChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+
+        selectedSeries.forEach((entry) => {
+          finalOpts.series.push(geoChart.seriesDefault.mergeDeep(fromJS(entry)).toJS());
+        });
+
+        break;
+      }
+
+      default: {
+        finalOpts = lineBarChart.defaultOpts.mergeDeep(fromJS(selectedOptions)).toJS();
+        if (Array.isArray(selectedOptions.yAxis)) {
+          finalOpts.yAxis = selectedOptions.yAxis;
+        }
+
+        selectedSeries.forEach((entry, index) => {
+          const seriesData = Object.assign(
+            {},
+            lineBarChart.seriesDefault.toJS(),
+            seriesConfig[index], entry,
+          );
+          finalOpts.series.push(seriesData);
+        });
+        break;
+      }
     }
     return finalOpts;
   };
@@ -261,10 +261,10 @@ const Chart = (props) => {
 
   useEffect(() => {
 
-    if(!chartWrapperRef?.current) {
+    if (!chartWrapperRef?.current) {
       return;
     }
-    
+
     setTykChartInstance(echarts.init(chartWrapperRef.current));
     return () => {
       if (tykChartInstance) {
@@ -301,7 +301,7 @@ const Chart = (props) => {
         tykChartInstance.off('click', debouncedMethod);
       }
     };
-  }, [tykChartInstance]);
+  }, [tykChartInstance, onChange]);
 
   const prevInstance = usePrevious(tykChartInstance);
   const prevOption = usePrevious(option);
