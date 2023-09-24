@@ -1,3 +1,11 @@
+*Icon With Hover state*
+```js
+import Icon from './index';
+<div>
+  <Icon type="edit" hoverIconType="star"/>
+</div>
+```
+
 ```js
 import Icon from './index';
 <div>
