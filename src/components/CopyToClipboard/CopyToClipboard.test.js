@@ -3,7 +3,7 @@ import CopyToClipboard from './index';
 import Button from '../Button'
 
 describe('CoopyToClipboard', () => {
-  it('Test Component Render', () => {
+  it('Test component rendering and Test copy functionality', () => {
     const textToCopy = "boooo";
     const displayText = "BUTTON_TEST_NAME"
     cy.mount(
