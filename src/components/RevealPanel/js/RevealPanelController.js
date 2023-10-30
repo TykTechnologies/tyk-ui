@@ -3,7 +3,7 @@
  * It provides methods to set the panel's height, hide and show it, and attach
  * event listeners for resizing.
  */
-export default class RevealPanelController {
+class RevealPanelController {
   #state = null; // Private state for mouse interactions.
 
   #panel = null; // The panel element to be resized.
@@ -174,7 +174,7 @@ export default class RevealPanelController {
   isPrimaryMouseButtonDown(e) {
     const flags = e.buttons !== undefined ? e.buttons : e.which;
     // eslint-disable-next-line no-bitwise
-    const isDown = (flags & 1) === 1;
+    const isDown = flags === 1;
     return isDown;
   }
 
@@ -245,7 +245,6 @@ export default class RevealPanelController {
        * Unbinds the event listeners added for resizing.
        */
   unbindEvents() {
-    this.ensureRefs('unbindEvents');
     this.#onHeightChangeCallbacks = [];
     this.#onDragStartCallbacks = [];
     this.#onDragEndCallbacks = [];
@@ -258,3 +257,7 @@ export default class RevealPanelController {
     this.unbindEvents();
   }
 }
+
+export default function GetRevealPanelHandler() {
+  return new RevealPanelController();
+};

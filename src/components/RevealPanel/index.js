@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import PanelController from './js/RevealPanelController';
+import GetRevealPanelHandler from './js/RevealPanelController';
 
 function RevealPanelHeaderLeft({ children }) {
   // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -46,7 +46,7 @@ const RevealPanel = forwardRef(({
   const gutterRef = useRef(null);
   const wrapperRef = useRef(null);
 
-  const panelControllerRef = useRef(new PanelController());
+  const panelControllerRef = useRef(GetRevealPanelHandler());
 
   useEffect(() => {
     if (!panelRef.current || !gutterRef.current || !wrapperRef.current) {
