@@ -39,7 +39,7 @@
     &__gutter {
         height: 2rem;
         width: 100%;
-        cursor: row-resize !important;
+        cursor: row-resize;
         display: flex;
         background-color: theme-color('primary', 'base');
         z-index: 2;
