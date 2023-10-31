@@ -1,9 +1,11 @@
+import { useRef } from 'react';
+
 /**
- * RevealPanelController is a class that manages the resizing of a panel element.
+ * RevealPanelService is a class that manages the resizing of a panel element.
  * It provides methods to set the panel's height, hide and show it, and attach
  * event listeners for resizing.
  */
-class RevealPanelController {
+class RevealPanelService {
   #state = null; // Private state for mouse interactions.
 
   #panel = null; // The panel element to be resized.
@@ -258,6 +260,7 @@ class RevealPanelController {
   }
 }
 
-export default function GetRevealPanelHandler() {
-  return new RevealPanelController();
-}
+export const useRevealPanelService = () => {
+  const revealPanelServiceRef = useRef(new RevealPanelService());
+  return revealPanelServiceRef.current;
+};

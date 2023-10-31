@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
-import GetRevealPanelHandler from './js/RevealPanelController';
+import { useRevealPanelService } from './js/RevealPanelService';
 
 function RevealPanelHeaderLeft({ children }) {
   // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -46,44 +46,44 @@ const RevealPanel = forwardRef(({
   const gutterRef = useRef(null);
   const wrapperRef = useRef(null);
 
-  const panelControllerRef = useRef(GetRevealPanelHandler());
+  const panelService = useRevealPanelService();
 
   useEffect(() => {
     if (!panelRef.current || !gutterRef.current || !wrapperRef.current) {
       return;
     }
 
-    const controller = panelControllerRef.current;
-    if (!controller) {
+    if (!panelService) {
       return;
     }
 
-    controller.setRefs(wrapperRef.current, panelRef.current, gutterRef.current);
-    controller.on('onHeightChange', onHeightChange);
-    controller.on('onDragStart', onDragStart);
-    controller.on('onDragEnd', onDragEnd);
-    controller.setHeight(height, 'initialize');
+    panelService.setRefs(wrapperRef.current, panelRef.current, gutterRef.current);
+    panelService.on('onHeightChange', onHeightChange);
+    panelService.on('onDragStart', onDragStart);
+    panelService.on('onDragEnd', onDragEnd);
+    panelService.setHeight(height, 'initialize');
 
     // eslint-disable-next-line consistent-return
     return () => {
-      controller.unbindEvents();
+      panelService.unbindEvents();
     };
   }, []);
 
   useImperativeHandle(
     ref,
     () => {
-      const ctl = panelControllerRef.current;
+      // bind this context
+      const bind = (func) => func.bind(panelService);
 
       return {
-        getHeight: ctl.getHeight.bind(ctl),
-        setHeight: ctl.setHeight.bind(ctl),
-        hide: ctl.hide.bind(ctl),
-        show: ctl.show.bind(ctl),
-        isHidden: ctl.isHidden.bind(ctl),
-        deinit: ctl.deinit.bind(ctl),
-        on: ctl.on.bind(ctl),
-        off: ctl.off.bind(ctl),
+        getHeight: bind(panelService.getHeight),
+        setHeight: bind(panelService.setHeight),
+        hide: bind(panelService.hide),
+        show: bind(panelService.show),
+        isHidden: bind(panelService.isHidden),
+        deinit: bind(panelService.deinit),
+        on: bind(panelService.on),
+        off: bind(panelService.off),
       };
     },
     [],
@@ -91,7 +91,7 @@ const RevealPanel = forwardRef(({
 
   let headerLeft = null;
   let headerRight = null;
-  let contents = [];
+  const contents = [];
 
   React.Children.forEach(children, (child) => {
     if (child && React.isValidElement(child)) {
