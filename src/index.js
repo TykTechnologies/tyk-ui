@@ -21,6 +21,7 @@ export { default as NavBar } from './components/NavBar';
 export { default as Navigation } from './components/Navigation';
 export { default as Panel } from './components/Panel';
 export { default as Pill } from './components/Pill';
+export { default as RevealPanel } from './components/RevealPanel';
 export { default as Tabs } from './components/Tabs';
 export { default as TextEllipsis } from './components/TextEllipsis';
 export { default as toast } from './components/Toast';
