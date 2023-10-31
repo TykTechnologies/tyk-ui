@@ -191,7 +191,7 @@ class RevealPanelController {
        * Sets the height of the panel.
        * @param {string} height - The new height value as a CSS string (e.g., "100px").
        */
-  setHeight(height, reason) {
+  setHeight(height) {
     let heightVal = height;
     this.ensureRefs('setHeight');
 
@@ -260,4 +260,4 @@ class RevealPanelController {
 
 export default function GetRevealPanelHandler() {
   return new RevealPanelController();
-};
+}
