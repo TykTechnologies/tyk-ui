@@ -1,13 +1,11 @@
-// export { default } from './js/Button';
-
 import React, { Fragment, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
+
 /**
  * Button component.
  */
-
 const Button = React.forwardRef((props, ref) => {
   const {
     customButton,
