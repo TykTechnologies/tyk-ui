@@ -56,14 +56,14 @@ describe('InfiniteScroller', () => {
 
       .get(selectors.wrapper)
       .scrollTo(0, 10)
-      .wait(250)
+      .wait(500)
       .then(() => {
         expect(loadMore).not.to.be.called;
       })
 
       .get(selectors.wrapper)
       .scrollTo('bottom')
-      .wait(250)
+      .wait(500)
       .then(() => {
         expect(loadMore).to.be.called;
       });
