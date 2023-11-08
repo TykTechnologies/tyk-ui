@@ -3,9 +3,9 @@ import Modal from './index';
 
 function Component({ children, ...props }) {
   return (
-      <Modal {...props}>
-        <Modal.Body>{children}</Modal.Body>
-      </Modal>
+    <Modal {...props}>
+      <Modal.Body>{children}</Modal.Body>
+    </Modal>
   );
 }
 
@@ -15,11 +15,14 @@ describe('Modal', () => {
     opened: 'opened',
     themeNone: 'tyk-modal--theme-none',
     modalDialog: 'tyk-modal__dialog',
+    themeSuccess: 'tyk-modal--theme-success',
+    backDrop: 'tyk-modal__backdrop',
   };
 
   const selectors = {
     tykModal: `.${cssClasses.tykModal}`,
     modalDialog: `.${cssClasses.modalDialog}`,
+    backDrop: `.${cssClasses.backDrop}`,
   };
 
   it('render the modal when opened prop exists or set to true', () => {
@@ -41,17 +44,32 @@ describe('Modal', () => {
   });
 
   it('should add custom class', () => {
-    cy.mount(<Component className="custom-class">demo</Component>)
+    cy.mount(<Component className="custom-class">Demo</Component>)
       .get(selectors.tykModal)
       .should('exist')
       .and('have.class', 'custom-class');
   });
 
-  it.only('should add theme class when theme option is present', () => {
-    cy.mount(<Component opened theme="success" size="md">
-      <div style={{ padding: '30px' }}>demo</div>
-    </Component>)
+  it('should add theme class when theme option is present', () => {
+    cy.mount(<Component opened theme="success">Demo</Component>)
       .get(selectors.tykModal)
-      .should('exist');
+      .should('exist')
+      .and('have.class', cssClasses.themeSuccess);
   });
+
+  it('should close when back drop is clicked', () => {
+    cy.mount(<Component opened theme="success">Demo</Component>)
+      .get(selectors.backDrop)
+      .should('exist')
+      .and('have.class', cssClasses.opened)
+      .and('have.class', cssClasses.backDrop)
+      .as('backdrop');
+
+    cy.get('@backdrop').click({force: true});
+    cy
+    .get('@backdrop')
+    .should('exist')
+    .and('have.not.class', cssClasses.opened);
+  });
+
 });
