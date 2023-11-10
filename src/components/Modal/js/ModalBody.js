@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ModalBody = (props) => {
-  const { children } = props;
-
+function ModalBody({ children }) {
   return (
     <div className="tyk-modal__body">
       { children }
     </div>
   );
-};
+}
 
 ModalBody.propTypes = {
   children: PropTypes.oneOfType([
