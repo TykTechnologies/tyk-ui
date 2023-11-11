@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Panel from './index';
-import PropTypes from "prop-types";
 
 function Component(props) {
   return (
