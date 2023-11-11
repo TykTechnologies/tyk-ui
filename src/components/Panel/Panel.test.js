@@ -1,5 +1,6 @@
 import React from 'react';
 import Panel from './index';
+import PropTypes from "prop-types";
 
 function Component(props) {
   return (
@@ -15,6 +16,15 @@ function Component(props) {
     </Panel>
   );
 }
+
+Component.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+};
 
 describe('Panel', () => {
   const cssClasses = {
@@ -167,13 +177,13 @@ describe('Panel', () => {
       .should('have.class', cssClasses.theme.success);
   });
 
-  it('should call set theme to success with theme="danger"', () => {
+  it('should call set theme to danger with theme="danger"', () => {
     cy.mount(<Component theme="danger" />)
       .get(selectors.panel)
       .should('have.class', cssClasses.theme.danger);
   });
 
-  it('should call set theme to success with theme="warning"', () => {
+  it('should call set theme to warning with theme="warning"', () => {
     cy.mount(<Component theme="warning" />)
       .get(selectors.panel)
       .should('have.class', cssClasses.theme.warning);
