@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NavigationItem = (props) => {
-  const { children } = props;
-
+function NavigationItem({ children }) {
   return (
     <li className="tyk-navigation-item">
       {children}
     </li>
   );
-};
+}
 
 NavigationItem.propTypes = {
   children: PropTypes.oneOfType([
