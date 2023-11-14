@@ -6,14 +6,35 @@ on:
   - pull_request
 
 jobs:
-  sonarcloud:
-    runs-on: ubuntu-latest
+  test:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x]
+
     steps:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: cache node modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-test-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-test-${{ matrix.node-version }}
+          ${{ runner.os }}-
     - name: install
-      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install
+      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install --force
+    - name: cypress install
+      run: npx cypress install
     - name: test
       run: npm test
     - name: SonarCloud Scan
@@ -23,8 +44,13 @@ jobs:
         args: >
           -Dsonar.organization=tyktechnologies
           -Dsonar.projectKey=TykTechnologies_tyk-ui
+          -Dsonar.sources=./src
+          -Dsonar.coverage.exclusions=**/*.test.js
+          -Dsonar.test.inclusions=**/*.test.js
+          -Dsonar.tests=./src
           -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
           -Dsonar.eslint.eslintconfigpath=.eslintrc
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    env:
+      CI: true
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
