@@ -17,6 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
@@ -42,9 +44,12 @@ jobs:
         args: >
           -Dsonar.organization=tyktechnologies
           -Dsonar.projectKey=TykTechnologies_tyk-ui
+          -Dsonar.sources=./src
+          -Dsonar.coverage.exclusions=**/*.test.js
+          -Dsonar.test.inclusions=**/*.test.js
+          -Dsonar.tests=./src
           -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
           -Dsonar.eslint.eslintconfigpath=.eslintrc
-
     env:
       CI: true
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
