@@ -169,7 +169,6 @@ describe('Tabs', () => {
       .should('exist')
       .and('have.length', 2)
       .filter(':contains(Tab 2)')
-      .as('tab2Header')
       .find(selectors.button)
       .should('exist')
       .and('have.length', 1)
