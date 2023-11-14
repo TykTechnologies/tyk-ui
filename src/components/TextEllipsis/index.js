@@ -7,22 +7,26 @@ import Tooltip from '../Tooltip';
  * The entire text is displayed with the help of Tooltip component
  */
 
-const TextEllipsis = ({ text, limit, position }) => (
-  text.length > limit
-    ? (
-      <Tooltip render={text} position={position}>
-        {text.substring(0, limit)}
-        ...
-      </Tooltip>
-    )
-    : text
-);
+function TextEllipsis({ text, limit, position }) {
+  return (
+    text.length > limit
+      ? (
+        <Tooltip render={text} position={position}>
+          {text.substring(0, limit)}
+          ...
+        </Tooltip>
+      )
+      : text
+  );
+}
 
 TextEllipsis.propTypes = {
   /** Text to be shrinked by TextEllipsis */
   text: PropTypes.string,
   /** Number of characters that TextEllipsis would leave visible */
   limit: PropTypes.number,
+  /** tooltip position */
+  position: PropTypes.string,
 };
 
 export default TextEllipsis;
