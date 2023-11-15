@@ -198,10 +198,10 @@ describe('Table Component Rendering', () => {
     const callbacks = {
       onChange: (values) => {console.log('result', values);}
     };
-    cy.spy(callbacks, 'onChange').as('onChangeSpy');
-    cy.mount(<Table value={config} onChange={callbacks.onChange} />);
+    const onChange = cy.stub().as('onChange');
+    cy.mount(<Table value={config} onChange={onChange} />);
     cy.get(`${selectors.columnHeader}:first ${selectors.sortIconClassName}`).click();
-    cy.get('@onChangeSpy').should('be.calledWith', 'sort');
+    cy.get('@onChange').should('be.calledWith', 'sort');
   });
   it('should allow selecting and deselecting a single row', () => {
     cy.spy(config.rows[0].events, 'onClick').as('onClickSpy');
