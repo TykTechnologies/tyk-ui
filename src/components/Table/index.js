@@ -39,6 +39,7 @@ function Table({
   const selectRow = (data) => {
     const { index, selected } = data;
     const selectedRow = state.rows[index];
+  
     setState({
       ...state,
       rows: [
