@@ -148,9 +148,8 @@ describe('Table Component Rendering', () => {
         ...config,
         ...configSelectable,
       }} />)
-      .get(selectors.selectAllCheckbox).should(($checkbox) => {
-        expect($checkbox).to.have.length(3);
-      });
+      .get(selectors.selectAllCheckbox)
+      .should('have.length', 3);
   });
 
   it('should render rows with correct data', () => {
