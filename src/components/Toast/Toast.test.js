@@ -78,19 +78,17 @@ describe('Toast', () => {
       cy.mount(<Component onClick={onClick} />)
         .get('button')
         .click()
-        .then(() => {
-          cy.get(selectors.toastContainer)
-            .should('exist')
-            .find(`.${classNames.message}.${className}`)
-            .should('exist')
-            .find(selectors.icons.icon)
-            .should('exist')
-            .and('have.class', theme === 'success' ? classNames.icons.success : classNames.icons.warning)
-            .closest(selectors.message)
-            .find(selectors.messageContent)
-            .should('exist')
-            .and('have.text', `demo ${theme}`);
-        });
+        .get(selectors.toastContainer)
+        .should('exist')
+        .find(`.${classNames.message}.${className}`)
+        .should('exist')
+        .find(selectors.icons.icon)
+        .should('exist')
+        .and('have.class', theme === 'success' ? classNames.icons.success : classNames.icons.warning)
+        .closest(selectors.message)
+        .find(selectors.messageContent)
+        .should('exist')
+        .and('have.text', `demo ${theme}`);
     });
   });
 });
