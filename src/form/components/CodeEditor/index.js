@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import 'brace';
 import AceEditor from 'react-ace';
@@ -14,169 +14,127 @@ import 'brace/ext/searchbox';
 import 'brace/ext/beautify';
 import 'brace/theme/github';
 
-export default class CodeEditor extends Component {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    disableValidation: PropTypes.bool,
-    id: PropTypes.string,
-    error: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
-    label: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    labelwidth: PropTypes.string,
-    mode: PropTypes.string,
-    name: PropTypes.string,
-    note: PropTypes.string,
-    onBlur: PropTypes.func,
-    onChange: PropTypes.func,
-    theme: PropTypes.string,
-    value: PropTypes.string,
-    setOptions: PropTypes.instanceOf(Object),
-    wrapperClassName: PropTypes.string,
-  }
+function CodeEditor(props) {
+  const {
+    disabled,
+    readOnly,
+    disableValidation,
+    id,
+    error,
+    label,
+    labelwidth,
+    note,
+    onBlur,
+    onChange,
+    theme,
+    value,
+    setOptions,
+    wrapperClassName,
+  } = props;
+  const classes = [
+    'tyk-form-group',
+    wrapperClassName,
+    ...(theme ? theme.split(' ').map((t) => `tyk-form-group--${t}`) : []),
+    labelwidth && 'tyk-form-group--label-has-width',
+    error && 'has-error',
+  ].filter(Boolean).join(' ');
 
-  constructor(props) {
-    super(props);
+  const finalSetOptions = {
+    ...setOptions,
+    ...disableValidation && { useWorker: false },
+  };
 
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnBlur = this.handleOnBlur.bind(this);
-  }
-
-  getCodeEditorError() {
-    const { error } = this.props;
-
-    return (error && error !== 'true' && error !== 'false')
+  const getCodeEditorError = useCallback(() => (
+    error && error !== 'true' && error !== 'false'
       ? (
-        <p
-          className="tyk-form-control__error-message"
-        >
-          { error }
+        <p className="tyk-form-control__error-message">
+          {error}
         </p>
       )
-      : null;
-  }
+      : null
+  ), [error]);
 
-  getCssClasses() {
-    const {
-      error, theme, labelwidth, wrapperClassName = '',
-    } = this.props;
-    const cssClasses = [wrapperClassName, 'tyk-form-group'];
-    const themes = theme ? theme.split(' ') : [];
+  const getLabelStyles = useCallback(() => {
+    if (labelwidth) return { flexBasis: labelwidth };
+    return {};
+  }, [labelwidth]);
 
-    if (themes.length) {
-      themes.forEach((iTheme) => {
-        cssClasses.push(`tyk-form-group--${iTheme}`);
-      });
-    }
+  const getNonLabelWidth = useCallback(() => {
+    if (labelwidth) return { flexBasis: `calc(100% - ${labelwidth} - 20px)` };
+    return {};
+  }, [labelwidth]);
 
-    if (labelwidth) {
-      cssClasses.push('tyk-form-group--label-has-width');
-    }
+  const handleOnChange = useCallback((newValue) => {
+    if (onChange) onChange(newValue);
+  }, [onChange]);
 
-    if (error) {
-      cssClasses.push('has-error');
-    }
+  const handleOnBlur = useCallback(() => {
+    if (onBlur) onBlur(value);
+  }, [onBlur, value]);
 
-    return cssClasses.join(' ');
-  }
-
-  getLabelStyles() {
-    const { labelwidth } = this.props;
-    const styles = {};
-
-    if (labelwidth) {
-      styles.flexBasis = labelwidth;
-    }
-
-    return styles;
-  }
-
-  getNonLabelWidth() {
-    const { labelwidth } = this.props;
-    const styles = {};
-
-    if (labelwidth) {
-      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
-    }
-
-    return styles;
-  }
-
-  handleOnChange(value) {
-    const { onChange } = this.props;
-    if (onChange) {
-      onChange(value);
-    }
-  }
-
-  handleOnBlur() {
-    const { value, onBlur } = this.props;
-
-    if (onBlur) {
-      onBlur(value);
-    }
-  }
-
-  render() {
-    const {
-      id,
-      label,
-      note,
-      disableValidation = false,
-      setOptions = null,
-      disabled,
-      readOnly,
-    } = this.props;
-
-    const finalSetOptions = {
-      ...setOptions,
-      ...disableValidation && { useWorker: false },
-    };
-
-    return (
-      <Fragment>
-        <div className={this.getCssClasses()}>
-          {
-            label
-              ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
-              : null
-          }
-          <div className="tyk-form-control__wrapper" style={this.getNonLabelWidth()}>
-            <AceEditor
-              className="tyk-form-control"
-              {...this.props}
-              onChange={this.handleOnChange}
-              onBlur={this.handleOnBlur}
-              theme="github"
-              editorProps={{ $blockScrolling: true }}
-              readOnly={readOnly || disabled}
-              onLoad={(editorInstance) => {
-                // eslint-disable-next-line
-                editorInstance.container.style.resize = 'both';
-                // mouseup = css resize end
-                document.addEventListener('mouseup', () => (
-                  editorInstance.resize()
-                ));
-              }}
-              setOptions={finalSetOptions}
-            />
-            {
-              note
-                ? <p className="tyk-form-control__help-block">{ note }</p>
-                : null
-            }
-            { this.getCodeEditorError() }
-          </div>
-        </div>
-      </Fragment>
-    );
-  }
+  return (
+    <div className={classes}>
+      {
+        label
+          ? <label htmlFor={id} style={getLabelStyles()}>{ label }</label>
+          : null
+      }
+      <div className="tyk-form-control__wrapper" style={getNonLabelWidth()}>
+        <AceEditor
+          className="tyk-form-control"
+          {...props}
+          onChange={handleOnChange}
+          onBlur={handleOnBlur}
+          theme="github"
+          editorProps={{ $blockScrolling: true }}
+          readOnly={readOnly || disabled}
+          onLoad={(editorInstance) => {
+            // eslint-disable-next-line
+            editorInstance.container.style.resize = 'both';
+            // mouseup = css resize end
+            document.addEventListener('mouseup', () => (
+              editorInstance.resize()
+            ));
+          }}
+          setOptions={finalSetOptions}
+        />
+        {
+          note
+            ? <p className="tyk-form-control__help-block">{ note }</p>
+            : null
+        }
+        { getCodeEditorError() }
+      </div>
+    </div>
+  );
 }
+
+CodeEditor.propTypes = {
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  disableValidation: PropTypes.bool,
+  id: PropTypes.string,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+  labelwidth: PropTypes.string,
+  mode: PropTypes.string,
+  name: PropTypes.string,
+  note: PropTypes.string,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  theme: PropTypes.string,
+  value: PropTypes.string,
+  setOptions: PropTypes.instanceOf(Object),
+  wrapperClassName: PropTypes.string,
+};
+
+export default CodeEditor;
