@@ -5,7 +5,7 @@ import toast from './index';
 /* eslint-disable react/destructuring-assignment */
 function Component(props) {
   // eslint-disable-next-line react/jsx-no-useless-fragment
-  return (<>{props.children || (<button type="button" onClick={props.onClick}>Show Toast</button>)}</>);
+  return props.children || <button type="button" onClick={props.onClick}>Show Toast</button>;
 }
 
 Component.propTypes = {
@@ -54,6 +54,7 @@ describe('Toast', () => {
       warning: `.${classNames.icons.warning}`,
     },
   };
+
   it('should render toast components and remove it after the given delay', () => {
     cy.mount(<Component onClick={() => toast.notify('demo', { delay: 150 })} />)
       .get('button')
