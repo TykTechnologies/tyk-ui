@@ -60,20 +60,16 @@ describe('Toast', () => {
       .get('button')
       .click()
       .click()
-      .then(() => {
-        cy.get(selectors.toastContainer)
-          .should('exist')
-          .find(selectors.message)
-          .should('exist')
-          .and('have.length', 2)
-          .and('have.class', classNames.theme.success);
-      })
-      .then(() => {
-        cy.get(selectors.toastContainer)
-          .should('exist')
-          .find(selectors.message, { timeout: 350 })
-          .should('not.exist');
-      });
+      .get(selectors.toastContainer)
+      .should('exist')
+      .find(selectors.message)
+      .should('exist')
+      .and('have.length', 2)
+      .and('have.class', classNames.theme.success)
+      .get(selectors.toastContainer)
+      .should('exist')
+      .find(selectors.message, { timeout: 350 })
+      .should('not.exist');
   });
 
   it('should display given message with correct icon for each theme', {}, () => {
