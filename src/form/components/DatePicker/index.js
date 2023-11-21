@@ -1,7 +1,6 @@
 import React, {
-  Fragment, useEffect, useState, useRef, useCallback,
+  useEffect, useState, useRef, useCallback,
 } from 'react';
-import format from 'date-fns/format';
 import PropTypes from 'prop-types';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
@@ -9,37 +8,32 @@ import 'flatpickr/dist/flatpickr.min.css';
 import Icon from '../../../components/Icon';
 import { usePrevious } from '../../../hooks';
 
-const DatePicker = (props) => {
-  const {
-    children,
-    disabled,
-    readOnly = false,
-    error,
-    id,
-    label,
-    labelwidth,
-    note,
-    onClose,
-    onChange,
-    onOpen,
-    theme,
-    config,
-    value,
-    wrapperClassName = '',
-  } = props;
+function DatePicker({
+  children,
+  disabled,
+  readOnly = false,
+  error,
+  id,
+  label,
+  labelwidth,
+  note,
+  onClose,
+  onChange,
+  onOpen,
+  theme,
+  config = {},
+  value,
+  wrapperClassName = '',
+}) {
   const [pickerInstance, setPickerInstance] = useState(null);
   const dateRef = useRef(null);
 
   const prevValue = usePrevious(value);
 
-  const hasValueChanged = (prevDate, currentDate) => {
-    if (!prevDate) {
-      return true;
-    }
+  const hasValueChanged = useCallback((prevDate, currentDate) => {
+    if (!prevDate) return true;
+    if (!Array.isArray(currentDate)) return prevDate.getTime() !== currentDate.getTime();
 
-    if (!Array.isArray(currentDate)) {
-      return prevDate.getTime() !== currentDate.getTime();
-    }
     let diffDates = currentDate;
 
     if (prevDate && currentDate.length && prevDate.length) {
@@ -49,21 +43,21 @@ const DatePicker = (props) => {
     }
 
     return currentDate.length > 0;
-  };
+  }, []);
 
   const onDateChange = useCallback((dateValue) => {
     const finalValue = config.mode === 'range' ? dateValue : dateValue[0] || null;
 
-    if (onChange) {
-      if (config.mode === 'range') {
-        if (finalValue.length === 2 && hasValueChanged(prevValue, finalValue)) {
-          onChange(finalValue);
-        }
-      } else {
+    if (!onChange) return;
+
+    if (config.mode === 'range') {
+      if (finalValue.length === 2 && hasValueChanged(prevValue, finalValue)) {
         onChange(finalValue);
       }
+    } else {
+      onChange(finalValue);
     }
-  }, [prevValue]);
+  }, [prevValue, onChange, hasValueChanged]);
 
   useEffect(() => {
     if (dateRef && dateRef.current && !pickerInstance) {
@@ -87,7 +81,7 @@ const DatePicker = (props) => {
       if (typeof value === 'string') {
         tempValue = new Date(value);
       } else if (Array.isArray(value)) {
-        tempValue = value.map(date => (typeof date === 'string' ? new Date(date) : date));
+        tempValue = value.map((date) => (typeof date === 'string' ? new Date(date) : date));
       }
 
       if (hasValueChanged(prevValue, tempValue)) {
@@ -103,51 +97,27 @@ const DatePicker = (props) => {
     }
   }, [prevValue, value, pickerInstance]);
 
-  const getCssClasses = () => {
-    const cssClasses = [wrapperClassName, 'tyk-form-group tyk-form-group--addon-right'];
-    const themes = theme ? theme.split(' ') : [];
-
-    if (themes.length) {
-      themes.forEach((iTheme) => {
-        cssClasses.push(`tyk-form-group--${iTheme}`);
-      });
-    }
-
-    if (labelwidth) {
-      cssClasses.push('tyk-form-group--label-has-width');
-    }
-
-    if (error) {
-      cssClasses.push('has-error');
-    }
-
-    return cssClasses.join(' ');
-  };
+  const classes = [
+    'tyk-form-group',
+    'tyk-form-group--addon-right',
+    wrapperClassName,
+    ...(theme ? theme.split(' ').map((t) => `tyk-form-group--${t}`) : []),
+    labelwidth && 'tyk-form-group--label-has-width',
+    error && 'has-error',
+  ].filter(Boolean).join(' ');
 
   const getLabelStyles = () => {
-    const styles = {};
-
-    if (labelwidth) {
-      styles.flexBasis = labelwidth;
-    }
-
-    return styles;
+    if (labelwidth) return { flexBasis: labelwidth };
+    return {};
   };
 
   const getNonLabelWidth = () => {
-    const styles = {};
-
-    if (labelwidth) {
-      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
-    }
-
-    return styles;
+    if (labelwidth) return { flexBasis: `calc(100% - ${labelwidth} - 20px)` };
+    return {};
   };
 
   const openCalendar = useCallback(() => {
-    if (!pickerInstance) {
-      return;
-    }
+    if (!pickerInstance) return;
 
     pickerInstance.open();
   }, [pickerInstance]);
@@ -155,9 +125,7 @@ const DatePicker = (props) => {
   const getInputError = () => (
     (error && error !== 'true' && error !== 'false')
       ? (
-        <p
-          className="tyk-form-control__error-message"
-        >
+        <p className="tyk-form-control__error-message">
           { error }
         </p>
       )
@@ -181,7 +149,7 @@ const DatePicker = (props) => {
       };
     }
     return (
-      <Fragment>
+      <>
         <input
           disabled={disabled}
           className="tyk-form-control"
@@ -200,26 +168,17 @@ const DatePicker = (props) => {
         >
           <Icon type="calendar" />
         </div>
-      </Fragment>
+      </>
     );
   };
 
   return (
-    <Fragment>
+    <>
       {
         children && children.length
-          ? (
-            <Fragment>
-              {children(
-                {
-                  openCalendar,
-                  ref: dateRef,
-                },
-              )}
-            </Fragment>
-          )
+          ? children({ openCalendar, ref: dateRef })
           : (
-            <div className={getCssClasses()}>
+            <div className={classes}>
               {
                 label
                   ? <label htmlFor={id} style={getLabelStyles()}>{ label }</label>
@@ -246,11 +205,11 @@ const DatePicker = (props) => {
       }
       <div className="tyk-form-control--readonly">
         {readOnly && !value && '-'}
-        {readOnly && value && format(value, config.dateFormat || 'd/m/Y')}
+        {readOnly && value && flatpickr.formatDate(value, config.dateFormat || 'd/m/Y')}
       </div>
-    </Fragment>
+    </>
   );
-};
+}
 
 DatePicker.propTypes = {
   config: PropTypes.instanceOf(Object),
@@ -292,10 +251,6 @@ DatePicker.propTypes = {
     PropTypes.string,
   ]),
   wrapperClassName: PropTypes.string,
-};
-
-DatePicker.defaultProps = {
-  config: {},
 };
 
 export default DatePicker;
