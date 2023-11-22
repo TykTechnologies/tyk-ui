@@ -7,7 +7,7 @@ import DropdownItem from './js/DropdownItem';
 import Button from '../../../components/Button';
 import { DropdownContext } from './dropdown-context';
 
-export default class Dropdown extends Component {
+class Dropdown extends Component {
   static isElemInRightView(el, dropdownWidth) {
     const windowWidth = window.innerWidth;
     const offset = el.getBoundingClientRect();
@@ -24,64 +24,6 @@ export default class Dropdown extends Component {
 
     return elemBottom <= windowHeight;
   }
-
-  static propTypes = {
-    appendTo: PropTypes.string,
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-      PropTypes.func,
-    ]),
-    closeOnSelect: PropTypes.bool,
-    btnClassName: PropTypes.string,
-    btnSize: PropTypes.string,
-    btnGroupSize: PropTypes.string,
-    btnTheme: PropTypes.string,
-    btnTitle: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.string,
-    ]),
-    customBtnTitle: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.string,
-    ]),
-    btnGroup: PropTypes.bool,
-    className: PropTypes.string,
-    display: PropTypes.string,
-    disabled: PropTypes.bool,
-    hasCustomContent: PropTypes.bool,
-    label: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    listclassnames: PropTypes.string,
-    onClose: PropTypes.func,
-    onSelect: PropTypes.func,
-    open: PropTypes.bool,
-    offset: PropTypes.instanceOf(Object),
-    position: PropTypes.string,
-    selectedItem: PropTypes.string,
-    showDropdownIcon: PropTypes.bool,
-    stopButtonTextChange: PropTypes.bool,
-    showTriggerButton: PropTypes.bool,
-    showCheckmark: PropTypes.bool,
-    maxHeight: PropTypes.string,
-    wrapperClassName: PropTypes.string,
-  };
-
-  static defaultProps = {
-    closeOnSelect: false,
-    showDropdownIcon: true,
-    showTriggerButton: true,
-    showCheckmark: true,
-    open: false,
-  };
 
   constructor(props) {
     super(props);
@@ -145,6 +87,15 @@ export default class Dropdown extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
+  handleClickOutside(event) {
+    if (
+      this.dropdownListRef.current && !this.dropdownListRef.current.contains(event.target)
+      && this.dropdownRef.current && !this.dropdownRef.current.contains(event.target)
+    ) {
+      this.closeDropdown();
+    }
+  }
+
   onSelectItem(itemId, itemProps) {
     const { closeOnSelect, onSelect } = this.props;
     const changes = {
@@ -205,6 +156,7 @@ export default class Dropdown extends Component {
       customLeft = left + el.clientWidth - dropdownWidth;
     }
 
+    console.log('position', position, '::', display);
     if (position !== 'relative') {
       dropdownEl.style.top = `${customTop}px`;
       if (display !== 'block') {
@@ -318,15 +270,6 @@ export default class Dropdown extends Component {
     });
   }
 
-  handleClickOutside(event) {
-    if (
-      this.dropdownListRef.current && !this.dropdownListRef.current.contains(event.target)
-      && this.dropdownRef.current && !this.dropdownRef.current.contains(event.target)
-    ) {
-      this.closeDropdown();
-    }
-  }
-
   render() {
     const {
       appendTo,
@@ -426,4 +369,64 @@ export default class Dropdown extends Component {
   }
 }
 
+Dropdown.propTypes = {
+  appendTo: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+  closeOnSelect: PropTypes.bool,
+  btnClassName: PropTypes.string,
+  btnSize: PropTypes.string,
+  btnGroupSize: PropTypes.string,
+  btnTheme: PropTypes.string,
+  btnTitle: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+  customBtnTitle: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+  btnGroup: PropTypes.bool,
+  className: PropTypes.string,
+  display: PropTypes.string,
+  disabled: PropTypes.bool,
+  hasCustomContent: PropTypes.bool,
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+  listclassnames: PropTypes.string,
+  onClose: PropTypes.func,
+  onSelect: PropTypes.func,
+  open: PropTypes.bool,
+  offset: PropTypes.instanceOf(Object),
+  position: PropTypes.string,
+  selectedItem: PropTypes.string,
+  showDropdownIcon: PropTypes.bool,
+  stopButtonTextChange: PropTypes.bool,
+  showTriggerButton: PropTypes.bool,
+  showCheckmark: PropTypes.bool,
+  maxHeight: PropTypes.string,
+  wrapperClassName: PropTypes.string,
+};
+
+Dropdown.defaultProps = {
+  closeOnSelect: false,
+  showDropdownIcon: true,
+  showTriggerButton: true,
+  showCheckmark: true,
+  open: false,
+};
+
 Dropdown.Item = DropdownItem;
+
+export default Dropdown;
