@@ -219,7 +219,7 @@ describe('Dropdown', () => {
       .should('have.text', label);
   });
 
-  it('adds the scrollabel class if maxHeight is set', () => {
+  it('adds the scrollable class if maxHeight is set', () => {
     cy.mount(<Component open maxHeight="100px" />)
       .get(selectors.menu)
       .should('have.class', classes.scrollable);

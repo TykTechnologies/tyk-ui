@@ -156,7 +156,6 @@ class Dropdown extends Component {
       customLeft = left + el.clientWidth - dropdownWidth;
     }
 
-    console.log('position', position, '::', display);
     if (position !== 'relative') {
       dropdownEl.style.top = `${customTop}px`;
       if (display !== 'block') {
