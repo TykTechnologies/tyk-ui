@@ -8,7 +8,7 @@ jobs:
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: install
@@ -22,6 +22,11 @@ jobs:
         args: >
           -Dsonar.organization=tyktechnologies
           -Dsonar.projectKey=TykTechnologies_tyk-ui
+          -Dsonar.sources=./src
+          -Dsonar.coverage.exclusions=./cypress/**/*.js,**/*.test.js,./src/form/components/Combobox/*.js,./src/form/components/redux-form/**/*.js
+          -Dsonar.cpd.exclusions=**/*.test.js,src/form/components/redux-form/**/*
+          -Dsonar.test.inclusions=**/*.test.js
+          -Dsonar.tests=./src
           -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
           -Dsonar.eslint.eslintconfigpath=.eslintrc
       env:

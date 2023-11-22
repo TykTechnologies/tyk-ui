@@ -13,14 +13,14 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [16.x]
+        node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
     - name: cache node modules
@@ -46,6 +46,7 @@ jobs:
           -Dsonar.projectKey=TykTechnologies_tyk-ui
           -Dsonar.sources=./src
           -Dsonar.coverage.exclusions=./cypress/**/*.js,**/*.test.js,./src/form/components/Combobox/*.js,./src/form/components/redux-form/**/*.js
+          -Dsonar.cpd.exclusions=**/*.test.js,src/form/components/redux-form/**/*
           -Dsonar.test.inclusions=**/*.test.js
           -Dsonar.tests=./src
           -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
