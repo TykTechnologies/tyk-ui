@@ -75,10 +75,14 @@ function Textarea({
 }
 
 Textarea.propTypes = {
+  /** Disable the component */
   disabled: PropTypes.bool,
+  /** Displays only the text value of the component, or "-" if no value is set */
   readOnly: PropTypes.bool,
   input: PropTypes.instanceOf(Object),
+  /** Set an error message for the component and the component is rendered in the error state */
   error: PropTypes.string,
+  /** Adds a label to the component */
   label: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -86,13 +90,20 @@ Textarea.propTypes = {
     PropTypes.func,
     PropTypes.string,
   ]),
+  /** Sets the width of the label */
   labelwidth: PropTypes.string,
+  /** Set a name for the component */
   name: PropTypes.string,
+  /** Adds additional information under the component */
   note: PropTypes.string,
+  /** Callback function executed on value change */
   onChange: PropTypes.func,
   id: PropTypes.string,
+  /** Set a theme for the component */
   theme: PropTypes.string,
+  /** Set the value of the component */
   value: PropTypes.string,
+  /** CSS classes added to the wrapper of the component */
   wrapperClassName: PropTypes.string,
 };
 
