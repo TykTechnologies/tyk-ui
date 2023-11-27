@@ -46,7 +46,7 @@ jobs:
           -Dsonar.projectKey=TykTechnologies_tyk-ui
           -Dsonar.sources=./src
           -Dsonar.coverage.exclusions=cypress/**/*.js,**/*.test.js,src/form/components/Combobox/*.js,src/form/redux-form/**/*.js
-          -Dsonar.cpd.exclusions=**/*.test.js,src/form/redux-form/**/*
+          -Dsonar.cpd.exclusions=**/*.test.js,src/form/redux-form/**/*,src/common/fonts
           -Dsonar.test.inclusions=**/*.test.js
           -Dsonar.tests=./src
           -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info

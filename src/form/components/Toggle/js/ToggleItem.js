@@ -1,24 +1,9 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 
-export default class ToggleItem extends Component {
-  static propTypes = {
-    context: PropTypes.instanceOf(Object),
-    label: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    name: PropTypes.string,
-    value: PropTypes.string,
-  };
-
+class ToggleItem extends Component {
   static getNotchCssClasses(context) {
-    const cssClasses = ['tyk-toggle__item-notch', `tyk-toggle__item-notch--${context.type}`];
-
-    return cssClasses.join(' ');
+    return ['tyk-toggle__item-notch', `tyk-toggle__item-notch--${context.type}`].join(' ');
   }
 
   constructor(props) {
@@ -83,3 +68,18 @@ export default class ToggleItem extends Component {
     );
   }
 }
+
+ToggleItem.propTypes = {
+  context: PropTypes.instanceOf(Object),
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+  name: PropTypes.string,
+  value: PropTypes.string,
+};
+
+export default ToggleItem;
