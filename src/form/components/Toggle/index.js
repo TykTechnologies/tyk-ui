@@ -1,191 +1,152 @@
-import React, { Component, createRef } from 'react';
+import React, {
+  useCallback, useMemo, useRef, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import ToggleContext from './js/ToggleContext';
 import ToggleItemWrapper from './js/ToggleItemWrapper';
 
-class Toggle extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.string,
-    ]),
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    error: PropTypes.string,
-    onChange: PropTypes.func,
-    label: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    labelwidth: PropTypes.string,
-    theme: PropTypes.string,
-    type: PropTypes.string, // single || multiple
-    size: PropTypes.string,
-    separated: PropTypes.bool,
-    direction: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.string,
-    ]),
-    onDark: PropTypes.bool,
-    wrapperClassName: PropTypes.string,
-  };
+function Toggle({
+  className,
+  disabled,
+  readOnly,
+  size,
+  theme,
+  direction,
+  onDark,
+  wrapperClassName = '',
+  onChange,
+  labelwidth,
+  label,
+  separated,
+  children,
+  type,
+  value,
+  error,
+}) {
+  const [selectedRef, setSelectedRef] = useState(null);
+  const notchRef = useRef();
+  const toggleRef = useRef();
 
-  static defaultProps = {
-    separated: false,
-    theme: 'primary',
-    type: 'single',
-    direction: 'row',
-  };
+  const classes = [
+    wrapperClassName,
+    className,
+    'tyk-toggle',
+    `tyk-toggle--disabled-${readOnly || disabled}`,
+    `tyk-toggle--${size || 'md'}`,
+    `tyk-toggle--${theme}`,
+    `tyk-toggle--${direction}`,
+    onDark && 'tyk-toggle--on-dark',
+  ].filter(Boolean).join(' ');
 
-  state = {
-    selectedRef: null,
-  }
+  const onItemSelected = useCallback((itemValue, event) => {
+    if (!onChange) return;
+    onChange(itemValue, event);
+  }, [onChange]);
 
-  constructor(props) {
-    super(props);
+  const getLabelStyles = useCallback(() => {
+    if (labelwidth) return { flexBasis: labelwidth };
+    return {};
+  }, [labelwidth]);
 
-    this.notchRef = createRef();
-    this.toggleRef = createRef();
-  }
-
-  onItemSelected(value, event) {
-    const { onChange } = this.props;
-
-    if (onChange) {
-      onChange(value, event);
-    }
-  }
-
-  getCssClasses() {
-    const {
-      className,
-      disabled,
-      readOnly,
-      size,
-      theme,
-      direction,
-      onDark,
-      wrapperClassName = '',
-    } = this.props;
-
-    let cssClasses = [
-      wrapperClassName,
-      'tyk-toggle',
-      `tyk-toggle--disabled-${readOnly || disabled}`,
-      `tyk-toggle--${size || 'md'}`,
-      `tyk-toggle--${theme}`,
-      `tyk-toggle--${direction}`,
-    ];
-
-    if (onDark) {
-      cssClasses.push('tyk-toggle--on-dark');
-    }
-
-    if (className) {
-      cssClasses = cssClasses.concat(className.split(' '));
-    }
-
-    return cssClasses.join(' ');
-  }
-
-  getLabelStyles() {
-    const { labelwidth } = this.props;
-    const styles = {};
-
-    if (labelwidth) {
-      styles.flexBasis = labelwidth;
-    }
-
-    return styles;
-  }
-
-  saveSelectedRef(ref) {
-    this.setState({
-      selectedRef: ref,
-    });
-  }
-
-  positionNotch() {
-    const { separated } = this.props;
-    const { selectedRef } = this.state;
-
+  const positionNotch = useCallback(() => {
     if (!selectedRef || separated) {
       return {};
     }
 
     const selectedWidth = selectedRef.current.offsetWidth;
     const selectedOffset = selectedRef.current.getBoundingClientRect().left;
-    const toggleOffset = this.toggleRef.current.getBoundingClientRect().left;
+    const toggleOffset = toggleRef.current.getBoundingClientRect().left;
     const left = selectedOffset - toggleOffset;
 
     return {
       left: `${left + 4}px`,
       width: `${selectedWidth - 8}px`,
     };
-  }
+  }, [selectedRef, separated]);
 
-  render() {
-    const {
-      children,
-      disabled,
-      readOnly,
-      label,
-      type,
-      separated,
-      value,
-      error,
-    } = this.props;
+  const contextValue = useMemo(() => ({
+    disabled,
+    readOnly,
+    onItemSelected,
+    saveSelectedRef: setSelectedRef,
+    separated,
+    type,
+    value,
+  }), [disabled, readOnly, onItemSelected, separated, type, value]);
 
-    return (
-      <>
-        <div className={this.getCssClasses()} ref={this.toggleRef}>
-          <ToggleContext.Provider
-            value={{
-              disabled,
-              readOnly,
-              onItemSelected: this.onItemSelected.bind(this),
-              saveSelectedRef: this.saveSelectedRef.bind(this),
-              separated,
-              type,
-              value,
-            }}
-          >
+  return (
+    <>
+      <div className={classes} ref={toggleRef}>
+        <ToggleContext.Provider
+          value={contextValue}
+        >
+          {
+            label
+              ? <label className="tyk-toggle__label" style={getLabelStyles()}>{label}</label>
+              : null
+          }
+          <ul className={`tyk-toggle__list tyk-toggle__list--${type} ${error && 'tyk-toggle__list--has-error'}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
+            { children }
             {
-              label
-                ? <label className="tyk-toggle__label" style={this.getLabelStyles()}>{label}</label>
+              type === 'multiple' && !separated
+                ? <li className="tyk-toggle__notch" ref={notchRef} style={positionNotch()} />
                 : null
             }
-            <ul className={`tyk-toggle__list tyk-toggle__list--${type} ${error && 'tyk-toggle__list--has-error'}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
-              { children }
-              {
-                type === 'multiple' && !separated
-                  ? <li className="tyk-toggle__notch" ref={this.notchRef} style={this.positionNotch()} />
-                  : null
-              }
-            </ul>
-          </ToggleContext.Provider>
-        </div>
-        {
-          error && (
-            <p
-              className="tyk-form-control__error-message"
-            >
-              { error }
-            </p>
-          )
-        }
-      </>
-    );
-  }
+          </ul>
+        </ToggleContext.Provider>
+      </div>
+      {
+        error && (
+          <p className="tyk-form-control__error-message">
+            { error }
+          </p>
+        )
+      }
+    </>
+  );
 }
 
+Toggle.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  error: PropTypes.string,
+  onChange: PropTypes.func,
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+  labelwidth: PropTypes.string,
+  theme: PropTypes.string,
+  type: PropTypes.string, // single || multiple
+  size: PropTypes.string,
+  separated: PropTypes.bool,
+  direction: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+  ]),
+  onDark: PropTypes.bool,
+  wrapperClassName: PropTypes.string,
+};
+
+Toggle.defaultProps = {
+  separated: false,
+  theme: 'primary',
+  type: 'single',
+  direction: 'row',
+};
+
 Toggle.Item = ToggleItemWrapper;
+
 export default Toggle;
