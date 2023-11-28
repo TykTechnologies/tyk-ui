@@ -1,7 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const { EsbuildPlugin } = require('esbuild-loader');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -14,14 +14,14 @@ module.exports = {
     path: path.resolve(__dirname, './lib/'),
     filename: '[name].js',
     library: {
-      type: 'commonjs2'
+      type: 'commonjs2',
     },
-    publicPath: ''
+    publicPath: '',
   },
   performance: {
     hints: false,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    maxAssetSize: 512000,
   },
   module: {
     rules: [
@@ -78,12 +78,17 @@ module.exports = {
         generator: {
           filename: 'images/[name][ext]',
         },
-      }
+      },
+      {
+        test: /worker-.*\.js/,
+        include: [/node_modules\/ace-build/],
+        type: 'asset/resource',
+      },
     ],
   },
   optimization: {
     minimizer: [
-      new ESBuildMinifyPlugin({
+      new EsbuildPlugin({
         target: 'es2015',
         css: true,
       }),

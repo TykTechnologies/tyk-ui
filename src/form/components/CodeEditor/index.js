@@ -1,18 +1,21 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import 'brace';
-import AceEditor from 'react-ace';
 
-import 'brace/mode/javascript';
-import 'brace/mode/golang';
-import 'brace/mode/python';
-import 'brace/mode/css';
-import 'brace/mode/json';
-import 'brace/mode/xml';
-import 'brace/mode/jsx';
-import 'brace/ext/searchbox';
-import 'brace/ext/beautify';
-import 'brace/theme/github';
+import ace from 'ace-builds/src-noconflict/ace';
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/mode-golang';
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/mode-css';
+import 'ace-builds/src-noconflict/mode-json';
+import 'ace-builds/src-noconflict/mode-xml';
+import 'ace-builds/src-noconflict/mode-jsx';
+import 'ace-builds/src-noconflict/ext-searchbox';
+import 'ace-builds/src-noconflict/ext-beautify';
+import 'ace-builds/src-noconflict/theme-github';
+import jsonWorker from 'ace-builds/src-noconflict/worker-json';
+
+ace.config.setModuleUrl('ace/mode/json_worker', jsonWorker);
 
 function CodeEditor(props) {
   const {

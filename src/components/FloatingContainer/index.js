@@ -9,53 +9,19 @@ import InfiniteScroller from '../InfiniteScroller';
  * It displays a container relative to another element.
  * Meant to be used for dropdowns, tooltips, and other similar components.
  */
-function FloatingContainer(props) {
-  const {
-    /** A DOM element that the floating container will be displayed relative to. */
-    element,
-    /** The size of the container.
-     * If `auto` the size will be determined by its contents.
-     * If `matchElement` it will take the width or the height of the element depending
-     * on the `displayAxis` prop.
-     * It can also be a function that returns a number representing the width
-     * or the height in pixels.
-     */
-    size = 'auto',
-    /**
-     * If `auto` the component will try to determine where to display the container relative to the
-     * element (top, bottom, left, right).
-     * It can also be one of top, bottom, left, right, to force the floating container to always be
-     * displayed in that position.
-     */
-    forceDisplay = 'auto',
-    /**
-     * It can be `auto`, `vertical` or `horizontal`. It specifies the axis where
-     * it will be displayed when `forceDisplay` is `auto`.
-     */
-    displayAxis = 'auto',
-    /**
-     * If there is space on both sides of the axis preffer this side.
-     */
-    preferredPosition,
-    /**
-     * The distance between the element and the floating container.
-     * It can be positive or negative.
-     */
-    offset = 0,
-    className,
-    children,
-    /**
-     * A reference for the container. Used in cases where you need some DOM
-     * control from outside the component.
-     */
-    passedRef,
-    /**
-     * Configuration object that will be passed to the infinite scroller component.
-     */
-    infiniteScrollerConfig,
-  } = props;
+function FloatingContainer({
+  element,
+  size = 'auto',
+  forceDisplay = 'auto',
+  displayAxis = 'auto',
+  preferredPosition,
+  offset = 0,
+  className,
+  children,
+  infiniteScrollerConfig,
+}, ref) {
   const localRef = useRef(null);
-  const floatingContainerRef = passedRef || localRef;
+  const floatingContainerRef = ref || localRef;
   const contentWrapperRef = useRef(null);
 
   function determineDisplay() {
@@ -196,17 +162,45 @@ function FloatingContainer(props) {
 }
 
 FloatingContainer.propTypes = {
+  /** A DOM element that the floating container will be displayed relative to. */
   element: PropTypes.instanceOf(Object),
   className: PropTypes.string,
+  /** The size of the container.
+   * If `auto` the size will be determined by its contents.
+   * If `matchElement` it will take the width or the height of the element depending
+   * on the `displayAxis` prop.
+   * It can also be a function that returns a number representing the width
+   * or the height in pixels.
+   */
   size: PropTypes.oneOfType([
     PropTypes.oneOf(['auto', 'matchElement']),
     PropTypes.func,
   ]),
+  /**
+   * The distance between the element and the floating container.
+   * It can be positive or negative.
+   */
   offset: PropTypes.number,
+  /**
+   * If `auto` the component will try to determine where to display the container relative to the
+   * element (top, bottom, left, right).
+   * It can also be one of top, bottom, left, right, to force the floating container to always be
+   * displayed in that position.
+   */
   forceDisplay: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
+  /**
+   * It can be `auto`, `vertical` or `horizontal`. It specifies the axis where
+   * it will be displayed when `forceDisplay` is `auto`.
+   */
   displayAxis: PropTypes.oneOf(['auto', 'vertical', 'horizontal']),
+  /**
+   * If there is space on both sides of the axis preffer this side.
+   */
   preferredPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  /**
+   * Configuration object that will be passed to the infinite scroller component.
+   */
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
 };
 
-export default forwardRef((props, ref) => <FloatingContainer {...props} passedRef={ref} />);
+export default forwardRef(FloatingContainer);

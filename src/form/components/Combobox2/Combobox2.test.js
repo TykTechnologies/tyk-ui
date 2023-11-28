@@ -58,7 +58,7 @@ describe('Combobox2', () => {
       .click()
       .get(`.${classes.dropdownList} li`)
       .should('have.length', items.length)
-      .contains(selectedItem.name)
+      .filter(`[title="${selectedItem.name}"]`)
       .find(`.${classes.checkIcon}`);
 
     cy.get('label')

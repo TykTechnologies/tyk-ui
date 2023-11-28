@@ -65,6 +65,11 @@ module.exports = {
           filename: 'images/[name][ext]',
         },
       },
+      {
+        test: /worker-.*\.js/,
+        include: [/node_modules\/ace-build/],
+        type: 'asset/resource',
+      },
     ],
   },
   devtool: 'source-map',
