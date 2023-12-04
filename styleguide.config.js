@@ -60,6 +60,11 @@ module.exports = {
             filename: 'fonts/[name][ext]',
           },
         },
+        {
+          test: /worker-.*\.js/,
+          include: [/node_modules\/ace-build/],
+          type: 'asset/resource',
+        },
       ],
     },
   },
