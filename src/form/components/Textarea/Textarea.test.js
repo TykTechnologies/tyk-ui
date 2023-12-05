@@ -104,8 +104,8 @@ describe('Textarea', () => {
     const onChange = cy.stub().as('onChange');
     cy.mount(<Component onChange={onChange} />)
       .get(selectors.textarea)
-      .type('something')
-      .get('@onChange')
+      .type('something');
+    cy.get('@onChange')
       .should('be.called');
   });
 
