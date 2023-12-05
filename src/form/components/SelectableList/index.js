@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fromJS } from 'immutable';
 
 import Message from '../../../components/Message';
 import List from '../../../components/List';
 import Icon from '../../../components/Icon';
 
-const SelectableList = (props) => {
+function SelectableList(props) {
   const {
     checkboxalticon,
     items,
     itemTemplate,
     value,
-    noItemsMessage,
+    noItemsMessage = 'No items in the list',
     onChange,
     theme,
     primaryKey,
@@ -20,9 +19,9 @@ const SelectableList = (props) => {
   } = props;
 
   const handleOnSelect = (event) => {
-    const newSelectedItems = fromJS(value).toJS();
+    const newSelectedItems = structuredClone(value);
     const elemPosition = newSelectedItems.findIndex(
-      id => JSON.stringify(id) === JSON.stringify(
+      (id) => JSON.stringify(id) === JSON.stringify(
         Array.isArray(id)
           ? event.target.value.split(',')
           : event.target.value,
@@ -58,7 +57,7 @@ const SelectableList = (props) => {
   };
 
   const isChecked = (inputValue, itemValue) => Boolean(
-    inputValue.find(tvalue => JSON.stringify(itemValue) === JSON.stringify(tvalue)),
+    inputValue.find((tvalue) => JSON.stringify(itemValue) === JSON.stringify(tvalue)),
   );
 
   return (
@@ -68,7 +67,7 @@ const SelectableList = (props) => {
           ? (
             <li className="tyk-selectable-list__no-items-message">
               <Message theme="info">
-                {noItemsMessage || 'No items in the list'}
+                {noItemsMessage}
               </Message>
             </li>
           )
@@ -100,7 +99,7 @@ const SelectableList = (props) => {
       }
     </List>
   );
-};
+}
 
 SelectableList.propTypes = {
   items: PropTypes.instanceOf(Array),
