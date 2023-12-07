@@ -1,7 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { EsbuildPlugin } = require('esbuild-loader');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -87,12 +86,7 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [
-      new EsbuildPlugin({
-        target: 'es2015',
-        css: true,
-      }),
-    ],
+    minimize: true,
   },
   plugins: [
     new MiniCssExtractPlugin({
