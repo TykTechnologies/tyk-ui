@@ -83,6 +83,9 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
   const componentProps = { ...properties };
   delete componentProps.debounce;
 
+  if (Object.hasOwn(componentProps, 'className') && componentProps.className === undefined) delete componentProps.className;
+  if (Object.hasOwn(componentProps, 'children') && componentProps.children === undefined) delete componentProps.children;
+
   return (
     <Component
       {...field}
