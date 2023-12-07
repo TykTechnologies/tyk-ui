@@ -87,13 +87,16 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [
-      new EsbuildPlugin({
-        target: 'es2015',
-        css: true,
-      }),
-    ],
+    minimize: false,
   },
+  // optimization: {
+  //   minimizer: [
+  //     new EsbuildPlugin({
+  //       target: 'es2015',
+  //       css: true,
+  //     }),
+  //   ],
+  // },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
