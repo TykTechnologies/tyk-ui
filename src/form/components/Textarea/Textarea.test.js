@@ -46,7 +46,7 @@ describe('Textarea', () => {
       .should('have.class', wrapperClassName);
   });
 
-  it('can renders with a label', () => {
+  it('can render with a label', () => {
     const label = 'my label';
     cy.mount(<Component label={label} />)
       .get(selectors.label)
