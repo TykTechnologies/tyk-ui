@@ -1,237 +1,156 @@
-import React, { Component, Fragment } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Select extends Component {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    id: PropTypes.string,
-    isfield: PropTypes.bool,
-    error: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
-    options: PropTypes.instanceOf(Array),
-    label: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    labelwidth: PropTypes.string,
-    name: PropTypes.string,
-    note: PropTypes.string,
-    onBlur: PropTypes.func,
-    onChange: PropTypes.func,
-    placeholder: PropTypes.string,
-    theme: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    wrapperClassName: PropTypes.string,
-  }
+function Select(props) {
+  const {
+    value,
+    onChange,
+    onBlur,
+    isfield,
+    label,
+    labelwidth,
+    id,
+    note,
+    readOnly,
+    options,
+    error,
+    theme,
+    wrapperClassName = '',
+    ...rest
+  } = props;
+  const [stateValue, setStateValue] = useState(value);
 
-  constructor(props) {
-    super(props);
-    const {
-      value,
-    } = this.props;
-
-    this.state = {
-      initValue: value,
-      stateValue: value,
-    };
-
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnBlur = this.handleOnBlur.bind(this);
-  }
-
-  componentDidUpdate(prevProps) {
-    const {
-      isfield,
-      value,
-      onChange,
-    } = this.props;
-
-    if (!isfield && prevProps.value !== value) {
-      /* eslint-disable react/no-did-update-set-state */
-      this.setState({
-        stateValue: value,
-      }, () => {
-        if (onChange) {
-          onChange(value);
-        }
-      });
+  useEffect(() => {
+    if (!isfield && stateValue !== value) {
+      setStateValue(value);
+      if (onChange) onChange(value);
     }
-  }
+  }, [stateValue, value]);
 
-  getSelectComponent() {
-    const {
-      isfield, options, onChange, onBlur, value, ...rest
-    } = this.props;
-    const {
-      stateValue,
-    } = this.state;
+  const handleOnChange = useCallback((e) => {
+    const selectedValue = options.find((option) => option.id === e.target.value);
 
-    let selectValue = '';
-
-    if (isfield && value) {
-      selectValue = value;
-    } else if (stateValue) {
-      selectValue = stateValue;
+    if (!isfield) {
+      setStateValue(selectedValue);
     }
+    onChange(selectedValue.id ? selectedValue : null);
+  }, [options, isfield, onChange]);
+
+  const handleOnBlur = useCallback(() => {
+    if (onBlur) {
+      onBlur(value);
+    }
+  }, [onBlur]);
+
+  // eslint-disable-next-line arrow-body-style
+  const getSelectError = useCallback(() => {
+    return (error && error !== 'true' && error !== 'false')
+      ? (
+        <p className="tyk-form-control__error-message">
+          { error }
+        </p>
+      )
+      : null;
+  }, [error]);
+
+  const getCssClasses = useCallback(
+    () => [
+      'tyk-form-group',
+      wrapperClassName,
+      ...(theme ? theme.split(' ').map((t) => `tyk-form-group--${t}`) : []),
+      labelwidth && 'tyk-form-group--label-has-width',
+      error && 'has-error',
+    ].filter(Boolean).join(' '),
+    [wrapperClassName, theme, labelwidth, error],
+  );
+
+  const getLabelStyles = useCallback(() => {
+    if (labelwidth) return { flexBasis: labelwidth };
+    return {};
+  }, [labelwidth]);
+
+  const getNonLabelWidth = useCallback(() => {
+    if (labelwidth) return { flexBasis: `calc(100% - ${labelwidth} - 20px)` };
+    return {};
+  }, [labelwidth]);
+
+  const getSelectComponent = useCallback(() => {
+    const selectValue = isfield && value ? value : stateValue;
 
     return (
       <select
         className="tyk-form-control tyk-select"
         {...rest}
-        onChange={this.handleOnChange}
-        onBlur={this.handleOnBlur}
+        onChange={handleOnChange}
+        onBlur={handleOnBlur}
         value={selectValue ? selectValue.id : ''}
       >
         {
-          options.map(option => <option key={option.id} value={option.id}>{ option.name }</option>)
+          options.map((option) => (
+            <option key={option.id} value={option.id}>
+              { option.name }
+            </option>
+          ))
         }
       </select>
     );
-  }
+  }, [isfield, value, stateValue, handleOnChange, handleOnBlur, options, rest]);
 
-  getSelectError() {
-    const { error } = this.props;
-
-    return (error && error !== 'true' && error !== 'false')
-      ? (
-        <p
-          className="tyk-form-control__error-message"
+  return (
+    <div className={getCssClasses()}>
+      {
+        label
+          ? <label htmlFor={id} style={getLabelStyles()}>{ label }</label>
+          : null
+      }
+      {!readOnly && (
+        <div
+          className="tyk-form-control__wrapper"
+          style={getNonLabelWidth()}
         >
-          { error }
-        </p>
-      )
-      : null;
-  }
-
-  getCssClasses() {
-    const {
-      error, labelwidth, theme, wrapperClassName = '',
-    } = this.props;
-    const cssClasses = [wrapperClassName, 'tyk-form-group'];
-    const themes = theme ? theme.split(' ') : [];
-
-    if (themes.length) {
-      themes.forEach((iTheme) => {
-        cssClasses.push(`tyk-form-group--${iTheme}`);
-      });
-    }
-
-    if (labelwidth) {
-      cssClasses.push('tyk-form-group--label-has-width');
-    }
-
-    if (error) {
-      cssClasses.push('has-error');
-    }
-
-    return cssClasses.join(' ');
-  }
-
-  getLabelStyles() {
-    const { labelwidth } = this.props;
-    const styles = {};
-
-    if (labelwidth) {
-      styles.flexBasis = labelwidth;
-    }
-
-    return styles;
-  }
-
-  getNonLabelWidth() {
-    const { labelwidth } = this.props;
-    const styles = {};
-
-    if (labelwidth) {
-      styles.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
-    }
-
-    return styles;
-  }
-
-  handleOnBlur() {
-    const { value, onBlur } = this.props;
-
-    if (onBlur) {
-      onBlur(value);
-    }
-  }
-
-  handleOnChange(e) {
-    const {
-      onChange,
-      isfield,
-      options,
-    } = this.props;
-    let selectedValue = null;
-
-    selectedValue = options.filter(option => option.id === e.target.value);
-    [selectedValue] = selectedValue;
-
-    if (!isfield) {
-      this.setState({
-        stateValue: selectedValue,
-      }, () => {
-        onChange(selectedValue.id ? selectedValue : null);
-      });
-    } else {
-      onChange(selectedValue.id ? selectedValue : null);
-    }
-  }
-
-  reset() {
-    const { initValue } = this.state;
-
-    this.setState({
-      stateValue: initValue,
-    });
-  }
-
-  render() {
-    const {
-      label,
-      id,
-      note,
-      readOnly,
-      value,
-    } = this.props;
-
-    return (
-      <Fragment>
-        <div className={this.getCssClasses()}>
+          { getSelectComponent() }
           {
-            label
-              ? <label htmlFor={id} style={this.getLabelStyles()}>{ label }</label>
+            note
+              ? <p className="tyk-form-control__help-block">{ note }</p>
               : null
           }
-          {!readOnly && (
-            <div
-              className="tyk-form-control__wrapper"
-              style={this.getNonLabelWidth()}
-            >
-              {
-                this.getSelectComponent()
-              }
-              {
-                note
-                  ? <p className="tyk-form-control__help-block">{ note }</p>
-                  : null
-              }
-              { this.getSelectError() }
-            </div>
-          )}
-          {readOnly && <div className="tyk-form-control--readonly">{value || '-'}</div>}
+          { getSelectError() }
         </div>
-      </Fragment>
-    );
-  }
+      )}
+      {readOnly && <div className="tyk-form-control--readonly">{value || '-'}</div>}
+    </div>
+  );
 }
+
+Select.propTypes = {
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  id: PropTypes.string,
+  isfield: PropTypes.bool,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  options: PropTypes.instanceOf(Array),
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+  labelwidth: PropTypes.string,
+  name: PropTypes.string,
+  note: PropTypes.string,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  theme: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  wrapperClassName: PropTypes.string,
+};
+
+export default Select;
