@@ -59,7 +59,7 @@ describe('Select', () => {
       .should('have.class', wrapperClassName);
   });
 
-  it('can renders with a label', () => {
+  it('can render with a label', () => {
     const label = 'my label';
     cy.mount(<Component label={label} />)
       .get(selectors.label)
@@ -100,7 +100,7 @@ describe('Select', () => {
 
   it('in readOnly mode text is displayed, the value or "-" if no value', () => {
     cy.mount(<Component readOnly />)
-      .get(selectors.input)
+      .get(selectors.select)
       .should('not.exist')
       .get(selectors.readonly)
       .should('exist')
