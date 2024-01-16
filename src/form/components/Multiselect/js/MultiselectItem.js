@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import MultiselectContext from './MultiselectContext';
@@ -20,88 +20,79 @@ const getItemLoader = (context, item) => {
     : null;
 };
 
-class MultiselectItem extends Component {
-  static propTypes = {
-    item: PropTypes.instanceOf(Object),
-    itemType: PropTypes.string,
-    searchValue: PropTypes.string,
-    onChange: PropTypes.func,
-  };
-
-  isInSearchValue(fieldsToSearchOn) {
-    const { searchValue, item } = this.props;
-
-    if (fieldsToSearchOn && fieldsToSearchOn.length > 0) {
-      let fields = fieldsToSearchOn.slice(0);
-
-      fields = fields.filter(key => item[key] && item[key].search(searchValue) > -1);
-
-      return fields.length > 0;
+function MultiselectItem({
+  item,
+  itemType,
+  searchValue,
+  onChange,
+}) {
+  const isInSearchValue = useCallback((fieldsToSearchOn) => {
+    if (fieldsToSearchOn?.length > 0) {
+      return fieldsToSearchOn.some((key) => item[key] && item[key].includes(searchValue));
     }
 
-    return JSON.stringify(item).search(searchValue) > -1;
-  }
+    return JSON.stringify(item).includes(searchValue);
+  }, [item, searchValue]);
 
-  render() {
-    const {
-      item,
-      itemType,
-      onChange,
-    } = this.props;
+  const onAddRemove = useCallback(() => {
+    onChange(item);
+  }, [onChange, item]);
 
-    return (
-      <Fragment>
-        <MultiselectContext.Consumer>
-          {
-            context => (
-              this.isInSearchValue(context.fieldsToSearchOn)
-                ? (
-                  <li>
-                    <div>
-                      <span className="tyk-multiselect-item__name">
-                        {
-                          context.itemDisplayTemplate
-                            ? context.itemDisplayTemplate(item)
-                            : JSON.stringify(item)
-                        }
-                      </span>
-                      <span className="tyk-multiselect-item__controls">
-                        <Button
-                          iconType={itemType === 'normal' ? 'plus' : 'minus'}
-                          iconOnly
-                          // eslint-disable-next-line react/jsx-no-bind
-                          onClick={onChange.bind(null, item)}
-                          disabled={context.disabled || (context.maxSelections && context.maxSelections === context.nrSelectedItems && itemType === 'normal')}
-                        />
-                        <Button
-                          iconType={context.opened[item.id] ? 'chevron-up' : 'chevron-down'}
-                          iconOnly
-                          // eslint-disable-next-line react/jsx-no-bind
-                          onClick={context.onGetItemDetails.bind(context.parentContext, item)}
-                        />
-                      </span>
-                    </div>
+  return (
+    <MultiselectContext.Consumer>
+      {
+        (context) => (
+          isInSearchValue(context.fieldsToSearchOn)
+            ? (
+              <li>
+                <div>
+                  <span className="tyk-multiselect-item__name">
                     {
-                      item.details
-                        ? (
-                          <Collapsible
-                            collapsed={!context.opened[item.id]}
-                            className="tyk-multiselect-item__details"
-                          >
-                            {getItemContent(context, item)}
-                          </Collapsible>
-                        )
-                        : getItemLoader(context, item)
+                      context.itemDisplayTemplate
+                        ? context.itemDisplayTemplate(item)
+                        : JSON.stringify(item)
                     }
-                  </li>
-                )
-                : null
+                  </span>
+                  <span className="tyk-multiselect-item__controls">
+                    <Button
+                      iconType={itemType === 'normal' ? 'plus' : 'minus'}
+                      iconOnly
+                      onClick={onAddRemove}
+                      disabled={context.disabled || (context.maxSelections && context.maxSelections === context.nrSelectedItems && itemType === 'normal')}
+                    />
+                    <Button
+                      iconType={context.opened[item.id] ? 'chevron-up' : 'chevron-down'}
+                      iconOnly
+                      onClick={() => context.onGetItemDetails(item)}
+                    />
+                  </span>
+                </div>
+                {
+                  item.details
+                    ? (
+                      <Collapsible
+                        collapsed={!context.opened[item.id]}
+                        className="tyk-multiselect-item__details"
+                      >
+                        {getItemContent(context, item)}
+                      </Collapsible>
+                    )
+                    : getItemLoader(context, item)
+                }
+              </li>
             )
-          }
-        </MultiselectContext.Consumer>
-      </Fragment>
-    );
-  }
+            : null
+        )
+      }
+    </MultiselectContext.Consumer>
+  );
 }
+
+MultiselectItem.propTypes = {
+  item: PropTypes.instanceOf(Object),
+  itemType: PropTypes.string,
+  searchValue: PropTypes.string,
+  onChange: PropTypes.func,
+};
 
 export default MultiselectItem;

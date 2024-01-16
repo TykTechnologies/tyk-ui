@@ -1,193 +1,163 @@
-import React, { Component, Fragment } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { fromJS } from 'immutable';
 
 import MultiselectPanel from './js/MultiselectPanel';
 import MultiselectContext from './js/MultiselectContext';
 
-const diffObjects = (value, items) => {
-  const newItems = items.filter((item) => {
-    const isCommon = value.filter(selectedItem => selectedItem.id === item.id).length > 0;
+const diffObjects = (value, items) => items.filter((item) => !value.find((v) => v.id === item.id));
 
-    return !isCommon;
-  });
+function Multiselect({
+  customSearch,
+  entityNamePlural,
+  disabled,
+  error,
+  getItemDetails,
+  itemDisplayTemplate,
+  detailsDisplayTemplate,
+  fieldsToSearchOn,
+  items,
+  itemsPageNumber,
+  itemsNrPages,
+  loadMoreItems,
+  maxSelections,
+  note,
+  value,
+  onChange,
+  wrapperClassName = '',
+}) {
+  const [opened, setOpened] = useState({});
 
-  return newItems;
-};
+  const onGetItemDetails = useCallback((item) => {
+    setOpened((prevOpened) => ({ ...prevOpened, [item.id]: !prevOpened[item.id] }));
 
-class Multiselect extends Component {
-  static propTypes = {
-    customSearch: PropTypes.func,
-    disabled: PropTypes.bool,
-    error: PropTypes.string,
-    entityNamePlural: PropTypes.string,
-    items: PropTypes.instanceOf(Array),
-    itemDisplayTemplate: PropTypes.func,
-    detailsDisplayTemplate: PropTypes.func,
-    fieldsToSearchOn: PropTypes.instanceOf(Array),
-    onChange: PropTypes.func,
-    getItemDetails: PropTypes.func,
-    itemsPageNumber: PropTypes.number,
-    itemsNrPages: PropTypes.number,
-    loadMoreItems: PropTypes.func,
-    note: PropTypes.string,
-    maxSelections: PropTypes.number,
-    value: PropTypes.instanceOf(Array),
-    wrapperClassName: PropTypes.string,
-  };
+    if (getItemDetails) getItemDetails(item);
+  }, [getItemDetails]);
 
-  state = {
-    opened: {},
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.valueChange = this.valueChange.bind(this);
-    this.itemsChange = this.itemsChange.bind(this);
-  }
-
-  onGetItemDetails(item) {
-    const { getItemDetails } = this.props;
-
-    this.setState((prevState) => {
-      const tempState = Object.assign({}, prevState);
-      tempState.opened[item.id] = !tempState.opened[item.id];
-
-      return tempState;
-    }, () => {
-      if (getItemDetails) {
-        getItemDetails(item);
-      }
-    });
-  }
-
-  getMultiselectError() {
-    const { error } = this.props;
-
+  function getMultiselectError() {
     return (error && error !== 'true' && error !== 'false')
       ? (
-        <p
-          className="tyk-form-control__error-message"
-        >
+        <p className="tyk-form-control__error-message">
           { error }
         </p>
       )
       : null;
   }
 
-  getCssClasses() {
-    const { error, wrapperClassName = '' } = this.props;
-    const cssClasses = [wrapperClassName, 'tyk-multiselect'];
+  const getCssClasses = useCallback(
+    () => [
+      wrapperClassName,
+      'tyk-multiselect',
+      error && 'has-error',
+    ]
+      .filter(Boolean)
+      .join(' '),
+    [wrapperClassName, error],
+  );
 
-    if (error) {
-      cssClasses.push('has-error');
-    }
-
-    return cssClasses.join(' ');
-  }
-
-  itemsChange(allItems, item) {
-    const { value, onChange } = this.props;
-    const valueClone = fromJS(value).toJS();
+  const itemsChange = useCallback((allItems, item) => {
+    const valueClone = structuredClone(value);
 
     valueClone.unshift(item);
 
     onChange(valueClone, item, 'added');
-  }
+  }, [value]);
 
-  valueChange(value, item) {
-    const { items, onChange } = this.props;
-    const allItemsClone = fromJS(items).toJS();
+  const valueChange = useCallback((newValue, item) => {
+    onChange(newValue, item, 'removed');
+  }, [items]);
 
-    allItemsClone.unshift(item);
+  const providerValue = useMemo(() => ({
+    disabled,
+    itemDisplayTemplate,
+    detailsDisplayTemplate,
+    fieldsToSearchOn,
+    maxSelections,
+    nrSelectedItems: value.length,
+    onGetItemDetails,
+    opened,
+  }), [
+    disabled,
+    itemDisplayTemplate,
+    detailsDisplayTemplate,
+    fieldsToSearchOn,
+    maxSelections,
+    value,
+    onGetItemDetails,
+    opened,
+  ]);
 
-    onChange(value, item, 'removed');
-  }
-
-  render() {
-    const {
-      customSearch,
-      entityNamePlural,
-      disabled,
-      itemDisplayTemplate,
-      detailsDisplayTemplate,
-      fieldsToSearchOn,
-      items,
-      itemsPageNumber,
-      itemsNrPages,
-      loadMoreItems,
-      maxSelections,
-      note,
-      value,
-    } = this.props;
-    const { opened } = this.state;
-
-    return (
-      <Fragment>
-        <div className={this.getCssClasses()}>
-          <MultiselectContext.Provider
-            value={{
-              disabled,
-              parentContext: this,
-              itemDisplayTemplate,
-              detailsDisplayTemplate,
-              fieldsToSearchOn,
-              maxSelections,
-              nrSelectedItems: value.length,
-              onGetItemDetails: this.onGetItemDetails,
-              opened,
-            }}
-          >
-            <div className="tyk-multiselect__header">
-              <div>
-                { value.length }
-                {' '}
-                Selected
-                {' '}
-                { entityNamePlural }
-              </div>
-              <div>
-                Select from existing
-                { entityNamePlural }
-              </div>
+  return (
+    <>
+      <div className={getCssClasses()}>
+        <MultiselectContext.Provider value={providerValue}>
+          <div className="tyk-multiselect__header">
+            <div>
+              { value.length }
+              {' '}
+              Selected
+              {' '}
+              { entityNamePlural }
             </div>
-            <div className="tyk-multiselect__panel-wrapper">
-              <MultiselectPanel
-                inputPlaceholder={`Search through selected ${entityNamePlural}`}
-                noItemsMessage={`Selected ${entityNamePlural} will show here`}
-                items={value}
-                onChange={this.valueChange}
-                panelType="selected"
-              />
-              <MultiselectPanel
-                inputPlaceholder={`Search existing ${entityNamePlural}`}
-                noItemsMessage={`No ${entityNamePlural} to display`}
-                entityNamePlural={entityNamePlural}
-                customSearch={!!customSearch}
-                onCustomSearch={customSearch}
-                items={diffObjects(value, items)}
-                onChange={this.itemsChange}
-                serverLoad={!!loadMoreItems}
-                loadMoreItems={loadMoreItems}
-                itemsPageNumber={itemsPageNumber}
-                itemsNrPages={itemsNrPages}
-                panelType="normal"
-              />
+            <div>
+              Select from existing
+              { entityNamePlural }
             </div>
-          </MultiselectContext.Provider>
-        </div>
-        <div>
-          {
-            note
-              ? <p className="tyk-form-control__help-block">{ note }</p>
-              : null
-          }
-        </div>
-        { this.getMultiselectError() }
-      </Fragment>
-    );
-  }
+          </div>
+          <div className="tyk-multiselect__panel-wrapper">
+            <MultiselectPanel
+              inputPlaceholder={`Search through selected ${entityNamePlural}`}
+              noItemsMessage={`Selected ${entityNamePlural} will show here`}
+              items={value}
+              onChange={valueChange}
+              panelType="selected"
+            />
+            <MultiselectPanel
+              inputPlaceholder={`Search existing ${entityNamePlural}`}
+              noItemsMessage={`No ${entityNamePlural} to display`}
+              entityNamePlural={entityNamePlural}
+              customSearch={!!customSearch}
+              onCustomSearch={customSearch}
+              items={diffObjects(value, items)}
+              onChange={itemsChange}
+              serverLoad={!!loadMoreItems}
+              loadMoreItems={loadMoreItems}
+              itemsPageNumber={itemsPageNumber}
+              itemsNrPages={itemsNrPages}
+              panelType="normal"
+            />
+          </div>
+        </MultiselectContext.Provider>
+      </div>
+      <div>
+        {
+          note
+            ? <p className="tyk-form-control__help-block">{ note }</p>
+            : null
+        }
+      </div>
+      { getMultiselectError() }
+    </>
+  );
 }
+
+Multiselect.propTypes = {
+  customSearch: PropTypes.func,
+  disabled: PropTypes.bool,
+  error: PropTypes.string,
+  entityNamePlural: PropTypes.string,
+  items: PropTypes.instanceOf(Array),
+  itemDisplayTemplate: PropTypes.func,
+  detailsDisplayTemplate: PropTypes.func,
+  fieldsToSearchOn: PropTypes.instanceOf(Array),
+  onChange: PropTypes.func,
+  getItemDetails: PropTypes.func,
+  itemsPageNumber: PropTypes.number,
+  itemsNrPages: PropTypes.number,
+  loadMoreItems: PropTypes.func,
+  note: PropTypes.string,
+  maxSelections: PropTypes.number,
+  value: PropTypes.instanceOf(Array),
+  wrapperClassName: PropTypes.string,
+};
 
 export default Multiselect;
