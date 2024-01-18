@@ -76,7 +76,7 @@ describe('Input2', () => {
   });
 
   it('calls onChange callback with the current value', () => {
-    const onChange = cy.stub();
+    const onChange = cy.stub().as('onChange');
 
     cy.mount(
       <Input2
@@ -85,10 +85,9 @@ describe('Input2', () => {
     );
 
     cy.get('input')
-      .type('foo')
-      .then(() => {
-        expect(onChange).to.be.calledWith(Cypress.sinon.match.any, 'foo');
-      });
+      .type('foo');
+    cy.get('@onChange')
+      .should('be.calledWith', Cypress.sinon.match.any, 'foo');
   });
 
   it('renders no input in readonly mode', () => {
