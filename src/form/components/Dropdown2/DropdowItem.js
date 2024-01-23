@@ -10,7 +10,7 @@ function DropdownItem({
   const { onChange, value: dropdownValue } = useDropdowContext();
   return (
     <List.Item
-      {...value === dropdownValue && { className: 'tyk-list__item--selected' }}
+      {...value === dropdownValue && { selected: true }}
     >
       <a
         {...onChange && { onClick: () => onChange(value) }}

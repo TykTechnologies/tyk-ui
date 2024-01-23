@@ -78,6 +78,23 @@ describe('Dropdown2', () => {
       .should('not.exist');
   });
 
+  it('closes the dropdown when the splitTrigger is true, and the button next to the arrow is clicked', () => {
+    cy.mount(
+      <Dropdown2 title="Dropdown" splitTrigger theme="primary">
+        Content of dropdown
+      </Dropdown2>,
+    )
+      .get(classes.dropdownTrigger)
+      .click()
+      .get('.dropdown__menu')
+      .should('exist')
+      .get(`${classes.buttonGroup} ${classes.btn}`)
+      .first()
+      .click()
+      .get('.dropdown__menu')
+      .should('not.exist');
+  });
+
   it('can split the trigger button, into a button and an arrow', () => {
     cy.mount(
       <Dropdown2 title="Dropdown" splitTrigger theme="primary">
@@ -138,18 +155,12 @@ describe('Dropdown2', () => {
       });
   });
 
-  it('selects the dropdown item, based on the value property', () => {
+  it.only('selects the dropdown item, based on the value property', () => {
     cy.mount(
-      <div
-        style={{
-          marginLeft: '40%',
-        }}
-      >
-        <Dropdown2 value="1" splitTrigger title="Dropdown" theme="primary">
-          <Dropdown2.Item value="1">Item 1</Dropdown2.Item>
-          <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
-        </Dropdown2>
-      </div>,
+      <Dropdown2 value="1" splitTrigger title="Dropdown" theme="primary">
+        <Dropdown2.Item value="1">Item 1 Item 1 Item 1 Item 1 Item 1 Item 1</Dropdown2.Item>
+        <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
+      </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
       .click()
@@ -160,16 +171,10 @@ describe('Dropdown2', () => {
 
   it('displays selected value in the dropdown trigger, if setSelectedValueAsTitle is true', () => {
     cy.mount(
-      <div
-        style={{
-          marginLeft: '40%',
-        }}
-      >
-        <Dropdown2 theme="success" value="1" title="Dropdown" setSelectedValueAsTitle>
-          <Dropdown2.Item value="1">Item 1</Dropdown2.Item>
-          <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
-        </Dropdown2>
-      </div>,
+      <Dropdown2 theme="success" value="1" title="Dropdown" setSelectedValueAsTitle>
+        <Dropdown2.Item value="1">Item 1</Dropdown2.Item>
+        <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
+      </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
       .should('contain', '1');
@@ -200,7 +205,7 @@ describe('Dropdown2', () => {
       <Dropdown2
         splitTrigger
         title="Dropdown"
-        theme="primary"
+        theme="success"
         onTriggerClick={onTriggerClick}
         value="1"
       >

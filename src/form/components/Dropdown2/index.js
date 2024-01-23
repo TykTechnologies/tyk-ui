@@ -23,7 +23,9 @@ function Dropdown2({
     toggle,
     dropdownRef,
     dropdownListRef,
-  } = useDropdown();
+  } = useDropdown({
+    splitTrigger,
+  });
 
   const contextValue = useMemo(() => ({
     onChange,
@@ -51,7 +53,6 @@ function Dropdown2({
         <DropdownListWrapper
           element={dropdownRef}
           ref={dropdownListRef}
-          theme={theme}
           maxWidth={maxWidth}
         >
           { children }

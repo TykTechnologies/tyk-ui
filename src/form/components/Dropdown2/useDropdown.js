@@ -2,7 +2,9 @@ import {
   useState, useRef, useCallback, useEffect,
 } from 'react';
 
-const useDropdown = () => {
+const useDropdown = ({
+  splitTrigger,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const dropdownListRef = useRef(null);
@@ -10,9 +12,12 @@ const useDropdown = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   const handleOutsideClick = useCallback((e) => {
+    const triggerElement = !splitTrigger
+      ? dropdownRef.current
+      : dropdownRef.current.querySelector('.dropdown__trigger');
     if (
       isOpen
-      && !dropdownRef.current.contains(e.target)
+      && !triggerElement.contains(e.target)
       && !dropdownListRef.current.contains(e.target)
     ) {
       setIsOpen(false);

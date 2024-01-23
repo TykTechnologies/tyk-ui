@@ -5,10 +5,11 @@ const ListItem = (props) => {
   const {
     className,
     children,
+    selected,
   } = props;
 
   return (
-    <li className={className}>
+    <li className={`${className} ${selected ? 'tyk-list__item--selected' : ''}`}>
       {children}
     </li>
   );
