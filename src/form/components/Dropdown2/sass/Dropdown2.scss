@@ -1,0 +1,21 @@
+.dropdown__menu {
+  .tyk-list {
+    background: white;
+    max-height: none;
+
+    li {
+      padding: 0;
+
+      &:hover {
+        background: theme-color('primary', 'light');
+      }
+
+      a {
+        cursor: pointer;
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+      }
+    }
+  }
+}

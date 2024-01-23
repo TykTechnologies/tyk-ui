@@ -35,6 +35,7 @@ export { default as Row } from './layout/Row';
 // -- Form Components
 export { default as Checkbox } from './form/components/Checkbox';
 export { default as Dropdown } from './form/components/Dropdown';
+export { default as Dropdown2 } from './form/components/Dropdown2';
 export { default as CodeEditor } from './form/components/CodeEditor';
 export { default as Combobox } from './form/components/Combobox';
 export { default as Combobox2 } from './form/components/Combobox2';
