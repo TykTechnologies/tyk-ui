@@ -7,6 +7,13 @@
     font-family: $font-family-medium;
   }
 
+  + .tyk-button,
+  + .tyk-dropdown,
+  + .tyk-toggle,
+  + .tyk-button-group__wrapper {
+    margin-left: map-get($spacing, 'sm');
+  }
+
   .tyk-button-group {
     display: flex;
 
@@ -45,7 +52,7 @@
         border-bottom-right-radius: map-get($spacing, 'md');
 
         &.tyk-button--icon-only {
-          width: 45px;
+          width: 42px;
         }
       }
     }

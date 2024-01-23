@@ -2,6 +2,8 @@
 import Button from '../Button';
 import Dropdown from '../../form/components/Dropdown';
 
+<>
+<Button theme="primary">Push Me</Button>
 <ButtonGroup
   label="Button Group"
 >
@@ -30,6 +32,8 @@ import Dropdown from '../../form/components/Dropdown';
       />
     </Dropdown>
 </ButtonGroup>
+<Button theme="primary">Push Me</Button>
+</>
 ```
 ```js
 import Button from '../Button';

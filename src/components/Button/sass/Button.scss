@@ -20,7 +20,8 @@
 
   + .tyk-button,
   + .tyk-dropdown,
-  + .tyk-toggle {
+  + .tyk-toggle,
+  + .tyk-button-group__wrapper {
     margin-left: map-get($spacing, 'sm');
   }
 
