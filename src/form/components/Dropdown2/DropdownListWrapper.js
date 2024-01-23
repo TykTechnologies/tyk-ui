@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 import FloatingContainer from '../../../components/FloatingContainer';
 import List from '../../../components/List';
 
-const DropdownListWrapper = forwardRef(({ children, element }, ref) => (
+const DropdownListWrapper = forwardRef(({
+  children,
+  element,
+  theme,
+  maxWidth,
+}, ref) => (
   <FloatingContainer
     element={element}
     ref={ref}
@@ -16,8 +21,9 @@ const DropdownListWrapper = forwardRef(({ children, element }, ref) => (
   >
     <List
       style={{
-        width: '200px',
+        ...maxWidth && { maxWidth },
       }}
+      theme={theme}
     >
       { children }
     </List>
@@ -34,6 +40,8 @@ DropdownListWrapper.propTypes = {
     PropTypes.element,
     PropTypes.string,
   ]),
+  theme: PropTypes.string,
+  maxWidth: PropTypes.string,
 };
 
 export default DropdownListWrapper;

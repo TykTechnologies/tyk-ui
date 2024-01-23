@@ -9,6 +9,8 @@ const DropdownTrigger = forwardRef(({
   theme = 'primary',
   splitTrigger,
   toggle,
+  onTriggerClick,
+  value,
 }, ref) => (
   !splitTrigger ? (
     <Button
@@ -24,7 +26,12 @@ const DropdownTrigger = forwardRef(({
     </Button>
   ) : (
     <ButtonGroup ref={ref}>
-      <Button theme={theme}>{title}</Button>
+      <Button
+        theme={theme}
+        {...onTriggerClick && { onClick: () => onTriggerClick(value) }}
+      >
+        {title}
+      </Button>
       <Button
         className="dropdown__trigger"
         iconType="arrowdown"
@@ -46,6 +53,11 @@ DropdownTrigger.propTypes = {
   dropdownRef: PropTypes.shape({
     current: PropTypes.instanceOf(Element),
   }).isRequired,
+  onTriggerClick: PropTypes.func,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 export default DropdownTrigger;

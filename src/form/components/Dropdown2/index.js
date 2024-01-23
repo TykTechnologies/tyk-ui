@@ -15,6 +15,8 @@ function Dropdown2({
   onChange,
   value,
   setSelectedValueAsTitle,
+  maxWidth,
+  onTriggerClick,
 }) {
   const {
     isOpen,
@@ -38,15 +40,19 @@ function Dropdown2({
             ? value
             : title
         }
+        onTriggerClick={onTriggerClick}
         theme={theme}
         splitTrigger={splitTrigger}
         toggle={toggle}
         ref={dropdownRef}
+        value={value}
       />
       {isOpen && (
         <DropdownListWrapper
           element={dropdownRef}
           ref={dropdownListRef}
+          theme={theme}
+          maxWidth={maxWidth}
         >
           { children }
         </DropdownListWrapper>
@@ -56,16 +62,28 @@ function Dropdown2({
 }
 
 Dropdown2.propTypes = {
+  /** Title of the dropdown. It is being displayed in the Drodpown trigger */
   title: PropTypes.string,
+  /** Theme of the dropdown trigger */
   theme: PropTypes.string,
   children: PropTypes.node,
+  /** If true, the dropdown trigger will be split into two buttons.
+   *  one with the dropdown title and one for the arrow */
   splitTrigger: PropTypes.bool,
+  /** Callback function called when a dropdown item is selected */
   onChange: PropTypes.func,
+  /** Value of the selected dropdown item */
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]),
+  /** If true, the selected value will be displayed in the dropdown trigger */
   setSelectedValueAsTitle: PropTypes.bool,
+  /** sets the maximum width of the dropdown list menu */
+  maxWidth: PropTypes.string,
+  /** this function is being called when splitTrigger is true,
+   * and receives as parameter the current value of the dropdown */
+  onTriggerClick: PropTypes.func,
 };
 
 Dropdown2.Item = DropdownItem;
