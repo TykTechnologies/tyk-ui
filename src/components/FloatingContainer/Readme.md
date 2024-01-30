@@ -27,6 +27,8 @@ const onAxisChange = updateStateProp('displayAxis');
     <label>Size:</label>
     <label><input type="radio" name="size" value="auto" checked={state.size === 'auto'} onChange={onSizeChange} />auto</label>
     <label><input type="radio" name="size" value="matchElement" checked={state.size === 'matchElement'} onChange={onSizeChange} />matchElement</label>
+    <label><input type="radio" name="size" value="matchStart" checked={state.size === 'matchStart'} onChange={onSizeChange} />matchStart</label>
+    <label><input type="radio" name="size" value="matchEnd" checked={state.size === 'matchEnd'} onChange={onSizeChange} />matchEnd</label>
   </div>
   <div>
     <label>Offset:<input type="number" value={state.offset} onChange={e => updateState({offset: Number(e.target.value)})} /></label>
