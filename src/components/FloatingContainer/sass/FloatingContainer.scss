@@ -3,4 +3,8 @@
   top: -9999px;
   overflow: auto;
   z-index: $modal-z-index;
+
+  &__content-wrapper {
+    height: 100%;
+  }
 }

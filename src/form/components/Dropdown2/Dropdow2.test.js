@@ -41,8 +41,8 @@ describe('Dropdown2', () => {
       .get('.dropdown__menu')
       .should('not.exist')
       .get(classes.dropdownTrigger)
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('exist');
   });
 
@@ -53,12 +53,12 @@ describe('Dropdown2', () => {
       </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('exist')
       .get(classes.dropdownTrigger)
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('not.exist');
   });
 
@@ -69,12 +69,12 @@ describe('Dropdown2', () => {
       </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('exist')
       .get('body')
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('not.exist');
   });
 
@@ -85,13 +85,13 @@ describe('Dropdown2', () => {
       </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('exist')
       .get(`${classes.buttonGroup} ${classes.btn}`)
       .first()
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('not.exist');
   });
 
@@ -109,20 +109,14 @@ describe('Dropdown2', () => {
 
   it('displays dropdown items when the trigger button is clicked', () => {
     cy.mount(
-      <div
-        style={{
-          marginLeft: '40%',
-        }}
-      >
-        <Dropdown2 splitTrigger title="Dropdown" theme="primary">
-          <Dropdown2.Item>Item 1</Dropdown2.Item>
-          <Dropdown2.Item>Item 2</Dropdown2.Item>
-        </Dropdown2>
-      </div>,
+      <Dropdown2 splitTrigger title="Dropdown" theme="primary">
+        <Dropdown2.Item>Item 1</Dropdown2.Item>
+        <Dropdown2.Item>Item 2</Dropdown2.Item>
+      </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
-      .click()
-      .get('.dropdown__menu')
+      .click();
+    cy.get('.dropdown__menu')
       .should('exist')
       .get(classes.dropdownListWrapper)
       .should('exist')
@@ -131,31 +125,23 @@ describe('Dropdown2', () => {
   });
 
   it('calls the onChange method of the Dropdown, with the value of the clicked item', () => {
-    const onChange = cy.stub();
+    const onChange = cy.stub().as('onChange');
     cy.mount(
-      <div
-        style={{
-          marginLeft: '40%',
-        }}
-      >
-        <Dropdown2 splitTrigger title="Dropdown" theme="primary" onChange={onChange}>
-          <Dropdown2.Item value="1">Item 1</Dropdown2.Item>
-          <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
-        </Dropdown2>
-      </div>,
+      <Dropdown2 splitTrigger title="Dropdown" theme="primary" onChange={onChange}>
+        <Dropdown2.Item value="1">Item 1</Dropdown2.Item>
+        <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
+      </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
-      .click()
-      .get(`${classes.dropdownListWrapper} > li`)
+      .click();
+    cy.get(`${classes.dropdownListWrapper} > li`)
       .first()
-      .click()
-      .then(() => {
-        expect(onChange).to.be.calledOnce;
-        expect(onChange).to.be.calledWith('1');
-      });
+      .click();
+    cy.get('@onChange')
+      .should('be.calledOnceWith', '1');
   });
 
-  it.only('selects the dropdown item, based on the value property', () => {
+  it('selects the dropdown item, based on the value property', () => {
     cy.mount(
       <Dropdown2 value="1" splitTrigger title="Dropdown" theme="primary">
         <Dropdown2.Item value="1">Item 1 Item 1 Item 1 Item 1 Item 1 Item 1</Dropdown2.Item>
@@ -163,8 +149,8 @@ describe('Dropdown2', () => {
       </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
-      .click()
-      .get(`${classes.dropdownListWrapper} > li`)
+      .click();
+    cy.get(`${classes.dropdownListWrapper} > li`)
       .first()
       .should('have.class', 'tyk-list__item--selected');
   });
@@ -182,25 +168,19 @@ describe('Dropdown2', () => {
 
   it('sets a max-width to the dropdown list', () => {
     cy.mount(
-      <div
-        style={{
-          marginLeft: '40%',
-        }}
-      >
-        <Dropdown2 maxWidth="200px" theme="success" value="1" title="Dropdown" setSelectedValueAsTitle>
-          <Dropdown2.Item value="1">Item 1</Dropdown2.Item>
-          <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
-        </Dropdown2>
-      </div>,
+      <Dropdown2 maxWidth="200px" theme="success" value="1" title="Dropdown" setSelectedValueAsTitle>
+        <Dropdown2.Item value="1">Item 1</Dropdown2.Item>
+        <Dropdown2.Item value="2">Item 2</Dropdown2.Item>
+      </Dropdown2>,
     )
       .get(classes.dropdownTrigger)
-      .click()
-      .get('.dropdown__menu .tyk-list')
+      .click();
+    cy.get('.dropdown__menu .tyk-list')
       .should('have.css', 'max-width', '200px');
   });
 
   it('calls the onTriggerClick function when the trigger button is clicked in case of splitTrigger is set to true', () => {
-    const onTriggerClick = cy.stub();
+    const onTriggerClick = cy.stub().as('onTriggerClick');
     cy.mount(
       <Dropdown2
         splitTrigger
@@ -214,10 +194,8 @@ describe('Dropdown2', () => {
     )
       .get(`${classes.buttonGroup} ${classes.btn}`)
       .first()
-      .click()
-      .then(() => {
-        expect(onTriggerClick).to.be.calledOnce;
-        expect(onTriggerClick).to.be.calledWith('1');
-      });
+      .click();
+    cy.get('@onTriggerClick')
+      .should('be.calledOnceWith', '1');
   });
 });

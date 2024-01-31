@@ -5,6 +5,8 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import InfiniteScroller from '../InfiniteScroller';
 
+const VIEWPORT_INITIAL_PADDING = 5;
+
 /**
  * It displays a container relative to another element.
  * Meant to be used for dropdowns, tooltips, and other similar components.
@@ -23,6 +25,8 @@ function FloatingContainer({
   const localRef = useRef(null);
   const floatingContainerRef = ref || localRef;
   const contentWrapperRef = useRef(null);
+  // offset calculated on first render to make sure the floating container is inside the viewport
+  const viewportOffset = useRef(null);
 
   function determineDisplay() {
     const target = element.current;
@@ -75,16 +79,23 @@ function FloatingContainer({
     if (!target || !container) return;
 
     const targetPosition = target.getBoundingClientRect();
+    const { left: vpLeft, top: vpTop } = viewportOffset.current ?? { left: 0, top: 0 };
 
     if (display === 'top') {
+      const leftPos = {
+        auto: targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2,
+        matchElement: targetPosition.left,
+        matchStart: targetPosition.left,
+        matchEnd: targetPosition.right - container.offsetWidth,
+      }[size];
       const topPos = targetPosition.top - container.offsetHeight - offset;
-      container.style.top = `${topPos}px`;
-      container.style.left = (size === 'auto'
-        ? `${targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2}px`
-        : `${targetPosition.left}px`);
+      container.style.left = `${leftPos + vpLeft}px`;
+      container.style.top = `${topPos + vpTop}px`;
 
       if (size === 'matchElement') {
         container.style.width = `${target.offsetWidth}px`;
+      } else if (size === 'matchEnd') {
+        container.style.maxWidth = `${targetPosition.right - VIEWPORT_INITIAL_PADDING}px`;
       } else if (typeof size === 'function') {
         container.style.width = `${size(target.offsetWidth)}px`;
       }
@@ -92,12 +103,20 @@ function FloatingContainer({
     }
 
     if (display === 'bottom') {
-      container.style.top = `${targetPosition.bottom + offset}px`;
-      container.style.left = size === 'auto'
-        ? `${targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2}px`
-        : `${targetPosition.left}px`;
+      const leftPos = {
+        auto: targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2,
+        matchElement: targetPosition.left,
+        matchStart: targetPosition.left,
+        matchEnd: targetPosition.right - container.offsetWidth,
+      }[size];
+      const topPos = targetPosition.bottom + offset;
+      container.style.left = `${leftPos + vpLeft}px`;
+      container.style.top = `${topPos + vpTop}px`;
+
       if (size === 'matchElement') {
         container.style.width = `${target.offsetWidth}px`;
+      } else if (size === 'matchEnd') {
+        container.style.maxWidth = `${targetPosition.right - VIEWPORT_INITIAL_PADDING}px`;
       } else if (typeof size === 'function') {
         container.style.width = `${size(target.offsetWidth)}px`;
       }
@@ -105,11 +124,16 @@ function FloatingContainer({
     }
 
     if (display === 'left') {
-      const topPos = targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2;
-      container.style.top = size === 'auto'
-        ? `${topPos}px`
-        : `${targetPosition.top}px`;
-      container.style.left = `${targetPosition.left - container.offsetWidth - offset}px`;
+      const leftPos = targetPosition.left - container.offsetWidth - offset;
+      const topPos = {
+        auto: targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2,
+        matchElement: targetPosition.top,
+        matchStart: targetPosition.top,
+        matchEnd: targetPosition.bottom - container.offsetHeight,
+      }[size];
+      container.style.left = `${leftPos}px`;
+      container.style.top = `${topPos}px`;
+
       if (size === 'matchElement') {
         container.style.height = `${target.offsetHeight}px`;
       } else if (typeof size === 'function') {
@@ -119,17 +143,35 @@ function FloatingContainer({
     }
 
     if (display === 'right') {
-      const topPos = targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2;
-      container.style.top = size === 'auto'
-        ? `${topPos}px`
-        : `${targetPosition.top}px`;
-      container.style.left = `${targetPosition.left + target.offsetWidth + offset}px`;
+      const leftPos = targetPosition.left + target.offsetWidth + offset;
+      const topPos = {
+        auto: targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2,
+        matchElement: targetPosition.top,
+        matchStart: targetPosition.top,
+        matchEnd: targetPosition.bottom - container.offsetHeight,
+      }[size];
+      container.style.left = size === 'auto' ? `${leftPos + vpLeft}px` : `${leftPos}px`;
+      container.style.top = size === 'auto' ? `${topPos + vpTop}px` : `${topPos}px`;
+
       if (size === 'matchElement') {
         container.style.height = `${target.offsetHeight}px`;
       } else if (typeof size === 'function') {
         container.style.height = `${size(target.offsetHeight)}px`;
       }
       container.style.maxWidth = `${window.innerWidth - targetPosition.left - target.offsetWidth - offset}px`;
+    }
+
+    if (viewportOffset.current === null) {
+      if (size === 'matchEnd') {
+        viewportOffset.current = { left: 0, top: 0 };
+      } else {
+        const left = Number(container.style.left.replace('px', ''));
+        const top = Number(container.style.top.replace('px', ''));
+        viewportOffset.current = {
+          left: left < 0 ? VIEWPORT_INITIAL_PADDING - left : 0,
+          top: top < 0 ? VIEWPORT_INITIAL_PADDING - top : 0,
+        };
+      }
     }
   }
 
@@ -173,7 +215,7 @@ FloatingContainer.propTypes = {
    * or the height in pixels.
    */
   size: PropTypes.oneOfType([
-    PropTypes.oneOf(['auto', 'matchElement']),
+    PropTypes.oneOf(['auto', 'matchElement', 'matchStart', 'matchEnd']),
     PropTypes.func,
   ]),
   /**
