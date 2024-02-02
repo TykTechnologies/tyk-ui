@@ -13,23 +13,23 @@ import worldMap from './maps/world.json';
 
 echarts.registerMap('world', worldMap);
 
-const Chart = (props) => {
-  const {
-    areaStyleColors,
-    dataLoaded,
-    hasData,
-    highlight,
-    type,
-    option,
-    series,
-    onChange,
-    zoomStart,
-    zoomEnd,
-    title,
-    seriesConfig = [],
-    noDataComponent = null,
-    zoomColors,
-  } = props;
+function Chart({
+  areaStyleColors,
+  dataLoaded,
+  hasData,
+  highlight,
+  type,
+  option,
+  series,
+  onChange,
+  zoomStart,
+  zoomEnd,
+  title,
+  seriesConfig = [],
+  noDataComponent = null,
+  zoomColors,
+  style,
+}) {
   const [tykChartInstance, setTykChartInstance] = useState(null);
   const chartWrapperRef = useRef(null);
   const onResize = () => {
@@ -146,11 +146,18 @@ const Chart = (props) => {
       type: 'line',
       areaStyle: {
         opacity: 1,
-        color: areaStyleColors ? new echarts.graphic.LinearGradient(0, 0, 1, 1,
-          areaStyleColors.map((color, index) => ({
-            offset: index,
-            color,
-          }))) : [],
+        color: areaStyleColors
+          ? new echarts.graphic.LinearGradient(
+            0,
+            0,
+            1,
+            1,
+            areaStyleColors.map((color, index) => ({
+              offset: index,
+              color,
+            })),
+          )
+          : [],
       },
       smooth: false,
       symbolSize: 7,
@@ -238,11 +245,11 @@ const Chart = (props) => {
         }
 
         selectedSeries.forEach((entry, index) => {
-          const seriesData = Object.assign(
-            {},
-            lineBarChart.seriesDefault.toJS(),
-            seriesConfig[index], entry,
-          );
+          const seriesData = {
+            ...lineBarChart.seriesDefault.toJS(),
+            ...seriesConfig[index],
+            ...entry,
+          };
           finalOpts.series.push(seriesData);
         });
         break;
@@ -260,12 +267,11 @@ const Chart = (props) => {
   }, [tykChartInstance]);
 
   useEffect(() => {
-
-    if (!chartWrapperRef?.current) {
-      return;
-    }
+    if (!chartWrapperRef?.current) return;
 
     setTykChartInstance(echarts.init(chartWrapperRef.current));
+
+    // eslint-disable-next-line consistent-return
     return () => {
       if (tykChartInstance) {
         tykChartInstance.dispose();
@@ -342,7 +348,6 @@ const Chart = (props) => {
     }
   }, [highlight]);
 
-
   const prevZoomStart = usePrevious(zoomStart);
   const prevZoomEnd = usePrevious(zoomEnd);
   useEffect(() => {
@@ -364,7 +369,6 @@ const Chart = (props) => {
   }, [zoomStart, zoomEnd]);
 
   const getStyle = () => {
-    const { style } = props;
     const tempStyle = style || {};
 
     if (!tempStyle.height) {
@@ -404,6 +408,7 @@ const Chart = (props) => {
       <div
         className={getCssClasses()}
         style={getStyle()}
+        data-type={type}
         ref={chartWrapperRef}
       />
       {
@@ -420,7 +425,7 @@ const Chart = (props) => {
       }
     </div>
   );
-};
+}
 
 Chart.propTypes = {
   areaStyleColors: PropTypes.instanceOf(Array),
