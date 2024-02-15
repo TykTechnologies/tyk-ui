@@ -15,7 +15,7 @@ const getUID = prefix => `${prefix}-${id++}`;
  * Editable list is a component, that lists rows of form elements (can have n elements on a row),
  * and stores the values of all the rows in an Array list
  */
-const EditableList2 = ({
+function EditableList2({
   addButtonName,
   disabled,
   readOnly,
@@ -26,7 +26,7 @@ const EditableList2 = ({
   onChange = () => {},
   hideOnEmpty = true,
   wrapperClassName = '',
-}) => {
+}) {
   const [internalErrors, setInteranlErrors] = useState(null);
 
   const updateRowValue = (rowIndex, fieldIndex, componentValue, isValid) => {
@@ -52,13 +52,13 @@ const EditableList2 = ({
     onChange(tempValueArr);
   };
 
-  const hasErrors = errors => Boolean(errors?.flat()?.filter(Boolean).length);
+  const hasErrors = (errors) => Boolean(errors?.flat()?.filter(Boolean).length);
 
   const Components = useMemo(
-    () => fields.map(field => {
-      let tempField = typeof field === 'function' ? field() : field;
+    () => fields.map((field) => {
+      const tempField = typeof field === 'function' ? field() : field;
 
-      return withValidation(tempField?.component || <></>)
+      return withValidation(tempField?.component || null);
     }),
     [],
   );
@@ -101,23 +101,21 @@ const EditableList2 = ({
       {value?.length || !hideOnEmpty ? (
         <ul className="editable-list__list">
           {(value || [[]]).map((v, i) => (
-            <>
-              <FieldsList
-                /* eslint-disable-next-line */
-                key={v.id || i}
-                rowIndex={i}
-                disabled={disabled}
-                readOnly={readOnly}
-                fields={fields}
-                /* eslint-disable-next-line */
-                onChange={updateRowValue.bind(null, i)}
-                /* eslint-disable-next-line */
-                onDelete={deleteRow.bind(null, i)}
-                value={v}
-                errors={internalErrors?.[i]}
-                components={Components}
-              />
-            </>
+            <FieldsList
+              /* eslint-disable-next-line */
+              key={v.id || i}
+              rowIndex={i}
+              disabled={disabled}
+              readOnly={readOnly}
+              fields={fields}
+              /* eslint-disable-next-line */
+              onChange={updateRowValue.bind(null, i)}
+              /* eslint-disable-next-line */
+              onDelete={deleteRow.bind(null, i)}
+              value={v}
+              errors={internalErrors?.[i]}
+              components={Components}
+            />
           ))}
           <ListHeader fields={fields} readOnly={readOnly} />
         </ul>
@@ -127,7 +125,7 @@ const EditableList2 = ({
       ) : null}
     </div>
   );
-};
+}
 
 EditableList2.propTypes = {
   /** Sets Editable list in edit mode.

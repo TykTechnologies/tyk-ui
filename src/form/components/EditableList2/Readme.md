@@ -34,7 +34,7 @@
           placeholder: 'Enter claim name',
           value: '',
           validate: isRequired
-        } 
+        }
       },
       {
         component: Input2,
@@ -49,7 +49,7 @@
           placeholder: 'Add Policy',
           value: '',
           validate: isRequired
-        } 
+        }
       }
     ]}
   />
@@ -98,7 +98,7 @@
     validateOnChange: (values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'},
     validate: formikRequired('This field is required')
   });
-  
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -134,7 +134,7 @@
           theme: 'default rounded-corners',
           placeholder: 'Enter claim name',
           validate: formikRequired('This field is required')
-        } 
+        }
       }),
       {
         component: Combobox2,
@@ -170,7 +170,7 @@
           label: 'Claim name',
           theme: 'default rounded-corners',
           placeholder: 'Enter claim name',
-        } 
+        }
       },
       {
         component: Input2,
@@ -183,7 +183,7 @@
           label: 'Policy',
           theme: 'default rounded-corners',
           placeholder: 'Add Policy',
-        } 
+        }
       }
     ]}
   />
@@ -238,7 +238,7 @@
           label: 'Claim name',
           theme: 'default rounded-corners',
           placeholder: 'Enter claim name',
-        } 
+        }
       },
       {
         component: Combobox2,
@@ -252,7 +252,7 @@
           tagSeparators: [' ', 'Enter', ':', '@'],
           name: "combobox",
           theme: "default rounded-corners",
-        } 
+        }
       }
     ]}
   />
