@@ -55,7 +55,6 @@ export { default as Pagination } from './form/components/Pagination';
 export { default as StringBuilder } from './form/components/StringBuilder';
 
 // -- Formik
-
 export { default as FormikCheckbox } from './form/formik/FormikCheckbox';
 export { default as FormikCodeEditor } from './form/formik/FormikCodeEditor';
 export { default as FormikCombobox } from './form/formik/FormikCombobox';
@@ -76,7 +75,6 @@ export { default as FormikStringBuilder } from './form/formik/FormikStringBuilde
 export { default as FormikWrapper } from './utils/formik';
 
 // Redux - Form
-
 export { default as FieldCodeEditor } from './form/redux-form/FieldCodeEditor';
 export { default as FieldCombobox } from './form/redux-form/FieldCombobox';
 export { default as FieldDropdown } from './form/redux-form/FieldDropdown';
