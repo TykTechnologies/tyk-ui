@@ -6,7 +6,6 @@ export const stringToTokenString = (value, options) => {
   return tempStr;
 };
 
-
 export const setCursorPos = (ref, pos) => {
   setTimeout(() => {
     ref.current.setSelectionRange(pos, pos);

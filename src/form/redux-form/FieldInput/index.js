@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 
 import Input from '../../components/Input';
 
-export default class FieldInput extends Component {
-  static propTypes = {
-    meta: PropTypes.instanceOf(Object),
-    input: PropTypes.instanceOf(Object),
-    validationmessages: PropTypes.instanceOf(Object),
-  }
-
+class FieldInput extends Component {
   getInputError() {
     const { meta, validationmessages } = this.props;
     const { touched, error, warning } = meta;
@@ -37,3 +31,11 @@ export default class FieldInput extends Component {
     );
   }
 }
+
+FieldInput.propTypes = {
+  meta: PropTypes.instanceOf(Object),
+  input: PropTypes.instanceOf(Object),
+  validationmessages: PropTypes.instanceOf(Object),
+};
+
+export default FieldInput;

@@ -82,8 +82,8 @@ function StringInput({
 
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
-      const lastToken = tokens[tokens?.length - 2];
-      const lastCharsInString = tokenValue.slice(-lastToken?.length);
+      const lastToken = tokens[tokens.length - 2];
+      const lastCharsInString = tokenValue.slice(-(lastToken?.length ?? 0));
       if (lastToken === lastCharsInString) {
         e.preventDefault();
         setTokenString(

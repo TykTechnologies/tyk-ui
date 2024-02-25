@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react';
 
-const withValidation = Component => ({
-  onChange,
-  validate,
-  error,
+// eslint-disable-next-line react/function-component-definition
+const withValidation = (Component) => ({
+  onChange, // eslint-disable-line react/prop-types
+  validate, // eslint-disable-line react/prop-types
+  error, // eslint-disable-line react/prop-types
   ...rest
 }) => {
   const [internalError, setInternalError] = useState(null);

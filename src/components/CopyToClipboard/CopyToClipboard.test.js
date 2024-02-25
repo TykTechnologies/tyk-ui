@@ -1,11 +1,11 @@
 import React from 'react';
 import CopyToClipboard from './index';
-import Button from '../Button'
+import Button from '../Button';
 
 describe('CoopyToClipboard', () => {
   it('Test component rendering and Test copy functionality', () => {
-    const textToCopy = "boooo";
-    const displayText = "BUTTON_TEST_NAME"
+    const textToCopy = 'boooo';
+    const displayText = 'BUTTON_TEST_NAME';
     cy.mount(
       <div>
         <CopyToClipboard
@@ -14,16 +14,15 @@ describe('CoopyToClipboard', () => {
           theme="primary"
           element={Button}
           onCopy={() => {
-            document.querySelector('.dummy').innerText = textToCopy
+            document.querySelector('.dummy').innerText = textToCopy;
           }}
         />
-        <span className='dummy'>PLACEHOLDER</span>
-      </div>
+        <span className="dummy">PLACEHOLDER</span>
+      </div>,
     );
-    cy.get('span.dummy').invoke('text').should('eq', 'PLACEHOLDER'); 
+    cy.get('span.dummy').invoke('text').should('eq', 'PLACEHOLDER');
     cy.contains(textToCopy).should('not.exist');
-    cy.contains(displayText).should('exist').click()
-    cy.get('span.dummy').invoke('text').should('eq', textToCopy); 
-    
+    cy.contains(displayText).should('exist').click();
+    cy.get('span.dummy').invoke('text').should('eq', textToCopy);
   });
 });

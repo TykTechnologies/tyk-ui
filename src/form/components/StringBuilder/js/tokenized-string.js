@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InvalidToken from './invalid-token';
 
-export const TokenizedString = (props) => {
+export function TokenizedString(props) {
   const {
     tokens,
     options,
@@ -23,7 +23,7 @@ export const TokenizedString = (props) => {
   const allTokens = tokens
     && tokens.map((token) => {
       if (options) {
-        const matchedOption = options.find(option => option.id === token);
+        const matchedOption = options.find((option) => option.id === token);
         // if invalid token
         if (invalidTokenRegex && !matchedOption) {
           const matchedTokens = token.replaceAll(' ', '').split(invalidTokenRegex);
@@ -71,7 +71,7 @@ export const TokenizedString = (props) => {
       {allTokens}
     </div>
   );
-};
+}
 
 TokenizedString.propTypes = {
   tokens: PropTypes.arrayOf(PropTypes.string),

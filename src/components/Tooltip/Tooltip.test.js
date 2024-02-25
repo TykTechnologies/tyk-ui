@@ -28,8 +28,9 @@ describe('Tooltip', () => {
     cy.get(`.${classes.floatingContainer}`)
       .should('not.exist')
       .get(`.${classes.content}`)
-      .trigger('mouseover')
-      .get(`.${classes.floatingContainer}`)
+      .trigger('mouseover');
+
+    cy.get(`.${classes.floatingContainer}`)
       .should('exist')
       .get(`.${classes.tooltip}`)
       .should('have.class', customClass)
@@ -41,8 +42,10 @@ describe('Tooltip', () => {
 
   it('can be positioned top, bottom, left, right', () => {
     function getContentOffset(dim) {
-      return cy.get(`.${classes.content}`) // eslint-disable-line cypress/no-unnecessary-waiting
-        .trigger('mouseover')
+      cy.get(`.${classes.content}`)
+        .trigger('mouseover');
+
+      return cy // eslint-disable-line cypress/no-unnecessary-waiting
         .get(`.${classes.floatingContainer}`)
         .wait(500)
         .invoke('offset')
@@ -76,15 +79,17 @@ describe('Tooltip', () => {
   it('can display a "help" icon or a custom icon', () => {
     cy.mount(<Component render="hello" icon />);
     cy.get(`.${classes.content}`)
-      .trigger('mouseover')
-      .get(`.${classes.tooltip}`)
+      .trigger('mouseover');
+
+    cy.get(`.${classes.tooltip}`)
       .find(`.${classes.iconHelp}`)
       .should('exist');
 
     cy.mount(<Component render="hello" icon={<Icon family="tykon" type="check" />} />);
     cy.get(`.${classes.content}`)
-      .trigger('mouseover')
-      .get(`.${classes.tooltip} .${classes.iconHelp}`)
+      .trigger('mouseover');
+
+    cy.get(`.${classes.tooltip} .${classes.iconHelp}`)
       .should('not.exist')
       .get(`.${classes.tooltip} .tykon-check`)
       .should('exist');
@@ -93,12 +98,14 @@ describe('Tooltip', () => {
   it('can be triggered by clicking', () => {
     cy.mount(<Component render="hello" closable />);
     cy.get(`.${classes.content}`)
-      .click()
-      .get(`.${classes.tooltip}`)
+      .click();
+
+    cy.get(`.${classes.tooltip}`)
       .should('exist')
       .get(`.${classes.iconClose}`)
-      .click()
-      .get(`.${classes.tooltip}`)
+      .click();
+
+    cy.get(`.${classes.tooltip}`)
       .should('not.exist');
   });
 

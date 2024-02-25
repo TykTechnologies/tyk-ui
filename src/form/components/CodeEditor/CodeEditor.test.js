@@ -43,22 +43,34 @@ describe('CodeEditor', () => {
       .get(selectors.component)
       .should('exist')
       .get(selectors.editorContent)
-      .click()
-      .type(text)
+      .click();
+
+    cy.get(selectors.editorContent)
+      .type(text);
+
+    cy.get(selectors.editorContent)
       .should('have.text', text);
   });
 
   it('you cannot type if disabled or readOnly', () => {
     cy.mount(<Component disabled />)
       .get(selectors.editorContent)
-      .click()
-      .type('foo')
+      .click();
+
+    cy.get(selectors.editorContent)
+      .type('foo');
+
+    cy.get(selectors.editorContent)
       .should('have.text', '');
 
     cy.mount(<Component disabled />)
       .get(selectors.editorContent)
-      .click()
-      .type('foo')
+      .click();
+
+    cy.get(selectors.editorContent)
+      .type('foo');
+
+    cy.get(selectors.editorContent)
       .should('have.text', '');
   });
 
@@ -107,11 +119,15 @@ describe('CodeEditor', () => {
     const onBlur = cy.stub().as('onBlur');
     cy.mount(<Component onBlur={onBlur} />)
       .get(selectors.editorContent)
-      .click()
-      .type('something')
-      .get('.ace_text-input')
-      .blur()
-      .get('@onBlur')
+      .click();
+
+    cy.get(selectors.editorContent)
+      .type('something');
+
+    cy.get('.ace_text-input')
+      .blur();
+
+    cy.get('@onBlur')
       .should('be.called');
   });
 
@@ -120,11 +136,15 @@ describe('CodeEditor', () => {
     const text = 'something';
     cy.mount(<Component onChange={onChange} />)
       .get(selectors.editorContent)
-      .click()
-      .type(text)
-      .get('.ace_text-input')
-      .blur()
-      .get('@onChange')
+      .click();
+
+    cy.get(selectors.editorContent)
+      .type(text);
+
+    cy.get('.ace_text-input')
+      .blur();
+
+    cy.get('@onChange')
       .should('be.calledWith', text);
   });
 

@@ -83,7 +83,7 @@ describe('Button', () => {
   });
 
   it('should call the onClick callback', () => {
-    const onClick = cy.stub();
+    const onClick = cy.stub().as('onClick');
 
     cy
       .mount(
@@ -96,12 +96,14 @@ describe('Button', () => {
       );
 
     cy.contains(buttonText)
-      .click()
-      .then(() => expect(onClick).to.be.called);
+      .click();
+
+    cy.get('@onClick')
+      .should('be.called');
   });
 
   it('should not call the onClick callback if disabled', () => {
-    const onClick = cy.stub();
+    const onClick = cy.stub().as('onClick');
 
     cy
       .mount(
@@ -115,7 +117,9 @@ describe('Button', () => {
       );
 
     cy.contains(buttonText)
-      .click({ force: true })
-      .then(() => expect(onClick).not.to.be.called);
+      .click({ force: true });
+
+    cy.get('@onClick')
+      .should('not.be.called');
   });
 });

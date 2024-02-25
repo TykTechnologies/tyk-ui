@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListItem = (props) => {
+function ListItem(props) {
   const {
     className,
     children,
@@ -13,7 +13,7 @@ const ListItem = (props) => {
       {children}
     </li>
   );
-};
+}
 
 ListItem.propTypes = {
   children: PropTypes.oneOfType([
@@ -23,6 +23,7 @@ ListItem.propTypes = {
     PropTypes.string,
   ]),
   className: PropTypes.string,
+  selected: PropTypes.bool,
 };
 
 ListItem.defaultProps = {

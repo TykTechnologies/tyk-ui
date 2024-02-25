@@ -4,15 +4,7 @@ import { fromJS } from 'immutable';
 
 import Toggle from '../../components/Toggle';
 
-export default class FieldToggle extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.node,
-    ]),
-    onChange: PropTypes.func,
-    input: PropTypes.instanceOf(Object),
-  };
-
+class FieldToggle extends Component {
   constructor(props) {
     super(props);
 
@@ -39,3 +31,13 @@ export default class FieldToggle extends Component {
     );
   }
 }
+
+FieldToggle.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+  ]),
+  onChange: PropTypes.func,
+  input: PropTypes.instanceOf(Object),
+};
+
+export default FieldToggle;

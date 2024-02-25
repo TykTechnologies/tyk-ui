@@ -58,9 +58,12 @@ describe('Toast', () => {
   it('should render toast components and remove it after the given delay', () => {
     cy.mount(<Component onClick={() => toast.notify('demo', { delay: 150 })} />)
       .get('button')
-      .click()
-      .click()
-      .get(selectors.toastContainer)
+      .click();
+
+    cy.get('button')
+      .click();
+
+    cy.get(selectors.toastContainer)
       .should('exist')
       .find(selectors.message)
       .should('exist')
@@ -77,8 +80,9 @@ describe('Toast', () => {
       const onClick = () => toast[theme].bind(toast)(`demo ${theme}`, { timeout: 200 });
       cy.mount(<Component onClick={onClick} />)
         .get('button')
-        .click()
-        .get(selectors.toastContainer)
+        .click();
+
+      cy.get(selectors.toastContainer)
         .should('exist')
         .find(`.${classNames.message}.${className}`)
         .should('exist')

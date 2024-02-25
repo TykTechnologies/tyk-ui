@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../../../components/Icon';
@@ -325,7 +327,7 @@ function Combobox2({
     }
   }
 
-  function onMessage(message, data) {
+  const onMessage = useCallback((message, data) => {
     if (message.startsWith('tag.')) onTagMessage(message.slice(4), data);
 
     if (message === 'value.select') selectValue(data.item);
@@ -345,7 +347,16 @@ function Combobox2({
     if (message === 'search.enter') {
       if (activeItem) selectValue(activeItem);
     }
-  }
+  }, [
+    onTagMessage,
+    selectValue,
+    selectAllValues,
+    openDropdown,
+    updateSearchValue,
+    closeDropdown,
+    moveUpActiveItem,
+    moveDownActiveItem,
+  ]);
 
   useEffect(() => {
     window.addEventListener('click', handleDocumentClick, true);
@@ -444,7 +455,7 @@ function Combobox2({
                 role="button"
                 tabIndex={disabled ? -1 : 0}
                 onClick={executeTriggerAction}
-                onKeyPress={executeTriggerAction}
+                onKeyDown={executeTriggerAction}
               >
                 {expandMode
                   ? (

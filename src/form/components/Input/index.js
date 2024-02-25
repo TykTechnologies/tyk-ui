@@ -1,43 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Input extends Component {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    id: PropTypes.string,
-    isfield: PropTypes.bool,
-    error: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.bool,
-    ]),
-    inputgroupaddonleft: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-    inputgroupaddonright: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]),
-    label: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.element,
-      PropTypes.node,
-    ]),
-    labelwidth: PropTypes.string,
-    name: PropTypes.string,
-    note: PropTypes.string,
-    onChange: PropTypes.func,
-    placeholder: PropTypes.string,
-    theme: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.string,
-    ]),
-  }
-
+class Input extends Component {
   static getAddon(content) {
     return (
       <div className="tyk-input-group__addon">
@@ -76,6 +40,23 @@ export default class Input extends Component {
           onChange(value);
         }
       });
+    }
+  }
+
+  handleOnChange(e) {
+    const { onChange, isfield } = this.props;
+    const inputValue = e.target.value;
+
+    if (!isfield) {
+      this.setState({
+        stateValue: inputValue,
+      }, () => {
+        if (onChange) {
+          onChange(inputValue);
+        }
+      });
+    } else {
+      onChange(inputValue);
     }
   }
 
@@ -190,29 +171,13 @@ export default class Input extends Component {
     );
   }
 
+  // eslint-disable-next-line react/no-unused-class-component-methods
   reset() {
     const { initValue } = this.state;
 
     this.setState({
       stateValue: initValue,
     });
-  }
-
-  handleOnChange(e) {
-    const { onChange, isfield } = this.props;
-    const inputValue = e.target.value;
-
-    if (!isfield) {
-      this.setState({
-        stateValue: inputValue,
-      }, () => {
-        if (onChange) {
-          onChange(inputValue);
-        }
-      });
-    } else {
-      onChange(inputValue);
-    }
   }
 
   render() {
@@ -258,3 +223,41 @@ export default class Input extends Component {
     );
   }
 }
+
+Input.propTypes = {
+  disabled: PropTypes.bool,
+  readOnly: PropTypes.bool,
+  id: PropTypes.string,
+  isfield: PropTypes.bool,
+  error: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+  ]),
+  inputgroupaddonleft: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+  inputgroupaddonright: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.node,
+  ]),
+  labelwidth: PropTypes.string,
+  name: PropTypes.string,
+  note: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  theme: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
+};
+
+export default Input;

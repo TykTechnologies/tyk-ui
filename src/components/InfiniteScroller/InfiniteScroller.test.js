@@ -42,7 +42,7 @@ describe('InfiniteScroller', () => {
   });
 
   it('scrolling to the bottom loads the next page', () => {
-    const loadMore = cy.stub();
+    const loadMore = cy.stub().as('loadMore');
     const content = (
       <>
         {[...Array(50)].map((_, index) => (
@@ -51,21 +51,21 @@ describe('InfiniteScroller', () => {
       </>
     );
 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.mount(<Component content={content} hasMore loadMore={loadMore} pageNumber={0} />)
-
       .get(selectors.wrapper)
-      .scrollTo(0, 10)
-      .wait(500)
-      .then(() => {
-        expect(loadMore).not.to.be.called;
-      })
+      .scrollTo(0, 10);
 
-      .get(selectors.wrapper)
-      .scrollTo('bottom')
-      .wait(500)
-      .then(() => {
-        expect(loadMore).to.be.called;
-      });
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(500)
+      .get('@loadMore')
+      .should('not.be.called');
+
+    cy.get(selectors.wrapper)
+      .scrollTo('bottom');
+
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(500)
+      .get('@loadMore')
+      .should('be.called');
   });
 });

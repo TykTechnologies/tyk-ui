@@ -41,8 +41,9 @@ describe('Dropdown', () => {
       .get(selectors.menu)
       .should('not.exist')
       .get(selectors.trigger)
-      .click()
-      .get(selectors.menu)
+      .click();
+
+    cy.get(selectors.menu)
       .should('exist');
   });
 
@@ -63,8 +64,9 @@ describe('Dropdown', () => {
     );
 
     cy.get(selectors.trigger)
-      .click()
-      .get('#target-container')
+      .click();
+
+    cy.get('#target-container')
       .find(selectors.menu)
       .should('exist');
   });
@@ -73,8 +75,9 @@ describe('Dropdown', () => {
     cy.mount(<Component open closeOnSelect />)
       .get(selectors.item)
       .eq(0)
-      .click()
-      .get(selectors.menu)
+      .click();
+
+    cy.get(selectors.menu)
       .should('not.exist');
   });
 
@@ -131,8 +134,9 @@ describe('Dropdown', () => {
   it('the trigger button can be disabled', () => {
     cy.mount(<Component disabled />)
       .get(selectors.trigger)
-      .click({ force: true })
-      .get(selectors.menu)
+      .click({ force: true });
+
+    cy.get(selectors.menu)
       .should('not.exist');
   });
 
@@ -153,10 +157,12 @@ describe('Dropdown', () => {
     const onClose = cy.stub().as('onClose');
     cy.mount(<Component onClose={onClose} />)
       .get(selectors.trigger)
-      .click()
-      .get('body')
-      .click()
-      .get('@onClose')
+      .click();
+
+    cy.get('body')
+      .click();
+
+    cy.get('@onClose')
       .should('be.called');
   });
 
@@ -164,11 +170,13 @@ describe('Dropdown', () => {
     const onSelect = cy.stub().as('onSelect');
     cy.mount(<Component onSelect={onSelect} />)
       .get(selectors.trigger)
-      .click()
-      .get(selectors.item)
+      .click();
+
+    cy.get(selectors.item)
       .eq(0)
-      .click()
-      .get('@onSelect')
+      .click();
+
+    cy.get('@onSelect')
       .should('be.called');
   });
 
@@ -214,8 +222,9 @@ describe('Dropdown', () => {
       .should('have.text', label)
       .get(selectors.item)
       .eq(0)
-      .click()
-      .get(selectors.trigger)
+      .click();
+
+    cy.get(selectors.trigger)
       .should('have.text', label);
   });
 
@@ -235,8 +244,9 @@ describe('Dropdown', () => {
     )
       .get(selectors.item)
       .eq(0)
-      .click()
-      .get('@onClick')
+      .click();
+
+    cy.get('@onClick')
       .should('be.calledWith', itemId);
   });
 

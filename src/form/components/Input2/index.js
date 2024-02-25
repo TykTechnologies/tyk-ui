@@ -24,7 +24,7 @@ const Input2 = forwardRef(({
     },
   }));
 
-  const getAddon = content => (
+  const getAddon = (content) => (
     <div className="tyk-input-group__addon">
       { content }
     </div>

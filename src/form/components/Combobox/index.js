@@ -13,7 +13,7 @@ const getStateSelectedValues = (multiple, tags, value) => {
   return value;
 };
 
-export default class Combobox extends Component {
+class Combobox extends Component {
   static closeList() {
     return {
       cursor: -1,
@@ -30,44 +30,6 @@ export default class Combobox extends Component {
   static filterByName(itemValue, inputValue) {
     return itemValue.name.toLowerCase().indexOf(inputValue) > -1;
   }
-
-  static propTypes = {
-    allowCustomValues: PropTypes.bool,
-    CustomListComponent: PropTypes.elementType,
-    searchItem: PropTypes.func,
-    disabled: PropTypes.bool,
-    error: PropTypes.string,
-    id: PropTypes.string,
-    label: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    labelwidth: PropTypes.string,
-    multiple: PropTypes.bool,
-    max: PropTypes.number,
-    note: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.string,
-    ]),
-    onChange: PropTypes.func,
-    placeholder: PropTypes.string,
-    tags: PropTypes.bool,
-    theme: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.instanceOf(Object),
-      PropTypes.instanceOf(Array),
-    ]),
-    values: PropTypes.instanceOf(Array),
-  };
-
-  static defaultProps = {
-    allowCustomValues: true,
-  };
 
   constructor(props) {
     super(props);
@@ -136,23 +98,116 @@ export default class Combobox extends Component {
     return null;
   }
 
+  handleItemsNavigation(e) {
+    const { tags } = this.props;
+    if (['ArrowDown', 'ArrowUp'].indexOf(e.key) === -1) {
+      return;
+    }
+
+    const { cursor } = this.state;
+    const filteredValues = this.filterValues();
+    let cursorNext;
+
+    e.preventDefault();
+
+    if (e.key === 'ArrowDown') {
+      if (cursor === -1 || cursor === filteredValues.length - 1) {
+        cursorNext = 0;
+      } else if (cursor < filteredValues.length - 1) {
+        cursorNext = cursor + 1;
+      }
+    }
+
+    if (e.key === 'ArrowUp') {
+      if (cursor > 0) {
+        cursorNext = cursor - 1;
+      } else {
+        cursorNext = filteredValues.length - 1;
+      }
+    }
+
+    if (this.valuesListRef.current && cursorNext > 4) {
+      const scrollTop = (cursorNext - 4) * 38;
+
+      this.valuesListRef.current.scrollTop = (!tags) ? 60 + scrollTop : scrollTop;
+    } else if (this.valuesListRef.current) {
+      this.valuesListRef.current.scrollTop = 0;
+    }
+
+    this.setState((previousState) => ({
+      ...previousState,
+      opened: true,
+      cursor: cursorNext,
+    }));
+  }
+
+  handleListItemClick(index) {
+    // eslint-disable-next-line react/destructuring-assignment
+    const clickedValue = this.props.values[index];
+    if (clickedValue.disabled) return;
+
+    const { multiple, tags } = this.props;
+
+    const methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';
+    const tempState = { ...this.state, ...this[methodName](index) };
+
+    this.setState((previousState) => {
+      if (!multiple && !tags) {
+        tempState.opened = false;
+      }
+
+      return { ...previousState, ...tempState };
+    });
+  }
+
+  handlePillRemoveClick(index) {
+    const { disabled } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
+    const tempState = this.removeSelectedValue(index);
+
+    this.setState((previousState) => ({ ...previousState, ...tempState }));
+  }
+
+  handleClickOutside(event) {
+    if (
+      this.valuesListRef.current && !this.valuesListRef.current.contains(event.target)
+      && this.comboboxRef.current && !this.comboboxRef.current.contains(event.target)
+    ) {
+      this.setState((previousState) => ({ ...previousState, ...Combobox.closeList() }));
+    }
+  }
+
+  handleComboboxDropdownClick() {
+    const { disabled } = this.props;
+
+    if (disabled) {
+      return;
+    }
+
+    this.setState((previousState) => ({ ...previousState, ...Combobox.openList() }));
+  }
+
   onKeyUp(e) {
     const { tags, allowCustomValues } = this.props;
     const { cursor, opened } = this.state;
     const filteredValues = this.filterValues();
-    let tempState = Object.assign({}, this.getSearchText());
+    let tempState = this.getSearchText();
 
     if (tags && e.key !== 'Escape') {
-      tempState = Object.assign({}, tempState, this.setInputWidth());
+      tempState = { ...tempState, ...this.setInputWidth() };
     }
 
     if (e.key === 'Enter') {
       const methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';
-      tempState = Object.assign({}, tempState, this[methodName](cursor));
+      tempState = { ...tempState, ...this[methodName](cursor) };
     }
 
     if (allowCustomValues && !e.key === ' ' && tags) {
-      tempState = Object.assign({}, tempState, this.manageSelectedTags());
+      tempState = { ...tempState, ...this.manageSelectedTags() };
     }
 
     if (
@@ -162,18 +217,18 @@ export default class Combobox extends Component {
         && filteredValues.length
         && e.key !== 'Escape'
     ) {
-      tempState = Object.assign({}, tempState, Combobox.openList());
+      tempState = { ...tempState, ...Combobox.openList() };
     }
 
     if (e.key === 'Escape' && opened) {
-      tempState = Object.assign({}, tempState, Combobox.closeList());
+      tempState = { ...tempState, ...Combobox.closeList() };
     }
 
     if (opened && filteredValues && !filteredValues.length) {
-      tempState = Object.assign({}, tempState, Combobox.closeList());
+      tempState = { ...tempState, ...Combobox.closeList() };
     }
 
-    this.setState(previousState => Object.assign({}, previousState, tempState));
+    this.setState((previousState) => ({ ...previousState, ...tempState }));
   }
 
   getLabelStyles() {
@@ -356,7 +411,7 @@ export default class Combobox extends Component {
       && values.length
       && !Array.isArray(stateSelectedValues) && !stateSelectedValues.name
     ) {
-      return values.filter(value => value.id === stateSelectedValues.id)[0].name;
+      return values.filter((value) => value.id === stateSelectedValues.id)[0].name;
     }
 
     return stateSelectedValues.name;
@@ -390,6 +445,7 @@ export default class Combobox extends Component {
     return selectedValues;
   }
 
+  // eslint-disable-next-line react/no-unused-class-component-methods
   manageSelectedValues(index) {
     const { stateSelectedValues } = this.state;
     const {
@@ -480,7 +536,7 @@ export default class Combobox extends Component {
 
     const arr = values
       .filter(
-        value => (searchItem
+        (value) => (searchItem
           ? searchItem(value, this.inputRef.current.value.toLowerCase())
           : Combobox.filterByName(value, this.inputRef.current.value.toLowerCase())),
       );
@@ -496,99 +552,7 @@ export default class Combobox extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  handleItemsNavigation(e) {
-    const { tags } = this.props;
-    if (['ArrowDown', 'ArrowUp'].indexOf(e.key) === -1) {
-      return;
-    }
-
-    const { cursor } = this.state;
-    const filteredValues = this.filterValues();
-    let cursorNext;
-
-    e.preventDefault();
-
-    if (e.key === 'ArrowDown') {
-      if (cursor === -1 || cursor === filteredValues.length - 1) {
-        cursorNext = 0;
-      } else if (cursor < filteredValues.length - 1) {
-        cursorNext = cursor + 1;
-      }
-    }
-
-    if (e.key === 'ArrowUp') {
-      if (cursor > 0) {
-        cursorNext = cursor - 1;
-      } else {
-        cursorNext = filteredValues.length - 1;
-      }
-    }
-
-    if (this.valuesListRef.current && cursorNext > 4) {
-      const scrollTop = (cursorNext - 4) * 38;
-
-      this.valuesListRef.current.scrollTop = (!tags) ? 60 + scrollTop : scrollTop;
-    } else if (this.valuesListRef.current) {
-      this.valuesListRef.current.scrollTop = 0;
-    }
-
-    this.setState(previousState => ({
-      ...previousState,
-      opened: true,
-      cursor: cursorNext,
-    }));
-  }
-
-  handleListItemClick(index) {
-    // eslint-disable-next-line react/destructuring-assignment
-    const clickedValue = this.props.values[index];
-    if (clickedValue.disabled) return;
-
-    const { multiple, tags } = this.props;
-
-    const methodName = (tags) ? 'manageSelectedTags' : 'manageSelectedValues';
-    const tempState = Object.assign({}, this.state, this[methodName](index));
-
-    this.setState((previousState) => {
-      if (!multiple && !tags) {
-        tempState.opened = false;
-      }
-
-      return Object.assign({}, previousState, tempState);
-    });
-  }
-
-  handlePillRemoveClick(index) {
-    const { disabled } = this.props;
-
-    if (disabled) {
-      return;
-    }
-
-    const tempState = this.removeSelectedValue(index);
-
-    this.setState(previousState => Object.assign({}, previousState, tempState));
-  }
-
-  handleClickOutside(event) {
-    if (
-      this.valuesListRef.current && !this.valuesListRef.current.contains(event.target)
-      && this.comboboxRef.current && !this.comboboxRef.current.contains(event.target)
-    ) {
-      this.setState(previousState => Object.assign({}, previousState, Combobox.closeList()));
-    }
-  }
-
-  handleComboboxDropdownClick() {
-    const { disabled } = this.props;
-
-    if (disabled) {
-      return;
-    }
-
-    this.setState(previousState => Object.assign({}, previousState, Combobox.openList()));
-  }
-
+  // eslint-disable-next-line react/no-unused-class-component-methods
   reset() {
     const { multiple, tags, value } = this.props;
 
@@ -621,7 +585,7 @@ export default class Combobox extends Component {
     const filteredValues = this.filterValues();
 
     return (
-      <Fragment>
+      <>
         <div className={this.getCssClasses()}>
           {
             label
@@ -641,11 +605,15 @@ export default class Combobox extends Component {
               {
                 tags
                   ? (
-                    <Fragment>
+                    <>
                       {
                         (stateSelectedValues || []).map((value, index) => (
                           <li className="pill" key={value.id}>
-                            <button type="button" onClick={this.handlePillRemoveClick.bind(this, index)}>
+                            <button
+                              type="button"
+                              onClick={this.handlePillRemoveClick.bind(this, index)}
+                              aria-label="remove"
+                            >
                               <Icon type="times" />
                             </button>
                             <span>{ value.name }</span>
@@ -701,7 +669,7 @@ export default class Combobox extends Component {
                             : null
                         }
                       </li>
-                    </Fragment>
+                    </>
                   )
                   : (
                     <li
@@ -788,7 +756,47 @@ export default class Combobox extends Component {
               />
             )
         }
-      </Fragment>
+      </>
     );
   }
 }
+
+Combobox.propTypes = {
+  allowCustomValues: PropTypes.bool,
+  CustomListComponent: PropTypes.elementType,
+  searchItem: PropTypes.func,
+  disabled: PropTypes.bool,
+  error: PropTypes.string,
+  id: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+  labelwidth: PropTypes.string,
+  multiple: PropTypes.bool,
+  max: PropTypes.number,
+  note: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  tags: PropTypes.bool,
+  theme: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object),
+    PropTypes.instanceOf(Array),
+  ]),
+  values: PropTypes.instanceOf(Array),
+};
+
+Combobox.defaultProps = {
+  allowCustomValues: true,
+};
+
+export default Combobox;

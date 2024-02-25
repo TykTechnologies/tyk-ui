@@ -1,12 +1,12 @@
 import React, {
-  Fragment, useContext, useEffect, useState,
+  useContext, useEffect, useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import { TabsContext } from '../tabs-context';
 import TabContext from './TabContext';
 import TabContent from './TabContent';
 
-const Tab = (props) => {
+function Tab(props) {
   const { id } = props;
   const tabsContext = useContext(TabsContext);
   const tabContext = useContext(TabContext);
@@ -45,26 +45,24 @@ const Tab = (props) => {
   }
 
   return (
-    <Fragment>
-      <TabContent
-        addTab={addTab}
-        updateTab={updateTab}
-        hideTab={hideTab}
-        showTab={showTab}
-        tabExists={tabExists}
-        tabData={props}
-        path={path}
-        tabsId={tabsContext.id}
-        selectedPath={selectedPath}
-        rendered={rendered}
-        hideTabContent={hideTabContent}
-        tabs={tabs}
-      >
-        {children}
-      </TabContent>
-    </Fragment>
+    <TabContent
+      addTab={addTab}
+      updateTab={updateTab}
+      hideTab={hideTab}
+      showTab={showTab}
+      tabExists={tabExists}
+      tabData={props}
+      path={path}
+      tabsId={tabsContext.id}
+      selectedPath={selectedPath}
+      rendered={rendered}
+      hideTabContent={hideTabContent}
+      tabs={tabs}
+    >
+      {children}
+    </TabContent>
   );
-};
+}
 
 Tab.propTypes = {
   children: PropTypes.oneOfType([

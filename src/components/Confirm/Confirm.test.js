@@ -46,8 +46,9 @@ describe('Confirm', () => {
       .get(selectors.modalBackdrop)
       .should('not.have.class', 'opened')
       .get(selectors.contentButton)
-      .click()
-      .get(selectors.modalBackdrop)
+      .click();
+
+    cy.get(selectors.modalBackdrop)
       .should('have.class', 'opened');
   });
 
@@ -82,45 +83,47 @@ describe('Confirm', () => {
 
   it('calls the confirmCallback when clicking on the confirm button', () => {
     const confirmBtnText = 'Custom Confirm';
-    const confirmCallback = cy.stub();
+    const confirmCallback = cy.stub().as('confirmCallback');
 
     cy
       .mount(<Component confirmBtnText={confirmBtnText} confirmCallback={confirmCallback} />)
       .get(selectors.contentButton)
-      .click()
-      .get('button')
+      .click();
+
+    cy.get('button')
       .contains(confirmBtnText)
-      .click()
-      .then(() => {
-        expect(confirmCallback).to.be.called;
-      });
+      .click();
+
+    cy.get('@confirmCallback')
+      .should('be.called');
   });
 
   it('calls the cancelCallback when clicking on the confirm button', () => {
     const cancelBtnText = 'Custom Cancel';
-    const cancelCallback = cy.stub();
+    const cancelCallback = cy.stub().as('cancelCallback');
 
     cy
       .mount(<Component cancelBtnText={cancelBtnText} cancelCallback={cancelCallback} />)
       .get(selectors.contentButton)
-      .click()
-      .get('button')
+      .click();
+
+    cy.get('button')
       .contains(cancelBtnText)
-      .click()
-      .then(() => {
-        expect(cancelCallback).to.be.called;
-      });
+      .click();
+
+    cy.get('@cancelCallback')
+      .should('be.called');
   });
 
   it('calls the beforeCallback when showing the modal', () => {
-    const beforeCallback = cy.stub();
+    const beforeCallback = cy.stub().as('beforeCallback');
 
     cy
       .mount(<Component beforeCallback={beforeCallback} />)
       .get(selectors.contentButton)
-      .click()
-      .then(() => {
-        expect(beforeCallback).to.be.called;
-      });
+      .click();
+
+    cy.get('@beforeCallback')
+      .should('be.called');
   });
 });

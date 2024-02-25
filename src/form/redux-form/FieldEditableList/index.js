@@ -4,17 +4,18 @@ import { fromJS } from 'immutable';
 
 import EditableList from '../../components/EditableList';
 
-export default class FieldEditableList extends Component {
-  static propTypes = {
-    input: PropTypes.instanceOf(Object),
-    meta: PropTypes.instanceOf(Object),
-    validationmessages: PropTypes.instanceOf(Object),
-  };
-
+class FieldEditableList extends Component {
   constructor(props) {
     super(props);
 
     this.handleOnChange = this.handleOnChange.bind(this);
+  }
+
+  handleOnChange(value) {
+    const { input } = this.props;
+    const { onChange } = input;
+
+    onChange(fromJS(value));
   }
 
   getEditableListError() {
@@ -27,13 +28,6 @@ export default class FieldEditableList extends Component {
     }
 
     return message;
-  }
-
-  handleOnChange(value) {
-    const { input } = this.props;
-    const { onChange } = input;
-
-    onChange(fromJS(value));
   }
 
   render() {
@@ -49,3 +43,11 @@ export default class FieldEditableList extends Component {
     );
   }
 }
+
+FieldEditableList.propTypes = {
+  input: PropTypes.instanceOf(Object),
+  meta: PropTypes.instanceOf(Object),
+  validationmessages: PropTypes.instanceOf(Object),
+};
+
+export default FieldEditableList;

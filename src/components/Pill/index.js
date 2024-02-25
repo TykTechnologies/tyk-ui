@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
  * Pill
  *
  */
-const Pill = (props) => {
+function Pill(props) {
   const {
     children,
     className,
@@ -12,7 +12,7 @@ const Pill = (props) => {
   } = props;
 
   const getCssClasses = () => {
-    let cssClasses = ['tyk-pill', ...theme.split(' ').map(t => `tyk-pill--${t}`)];
+    let cssClasses = ['tyk-pill', ...theme.split(' ').map((t) => `tyk-pill--${t}`)];
 
     if (className) {
       cssClasses = cssClasses.concat(className);
@@ -26,7 +26,7 @@ const Pill = (props) => {
       {children}
     </div>
   );
-};
+}
 
 Pill.propTypes = {
   children: PropTypes.oneOfType([

@@ -49,8 +49,9 @@ describe('AccordionItem', () => {
       .get(selectors.itemActive)
       .should('exist')
       .get(selectors.trigger)
-      .click()
-      .get(selectors.itemActive)
+      .click();
+
+    cy.get(selectors.itemActive)
       .should('not.exist');
   });
 
@@ -60,8 +61,9 @@ describe('AccordionItem', () => {
       .get(selectors.itemActive)
       .should('exist')
       .get(selectors.trigger)
-      .click()
-      .get(selectors.itemActive)
+      .click();
+
+    cy.get(selectors.itemActive)
       .should('exist');
   });
 });

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useRef, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import Message from '../Message';
 import Pagination from '../../form/components/Pagination';
@@ -19,53 +21,50 @@ function Table({
   const [state, setState] = useState(null);
   const [onChangeMsg, setOnChangeMsg] = useState('api');
   const itemsListRef = useRef(null);
-  const sortRows = (col, sortOrder) => {
-    setState({
-      ...state,
+  const sortRows = useCallback((col, sortOrder) => {
+    setState((prevState) => ({
+      ...prevState,
       sort: {
         order: sortOrder,
         col,
       },
-    });
-  };
+    }));
+  }, []);
 
-  const selectAllRows = (data) => {
-    setState({
-      ...state,
-      rows: state.rows.map((row) => ({ ...row, selected: data })),
-    });
-  };
+  const selectAllRows = useCallback((data) => {
+    setState((prevState) => ({
+      ...prevState,
+      rows: prevState.rows.map((row) => ({ ...row, selected: data })),
+    }));
+  }, []);
 
-  const selectRow = (data) => {
-    const { index, selected } = data;
-    const selectedRow = state.rows[index];
-  
-    setState({
-      ...state,
+  const selectRow = useCallback(({ index, selected }) => {
+    setState((prevState) => ({
+      ...prevState,
       rows: [
-        ...state.rows.slice(0, index),
-        { ...selectedRow, selected },
-        ...state.rows.slice(index + 1),
+        ...prevState.rows.slice(0, index),
+        { ...prevState.rows[index], selected },
+        ...prevState.rows.slice(index + 1),
       ],
-    });
-  };
+    }));
+  }, []);
 
-  const setPagination = (data) => {
-    setState({
-      ...state,
+  const setPagination = useCallback((data) => {
+    setState((prevState) => ({
+      ...prevState,
       pagination: {
         ...state.pagination,
         current: data + 1,
       },
-    });
-  };
+    }));
+  }, []);
 
   const api = {
     getState: () => state,
     setState: (newState) => setState(newState),
   };
 
-  const sendMessage = (message, data) => {
+  const sendMessage = useCallback((message, data) => {
     setOnChangeMsg(message);
     if (message === 'sort') {
       sortRows(data.column.id, data.sortOrder);
@@ -86,7 +85,9 @@ function Table({
     if (message === 'pagination.change') {
       setPagination(data);
     }
-  };
+  }, [sortRows, selectAllRows, selectRow, setPagination]);
+
+  const context = useMemo(() => ({ state, sendMessage }), [state, sendMessage]);
 
   useEffect(() => setState(value), [value]);
   useEffect(() => {
@@ -111,9 +112,8 @@ function Table({
     </table>
   );
 
-
   return (
-    <tableContext.Provider value={{ state, sendMessage }}>
+    <tableContext.Provider value={context}>
       <div className={`scrollable ${state.styling?.className || ''}`} style={{ height: state.maxHeight ? state.maxHeight : 'auto', position: 'relative' }}>
         {
           loading && <Loader position="absolute" withbackground />

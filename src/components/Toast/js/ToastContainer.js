@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import ToastMessage from './ToastMessage';
 
-const ToastContainer = (props) => {
+function ToastContainer(props) {
   const [messages, setMessages] = useState({});
   const {
     notify,
@@ -13,13 +13,13 @@ const ToastContainer = (props) => {
 
   const updateNotifications = (message, options) => {
     const msgID = Math.floor(Math.random() * 1000000);
-    
+
     setMessages((prevMessages) => ({
       ...prevMessages,
       [msgID]: {
         message,
         options,
-      }
+      },
     }));
   };
 
@@ -28,7 +28,7 @@ const ToastContainer = (props) => {
   }, [messages]);
 
   const onMessageClosed = (index) => {
-    const tempMessages = {...messages};
+    const tempMessages = { ...messages };
     delete tempMessages[index];
     setMessages((prevMessages) => {
       const { [index]: messageToBeRemoved, ...restMessages } = prevMessages;
@@ -58,7 +58,7 @@ const ToastContainer = (props) => {
       }
     </div>
   );
-};
+}
 
 ToastContainer.propTypes = {
   notify: PropTypes.func,

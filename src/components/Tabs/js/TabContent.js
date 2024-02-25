@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TabContext from './TabContext';
 import { usePrevious } from '../../../hooks';
 
-const TabContent = (props) => {
+function TabContent(props) {
   const {
     addTab,
     hideTab,
@@ -60,17 +60,14 @@ const TabContent = (props) => {
     return selectedPath && selectedPath.indexOf(tabData.id) > -1;
   }, [hideTabContent, rendered, selectedPath, tabData, tabs]);
 
+  const context = useMemo(() => ({ path, tabsId }), [path, tabsId]);
+
   return (
     (
       shouldRender
         ? (
           <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath && selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
-            <TabContext.Provider
-              value={{
-                path,
-                tabsId,
-              }}
-            >
+            <TabContext.Provider value={context}>
               {children}
             </TabContext.Provider>
           </div>
@@ -78,7 +75,7 @@ const TabContent = (props) => {
         : null
     )
   );
-};
+}
 
 TabContent.propTypes = {
   addTab: PropTypes.func,

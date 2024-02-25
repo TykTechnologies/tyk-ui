@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const StringBuilderFooter = (props) => {
+export function StringBuilderFooter(props) {
   const {
     note, error, inputInFocus, stringBuilderHeight, dropdownTriggerKey,
   } = props;
@@ -29,7 +29,7 @@ export const StringBuilderFooter = (props) => {
       )}
     </div>
   );
-};
+}
 
 StringBuilderFooter.propTypes = {
   note: PropTypes.string,

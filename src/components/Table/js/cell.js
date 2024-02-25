@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Cell = ({ col, row }) => {
+export function Cell({ col, row }) {
   if (!row.values[col.id]) {
-    return <td />;
+    return <td />; // eslint-disable-line jsx-a11y/control-has-associated-label
   }
 
   if (col.type === 'string') {
@@ -30,7 +30,7 @@ export const Cell = ({ col, row }) => {
       </Component>
     </td>
   );
-};
+}
 
 Cell.propTypes = {
   col: PropTypes.instanceOf(Object),

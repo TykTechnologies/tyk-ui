@@ -4,17 +4,18 @@ import { fromJS } from 'immutable';
 
 import Select from '../../components/Select';
 
-export default class FieldSelect extends Component {
-  static propTypes = {
-    input: PropTypes.instanceOf(Object),
-    meta: PropTypes.instanceOf(Object),
-    validationmessages: PropTypes.instanceOf(Object),
-  };
-
+class FieldSelect extends Component {
   constructor(props) {
     super(props);
 
     this.handleEvent = this.handleEvent.bind(this);
+  }
+
+  handleEvent(selectValue) {
+    const { input } = this.props;
+    const { onChange, value } = input;
+
+    onChange(fromJS(selectValue !== undefined ? selectValue : value));
   }
 
   getSelectError() {
@@ -29,13 +30,6 @@ export default class FieldSelect extends Component {
     }
 
     return message;
-  }
-
-  handleEvent(selectValue) {
-    const { input } = this.props;
-    const { onChange, value } = input;
-
-    onChange(fromJS(selectValue !== undefined ? selectValue : value));
   }
 
   render() {
@@ -54,3 +48,11 @@ export default class FieldSelect extends Component {
     );
   }
 }
+
+FieldSelect.propTypes = {
+  input: PropTypes.instanceOf(Object),
+  meta: PropTypes.instanceOf(Object),
+  validationmessages: PropTypes.instanceOf(Object),
+};
+
+export default FieldSelect;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 import ListItem from './js/ListItem';
 
-const List = (props) => {
+function List(props) {
   const {
     className,
     children,
@@ -55,7 +55,7 @@ const List = (props) => {
       </ul>
     </div>
   );
-};
+}
 
 List.propTypes = {
   children: PropTypes.oneOfType([
@@ -76,8 +76,6 @@ List.defaultProps = {
   style: {},
 };
 
-
 List.Item = ListItem;
-
 
 export default List;

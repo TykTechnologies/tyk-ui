@@ -4,17 +4,18 @@ import { fromJS } from 'immutable';
 
 import Combobox from '../../components/Combobox';
 
-export default class FieldCombobox extends Component {
-  static propTypes = {
-    meta: PropTypes.instanceOf(Object),
-    input: PropTypes.instanceOf(Object),
-    validationmessages: PropTypes.instanceOf(Object),
-  }
-
+class FieldCombobox extends Component {
   constructor(props) {
     super(props);
 
     this.handleOnChange = this.handleOnChange.bind(this);
+  }
+
+  handleOnChange(value) {
+    const { input } = this.props;
+    const { onChange } = input;
+
+    onChange(fromJS(value));
   }
 
   getComboboxError() {
@@ -31,13 +32,6 @@ export default class FieldCombobox extends Component {
     return message;
   }
 
-  handleOnChange(value) {
-    const { input } = this.props;
-    const { onChange } = input;
-
-    onChange(fromJS(value));
-  }
-
   render() {
     const { ...props } = this.props;
 
@@ -51,3 +45,11 @@ export default class FieldCombobox extends Component {
     );
   }
 }
+
+FieldCombobox.propTypes = {
+  meta: PropTypes.instanceOf(Object),
+  input: PropTypes.instanceOf(Object),
+  validationmessages: PropTypes.instanceOf(Object),
+};
+
+export default FieldCombobox;

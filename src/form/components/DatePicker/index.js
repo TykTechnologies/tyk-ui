@@ -165,6 +165,7 @@ function DatePicker({
           onKeyUp={() => {}}
           tabIndex={0}
           style={addonStyle}
+          aria-label="show calendar"
         >
           <Icon type="calendar" />
         </div>

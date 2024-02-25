@@ -11,26 +11,7 @@ import Column from '../../../layout/Column';
 import Icon from '../../../components/Icon';
 import Row from '../../../layout/Row';
 
-export default class EditableList extends Component {
-  static propTypes = {
-    addValueOnFieldChange: PropTypes.bool,
-    disabled: PropTypes.bool,
-    error: PropTypes.string,
-    config: PropTypes.instanceOf(Object),
-    onChange: PropTypes.func,
-    label: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.func,
-      PropTypes.string,
-    ]),
-    value: PropTypes.oneOfType([
-      PropTypes.instanceOf(Array),
-      PropTypes.instanceOf(Object),
-    ]),
-  };
-
+class EditableList extends Component {
   static getItemListValue(itemValue) {
     let tempValue = null;
 
@@ -92,6 +73,40 @@ export default class EditableList extends Component {
     return state.value ? state : null;
   }
 
+  handleFormSubmit(value) {
+    const tempState = this.addValues(value);
+    this.setState((previousState) => ({ ...previousState, ...tempState }), () => {
+      this.triggerOnChange(tempState.value.length - 1, null, value);
+    });
+  }
+
+  handleItemUpdate(index, value) {
+    let prevValue;
+    this.setState((previousState) => {
+      const tempState = { ...previousState };
+      prevValue = fromJS(tempState.value[index].value).toJS();
+      tempState.value[index].value = value;
+      tempState.value[index].editMode = false;
+
+      return tempState;
+    }, () => {
+      this.triggerOnChange(index, prevValue, value);
+    });
+  }
+
+  handleChildrenOnChange(index, value) {
+    let prevValue;
+    this.setState((previousState) => {
+      const tempState = { ...previousState };
+      prevValue = fromJS(tempState.value[index].children).toJS();
+      tempState.value[index].children = value;
+
+      return tempState;
+    }, () => {
+      this.triggerOnChange(index, prevValue, value);
+    });
+  }
+
   getListItemsCssClass(displayType) {
     const { config } = this.props;
     const cssClasses = ['tyk-editable-list-items'];
@@ -117,40 +132,40 @@ export default class EditableList extends Component {
     let value = null;
 
     switch (config.displayType) {
-    case 'list':
-    case 'inline': {
-      const itemText = itemData.value.reduce((prevValue, itemValue, index) => {
-        const tempValue = EditableList.getItemListValue(itemValue);
-        let separator = ', ';
+      case 'list':
+      case 'inline': {
+        const itemText = itemData.value.reduce((prevValue, itemValue, index) => {
+          const tempValue = EditableList.getItemListValue(itemValue);
+          let separator = ', ';
 
-        if (index === itemData.value.length - 1) {
-          separator = '';
-        }
-
-        return prevValue + tempValue + separator;
-      }, '');
-
-      value = itemText;
-
-      break;
-    }
-    default:
-      value = (
-        <Row>
-          {
-            config.components.map((component, index) => (
-              <Column
-                key={this.getFormInputKey()}
-                size={`md-${component.size} lg-${component.size}`}
-              >
-                { EditableList.getItemListValue(itemData.value[index]) }
-              </Column>
-            ))
+          if (index === itemData.value.length - 1) {
+            separator = '';
           }
-        </Row>
-      );
 
-      break;
+          return prevValue + tempValue + separator;
+        }, '');
+
+        value = itemText;
+
+        break;
+      }
+      default:
+        value = (
+          <Row>
+            {
+              config.components.map((component, index) => (
+                <Column
+                  key={this.getFormInputKey()}
+                  size={`md-${component.size} lg-${component.size}`}
+                >
+                  { EditableList.getItemListValue(itemData.value[index]) }
+                </Column>
+              ))
+            }
+          </Row>
+        );
+
+        break;
     }
 
     return value;
@@ -166,7 +181,7 @@ export default class EditableList extends Component {
     const newValues = this.closeListItems();
 
     this.setState((previousState) => {
-      const tempState = Object.assign({}, previousState);
+      const tempState = { ...previousState };
       tempState.value = newValues;
       tempState.value[index].editMode = !tempState.value[index].editMode;
 
@@ -225,45 +240,11 @@ export default class EditableList extends Component {
     });
   }
 
-  handleFormSubmit(value) {
-    const tempState = this.addValues(value);
-    this.setState(previousState => Object.assign({}, previousState, tempState), () => {
-      this.triggerOnChange(tempState.value.length - 1, null, value);
-    });
-  }
-
-  handleItemUpdate(index, value) {
-    let prevValue;
-    this.setState((previousState) => {
-      const tempState = Object.assign({}, previousState);
-      prevValue = fromJS(tempState.value[index].value).toJS();
-      tempState.value[index].value = value;
-      tempState.value[index].editMode = false;
-
-      return tempState;
-    }, () => {
-      this.triggerOnChange(index, prevValue, value);
-    });
-  }
-
-  handleChildrenOnChange(index, value) {
-    let prevValue;
-    this.setState((previousState) => {
-      const tempState = Object.assign({}, previousState);
-      prevValue = fromJS(tempState.value[index].children).toJS();
-      tempState.value[index].children = value;
-
-      return tempState;
-    }, () => {
-      this.triggerOnChange(index, prevValue, value);
-    });
-  }
-
   closeListItems() {
     const { value } = this.state;
 
     const newValues = value.map((itemValue) => {
-      const tempItemValue = Object.assign({}, itemValue);
+      const tempItemValue = { ...itemValue };
 
       if (tempItemValue.editMode) {
         tempItemValue.editMode = false;
@@ -307,7 +288,7 @@ export default class EditableList extends Component {
           {
             !itemData.editMode
               ? (
-                <Fragment>
+                <>
                   { this.getListItemText(itemData, index) }
                   <div
                     className="tyk-editable-list-item__controls"
@@ -316,17 +297,29 @@ export default class EditableList extends Component {
                       width: (config.displayType === 'inline') ? 'auto' : `${buttonWidth + 60}px`,
                     }}
                   >
-                    <button disabled={disabled} type="button" className="tyk-editable-list-action__button" onClick={this.setItemEditMode.bind(this, index)}>
+                    <button
+                      disabled={disabled}
+                      type="button"
+                      className="tyk-editable-list-action__button"
+                      onClick={this.setItemEditMode.bind(this, index)}
+                      aria-label="edit"
+                    >
                       <Icon type="edit" />
                     </button>
-                    <button disabled={disabled} type="button" className="tyk-editable-list-action__button" onClick={this.removeListItem.bind(this, index)}>
+                    <button
+                      disabled={disabled}
+                      type="button"
+                      className="tyk-editable-list-action__button"
+                      onClick={this.removeListItem.bind(this, index)}
+                      aria-label="remove"
+                    >
                       <Icon type="trash" />
                     </button>
                   </div>
-                </Fragment>
+                </>
               )
               : (
-                <Fragment>
+                <>
                   <EditableListForm
                     buttonName="Update"
                     noLabels={config.noLabels}
@@ -339,10 +332,15 @@ export default class EditableList extends Component {
                     validate={this.isInList.bind(this, index)}
                     validationmessage="This value is already in the list"
                   />
-                  <button type="button" className="tyk-editable-list-action__button on-edit" onClick={this.removeListItem.bind(this, index)}>
+                  <button
+                    type="button"
+                    className="tyk-editable-list-action__button on-edit"
+                    onClick={this.removeListItem.bind(this, index)}
+                    aria-label="remove"
+                  >
                     <Icon type="trash" />
                   </button>
-                </Fragment>
+                </>
               )
           }
         </div>
@@ -372,7 +370,7 @@ export default class EditableList extends Component {
     }
 
     return (
-      <Fragment>
+      <>
         {
           config.displayType === 'table' || !config.displayType
             ? (
@@ -400,7 +398,7 @@ export default class EditableList extends Component {
             value.map((itemData, index) => this.genListItem(itemData, index))
           }
         </ul>
-      </Fragment>
+      </>
     );
   }
 
@@ -444,3 +442,24 @@ export default class EditableList extends Component {
     );
   }
 }
+
+EditableList.propTypes = {
+  addValueOnFieldChange: PropTypes.bool,
+  disabled: PropTypes.bool,
+  error: PropTypes.string,
+  config: PropTypes.instanceOf(Object),
+  onChange: PropTypes.func,
+  label: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.string,
+  ]),
+  value: PropTypes.oneOfType([
+    PropTypes.instanceOf(Array),
+    PropTypes.instanceOf(Object),
+  ]),
+};
+
+export default EditableList;

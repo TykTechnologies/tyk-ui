@@ -6,23 +6,7 @@ import Column from '../../../../layout/Column';
 import Row from '../../../../layout/Row';
 import Button from '../../../../components/Button';
 
-export default class EditableListForm extends Component {
-  static propTypes = {
-    addValueOnFieldChange: PropTypes.bool,
-    noLabels: PropTypes.bool,
-    buttonName: PropTypes.string,
-    buttonStyle: PropTypes.string,
-    components: PropTypes.instanceOf(Array),
-    displayType: PropTypes.string,
-    disabled: PropTypes.bool,
-    getMainFormButtonWidth: PropTypes.func,
-    error: PropTypes.string,
-    errorPersist: PropTypes.bool,
-    onSubmit: PropTypes.func,
-    validate: PropTypes.func,
-    validationmessage: PropTypes.string,
-  };
-
+class EditableListForm extends Component {
   static getMainFormValue(components) {
     const mainFormValue = new Array(components.length);
 
@@ -91,6 +75,27 @@ export default class EditableListForm extends Component {
     return state;
   }
 
+  handleOnChange(component, index, value) {
+    const { addValueOnFieldChange } = this.props;
+    let tempState = this.state;
+
+    tempState = { ...tempState, ...this.validateValue(value, component.props) };
+
+    if (!tempState.errors[component.props.name]) {
+      tempState.mainFormValue[index] = value;
+
+      if (component.props.onChange) {
+        component.props.onChange(value);
+      }
+    }
+
+    this.setState((previousState) => ({ ...previousState, ...tempState }), () => {
+      if (addValueOnFieldChange) {
+        this.submitForm();
+      }
+    });
+  }
+
   getFormCssClasses() {
     const { noLabels } = this.props;
     const cssClasses = ['tyk-editable-list__form'];
@@ -153,7 +158,7 @@ export default class EditableListForm extends Component {
     const validatorsNames = props.validate ? Object.keys(props.validate) : [];
     // if there is a general form error don't take field errors into consideration
     const tempState = {
-      errors: (error || mainError) ? {} : Object.assign({}, errors),
+      errors: (error || mainError) ? {} : { ...errors },
     };
     let ok = true;
 
@@ -186,7 +191,7 @@ export default class EditableListForm extends Component {
     const { components, errorPersist } = this.props;
     const { mainFormValue } = this.state;
     const tempState = {
-      errors: Object.assign({}, errors),
+      errors: { ...errors },
     };
 
     if (errorPersist && mainFormValue.indexOf(undefined) === -1) {
@@ -198,35 +203,13 @@ export default class EditableListForm extends Component {
     }
 
     components.forEach((component, index) => {
-      tempState.errors = Object.assign(
-        {},
-        tempState.errors,
-        this.validateValue(mainFormValue[index], component.props).errors,
-      );
+      tempState.errors = {
+        ...tempState.errors,
+        ...this.validateValue(mainFormValue[index], component.props).errors,
+      };
     });
 
     return Object.keys(tempState.errors).length > 0;
-  }
-
-  handleOnChange(component, index, value) {
-    const { addValueOnFieldChange } = this.props;
-    let tempState = this.state;
-
-    tempState = Object.assign({}, tempState, this.validateValue(value, component.props));
-
-    if (!tempState.errors[component.props.name]) {
-      tempState.mainFormValue[index] = value;
-
-      if (component.props.onChange) {
-        component.props.onChange(value);
-      }
-    }
-
-    this.setState(previousState => Object.assign({}, previousState, tempState), () => {
-      if (addValueOnFieldChange) {
-        this.submitForm();
-      }
-    });
   }
 
   resetForm() {
@@ -356,3 +339,21 @@ export default class EditableListForm extends Component {
     );
   }
 }
+
+EditableListForm.propTypes = {
+  addValueOnFieldChange: PropTypes.bool,
+  noLabels: PropTypes.bool,
+  buttonName: PropTypes.string,
+  buttonStyle: PropTypes.string,
+  components: PropTypes.instanceOf(Array),
+  displayType: PropTypes.string,
+  disabled: PropTypes.bool,
+  getMainFormButtonWidth: PropTypes.func,
+  error: PropTypes.string,
+  errorPersist: PropTypes.bool,
+  onSubmit: PropTypes.func,
+  validate: PropTypes.func,
+  validationmessage: PropTypes.string,
+};
+
+export default EditableListForm;

@@ -2,12 +2,12 @@ import React, { useContext, useState } from 'react';
 import { HeaderCell } from './header-cell';
 import { tableContext } from '../tableContext';
 
-export const Header = () => {
+export function Header() {
   const [selectAll, setSelectAll] = useState(false);
   const { state, sendMessage } = useContext(tableContext);
   const { columns, selectable } = state;
 
-  const generateHeaders = () => columns.map(column => (
+  const generateHeaders = () => columns.map((column) => (
     <HeaderCell
       key={column.id}
       column={column}
@@ -55,4 +55,4 @@ export const Header = () => {
       </tr>
     </thead>
   );
-};
+}
