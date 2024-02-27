@@ -81,7 +81,7 @@ function Value(props) {
         role="none"
         tabIndex={disabled ? '-1' : '0'}
         onClick={triggerAction}
-        onKeyPress={triggerAction}
+        onKeyDown={triggerAction}
       >
         {val}
       </span>

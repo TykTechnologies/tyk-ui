@@ -168,10 +168,10 @@ class EditableListForm extends Component {
     }
 
     // validate each field from the form
-    for (let i = 0; i < validatorsNames.length; i += 1) {
-      const validator = props.validate[validatorsNames[i]];
+    for (const validatorName of validatorsNames) {
+      const validator = props.validate[validatorName];
       if (validator(value)) {
-        tempState.errors[props.name] = props.validationmessages[validatorsNames[i]];
+        tempState.errors[props.name] = props.validationmessages[validatorName];
         ok = false;
         break;
       }

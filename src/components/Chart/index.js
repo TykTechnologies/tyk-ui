@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useRef, memo,
+  useState, useEffect, useMemo, useRef, memo,
 } from 'react';
 import PropTypes from 'prop-types';
 import * as echarts from 'echarts';
@@ -26,7 +26,7 @@ function Chart({
   zoomEnd,
   title,
   seriesConfig = [],
-  noDataComponent = null,
+  noDataComponent: noDataComponentProp = null,
   zoomColors,
   style,
 }) {
@@ -37,6 +37,17 @@ function Chart({
       tykChartInstance.resize();
     }
   };
+
+  const noDataComponent = useMemo(
+    () => (noDataComponentProp
+      ? noDataComponentProp()
+      : (
+        <Message theme="info">
+          No data to display
+        </Message>
+      )),
+    [noDataComponentProp],
+  );
 
   const lineBarChart = {
     defaultOpts: fromJS({
@@ -412,16 +423,9 @@ function Chart({
         ref={chartWrapperRef}
       />
       {
-        /* eslint-disable-next-line no-nested-ternary */
         chartHasData()
           ? null
           : noDataComponent
-            ? noDataComponent()
-            : (
-              <Message theme="info">
-                No data to display
-              </Message>
-            )
       }
     </div>
   );

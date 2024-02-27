@@ -60,7 +60,7 @@ function DatePicker({
   }, [prevValue, onChange, hasValueChanged]);
 
   useEffect(() => {
-    if (dateRef && dateRef.current && !pickerInstance) {
+    if (dateRef.current && !pickerInstance) {
       const instance = flatpickr(dateRef.current, {
         ...config, defaultDate: value, onChange: onDateChange, onClose, onOpen,
       });
@@ -72,7 +72,7 @@ function DatePicker({
         pickerInstance.destroy();
       }
     };
-  }, [dateRef.current, pickerInstance]);
+  }, [pickerInstance]);
 
   useEffect(() => {
     if (pickerInstance) {
@@ -136,7 +136,7 @@ function DatePicker({
     let inputStyle = {};
     let addonStyle = {};
 
-    if (config && config.inline) {
+    if (config?.inline) {
       inputStyle = {
         height: 0,
         padding: 0,
@@ -176,7 +176,7 @@ function DatePicker({
   return (
     <>
       {
-        children && children.length
+        children?.length
           ? children({ openCalendar, ref: dateRef })
           : (
             <div className={classes}>

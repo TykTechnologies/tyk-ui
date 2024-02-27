@@ -207,7 +207,7 @@ function Tabs(props) {
 
     const key = tempPath.shift();
 
-    return !!(tempTabs && tempTabs[key]);
+    return Boolean(tempTabs?.[key]);
   };
 
   const context = useMemo(() => ({

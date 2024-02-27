@@ -1,4 +1,4 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
@@ -352,7 +352,7 @@ class EditableList extends Component {
                 // eslint-disable-next-line react/jsx-no-bind
                 onChange={this.handleChildrenOnChange.bind(this, index)}
                 config={config.children.config}
-                value={(value[index] && value[index].children) || []}
+                value={value[index]?.children || []}
               />
             )
             : null

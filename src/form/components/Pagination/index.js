@@ -30,11 +30,7 @@ function shouldShowPage(currentNr, pageNr, totalNrOfPages) {
     return true;
   }
 
-  if ([0, 1, totalNrOfPages - 1, totalNrOfPages].includes(currentNr)) {
-    return true;
-  }
-
-  return false;
+  return [0, 1, totalNrOfPages - 1, totalNrOfPages].includes(currentNr);
 }
 
 function getPagesArr(nrOfPages, selectedPage) {

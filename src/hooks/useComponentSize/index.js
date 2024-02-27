@@ -15,7 +15,7 @@ const getSize = (el) => {
 };
 
 const useComponentSize = (ref) => {
-  const [ComponentSize, setComponentSize] = useState(getSize(ref ? ref.current : {}));
+  const [componentSize, setComponentSize] = useState(getSize(ref ? ref.current : {}));
   const handleResize = useCallback(() => {
     if (ref.current) {
       setComponentSize(getSize(ref.current));
@@ -36,7 +36,7 @@ const useComponentSize = (ref) => {
     };
   }, [ref.current]);
 
-  return ComponentSize;
+  return componentSize;
 };
 
 /** @component */

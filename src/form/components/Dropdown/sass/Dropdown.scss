@@ -108,6 +108,8 @@
 
   &:hover {
     color: $tyk-dropdown-item-hover-text-color;
+    background-color: $tyk-dropdown-item-background-hover;
+    text-decoration: none;
   }
 
   .badge {
@@ -116,11 +118,6 @@
     font-size: map-get($spacing, 'sm');
     margin-top: -4px;
     margin-left: 6px;
-  }
-
-  &:hover {
-    background-color: $tyk-dropdown-item-background-hover;
-    text-decoration: none;
   }
 }
 

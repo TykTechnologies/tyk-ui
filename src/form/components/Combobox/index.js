@@ -1,4 +1,4 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
@@ -206,15 +206,14 @@ class Combobox extends Component {
       tempState = { ...tempState, ...this[methodName](cursor) };
     }
 
-    if (allowCustomValues && !e.key === ' ' && tags) {
+    if (allowCustomValues && e.key !== ' ' && tags) {
       tempState = { ...tempState, ...this.manageSelectedTags() };
     }
 
     if (
       !opened
         && this.inputRef.current.value
-        && filteredValues
-        && filteredValues.length
+        && filteredValues?.length
         && e.key !== 'Escape'
     ) {
       tempState = { ...tempState, ...Combobox.openList() };
@@ -407,8 +406,7 @@ class Combobox extends Component {
     }
 
     if (
-      values
-      && values.length
+      values?.length
       && !Array.isArray(stateSelectedValues) && !stateSelectedValues.name
     ) {
       return values.filter((value) => value.id === stateSelectedValues.id)[0].name;
@@ -465,8 +463,6 @@ class Combobox extends Component {
         }
         selectedValues = this.addSelectedValue(filteredValues[index]);
       }
-
-      // tempSelectedValues = stateSelectedValues;
     } else {
       selectedValues = {
         stateSelectedValues: (selectedIndex === -1) ? tempSelectedValues : { id: null },
@@ -623,7 +619,7 @@ class Combobox extends Component {
                       <li
                         className="tyk-combobox__search-box"
                         style={{
-                          width: (!stateSelectedValues || !stateSelectedValues.length) ? '100%' : 'auto',
+                          width: (!stateSelectedValues?.length) ? '100%' : 'auto',
                         }}
                       >
                         {(max === undefined || stateSelectedValues?.length < max) && (
@@ -631,17 +627,17 @@ class Combobox extends Component {
                             <input
                               className="tyk-form-control"
                               disabled={disabled}
-                              onKeyPress={(e) => {
+                              onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
                                   e.preventDefault();
                                 }
+                                this.handleItemsNavigation(e);
                               }}
                               onKeyUp={this.onKeyUp}
-                              onKeyDown={this.handleItemsNavigation}
-                              placeholder={(!stateSelectedValues || !stateSelectedValues.length) ? placeholder : ''}
+                              placeholder={(!stateSelectedValues?.length) ? placeholder : ''}
                               ref={this.inputRef}
                               style={{
-                                width: (!stateSelectedValues || !stateSelectedValues.length) ? '100%' : `${width}px`,
+                                width: (!stateSelectedValues?.length) ? '100%' : `${width}px`,
                               }}
                             />
                             <span
@@ -697,6 +693,7 @@ class Combobox extends Component {
             ? opened && filteredValues.length
               ? ReactDOM.createPortal(
                 <ul
+                  id=""
                   className={this.getComboboxListCssClass()}
                   ref={this.valuesListRef}
                   style={this.getStyles()}

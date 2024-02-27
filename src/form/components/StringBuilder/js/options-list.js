@@ -72,7 +72,7 @@ export function OptionsList({
       <ul className="string-builder-list">
         {filteredOptions.map((option) => (
           <li
-            key={`${option.id}${Math.random()}`}
+            key={`${option.id}-${option.name}`}
             onMouseDown={() => handleOptionSelection(option)}
           >
             <span className={`url-builder__options_name ${option.className || 'default-option-name'}`}>

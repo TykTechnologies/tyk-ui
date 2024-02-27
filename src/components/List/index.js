@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fromJS } from 'immutable';
 import ListItem from './js/ListItem';
 
 function List(props) {
@@ -28,7 +27,7 @@ function List(props) {
   };
 
   const getListStyle = () => {
-    const styleCopy = fromJS(style).toJS();
+    const styleCopy = structuredClone(style);
     if (labelwidth) {
       styleCopy.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }

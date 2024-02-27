@@ -24,6 +24,7 @@
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "no-console": "off",
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
     "no-unused-expressions": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",

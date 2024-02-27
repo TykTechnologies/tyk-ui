@@ -31,8 +31,9 @@ function ToastContainer(props) {
     const tempMessages = { ...messages };
     delete tempMessages[index];
     setMessages((prevMessages) => {
-      const { [index]: messageToBeRemoved, ...restMessages } = prevMessages;
-      return restMessages;
+      const newMessages = { ...prevMessages };
+      delete newMessages[index];
+      return newMessages;
     });
   };
 

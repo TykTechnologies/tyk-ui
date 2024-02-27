@@ -18,7 +18,9 @@ export function StringBuilderFooter(props) {
         <p className="tyk-form-control__help-block">
           <span>
             Enter
+            {' '}
             <span className="string_builder_trigger">{dropdownTriggerKey}</span>
+            {' '}
             to add any parameter
           </span>
         </p>

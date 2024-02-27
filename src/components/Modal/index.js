@@ -96,6 +96,9 @@ Modal.Header = ({ children }) => {
     </div>
   );
 };
+Modal.Header.propTypes = {
+  children: PropTypes.element,
+};
 /* eslint-disable-next-line */
 Modal.Title = ({ children }) => {
   console.warn('%cModal.Title%c is deprecated.', 'font-weight: bold', '');
@@ -104,6 +107,9 @@ Modal.Title = ({ children }) => {
       { children }
     </h4>
   );
+};
+Modal.Title.propTypes = {
+  children: PropTypes.element,
 };
 
 Modal.propTypes = {

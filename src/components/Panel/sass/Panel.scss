@@ -15,18 +15,6 @@
     border: $general-border-width solid theme-color('danger', 'base');
   }
 
-  &__header {
-    align-items: center;
-    border-bottom: 1px solid $panel-default-border-bottom-color;
-    display: flex;
-    font-family: $font-family-regular;
-
-    > .tyk-icon,
-    > .tyk-tooltip__wrapper {
-      margin-left: 5px;
-    }
-  }
-
   .tyk-panel {
     border: $general-border-width solid theme-color('default', 'light');
     box-shadow: none;
@@ -57,13 +45,11 @@
 
     .tyk-panel__header {
       @include panel-variant($panel-primary-header-color, $panel-primary-header-text-color);
+      border: $panel-primary-border-color;
     }
 
     .tyk-panel__body {
-        @include panel-variant($panel-primary-body-color, $panel-primary-body-text-color);
-      }
-    .tyk-panel__header {
-      border: $panel-primary-border-color;
+      @include panel-variant($panel-primary-body-color, $panel-primary-body-text-color);
     }
 
     & .tyk-form-group {
@@ -121,6 +107,9 @@
 }
 
 .tyk-panel__header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $panel-default-border-bottom-color;
   border-radius: $panel-border-radius;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -128,6 +117,11 @@
   overflow: hidden;
   padding: $padding-y-panel-header $padding-x-panel-header;
   position: relative;
+
+  > .tyk-icon,
+  > .tyk-tooltip__wrapper {
+    margin-left: 5px;
+  }
 
   .tyk-panel--collapsed & {
     border-bottom-left-radius: $panel-border-radius;

@@ -265,8 +265,8 @@ function Combobox2({
   }
 
   function handleDocumentClick(e) {
-    const isClickInside = (rootRef.current && rootRef.current.contains(e.target))
-      || (dropdownRef.current && dropdownRef.current.contains(e.target));
+    const isClickInside = rootRef.current?.contains(e.target)
+      || dropdownRef.current?.contains(e.target);
     if (!isClickInside) {
       closeDropdown();
     }

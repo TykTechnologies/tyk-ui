@@ -33,7 +33,7 @@ function TabContent(props) {
   useEffect(() => {
     if (
       tabExists(path) && tabData?.title
-      && (prevTabData?.title !== tabData?.title || prevTabData.selected !== tabData.selected)
+      && (prevTabData?.title !== tabData?.title || prevTabData?.selected !== tabData.selected)
     ) {
       const tempTabData = { ...tabData };
       updateTab(tempTabData, path);
