@@ -4,30 +4,32 @@ import PropTypes from 'prop-types';
 import FloatingContainer from '../../../components/FloatingContainer';
 import List from '../../../components/List';
 
-const DropdownListWrapper = forwardRef(({
+function DropdownListWrapper({
   children,
   element,
   maxWidth,
-}, ref) => (
-  <FloatingContainer
-    element={element}
-    ref={ref}
-    className="dropdown__menu"
-    position="bottom"
-    alignment="auto"
-    offset={5}
-    arrow
-  >
-    <List
-      style={{
-        ...maxWidth && { maxWidth },
-      }}
-      theme="primary"
+}, ref) {
+  return (
+    <FloatingContainer
+      element={element}
+      ref={ref}
+      className="dropdown__menu"
+      position="bottom"
+      alignment="auto"
+      offset={5}
+      arrow
     >
-      { children }
-    </List>
-  </FloatingContainer>
-));
+      <List
+        style={{
+          ...maxWidth && { maxWidth },
+        }}
+        theme="primary"
+      >
+        { children }
+      </List>
+    </FloatingContainer>
+  );
+}
 
 DropdownListWrapper.propTypes = {
   element: PropTypes.shape({
@@ -42,4 +44,4 @@ DropdownListWrapper.propTypes = {
   maxWidth: PropTypes.string,
 };
 
-export default DropdownListWrapper;
+export default forwardRef(DropdownListWrapper);

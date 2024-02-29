@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import ToggleContext from './ToggleContext';
 import ToggleItem from './ToggleItem';
 
-const ToggleItemWrapper = React.forwardRef((props, ref) => (
-  <ToggleContext.Consumer>
-    {(context) => (
-      <ToggleItem {...props} context={context} ref={ref}>
-        {props.children}
-      </ToggleItem>
-    )}
-  </ToggleContext.Consumer>
-));
+function ToggleItemWrapper({ children, ...rest }, ref) {
+  return (
+    <ToggleContext.Consumer>
+      {(context) => (
+        <ToggleItem {...rest} context={context} ref={ref}>
+          {children}
+        </ToggleItem>
+      )}
+    </ToggleContext.Consumer>
+  );
+}
 
 ToggleItemWrapper.propTypes = {
   children: PropTypes.oneOfType([
@@ -23,4 +25,4 @@ ToggleItemWrapper.propTypes = {
   ]),
 };
 
-export default ToggleItemWrapper;
+export default forwardRef(ToggleItemWrapper);

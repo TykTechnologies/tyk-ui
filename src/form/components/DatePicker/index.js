@@ -81,7 +81,7 @@ function DatePicker({
       if (typeof value === 'string') {
         tempValue = new Date(value);
       } else if (Array.isArray(value)) {
-        tempValue = value.map((date) => (typeof date === 'string' ? new Date(date) : date));
+        tempValue = value.map((date) => new Date(date));
       }
 
       if (hasValueChanged(prevValue, tempValue)) {

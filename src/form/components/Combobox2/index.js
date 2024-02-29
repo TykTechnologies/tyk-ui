@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useEffect, useRef, useState,
+  useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,21 +8,6 @@ import FloatingContainer from '../../../components/FloatingContainer';
 
 import Value from './js/Value';
 import List from './js/List';
-
-function normalizeValue(value, values) {
-  let v = value;
-  if (typeof value === 'string') v = { id: value, name: value };
-  else if (!value.hasOwnProperty('name')) v = { ...value, name: value.id }; // eslint-disable-line no-prototype-builtins
-  if (!values) return v;
-  const existingVal = values.find((ev) => ev.id === v.id);
-  return existingVal ? { ...v, ...existingVal } : v;
-}
-
-function getValueFromProp(value, values) {
-  if (!value) return [];
-  if (Array.isArray(value)) return value.map((v) => normalizeValue(v, values));
-  return [normalizeValue(value, values)];
-}
 
 /**
  * Dropdown-like component that can display selected values as regular text,
@@ -66,13 +51,15 @@ function Combobox2({
   wrapperClassName = '',
   ...restProps
 }) {
-  const max = multiple ? Infinity : maxProp || (tags ? Infinity : 1);
+  const max = useMemo(
+    () => (multiple ? Infinity : maxProp || (tags ? Infinity : 1)),
+    [multiple, maxProp, tags],
+  );
   const renderList = CustomListComponent
     ? (values, { sendMessage }) => (
       <CustomListComponent
         filteredValues={values}
         handleListItemClick={(index) => sendMessage('value.select', { item: values[index] })}
-        getListItemCssClasses={() => {}}
       />
     )
     : renderListProp;
@@ -197,17 +184,18 @@ function Combobox2({
 
   function selectValue({ id }) {
     const val = values.find((v) => v.id === id);
+    const valIndex = values.findIndex((v) => v.id === id);
     let finalValue = value;
     let selectedValues = values;
 
     if (val.selected) {
       if (!required || max !== 1) {
         finalValue = value.filter((v) => v.id !== val.id);
-        selectedValues = values.map((v) => (v.id === val.id ? { ...v, selected: false } : v));
+        selectedValues = values.with(valIndex, { ...val, selected: false });
       }
     } else if (value.length < max) {
       finalValue = [...value, val];
-      selectedValues = values.map((v) => (v.id === val.id ? { ...v, selected: true } : v));
+      selectedValues = values.with(valIndex, { ...val, selected: true });
     } else if (max === 1) {
       finalValue = [val];
       selectedValues = values.map((v) => ({ ...v, selected: v.id === val.id }));
@@ -358,6 +346,14 @@ function Combobox2({
     moveDownActiveItem,
   ]);
 
+  const renderIcon = useCallback(
+    () => (expandMode
+      ? <Icon type={valuesExpanded ? 'compress-arrows-alt' : 'expand-arrows-alt'} />
+      : <Icon family="tykon" type="arrowdown" />
+    ),
+    [expandMode, valuesExpanded],
+  );
+
   useEffect(() => {
     window.addEventListener('click', handleDocumentClick, true);
     return () => window.removeEventListener('click', handleDocumentClick, true);
@@ -411,6 +407,7 @@ function Combobox2({
     expandMode && 'expand-mode',
     `tyk-combobox2__current-values--${valuesExpanded ? 'expanded' : 'collapsed'}`,
   ].join(' ');
+
   return (
     <div
       ref={rootRef}
@@ -457,13 +454,7 @@ function Combobox2({
                 onClick={executeTriggerAction}
                 onKeyDown={executeTriggerAction}
               >
-                {expandMode
-                  ? (
-                    <Icon type={valuesExpanded ? 'compress-arrows-alt' : 'expand-arrows-alt'} />
-                  )
-                  : (
-                    <Icon family="tykon" type="arrowdown" />
-                  )}
+                {renderIcon()}
               </div>
             )}
           </div>
@@ -641,3 +632,18 @@ Combobox2.propTypes = {
 };
 
 export default Combobox2;
+
+function normalizeValue(value, values) {
+  let v = value;
+  if (typeof value === 'string') v = { id: value, name: value };
+  else if (!value.hasOwnProperty('name')) v = { ...value, name: value.id }; // eslint-disable-line no-prototype-builtins
+  if (!values) return v;
+  const existingVal = values.find((ev) => ev.id === v.id);
+  return existingVal ? { ...v, ...existingVal } : v;
+}
+
+function getValueFromProp(value, values) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.map((v) => normalizeValue(v, values));
+  return [normalizeValue(value, values)];
+}

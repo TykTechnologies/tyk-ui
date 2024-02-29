@@ -62,18 +62,13 @@ function TabContent(props) {
 
   const context = useMemo(() => ({ path, tabsId }), [path, tabsId]);
 
+  if (!shouldRender) return null;
   return (
-    (
-      shouldRender
-        ? (
-          <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath && selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
-            <TabContext.Provider value={context}>
-              {children}
-            </TabContext.Provider>
-          </div>
-        )
-        : null
-    )
+    <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath && selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
+      <TabContext.Provider value={context}>
+        {children}
+      </TabContext.Provider>
+    </div>
   );
 }
 

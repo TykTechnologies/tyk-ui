@@ -4,46 +4,48 @@ import PropTypes from 'prop-types';
 import Button from '../../../components/Button';
 import ButtonGroup from '../../../components/ButtonGroup';
 
-const DropdownTrigger = forwardRef(({
+function DropdownTrigger({
   title,
   theme = 'primary',
   splitTrigger,
   toggle,
   onTriggerClick,
   value,
-}, ref) => (
-  !splitTrigger ? (
-    <Button
-      className="dropdown__trigger"
-      iconType="arrowdown"
-      iconFamily="tykon"
-      iconPosition="right"
-      theme={theme}
-      ref={ref}
-      onClick={toggle}
-    >
-      {title}
-    </Button>
-  ) : (
-    <ButtonGroup ref={ref}>
-      <Button
-        theme={theme}
-        {...onTriggerClick && { onClick: () => onTriggerClick(value) }}
-      >
-        {title}
-      </Button>
+}, ref) {
+  return (
+    !splitTrigger ? (
       <Button
         className="dropdown__trigger"
         iconType="arrowdown"
         iconFamily="tykon"
         iconPosition="right"
         theme={theme}
+        ref={ref}
         onClick={toggle}
-        iconOnly
-      />
-    </ButtonGroup>
-  )
-));
+      >
+        {title}
+      </Button>
+    ) : (
+      <ButtonGroup ref={ref}>
+        <Button
+          theme={theme}
+          {...onTriggerClick && { onClick: () => onTriggerClick(value) }}
+        >
+          {title}
+        </Button>
+        <Button
+          className="dropdown__trigger"
+          iconType="arrowdown"
+          iconFamily="tykon"
+          iconPosition="right"
+          theme={theme}
+          onClick={toggle}
+          iconOnly
+        />
+      </ButtonGroup>
+    )
+  );
+}
 
 DropdownTrigger.propTypes = {
   title: PropTypes.string,
@@ -60,4 +62,4 @@ DropdownTrigger.propTypes = {
   ]),
 };
 
-export default DropdownTrigger;
+export default forwardRef(DropdownTrigger);

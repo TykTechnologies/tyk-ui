@@ -21,47 +21,54 @@ export function TokenizedString(props) {
   const hasDuplicates = new Set(tokens).size !== tokens.length;
 
   const allTokens = tokens?.map((token) => {
-    if (options) {
-      const matchedOption = options.find((option) => option.id === token);
-      // if invalid token
-      if (invalidTokenRegex && !matchedOption) {
-        const matchedTokens = token.replaceAll(' ', '').split(invalidTokenRegex);
-        if (matchedTokens?.length > 1) {
-          return (
-            <span key={`${token}${hasDuplicates && Math.random()}`}>
-              {matchedTokens.map((tkn) => {
-                if (tkn.match(invalidTokenRegex)) {
-                  return (
-                    <InvalidToken
-                      key={tkn}
-                      token={tkn}
-                      findInvalidTokenSubstitute={findInvalidTokenSubstitute}
-                    />
-                  );
-                }
-                return (<span key={tkn}>{`${tkn} `}</span>);
-              })}
-            </span>
-          );
-        }
-      }
-      // if token matches option
+    const key = `${token}${hasDuplicates && Math.random()}`;
 
-      if (matchedOption) {
+    if (!options) {
+      return (
+        <span key={key}>{token}</span>
+      );
+    }
+
+    const matchedOption = options.find((option) => option.id === token);
+
+    // if invalid token
+    if (invalidTokenRegex && !matchedOption) {
+      const matchedTokens = token.replaceAll(' ', '').split(invalidTokenRegex);
+      if (matchedTokens?.length > 1) {
         return (
-          <span
-            key={`${token}${hasDuplicates && Math.random()}`}
-            className={`${matchedOption.className || 'default-option-name'}`}
-          >
-            {matchedOption.id}
+          <span key={key}>
+            {matchedTokens.map((tkn) => {
+              if (tkn.match(invalidTokenRegex)) {
+                return (
+                  <InvalidToken
+                    key={tkn}
+                    token={tkn}
+                    findInvalidTokenSubstitute={findInvalidTokenSubstitute}
+                  />
+                );
+              }
+              return (<span key={tkn}>{`${tkn} `}</span>);
+            })}
           </span>
         );
       }
     }
-    return (
-      <span key={`${token}${hasDuplicates && Math.random()}`}>{token}</span>
-    );
+
+    // if token matches option
+    if (matchedOption) {
+      return (
+        <span
+          key={key}
+          className={`${matchedOption.className || 'default-option-name'}`}
+        >
+          {matchedOption.id}
+        </span>
+      );
+    }
+
+    return null;
   });
+
   return (
     <div className={`string-builder__styled ${disabled && 'string-builder__disabled'}`}>
       {allTokens}

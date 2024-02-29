@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React, { cloneElement, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
@@ -6,7 +6,7 @@ import Icon from '../Icon';
 /**
  * Button component.
  */
-const Button = React.forwardRef((props, ref) => {
+function Button(props, ref) {
   const {
     customButton,
     children,
@@ -115,7 +115,7 @@ const Button = React.forwardRef((props, ref) => {
   return (
     getButtonType()
   );
-});
+}
 
 Button.propTypes = {
   /**
@@ -174,4 +174,4 @@ Button.defaultProps = {
   type: 'button',
 };
 
-export default Button;
+export default forwardRef(Button);
