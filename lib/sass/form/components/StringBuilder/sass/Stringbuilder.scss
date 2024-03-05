@@ -15,9 +15,9 @@
   font: inherit;
   display: block;
   z-index: 1;
-  width: 100%;
   padding: 0px;
   width: calc(100% - 35px);
+
   &:focus,
   &:active {
     border: none;
@@ -34,7 +34,7 @@
   border: none;
   word-wrap: break-word;
   word-break: break-all;
-  
+
 }
 
 .string-builder__disabled{

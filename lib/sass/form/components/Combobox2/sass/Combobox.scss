@@ -116,7 +116,6 @@
   &__text-value {
     font-family: $font-family-medium;
     font-size: text-scale('sm');
-    line-height: line-height('sm');
     padding: 9px 5px;
     width: 100%;
     overflow: hidden;
@@ -145,6 +144,7 @@
     cursor: pointer;
     outline: none;
     transition: all .2s;
+    color: $text-color;
 
     &--expanded {
       transform: rotate(180deg);
@@ -168,6 +168,7 @@
 
   &.tyk-form-group--rounded-corners {
     border-radius: $general-border-radius;
+    z-index: 1081;
   }
 
   .tyk-combobox2__combobox-search {
@@ -216,11 +217,4 @@
       }
     }
   }
-}
-.tyk-combobox2__values-container-trigger {
-  color: $text-color;
-}
-
-.tyk-combobox2__combobox-dropdown.tyk-form-group--rounded-corners {
-  z-index: 1081;
 }
