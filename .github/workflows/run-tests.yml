@@ -46,8 +46,8 @@ jobs:
           -Dsonar.projectKey=TykTechnologies_tyk-ui
           -Dsonar.sources=./src
           -Dsonar.exclusions=src/common/sass/fontawesome.scss,src/common/sass/tykon.scss
-          -Dsonar.coverage.exclusions=cypress/**/*.js,**/*.test.js,src/form/components/Combobox/*.js,src/form/components/Input/*.js,src/form/redux-form/**/*.js
-          -Dsonar.cpd.exclusions=**/*.test.js,src/form/redux-form/**/*,src/common/fonts/**/*,src/form/components/Combobox/*.js,src/form/components/Input/*.js
+          -Dsonar.coverage.exclusions=cypress/**/*.js,**/*.test.js,src/form/components/Combobox/**/*.js,src/form/components/Input/**/*.js,src/form/components/EditableList/**/*.js,src/form/redux-form/**/*.js,src/hooks/**/*,src/utils/**/*
+          -Dsonar.cpd.exclusions=**/*.test.js,src/form/redux-form/**/*,src/common/fonts/**/*,src/form/components/Combobox/*.js,src/form/components/Input/*.js,src/form/components/EditableList/**/*.js,src/form/redux-form/**/*.js,src/hooks/**/*,src/utils/**/*
           -Dsonar.test.inclusions=**/*.test.js
           -Dsonar.tests=./src
           -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info

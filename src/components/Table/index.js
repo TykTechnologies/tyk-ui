@@ -31,10 +31,10 @@ function Table({
     }));
   }, []);
 
-  const selectAllRows = useCallback((data) => {
+  const selectAllRows = useCallback((selected) => {
     setState((prevState) => ({
       ...prevState,
-      rows: prevState.rows.map((row) => ({ ...row, selected: data })),
+      rows: prevState.rows.map((row) => ({ ...row, selected })),
     }));
   }, []);
 
@@ -70,10 +70,6 @@ function Table({
       sortRows(data.column.id, data.sortOrder);
     }
 
-    if (message === 'header.selectAll.click') {
-      selectAllRows(data);
-    }
-
     if (message === 'header.selectAll.change') {
       selectAllRows(data);
     }
@@ -107,7 +103,7 @@ function Table({
 
   const getTable = () => (
     <table className="tyk-table" ref={itemsListRef}>
-      <Header />
+      <Header allRowsSelected={state.rows.every(({ selected }) => selected)} />
       <Body />
     </table>
   );

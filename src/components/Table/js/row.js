@@ -12,11 +12,11 @@ export function Row({ row, index }) {
     // eslint-disable-next-line jsx-a11y/control-has-associated-label
     <td>
       <Checkbox
-        defaultChecked={row.selected}
-        onChange={(v) => sendMessage('row.selected', { index, selected: v })}
+        value={row.selected}
+        onChange={(v) => sendMessage('row.selected', { index, selected: v.target.checked })}
       />
     </td>
-  ), []);
+  ), [row.selected, index]);
 
   return (
     <tr

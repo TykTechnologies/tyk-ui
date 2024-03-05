@@ -8,7 +8,8 @@ describe('Table Component Rendering', () => {
     headerCell: '.tyk-table thead th',
     sortIcon: '.tyk-table thead th .tykon-arrowsort',
     sortIconClassName: '.tykon-arrowsort',
-    selectAllCheckbox: '.tyk-table input[type="checkbox"]',
+    selectAllCheckbox: '.tyk-table thead input[type="checkbox"]',
+    allRowCheckboxes: '.tyk-table tbody input[type="checkbox"]',
     row: '.tyk-table tbody tr',
     noDataMessage: '.tyk-message',
     loadingIndicator: '.tyk-loading__wrapper',
@@ -162,8 +163,8 @@ describe('Table Component Rendering', () => {
           }}
         />,
       )
-      .get(selectors.selectAllCheckbox)
-      .should('have.length', 3);
+      .get(selectors.allRowCheckboxes)
+      .should('have.length', config.rows.length);
   });
 
   it('should render rows with correct data', () => {
@@ -231,5 +232,65 @@ describe('Table Component Rendering', () => {
     );
     cy.get(`${selectors.row}:eq(0)`).find(selectors.checkbox).check();
     cy.get('@onClickSpy').should('be.called');
+  });
+
+  it('selects all rows if checking the header select all checkbox', () => {
+    cy.mount(
+      <Table
+        value={{
+          ...config,
+          ...configSelectable,
+        }}
+      />,
+    );
+
+    cy.get(selectors.selectAllCheckbox)
+      .should('not.be.checked')
+      .check();
+
+    cy.get(selectors.selectAllCheckbox)
+      .should('be.checked')
+      .get(selectors.allRowCheckboxes)
+      .should('be.checked');
+
+    // unselecting a row makes the selectAllCheckbox not to be checked
+    cy.get(selectors.allRowCheckboxes)
+      .eq(0)
+      .uncheck();
+
+    cy.get(selectors.selectAllCheckbox)
+      .should('not.be.checked');
+  });
+
+  it('renders an empty table cell if a row has no value specified for a column', () => {
+    cy.mount(
+      <Table
+        value={{
+          columns: [{ id: 'col1', name: 'Col1' }],
+          rows: [{ values: {} }],
+        }}
+      />,
+    );
+
+    cy.get(selectors.row)
+      .eq(0)
+      .find('td')
+      .should('be.empty');
+  });
+
+  it('columns can render different things based on its "type"', () => {
+    cy.mount(
+      <Table
+        value={{
+          columns: [{ id: 'col1', name: 'Col1', type: Checkbox }],
+          rows: [{ values: { col1: {} } }],
+        }}
+      />,
+    );
+
+    cy.get(selectors.row)
+      .eq(0)
+      .find('td input')
+      .should('exist');
   });
 });
