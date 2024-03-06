@@ -32,12 +32,12 @@ describe('FixedWrapper', () => {
       .get(selectors.scrolled)
       .should('not.exist');
 
-    cy.scrollTo(0, 500)
-      .get(selectors.scrolled)
+    cy.scrollTo(0, 500);
+    cy.get(selectors.scrolled)
       .should('exist');
 
-    cy.scrollTo(0, 0)
-      .get(selectors.scrolled)
+    cy.scrollTo(0, 0);
+    cy.get(selectors.scrolled)
       .should('not.exist');
   });
 });

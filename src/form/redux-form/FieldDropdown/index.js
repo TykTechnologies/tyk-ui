@@ -4,17 +4,7 @@ import { fromJS } from 'immutable';
 
 import Dropdown from '../../components/Dropdown';
 
-export default class FieldDropdown extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-      PropTypes.element,
-      PropTypes.string,
-    ]),
-    input: PropTypes.instanceOf(Object),
-  };
-
+class FieldDropdown extends Component {
   constructor(props) {
     super(props);
 
@@ -46,3 +36,15 @@ export default class FieldDropdown extends Component {
     );
   }
 }
+
+FieldDropdown.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.string,
+  ]),
+  input: PropTypes.instanceOf(Object),
+};
+
+export default FieldDropdown;

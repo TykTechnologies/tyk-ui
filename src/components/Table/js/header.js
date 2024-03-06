@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { HeaderCell } from './header-cell';
 import { tableContext } from '../tableContext';
 
-export const Header = () => {
-  const [selectAll, setSelectAll] = useState(false);
+export function Header({ allRowsSelected }) {
   const { state, sendMessage } = useContext(tableContext);
   const { columns, selectable } = state;
 
-  const generateHeaders = () => columns.map(column => (
+  const generateHeaders = () => columns.map((column) => (
     <HeaderCell
       key={column.id}
       column={column}
@@ -15,11 +15,7 @@ export const Header = () => {
   ));
 
   const generateSelectable = () => {
-    if (!selectable) {
-      return;
-    }
     const Component = selectable.type;
-    // eslint-disable-next-line consistent-return
     return (
       <th
         className={state.maxHeight ? 'fixed-header' : ''}
@@ -28,12 +24,10 @@ export const Header = () => {
           <div className={selectable?.style}>
             <Component
               {...selectable.values}
-              onClick={() => {
-                setSelectAll(!selectAll);
-                sendMessage('header.selectAll.click', selectAll);
-              }}
+              value={allRowsSelected}
               onChange={(v) => {
-                sendMessage('header.selectAll.change', v);
+                const isCheckbox = v?.target?.tagName.toLowerCase() === 'input' && v?.target?.type.toLowerCase() === 'checkbox';
+                sendMessage('header.selectAll.change', isCheckbox ? v.target.checked : Boolean(v));
               }}
             >
               {selectable.values?.value}
@@ -49,10 +43,14 @@ export const Header = () => {
   return (
     <thead>
       <tr>
-        {selectable && selectable.position === 'LEFT' && generateSelectable()}
+        {selectable?.position === 'LEFT' && generateSelectable()}
         {generateHeaders()}
-        {selectable && selectable.position === 'RIGHT' && generateSelectable()}
+        {selectable?.position === 'RIGHT' && generateSelectable()}
       </tr>
     </thead>
   );
+}
+
+Header.propTypes = {
+  allRowsSelected: PropTypes.bool,
 };

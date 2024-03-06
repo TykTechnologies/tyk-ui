@@ -78,7 +78,6 @@ describe('Collapsible', () => {
       );
     }
 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy
       .mount(<Component />)
       .get(wrapperSelector)
@@ -87,16 +86,20 @@ describe('Collapsible', () => {
 
       .get('button')
       .contains('large')
-      .click()
-      .wait(200)
+      .click();
+
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(200)
       .get(wrapperSelector)
       .invoke('height')
       .should('be.gt', epsilon)
 
       .get('button')
       .contains('small')
-      .click()
-      .wait(200)
+      .click();
+
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(200)
       .get(wrapperSelector)
       .invoke('height')
       .should('be.lt', epsilon);

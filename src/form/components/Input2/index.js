@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const Input2 = forwardRef(({
+function Input2({
   error,
   onChange,
   readOnly,
@@ -15,7 +15,7 @@ const Input2 = forwardRef(({
   value,
   wrapperClassName = '',
   ...rest
-}, ref) => {
+}, ref) {
   const inputRef = useRef();
 
   useImperativeHandle(ref, () => ({
@@ -24,7 +24,7 @@ const Input2 = forwardRef(({
     },
   }));
 
-  const getAddon = content => (
+  const getAddon = (content) => (
     <div className="tyk-input-group__addon">
       { content }
     </div>
@@ -148,7 +148,7 @@ const Input2 = forwardRef(({
       }
     </div>
   );
-});
+}
 
 Input2.propTypes = {
   disabled: PropTypes.bool,
@@ -186,4 +186,4 @@ Input2.propTypes = {
   wrapperClassName: PropTypes.string,
 };
 
-export default Input2;
+export default forwardRef(Input2);

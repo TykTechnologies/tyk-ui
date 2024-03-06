@@ -99,11 +99,10 @@ describe('Panel', () => {
 
     cy.get('@panel')
       .find(selectors.header)
-      .click()
-      .then(() => {
-        cy.get(selectors.panel)
-          .should('have.class', cssClasses.collapsed);
-      });
+      .click();
+
+    cy.get(selectors.panel)
+      .should('have.class', cssClasses.collapsed);
   });
 
   it('should start with collapsed state when "collapsed" is set', () => {
@@ -145,30 +144,29 @@ describe('Panel', () => {
       .get(selectors.header)
       .find(selectors.upArrowIcon)
       .should('exist')
-      .click()
-      .then(() => {
-        cy.get(selectors.header)
-          .find(selectors.downArrowIcon)
-          .should('exist');
-      });
+      .click();
+
+    cy.get(selectors.header)
+      .find(selectors.downArrowIcon)
+      .should('exist');
   });
 
   it('should call onToggleCollapse when collapsed state is change', () => {
-    const onCollapsed = cy.stub();
+    const onCollapsed = cy.stub().as('onCollapsed');
 
     cy.mount(<Component onToggleCollapse={onCollapsed} collapsable collapsibleIconPosition="right" />)
       .get(selectors.header)
       .as('header')
-      .click()
-      .then(() => {
-        expect(onCollapsed).to.be.calledWith(true);
-      });
+      .click();
+
+    cy.get('@onCollapsed')
+      .should('be.calledWith', true);
 
     cy.get('@header')
-      .click()
-      .then(() => {
-        expect(onCollapsed).to.be.calledWith(false);
-      });
+      .click();
+
+    cy.get('@onCollapsed')
+      .should('be.calledWith', false);
   });
 
   it('should call set theme to success with theme="success"', () => {

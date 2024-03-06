@@ -4,15 +4,7 @@ import { fromJS } from 'immutable';
 
 import SelectableList from '../../components/SelectableList';
 
-export default class FieldSelectableList extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.node,
-    ]),
-    onChange: PropTypes.func,
-    input: PropTypes.instanceOf(Object),
-  };
-
+class FieldSelectableList extends Component {
   constructor(props) {
     super(props);
 
@@ -37,3 +29,13 @@ export default class FieldSelectableList extends Component {
     );
   }
 }
+
+FieldSelectableList.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+  ]),
+  onChange: PropTypes.func,
+  input: PropTypes.instanceOf(Object),
+};
+
+export default FieldSelectableList;

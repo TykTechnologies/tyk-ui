@@ -28,7 +28,7 @@ function MultiselectItem({
 }) {
   const isInSearchValue = useCallback((fieldsToSearchOn) => {
     if (fieldsToSearchOn?.length > 0) {
-      return fieldsToSearchOn.some((key) => item[key] && item[key].includes(searchValue));
+      return fieldsToSearchOn.some((key) => item[key]?.includes(searchValue));
     }
 
     return JSON.stringify(item).includes(searchValue);

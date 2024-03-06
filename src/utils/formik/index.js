@@ -46,7 +46,7 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
   })(), []);
 
   const getValue = (v) => {
-    if (v && v.target) {
+    if (v?.target) {
       if (v.target.nodeName === 'INPUT' && (v.target.type === 'checkbox' || v.target.type === 'radio')) {
         return v.target.checked;
       }

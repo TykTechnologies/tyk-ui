@@ -55,8 +55,9 @@ describe('Combobox2', () => {
       .should('have.text', selectedItem.name);
 
     cy.get(`.${classes.trigger}`)
-      .click()
-      .get(`.${classes.dropdownList} li`)
+      .click();
+
+    cy.get(`.${classes.dropdownList} li`)
       .should('have.length', items.length)
       .filter(`[title="${selectedItem.name}"]`)
       .find(`.${classes.checkIcon}`);
@@ -72,8 +73,9 @@ describe('Combobox2', () => {
 
     cy.get(`.${classes.dropdownList} li`)
       .eq(1)
-      .click()
-      .get(`.${classes.textValue}`)
+      .click();
+
+    cy.get(`.${classes.textValue}`)
       .should('have.class', 'is-placeholder')
       .and('have.text', placeholder);
   });
@@ -102,11 +104,14 @@ describe('Combobox2', () => {
     }
     cy.mount(<Comp />);
 
-    const changeValueAndCheck = (id) => cy
-      .contains('change value')
-      .click()
-      .get(`.${classes.textValue}`)
-      .should('have.text', getItemNameById(id));
+    const changeValueAndCheck = (id) => {
+      cy
+        .contains('change value')
+        .click();
+
+      return cy.get(`.${classes.textValue}`)
+        .should('have.text', getItemNameById(id));
+    };
 
     cy.get(`.${classes.textValue}`)
       .should('have.text', getItemNameById(values[0]))
@@ -142,8 +147,9 @@ describe('Combobox2', () => {
       .should('be.gt', singleHeight)
 
       .get('#single-checkbox')
-      .check()
-      .get(`.${classes.textValue}`)
+      .check();
+
+    cy.get(`.${classes.textValue}`)
       .invoke('css', 'height')
       .then(parseFloat)
       .should('eq', singleHeight);
@@ -162,14 +168,17 @@ describe('Combobox2', () => {
     );
 
     cy.get(`.${classes.entryField}`)
-      .type('aaa')
-      .blur()
-      .get('.tyk-pill:last-of-type')
+      .type('aaa');
+    cy.get(`.${classes.entryField}`)
+      .blur();
+
+    cy.get('.tyk-pill:last-of-type')
       .should('have.text', 'aaa')
 
       .get(`.${classes.entryField}`)
-      .type('bbb.')
-      .get('.tyk-pill')
+      .type('bbb.');
+
+    cy.get('.tyk-pill')
       .should('have.length', 2)
       .filter(':last-of-type')
       .should('have.text', 'bbb');
@@ -186,8 +195,9 @@ describe('Combobox2', () => {
     );
 
     cy.get(`.${classes.trigger}`)
-      .click()
-      .get(`.${classes.dropdownList}`)
+      .click();
+
+    cy.get(`.${classes.dropdownList}`)
       .should('not.exist');
   });
 
@@ -221,13 +231,15 @@ describe('Combobox2', () => {
       .should('have.length', 1)
 
       .get(`.${classes.entryField}`)
-      .type('nonexistent{enter}')
-      .get(`.${classes.tag}`)
+      .type('nonexistent{enter}');
+
+    cy.get(`.${classes.tag}`)
       .should('have.length', 1)
 
       .get(`.${classes.entryField}`)
-      .type('Item2{enter}')
-      .get(`.${classes.tag}`)
+      .type('Item2{enter}');
+
+    cy.get(`.${classes.tag}`)
       .should('have.length', 2);
   });
 
@@ -245,13 +257,15 @@ describe('Combobox2', () => {
     );
 
     cy.get(`.${classes.trigger}`)
-      .click()
-      .get(`.${classes.dropdownList} li`)
+      .click();
+
+    cy.get(`.${classes.dropdownList} li`)
       .should('have.length', items.length)
 
       .get(`.${classes.searchField} input`)
-      .type('2')
-      .get(`.${classes.dropdownList} li`)
+      .type('2');
+
+    cy.get(`.${classes.dropdownList} li`)
       .should('have.length', 1)
       .and('have.text', 'Item4');
   });
@@ -273,8 +287,9 @@ describe('Combobox2', () => {
       .should('have.length', 2);
 
     cy.get(`.${classes.trigger}`)
-      .click()
-      .get(`.${classes.dropdownList} li`)
+      .click();
+
+    cy.get(`.${classes.dropdownList} li`)
       .should('not.exist')
       .get(`.${classes.dropdownList} .custom-item`)
       .should('have.length', items.length);
@@ -297,8 +312,9 @@ describe('Combobox2', () => {
     );
 
     cy.get(`.${classes.trigger}`)
-      .click()
-      .get(`.${classes.dropdown} .${classes.dropdownList}`)
+      .click();
+
+    cy.get(`.${classes.dropdown} .${classes.dropdownList}`)
       .should('not.exist')
       .get(`.${classes.dropdown} .custom-list`)
       .should('exist')
@@ -328,8 +344,9 @@ describe('Combobox2', () => {
       .should('eq', normalHeight)
 
       .get(`.${classes.trigger}`)
-      .click()
-      .get(`.${classes.valueContainer}`)
+      .click();
+
+    cy.get(`.${classes.valueContainer}`)
       .invoke('css', 'height')
       .then(parseFloat)
       .should('be.gt', normalHeight);
@@ -363,8 +380,9 @@ describe('Combobox2', () => {
       .should('exist')
 
       .get('#display-trigger')
-      .uncheck()
-      .get(`.${classes.trigger}`)
+      .uncheck();
+
+    cy.get(`.${classes.trigger}`)
       .should('not.exist');
   });
 
@@ -380,31 +398,36 @@ describe('Combobox2', () => {
     cy.get(`.${classes.tag}`)
       .should('have.length', 0)
       .get(`.${classes.entryField}`)
-      .focus()
-      .get('li.active')
+      .focus();
+
+    cy.get('li.active')
       .should('not.exist')
 
       .get(`.${classes.entryField}`)
-      .type('{downarrow}')
-      .get('li:first')
+      .type('{downarrow}');
+
+    cy.get('li:first')
       .should('have.class', 'active')
 
       .get(`.${classes.entryField}`)
-      .type('{uparrow}')
-      .get('li:first')
+      .type('{uparrow}');
+
+    cy.get('li:first')
       .should('not.have.class', 'active')
       .get('li:last')
       .should('have.class', 'active')
 
       .get(`.${classes.entryField}`)
-      .type('{enter}')
-      .get(`.${classes.tag}`)
+      .type('{enter}');
+
+    cy.get(`.${classes.tag}`)
       .should('have.length', 1)
       .and('have.text', items[items.length - 1].name)
 
       .get(`.${classes.entryField}`)
-      .type('{esc}')
-      .get('.tyk-combobox2__combobox-dropdown')
+      .type('{esc}');
+
+    cy.get('.tyk-combobox2__combobox-dropdown')
       .should('not.exist');
   });
 
@@ -430,9 +453,9 @@ describe('Combobox2', () => {
       .should('have.length', 0)
 
       .get(`.${classes.entryField}`)
-      .focus()
+      .focus();
 
-      .then(getSelectAll)
+    getSelectAll()
       .click()
       .find(`.${classes.checkIcon}`)
       .should('exist')
@@ -472,11 +495,13 @@ describe('Combobox2', () => {
       );
 
       cy.get(`.${classes.trigger}`)
-        .click()
-        .get(`.${classes.dropdownList} li`)
+        .click();
+
+      cy.get(`.${classes.dropdownList} li`)
         .eq(1)
-        .click()
-        .get(`.${classes.textValue}`)
+        .click();
+
+      cy.get(`.${classes.textValue}`)
         .should('have.text', previousItem.name);
     });
 
@@ -494,11 +519,13 @@ describe('Combobox2', () => {
         />,
       );
 
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.get(`.${classes.entryField}`)
-        .type('aaa')
-        .blur()
-        .wait(1000)
+        .type('aaa');
+      cy.get(`.${classes.entryField}`)
+        .blur();
+
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(1000)
         .get('.tyk-pill:last-of-type')
         .should('have.text', item.name);
     });
@@ -518,9 +545,11 @@ describe('Combobox2', () => {
       );
 
       cy.get(`.${classes.entryField}`)
-        .type('{backspace}')
-        .blur()
-        .get('.tyk-pill')
+        .type('{backspace}');
+      cy.get(`.${classes.entryField}`)
+        .blur();
+
+      cy.get('.tyk-pill')
         .should('have.length', 1)
         .filter(':last-of-type')
         .should('have.text', item.name);

@@ -33,6 +33,7 @@
       line-height: line-height('sm');
       font-family: $font-family-bold;
       text-transform: uppercase;
+      padding: $table-th-padding;
 
       &:last-child {
         border-right: none;
@@ -49,10 +50,6 @@
       }
     }
 
-    > thead th {
-      padding: $table-th-padding;
-    }
-
     > tbody tr:hover {
       background: rgba(theme-color('background', 'light'), 0.4);
     }
@@ -67,7 +64,7 @@
       &:last-child {
         border-right: none;
       }
-      
+
       vertical-align: middle;
 
       &.fit {
@@ -97,7 +94,7 @@
       border-top: 1px solid theme-color('default', 'light');
       transition: all .4s linear;
       border-radius: $general-border-radius;
-  
+
       &.clickable {
         cursor: pointer;
       }

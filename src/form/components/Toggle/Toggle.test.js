@@ -173,8 +173,9 @@ describe('Toggle', () => {
     const onChange = cy.stub().as('onChange');
     cy.mount(<Component onChange={onChange} />)
       .get(selectors.item)
-      .click()
-      .get('@onChange')
+      .click();
+
+    cy.get('@onChange')
       .should('be.called');
   });
 
@@ -195,7 +196,10 @@ describe('Toggle', () => {
     )
       .get(selectors.item)
       .eq(1)
-      .click()
+      .as('option2')
+      .click();
+
+    cy.get('@option2')
       .should('have.class', classes.active);
   });
 });

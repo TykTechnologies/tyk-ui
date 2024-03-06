@@ -1,4 +1,4 @@
-import React, { Fragment, cloneElement } from 'react';
+import React, { cloneElement, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
@@ -6,7 +6,7 @@ import Icon from '../Icon';
 /**
  * Button component.
  */
-const Button = React.forwardRef((props, ref) => {
+function Button(props, ref) {
   const {
     customButton,
     children,
@@ -65,13 +65,12 @@ const Button = React.forwardRef((props, ref) => {
 
     if (customButton) {
       return (
-        <Fragment>
+        <>
           { cloneElement(customButton, {
             className: getCssClasses(),
             disabled,
-          })
-          }
-        </Fragment>
+          })}
+        </>
       );
     }
 
@@ -99,7 +98,7 @@ const Button = React.forwardRef((props, ref) => {
           className={getCssClasses()}
           disabled={disabled}
           onClick={onClick}
-          type={type || 'button'}
+          type={type || 'button'} // eslint-disable-line react/button-has-type
           ref={ref}
           {...rest}
         >
@@ -113,11 +112,10 @@ const Button = React.forwardRef((props, ref) => {
     return buttonType;
   };
 
-
   return (
     getButtonType()
   );
-});
+}
 
 Button.propTypes = {
   /**
@@ -176,4 +174,4 @@ Button.defaultProps = {
   type: 'button',
 };
 
-export default Button;
+export default forwardRef(Button);

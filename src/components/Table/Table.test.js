@@ -8,7 +8,8 @@ describe('Table Component Rendering', () => {
     headerCell: '.tyk-table thead th',
     sortIcon: '.tyk-table thead th .tykon-arrowsort',
     sortIconClassName: '.tykon-arrowsort',
-    selectAllCheckbox: '.tyk-table input[type="checkbox"]',
+    selectAllCheckbox: '.tyk-table thead input[type="checkbox"]',
+    allRowCheckboxes: '.tyk-table tbody input[type="checkbox"]',
     row: '.tyk-table tbody tr',
     noDataMessage: '.tyk-message',
     loadingIndicator: '.tyk-loading__wrapper',
@@ -72,10 +73,16 @@ describe('Table Component Rendering', () => {
   };
   const config = {
     columns: [
-      { id: 'name', name: 'Policy Name', type: 'string', sortable: { default: 'DESC' } },
+      {
+        id: 'name', name: 'Policy Name', type: 'string', sortable: { default: 'DESC' },
+      },
       { id: 'access_rights', name: 'Access Rights', type: 'string' },
-      { id: 'auth_type', name: 'Auth Type', type: 'string', sortable: true },
-      { id: 'date', name: 'Date Created', type: 'string', sortable: true },
+      {
+        id: 'auth_type', name: 'Auth Type', type: 'string', sortable: true,
+      },
+      {
+        id: 'date', name: 'Date Created', type: 'string', sortable: true,
+      },
     ],
     rows: [
       {
@@ -127,12 +134,16 @@ describe('Table Component Rendering', () => {
   });
 
   it('should render all column headers as per the configuration', () => {
-    //because it's selectable, we have an extra column
+    // because it's selectable, we have an extra column
     cy
-      .mount(<Table value={{
-        ...config,
-        ...configSelectable,
-      }} />)
+      .mount(
+        <Table
+          value={{
+            ...config,
+            ...configSelectable,
+          }}
+        />,
+      )
       .get(selectors.headerCell).should('have.length', config.columns.length + 1);
 
     config.columns.forEach((column) => {
@@ -144,12 +155,16 @@ describe('Table Component Rendering', () => {
 
   it('should display a row with checkboxes if the table is set as selectable', () => {
     cy
-      .mount(<Table value={{
-        ...config,
-        ...configSelectable,
-      }} />)
-      .get(selectors.selectAllCheckbox)
-      .should('have.length', 3);
+      .mount(
+        <Table
+          value={{
+            ...config,
+            ...configSelectable,
+          }}
+        />,
+      )
+      .get(selectors.allRowCheckboxes)
+      .should('have.length', config.rows.length);
   });
 
   it('should render rows with correct data', () => {
@@ -178,38 +193,104 @@ describe('Table Component Rendering', () => {
       .mount(<Table value={configWithNoData} />)
       .get(selectors.table).should('not.exist');
   });
+
   it('should render a loading indicator when loading is true', () => {
     cy
       .mount(<Table value={config} loading />)
       .get(selectors.loadingIndicator).should('exist');
   });
+
   it('should render the table with infinite scrolling enabled', () => {
     cy.mount(<Table value={configWithInfiniteScroll} infiniteScrolling />);
     cy.get(selectors.table).should('exist');
     cy.get(selectors.pagination).should('not.exist');
     cy.get(selectors.infiniteScroll).should('exist');
   });
+
   it('should render sortable columns with column headers', () => {
     cy.mount(<Table value={config} />)
       .get(selectors.table).should('exist');
     cy.get(selectors.sortIcon).should('have.length', 3);
   });
+
   it('should call the onChange callback with message sort', () => {
-    const callbacks = {
-      onChange: (values) => {console.log('result', values);}
-    };
     const onChange = cy.stub().as('onChange');
     cy.mount(<Table value={config} onChange={onChange} />);
     cy.get(`${selectors.columnHeader}:first ${selectors.sortIconClassName}`).click();
     cy.get('@onChange').should('be.calledWith', 'sort');
   });
+
   it('should allow selecting and deselecting a single row', () => {
     cy.spy(config.rows[0].events, 'onClick').as('onClickSpy');
-    cy.mount(<Table value={{
-      ...config,
-      ...configSelectable,
-    }} />);
+    cy.mount(
+      <Table
+        value={{
+          ...config,
+          ...configSelectable,
+        }}
+      />,
+    );
     cy.get(`${selectors.row}:eq(0)`).find(selectors.checkbox).check();
     cy.get('@onClickSpy').should('be.called');
+  });
+
+  it('selects all rows if checking the header select all checkbox', () => {
+    cy.mount(
+      <Table
+        value={{
+          ...config,
+          ...configSelectable,
+        }}
+      />,
+    );
+
+    cy.get(selectors.selectAllCheckbox)
+      .should('not.be.checked')
+      .check();
+
+    cy.get(selectors.selectAllCheckbox)
+      .should('be.checked')
+      .get(selectors.allRowCheckboxes)
+      .should('be.checked');
+
+    // unselecting a row makes the selectAllCheckbox not to be checked
+    cy.get(selectors.allRowCheckboxes)
+      .eq(0)
+      .uncheck();
+
+    cy.get(selectors.selectAllCheckbox)
+      .should('not.be.checked');
+  });
+
+  it('renders an empty table cell if a row has no value specified for a column', () => {
+    cy.mount(
+      <Table
+        value={{
+          columns: [{ id: 'col1', name: 'Col1' }],
+          rows: [{ values: {} }],
+        }}
+      />,
+    );
+
+    cy.get(selectors.row)
+      .eq(0)
+      .find('td')
+      .should('be.empty');
+  });
+
+  it('columns can render different things based on its "type"', () => {
+    cy.mount(
+      <Table
+        value={{
+          columns: [{ id: 'col1', name: 'Col1', type: Checkbox }],
+          rows: [{ values: { col1: {} } }],
+        }}
+      />,
+    );
+
+    cy.get(selectors.row)
+      .eq(0)
+      .find('td input')
+      .should('exist');
   });
 });

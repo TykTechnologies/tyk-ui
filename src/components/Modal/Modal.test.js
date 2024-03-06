@@ -66,7 +66,7 @@ describe('Modal', () => {
   });
 
   it('should call onClose when back drop is clicked', () => {
-    const onClose = cy.stub();
+    const onClose = cy.stub().as('onClose');
     cy.mount(<Component opened onClose={onClose} />)
       .get(selectors.backDrop)
       .should('exist')
@@ -74,25 +74,25 @@ describe('Modal', () => {
       .and('have.class', cssClasses.backDrop);
 
     cy.get(selectors.backDrop)
-      .click({ force: true })
-      .then(() => {
-        expect(onClose).to.be.called;
-      });
+      .click({ force: true });
+
+    cy.get('@onClose')
+      .should('be.called');
   });
 
   it('should not call onClose with disableCloseCommands', () => {
-    const onClose = cy.stub();
-    cy.mount(<Component opened disableCloseCommands />)
+    const onClose = cy.stub().as('onClose');
+    cy.mount(<Component opened disableCloseCommands onClose={onClose} />)
       .get(selectors.backDrop)
       .should('exist')
       .and('have.class', cssClasses.opened)
       .and('have.class', cssClasses.backDrop);
 
     cy.get(selectors.backDrop)
-      .click({ force: true })
-      .then(() => {
-        expect(onClose).not.to.be.called;
-      });
+      .click({ force: true });
+
+    cy.get('@onClose')
+      .should('not.be.called');
     cy
       .get(selectors.backDrop)
       .should('exist')

@@ -39,16 +39,18 @@ describe('DatePicker', () => {
     cy.mount(<Component value={new Date()} />)
       .get(selectors.input)
       .should('exist')
-      .focus()
-      .get(selectors.calendar)
+      .focus();
+
+    cy.get(selectors.calendar)
       .should('be.visible');
   });
 
   it('can open the calendar by clicking on the calendar icon', () => {
     cy.mount(<Component />)
       .get(selectors.icon)
-      .click()
-      .get(selectors.calendar)
+      .click();
+
+    cy.get(selectors.calendar)
       .should('be.visible');
   });
 
@@ -66,8 +68,9 @@ describe('DatePicker', () => {
       </Component>,
     )
       .get('#datepicker-button')
-      .click()
-      .get(selectors.calendar)
+      .click();
+
+    cy.get(selectors.calendar)
       .should('be.visible');
   });
 
@@ -137,8 +140,9 @@ describe('DatePicker', () => {
     const onOpen = cy.stub().as('onOpen');
     cy.mount(<Component onOpen={onOpen} />)
       .get(selectors.input)
-      .focus()
-      .get('@onOpen')
+      .focus();
+
+    cy.get('@onOpen')
       .should('be.called');
   });
 
@@ -151,10 +155,12 @@ describe('DatePicker', () => {
       </>,
     )
       .get(selectors.input)
-      .focus()
-      .get('#close-button')
-      .click()
-      .get('@onClose')
+      .focus();
+
+    cy.get('#close-button')
+      .click();
+
+    cy.get('@onClose')
       .should('be.called');
   });
 
@@ -162,11 +168,13 @@ describe('DatePicker', () => {
     const onChange = cy.stub().as('onChange');
     cy.mount(<Component onChange={onChange} />)
       .get(selectors.input)
-      .focus()
-      .get(selectors.day)
+      .focus();
+
+    cy.get(selectors.day)
       .eq(10)
-      .click()
-      .get('@onChange')
+      .click();
+
+    cy.get('@onChange')
       .should('be.called');
   });
 
@@ -194,14 +202,17 @@ describe('DatePicker', () => {
     const secondDay = 12;
     cy.mount(<Component config={{ mode: 'range' }} value={[new Date(), new Date()]} onChange={() => {}} />)
       .get(selectors.icon)
-      .click()
-      .get(selectors.day)
+      .click();
+
+    cy.get(selectors.day)
       .contains(firstDay)
-      .click()
-      .get(selectors.day)
+      .click();
+
+    cy.get(selectors.day)
       .contains(secondDay)
-      .click()
-      .get(selectors.input)
+      .click();
+
+    cy.get(selectors.input)
       .should('have.value', `${year}-${month}-${firstDay} to ${year}-${month}-${secondDay}`);
   });
 

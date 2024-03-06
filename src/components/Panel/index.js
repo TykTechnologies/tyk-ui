@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import PanelBody from './js/PanelBody';
 import PanelFooter from './js/PanelFooter';
 import PanelHeader from './js/PanelHeader';
 
-
 import { PortalContext } from './panel-context';
 
-
-const Panel = (props) => {
+function Panel(props) {
   const {
     children,
     className,
@@ -45,25 +45,25 @@ const Panel = (props) => {
     return cssClasses.join(' ');
   };
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     setCollapsedState(!collapsedState);
 
     if (onToggleCollapse) {
       onToggleCollapse(!collapsedState);
     }
-  };
+  }, [collapsedState, onToggleCollapse]);
+
+  const context = useMemo(() => ({
+    collapsable,
+    collapsed: collapsedState,
+    onToggle: handleToggle,
+    theme,
+    collapsibleIconPosition,
+  }), [collapsable, collapsedState, collapsibleIconPosition, theme, handleToggle]);
 
   return (
     <div className={getCssClasses()}>
-      <PortalContext.Provider
-        value={{
-          collapsable,
-          collapsed: collapsedState,
-          onToggle: handleToggle,
-          theme,
-          collapsibleIconPosition,
-        }}
-      >
+      <PortalContext.Provider value={context}>
         {
           (typeof children === 'function')
             ? children({
@@ -74,7 +74,7 @@ const Panel = (props) => {
       </PortalContext.Provider>
     </div>
   );
-};
+}
 
 Panel.propTypes = {
   children: PropTypes.oneOfType([
@@ -90,7 +90,6 @@ Panel.propTypes = {
   theme: PropTypes.string,
   onToggleCollapse: PropTypes.func,
 };
-
 
 Panel.Body = PanelBody;
 Panel.Footer = PanelFooter;

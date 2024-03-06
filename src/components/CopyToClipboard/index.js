@@ -1,4 +1,4 @@
-import React, { Fragment, createRef, useCallback } from 'react';
+import React, { createRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import toast from '../Toast';
@@ -8,7 +8,7 @@ import toast from '../Toast';
  * - Can be used normally with a text or a custom components (Eg. Button, Icon, etc)
  */
 
-const CopyToClipboard = (props) => {
+function CopyToClipboard(props) {
   const {
     display, copy, children, onCopy,
   } = props;
@@ -29,7 +29,7 @@ const CopyToClipboard = (props) => {
   }, [onCopy, txtRef]);
 
   return (
-    <Fragment>
+    <>
       <props.element onClick={handleClick} onKeyUp={handleClick} {...props}>
         {children || display}
       </props.element>
@@ -38,9 +38,9 @@ const CopyToClipboard = (props) => {
           {copy}
         </textarea>
       ) : null}
-    </Fragment>
+    </>
   );
-};
+}
 
 CopyToClipboard.propTypes = {
   /** Callback function executed after text is copied */

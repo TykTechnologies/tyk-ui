@@ -26,8 +26,9 @@ describe('TextEllipsis', () => {
     cy.get(`.${classes.floatingContainer}`)
       .should('not.exist')
       .get('.text-ellipsis')
-      .trigger('mouseover')
-      .get(`.${classes.floatingContainer}`)
+      .trigger('mouseover');
+
+    cy.get(`.${classes.floatingContainer}`)
       .should('exist');
   });
 });

@@ -4,16 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from '../../Icon';
 import { PortalContext } from '../panel-context';
 
-export default class PanelHeader extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.node,
-      PropTypes.string,
-    ]).isRequired,
-    className: PropTypes.string,
-  }
-
+class PanelHeader extends Component {
   getCssClasses(props) {
     const { className } = this.props;
     let cssClasses = ['tyk-panel__header'];
@@ -60,3 +51,14 @@ export default class PanelHeader extends Component {
     );
   }
 }
+
+PanelHeader.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]).isRequired,
+  className: PropTypes.string,
+};
+
+export default PanelHeader;

@@ -8,7 +8,7 @@ export default function useInterval(callback, delay, ...args) {
     savedCallback.current = callback;
   }, [callback]);
 
-  /* eslint-disable consistent-return */
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
     function tick() {
       savedCallback.current(...args);
@@ -18,5 +18,4 @@ export default function useInterval(callback, delay, ...args) {
       return () => clearInterval(id);
     }
   }, [delay]);
-  /* eslint-disable consistent-return */
 }

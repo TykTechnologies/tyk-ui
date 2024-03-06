@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Tooltip from '../../../../components/Tooltip';
 import Icon from '../../../../components/Icon';
 
-
-const InvalidToken = (props) => {
+function InvalidToken(props) {
   const { token, findInvalidTokenSubstitute } = props;
   return (
     <span
@@ -20,7 +19,7 @@ const InvalidToken = (props) => {
       </Tooltip>
     </span>
   );
-};
+}
 
 InvalidToken.propTypes = {
   token: PropTypes.string,

@@ -150,9 +150,7 @@ class Dropdown extends Component {
       customTop = top + scrollTop - dropdownHeight - 5;
     }
 
-    if (Dropdown.isElemInRightView(el, dropdownWidth)) {
-      customLeft = left;
-    } else {
+    if (!Dropdown.isElemInRightView(el, dropdownWidth)) {
       customLeft = left + el.clientWidth - dropdownWidth;
     }
 
@@ -235,7 +233,7 @@ class Dropdown extends Component {
     const { btnTitle, stopButtonTextChange } = this.props;
     const { selectedItemProps } = this.state;
 
-    if (!stopButtonTextChange && selectedItemProps && selectedItemProps.title) {
+    if (!stopButtonTextChange && selectedItemProps?.title) {
       return selectedItemProps.title;
     }
 
@@ -327,6 +325,7 @@ class Dropdown extends Component {
           opened
             ? ReactDOM.createPortal(
               <DropdownContext.Provider
+                // eslint-disable-next-line react/jsx-no-constructed-context-values
                 value={{
                   onSelectItem: this.onSelectItem,
                   selectedItem,

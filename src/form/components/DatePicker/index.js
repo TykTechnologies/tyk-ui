@@ -60,7 +60,7 @@ function DatePicker({
   }, [prevValue, onChange, hasValueChanged]);
 
   useEffect(() => {
-    if (dateRef && dateRef.current && !pickerInstance) {
+    if (dateRef.current && !pickerInstance) {
       const instance = flatpickr(dateRef.current, {
         ...config, defaultDate: value, onChange: onDateChange, onClose, onOpen,
       });
@@ -72,7 +72,7 @@ function DatePicker({
         pickerInstance.destroy();
       }
     };
-  }, [dateRef.current, pickerInstance]);
+  }, [pickerInstance]);
 
   useEffect(() => {
     if (pickerInstance) {
@@ -81,7 +81,7 @@ function DatePicker({
       if (typeof value === 'string') {
         tempValue = new Date(value);
       } else if (Array.isArray(value)) {
-        tempValue = value.map((date) => (typeof date === 'string' ? new Date(date) : date));
+        tempValue = value.map((date) => new Date(date));
       }
 
       if (hasValueChanged(prevValue, tempValue)) {
@@ -136,7 +136,7 @@ function DatePicker({
     let inputStyle = {};
     let addonStyle = {};
 
-    if (config && config.inline) {
+    if (config?.inline) {
       inputStyle = {
         height: 0,
         padding: 0,
@@ -165,6 +165,7 @@ function DatePicker({
           onKeyUp={() => {}}
           tabIndex={0}
           style={addonStyle}
+          aria-label="show calendar"
         >
           <Icon type="calendar" />
         </div>
@@ -175,7 +176,7 @@ function DatePicker({
   return (
     <>
       {
-        children && children.length
+        children?.length
           ? children({ openCalendar, ref: dateRef })
           : (
             <div className={classes}>

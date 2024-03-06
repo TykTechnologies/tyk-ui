@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TabContext from './TabContext';
 import { usePrevious } from '../../../hooks';
 
-const TabContent = (props) => {
+function TabContent(props) {
   const {
     addTab,
     hideTab,
@@ -33,7 +33,7 @@ const TabContent = (props) => {
   useEffect(() => {
     if (
       tabExists(path) && tabData?.title
-      && (prevTabData?.title !== tabData?.title || prevTabData.selected !== tabData.selected)
+      && (prevTabData?.title !== tabData?.title || prevTabData?.selected !== tabData.selected)
     ) {
       const tempTabData = { ...tabData };
       updateTab(tempTabData, path);
@@ -60,25 +60,17 @@ const TabContent = (props) => {
     return selectedPath && selectedPath.indexOf(tabData.id) > -1;
   }, [hideTabContent, rendered, selectedPath, tabData, tabs]);
 
+  const context = useMemo(() => ({ path, tabsId }), [path, tabsId]);
+
+  if (!shouldRender) return null;
   return (
-    (
-      shouldRender
-        ? (
-          <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath && selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
-            <TabContext.Provider
-              value={{
-                path,
-                tabsId,
-              }}
-            >
-              {children}
-            </TabContext.Provider>
-          </div>
-        )
-        : null
-    )
+    <div key={tabData.id} className="tyk-tab__content" style={{ display: selectedPath && selectedPath.indexOf(tabData.id) > -1 ? 'block' : 'none' }}>
+      <TabContext.Provider value={context}>
+        {children}
+      </TabContext.Provider>
+    </div>
   );
-};
+}
 
 TabContent.propTypes = {
   addTab: PropTypes.func,

@@ -45,12 +45,12 @@ describe('Message', () => {
   });
 
   it('renders an icon that calls the onClose callback when clicked', () => {
-    const onClose = cy.stub();
+    const onClose = cy.stub().as('onClose');
     cy.mount(<Component onClose={onClose} />)
       .get(selectors.closeIcon)
-      .click()
-      .then(() => {
-        expect(onClose).to.be.called;
-      });
+      .click();
+
+    cy.get('@onClose')
+      .should('be.called');
   });
 });

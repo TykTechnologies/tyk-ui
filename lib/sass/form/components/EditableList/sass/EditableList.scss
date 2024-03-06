@@ -23,8 +23,8 @@
       border-bottom-left-radius: 0px;
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
-      padding-bottom: 11px;
-      padding: map-get($spacing, 'sm') map-get($spacing, 'base') 11px map-get($spacing, 'base');
+      padding-block: map-get($spacing, 'sm') 11px;
+      padding-inline: map-get($spacing, 'base');
     }
   }
 
@@ -43,11 +43,23 @@
 
 .tyk-editable-list__header {
   padding-top: map-get($spacing, 'base');
-  border-bottom: 1px solid theme-color('background', 'dark');
-  color: $text-color;
   font-size: 11px;
   padding-bottom: map-get($spacing, 'base');
   text-transform: uppercase;
+  background-color: white;
+  border-top-left-radius: $general-border-radius;
+  border-top-right-radius: $general-border-radius;
+  border: $general-border-width solid theme-color('default', 'light');
+  border-bottom: 1px solid theme-color('default', 'light') !important;
+  color: $text-color !important;
+  font-family: $font-family-bold;
+  margin-top: map-get($spacing, 'sm');
+
+  & + .tyk-editable-list-items.table {
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+  }
 
   .tyk-row {
     margin: 0;
@@ -185,21 +197,4 @@
       cursor: pointer;
       margin-right: map-get($spacing, 'sm');
   }
-}
-
-.tyk-editable-list__header {
-    background-color: white;
-    border-top-left-radius: $general-border-radius;
-    border-top-right-radius: $general-border-radius;
-    border: $general-border-width solid theme-color('default', 'light');
-    border-bottom: 1px solid theme-color('default', 'light') !important;
-    color: $text-color !important;
-    font-family: $font-family-bold;
-    margin-top: map-get($spacing, 'sm');
-
-    & + .tyk-editable-list-items.table {
-        border-top: none;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
 }

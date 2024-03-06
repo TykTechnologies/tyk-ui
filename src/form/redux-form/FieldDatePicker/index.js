@@ -4,7 +4,7 @@ import { fromJS } from 'immutable';
 
 import DatePicker from '../../components/DatePicker';
 
-const FormDatePicker = (props) => {
+function FormDatePicker(props) {
   const {
     input,
     meta,
@@ -37,7 +37,7 @@ const FormDatePicker = (props) => {
       error={getDatePickerError()}
     />
   );
-};
+}
 
 FormDatePicker.propTypes = {
   meta: PropTypes.instanceOf(Object),

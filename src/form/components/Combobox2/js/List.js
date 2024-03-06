@@ -37,7 +37,7 @@ function List(props) {
           activeItem && item.id === activeItem.id && 'active',
         ].filter(Boolean).join(' ')}
         onClick={() => !item.disabled && sendMessage('value.select', { item })}
-        onKeyPress={() => {}}
+        onKeyDown={() => {}}
       >
         {item.selected && <Icon type="check" />}
         <span className="item-name">{item.name}</span>
@@ -46,8 +46,8 @@ function List(props) {
   }
 
   function renderSelectAllOption() {
-    const isAllSelected = values.every(v => v.selected);
-    const isNoneSelected = values.every(v => !v.selected);
+    const isAllSelected = values.every((v) => v.selected);
+    const isNoneSelected = values.every((v) => !v.selected);
     const label = selectAll?.label ?? 'Select All';
     const mode = selectAll?.mode ?? 'select';
     const show = selectAll?.show ?? 'always';
@@ -84,7 +84,7 @@ function List(props) {
             autoFocus
             className="tyk-form-control"
             value={searchValue}
-            onChange={e => sendMessage('search.change', e.target.value)}
+            onChange={(e) => sendMessage('search.change', e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'Escape') sendMessage('search.escape');
               if (e.key === 'ArrowUp') sendMessage('search.arrowUp');

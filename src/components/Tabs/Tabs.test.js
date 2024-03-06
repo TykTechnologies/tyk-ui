@@ -100,7 +100,7 @@ describe('Tabs', () => {
   });
 
   it('should call handler function on tab change and add active classes', () => {
-    const onTabChange = cy.stub();
+    const onTabChange = cy.stub().as('onTabChange');
 
     cy.mount(<Component onTabChange={onTabChange} />)
       .get(selectors.tabs)
@@ -113,19 +113,19 @@ describe('Tabs', () => {
       .as('tabHeader')
       .find(selectors.button)
       .should('exist')
-      .click()
-      .then(() => {
-        cy.get('@tabs')
-          .should('exist')
-          .find(selectors.active)
-          .should('exist')
-          .and('have.length', 1);
+      .click();
 
-        cy.get('@tabHeader')
-          .should('have.class', classNames.active);
+    cy.get('@tabs')
+      .should('exist')
+      .find(selectors.active)
+      .should('exist')
+      .and('have.length', 1);
 
-        expect(onTabChange).to.be.called;
-      });
+    cy.get('@tabHeader')
+      .should('have.class', classNames.active);
+
+    cy.get('@onTabChange')
+      .should('be.called');
   });
 
   it('should support different themes when type prop is supplied', () => {
@@ -172,30 +172,26 @@ describe('Tabs', () => {
       .find(selectors.button)
       .should('exist')
       .and('have.length', 1)
-      .click()
-      .then(() => {
-        cy.get('@tabs')
-          .find('#hide')
-          .should('exist')
-          .click()
-          .then(() => {
-            cy.get('@tabs')
-              .find(selectors.tabHeaderContainer)
-              .find(selectors.tabHeader)
-              .should('have.length', 1);
-          })
-          .then(() => {
-            cy.get('@tabs')
-              .find('#show')
-              .should('exist')
-              .click()
-              .then(() => {
-                cy.get('@tabs')
-                  .find(selectors.tabHeaderContainer)
-                  .find(selectors.tabHeader)
-                  .should('have.length', 2);
-              });
-          });
-      });
+      .click();
+
+    cy.get('@tabs')
+      .find('#hide')
+      .should('exist')
+      .click();
+
+    cy.get('@tabs')
+      .find(selectors.tabHeaderContainer)
+      .find(selectors.tabHeader)
+      .should('have.length', 1);
+
+    cy.get('@tabs')
+      .find('#show')
+      .should('exist')
+      .click();
+
+    cy.get('@tabs')
+      .find(selectors.tabHeaderContainer)
+      .find(selectors.tabHeader)
+      .should('have.length', 2);
   });
 });

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Pagination from '../../components/Pagination';
 
-const FieldPagination = (props) => {
+function FieldPagination(props) {
   const { input, ...rest } = props;
 
   return (
@@ -14,7 +14,7 @@ const FieldPagination = (props) => {
       value={input.value ? input.value : 0}
     />
   );
-};
+}
 
 FieldPagination.propTypes = {
   input: PropTypes.instanceOf(Object),

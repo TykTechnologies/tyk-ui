@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { tableContext } from '../tableContext';
 import Icon from '../../Icon';
 
-export const HeaderCell = ({ column }) => {
+export function HeaderCell({ column }) {
   const { sortable } = column;
   const [sortOrder, setSortOrder] = useState(sortable?.default || 'ASC');
   const { state, sendMessage } = useContext(tableContext);
@@ -25,7 +25,7 @@ export const HeaderCell = ({ column }) => {
       )}
     </th>
   );
-};
+}
 
 HeaderCell.propTypes = {
   column: PropTypes.instanceOf(Object),

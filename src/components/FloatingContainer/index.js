@@ -53,22 +53,26 @@ function FloatingContainer({
         && positionedVerticallyFitsInViewport
       )
     ) {
-      if (preferredPosition === 'top' && hasTopSpace) return 'top';
-      if (preferredPosition === 'bottom' && hasBottomSpace) return 'bottom';
-      return hasBottomSpace || bottomSpace > topSpace ? 'bottom' : 'top';
+      return getDisplayForVertical({
+        preferredPosition, hasTopSpace, hasBottomSpace, topSpace, bottomSpace,
+      });
     }
 
     if (displayAxis === 'horizontal') {
-      if (preferredPosition === 'left' && hasLeftSpace) return 'left';
-      if (preferredPosition === 'right' && hasLeftSpace) return 'right';
-      return hasRightSpace || rightSpace > leftSpace ? 'right' : 'left';
+      return getDisplayForHorizontal({
+        preferredPosition, hasLeftSpace, hasRightSpace, leftSpace, rightSpace,
+      });
     }
 
-    if (hasTopSpace && positionedVerticallyFitsInViewport) return 'top';
-    if (hasBottomSpace && positionedVerticallyFitsInViewport) return 'bottom';
-    if (hasRightSpace && positionedHorizontallyFitsInViewport) return 'right';
-    if (hasLeftSpace && positionedHorizontallyFitsInViewport) return 'left';
-    return preferredPosition ?? 'bottom';
+    return getDisplayWhereItFits({
+      preferredPosition,
+      hasTopSpace,
+      hasBottomSpace,
+      hasLeftSpace,
+      hasRightSpace,
+      positionedHorizontallyFitsInViewport,
+      positionedVerticallyFitsInViewport,
+    });
   }
 
   function adjustPosition() {
@@ -82,96 +86,40 @@ function FloatingContainer({
     const { left: vpLeft, top: vpTop } = viewportOffset.current ?? { left: 0, top: 0 };
 
     if (display === 'top') {
-      const leftPos = {
-        auto: targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2,
-        matchElement: targetPosition.left,
-        matchStart: targetPosition.left,
-        matchEnd: targetPosition.right - container.offsetWidth,
-      }[size];
-      const topPos = targetPosition.top - container.offsetHeight - offset;
-      container.style.left = `${leftPos + vpLeft}px`;
-      container.style.top = `${topPos + vpTop}px`;
-
-      if (size === 'matchElement') {
-        container.style.width = `${target.offsetWidth}px`;
-      } else if (size === 'matchEnd') {
-        container.style.maxWidth = `${targetPosition.right - VIEWPORT_INITIAL_PADDING}px`;
-      } else if (typeof size === 'function') {
-        container.style.width = `${size(target.offsetWidth)}px`;
-      }
-      container.style.maxHeight = `${targetPosition.top - offset}px`;
+      Object.assign(container.style, getStylesForTop({
+        container, targetPosition, target, size, offset, vpLeft, vpTop,
+      }));
     }
 
     if (display === 'bottom') {
-      const leftPos = {
-        auto: targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2,
-        matchElement: targetPosition.left,
-        matchStart: targetPosition.left,
-        matchEnd: targetPosition.right - container.offsetWidth,
-      }[size];
-      const topPos = targetPosition.bottom + offset;
-      container.style.left = `${leftPos + vpLeft}px`;
-      container.style.top = `${topPos + vpTop}px`;
-
-      if (size === 'matchElement') {
-        container.style.width = `${target.offsetWidth}px`;
-      } else if (size === 'matchEnd') {
-        container.style.maxWidth = `${targetPosition.right - VIEWPORT_INITIAL_PADDING}px`;
-      } else if (typeof size === 'function') {
-        container.style.width = `${size(target.offsetWidth)}px`;
-      }
-      container.style.maxHeight = `${window.innerHeight - targetPosition.bottom - offset}px`;
+      Object.assign(container.style, getStylesForBottom({
+        container, targetPosition, target, size, offset, vpLeft, vpTop,
+      }));
     }
 
     if (display === 'left') {
-      const leftPos = targetPosition.left - container.offsetWidth - offset;
-      const topPos = {
-        auto: targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2,
-        matchElement: targetPosition.top,
-        matchStart: targetPosition.top,
-        matchEnd: targetPosition.bottom - container.offsetHeight,
-      }[size];
-      container.style.left = `${leftPos}px`;
-      container.style.top = `${topPos}px`;
-
-      if (size === 'matchElement') {
-        container.style.height = `${target.offsetHeight}px`;
-      } else if (typeof size === 'function') {
-        container.style.height = `${size(target.offsetHeight)}px`;
-      }
-      container.style.maxWidth = `${targetPosition.left - offset}px`;
+      Object.assign(container.style, getStylesForLeft({
+        targetPosition, target, container, size, offset,
+      }));
     }
 
     if (display === 'right') {
-      const leftPos = targetPosition.left + target.offsetWidth + offset;
-      const topPos = {
-        auto: targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2,
-        matchElement: targetPosition.top,
-        matchStart: targetPosition.top,
-        matchEnd: targetPosition.bottom - container.offsetHeight,
-      }[size];
-      container.style.left = size === 'auto' ? `${leftPos + vpLeft}px` : `${leftPos}px`;
-      container.style.top = size === 'auto' ? `${topPos + vpTop}px` : `${topPos}px`;
-
-      if (size === 'matchElement') {
-        container.style.height = `${target.offsetHeight}px`;
-      } else if (typeof size === 'function') {
-        container.style.height = `${size(target.offsetHeight)}px`;
-      }
-      container.style.maxWidth = `${window.innerWidth - targetPosition.left - target.offsetWidth - offset}px`;
+      Object.assign(container.style, getStylesForRight({
+        targetPosition, target, container, size, offset, vpLeft, vpTop,
+      }));
     }
 
-    if (viewportOffset.current === null) {
-      if (size === 'matchEnd') {
-        viewportOffset.current = { left: 0, top: 0 };
-      } else {
-        const left = Number(container.style.left.replace('px', ''));
-        const top = Number(container.style.top.replace('px', ''));
-        viewportOffset.current = {
-          left: left < 0 ? VIEWPORT_INITIAL_PADDING - left : 0,
-          top: top < 0 ? VIEWPORT_INITIAL_PADDING - top : 0,
-        };
-      }
+    if (viewportOffset.current !== null) return;
+
+    if (size === 'matchEnd') {
+      viewportOffset.current = { left: 0, top: 0 };
+    } else {
+      const left = Number(container.style.left.replace('px', ''));
+      const top = Number(container.style.top.replace('px', ''));
+      viewportOffset.current = {
+        left: left < 0 ? VIEWPORT_INITIAL_PADDING - left : 0,
+        top: top < 0 ? VIEWPORT_INITIAL_PADDING - top : 0,
+      };
     }
   }
 
@@ -246,3 +194,126 @@ FloatingContainer.propTypes = {
 };
 
 export default forwardRef(FloatingContainer);
+
+function getDisplayForVertical({
+  preferredPosition, hasTopSpace, hasBottomSpace, topSpace, bottomSpace,
+}) {
+  if (preferredPosition === 'top' && hasTopSpace) return 'top';
+  if (preferredPosition === 'bottom' && hasBottomSpace) return 'bottom';
+  return hasBottomSpace || bottomSpace > topSpace ? 'bottom' : 'top';
+}
+
+function getDisplayForHorizontal({
+  preferredPosition, hasLeftSpace, hasRightSpace, leftSpace, rightSpace,
+}) {
+  if (preferredPosition === 'left' && hasLeftSpace) return 'left';
+  if (preferredPosition === 'right' && hasRightSpace) return 'right';
+  return hasRightSpace || rightSpace > leftSpace ? 'right' : 'left';
+}
+
+function getDisplayWhereItFits({
+  preferredPosition, hasTopSpace, hasBottomSpace, hasLeftSpace, hasRightSpace,
+  positionedHorizontallyFitsInViewport, positionedVerticallyFitsInViewport,
+}) {
+  if (hasTopSpace && positionedVerticallyFitsInViewport) return 'top';
+  if (hasBottomSpace && positionedVerticallyFitsInViewport) return 'bottom';
+  if (hasRightSpace && positionedHorizontallyFitsInViewport) return 'right';
+  if (hasLeftSpace && positionedHorizontallyFitsInViewport) return 'left';
+  return preferredPosition ?? 'bottom';
+}
+
+function getStylesForTop({
+  container, targetPosition, target, size, offset, vpLeft, vpTop,
+}) {
+  const style = {};
+  const leftPos = {
+    auto: targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2,
+    matchElement: targetPosition.left,
+    matchStart: targetPosition.left,
+    matchEnd: targetPosition.right - container.offsetWidth,
+  }[size];
+  const topPos = targetPosition.top - container.offsetHeight - offset;
+  style.left = `${leftPos + vpLeft}px`;
+  style.top = `${topPos + vpTop}px`;
+
+  if (size === 'matchElement') {
+    style.width = `${target.offsetWidth}px`;
+  } else if (size === 'matchEnd') {
+    style.maxWidth = `${targetPosition.right - VIEWPORT_INITIAL_PADDING}px`;
+  } else if (typeof size === 'function') {
+    style.width = `${size(target.offsetWidth)}px`;
+  }
+  style.maxHeight = `${targetPosition.top - offset}px`;
+  return style;
+}
+
+function getStylesForBottom({
+  targetPosition, target, container, size, offset, vpLeft, vpTop,
+}) {
+  const style = {};
+  const leftPos = {
+    auto: targetPosition.left + target.offsetWidth / 2 - container.offsetWidth / 2,
+    matchElement: targetPosition.left,
+    matchStart: targetPosition.left,
+    matchEnd: targetPosition.right - container.offsetWidth,
+  }[size];
+  const topPos = targetPosition.bottom + offset;
+  style.left = `${leftPos + vpLeft}px`;
+  style.top = `${topPos + vpTop}px`;
+
+  if (size === 'matchElement') {
+    style.width = `${target.offsetWidth}px`;
+  } else if (size === 'matchEnd') {
+    style.maxWidth = `${targetPosition.right - VIEWPORT_INITIAL_PADDING}px`;
+  } else if (typeof size === 'function') {
+    style.width = `${size(target.offsetWidth)}px`;
+  }
+  style.maxHeight = `${window.innerHeight - targetPosition.bottom - offset}px`;
+  return style;
+}
+
+function getStylesForLeft({
+  targetPosition, target, container, size, offset,
+}) {
+  const style = {};
+  const leftPos = targetPosition.left - container.offsetWidth - offset;
+  const topPos = {
+    auto: targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2,
+    matchElement: targetPosition.top,
+    matchStart: targetPosition.top,
+    matchEnd: targetPosition.bottom - container.offsetHeight,
+  }[size];
+  style.left = `${leftPos}px`;
+  style.top = `${topPos}px`;
+
+  if (size === 'matchElement') {
+    style.height = `${target.offsetHeight}px`;
+  } else if (typeof size === 'function') {
+    style.height = `${size(target.offsetHeight)}px`;
+  }
+  style.maxWidth = `${targetPosition.left - offset}px`;
+  return style;
+}
+
+function getStylesForRight({
+  targetPosition, target, container, size, offset, vpLeft, vpTop,
+}) {
+  const style = {};
+  const leftPos = targetPosition.left + target.offsetWidth + offset;
+  const topPos = {
+    auto: targetPosition.top + target.offsetHeight / 2 - container.offsetHeight / 2,
+    matchElement: targetPosition.top,
+    matchStart: targetPosition.top,
+    matchEnd: targetPosition.bottom - container.offsetHeight,
+  }[size];
+  style.left = size === 'auto' ? `${leftPos + vpLeft}px` : `${leftPos}px`;
+  style.top = size === 'auto' ? `${topPos + vpTop}px` : `${topPos}px`;
+
+  if (size === 'matchElement') {
+    style.height = `${target.offsetHeight}px`;
+  } else if (typeof size === 'function') {
+    style.height = `${size(target.offsetHeight)}px`;
+  }
+  style.maxWidth = `${window.innerWidth - targetPosition.left - target.offsetWidth - offset}px`;
+  return style;
+}

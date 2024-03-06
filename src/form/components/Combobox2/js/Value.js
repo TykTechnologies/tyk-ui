@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Icon from '../../../../components/Icon';
 import Pill from '../../../../components/Pill';
 
@@ -24,7 +25,7 @@ function Value(props) {
   const [inputWidth, setInputWidth] = useState(`${INPUT_MIN_WIDTH + 10}px`);
 
   function entryFieldOnChange(val) {
-    if (tagSeparators.some(ts => val.slice(-1) === ts)) return;
+    if (tagSeparators.some((ts) => val.slice(-1) === ts)) return;
     const dummy = dummyElementRef.current;
     dummy.innerHTML = val;
     setInputWidth(`${Math.max(dummy.clientWidth, INPUT_MIN_WIDTH) + 10}px`);
@@ -80,7 +81,7 @@ function Value(props) {
         role="none"
         tabIndex={disabled ? '-1' : '0'}
         onClick={triggerAction}
-        onKeyPress={triggerAction}
+        onKeyDown={triggerAction}
       >
         {val}
       </span>
@@ -113,6 +114,7 @@ function Value(props) {
             e.stopPropagation();
             sendMessage('tag.remove', v.id);
           }}
+          aria-label="remove"
         >
           <Icon type="times" />
         </button>
@@ -134,7 +136,7 @@ function Value(props) {
               disabled={disabled}
               value={inputValue}
               style={{ width: value.length ? inputWidth : '100%' }}
-              onChange={e => entryFieldOnChange(e.target.value)}
+              onChange={(e) => entryFieldOnChange(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') e.preventDefault();
                 entryFieldOnKeyDown(e.key, e.target.value);
@@ -164,7 +166,7 @@ function Value(props) {
   }, [focus]);
 
   if (readOnly) {
-    return <div className="tyk-form-control--readonly">{textValue(value.map(v => v.name).join(', '))}</div>;
+    return <div className="tyk-form-control--readonly">{textValue(value.map((v) => v.name).join(', '))}</div>;
   }
 
   if (tags) return getTags();
@@ -173,7 +175,22 @@ function Value(props) {
   }
   return value.length === 0
     ? textValue(placeholder, true)
-    : textValue(value.map(v => v.name).join(', '));
+    : textValue(value.map((v) => v.name).join(', '));
 }
+
+Value.propTypes = {
+  value: PropTypes.instanceOf(Array),
+  max: PropTypes.number,
+  tags: PropTypes.instanceOf(Array),
+  tagSeparators: PropTypes.instanceOf(Array),
+  addTagOnBlur: PropTypes.bool,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
+  renderValue: PropTypes.func,
+  valueOverflow: PropTypes.string,
+  focus: PropTypes.bool,
+  onMessage: PropTypes.func,
+  readOnly: PropTypes.bool,
+};
 
 export default Value;

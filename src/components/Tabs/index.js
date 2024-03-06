@@ -1,6 +1,5 @@
-
 import React, {
-  useEffect, useState,
+  useEffect, useMemo, useState,
 } from 'react';
 import PropTypes from 'prop-types';
 import Tab from './js/Tab';
@@ -9,7 +8,7 @@ import Collapsible from '../Collapsible';
 import Icon from '../Icon';
 import { TabsContext } from './tabs-context';
 
-const Tabs = (props) => {
+function Tabs(props) {
   const {
     children,
     className,
@@ -28,8 +27,8 @@ const Tabs = (props) => {
   }, [initialPath]);
 
   const updateTabsList = (tabsState, path, tabData) => {
-    let tempTabsState = Object.assign({}, tabsState);
-    const tempTabData = Object.assign({}, tabData);
+    let tempTabsState = { ...tabsState };
+    const tempTabData = { ...tabData };
     const tempPath = path.slice(0);
 
     while (tempPath.length > 1) {
@@ -47,7 +46,7 @@ const Tabs = (props) => {
   };
 
   const toggleTab = (tabsState, path) => {
-    let tempTabsState = Object.assign({}, tabsState);
+    let tempTabsState = { ...tabsState };
     const tempPath = path.slice(0);
 
     while (tempPath.length > 1) {
@@ -86,7 +85,7 @@ const Tabs = (props) => {
     }
 
     setTabs((prevTabs) => {
-      let tempTabs = Object.assign({}, prevTabs);
+      let tempTabs = { ...prevTabs };
 
       tempTabs = toggleTab(tempTabs, path);
 
@@ -161,7 +160,7 @@ const Tabs = (props) => {
   };
 
   const addTab = (tabData, path) => {
-    setTabs(prevTabs => updateTabsList({ ...prevTabs }, path, tabData));
+    setTabs((prevTabs) => updateTabsList({ ...prevTabs }, path, tabData));
 
     if (tabData.selected) {
       setInitialPath(path);
@@ -208,26 +207,37 @@ const Tabs = (props) => {
 
     const key = tempPath.shift();
 
-    return !!(tempTabs && tempTabs[key]);
+    return Boolean(tempTabs?.[key]);
   };
+
+  const context = useMemo(() => ({
+    id,
+    addTab,
+    hideTab,
+    updateTab,
+    showTab,
+    tabExists,
+    selectedPath,
+    rendered,
+    hideTabContent,
+    tabs,
+  }), [
+    id,
+    addTab,
+    hideTab,
+    updateTab,
+    showTab,
+    tabExists,
+    selectedPath,
+    rendered,
+    hideTabContent,
+    tabs,
+  ]);
 
   return (
     <div className={getCssClasses()}>
       {genTabs(tabs)}
-      <TabsContext.Provider
-        value={{
-          id,
-          addTab,
-          hideTab,
-          updateTab,
-          showTab,
-          tabExists,
-          selectedPath,
-          rendered,
-          hideTabContent,
-          tabs,
-        }}
-      >
+      <TabsContext.Provider value={context}>
         {
           (typeof children === 'function')
             ? children({
@@ -239,7 +249,7 @@ const Tabs = (props) => {
       </TabsContext.Provider>
     </div>
   );
-};
+}
 
 Tabs.propTypes = {
   className: PropTypes.string,
@@ -254,7 +264,6 @@ Tabs.propTypes = {
   onTabChange: PropTypes.func,
   type: PropTypes.string,
 };
-
 
 Tabs.Tab = Tab;
 

@@ -4,17 +4,18 @@ import { fromJS } from 'immutable';
 
 import CodeEditor from '../../components/CodeEditor';
 
-export default class FieldCodeEditor extends Component {
-  static propTypes = {
-    input: PropTypes.instanceOf(Object),
-    meta: PropTypes.instanceOf(Object),
-    validationmessages: PropTypes.instanceOf(Object),
-  };
-
+class FieldCodeEditor extends Component {
   constructor(props) {
     super(props);
 
     this.handleOnChange = this.handleOnChange.bind(this);
+  }
+
+  handleOnChange(value) {
+    const { input } = this.prop;
+    const { onChange } = input;
+
+    onChange(fromJS(value));
   }
 
   getInputError() {
@@ -31,13 +32,6 @@ export default class FieldCodeEditor extends Component {
     return message;
   }
 
-  handleOnChange(value) {
-    const { input } = this.prop;
-    const { onChange } = input;
-
-    onChange(fromJS(value));
-  }
-
   render() {
     const { input, ...rest } = this.props;
 
@@ -50,3 +44,11 @@ export default class FieldCodeEditor extends Component {
     );
   }
 }
+
+FieldCodeEditor.propTypes = {
+  input: PropTypes.instanceOf(Object),
+  meta: PropTypes.instanceOf(Object),
+  validationmessages: PropTypes.instanceOf(Object),
+};
+
+export default FieldCodeEditor;

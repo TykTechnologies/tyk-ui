@@ -4,17 +4,18 @@ import { fromJS } from 'immutable';
 
 import Multiselect from '../../components/Multiselect';
 
-export default class FieldMultiselect extends Component {
-  static propTypes = {
-    input: PropTypes.instanceOf(Object),
-    meta: PropTypes.instanceOf(Object),
-    validationmessages: PropTypes.instanceOf(Object),
-  }
-
+class FieldMultiselect extends Component {
   constructor(props) {
     super(props);
 
     this.handleOnChange = this.handleOnChange.bind(this);
+  }
+
+  handleOnChange(value) {
+    const { input } = this.props;
+    const { onChange } = input;
+
+    onChange(fromJS(value));
   }
 
   getMultiselectError() {
@@ -31,13 +32,6 @@ export default class FieldMultiselect extends Component {
     return message;
   }
 
-  handleOnChange(value) {
-    const { input } = this.props;
-    const { onChange } = input;
-
-    onChange(fromJS(value));
-  }
-
   render() {
     const { ...props } = this.props;
 
@@ -51,3 +45,11 @@ export default class FieldMultiselect extends Component {
     );
   }
 }
+
+FieldMultiselect.propTypes = {
+  input: PropTypes.instanceOf(Object),
+  meta: PropTypes.instanceOf(Object),
+  validationmessages: PropTypes.instanceOf(Object),
+};
+
+export default FieldMultiselect;

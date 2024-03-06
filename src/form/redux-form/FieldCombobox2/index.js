@@ -4,7 +4,7 @@ import { fromJS } from 'immutable';
 
 import Combobox2 from '../../components/Combobox2';
 
-const FieldCombobox2 = (props) => {
+function FieldCombobox2(props) {
   const { input, meta, validationmessages } = props;
 
   const getComboboxError = () => {
@@ -32,7 +32,7 @@ const FieldCombobox2 = (props) => {
       error={getComboboxError()}
     />
   );
-};
+}
 
 FieldCombobox2.propTypes = {
   meta: PropTypes.instanceOf(Object),

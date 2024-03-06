@@ -17,6 +17,7 @@ function ItemTrigger({ wrap }) {
       className={classes}
       onClick={toggleChange}
       type="button"
+      aria-label="collapse/expand"
     >
       <Icon className="collapsable__arrow" type={iconType} />
     </button>

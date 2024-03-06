@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 import Message from '../../Message';
 import { useTimeout } from '../../../hooks';
 
-const ToastMessage = (props) => {
+function ToastMessage(props) {
   const {
     children,
     options,
     onClose,
     index,
   } = props;
-  const opts = Object.assign({
+  const opts = {
     theme: 'success',
     delay: 3000,
-  }, options);
+    ...options,
+  };
   let timer;
 
   const handleClose = (itemIndex) => {
@@ -33,7 +34,7 @@ const ToastMessage = (props) => {
       {children}
     </Message>
   );
-};
+}
 
 ToastMessage.propTypes = {
   children: PropTypes.oneOfType([

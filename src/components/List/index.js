@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fromJS } from 'immutable';
 import ListItem from './js/ListItem';
 
-const List = (props) => {
+function List(props) {
   const {
     className,
     children,
@@ -28,7 +27,7 @@ const List = (props) => {
   };
 
   const getListStyle = () => {
-    const styleCopy = fromJS(style).toJS();
+    const styleCopy = structuredClone(style);
     if (labelwidth) {
       styleCopy.flexBasis = `calc(100% - ${labelwidth} - 20px)`;
     }
@@ -55,7 +54,7 @@ const List = (props) => {
       </ul>
     </div>
   );
-};
+}
 
 List.propTypes = {
   children: PropTypes.oneOfType([
@@ -76,8 +75,6 @@ List.defaultProps = {
   style: {},
 };
 
-
 List.Item = ListItem;
-
 
 export default List;

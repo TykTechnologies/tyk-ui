@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { tableContext } from '../tableContext';
 import { Row } from './row';
 
-
-export const Body = () => {
+export function Body() {
   const { state } = useContext(tableContext);
   const { rows } = state;
 
@@ -15,4 +14,4 @@ export const Body = () => {
       }
     </tbody>
   );
-};
+}

@@ -27,7 +27,7 @@ function EditableList2({
   hideOnEmpty = true,
   wrapperClassName = '',
 }) {
-  const [internalErrors, setInteranlErrors] = useState(null);
+  const [internalErrors, setInternalErrors] = useState(null);
 
   const updateRowValue = (rowIndex, fieldIndex, componentValue, isValid) => {
     const tempValueArr = !value ? [] : [...value];
@@ -47,7 +47,7 @@ function EditableList2({
       const tempFieldError = [...tempErrors[rowIndex]];
       tempFieldError[fieldIndex] = null;
       tempErrors[rowIndex] = tempFieldError;
-      setInteranlErrors(tempErrors);
+      setInternalErrors(tempErrors);
     }
     onChange(tempValueArr);
   };
@@ -67,7 +67,7 @@ function EditableList2({
     const errors = validateValues(fields, value);
 
     if (hasErrors(errors)) {
-      setInteranlErrors(errors);
+      setInternalErrors(errors);
       return;
     }
 
@@ -75,7 +75,7 @@ function EditableList2({
     newValue.id = getUID('row');
 
     onChange([
-      ...value && value,
+      ...value,
       newValue,
     ]);
   };

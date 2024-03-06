@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 
 import FileInput from '../../components/FileInput';
 
-export default class FieldFileInput extends Component {
-  static propTypes = {
-    input: PropTypes.instanceOf(Object),
-    meta: PropTypes.instanceOf(Object),
-    validationmessages: PropTypes.instanceOf(Object),
-  };
-
+class FieldFileInput extends Component {
   getInputError() {
     const { meta, validationmessages } = this.props;
     const { touched, error, warning } = meta;
@@ -36,3 +30,11 @@ export default class FieldFileInput extends Component {
     );
   }
 }
+
+FieldFileInput.propTypes = {
+  input: PropTypes.instanceOf(Object),
+  meta: PropTypes.instanceOf(Object),
+  validationmessages: PropTypes.instanceOf(Object),
+};
+
+export default FieldFileInput;
