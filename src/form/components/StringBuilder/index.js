@@ -41,7 +41,7 @@ function StringBuilder(props) {
   const [stringBuilderHeight, setStringBuilderHeight] = useState();
   const [showOptions, setShowOptions] = useState(false);
   const [tokenString, setTokenString] = useState(stringToTokenString(value, options));
-  const [contentMaxLength, setContentMaxLength] = useState(
+  const [contextMaxLength, setContentMaxLength] = useState(
     tokenValue.length + 5,
   );
   const [tokens, setTokens] = useState([]);
@@ -82,10 +82,10 @@ function StringBuilder(props) {
 
   useEffect(() => {
     // Auto Grow Input
-    if (contentMaxLength - 3 < tokenValue.length) {
+    if (contextMaxLength - 3 < tokenValue.length) {
       const newHeight = inputRef.current.scrollHeight + 3;
       setStringBuilderHeight(() => newHeight);
-      setContentMaxLength(() => contentMaxLength + 25);
+      setContentMaxLength(() => contextMaxLength + 25);
     }
   }, [tokenString, tokenValue]);
 
@@ -183,7 +183,7 @@ function StringBuilder(props) {
                 inputRef={inputRef}
                 invalidTokenRegex={invalidTokenRegex}
                 name={name}
-                contentMaxLength={contentMaxLength}
+                contextMaxLength={contextMaxLength}
                 setContentMaxLength={setContentMaxLength}
               />
               <TokenizedString

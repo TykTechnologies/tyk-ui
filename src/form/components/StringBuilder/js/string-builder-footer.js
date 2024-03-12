@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function StringBuilderFooter(props) {
+export const StringBuilderFooter = (props) => {
   const {
     note, error, inputInFocus, stringBuilderHeight, dropdownTriggerKey,
   } = props;
@@ -18,9 +18,7 @@ export function StringBuilderFooter(props) {
         <p className="tyk-form-control__help-block">
           <span>
             Enter
-            {' '}
             <span className="string_builder_trigger">{dropdownTriggerKey}</span>
-            {' '}
             to add any parameter
           </span>
         </p>
@@ -31,7 +29,7 @@ export function StringBuilderFooter(props) {
       )}
     </div>
   );
-}
+};
 
 StringBuilderFooter.propTypes = {
   note: PropTypes.string,
