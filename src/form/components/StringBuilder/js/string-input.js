@@ -21,7 +21,7 @@ function StringInput({
   setInputInFocus,
   invalidTokenRegex,
   name,
-  contentMaxLength,
+  contextMaxLength,
 }) {
   const [isPasteEvent, setIsPasteEvent] = useState(false);
 
@@ -82,8 +82,8 @@ function StringInput({
 
     // -- START :: Handle backspacing when cursor is at the end of the string
     if (selectionEnd === tokenValue.length) {
-      const lastToken = tokens[tokens.length - 2];
-      const lastCharsInString = tokenValue.slice(-(lastToken?.length ?? 0));
+      const lastToken = tokens[tokens?.length - 2];
+      const lastCharsInString = tokenValue.slice(-lastToken?.length);
       if (lastToken === lastCharsInString) {
         e.preventDefault();
         setTokenString(
@@ -257,7 +257,7 @@ function StringInput({
       name={name}
       ref={inputRef}
       style={{ height: `${stringBuilderHeight}px` }}
-      maxLength={contentMaxLength}
+      maxLength={contextMaxLength}
       onPaste={handlePasteEvent}
       onFocus={handleOnFocus}
       onBlur={() => setInputInFocus(false)}
@@ -290,7 +290,7 @@ StringInput.propTypes = {
   inputRef: PropTypes.instanceOf(Object),
   invalidTokenRegex: PropTypes.instanceOf(RegExp),
   name: PropTypes.string,
-  contentMaxLength: PropTypes.number,
+  contextMaxLength: PropTypes.number,
 };
 
 export { StringInput };
