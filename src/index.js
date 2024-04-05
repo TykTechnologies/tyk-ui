@@ -52,7 +52,6 @@ export { default as SelectableList } from './form/components/SelectableList';
 export { default as Textarea } from './form/components/Textarea';
 export { default as Toggle } from './form/components/Toggle';
 export { default as Pagination } from './form/components/Pagination';
-export { default as StringBuilder } from './form/components/StringBuilder';
 
 // -- Formik
 export { default as FormikCheckbox } from './form/formik/FormikCheckbox';
@@ -71,7 +70,6 @@ export { default as FormikSelect } from './form/formik/FormikSelect';
 export { default as FormikSelectableList } from './form/formik/FormikSelectableList';
 export { default as FormikTextarea } from './form/formik/FormikTextarea';
 export { default as FormikToggle } from './form/formik/FormikToggle';
-export { default as FormikStringBuilder } from './form/formik/FormikStringBuilder';
 export { default as FormikWrapper } from './utils/formik';
 
 // Redux - Form

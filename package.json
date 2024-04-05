@@ -1,6 +1,6 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "3.0.17",
+  "version": "3.0.18",
   "description": "Tyk UI - ui reusable components",
   "main": "lib/index.js",
   "scripts": {
