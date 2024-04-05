@@ -4,20 +4,19 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: stretch;
-    width: 100%;
-    height: 100%;
+    inline-size: 100%;
+    block-size: 100%;
     z-index: 1000;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    inset-block-end: 0;
+    inset-inline-start: 0;
     pointer-events: none;
 
     &__panel {
-        max-height: calc(100% - 2rem);
+        max-block-size: calc(100% - 2rem);
         background-color: white;
         padding: 0;
         margin: 0;
-        overflow-y: auto;
         display: flex;
         flex-direction: column;
         pointer-events: all;
@@ -28,7 +27,7 @@
     &__hole {
         flex-grow: 1;
         opacity: 0;
-        width: 100%;
+        inline-size: 100%;
         background-color: green;
         -webkit-user-select: none;
         user-select: none;
@@ -37,8 +36,8 @@
     }
 
     &__gutter {
-        height: 2rem;
-        width: 100%;
+        block-size: 2rem;
+        inline-size: 100%;
         cursor: row-resize;
         display: flex;
         background-color: theme-color('primary', 'base');
@@ -47,7 +46,7 @@
         justify-content: space-between;
         align-items: stretch;
         position: relative;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 5px 10px rgba(0 0 0 / 30%);
 
         &__headerleft, &__headerright
         {
@@ -65,8 +64,8 @@
         }
 
         &__logo {
-            width: 1rem;
-            height: 1rem;
+            inline-size: 1rem;
+            block-size: 1rem;
             -webkit-user-select: none;
             user-select: none;
             pointer-events: none;

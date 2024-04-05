@@ -1,4 +1,6 @@
+@use 'sass:map';
+
 .tyk-select {
   background: transparent url('#{$component-images-path}/arrow_down.svg') no-repeat calc(100% - 15px) center;
-  background-size: map-get($spacing, 'base') map-get($spacing, 'base');
+  background-size: map.get($spacing, 'base') map.get($spacing, 'base');
 }

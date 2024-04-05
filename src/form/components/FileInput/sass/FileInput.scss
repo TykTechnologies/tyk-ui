@@ -1,8 +1,11 @@
+@use 'sass:map';
+
 .tyk-file-input__wrapper {
   position: relative;
 
   > input {
-    padding: 6px map-get($spacing, 'md');
+    padding-block: 6px;
+    padding-inline: map.get($spacing, 'md');
   }
 
   > button {
@@ -10,7 +13,7 @@
     border: none;
     cursor: pointer;
     position: absolute;
-    right: map-get($spacing, 'base');
-    top: 9px;
+    inset-inline-end: map.get($spacing, 'base');
+    inset-block-start: 9px;
   }
 }

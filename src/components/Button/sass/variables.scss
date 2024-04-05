@@ -1,8 +1,10 @@
+@use 'sass:map';
+
 $button-font-family: $font-family-bold !default;
-$button-border-radius: map-get($spacing, 'md') !default;
+$button-border-radius: map.get($spacing, 'md') !default;
 
 $padding-y-button-sm: 3px !default;
-$padding-x-button-sm: map-get($spacing, 'base') !default;
+$padding-x-button-sm: map.get($spacing, 'base') !default;
 $padding-y-button-md: 8px !default;
 $padding-x-button-md: 23px !default;
 $padding-y-button-lg: 13px !default;

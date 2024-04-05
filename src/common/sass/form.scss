@@ -1,9 +1,11 @@
+@use 'sass:map';
 @import 'mixins';
 @import 'variables';
 
 .tyk-form-section__title {
   font-size: text-scale('base');
-  margin: map-get($spacing, 'xs') 0 map-get($spacing, 'base') 0;
+  margin-block: map.get($spacing, 'xs') map.get($spacing, 'base');
+  margin-inline: 0;
 
   &--light {
     color: theme-color('background', 'dark');
@@ -11,17 +13,17 @@
 }
 
 .tyk-form-group {
-  margin-bottom: $form-group-margin-bottom;
+  margin-block-end: $form-group-margin-bottom;
 
   &.has-error > .tyk-form-control__wrapper > .tyk-form-control,
   &.has-error > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control,
   &.has-error .tyk-file-input__wrapper  > .tyk-form-control {
     border: $error-border;
-    border-left: $error-border-left;
+    border-inline-start: $error-border-left;
     outline: none;
 
     &:focus {
-      border-left: 2px solid theme-color('danger', 'dark');
+      border-inline-start: 2px solid theme-color('danger', 'dark');
       border-color: theme-color('danger', 'dark');
       outline: none;
     }
@@ -43,8 +45,8 @@
     label {
       display: flex;
       white-space: nowrap;
-      margin-right: map-get($spacing, 'md');
-      margin-top: 14px;
+      margin-inline-end: map.get($spacing, 'md');
+      margin-block-start: 14px;
     }
 
     input,
@@ -54,7 +56,7 @@
 
     .tyk-form-control__help-block {
       display: flex;
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 
@@ -79,10 +81,10 @@
 
   &--rounded-corners {
     &.has-error > .tyk-form-control__wrapper > .tyk-form-control {
-      border-left: $error-border;
+      border-inline-start: $error-border;
 
       &:focus {
-        border-left: $error-border;
+        border-inline-start: $error-border;
         outline: none;
       }
     }
@@ -94,38 +96,40 @@
 }
 
 .tyk-form-group--addon-right input {
-  border-right: 0 !important;
-  padding-right: 0;
+  border-inline-end: 0 !important;
+  padding-inline-end: 0;
 }
 
 .tyk-form-group--addon-left input {
-  border-left: 0 !important;
-  padding-left: 0;
+  border-inline-start: 0 !important;
+  padding-inline-start: 0;
 }
 
 .tyk-form-group--rounded-corners.tyk-form-group--addon-right {
   input {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
   }
+
   .tyk-input-group__addon {
     background: $form-control-addon-background-color;
-    border-top-right-radius: $general-border-radius;
-    border-bottom-right-radius: $general-border-radius;
+    border-start-end-radius: $general-border-radius;
+    border-end-end-radius: $general-border-radius;
     color: $text-color;
   }
 }
 
 .tyk-form-group--rounded-corners.tyk-form-group--addon-left {
   input {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left: 0 !important;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-inline-start: 0 !important;
   }
+
   .tyk-input-group__addon {
     background: $form-control-addon-background-color;
-    border-top-left-radius: $general-border-radius;
-    border-bottom-left-radius: $general-border-radius;
+    border-start-start-radius: $general-border-radius;
+    border-end-start-radius: $general-border-radius;
     color: $text-color;
   }
 }
@@ -134,19 +138,20 @@
   font-family: $font-family-regular;
   font-size: text-scale('xs');
   line-height: line-height('xs');
-  margin-top: 5px;
+  margin-block-start: 5px;
   padding: $error-message-padding;
   position: relative;
 
-  &:before {
+  &::before {
     content: '!';
     background: theme-color('danger', 'base');
     color: white;
     font-family: $font-family-bold;
     border-radius: 8px;
     display: inline-block;
-    margin-right: 5px;
-    padding: 0px 7px;
+    margin-inline-end: 5px;
+    padding-block: 0;
+    padding-inline: 7px;
   }
 }
 
@@ -160,15 +165,16 @@
     background-color: $form-control-addon-background-color;
     border: $form-control-border;
     display: flex;
-    height: $form-control-height;
-    padding: $form-control-addon-padding-top $form-control-addon-padding-right $form-control-addon-padding-bottom $form-control-addon-padding-left;
+    block-size: $form-control-height;
+    padding-block: $form-control-addon-padding-top $form-control-addon-padding-bottom;
+    padding-inline: $form-control-addon-padding-left $form-control-addon-padding-right;
 
     &:first-child {
-      border-right: 0;
+      border-inline-end: 0;
     }
 
     &:last-child {
-      border-left: 0;
+      border-inline-start: 0;
     }
   }
 }
@@ -181,10 +187,11 @@
   background-color: white;
   color: $text-color;
   display: block;
-  height: $form-control-height;
-  padding: $form-control-padding-top $form-control-padding-right $form-control-padding-bottom $form-control-padding-left;
+  block-size: $form-control-height;
+  padding-block: $form-control-padding-top $form-control-padding-bottom;
+  padding-inline: $form-control-padding-left $form-control-padding-right;
   transition: all .2s linear;
-  width: 100%;
+  inline-size: 100%;
 
   &[disabled] {
     background-color: $form-control-disabled-background-color;
@@ -208,7 +215,7 @@
 
     + .tyk-input-group__addon {
       border: $form-control-border-focus !important;
-      border-left: none !important;
+      border-inline-start: none !important;
     }
   }
 
@@ -219,48 +226,51 @@
     font-size: text-scale('xs');
     line-height: line-height('xs');
     padding: $help-block-padding;
-    margin: 5px 0 0 0;
+    margin-block: 5px 0;
+    margin-inline: 0;
   }
 }
 
 select {
   border-radius: 0;
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 .inline-form-wrapper {
   align-items: center;
   display: flex;
-  width: 100%;
+  inline-size: 100%;
 
   .inline-form {
-    width: 100%;
+    inline-size: 100%;
   }
 
   > button {
-    margin-left: 10px;
-    margin-bottom: map-get($spacing, 'base');
+    margin-inline-start: 10px;
+    margin-block-end: map.get($spacing, 'base');
   }
 }
 
 .tyk-checkbox,
 .tyk-radio {
-  margin: 10px 0;
+  margin-block: 10px;
+  margin-inline: 0;
 
   label {
     font-family: $font-family-medium;
   }
 
   input {
-    margin: 0 5px 0 0;
+    margin-block: 0;
+    margin-block: 0 5px;
   }
 
   &--inline {
     display: inline-flex;
-    margin-left: map-get($spacing, 'base');
+    margin-inline-start: map.get($spacing, 'base');
 
     &:first-child {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
 }
@@ -272,16 +282,16 @@ select {
 
   .tyk-form-group {
     flex: 1;
-    margin-left: map-get($spacing, 'md');
-    min-width: 200px;
+    margin-inline-start: map.get($spacing, 'md');
+    min-inline-size: 200px;
 
     &:first-child {
-      margin-left:0
+      margin-inline-start:0
     }
   }
 
   > .tyk-button {
-    margin-left: map-get($spacing, 'md');
-    margin-bottom: map-get($spacing, 'base');
+    margin-inline-start: map.get($spacing, 'md');
+    margin-block-end: map.get($spacing, 'base');
   }
 }

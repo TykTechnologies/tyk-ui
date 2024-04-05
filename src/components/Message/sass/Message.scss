@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 @import './mixins';
@@ -7,26 +8,26 @@
   display: flex;
   align-items: center;
   border-radius: $tyk-message-border-radius;
-  margin-bottom: map-get($spacing, 'md');
-  padding: $tyk-message-padding-top $tyk-message-padding-right $tyk-message-padding-bottom $tyk-message-padding-left;
+  margin-block-end: map.get($spacing, 'md');
+  padding-block: $tyk-message-padding-top $tyk-message-padding-bottom;
+  padding-inline: $tyk-message-padding-left $tyk-message-padding-right;
 
   &__content {
     flex-grow: 1;
-    margin-left: map-get($spacing, 'md');
-    margin-right: map-get($spacing, 'md');
+    margin-inline: map.get($spacing, 'md');
   }
 
   > .tyk-icon:first-child {
-    width: 32px;
-    height: 32px;
+    inline-size: 32px;
+    block-size: 32px;
     flex-shrink: 0;
     border-radius: 50%;
     color: white;
 
-    &:before {
+    &::before {
       display: flex;
-      width: 100%;
-      height: 100%;
+      inline-size: 100%;
+      block-size: 100%;
       align-items: center;
       justify-content: center;
     }

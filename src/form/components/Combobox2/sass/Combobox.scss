@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import '../../../../common/sass/variables';
 @import '../../../../common/sass/mixins';
 @import './variables';
@@ -6,6 +7,7 @@
 .tyk-combobox2 {
   $container-trigger-width: 40px;
   $values-default-height: 38px;
+
   outline: none;
 
   &.disabled {
@@ -34,8 +36,8 @@
     display: flex;
     flex-direction: row;
     position: relative;
-    min-height: 40px;
-    height: auto;
+    min-block-size: 40px;
+    block-size: auto;
     padding: 0;
 
     &:focus-within {
@@ -48,41 +50,40 @@
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: map-get($spacing, 'sm');
-    max-width: calc(100% - #{$container-trigger-width});
+    padding-block: 2px;
+    padding-inline-start: map.get($spacing, 'sm');
+    max-inline-size: calc(100% - #{$container-trigger-width});
 
     &.expand-mode {
-      max-height: 1000px;
+      max-block-size: 1000px;
       overflow: hidden;
-      transition: max-height 1s ease;
+      transition: max-block-size 1s ease;
     }
 
     &--collapsed.expand-mode {
-      max-height: $values-default-height;
-      transition: max-height .2s ease;
+      max-block-size: $values-default-height;
+      transition: max-block-size .2s ease;
     }
 
     .tyk-pill--combobox {
-      margin-top: 3px;
-      margin-bottom: 3px;
+      margin-block: 3px;
       background-color: $tyk-combobox-pill-background;
-      border-radius: map-get($spacing, 'sm');
+      border-radius: map.get($spacing, 'sm');
       color: $tyk-combobox-pill-color;
-      padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
-      max-width: 100%;
-      max-height: 26px;
+      padding-block: map.get($spacing, 'xs');
+      padding-inline: map.get($spacing, 'sm');
+      max-inline-size: 100%;
+      max-block-size: 26px;
 
       button {
         background: none;
         border: none;
         cursor: pointer;
-        width: 23px;
+        inline-size: 23px;
         outline: none;
 
         + span {
-          margin-left: 0;
+          margin-inline-start: 0;
         }
       }
 
@@ -92,7 +93,7 @@
       }
 
       i {
-        margin-right: map-get($spacing, 'xs');
+        margin-inline-end: map.get($spacing, 'xs');
       }
     }
   }
@@ -116,8 +117,9 @@
   &__text-value {
     font-family: $font-family-medium;
     font-size: text-scale('sm');
-    padding: 9px 5px;
-    width: 100%;
+    padding-block: 9px;
+    padding-inline: 5px;
+    inline-size: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1;
@@ -151,7 +153,7 @@
     }
 
     .tyk-icon {
-      height: 14px;
+      block-size: 14px;
     }
   }
 }
@@ -174,21 +176,23 @@
   .tyk-combobox2__combobox-search {
     background-color: white;
     position: sticky;
-    top: 0;
-    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    inset-block-start: 0;
+    padding-block: map.get($spacing, 'sm');
+    padding-inline: map.get($spacing, 'md');
 
     + .combobox-list {
-      border-top: 1px solid $form-default-color;
+      border-block-start: 1px solid $form-default-color;
     }
   }
 
   .tyk-combobox2__combobox-list {
-    max-height: 255px;
+    max-block-size: 255px;
 
     li {
       display: flex;
       cursor: pointer;
-      padding: 9px map-get($spacing, 'md');
+      padding-block: 9px;
+      padding-inline: map.get($spacing, 'md');
       transition: all .2s;
       font-family: $font-family-medium;
 
@@ -203,11 +207,11 @@
       }
 
       + li {
-        border-top: 1px solid $form-default-color;
+        border-block-start: 1px solid $form-default-color;
       }
 
       i {
-        margin-right: map-get($spacing, 'xs');
+        margin-inline-end: map.get($spacing, 'xs');
       }
 
       .item-name {

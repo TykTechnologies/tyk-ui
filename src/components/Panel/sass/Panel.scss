@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 @import './variables';
@@ -6,7 +7,7 @@
 .tyk-panel {
   background: white;
   border-radius: $panel-border-radius;
-  margin-bottom: 20px;
+  margin-block-end: 20px;
   font-family: $font-family-medium;
   position: relative;
 
@@ -18,21 +19,22 @@
   .tyk-panel {
     border: $general-border-width solid theme-color('default', 'light');
     box-shadow: none;
-    -webkit-box-shadow: none;
   }
 
   &--blank {
     &.tyk-panel--collapsed {
-      margin-bottom: 20px;
+      margin-block-end: 20px;
 
       .tyk-panel__header {
-        margin-bottom: 0;
+        margin-block-end: 0;
       }
     }
 
     .tyk-panel__header {
-      margin-bottom: -20px;
-      padding: $padding-y-blank-panel-header $padding-x-panel-header;
+      margin-block-end: -20px;
+      padding-block: $padding-y-blank-panel-header;
+      padding-inline: $padding-x-panel-header;
+
       @include panel-variant(
         white,
         theme-color('default', 'base')
@@ -45,6 +47,7 @@
 
     .tyk-panel__header {
       @include panel-variant($panel-primary-header-color, $panel-primary-header-text-color);
+
       border: $panel-primary-border-color;
     }
 
@@ -72,6 +75,7 @@
       );
     }
   }
+
   &--danger {
     .tyk-panel__header {
       @include panel-variant(
@@ -79,6 +83,7 @@
       );
     }
   }
+
   &--warning {
     .tyk-panel__header {
       @include panel-variant(
@@ -94,11 +99,11 @@
   font-family: $font-family-regular;
   padding: $padding-panel-body;
   position: relative;
-  transition: height .2s;
+  transition: block-size .2s;
 
   & ~ .tyk-panel__header {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-end-start-radius: 0;
+    border-end-end-radius: 0;
   }
 
   &.no-padding {
@@ -109,28 +114,29 @@
 .tyk-panel__header {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid $panel-default-border-bottom-color;
+  border-block-end: 1px solid $panel-default-border-bottom-color;
   border-radius: $panel-border-radius;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
   font-family: $panel-header-font-family;
   overflow: hidden;
-  padding: $padding-y-panel-header $padding-x-panel-header;
+  padding-block: $padding-y-panel-header;
+  padding-inline: $padding-x-panel-header;
   position: relative;
 
   > .tyk-icon,
   > .tyk-tooltip__wrapper {
-    margin-left: 5px;
+    margin-inline-start: 5px;
   }
 
   .tyk-panel--collapsed & {
-    border-bottom-left-radius: $panel-border-radius;
-    border-bottom-right-radius: $panel-border-radius;
+    border-end-start-radius: $panel-border-radius;
+    border-end-end-radius: $panel-border-radius;
   }
 
   & ~ .tyk-panel__body {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
   }
 
   &h3 {
@@ -145,38 +151,40 @@
     cursor: pointer;
 
     .tyk-panel__icon-collapse--right & {
-      padding-right: $padding-x-right-panel-collapsable;
+      padding-inline-end: $padding-x-right-panel-collapsable;
     }
 
     .tyk-panel__icon-collapse--left & {
-      padding-left: $padding-x-left-panel-collapsable;
+      padding-inline-start: $padding-x-left-panel-collapsable;
     }
   }
 
   .collapsable__arrow-right {
     font-size: text-scale('sm');
     position: absolute;
-    padding: map-get($spacing, 'sm');
-    right: map-get($spacing, 'sm');
-    top: calc(50% - 21px);
+    padding: map.get($spacing, 'sm');
+    inset-inline-end: map.get($spacing, 'sm');
+    inset-block-start: calc(50% - 21px);
   }
+
   .collapsable__arrow-left {
     font-size: text-scale('sm');
     position: absolute;
-    padding: 8px 0px map-get($spacing, 'sm') 20px;
-    left: 0px;
-    top: calc(50% - 21px);
+    padding-block: 8px map.get($spacing, 'sm');
+    padding-inline: 20px 0;
+    inset-inline-start: 0;
+    inset-block-start: calc(50% - 21px);
   }
 }
 
 .tyk-panel__footer {
   align-items: center;
-  border-top: 1px solid theme-color('background', 'light');
+  border-block-start: 1px solid theme-color('background', 'light');
   display: flex;
   justify-content: flex-end;
-  padding: map-get($spacing, 'lg');
+  padding: map.get($spacing, 'lg');
 
   >:not(:first-child) {
-    margin-left: 5px;
+    margin-inline-start: 5px;
   }
 }

@@ -1,7 +1,7 @@
 .dropdown__menu {
   .tyk-list {
     background: white;
-    max-height: none;
+    max-block-size: none;
 
     li {
       padding: 0;
@@ -13,7 +13,8 @@
       a {
         cursor: pointer;
         display: block;
-        padding: 10px 20px;
+        padding-block: 10px;
+        padding-inline: 20px;
         text-decoration: none;
       }
     }

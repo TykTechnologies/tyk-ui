@@ -1,7 +1,9 @@
-$tyk-message-padding-top: map-get($spacing, 'md') !default;
-$tyk-message-padding-right: map-get($spacing, 'md') !default;
-$tyk-message-padding-bottom: map-get($spacing, 'md') !default;
-$tyk-message-padding-left: map-get($spacing, 'md') !default;
+@use 'sass:map';
+
+$tyk-message-padding-top: map.get($spacing, 'md') !default;
+$tyk-message-padding-right: map.get($spacing, 'md') !default;
+$tyk-message-padding-bottom: map.get($spacing, 'md') !default;
+$tyk-message-padding-left: map.get($spacing, 'md') !default;
 $tyk-message-border-radius: $general-border-radius !default;
 $tyk-message-default-background: theme-color('primary', 'light') !default;
 $tyk-message-default-border: theme-color('default', 'dark') !default;

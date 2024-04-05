@@ -1,13 +1,16 @@
+@use 'sass:map';
 @use "sass:math";
 
 @function theme-color($key: 'primary', $variant: 'base') {
-  $map: map-get($theme-colors, $key);
-  @return map-get($map, $variant);
+  $map: map.get($theme-colors, $key);
+
+  @return map.get($map, $variant);
 }
 
 @function contrast($background: 'light', $type: 'primary') {
-  $map: map-get($contrast-colors, $background);
-  @return map-get($map, $type);
+  $map: map.get($contrast-colors, $background);
+
+  @return map.get($map, $type);
 }
 
 @mixin contrast($background: 'light', $type: 'primary') {
@@ -15,11 +18,11 @@
 }
 
 @function text-scale($level) {
-  @return map-get(map-get($text-settings, $level), 'font-size');
+  @return map.get(map.get($text-settings, $level), 'font-size');
 }
 
 @function line-height($level) {
-  @return map-get(map-get($text-settings, $level), 'line-height');
+  @return map.get(map.get($text-settings, $level), 'line-height');
 }
 
 @mixin text-setting($level) {
@@ -40,9 +43,11 @@
 @mixin mq($width, $type: min) {
     @if map_has_key($breakpoints, $width) {
         $width: map_get($breakpoints, $width);
+
         @if $type == max {
             $width: $width - 1px;
         }
+
         @media only screen and (#{$type}-width: $width) {
             @content;
         }
@@ -52,12 +57,12 @@
 @mixin grid-loop($name) {
   @for $i from 0 through $grid-columns {
     .tyk-col--#{$name}-#{$i} {
-      flex-basis: calc(#{percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
-      max-width: calc(#{percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
+      flex-basis: calc(#{math.percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
+      max-inline-size: calc(#{math.percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
     }
 
     .tyk-col--offset-#{$name}-#{$i} {
-      margin-left: percentage(math.div($i, $grid-columns));
+      margin-inline-start: math.percentage(math.div($i, $grid-columns));
     }
   }
 }
@@ -92,26 +97,20 @@
     &:-ms-input-placeholder {
       opacity: 0.8;
     }
-
-    &::-ms-input-placeholder {
-      opacity: 0.8;
-    }
   }
 
   &.tyk-form-group--addon-left {
     .tyk-input-group__addon {
-      border-bottom: 2px solid $border-color;
-      border-left: 2px solid $border-color;
-      border-top: 2px solid $border-color;
+      border-block: 2px solid $border-color;
+      border-inline-start: 2px solid $border-color;
       color: $color;
     }
   }
 
   &.tyk-form-group--addon-right {
     .tyk-input-group__addon {
-      border-bottom: 2px solid $border-color;
-      border-right: 2px solid $border-color;
-      border-top: 2px solid $border-color;
+      border-block: 2px solid $border-color;
+      border-inline-end: 2px solid $border-color;
       color: $color;
     }
   }

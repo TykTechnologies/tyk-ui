@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import './variables';
 
 .tyk-tooltip {
@@ -6,27 +7,27 @@
   background-color: theme-color('primary', 'light');
   border: 2px solid theme-color('primary', 'base');
   border-radius: $general-border-radius;
-  max-width: var(--tooltip-max-width);
-  padding: map-get($spacing, 'md');
+  max-inline-size: var(--tooltip-max-width);
+  padding: map.get($spacing, 'md');
 
   > .tyk-icon:first-child {
-    width: 32px;
-    height: 32px;
+    inline-size: 32px;
+    block-size: 32px;
     border-radius: 50%;
     color: white;
     background-color: theme-color('default', 'base-light');
 
-    &:before {
+    &::before {
       display: flex;
-      width: 100%;
-      height: 100%;
+      inline-size: 100%;
+      block-size: 100%;
       align-items: center;
       justify-content: center;
     }
   }
 
   > .tyk-icon + .tyk-tooltip__content {
-    margin-left: map-get($spacing, 'md');
+    margin-inline-start: map.get($spacing, 'md');
   }
 
   &__content {
@@ -35,7 +36,7 @@
     word-wrap: break-word;
 
     + .tyk-icon {
-      margin-left: map-get($spacing, 'md');
+      margin-inline-start: map.get($spacing, 'md');
     }
   }
 

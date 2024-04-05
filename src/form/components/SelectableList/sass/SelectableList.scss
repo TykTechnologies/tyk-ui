@@ -1,13 +1,15 @@
+@use 'sass:map';
+
 .tyk-selectable-list {
-  margin-bottom: map-get($spacing, 'md');
-  width: 100%;
+  margin-block-end: map.get($spacing, 'md');
+  inline-size: 100%;
 
   li:not(.tyk-selectable-list__no-items-message) {
     font-family: $font-family-medium;
     padding: 0;
 
     .tyk-message {
-      margin-bottom: 0;
+      margin-block-end: 0;
     }
 
     label {
@@ -19,10 +21,11 @@
       align-items: center;
       cursor: pointer;
       display: flex;
-      padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+      padding-block: map.get($spacing, 'sm');
+      padding-inline: map.get($spacing, 'md');
 
       input[type="checkbox"] {
-        margin-left: auto;
+        margin-inline-start: auto;
       }
     }
   }

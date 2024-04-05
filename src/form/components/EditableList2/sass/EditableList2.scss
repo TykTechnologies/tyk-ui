@@ -4,10 +4,10 @@
   &__header {
     align-items: center;
     display: flex;
-    margin-bottom: 10px;
+    margin-block-end: 10px;
 
     .tyk-button {
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 
@@ -23,17 +23,17 @@
   }
 
   &__item {
-    border-bottom: 1px solid theme-color('default', 'light');
+    border-block-end: 1px solid theme-color('default', 'light');
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
+    inline-size: 100%;
 
     &:first-child {
-      border-bottom: none;
+      border-block-end: none;
     }
 
     &-header {
-      border-bottom: 1px solid theme-color('default', 'light');
+      border-block-end: 1px solid theme-color('default', 'light');
       color: $text-color;
       font-size: text-scale('sm');
       line-height: line-height('sm');
@@ -46,9 +46,10 @@
     }
 
     &-cell {
-      border-left: 1px solid theme-color('default', 'light');
+      border-inline-start: 1px solid theme-color('default', 'light');
       overflow: hidden;
-      padding: 0 10px;
+      padding-block: 0;
+      padding-inline: 10px;
 
       .tyk-form-control--readonly {
         overflow: hidden;
@@ -57,16 +58,18 @@
       }
 
       &:first-child {
-        border-left: none;
-        padding-left: 15px;
+        border-inline-start: none;
+        padding-inline-start: 15px;
       }
+
       &:last-child {
-        padding-right: 15px;
+        padding-inline-end: 15px;
       }
 
       .tyk-form-group {
-        margin: 10px 0;
-        width: 100%;
+        margin-block: 10px;
+        margin-inline: 0;
+        inline-size: 100%;
       }
     }
 
@@ -77,23 +80,22 @@
       &--size-#{$i} {
         display: flex;
         flex-grow: #{$i + 1};
-        $my_width: #{math.div($i, 12) * 100%};
-        width: $my_width;
+        inline-size: #{math.div($i, 12) * 100%};
       }
     }
 
     &--size-fit {
-      width: fit-content;
+      inline-size: fit-content;
     }
 
     &-action {
       align-items: flex-start;
       display: flex;
       justify-content: center;
-      width: 100px;
+      inline-size: 100px;
 
       .tyk-button {
-        margin-top: 20px;
+        margin-block-start: 20px;
       }
 
       &--read-only {
@@ -101,7 +103,7 @@
         align-items: center;
 
         .tyk-button {
-          margin-top: 0;
+          margin-block-start: 0;
         }
       }
 
