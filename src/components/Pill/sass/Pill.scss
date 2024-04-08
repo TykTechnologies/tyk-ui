@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .tyk-pill {
   align-items: center;
   border-radius: $general-border-radius;
@@ -5,7 +7,8 @@
   font-size: text-scale('xs');
   line-height: 19px;
   margin: $pill-margin;
-  padding: 6px map-get($spacing, 'base');
+  padding-block: 6px;
+  padding-inline: map.get($spacing, 'base');
   font-family: $font-family-medium;
 
   &--square {
@@ -17,23 +20,23 @@
   }
 
   + .tyk-pill {
-    margin-right: map-get($spacing, 'sm');
+    margin-inline-end: map.get($spacing, 'sm');
   }
 
   button + span {
-    margin-left: map-get($spacing, 'sm');
+    margin-inline-start: map.get($spacing, 'sm');
   }
 
   span + button {
-    margin-left: map-get($spacing, 'sm');
+    margin-inline-start: map.get($spacing, 'sm');
   }
 
   &:first-child {
-    margin-right: map-get($spacing, 'sm');
+    margin-inline-end: map.get($spacing, 'sm');
   }
 
   &:last-child {
-    margin-right: 0;
+    margin-inline-end: 0;
   }
 
   &--default {
@@ -64,7 +67,7 @@
   }
 
   &--primary-outline {
-    box-shadow: inset 0px 0px 0px 2px theme-color('primary', 'base');
+    box-shadow: inset 0 0 0 2px theme-color('primary', 'base');
     color: $text-color;
 
     i {
@@ -82,7 +85,7 @@
   }
 
   &--success-outline {
-    box-shadow: inset 0px 0px 0px 2px theme-color('success', 'base');
+    box-shadow: inset 0 0 0 2px theme-color('success', 'base');
     color: $text-color;
 
     i {
@@ -100,7 +103,7 @@
   }
 
   &--danger-outline {
-    box-shadow: inset 0px 0px 0px 2px theme-color('danger', 'base');
+    box-shadow: inset 0 0 0 2px theme-color('danger', 'base');
     color: $text-color;
 
     i {
@@ -118,7 +121,7 @@
   }
 
   &--warning-outline {
-    box-shadow: inset 0px 0px 0px 2px theme-color('warning', 'base');
+    box-shadow: inset 0 0 0 2px theme-color('warning', 'base');
     color: $text-color;
 
     i {
@@ -136,7 +139,7 @@
   }
 
   &--info-outline {
-    box-shadow: inset 0px 0px 0px 2px theme-color('info', 'base');
+    box-shadow: inset 0 0 0 2px theme-color('info', 'base');
     color: $text-color;
 
     i {

@@ -1,2 +1,4 @@
+@use 'sass:map';
+
 $pagination-border-radius: $general-border-radius !default;
-$pagination-button-padding: map-get($spacing, 'sm') map-get($spacing, 'base') !default;
+$pagination-button-padding: map.get($spacing, 'sm') map.get($spacing, 'base') !default;

@@ -1,31 +1,34 @@
+@use 'sass:map';
+
 .tyk-multiselect {
   align-items: flex-start;
   border-radius: $general-border-radius;
   flex-wrap: wrap;
   display: flex;
-  margin-bottom: map-get($spacing, 'md');
-  width: 100%;
+  margin-block-end: map.get($spacing, 'md');
+  inline-size: 100%;
 
-  /*FALLBACK FOR ANGULAR COMPONENTS*/
+  /* FALLBACK FOR ANGULAR COMPONENTS */
   .input-group .input-group-addon + .form-control {
     border-width: 1px !important;
-    border-left: none !important;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+    border-inline-start: none !important;
+    border-start-start-radius: 0 !important;
+    border-start-end-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+    border-end-end-radius: 0 !important;
   }
 
   .input-group .input-group-addon {
     background: transparent !important;
     border-width: 1px !important;
-    border-right: 0 !important;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
+    border-inline-end: 0 !important;
+    border-start-start-radius: 0 !important;
+    border-start-end-radius: 0 !important;
+    border-end-start-radius: 0 !important;
+    border-end-end-radius: 0 !important;
   }
-  /*END FALLBACK FOR ANGULAR COMPONENTS*/
+
+  /* END FALLBACK FOR ANGULAR COMPONENTS */
 
   &.has-error {
     border: $general-border-width solid theme-color('danger', 'base');
@@ -33,46 +36,50 @@
 
   &__header {
     background-color: theme-color('default', 'base');
-    border-top-left-radius: $general-border-radius;
-    border-top-right-radius: $general-border-radius;
+    border-start-start-radius: $general-border-radius;
+    border-start-end-radius: $general-border-radius;
     color: white;
     display: flex;
-    width: 100%;
+    inline-size: 100%;
 
     > div {
-      padding: map-get($spacing, 'sm') map-get($spacing, 'base');
-      width: 50%;
+      padding-block: map.get($spacing, 'sm');
+      padding-inline: map.get($spacing, 'base');
+      inline-size: 50%;
     }
   }
 
   &__panel-wrapper {
     border: $form-control-border;
-    border-top: none;
-    border-bottom-left-radius: $general-border-radius;
-    border-bottom-right-radius: $general-border-radius;
+    border-block-start: none;
+    border-end-start-radius: $general-border-radius;
+    border-end-end-radius: $general-border-radius;
     display: flex;
     flex: 1;
-    height: 265px;
-    width: 100%;
+    block-size: 265px;
+    inline-size: 100%;
   }
 
   &__panel {
     display: flex;
     flex-direction: column;
-    margin: 0 0 0 -1px;
+    margin-block: 0;
+    margin-inline: -1px 0;
     position: relative;
-    width: calc(50% + 1px);
+    inline-size: calc(50% + 1px);
 
     &:last-child {
-      border-left: $form-control-border;
+      border-inline-start: $form-control-border;
+
       .tyk-form-group {
-        margin-left: -1px;
-        width: calc(100% + 2px);
+        margin-inline-start: -1px;
+        inline-size: calc(100% + 2px);
       }
     }
 
     .tyk-message {
-      margin: map-get($spacing, 'md') map-get($spacing, 'md') 0 map-get($spacing, 'md');
+      margin-block: map.get($spacing, 'md') 0;
+      margin-inline: map.get($spacing, 'md');
     }
   }
 
@@ -82,20 +89,21 @@
     padding: 0;
 
     &--scroll {
-      height: 100%;
+      block-size: 100%;
       overflow-y: auto;
     }
 
     > li {
-      border-bottom: $form-control-border;
+      border-block-end: $form-control-border;
       display: flex;
       flex-direction: column;
-      padding: map-get($spacing, 'sm') map-get($spacing, 'base');
+      padding-block: map.get($spacing, 'sm');
+      padding-inline: map.get($spacing, 'base');
 
       > div {
         align-items: start;
         display: flex;
-        width: 100%;
+        inline-size: 100%;
       }
 
       .loading {
@@ -103,7 +111,7 @@
       }
 
       &:last-child {
-        border-bottom: none;
+        border-block-end: none;
       }
     }
   }
@@ -121,15 +129,15 @@
 
   .tyk-multiselect-item__controls {
     display: flex;
-    margin-left: auto;
+    margin-inline-start: auto;
     flex-wrap: nowrap;
 
     .tyk-button {
       color: $text-color;
-      margin-left: map-get($spacing, 'xs');
+      margin-inline-start: map.get($spacing, 'xs');
 
       &:last-child {
-        margin-left: 0;
+        margin-inline-start: 0;
       }
     }
   }

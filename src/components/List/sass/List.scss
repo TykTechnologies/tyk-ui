@@ -1,10 +1,12 @@
+@use 'sass:map';
+
 .tyk-list {
   border: $general-border-width solid theme-color('default', 'light');
   border-radius: $general-border-radius;
   font-size: text-scale('sm');
   list-style-type: none;
   margin: 0;
-  max-height: 191px;
+  max-block-size: 191px;
   padding: 0;
   overflow: auto;
 
@@ -12,13 +14,14 @@
     display: flex;
 
     > label {
-      margin-right: map-get($spacing, 'md');
+      margin-inline-end: map.get($spacing, 'md');
     }
   }
 
   li {
-    border-bottom: 1px solid theme-color('default', 'light');
-    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    border-block-end: 1px solid theme-color('default', 'light');
+    padding-block: map.get($spacing, 'sm');
+    padding-inline: map.get($spacing, 'md');
     font-family: $font-family-medium;
 
     &.tyk-list__item--selected {
@@ -92,13 +95,13 @@ ul.tyk-list--inline {
   display: flex;
 
   li {
-    padding: 0 map-get($spacing, 'sm');
+    padding-block: 0;
+    padding-inline: map.get($spacing, 'sm');
   }
 
   &.tyk-list--with-separator {
-
     li:not(:first-child) {
-      border-left: 1px solid theme-color('default', 'base');
+      border-inline-start: 1px solid theme-color('default', 'base');
     }
   }
 }

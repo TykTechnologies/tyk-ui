@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import '../../../../common/sass/variables';
 @import '../../../../common/sass/mixins';
 @import './variables';
@@ -14,8 +15,8 @@
 
   ul {
     list-style-type: none;
-    margin-top: 0;
-    height: auto;
+    margin-block-start: 0;
+    block-size: auto;
   }
 
   > .tyk-form-control__wrapper {
@@ -23,11 +24,12 @@
       margin: 0;
       padding: 0;
     }
+
     > .tyk-form-control--with-tags {
       cursor: auto;
       overflow: hidden;
-      padding-right: 45px;
-      padding-bottom: map-get($spacing, 'xs');
+      padding-inline-end: 45px;
+      padding-block-end: map.get($spacing, 'xs');
       position: relative;
     }
   }
@@ -37,15 +39,15 @@
   }
 
   .tyk-combobox--with-tags__button-down {
-    bottom: 0;
+    inset-block: 0;
     border-radius: 0;
     color: $text-color;
     font-size: text-scale('base');
-    padding: 0 map-get($spacing, 'base');
+    padding-block: 0;
+    padding-inline: map.get($spacing, 'base');
     position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
+    inset-inline-end: 0;
+    inline-size: auto;
 
     .tyk-form-group--rounded-corners & {
       border-radius: $general-border-radius;
@@ -54,30 +56,31 @@
 
   .pill {
     background-color: $tyk-combobox-pill-background;
-    border-radius: map-get($spacing, 'sm');
+    border-radius: map.get($spacing, 'sm');
     color: $tyk-combobox-pill-color;
-    float: left;
-    margin-left: map-get($spacing, 'sm');
-    margin-top: 6px;
-    padding: map-get($spacing, 'xs') map-get($spacing, 'sm');
+    float: inline-start;
+    margin-inline-start: map.get($spacing, 'sm');
+    margin-block-start: 6px;
+    padding-block: map.get($spacing, 'xs');
+    padding-inline: map.get($spacing, 'sm');
 
     button {
       background: none;
       border: none;
       cursor: pointer;
-      width: 23px;
+      inline-size: 23px;
     }
 
     i {
-      margin-right: map-get($spacing, 'xs');
+      margin-inline-end: map.get($spacing, 'xs');
     }
   }
 
   &__search-box {
-    float: left;
-    padding-right: 45px;
-    height: 35px;
-    padding-bottom: map-get($spacing, 'xs');
+    float: inline-start;
+    padding-inline-end: 45px;
+    block-size: 35px;
+    padding-block-end: map.get($spacing, 'xs');
 
     input {
       border: none;
@@ -94,11 +97,12 @@
     display: flex;
     overflow: hidden;
     white-space: nowrap;
-    padding: 12px $form-control-padding-right 12px $form-control-padding-left;
-    width: 100%;
+    padding-block: 12px;
+    padding-inline: $form-control-padding-left $form-control-padding-right;
+    inline-size: 100%;
 
     > i {
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 }
@@ -108,7 +112,7 @@
   border: $general-border-width solid $form-default-color;
   display: none;
   list-style-type: none;
-  max-height: 255px;
+  max-block-size: 255px;
   margin: 0;
   overflow-y: auto;
   padding: 0;
@@ -120,7 +124,7 @@
   }
 
   &--has-tags {
-    max-height: 195px;
+    max-block-size: 195px;
   }
 
   &--opened {
@@ -128,13 +132,14 @@
   }
 
   li {
-    border-top: 1px solid $form-default-color;
+    border-block-start: 1px solid $form-default-color;
     cursor: pointer;
-    padding: map-get($spacing, 'sm') map-get($spacing, 'base');
+    padding-block: map.get($spacing, 'sm');
+    padding-inline: map.get($spacing, 'base');
     transition: all .2s;
 
     &:first-child {
-      border-top: none;
+      border-block-start: none;
     }
 
     .tyk-form-control {
@@ -153,13 +158,12 @@
 
     &.combobox-search__container {
       background-color: white;
-      position: -webkit-sticky;
       position: sticky;
-      top: 0;
+      inset-block-start: 0;
     }
 
     i {
-      margin-right: map-get($spacing, 'xs');
+      margin-inline-end: map.get($spacing, 'xs');
     }
   }
 }

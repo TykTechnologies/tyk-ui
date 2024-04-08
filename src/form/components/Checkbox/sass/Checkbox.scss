@@ -5,13 +5,14 @@
 .tyk-checkbox {
   label {
     $label-indent: 20px;
+
     display: flex;
     align-items: flex-start;
-    padding-left: $label-indent;
+    padding-inline-start: $label-indent;
 
     input {
-      margin-left: -1 * $label-indent;
-      margin-top: 5px;
+      margin-inline-start: -1 * $label-indent;
+      margin-block-start: 5px;
     }
   }
 

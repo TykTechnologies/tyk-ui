@@ -1,9 +1,11 @@
+@use 'sass:map';
+
 .tyk-toast {
   &__container {
-    bottom: 0;
-    min-width: 300px;
+    inset-block-end: 0;
+    min-inline-size: 300px;
     position: fixed;
-    right: map-get($spacing, 'md');
+    inset-inline-end: map.get($spacing, 'md');
     z-index: 11;
   }
 
@@ -13,16 +15,16 @@
 
   &-message__button {
     color: $text-color;
-    height: map-get($spacing, 'md');
+    block-size: map.get($spacing, 'md');
     line-height: 1;
-    padding: map-get($spacing, 'xs');
+    padding: map.get($spacing, 'xs');
     position: absolute;
-    right: map-get($spacing, 'xs');
-    top: map-get($spacing, 'xs');
-    width: map-get($spacing, 'md');
+    inset-inline-end: map.get($spacing, 'xs');
+    inset-block-start: map.get($spacing, 'xs');
+    inline-size: map.get($spacing, 'md');
 
     &:hover {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255 255 255 / 30%);
       color: $text-color;
     }
   }
