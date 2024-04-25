@@ -1,0 +1,106 @@
+:root {
+  --nav-bar-background-color: white;
+  --nav-bar-text-color: var(--color-default-base);
+  --nav-bar-padding-left: 265px;
+  --nav-bar-animate-left: 245px;
+  --nav-bar-top-padding: var(--spacing-sm);
+  --nav-bar-bottom-padding: 0;
+  --nav-bar-left-padding: var(--spacing-md);
+  --nav-bar-right-padding: var(--spacing-md);
+  --nav-bar-padding: 0 var(--nav-bar-right-padding) 0 var(--nav-bar-left-padding);
+  --nav-bar-top: 51px;
+  --nav-bar-header-font-size: var(--xxl-font-size);
+  --nav-bar-header-font-family: var(--headings-font-family-bold);
+  --nav-bar-header-line-height: var(--xxl-line-height);
+  --nav-bar-height: 92px;
+  --nav-bar-font-family: var(--font-family-regular);
+}
+
+.tyk-nav-bar {
+  align-items: center;
+  border: none;
+  background-color: var(--nav-bar-background-color);
+  font-family: var(--nav-bar-font-family);
+  color: var(--nav-bar-text-color);
+  margin: 0;
+  padding: var(--nav-bar-padding);
+  inline-size: 100%;
+  z-index: 8;
+  transition: all .2s linear;
+
+  &.tyk-nav-bar__with-tabs .tyk-tabs--default > ul li button {
+    padding-block-start: 0;
+  }
+
+  @media screen and (width <= 1024px) {
+    padding-inline-start: var(--spacing-md);
+
+    .menu-opened & {
+      transform: translate(var(--nav-bar-animate-left));
+    }
+  }
+
+  h1 {
+    color: var(--nav-bar-text-color);
+  }
+
+  h4 {
+    margin: 0;
+  }
+
+  .tyk-nav-bar__wrapper {
+    align-items: center;
+    padding-block-end: var(--nav-bar-bottom-padding);
+    display: flex;
+    flex-wrap: wrap;
+    block-size: var(--nav-bar-height);
+
+    &.tyk-nav-bar--align-top {
+      align-items: flex-start;
+    }
+
+    @media screen and (width <= 1024px) {
+      padding-inline-start: 0;
+    }
+
+    h1 {
+      font-size: var(--nav-bar-header-font-size);
+      font-family: var(--nav-bar-header-font-family);
+      line-height: var(--nav-bar-header-line-height);
+      margin: 0;
+      padding-inline-end: var(--spacing-sm);
+    }
+
+    h4 {
+      padding-inline-end: var(--spacing-sm);
+    }
+
+    .tyk-nav-bar__container {
+      align-items: center;
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .tyk-nav-bar__left {
+      flex-grow: 1;
+    }
+
+    .tyk-nav-bar__right {
+      margin-inline-start: auto;
+    }
+  }
+}
+
+.tyk-nav-bar__pre {
+  align-self: flex-end;
+  color: var(--text-color);
+  flex-basis: 100%;
+
+  a {
+    font-family: var(--font-family-bold);
+    font-size: var(--xs-font-size);
+    line-height: var(--xs-line-height);
+    color: var(--text-color);
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ToastContainer from './js/ToastContainer';
+
 /**
  * Toast is a service that displays dialogs
  * on the bottom right part of the screen.

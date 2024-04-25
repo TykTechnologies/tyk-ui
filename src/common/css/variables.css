@@ -1,0 +1,135 @@
+:root {
+  --general-border-radius: 18px;
+  --general-border-width: 2px;
+
+  --color-default-base: #36364C;
+  --color-default-base-light: #7A79A1;
+  --color-default-light: #C3C3E5;
+  --color-default-dark: #505071;
+  --color-primary-base: #A2A2CC;
+  --color-primary-light: #EDEDF9;
+  --color-primary-dark: #505071;
+  --color-success-base: #00d9ba;
+  --color-success-light: #C2F2E9;
+  --color-success-dark: #00B798;
+  --color-info-base: #82BBC6;
+  --color-info-light: #D3EBEF;
+  --color-danger-base: #FF6C7D;
+  --color-danger-extra-light: #F5CCD1;
+  --color-danger-light: #FFBBC5;
+  --color-danger-dark: #EA4766;
+  --color-warning-base: #D6B218;
+  --color-warning-light: #FFE885;
+  --color-warning-dark: #C58C11;
+  --color-foreground-base: #393939;
+  --color-foreground-base-dark: #22272B;
+  --color-foreground-light: #5a5a68;
+  --color-foreground-dark: #161B20;
+  --color-foreground-extra-dark: #0A0D10;
+  --color-background-base: #E1E1E1;
+  --color-background-light: #EDEDF9;
+  --color-background-dark: #43435B;
+  --color-background-extra-dark: #0A0D10;
+
+  --text-color: var(--color-default-dark);
+  --label-color: var(--color-default-base);
+
+  --xs-line-height: 16px;
+  --sm-line-height: 19px;
+  --md-line-height: 22px;
+  --lg-line-height: 23px;
+  --xl-line-height: 24px;
+  --xxl-line-height: 30px;
+
+  --xs-font-size: 12px;
+  --sm-font-size: 14px;
+  --md-font-size: 16px;
+  --lg-font-size: 17px;
+  --xl-font-size: 20px;
+  --xxl-font-size: 25px;
+
+  --base-font-size: var(--sm-font-size);
+  --base-line-height: var(--sm-line-height);
+
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-base: 15px;
+  --spacing-md: 20px;
+  --spacing-lg: 25px;
+  --spacing-xl: 30px;
+  --spacing-xxl: 40px;
+
+  --grid-gutter: var(--spacing-md);
+  --grid-max-width: calc(1200px + var(--grid-gutter) * 2);
+
+  --breakpoint-xs: 420px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1248px;
+
+  --font-family-regular: 'OpenSans-regular';
+  --font-family-medium: 'OpenSans-SemiBold';
+  --font-family-bold: 'OpenSans-Bold';
+
+  --headings-color: var(--color-default-base);
+  --headings-font-family-regular: 'smoolthan_regular';
+  --headings-font-family-medium: 'smoolthan_medium';
+  --headings-font-family-bold: 'smoolthan_bold';
+
+  --headings-margin-bottom: 15px;
+  --headings-font-family: var(--headings-font-family-medium);
+  --headings-font-weight: 500;
+  --headings-line-height: var(--base-line-height);
+
+  --form-group-margin-bottom: 15px;
+  --form-control-height: 39px;
+  --form-control-padding-left: var(--spacing-md);
+  --form-control-padding-right: var(--spacing-md);
+  --form-control-padding-top: 10px;
+  --form-control-padding-bottom: 10px;
+  --form-control-addon-background-color: white;
+  --form-control-addon-padding-top: 10px;
+  --form-control-addon-padding-bottom: 10px;
+  --form-control-addon-padding-left: 10px;
+  --form-control-addon-padding-right: 10px;
+  --form-control-border: var(--general-border-width) solid var(--color-default-light);
+  --form-control-disabled-border: var(--general-border-width) solid var(--color-default-light);
+  --form-control-placeholder-color: var(--color-primary-base);
+  --form-control-disabled-background-color: var(--color-background-light);
+  --form-control-disabled-color:var(--text-color);
+  --form-control-border-focus: 2px solid var(--color-success-base);
+  --form-control-placeholder-font-family: var(--font-family-medium);
+  --form-control-error-colour: var(--color-danger-dark);
+  --form-default-color: var(--color-default-light);
+  --form-primary-color: var(--color-primary-base);
+  --form-success-color: var(--color-success-base);
+
+  --error-border: var(--general-border-width) solid var(--color-danger-base);
+  --error-border-left: 2px solid var(--color-danger-dark);
+  --help-block-color: var(--color-default-base);
+  --help-block-font-style: normal;
+  --help-block-padding: 0 0 0 var(--form-control-padding-left);
+  --error-message-padding: 0 0 0 var(--form-control-padding-left);
+  --default-pill-background-color: var(--color-default-base);
+  --default-pill-color: white;
+  --pill-margin: 0 0 10px 0;
+  --default-outline-pill-box-shadow: inset 0 0 0 2px var(--color-default-base);
+  --default-outline-pill-color: var(--text-color);
+
+  --title-medium-font-size: 16px;
+
+  --bottom-buffer-large: var(--spacing-md);
+  --bottom-buffer-medium: 10px;
+  --bottom-buffer-small: 5px;
+  --top-buffer-large: var(--spacing-md);
+  --top-buffer-medium: 10px;
+  --top-buffer-small: 5px;
+  --right-buffer-large: var(--spacing-md);
+  --right-buffer-medium: 10px;
+  --right-buffer-small: 5px;
+  --left-buffer-large: var(--spacing-md);
+  --left-buffer-medium: 10px;
+  --left-buffer-small: 5px;
+
+  --modal-z-index: 1080;
+}

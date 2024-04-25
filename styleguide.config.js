@@ -7,7 +7,7 @@ module.exports = {
   title: `Tyk UI ${version}`,
   styleguideDir: 'tyk-ui-styleguide',
   require: [
-    path.join(__dirname, 'src/index.scss'),
+    path.join(__dirname, 'src/index.css'),
   ],
   styleguideComponents: {
     Logo: path.join(__dirname, 'logo'),
@@ -35,17 +35,8 @@ module.exports = {
           test: /\.css$/,
           use: [
             'style-loader',
-            'css-loader',
-          ],
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            'style-loader',
-            'css-loader',
-            'resolve-url-loader',
             {
-              loader: 'sass-loader',
+              loader: 'css-loader',
               options: {
                 sourceMap: true,
               },

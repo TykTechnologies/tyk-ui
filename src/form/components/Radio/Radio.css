@@ -1,0 +1,21 @@
+:root {
+  --radio-description-text-padding: 0 0 0 20px;
+}
+
+.tyk-radio {
+  label {
+    align-items: center;
+    display: flex;
+  }
+}
+
+.tyk-radio--is-disabled {
+  label, p {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.tyk-radio__description-text {
+  padding: var(--radio-description-text-padding);
+}

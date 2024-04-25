@@ -1,0 +1,22 @@
+.dropdown__menu {
+  .tyk-list {
+    background: white;
+    max-block-size: none;
+
+    li {
+      padding: 0;
+
+      &:hover {
+        background: var(--primary-light);
+      }
+
+      a {
+        cursor: pointer;
+        display: block;
+        padding-block: 10px;
+        padding-inline: 20px;
+        text-decoration: none;
+      }
+    }
+  }
+}

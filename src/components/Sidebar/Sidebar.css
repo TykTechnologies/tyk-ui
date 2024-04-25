@@ -1,0 +1,17 @@
+:root {
+  --sidebar-background-color: white;
+  --sidebar-top: 58px;
+  --sidebar-height: calc(100vh - 58px);
+  --sidebar-width: 280px;
+  --sidebar-padding: 0;
+}
+
+.tyk-sidebar {
+  background-color: var(--sidebar-background-color);
+  block-size: var(--sidebar-height);
+  flex: 0 0 var(--sidebar-width);
+  padding: var(--sidebar-padding);
+  position: sticky;
+  overflow: auto;
+  inset-block-start: var(--sidebar-top);
+}

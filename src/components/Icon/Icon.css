@@ -1,0 +1,5 @@
+.tyk-icon {
+  + .tyk-icon {
+    margin-inline-start: var(--spacing-sm);
+  }
+}

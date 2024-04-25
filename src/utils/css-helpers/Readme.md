@@ -1,10 +1,10 @@
-```scss
+```css
 .right-align {
-  text-align: right !important;
+  text-align: end !important;
 }
 
 .left-align {
-  text-align: left !important;
+  text-align: start !important;
 }
 
 .center-align {
@@ -12,11 +12,11 @@
 }
 
 .left {
-  float: left !important;
+  float: inline-start !important;
 }
 
 .right {
-  float: right !important;
+  float: inline-end !important;
 }
 
 .hide {
@@ -28,71 +28,71 @@
 }
 
 .no-margin-bottom {
-  margin-bottom: 0 !important;
+  margin-block-end: 0 !important;
 }
 
 .no-margin-top {
-  margin-top: 0 !important;
+  margin-block-start: 0 !important;
 }
 
 .no-margin-right {
-  margin-right: 0 !important;
+  margin-inline-end: 0 !important;
 }
 
 .no-margin-left {
-  margin-right: 0 !important;
+  margin-inline-start: 0 !important;
 }
 
 .disabled-section {
-  color: theme-color('default', 'light');
+  color: var(--color-default-light);
 }
 
 .top-buffer-large {
-  margin-top: $top-buffer-large !important; 
+  margin-block-start: var(--top-buffer-large) !important;
 }
 
 .top-buffer-small {
-  margin-top: $top-buffer-small !important; 
+  margin-block-start: var(--top-buffer-small) !important;
 }
 
 .top-buffer-medium {
-  margin-top: $top-buffer-medium !important; 
+  margin-block-start: var(--top-buffer-medium) !important;
 }
 
 .bottom-buffer-large {
-  margin-bottom: $bottom-buffer-large !important; 
+  margin-block-end: var(--bottom-buffer-large) !important;
 }
 
 .bottom-buffer-small {
-  margin-bottom: $bottom-buffer-small !important; 
+  margin-block-end: var(--bottom-buffer-small) !important;
 }
 
 .bottom-buffer-medium {
-  margin-bottom: $bottom-buffer-medium !important; 
+  margin-block-end: var(--bottom-buffer-medium) !important;
 }
 
 .right-buffer-large {
-  margin-right: $right-buffer-large !important; 
+  margin-inline-end: var(--right-buffer-large) !important;
 }
 
 .right-buffer-small {
-  margin-right: $right-buffer-small !important; 
+  margin-inline-end: var(--right-buffer-small) !important;
 }
 
 .right-buffer-medium {
-  margin-right: $right-buffer-medium !important; 
+  margin-inline-end: var(--right-buffer-medium) !important;
 }
 
 .left-buffer-large {
-  margin-left: $left-buffer-large !important; 
+  margin-inline-start: var(--left-buffer-large) !important;
 }
 
 .left-buffer-small {
-  margin-left: $left-buffer-small !important; 
+  margin-inline-start: var(--left-buffer-small) !important;
 }
 
 .left-buffer-medium {
-  margin-left: $left-buffer-medium !important; 
+  margin-inline-start: var(--left-buffer-medium) !important;
 }
 
 .word-wrap {
@@ -101,7 +101,7 @@
 }
 
 .clear-left {
-  clear: left;
+  clear: inline-start;
 }
 
 .flex-container {
@@ -116,14 +116,14 @@
 .right-align-controls {
   align-items: center;
   display: flex;
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 .inline-label {
-  margin-right: 15px;
+  margin-inline-end: 15px;
 }
 
-.nowrap { 
+.nowrap {
   white-space: nowrap;
 }
 

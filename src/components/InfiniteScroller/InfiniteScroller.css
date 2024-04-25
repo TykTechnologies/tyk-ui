@@ -1,0 +1,22 @@
+.tyk-infinite-scroller {
+  block-size: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .loading {
+    background: linear-gradient(180deg, rgba(255 255 255 / 0%), rgba(255 255 255 / 100%));
+    justify-content: center;
+    display: flex;
+    inset-inline: 0;
+    inset-block-start: auto;
+    inset-block-end: 0;
+    padding-block: var(--spacing-base);
+    padding-inline: 0;
+    inline-size: 100%;
+  }
+}
+
+.tyk-infinite-scroller__wrapper {
+  block-size: 100%;
+  overflow-y: auto;
+}

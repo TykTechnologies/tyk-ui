@@ -1,7 +1,5 @@
 @use 'sass:map';
 
-$font-path: '../fonts/' !default;
-$component-images-path: '../images' !default;
 $general-border-radius: 18px !default;
 $general-border-width: 2px !default;
 
@@ -54,21 +52,6 @@ $theme-colors: (
 
 $text-color: #505071 !default;
 $label-color: theme-color('default', 'base') !default;
-
-$contrast-colors: (
-  'dark': (
-    'primary': rgb(255 255 255),
-    'secondary': rgba(255 255 255 / 70%),
-    'disabled': rgba(255 255 255 / 50%),
-    'hint': rgba(255 255 255 / 12%)
-  ),
-  'light': (
-    'primary': rgba(0 0 0 / 87%),
-    'secondary': rgba(0 0 0 / 54%),
-    'disabled': rgba(0 0 0 / 38%),
-    'hint': rgba(0 0 0 / 12%)
-  ),
-) !default;
 
 $xs-line-height: 16px;
 $sm-line-height: 19px;
@@ -131,25 +114,6 @@ $spacing: (
 $grid-gutter: map.get($spacing, 'md') !default;
 $grid-max-width: 1200px + ($grid-gutter * 2) !default;
 $grid-columns: 12 !default;
-
-$breakpoint-xs: 420px !default;
-$breakpoint-sm: 768px !default;
-$breakpoint-md: 1024px !default;
-$breakpoint-lg: 1248px !default;
-
-$breakpoints: (
-  "xs": $breakpoint-xs,
-  "sm": $breakpoint-sm,
-  "md": $breakpoint-md,
-  "lg": $breakpoint-lg
-);
-
-$grid-breakpoints: (
-  'lg' '(min-width: ' + $breakpoint-lg + ')',
-  'md' '(min-width: ' + $breakpoint-md + ') and (max-width: ' + ($breakpoint-lg - 1) + ')',
-  'sm' '(min-width: ' + ($breakpoint-sm + 1) + ') and (max-width:' + ($breakpoint-md - 1) + ')',
-  'xs' '(max-width: ' + $breakpoint-sm + ')'
-) !default;
 
 $font-family-regular: 'OpenSans-regular' !default;
 $font-family-medium: 'OpenSans-SemiBold' !default;
@@ -218,3 +182,91 @@ $left-buffer-medium: 10px;
 $left-buffer-small: 5px;
 
 $modal-z-index: 1080;
+
+// FixedWrapper variables
+$fixed-wrapper-top: 0 !default;
+$fixed-wrapper-left: 0 !default;
+
+// Message variables
+$tyk-message-padding-top: map.get($spacing, 'md') !default;
+$tyk-message-padding-right: map.get($spacing, 'md') !default;
+$tyk-message-padding-bottom: map.get($spacing, 'md') !default;
+$tyk-message-padding-left: map.get($spacing, 'md') !default;
+$tyk-message-success-background: theme-color('success', 'light') !default;
+$tyk-message-success-border: theme-color('success', 'dark') !default;
+
+// NavBar variables
+$nav-bar-header-font-size: text-scale('xxl') !default;
+$nav-bar-background-color: white !default;
+$nav-bar-text-color: theme-color('default', 'base') !default;
+$nav-bar-height: 92px !default;
+$nav-bar-top-padding: map.get($spacing, 'sm') !default;
+$nav-bar-bottom-padding: 0 !default;
+$nav-bar-left-padding: map.get($spacing, 'md') !default;
+$nav-bar-right-padding: map.get($spacing, 'md') !default;
+$nav-bar-padding: 0 $nav-bar-right-padding 0 $nav-bar-left-padding !default;
+
+// Navigation variables
+$navigation-background-color: white !default;
+$navigation-item-padding-y: map.get($spacing, 'sm') !default;
+$navigation-item-padding-x: map.get($spacing, 'md') !default;
+$navigation-item-color: $text-color !default;
+$navigation-item-hover-background-color: theme-color('primary', 'base') !default;
+$navigation-item-hover-color: white !default;
+$navigation-item-active-background-color: theme-color('primary', 'dark') !default;
+$navigation-item-active-color: white !default;
+
+// Panel variables
+$padding-y-panel-header: map.get($spacing, 'sm') !default;
+$padding-x-panel-header: 25px !default;
+$padding-panel-body: 25px !default;
+$panel-border-radius: 0 !default;
+$panel-default-border-bottom-color: theme-color('background', 'base') !default;
+$panel-header-font-size: text-scale('base') !default;
+$panel-primary-header-color: theme-color('primary', 'base') !default;
+$panel-primary-body-color: white !default;
+$panel-primary-label-color: $text-color !default;
+$panel-primary-border-color: none !default;
+
+// Sidebar variables
+$sidebar-top: 58px !default;
+$sidebar-height: calc(100vh - 58px) !default;
+$sidebar-width: 280px !default;
+
+// Table variables
+$table-th-padding: map.get($spacing, 'base') map.get($spacing, 'sm') !default;
+$table-td-padding-y: map.get($spacing, 'xs') !default;
+$table-td-padding-x: map.get($spacing, 'sm') !default;
+$table-first-last-padding: 20px !default;
+$table-pagination-padding: map.get($spacing, 'md') 25px !default;
+
+// Checkbox variables
+$tyk-checkbox-theme-light-label-color: white !default;
+$tyk-checkbox-theme-light-label-disabled-color: white !default;
+$tyk-checkbox-theme-dark-label-color: $text-color !default;
+$tyk-checkbox-theme-dark-label-disabled-color: $text-color !default;
+
+// Combobox variables
+$combobox-disabled-border: $general-border-width solid theme-color('default', 'light') !default;
+
+// Combobox2 variables
+$tyk-combobox-list-item-disabled-color: $form-default-color !default;
+
+// Dropdown variables
+$tyk-dropdown-item-background: white !default;
+$tyk-dropdown-item-background-hover: theme-color('background', 'light') !default;
+$tyk-dropdown-item-border-color: white !default;
+$tyk-dropdown-item-text-color: $text-color !default;
+$tyk-dropdown-item-hover-text-color: $text-color !default;
+
+// Radio variables
+$tyk-radio-theme-light-label-color: white !default;
+$tyk-radio-theme-light-label-disabled-color: white !default;
+$tyk-radio-theme-dark-label-color: $text-color !default;
+$tyk-radio-theme-dark-label-disabled-color: $text-color !default;
+
+// Toggle variables
+$toggle-list-background-color: theme-color('background', 'light') !default;
+$toggle-list-background-color-on-dark: white !default;
+$toggle-label-font-size: text-scale('sm') !default;
+$toggle-padding: 0 !default;

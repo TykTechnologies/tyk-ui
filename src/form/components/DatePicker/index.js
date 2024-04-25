@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
 
 import Icon from '../../../components/Icon';
 import { usePrevious } from '../../../hooks';

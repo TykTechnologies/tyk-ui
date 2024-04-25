@@ -281,6 +281,7 @@ class EditableListForm extends Component {
             {
               components.map((component, index) => {
                 const ComponentName = component.name;
+                console.log('ComponentName', ComponentName);
                 const {
                   onChange, value, ...rest
                 } = component.props;

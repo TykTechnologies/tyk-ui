@@ -1,0 +1,36 @@
+.tyk-selectable-list {
+  margin-block-end: var(--spacing-md);
+  inline-size: 100%;
+
+  li:not(.tyk-selectable-list__no-items-message) {
+    font-family: var(--font-family-medium);
+    padding: 0;
+
+    .tyk-message {
+      margin-block-end: 0;
+    }
+
+    label {
+      font-family: var(--font-family-medium);
+      margin: 0;
+    }
+
+    > label {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      padding-block: var(--spacing-sm);
+      padding-inline: var(--spacing-md);
+
+      input[type="checkbox"] {
+        margin-inline-start: auto;
+      }
+    }
+  }
+}
+
+.tyk-selectable-list__item--with-icon {
+  & input[type="checkbox"] {
+    visibility: hidden;
+  }
+}

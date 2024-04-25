@@ -1,0 +1,199 @@
+.tyk-editable-list__submit-btn {
+  white-space: nowrap;
+}
+
+.tyk-editable-list__form {
+  align-items: center;
+  display: flex;
+
+  .tyk-form-group {
+    margin-block-end: 0;
+  }
+
+  span.inline {
+    margin-block-start: 0;
+  }
+
+  > span {
+    margin-inline-start: var(--spacing-base);
+
+    &.inline-with-label {
+      align-self: flex-end;
+    }
+  }
+}
+
+.tyk-editable-list__form--sticked {
+  margin-inline-start: 0;
+
+  button {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    border-start-end-radius: 3px;
+    border-end-end-radius: 3px;
+    padding-block: var(--spacing-sm) 11px;
+    padding-inline: var(--spacing-base);
+  }
+}
+
+.tyk-editable-list__header {
+  padding-block: var(--spacing-base);
+  font-size: 11px;
+  text-transform: uppercase;
+  background-color: white;
+  border-start-start-radius: var(--general-border-radius);
+  border-start-end-radius: var(--general-border-radius);
+  border: var(--general-border-width) solid var(--color-default-light);
+  border-block-end: 1px solid var(--color-default-light) !important;
+  color: var(--text-color) !important;
+  font-family: var(--font-family-bold);
+  margin-block-start: var(--spacing-sm);
+
+  & + .tyk-editable-list-items.table {
+      border-block-start: none;
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+  }
+
+  .tyk-row {
+    margin: 0;
+  }
+}
+
+.tyk-editable-list-items {
+  overflow: hidden;
+  list-style: none;
+  padding-block: var(--spacing-md) 0;
+  padding-inline: 0;
+
+  .edit-mode-wrapper.table button {
+    margin-block-start: 23px;
+  }
+
+  .tyk-row {
+    margin: 0;
+  }
+
+  button[disabled] {
+    cursor: not-allowed;
+  }
+
+  &.tyk-editable-list-items--inline {
+    align-items: center;
+    color: var(--text-color);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  li {
+    border-block-start: 1px solid var(--color-default-light);
+    transition: all .2s linear;
+
+    &.tyk-editable-list-item--inline {
+      background-color: var(--color-default-light);
+      border-radius: 25px;
+      border: none;
+      color: white;
+      float: inline-start;
+      font-family: var(--font-family-medium);
+      margin-block-end: var(--spacing-sm);
+      margin-inline-end: var(--spacing-base);
+      padding-block: 0;
+      padding-inline: var(--spacing-base);
+      white-space: nowrap;
+
+      .tyk-editable-list-item__text {
+        color: var(--text-color);
+        padding-block: var(--spacing-xs);
+        padding-inline: 0;
+      }
+
+      .tyk-editable-list-action__button.on-edit {
+        margin-block-start: 0;
+      }
+    }
+
+    &:first-child {
+      border-block-start: none;
+    }
+
+    .tyk-editable-list-item__text {
+      display: flex;
+      padding-block: var(--spacing-sm);
+      padding-inline: 0;
+
+      > span {
+        flex-grow: 1;
+      }
+
+      > div:first-child {
+        flex-grow: 1;
+
+        .error-message {
+          margin: 0;
+        }
+      }
+    }
+
+    .tyk-editable-list-items {
+      overflow: hidden;
+      padding-block-end: var(--spacing-sm);
+    }
+
+    .tyk-editable-list {
+      border-block-start: var(--spacing-xs) solid var(--background-dark);
+      background: var(--background-light);
+      padding-block: var(--spacing-sm);
+      padding-inline: var(--spacing-base);
+    }
+  }
+
+  .tyk-editable-list-item__text {
+    display: block;
+    word-wrap: break-word;
+    word-break:break-all;
+  }
+
+  .tyk-editable-list-action__button {
+    border: none;
+    background: transparent;
+
+    &.on-edit {
+      margin-inline-start: var(--spacing-sm);
+    }
+  }
+
+  .tyk-editable-list-item-controls {
+    flex-grow: 0;
+    text-align: end;
+  }
+}
+
+.tyk-editable-list-item__controls {
+  text-align: end;
+}
+
+.tyk-editable-list-items.table {
+  background-color: white;
+  border-radius: var(--general-border-radius);
+  border: var(--general-border-width) solid var(--color-default-light);
+  padding: 0 !important;
+
+  li {
+    border-color: var(--color-default-light);
+
+    &:hover {
+      background: var(--color-background-light);
+    }
+  }
+
+  .tyk-editable-list-item__text {
+    background: transparent;
+  }
+
+  .tyk-editable-list-action__button {
+      border-radius: 6px;
+      cursor: pointer;
+      margin-inline-end: var(--spacing-sm);
+  }
+}

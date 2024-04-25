@@ -1,0 +1,43 @@
+:root {
+  --navigation-background-color: white;
+  --navigation-item-padding-y: var(--spacing-sm);
+  --navigation-item-padding-x: var(--spacing-md);
+  --navigation-item-background-color: white;
+  --navigation-item-color: var(--text-color);
+  --navigation-item-hover-background-color: var(--color-primary-base);
+  --navigation-item-hover-color: white;
+  --navigation-item-active-background-color: var(--color-primary-dark);
+  --navigation-item-active-color: white;
+  --navigation-padding: 0;
+}
+
+.tyk-navigation {
+  background-color: var(--navigation-background-color);
+  block-size: 100%;
+  overflow: auto;
+  padding: var(--navigation-padding);
+  inline-size: 100%;
+
+  .tyk-navigation-item {
+    inline-size: 100%;
+
+    a {
+      color: var(--navigation-item-color);
+      display: flex;
+      padding-block: var(--navigation-item-padding-y);
+      padding-inline: var(--navigation-item-padding-x);
+      text-decoration: none;
+      transition: all .2s ease;
+
+      &:hover {
+        background-color: var(--navigation-item-hover-background-color);
+        color: var(--navigation-item-hover-color);
+      }
+
+      &.active {
+        background-color: var(--navigation-item-active-background-color);
+        color: var(--navigation-item-active-color);
+      }
+    }
+  }
+}

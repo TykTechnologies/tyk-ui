@@ -1,0 +1,17 @@
+:root {
+  --fixed-wrapper-top: 0;
+  --fixed-wrapper-left: 0;
+  --fixed-wrapper-right: 0;
+}
+
+.tyk-fixed-wrapper {
+  inset-inline-start: var(--fixed-wrapper-left);
+  inset-inline-end: var(--fixed-wrapper-right);
+  position: sticky;
+  inset-block-start: var(--fixed-wrapper-top);
+  z-index: 8;
+}
+
+.tyk-fixed-wrapper--scrolled {
+  box-shadow: 2px 2px 5px rgba(0 0 0 / 10%);
+}

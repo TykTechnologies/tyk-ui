@@ -1,4 +1,4 @@
-import './index.scss';
+import './index.css';
 
 // -- Components
 export { default as Accordion } from './components/Accordion';

@@ -1,0 +1,148 @@
+:root {
+  --tyk-message-padding-top: var(--spacing-md);
+  --tyk-message-padding-right: var(--spacing-md);
+  --tyk-message-padding-bottom: var(--spacing-md);
+  --tyk-message-padding-left: var(--spacing-md);
+  --tyk-message-border-radius: var(--general-border-radius);
+  --tyk-message-default-background: var(--color-primary-light);
+  --tyk-message-default-border: var(--color-default-dark);
+  --tyk-message-default-text-color: var(--color-default-dark);
+  --tyk-message-info-background: var(--color-info-light);
+  --tyk-message-info-border: var(--color-info-base);
+  --tyk-message-info-text-color: var(--color-info-base);
+  --tyk-message-success-background: var(--color-success-light);
+  --tyk-message-success-border: var(--color-success-dark);
+  --tyk-message-success-text-color: var(--color-success-dark);
+  --tyk-message-warning-background: var(--color-warning-light);
+  --tyk-message-warning-border: var(--color-warning-base);
+  --tyk-message-warning-text-color: var(--color-warning-dark);
+  --tyk-message-danger-background: var(--color-danger-extra-light);
+  --tyk-message-danger-border: var(--color-danger-base);
+  --tyk-message-danger-text-color: var(--color-danger-dark);
+}
+
+.tyk-message {
+  display: flex;
+  align-items: center;
+  border-radius: var(--tyk-message-border-radius);
+  margin-block-end: var(--spacing-md);
+  padding-block: var(--tyk-message-padding-top) var(--tyk-message-padding-bottom);
+  padding-inline: var(--tyk-message-padding-left) var(--tyk-message-padding-right);
+
+  > .tyk-icon:first-child {
+    inline-size: 32px;
+    block-size: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    color: white;
+
+    &::before {
+      display: flex;
+      inline-size: 100%;
+      block-size: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  > .tyk-icon:last-child {
+    cursor: pointer;
+  }
+
+  /* &--default {
+    @include message-variant(
+      $tyk-message-default-background,
+      $tyk-message-default-border,
+      $tyk-message-default-text-color
+    );
+
+    > .tyk-icon:first-child {
+      transform: rotate(180deg);
+    }
+  }
+
+  &--info {
+    @include message-variant(
+      $tyk-message-info-background,
+      $tyk-message-info-border,
+      $tyk-message-info-text-color
+    );
+  }
+
+  &--success {
+    @include message-variant(
+      $tyk-message-success-background,
+      $tyk-message-success-border,
+      $tyk-message-success-text-color
+    );
+  }
+
+  &--warning {
+    @include message-variant(
+      $tyk-message-warning-background,
+      $tyk-message-warning-border,
+      $tyk-message-warning-text-color
+    );
+  }
+
+  &--danger {
+    @include message-variant(
+      $tyk-message-danger-background,
+      $tyk-message-danger-border,
+      $tyk-message-danger-text-color
+    );
+  } */
+}
+
+.tyk-message__content {
+  flex-grow: 1;
+  margin-inline: var(--spacing-md);
+}
+
+.tyk-message--default {
+  --message-variant-background: var(--tyk-message-default-background);
+  --message-variant-border: var(--tyk-message-default-border);
+  --message-variant-color: var(--tyk-message-default-text-color);
+
+  > .tyk-icon:first-child {
+    transform: rotate(180deg);
+  }
+}
+
+.tyk-message--info {
+  --message-variant-background: var(--tyk-message-info-background);
+  --message-variant-border: var(--tyk-message-info-border);
+  --message-variant-color: var(--tyk-message-info-text-color);
+}
+
+.tyk-message--success {
+  --message-variant-background: var(--tyk-message-success-background);
+  --message-variant-border: var(--tyk-message-success-border);
+  --message-variant-color: var(--tyk-message-success-text-color);
+}
+
+.tyk-message--warning {
+  --message-variant-background: var(--tyk-message-warning-background);
+  --message-variant-border: var(--tyk-message-warning-border);
+  --message-variant-color: var(--tyk-message-warning-text-color);
+}
+
+.tyk-message--danger {
+  --message-variant-background: var(--tyk-message-danger-background);
+  --message-variant-border: var(--tyk-message-danger-border);
+  --message-variant-color: var(--tyk-message-danger-text-color);
+}
+
+.tyk-message--default,
+.tyk-message--info,
+.tyk-message--success,
+.tyk-message--warning,
+.tyk-message--danger {
+  background-color: var(--message-variant-background);
+  border: var(--general-border-width) solid var(--message-variant-border);
+  color: var(--message-variant-color);
+
+  & > .tyk-icon:first-child {
+    background-color: var(--message-variant-border);
+  }
+}
