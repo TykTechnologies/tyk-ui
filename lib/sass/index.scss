@@ -1,7 +1,7 @@
 @import './common/sass/mixins';
 @import './common/sass/variables';
 
-body {
+:root {
   --general-border-radius: #{$general-border-radius};
   --general-border-width: #{$general-border-width};
 
