@@ -30,7 +30,7 @@ import {
 ```
 
 - *Import the css before any other styles from your main js file*
-```js
+```javascript static
 import '@tyk-technologies/tyk-ui/src/index.css';
 ```
 

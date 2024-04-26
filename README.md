@@ -9,7 +9,7 @@ npm install --save @tyk-technologies/tyk-ui
 **Loading tyk-ui into the project**
 
 *Import the css before any other styles from your main js file*
-```js
+```javascript static
 import '@tyk-technologies/tyk-ui/src/index.css';
 ```
 
@@ -24,7 +24,7 @@ For projects that don't use SASS but just pure css we are also exposing the comp
 ```
 
 *Loading React components*
-```javascript
+```javascript static
 import {
   Button,
   Column,
