@@ -1,0 +1,102 @@
+@use 'sass:map';
+.tyk-card { 
+  border: 1px solid theme-color('background', 'base');
+  box-shadow: 2px 2px 3px theme-color('background', 'base');
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__header {
+    align-items: center;
+    display: flex;
+    font-family: $font-inter-regular;
+    font-size: $sm-font-size;
+    padding: map.get($spacing, 'base') map.get($spacing, 'base') 0 map.get($spacing, 'base');
+  
+    &-right {
+      margin-left: auto;
+    }
+  }
+
+  &__title-group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+
+    .tyk-card__title-icon {
+      align-items: center; 
+      display: flex;
+      height: 42px;
+      justify-content: center;
+      grid-row: span 2;
+      width: 42px;
+    }
+  }
+
+  &__title { 
+    font-family: $font-inter-bold;
+    font-size: $lg-font-size;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+
+    &--max-1-lines {
+      -webkit-line-clamp: 1;
+    }
+    &--max-2-lines {
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  &__sub-title { 
+    font-family: $font-inter-medium;
+    font-size: $xs-font-size;
+    margin: 0;
+  }
+
+  &__title-group + &__summary,
+  &__sub-title + &__summary,
+  &__title + &__summary{
+    margin-top: map.get($spacing, 'sm');
+  }
+
+  &__summary {
+    font-family: $font-inter-regular;
+    font-size: $sm-font-size;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+
+    &--max-1-lines {
+      -webkit-line-clamp: 1;
+    }
+    &--max-2-lines {
+      -webkit-line-clamp: 2;
+    }
+    &--max-3-lines {
+      -webkit-line-clamp: 3;
+    }
+    &--max-4-lines {
+      -webkit-line-clamp: 4;
+    }
+    &--max-5-lines {
+      -webkit-line-clamp: 5;
+    }
+  }
+
+  &__body {
+    flex-grow: 1;
+    padding: map.get($spacing, 'base');
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid theme-color('background', 'base');
+    padding: map.get($spacing, 'base');
+  }
+}
