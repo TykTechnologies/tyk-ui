@@ -1,6 +1,7 @@
 @use 'sass:map';
 .tyk-card { 
   border: 1px solid theme-color('background', 'base');
+  border-radius: 8px;
   box-shadow: 2px 2px 3px theme-color('background', 'base');
   display: flex;
   flex-direction: column;
@@ -28,6 +29,7 @@
       display: flex;
       height: 42px;
       justify-content: center;
+      margin-right: 10px;
       grid-row: span 2;
       width: 42px;
     }
@@ -36,17 +38,17 @@
   &__title { 
     font-family: $font-inter-bold;
     font-size: $lg-font-size;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    display: box;
+    box-orient: vertical;
     overflow: hidden;
     margin: 0;
     text-overflow: ellipsis;
 
     &--max-1-lines {
-      -webkit-line-clamp: 1;
+      line-clamp: 1;
     }
     &--max-2-lines {
-      -webkit-line-clamp: 2;
+      line-clamp: 2;
     }
   }
 
@@ -89,8 +91,22 @@
   }
 
   &__body {
+    display: flex;
+    flex: 1 0 auto;
     flex-grow: 1;
     padding: map.get($spacing, 'base');
+
+    &--align-top {
+      align-items: flex-start;
+    }
+
+    &--align-center {
+      align-items: center;
+    }
+
+    &--align-bottom {
+      align-items: flex-end;
+    }
   }
 
   &__footer {
