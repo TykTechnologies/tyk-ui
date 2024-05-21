@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import './variables';
 
 .tyk-toggle {
@@ -9,11 +10,11 @@
   white-space: nowrap;
 
   &.block {
-    margin-bottom: map-get($spacing, 'md');
-    width: 100%;
+    margin-block-end: map.get($spacing, 'md');
+    inline-size: 100%;
 
     + .tyk-toggle {
-      margin-left: 0;
+      margin-inline-start: 0;
     }
   }
 
@@ -31,19 +32,19 @@
     font-family: $toggle-label-font-family;
     font-size: $toggle-label-font-size;
     padding: $toggle-padding;
-    width: 100%;
+    inline-size: 100%;
     color: $toggle-label-color;
   }
 
   &.inline-label &__label {
-    margin-right: map-get($spacing, 'sm');
-    width: auto;
+    margin-inline-end: map.get($spacing, 'sm');
+    inline-size: auto;
   }
 
   + .tyk-button,
   + .tyk-dropdown,
   + .tyk-toggle {
-    margin-left: map-get($spacing, 'sm')
+    margin-inline-start: map.get($spacing, 'sm')
   }
 
   &--disabled-true {
@@ -55,11 +56,11 @@
     .tyk-toggle__list--separated {
       display: flex;
       flex-direction: column;
-      margin-right: map-get($spacing, 'md');
+      margin-inline-end: map.get($spacing, 'md');
 
       .tyk-toggle__item {
         background-color: $toggle-list-background-color;
-        margin-right: auto;
+        margin-inline-end: auto;
       }
     }
   }
@@ -112,6 +113,7 @@
     span {
       color: white;
     }
+
     @include button-variant(
       theme-color('primary', 'base'),
       transparent,
@@ -131,6 +133,7 @@
     span {
       color: white;
     }
+
     @include button-variant(
       theme-color('success', 'dark'),
       transparent,
@@ -177,11 +180,13 @@
   &--primary-gradient &__item--active span {
     color: white;
   }
+
   &--primary-gradient &__list--single &__item--active,
   &--primary-gradient &__list--separated &__item--active {
     span {
       color: white;
     }
+
     @include button-variant-gradient(
       theme-color('primary', 'base'),
       theme-color('primary', 'dark'),
@@ -193,11 +198,13 @@
   &--success-gradient &__item--active span {
     color: white;
   }
+
   &--success-gradient &__list--single &__item--active,
   &--success-gradient &__list--separated &__item--active {
     span {
       color: white;
     }
+
     @include button-variant-gradient(
       theme-color('success', 'base'),
       theme-color('success', 'dark'),
@@ -210,11 +217,13 @@
   &--danger-gradient &__item--active span {
     color: white;
   }
+
   &--danger-gradient &__list--single &__item--active,
   &--danger-gradient &__list--separated &__item--active {
     span {
       color: white;
     }
+
     @include button-variant-gradient(
       theme-color('danger', 'base'),
       theme-color('danger', 'dark'),
@@ -227,11 +236,13 @@
   &--warning-gradient &__item--active span {
     color: white;
   }
+
   &--warning-gradient &__list--single &__item--active,
   &--warning-gradient &__list--separated &__item--active {
     span {
       color: white;
     }
+
     @include button-variant-gradient(
       theme-color('warning', 'light'),
       theme-color('warning', 'base'),
@@ -247,23 +258,23 @@
     border: 2px solid transparent;
 
     &:first-child {
-      border-top-left-radius: 25px;
-      border-bottom-left-radius: 25px;
+      border-start-start-radius: 25px;
+      border-end-start-radius: 25px;
     }
+
     &:last-child {
-      border-top-right-radius: 25px;
-      border-bottom-right-radius: 25px;
+      border-start-end-radius: 25px;
+      border-end-end-radius: 25px;
     }
 
     .tyk-toggle__list--separated & {
       background: tyk-toggle__list--separated;
       border-radius: 25px;
-      margin-bottom: map-get($spacing, 'xs');
-      margin-top: map-get($spacing, 'xs');
-      margin-right: map-get($spacing, 'sm');
+      margin-block: map.get($spacing, 'xs');
+      margin-inline-end: map.get($spacing, 'sm');
 
       &:last-child {
-        margin-right: 0;
+        margin-inline-end: 0;
       }
     }
 
@@ -279,17 +290,17 @@
       transition: all .2s ease;
 
       .tyk-toggle__list--single & {
-        padding-left: 45px;
+        padding-inline-start: 45px;
       }
     }
 
     .tyk-toggle__list--single &--active {
       label {
-        padding-left: 25px;
-        padding-right: 45px;
+        padding-inline-start: 25px;
+        padding-inline-end: 45px;
 
         .tyk-toggle__item-notch {
-          left: calc(100% - 35px);
+          inset-inline-start: calc(100% - 35px);
         }
       }
     }
@@ -314,15 +325,15 @@
   }
 
   &--sm &__list--single label {
-    padding-left: 35px;
+    padding-inline-start: 35px;
   }
 
   &--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
-    padding-left: 17px;
-    padding-right: 35px;
+    padding-inline-start: 17px;
+    padding-inline-end: 35px;
 
     .tyk-toggle__item-notch {
-      left: calc(100% - 27px);
+      inset-inline-start: calc(100% - 27px);
     }
   }
 
@@ -347,48 +358,47 @@
   }
 
   &--lg &__list--single label {
-    padding-left: 45px;
+    padding-inline-start: 45px;
   }
 
   &--lg .tyk-toggle__list--single .tyk-toggle__item--active label {
-    padding-left: 25px;
-    padding-right: 45px;
+    padding-inline-start: 25px;
+    padding-inline-end: 45px;
 
     .tyk-toggle__item-notch {
-      left: calc(100% - 43px);
+      inset-inline-start: calc(100% - 43px);
     }
   }
 
   &__item-notch {
     border-radius: 25px;
-    bottom: 2px;
+    inset-block: 2px;
     position: absolute;
     transition: all .2s ease;
-    top: 2px;
 
     &--single {
       background: white;
-      left: 2px;
-      width: 32px;
+      inset-inline-start: 2px;
+      inline-size: 32px;
     }
   }
 
   &--sm &__item-notch--single {
-    width: 24px;
+    inline-size: 24px;
   }
 
   &--lg &__item-notch--single {
-    width: 40px;
+    inline-size: 40px;
   }
 
   &__notch {
     border-radius: 25px;
-    left: 0;
+    inset-inline-start: 0;
     position: absolute;
-    bottom: $toggle-bottom;
-    top: $toggle-top;
+    inset-block-start: $toggle-top;
+    inset-block-end: $toggle-bottom;
     transition: all .2s ease;
-    width: 100px;
+    inline-size: 100px;
     z-index: 1;
   }
 

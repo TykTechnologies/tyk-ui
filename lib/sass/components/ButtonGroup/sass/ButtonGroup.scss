@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .tyk-button-group__wrapper {
   display: inline-block;
   position: relative;
@@ -11,7 +13,7 @@
   + .tyk-dropdown,
   + .tyk-toggle,
   + .tyk-button-group__wrapper {
-    margin-left: map-get($spacing, 'sm');
+    margin-inline-start: map.get($spacing, 'sm');
   }
 
   .tyk-button-group {
@@ -19,15 +21,15 @@
 
     > .tyk-button-group:not(:first-child) {
       > .tyk-button {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-start-start-radius: 0;
+        border-end-start-radius: 0;
       }
     }
 
     > .tyk-button-group:not(:last-child) {
       > .tyk-button {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+        border-start-end-radius: 0;
+        border-end-end-radius: 0;
       }
     }
 
@@ -35,24 +37,24 @@
       border-radius: 0;
 
       + .tyk-button {
-        margin-left: 0;
+        margin-inline-start: 0;
       }
 
       + .tyk-dropdown {
-        margin-left: 0;
+        margin-inline-start: 0;
       }
 
       &:first-child {
-        border-top-left-radius: map-get($spacing, 'md');
-        border-bottom-left-radius: map-get($spacing, 'md');
+        border-start-start-radius: map.get($spacing, 'md');
+        border-end-start-radius: map.get($spacing, 'md');
       }
 
       &:last-child {
-        border-top-right-radius: map-get($spacing, 'md');
-        border-bottom-right-radius: map-get($spacing, 'md');
+        border-start-end-radius: map.get($spacing, 'md');
+        border-end-end-radius: map.get($spacing, 'md');
 
         &.tyk-button--icon-only {
-          width: 42px;
+          inline-size: 42px;
         }
       }
     }

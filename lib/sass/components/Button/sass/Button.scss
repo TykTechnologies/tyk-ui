@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 @import './variables';
@@ -21,15 +22,15 @@
   + .tyk-button,
   + .tyk-dropdown,
   + .tyk-toggle {
-    margin-left: map-get($spacing, 'sm');
+    margin-inline-start: map.get($spacing, 'sm');
   }
 
   span + i {
-    margin-left: map-get($spacing, 'sm');
+    margin-inline-start: map.get($spacing, 'sm');
   }
 
   i + span {
-    margin-left: map-get($spacing, 'sm');
+    margin-inline-start: map.get($spacing, 'sm');
   }
 
   &.disabled {
@@ -94,6 +95,7 @@
       );
     }
   }
+
   &--success {
     @include button-variant(
       $button-success-color,
@@ -121,6 +123,7 @@
       );
     }
   }
+
   &--danger {
     @include button-variant(
       $button-danger-color,
@@ -176,6 +179,7 @@
       );
     }
   }
+
   &--info {
     @include button-variant(
       $button-info-color
@@ -249,6 +253,7 @@
       $button-border-radius
     );
   }
+
   &--lg {
     @include button-size(
       $padding-y-button-lg,
@@ -262,8 +267,8 @@
   &--icon-only {
     border-radius: $general-border-radius;
     padding: 0;
-    line-height: map-get($spacing, 'md');
-    width: 24px;
+    line-height: map.get($spacing, 'md');
+    inline-size: 24px;
 
     &:hover {
       border-radius: $general-border-radius;
@@ -271,8 +276,8 @@
   }
 
   &--fit {
-    height: auto;
-    width: auto;
+    block-size: auto;
+    inline-size: auto;
     line-height: normal;
   }
 

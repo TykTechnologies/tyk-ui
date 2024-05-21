@@ -1,5 +1,7 @@
+@use 'sass:map';
+
 .tyk-icon {
   + .tyk-icon {
-    margin-left: map-get($spacing, 'sm');
+    margin-inline-start: map.get($spacing, 'sm');
   }
 }

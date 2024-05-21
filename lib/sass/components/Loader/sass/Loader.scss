@@ -1,59 +1,61 @@
+@use 'sass:map';
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 
 .tyk-loading__wrapper {
-  background: rgba(255, 255, 255, 0.6);
-  bottom: 0;
+  background: rgba(255 255 255 / 60%);
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+  inset: 0;
   z-index: 99;
 }
 
 .loader-wrapper {
-  min-height: 100px;
+  min-block-size: 100px;
   position: relative;
 }
 
 .loading {
   position: absolute;
-  top: calc(50% - map-get($spacing, 'sm'));
-  left: 50%;
+  inset-block-start: calc(50% - map.get($spacing, 'sm'));
+  inset-inline-start: 50%;
 
   &.relative {
-    left: auto;
+    inset-inline-start: auto;
     padding: 25px;
     position: relative;
     text-align: center;
-    top: auto;
-    width: 100%;
+    inset-block-start: auto;
+    inline-size: 100%;
   }
 }
 
 .loading-bar {
   display: inline-block;
-  width: 4px;
-  height: map-get($spacing, 'md');
+  inline-size: 4px;
+  block-size: map.get($spacing, 'md');
   border-radius: 4px;
   animation: loading 1s ease-in-out infinite;
-  margin-left: 2px;
+  margin-inline-start: 2px;
 }
+
 .loading-bar:nth-child(1) {
   animation-delay: 0;
   background-color: theme-color('success', 'base');
   opacity: 1;
 }
+
 .loading-bar:nth-child(2) {
   animation-delay: 0.09s;
   background-color: theme-color('success', 'base');
   opacity: 0.80;
 }
+
 .loading-bar:nth-child(3) {
   animation-delay: .18s;
   background-color: theme-color('success', 'base');
   opacity: 0.60;
 }
+
 .loading-bar:nth-child(4) {
   animation-delay: .27s;
   background-color: theme-color('success', 'base');
@@ -64,9 +66,11 @@
   0% {
     transform: scale(1);
   }
+
   20% {
     transform: scale(1, 2.2);
   }
+
   40% {
     transform: scale(1);
   }

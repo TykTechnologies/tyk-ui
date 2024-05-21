@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import '../../../../common/sass/variables';
 @import '../../../../common/sass/mixins';
 @import './variables';
@@ -8,21 +9,20 @@
   + .tyk-button,
   + .tyk-dropdown,
   + .tyk-toggle {
-    margin-left: map-get($spacing, 'sm')
+    margin-inline-start: map.get($spacing, 'sm')
   }
 
   &--block {
-    left: map-get($spacing, 'md');
-    right: map-get($spacing, 'md');
+    inset-inline: map.get($spacing, 'md');
   }
 
   &--relative {
-    left: auto;
-    right: auto;
+    inset-inline: auto;
   }
 
   &--custom {
-    padding: map-get($spacing, 'md') 25px;
+    padding-block: map.get($spacing, 'md');
+    padding-inline: 25px;
   }
 
   label {
@@ -54,11 +54,10 @@
   background: $tyk-dropdown-item-background;
   border: $general-border-width solid theme-color('default', 'light');
   border-radius: $general-border-radius;
-  -webkit-filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
-  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(1px 2px 1px rgba(0 0 0 / 10%));
   list-style-type: none;
-  margin: 0;
-  margin-top: 3px;
+  margin-inline: 0;
+  margin-block: 3px 0;
   overflow: hidden;
   padding: 0;
   z-index: 1081;
@@ -79,7 +78,7 @@
 
   > li {
     background: $tyk-dropdown-item-background;
-    border-bottom: 1px solid $tyk-dropdown-item-border-color;
+    border-block-end: 1px solid $tyk-dropdown-item-border-color;
     display: flex;
     position: relative;
     z-index: 7;
@@ -89,9 +88,9 @@
     }
 
     i {
-      left: 7px;
       position: absolute;
-      top: 9px;
+      inset-inline-start: 7px;
+      inset-block-start: 9px;
     }
   }
 }
@@ -101,10 +100,11 @@
   color: $tyk-dropdown-item-text-color;
   display: flex;
   font-size: 12px;
-  padding: 7px 24px;
+  padding-block: 7px;
+  padding-inline: 24px;
   text-transform: uppercase;
   text-decoration: none;
-  width: 100%;
+  inline-size: 100%;
 
   &:hover {
     color: $tyk-dropdown-item-hover-text-color;
@@ -115,9 +115,9 @@
   .badge {
     background: $text-color;
     color: white;
-    font-size: map-get($spacing, 'sm');
-    margin-top: -4px;
-    margin-left: 6px;
+    font-size: map.get($spacing, 'sm');
+    margin-block-start: -4px;
+    margin-inline-start: 6px;
   }
 }
 

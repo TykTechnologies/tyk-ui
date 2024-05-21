@@ -2,11 +2,10 @@
 
 .tyk-sidebar {
   background-color: $sidebar-background-color;
-  height: $sidebar-height;
+  block-size: $sidebar-height;
   flex: 0 0 $sidebar-width;
   padding: $sidebar-padding;
-  position: -webkit-sticky;
   position: sticky;
   overflow: auto;
-  top: $sidebar-top;
+  inset-block-start: $sidebar-top;
 }

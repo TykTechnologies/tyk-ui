@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import '../../../common/sass/variables';
 @import '../../../common/sass/mixins';
 @import './variables';
@@ -7,7 +8,7 @@
   border-spacing: 0;
   background-color: white;
   border-radius: $general-border-radius;
-  width: 100%;
+  inline-size: 100%;
 
     &__wrapper {
       border: $general-border-width solid theme-color('default', 'light');
@@ -21,13 +22,13 @@
       &.no-innner-horizontal-borders {
         & .tyk-table > thead th,
         & .tyk-table > tbody td {
-          border-right: none;
+          border-inline-end: none;
         }
       }
     }
 
     > thead th {
-      border-right: 1px solid theme-color('default', 'light');
+      border-inline-end: 1px solid theme-color('default', 'light');
       color: $text-color;
       font-size: text-scale('sm');
       line-height: line-height('sm');
@@ -36,7 +37,7 @@
       padding: $table-th-padding;
 
       &:last-child {
-        border-right: none;
+        border-inline-end: none;
       }
 
       i {
@@ -51,29 +52,32 @@
     }
 
     > tbody tr:hover {
-      background: rgba(theme-color('background', 'light'), 0.4);
+      $color: theme-color('background', 'light');
+
+      background: rgba($color, 40%);
     }
 
     > tbody td {
-      border-right: 1px solid theme-color('default', 'light');
+      border-inline-end: 1px solid theme-color('default', 'light');
       font-size: text-scale('sm');
       line-height: line-height('sm');
       font-family: $font-family-regular;
-      padding: $table-td-padding-y $table-td-padding-x;
+      padding-block: $table-td-padding-y;
+      padding-inline: $table-td-padding-x;
 
       &:last-child {
-        border-right: none;
+        border-inline-end: none;
       }
 
       vertical-align: middle;
 
       &.fit {
         white-space: nowrap;
-        width: 1%;
+        inline-size: 1%;
       }
 
-      input:not([type='checkbox']):not([type='radio']) {
-        margin-top: map-get($spacing, 'base');
+      input:not([type='checkbox'], [type='radio']) {
+        margin-block-start: map.get($spacing, 'base');
       }
 
       a {
@@ -91,7 +95,7 @@
     }
 
     tbody > tr {
-      border-top: 1px solid theme-color('default', 'light');
+      border-block-start: 1px solid theme-color('default', 'light');
       transition: all .4s linear;
       border-radius: $general-border-radius;
 
@@ -102,19 +106,19 @@
 
     > tbody tr td:first-child,
     > thead tr th:first-child {
-      padding-left: $table-first-last-padding;
+      padding-inline-start: $table-first-last-padding;
 
       &.with-icon {
-        padding-left: map-get($spacing, 'base');
+        padding-inline-start: map.get($spacing, 'base');
       }
     }
 
     > tbody tr td:last-child,
     > thead tr th:last-child {
-      padding-right: $table-first-last-padding;
+      padding-inline-end: $table-first-last-padding;
 
       &.with-icon {
-        padding-right: map-get($spacing, 'base');
+        padding-inline-end: map.get($spacing, 'base');
       }
     }
 
@@ -122,7 +126,7 @@
       padding: $table-pagination-padding;
 
       li:first-child {
-        margin-left: auto;
+        margin-inline-start: auto;
       }
     }
 
@@ -136,7 +140,8 @@
 }
 
 .tyk-table-search {
-  padding: map-get($spacing, 'sm') 25px 0 25px;
+  padding-block: map.get($spacing, 'sm') 0;
+  padding-inline: 25px;
 
   label {
     font-size: text-scale('sm');
@@ -145,17 +150,17 @@
 }
 
 .header-sort {
-  padding-left: 3px;
-  padding-top: map-get($spacing, 'xs');
+  padding-inline-start: 3px;
+  padding-block-start: map.get($spacing, 'xs');
   vertical-align: middle;
 }
 
 .new-table-pagination {
-  float: right;
+  float: inline-end;
 }
 
 .selectable > div {
-  margin-left: map-get($spacing, 'md');
+  margin-inline-start: map.get($spacing, 'md');
 }
 
 .scrollable {
@@ -166,7 +171,7 @@
 .fixed-header {
   background: white;
   position: sticky;
-  top: 0;
+  inset-block-start: 0;
 }
 
 .tyk-table.has-error,

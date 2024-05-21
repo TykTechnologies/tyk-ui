@@ -1,5 +1,6 @@
 @mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
-  padding: $padding-y $padding-x;
+  padding-block: $padding-y;
+  padding-inline: $padding-x;
   font-size: $font-size;
   line-height: $line-height;
   border-radius: $border-radius;
@@ -68,7 +69,7 @@
   }
 }
 
-@mixin button-variant-gradient ($left-color, $right-color, $color: white, $hover-enabled: true) {
+@mixin button-variant-gradient($left-color, $right-color, $color: white, $hover-enabled: true) {
   border-image: linear-gradient(to right, $left-color, $right-color, $left-color) 0 round;
   background: transparent linear-gradient(to right, $left-color, $right-color, $left-color);
   background-origin: border-box;

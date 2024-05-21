@@ -10,17 +10,19 @@ import CardSummary from './CardSummary';
 import CardTitleIcon from './CardTitleIcon';
 
 function Card({
+  className = '',
   height = 'auto',
   children,
 }) {
   return (
-    <div style={{ height }} className="tyk-card">
+    <div style={{ height }} className={`tyk-card ${className}`}>
       {children}
     </div>
   );
 }
 
 Card.propTypes = {
+  className: PropTypes.string,
   height: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,

@@ -1,6 +1,8 @@
+@use 'sass:map';
+
 $navigation-background-color: white !default;
-$navigation-item-padding-y: map-get($spacing, 'sm') !default;
-$navigation-item-padding-x: map-get($spacing, 'md') !default;
+$navigation-item-padding-y: map.get($spacing, 'sm') !default;
+$navigation-item-padding-x: map.get($spacing, 'md') !default;
 $navigation-item-background-color: white !default;
 $navigation-item-color: $text-color !default;
 $navigation-item-hover-background-color: theme-color('primary', 'base') !default;
