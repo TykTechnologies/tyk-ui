@@ -77,10 +77,10 @@ $lg-line-height: 23px;
 $xl-line-height: 24px;
 $xxl-line-height: 30px;
 
-$xs-font-size: 12px;
+$xs-font-size: 13px;
 $sm-font-size: 14px;
 $md-font-size: 16px;
-$lg-font-size: 17px;
+$lg-font-size: 18px;
 $xl-font-size: 20px;
 $xxl-font-size: 25px;
 
@@ -150,6 +150,11 @@ $grid-breakpoints: (
   'sm' '(min-width: ' + ($breakpoint-sm + 1) + ') and (max-width:' + ($breakpoint-md - 1) + ')',
   'xs' '(max-width: ' + $breakpoint-sm + ')'
 ) !default;
+
+$font-inter-light: 'Inter-Light' !default;
+$font-inter-medium: 'Inter-Medium' !default;
+$font-inter-regular: 'Inter-Regular' !default;
+$font-inter-bold: 'Inter-Bold' !default;
 
 $font-family-regular: 'OpenSans-regular' !default;
 $font-family-medium: 'OpenSans-SemiBold' !default;

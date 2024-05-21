@@ -1,7 +1,7 @@
 .collapse-exit,
 .collapse-exit-active,
 .collapse-exit-done {
-  height: 0px;
+  block-size: 0;
 }
 
 .collapse-wrapper {
@@ -12,11 +12,11 @@
 .collapse-horizontal-exit,
 .collapse-horizontal-exit-active,
 .collapse-horizontal-exit-done {
-  width: 0px;
+  inline-size: 0;
 }
 
 .collapse-horizontal-enter,
 .collapse-horizontal-enter-active,
 .collapse-horizontal-enter-done {
-  width: 100%;
+  inline-size: 100%;
 }

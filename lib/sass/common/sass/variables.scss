@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $font-path: '../fonts/' !default;
 $component-images-path: '../images' !default;
 $general-border-radius: 18px !default;
@@ -51,20 +53,20 @@ $theme-colors: (
 ) !default;
 
 $text-color: #505071 !default;
-$label-color:  theme-color('default', 'base') !default;
+$label-color: theme-color('default', 'base') !default;
 
 $contrast-colors: (
   'dark': (
-    'primary': rgb(255, 255, 255),
-    'secondary': rgba(255, 255, 255, .70),
-    'disabled': rgba(255, 255, 255, .5),
-    'hint': rgba(255, 255, 255, .12)
+    'primary': rgb(255 255 255),
+    'secondary': rgba(255 255 255 / 70%),
+    'disabled': rgba(255 255 255 / 50%),
+    'hint': rgba(255 255 255 / 12%)
   ),
   'light': (
-    'primary': rgba(0, 0, 0, .87),
-    'secondary': rgba(0, 0, 0, .54),
-    'disabled': rgba(0, 0, 0, .38),
-    'hint': rgba(0, 0, 0, .12)
+    'primary': rgba(0 0 0 / 87%),
+    'secondary': rgba(0 0 0 / 54%),
+    'disabled': rgba(0 0 0 / 38%),
+    'hint': rgba(0 0 0 / 12%)
   ),
 ) !default;
 
@@ -75,10 +77,10 @@ $lg-line-height: 23px;
 $xl-line-height: 24px;
 $xxl-line-height: 30px;
 
-$xs-font-size: 12px;
+$xs-font-size: 13px;
 $sm-font-size: 14px;
 $md-font-size: 16px;
-$lg-font-size: 17px;
+$lg-font-size: 18px;
 $xl-font-size: 20px;
 $xxl-font-size: 25px;
 
@@ -126,7 +128,7 @@ $spacing: (
   'xxl': 40px
 ) !default;
 
-$grid-gutter: map-get($spacing, 'md') !default;
+$grid-gutter: map.get($spacing, 'md') !default;
 $grid-max-width: 1200px + ($grid-gutter * 2) !default;
 $grid-columns: 12 !default;
 
@@ -149,6 +151,11 @@ $grid-breakpoints: (
   'xs' '(max-width: ' + $breakpoint-sm + ')'
 ) !default;
 
+$font-inter-light: 'Inter-Light' !default;
+$font-inter-medium: 'Inter-Medium' !default;
+$font-inter-regular: 'Inter-Regular' !default;
+$font-inter-bold: 'Inter-Bold' !default;
+
 $font-family-regular: 'OpenSans-regular' !default;
 $font-family-medium: 'OpenSans-SemiBold' !default;
 $font-family-bold: 'OpenSans-Bold' !default;
@@ -165,8 +172,8 @@ $headings-line-height: $base-line-height !default;
 
 $form-group-margin-bottom: 15px !default;
 $form-control-height: 39px !default;
-$form-control-padding-left: map-get($spacing, 'md') !default;
-$form-control-padding-right: map-get($spacing, 'md') !default;
+$form-control-padding-left: map.get($spacing, 'md') !default;
+$form-control-padding-right: map.get($spacing, 'md') !default;
 $form-control-padding-top: 10px !default;
 $form-control-padding-bottom: 10px !default;
 $form-control-addon-background-color: white !default;
@@ -196,22 +203,22 @@ $error-message-padding: 0 0 0 $form-control-padding-left !default;
 $default-pill-background-color: theme-color('default', 'base') !default;
 $default-pill-color: white !default;
 $pill-margin: 0 0 10px 0 !default;
-$default-outline-pill-box-shadow: inset 0px 0px 0px 2px theme-color('default', 'base');
+$default-outline-pill-box-shadow: inset 0 0 0 2px theme-color('default', 'base');
 $default-outline-pill-color: $text-color;
 
 $title-medium-font-size: 16px;
 
-//Buffers
-$bottom-buffer-large: map-get($spacing, 'md');
+// Buffers
+$bottom-buffer-large: map.get($spacing, 'md');
 $bottom-buffer-medium: 10px;
 $bottom-buffer-small: 5px;
-$top-buffer-large: map-get($spacing, 'md');
+$top-buffer-large: map.get($spacing, 'md');
 $top-buffer-medium: 10px;
 $top-buffer-small: 5px;
-$right-buffer-large: map-get($spacing, 'md');
+$right-buffer-large: map.get($spacing, 'md');
 $right-buffer-medium: 10px;
 $right-buffer-small: 5px;
-$left-buffer-large: map-get($spacing, 'md');
+$left-buffer-large: map.get($spacing, 'md');
 $left-buffer-medium: 10px;
 $left-buffer-small: 5px;
 

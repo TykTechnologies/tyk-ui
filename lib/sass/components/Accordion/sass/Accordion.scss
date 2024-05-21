@@ -7,11 +7,12 @@
   display: flex;
   font-size: $accordion-item-header-font-size;
   outline: none;
-  padding: $accordion-item-header-padding-y $accordion-item-header-padding-x;
-  width: 100%;
+  padding-inline: $accordion-item-header-padding-x;
+  padding-block: $accordion-item-header-padding-y;
+  inline-size: 100%;
 
   .tyk-icon {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 }
 
@@ -48,8 +49,7 @@
     justify-content: center;
 
     .tyk-icon {
-      margin-left: auto;
-      margin-right: auto;
+      margin-inline: auto;
     }
   }
 
@@ -78,8 +78,8 @@
     }
 
     > button {
-      margin-left: auto;
-      width: auto;
+      margin-inline-start: auto;
+      inline-size: auto;
     }
   }
 

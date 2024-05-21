@@ -1,3 +1,8 @@
+@include font-face('Inter-Bold', $font-path + 'inter/Inter-Bold');
+@include font-face('Inter-Light', $font-path + 'inter/Inter-Light');
+@include font-face('Inter-Medium', $font-path + 'inter/Inter-Medium');
+@include font-face('Inter-Regular', $font-path + 'inter/Inter-Regular');
+@include font-face('Inter-SemiBold', $font-path + 'inter/Inter-SemiBold');
 @include font-face('OpenSans-Bold', $font-path + 'OpenSans-Bold');
 @include font-face('OpenSans-SemiBold', $font-path + 'OpenSans-SemiBold');
 @include font-face('OpenSans-Regular', $font-path + 'OpenSans-Regular');
