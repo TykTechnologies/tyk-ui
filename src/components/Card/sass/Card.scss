@@ -38,8 +38,8 @@
   &__title { 
     font-family: $font-inter-bold;
     font-size: $lg-font-size;
-    display: box;
-    box-orient: vertical;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 0;
     text-overflow: ellipsis;
