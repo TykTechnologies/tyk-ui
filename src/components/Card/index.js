@@ -22,11 +22,14 @@ function Card({
 }
 
 Card.propTypes = {
+  /** Custom css class to add on the card wrapper */
   className: PropTypes.string,
+  /** Height of the card, by default is auto, takes the height of the content */
   height: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
   ]),
+  /** Content to be displayed inside the card */
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.node,

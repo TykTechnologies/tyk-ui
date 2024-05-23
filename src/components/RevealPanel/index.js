@@ -139,8 +139,8 @@ RevealPanel.propTypes = {
   gutterClassName: PropTypes.string,
   wrapperClassName: PropTypes.string,
 };
+const TempRevealPanel = forwardRef(RevealPanel);
+TempRevealPanel.HeaderLeft = RevealPanelHeaderLeft;
+TempRevealPanel.HeaderRight = RevealPanelHeaderRight;
 
-RevealPanel.HeaderLeft = RevealPanelHeaderLeft;
-RevealPanel.HeaderRight = RevealPanelHeaderRight;
-
-export default forwardRef(RevealPanel);
+export default TempRevealPanel;

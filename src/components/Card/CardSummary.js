@@ -13,7 +13,9 @@ function CardSummary({
 }
 
 CardSummary.propTypes = {
+  /** Maximum number of lines to display from, (1 to 5) */
   maxLines: PropTypes.number,
+  /** Content to be displayed */
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.node,

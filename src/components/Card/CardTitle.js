@@ -13,7 +13,9 @@ function CardTitle({
 }
 
 CardTitle.propTypes = {
+  /** Maximum number of lines to display */
   maxLines: PropTypes.number,
+  /** Content to be displayed */
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.node,
