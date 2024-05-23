@@ -41,10 +41,10 @@
   --xl-line-height: 24px;
   --xxl-line-height: 30px;
 
-  --xs-font-size: 12px;
+  --xs-font-size: 13px;
   --sm-font-size: 14px;
   --md-font-size: 16px;
-  --lg-font-size: 17px;
+  --lg-font-size: 18px;
   --xl-font-size: 20px;
   --xxl-font-size: 25px;
 
@@ -66,6 +66,11 @@
   --breakpoint-sm: 768px;
   --breakpoint-md: 1024px;
   --breakpoint-lg: 1248px;
+
+  --font-inter-light: 'Inter-Light';
+  --font-inter-medium: 'Inter-Medium';
+  --font-inter-regular: 'Inter-Regular';
+  --font-inter-bold: 'Inter-Bold';
 
   --font-family-regular: 'OpenSans-regular';
   --font-family-medium: 'OpenSans-SemiBold';

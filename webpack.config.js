@@ -54,7 +54,7 @@ module.exports = {
         exclude: [/images/],
         type: 'asset/resource',
         generator: {
-          filename: 'fonts/[name][ext]',
+          filename: ({ filename }) => path.relative('src/common', filename),
         },
       },
       {
