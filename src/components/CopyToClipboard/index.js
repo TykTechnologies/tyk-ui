@@ -10,7 +10,7 @@ import toast from '../Toast';
 
 function CopyToClipboard(props) {
   const {
-    display, copy, children, onCopy,
+    display, copy, children, onCopy, message,
   } = props;
   const txtRef = createRef();
   const handleClick = useCallback(() => {
@@ -25,7 +25,7 @@ function CopyToClipboard(props) {
       return;
     }
     window.navigator.clipboard.writeText(copy);
-    toast.notify('copied', { theme: 'success' });
+    toast.notify(message || 'copied', { theme: 'success' });
   }, [onCopy, txtRef]);
 
   return (
@@ -43,6 +43,8 @@ function CopyToClipboard(props) {
 }
 
 CopyToClipboard.propTypes = {
+  /** Message to be displayed after text is copied */
+  message: PropTypes.string,
   /** Callback function executed after text is copied */
   onCopy: PropTypes.func,
   /** Text to be copied */

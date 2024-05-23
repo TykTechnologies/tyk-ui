@@ -53,7 +53,7 @@ function Table({
     setState((prevState) => ({
       ...prevState,
       pagination: {
-        ...state.pagination,
+        ...prevState.pagination,
         current: data + 1,
       },
     }));
