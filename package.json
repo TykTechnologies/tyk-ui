@@ -1,15 +1,15 @@
 {
   "name": "@tyk-technologies/tyk-ui",
-  "version": "3.1.2",
+  "version": "4.0.0",
   "description": "Tyk UI - ui reusable components",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "npx styleguidist server",
     "build-prod": "webpack",
     "build": "npx --max_old_space_size=4096 styleguidist build",
     "test": "npm run cy:run",
     "lint": "eslint ./src",
-    "stylelint": "stylelint './src/**/*.?(s)css'",
+    "stylelint": "stylelint './src/**/*.css'",
     "linters": "npm run lint && npm run stylelint",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
@@ -47,6 +47,9 @@
     ],
     "excludeAfterRemap": true
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "devDependencies": {
     "@babel/core": "7.23.5",
     "@babel/eslint-parser": "7.23.10",
@@ -56,8 +59,8 @@
     "@cypress/react": "8.0.0",
     "@cypress/webpack-dev-server": "3.7.1",
     "@jsdevtools/coverage-istanbul-loader": "3.0.5",
-    "copy-webpack-plugin": "11.0.0",
     "css-loader": "6.8.1",
+    "css-minimizer-webpack-plugin": "6.0.0",
     "cypress": "13.6.1",
     "esbuild-loader": "4.0.2",
     "eslint": "8.57.0",
@@ -71,12 +74,9 @@
     "html-webpack-plugin": "5.5.4",
     "mini-css-extract-plugin": "2.7.6",
     "react-styleguidist": "13.1.1",
-    "resolve-url-loader": "5.0.0",
-    "sass-loader": "13.3.2",
     "style-loader": "3.3.3",
     "stylelint": "16.2.1",
     "stylelint-config-standard": "36.0.0",
-    "stylelint-config-standard-scss": "13.0.0",
     "stylelint-declaration-block-no-ignored-properties": "2.8.0",
     "stylelint-use-logical-spec": "5.0.1",
     "webpack": "5.89.0",
@@ -86,6 +86,7 @@
   "dependencies": {
     "ace-builds": "1.32.0",
     "brace": "0.11.1",
+    "copy-webpack-plugin": "12.0.2",
     "date-fns": "2.30.0",
     "echarts": "5.4.3",
     "flatpickr": "4.6.13",
@@ -98,8 +99,7 @@
     "react-datetime-picker": "5.5.3",
     "react-dom": "18.2.0",
     "react-fast-compare": "3.2.2",
-    "react-transition-group": "4.4.5",
-    "sass": "1.69.5"
+    "react-transition-group": "4.4.5"
   },
   "overrides": {
     "react": "$react",

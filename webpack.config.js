@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
@@ -39,23 +40,9 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          'css-loader',
-        ],
-      },
-      {
-        test: /\.scss$/,
-        use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          'resolve-url-loader',
-          {
-            loader: 'sass-loader',
             options: {
               sourceMap: true,
             },
@@ -87,6 +74,10 @@ module.exports = {
   },
   optimization: {
     minimize: true,
+    minimizer: [
+      '...',
+      new CssMinimizerPlugin(),
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({

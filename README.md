@@ -6,14 +6,15 @@ https://nifty-johnson-6002dd.netlify.app/
 npm install --save @tyk-technologies/tyk-ui
 ```
 
->Note that this is a private package so you'll need to be added as a member to the tyk-technologies org and then run `npm adduser` which will ask you for your npm credentials
-
 **Loading tyk-ui into the project**
 
-*Loading SASS files*
+*Import the css before any other styles from your main js file*
+```javascript static
+import '@tyk-technologies/tyk-ui/src/index.css';
+```
+
+*Loading SASS files (only if your project uses SASS)*
 ```scss
-$font-path: "~@tyk-technologies/tyk-ui/lib/fonts/";
-$component-images-path: "~@tyk-technologies/tyk-ui/lib/images/";
 @import '~@tyk-technologies/tyk-ui/lib/sass/index';
 ```
 *NOTE*:
@@ -23,7 +24,7 @@ For projects that don't use SASS but just pure css we are also exposing the comp
 ```
 
 *Loading React components*
-```javascript
+```javascript static
 import {
   Button,
   Column,

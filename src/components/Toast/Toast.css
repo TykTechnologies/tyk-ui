@@ -1,0 +1,27 @@
+.tyk-toast__container {
+  inset-block-end: 0;
+  min-inline-size: 300px;
+  position: fixed;
+  inset-inline-end: var(--spacing-md);
+  z-index: 11;
+}
+
+.tyk-toast__message {
+  position: relative;
+}
+
+.tyk-toast-message__button {
+  color: var(--text-color);
+  block-size: var(--spacing-md);
+  line-height: 1;
+  padding: var(--spacing-xs);
+  position: absolute;
+  inset-inline-end: var(--spacing-xs);
+  inset-block-start: var(--spacing-xs);
+  inline-size: var(--spacing-md);
+
+  &:hover {
+    background: rgba(255 255 255 / 30%);
+    color: var(--text-color);
+  }
+}

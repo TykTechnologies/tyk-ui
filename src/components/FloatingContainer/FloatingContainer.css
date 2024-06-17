@@ -1,0 +1,10 @@
+.floating-container {
+  position: fixed;
+  inset-block-start: -9999px;
+  overflow: auto;
+  z-index: var(--modal-z-index, 1080);
+}
+
+.floating-container__content-wrapper {
+  block-size: 100%;
+}

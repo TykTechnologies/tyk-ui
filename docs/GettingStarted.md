@@ -29,12 +29,14 @@ import {
 *Note*: for the projects that don't have React this is not usable, and we can use just the styling.
 ```
 
+- *Import the css before any other styles from your main js file*
+```javascript static
+import '@tyk-technologies/tyk-ui/src/index.css';
+```
 
-- *Loading SASS files*
+- *Loading SASS files (only if your project uses SASS)*
 
 ```scss
-$font-path: "~@tyk-technologies/tyk-ui/lib/fonts/";
-$component-images-path: "~@tyk-technologies/tyk-ui/lib/images/";
 @import '~@tyk-technologies/tyk-ui/lib/sass/index';
 ```
 

@@ -1,0 +1,17 @@
+.tyk-file-input__wrapper {
+  position: relative;
+
+  > input {
+    padding-block: 6px;
+    padding-inline: var(--spacing-md);
+  }
+
+  > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    inset-inline-end: var(--spacing-base);
+    inset-block-start: 9px;
+  }
+}

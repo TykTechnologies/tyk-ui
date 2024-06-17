@@ -1,0 +1,85 @@
+:root {
+  --accordion-item-header-padding-y: var(--spacing-base);
+  --accordion-item-header-padding-x: var(--spacing-base);
+  --accordion-item-header-font-size: var(--base-font-size);
+  --accordion-item-outside-trigger-width: var(--spacing-xxl);
+}
+
+.tyk-accordion__item {
+  display: grid;
+}
+
+.tyk-accordion__item--trigger-position-left {
+  grid-template-columns: var(--accordion-item-outside-trigger-width) auto;
+  grid-template-areas:
+    "trigger header"
+    "trigger content";
+}
+
+.tyk-accordion__item--trigger-position-right {
+  grid-template-columns: auto var(--accordion-item-outside-trigger-width);
+  grid-template-areas:
+    "header trigger"
+    "content trigger";
+}
+
+.tyk-accordion__item--trigger-in-header {
+  grid-template-columns: auto;
+  grid-template-areas:
+    "header"
+    "content";
+}
+
+.tyk-accordion__trigger-wrapper {
+  grid-area: trigger;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  .tyk-icon {
+    margin-inline: auto;
+  }
+}
+
+.tyk-accordion__trigger,
+.tyk-accordion__item-header > button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: var(--accordion-item-header-font-size);
+  outline: none;
+  padding-inline: var(--accordion-item-header-padding-x);
+  padding-block: var(--accordion-item-header-padding-y);
+  inline-size: 100%;
+
+  .tyk-icon {
+    margin-inline-start: auto;
+  }
+}
+
+.tyk-accordion__item-header {
+  grid-area: header;
+}
+
+.tyk-accordion__trigger--disabled {
+  color: var(--color-background-base);
+}
+
+.tyk-accordion__item-header.tyk-accordion__arrow-trigger {
+  align-items: center;
+  display: flex;
+
+  > div {
+    flex: 1;
+  }
+
+  > button {
+    margin-inline-start: auto;
+    inline-size: auto;
+  }
+}
+
+.tyk-accordion__item-content {
+  grid-area: content;
+}

@@ -1,20 +1,9 @@
 @use 'sass:map';
-@use "sass:math";
 
 @function theme-color($key: 'primary', $variant: 'base') {
   $map: map.get($theme-colors, $key);
 
   @return map.get($map, $variant);
-}
-
-@function contrast($background: 'light', $type: 'primary') {
-  $map: map.get($contrast-colors, $background);
-
-  @return map.get($map, $type);
-}
-
-@mixin contrast($background: 'light', $type: 'primary') {
-  color: contrast($background, $type)
 }
 
 @function text-scale($level) {
@@ -23,95 +12,4 @@
 
 @function line-height($level) {
   @return map.get(map.get($text-settings, $level), 'line-height');
-}
-
-@mixin text-setting($level) {
-  font-size: text-scale($level);
-  line-height: line-height($level);
-}
-
-@mixin font-face($font-family, $url) {
-	@font-face {
-		font-family: '#{$font-family}';
-		src: url('#{$url}.woff2') format('woff2'),
-		     url('#{$url}.woff') format('woff');
-		font-weight: normal;
-		font-style: normal;
-	}
-}
-
-@mixin mq($width, $type: min) {
-    @if map_has_key($breakpoints, $width) {
-        $width: map_get($breakpoints, $width);
-
-        @if $type == max {
-            $width: $width - 1px;
-        }
-
-        @media only screen and (#{$type}-width: $width) {
-            @content;
-        }
-    }
-}
-
-@mixin grid-loop($name) {
-  @for $i from 0 through $grid-columns {
-    .tyk-col--#{$name}-#{$i} {
-      flex-basis: calc(#{math.percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
-      max-inline-size: calc(#{math.percentage(math.div($i, $grid-columns))} - #{$grid-gutter});
-    }
-
-    .tyk-col--offset-#{$name}-#{$i} {
-      margin-inline-start: math.percentage(math.div($i, $grid-columns));
-    }
-  }
-}
-
-@mixin form-group-variant(
-  $border-color,
-  $color: $border-color,
-) {
-  color: $text-color;
-
-  > .tyk-form-control__wrapper > .tyk-form-control,
-  > .tyk-form-control__wrapper  > .tyk-file-input__wrapper > .tyk-form-control,
-  > .tyk-form-control__wrapper > .tyk-input-group > .tyk-form-control {
-    border: $general-border-width solid $border-color;
-    color: $text-color;
-
-    &[disabled] {
-      border: $general-border-width solid $border-color;
-      background-color: $form-control-disabled-background-color;
-      color: $form-control-disabled-color;
-      cursor: not-allowed;
-
-      + .tyk-input-group__addon {
-        background-color: $form-control-disabled-background-color;
-      }
-    }
-
-    &::placeholder {
-      opacity: 0.8;
-    }
-
-    &:-ms-input-placeholder {
-      opacity: 0.8;
-    }
-  }
-
-  &.tyk-form-group--addon-left {
-    .tyk-input-group__addon {
-      border-block: 2px solid $border-color;
-      border-inline-start: 2px solid $border-color;
-      color: $color;
-    }
-  }
-
-  &.tyk-form-group--addon-right {
-    .tyk-input-group__addon {
-      border-block: 2px solid $border-color;
-      border-inline-end: 2px solid $border-color;
-      color: $color;
-    }
-  }
 }

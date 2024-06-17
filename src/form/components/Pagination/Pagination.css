@@ -1,0 +1,52 @@
+:root {
+  --pagination-border-radius: var(--general-border-radius);
+  --pagination-button-padding: var(--spacing-sm) var(--spacing-base);
+}
+
+.tyk-pagination {
+  display: flex;
+  list-style-type: none;
+  margin-block: var(--spacing-sm);
+  margin-inline: 0;
+  padding: 0;
+
+  li {
+    align-items: center;
+    display: flex;
+  }
+
+  li:first-child button {
+    border-start-start-radius: var(--pagination-border-radius);
+    border-end-start-radius: var(--pagination-border-radius);
+  }
+
+  li:last-child button {
+    border-start-end-radius: var(--pagination-border-radius);
+    border-end-end-radius: var(--pagination-border-radius);
+  }
+
+  span {
+    margin-block: 0;
+    margin-inline: var(--spacing-sm);
+  }
+
+  button {
+    background: white;
+    border: none;
+    font-size: var(--sm-font-size);
+    font-family: var(--font-family-bold);
+    cursor: pointer;
+    color: var(--color-default-base);
+    margin-inline-start: -1px;
+    padding: var(--pagination-button-padding);
+
+    &:hover {
+      background-color: var(--color-success-light);
+    }
+  }
+
+  .active button {
+    background-color: var(--color-success-base);
+    color: white;
+  }
+}

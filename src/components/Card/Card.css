@@ -1,0 +1,125 @@
+.tyk-card {
+  background-color: white;
+  border: 1px solid var(--color-background-base);
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px var(--color-background-base);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tyk-card__header {
+  align-items: center;
+  display: flex;
+  font-family: var(--font-inter-regular);
+  font-size: var(--sm-font-size);
+  padding-block: var(--spacing-base) 0;
+  padding-inline: var(--spacing-base);
+}
+
+.tyk-card__header-right {
+  margin-inline-start: auto;
+}
+
+.tyk-card__title-group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+
+  .tyk-card__title-icon {
+    align-items: center;
+    display: flex;
+    inline-size: 42px;
+    block-size: 42px;
+    justify-content: center;
+    margin-inline-end: 10px;
+    grid-row: span 2;
+  }
+}
+
+.tyk-card__title {
+  font-family: var(--font-inter-bold);
+  font-size: var(--lg-font-size);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  text-overflow: ellipsis;
+}
+
+.tyk-card__title--max-1-lines {
+  -webkit-line-clamp: 1;
+}
+
+.tyk-card__title--max-2-lines {
+  -webkit-line-clamp: 2;
+}
+
+.tyk-card__sub-title {
+  font-family: var(--font-inter-medium);
+  font-size: var(--xs-font-size);
+  margin: 0;
+}
+
+.tyk-card__title-group + .tyk-card__summary,
+.tyk-card__sub-title + .tyk-card__summary,
+.tyk-card__title + .tyk-card__summary {
+  margin-block-start: var(--spacing-sm);
+}
+
+.tyk-card__summary {
+  color: var(--text-color);
+  font-family: var(--font-inter-regular);
+  font-size: var(--sm-font-size);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+  text-overflow: ellipsis;
+}
+
+.tyk-card__summary--max-1-lines {
+  -webkit-line-clamp: 1;
+}
+
+.tyk-card__summary--max-2-lines {
+  -webkit-line-clamp: 2;
+}
+
+.tyk-card__summary--max-3-lines {
+  -webkit-line-clamp: 3;
+}
+
+.tyk-card__summary--max-4-lines {
+  -webkit-line-clamp: 4;
+}
+
+.tyk-card__summary--max-5-lines {
+  -webkit-line-clamp: 5;
+}
+
+.tyk-card__body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-grow: 1;
+  padding: var(--spacing-base);
+}
+
+.tyk-card__body--align-top {
+  align-items: flex-start;
+}
+
+.tyk-card__body--align-center {
+  align-items: center;
+}
+
+.tyk-card__body--align-bottom {
+  align-items: flex-end;
+}
+
+.tyk-card__footer {
+  display: flex;
+  justify-content: end;
+  border-block-start: 1px solid var(--color-background-base);
+  padding: var(--spacing-base);
+}

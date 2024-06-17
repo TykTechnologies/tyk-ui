@@ -1,0 +1,508 @@
+:root {
+  --toggle-font-family: var(--font-family-bold);
+  --toggle-list-background-color: var(--color-background-light);
+  --toggle-list-text-color: white;
+  --toggle-list-background-color-on-dark: white;
+  --toggle-list-text-color-on-dark: var(--text-color);
+  --toggle-top: 4px;
+  --toggle-bottom: 4px;
+  --toggle-label-font-size: var(--sm-font-size);
+  --toggle-label-font-family: var(--font-family-medium);
+  --toggle-label-color: var(--label-color);
+  --toggle-padding: 0;
+}
+
+.tyk-toggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  font-family: var(--toggle-font-family);
+  font-size: var(--sm-font-size);
+  line-height: var(--sm-line-height);
+  white-space: nowrap;
+
+  &.block {
+    margin-block-end: var(--spacing-md);
+    inline-size: 100%;
+
+    + .tyk-toggle {
+      margin-inline-start: 0;
+    }
+  }
+
+  &.inline-label {
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  + .tyk-button,
+  + .tyk-dropdown,
+  + .tyk-toggle {
+    margin-inline-start: var(--spacing-sm)
+  }
+}
+
+.tyk-toggle__list--has-error {
+  border: var(--error-border);
+}
+
+.tyk-toggle .tyk-toggle__label {
+  display: block;
+  font-family: var(--toggle-label-font-family);
+  font-size: var(--toggle-label-font-size);
+  padding: var(--toggle-padding);
+  inline-size: 100%;
+  color: var(--toggle-label-color);
+}
+
+.tyk-toggle.inline-label .tyk-toggle__label {
+  margin-inline-end: var(--spacing-sm);
+  inline-size: auto;
+}
+
+.tyk-toggle--disabled-true {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.tyk-toggle--column {
+  .tyk-toggle__list--separated {
+    display: flex;
+    flex-direction: column;
+    margin-inline-end: var(--spacing-md);
+
+    .tyk-toggle__item {
+      background-color: var(--toggle-list-background-color);
+      margin-inline-end: auto;
+    }
+  }
+}
+
+.tyk-toggle__list {
+  background: var(--toggle-list-background-color);
+  border-radius: 25px;
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.tyk-toggle__list--separated {
+  background: transparent;
+  flex-wrap: wrap;
+}
+
+.tyk-toggle--on-dark .tyk-toggle__list {
+  background: var(--toggle-list-background-color-on-dark);
+}
+
+.tyk-toggle--default .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--default .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--default .tyk-toggle__list--separated .tyk-toggle__item--active {
+  background-color: var(--button-default-color);
+  color: white;
+  border: var(--general-border-width) solid transparent;
+
+  &:hover {
+    background-color: var(--button-default-color);
+    color: white;
+  }
+
+  span {
+    color: white;
+  }
+}
+
+.tyk-toggle--primary .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--primary .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--primary .tyk-toggle__list--separated .tyk-toggle__item--active {
+  background-color: var(--color-primary-base);
+  color: white;
+  border: var(--general-border-width) solid transparent;
+
+  &:hover {
+    background-color: var(--color-primary-base);
+    color: white;
+  }
+
+  span {
+    color: white;
+  }
+}
+
+.tyk-toggle--success .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--success .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--success .tyk-toggle__list--separated .tyk-toggle__item--active {
+  background-color: var(--color-success-dark);
+  color: white;
+  border: var(--general-border-width) solid transparent;
+
+  &:hover {
+    background-color: var(--color-success-dark);
+    color: white;
+  }
+
+  span {
+    color: white;
+  }
+}
+
+.tyk-toggle--danger .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--danger .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--danger .tyk-toggle__list--separated .tyk-toggle__item--active {
+  background-color: var(--color-danger-base);
+  color: white;
+  border: var(--general-border-width) solid transparent;
+
+  &:hover {
+    background-color: var(--color-danger-base);
+    color: white;
+  }
+}
+
+.tyk-toggle--warning .tyk-toggle__item--active span {
+  color: var(--text-color);
+}
+
+.tyk-toggle--warning .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--warning .tyk-toggle__list--separated .tyk-toggle__item--active {
+  background-color: var(--color-warning-base);
+  color: var(--text-color);
+  border: var(--general-border-width) solid transparent;
+
+  &:hover {
+    background-color: var(--color-warning-base);
+    color: var(--text-color);
+  }
+}
+
+
+.tyk-toggle--primary-gradient .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--primary-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--primary-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
+  border-image: linear-gradient(to right, var(--color-primary-base), var(--color-primary-dark), var(--color-primary-base)) 0 round;
+  background: transparent linear-gradient(to right, var(--color-primary-base), var(--color-primary-dark), var(--color-primary-base));
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-position: 0 0;
+  color: white;
+
+  span {
+    color: white;
+  }
+}
+
+.tyk-toggle--success-gradient .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--success-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--success-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
+  border-image: linear-gradient(to right, var(--color-success-base), var(--color-success-dark), var(--color-success-base)) 0 round;
+  background: transparent linear-gradient(to right, var(--color-success-base), var(--color-success-dark), var(--color-success-base));
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-position: 0 0;
+  color: white;
+
+  span {
+    color: white;
+  }
+}
+
+
+.tyk-toggle--danger-gradient .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--danger-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--danger-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
+  border-image: linear-gradient(to right, var(--color-danger-base), var(--color-danger-dark), var(--color-danger-base)) 0 round;
+  background: transparent linear-gradient(to right, var(--color-danger-base), var(--color-danger-dark), var(--color-danger-base));
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-position: 0 0;
+  color: white;
+
+  span {
+    color: white;
+  }
+}
+
+
+.tyk-toggle--warning-gradient .tyk-toggle__item--active span {
+  color: white;
+}
+
+.tyk-toggle--warning-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
+.tyk-toggle--warning-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
+  border-image: linear-gradient(to right, var(--color-warning-light), var(--color-warning-base), var(--color-warning-light)) 0 round;
+  background: transparent linear-gradient(to right, var(--color-warning-light), var(--color-warning-base), var(--color-warning-light));
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-position: 0 0;
+  color: var(--text-color);
+
+  span {
+    color: white;
+  }
+}
+
+.tyk-toggle__item {
+  color: var(--toggle-list-text-color);
+  text-transform: uppercase;
+  z-index: 2;
+  border: 2px solid transparent;
+
+  &:first-child {
+    border-start-start-radius: 25px;
+    border-end-start-radius: 25px;
+  }
+
+  &:last-child {
+    border-start-end-radius: 25px;
+    border-end-end-radius: 25px;
+  }
+
+  .tyk-toggle__list--separated & {
+    border-radius: 25px;
+    margin-block: var(--spacing-xs);
+    margin-inline-end: var(--spacing-sm);
+
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    font-family: var(--toggle-font-family);
+    position: relative;
+    margin: 0;
+    transition: all .2s ease;
+
+    .tyk-toggle__list--single & {
+      padding-inline-start: 45px;
+    }
+  }
+}
+
+.tyk-toggle__list--single .tyk-toggle__item--active {
+  label {
+    padding-inline-start: 25px;
+    padding-inline-end: 45px;
+
+    .tyk-toggle__item-notch {
+      inset-inline-start: calc(100% - 35px);
+    }
+  }
+}
+
+.tyk-toggle--on-dark .tyk-toggle__item:not(.tyk-toggle__item--active) {
+  color: var(--toggle-list-text-color-on-dark);
+}
+
+.tyk-toggle--on-dark .tyk-toggle__item-notch--single {
+  background: var(--color-background-light);
+}
+
+.tyk-toggle--sm label {
+  padding-block: calc(var(--padding-y-button-sm) + 2px);
+  padding-inline: calc(var(--padding-x-button-sm) + 2px);
+  font-size: var(--xs-font-size);
+  line-height: var(--xs-line-height);
+  border-radius: var(--button-border-radius);
+}
+
+.tyk-toggle--sm .tyk-toggle__list--single label {
+  padding-inline-start: 35px;
+}
+
+.tyk-toggle--sm .tyk-toggle__list--single .tyk-toggle__item--active label {
+  padding-inline-start: 17px;
+  padding-inline-end: 35px;
+
+  .tyk-toggle__item-notch {
+    inset-inline-start: calc(100% - 27px);
+  }
+}
+
+.tyk-toggle--md label {
+  padding-block: calc(var(--padding-y-button-md) + 2px);
+  padding-inline: calc(var(--padding-x-button-md) + 2px);
+  font-size: var(--sm-font-size);
+  line-height: var(--line-height-button-sm);
+  border-radius: var(--button-border-radius);
+}
+
+.tyk-toggle--lg label {
+  padding-block: calc(var(--padding-y-button-lg) + 2px);
+  padding-inline: calc(var(--padding-x-button-lg) + 2px);
+  font-size: var(--sm-font-size);
+  line-height: var(--line-height-button-sm);
+  border-radius: var(--button-border-radius);
+}
+
+.tyk-toggle--lg .tyk-toggle__list--single label {
+  padding-inline-start: 45px;
+}
+
+.tyk-toggle--lg .tyk-toggle__list--single .tyk-toggle__item--active label {
+  padding-inline-start: 25px;
+  padding-inline-end: 45px;
+
+  .tyk-toggle__item-notch {
+    inset-inline-start: calc(100% - 43px);
+  }
+}
+
+.tyk-toggle__item-notch {
+  border-radius: 25px;
+  inset-block: 2px;
+  position: absolute;
+  transition: all .2s ease;
+}
+
+.tyk-toggle__item-notch--single {
+  background: white;
+  inset-inline-start: 2px;
+  inline-size: 32px;
+}
+
+.tyk-toggle--sm .tyk-toggle__item-notch--single {
+  inline-size: 24px;
+}
+
+.tyk-toggle--lg .tyk-toggle__item-notch--single {
+  inline-size: 40px;
+}
+
+.tyk-toggle__notch {
+  border-radius: 25px;
+  inset-inline-start: 0;
+  position: absolute;
+  inset-block-start: var(--toggle-top);
+  inset-block-end: var(--toggle-bottom);
+  transition: all .2s ease;
+  inline-size: 100px;
+  z-index: 1;
+}
+
+.tyk-toggle--default .tyk-toggle__notch {
+  --toggle-notch-background: var(--button-default-color);
+  --toggle-notch-border: transparent;
+  --toggle-notch-color: white;
+  --toggle-notch-hover-background: var(--button-default-color);
+  --toggle-notch-hover-color: white;
+}
+
+.tyk-toggle--primary .tyk-toggle__notch {
+  --toggle-notch-background: var(--primary-base);
+  --toggle-notch-border: transparent;
+  --toggle-notch-color: white;
+  --toggle-notch-hover-background: var(--primary-base);
+  --toggle-notch-hover-color: white;
+}
+
+.tyk-toggle--success .tyk-toggle__notch {
+  --toggle-notch-background: var(--success-base);
+  --toggle-notch-border: transparent;
+  --toggle-notch-color: white;
+  --toggle-notch-hover-background: var(--success-base);
+  --toggle-notch-hover-color: white;
+}
+
+.tyk-toggle--danger .tyk-toggle__notch {
+  --toggle-notch-background: var(--color-danger-base);
+  --toggle-notch-border: transparent;
+  --toggle-notch-color: white;
+  --toggle-notch-hover-background: var(--color-danger-base);
+  --toggle-notch-hover-color: white;
+}
+
+.tyk-toggle--warning .tyk-toggle__notch {
+  --toggle-notch-background: var(--color-warning-base);
+  --toggle-notch-border: transparent;
+  --toggle-notch-color: var(--text-color);
+  --toggle-notch-hover-background: var(--color-warning-base);
+  --toggle-notch-hover-color: var(--text-color);
+}
+
+.tyk-toggle--default .tyk-toggle__notch,
+.tyk-toggle--primary .tyk-toggle__notch,
+.tyk-toggle--success .tyk-toggle__notch,
+.tyk-toggle--danger .tyk-toggle__notch,
+.tyk-toggle--warning .tyk-toggle__notch {
+  background-color: var(--toggle-notch-background);
+  color: var(--toggle-notch-color);
+  border: var(--general-border-width) solid var(--toggle-notch-border);
+
+  &:hover {
+    background-color: var(--toggle-notch-hover-background);
+    color: var(--toggle-notch-hover-color);
+  }
+}
+
+.tyk-toggle--primary-gradient .tyk-toggle__notch {
+  --toggle-notch-gradient-left-color: var(--color-primary-base);
+  --toggle-notch-gradient-right-color: var(--color-primary-dark);
+  --toggle-notch-gradient-color: white;
+}
+
+.tyk-toggle--success-gradient .tyk-toggle__notch {
+  --toggle-notch-gradient-left-color: var(--color-success-base);
+  --toggle-notch-gradient-right-color: var(--color-success-dark);
+  --toggle-notch-gradient-color: white;
+}
+
+.tyk-toggle--danger-gradient .tyk-toggle__notch {
+  --toggle-notch-gradient-left-color: var(--color-danger-base);
+  --toggle-notch-gradient-right-color: var(--color-danger-dark);
+  --toggle-notch-gradient-color: white;
+}
+
+.tyk-toggle--warning-gradient .tyk-toggle__notch {
+  --toggle-notch-gradient-left-color: var(--color-warning-light);
+  --toggle-notch-gradient-right-color: var(--color-warning-base);
+  --toggle-notch-gradient-color: var(--text-color);
+}
+
+.tyk-toggle--primary-gradient .tyk-toggle__notch,
+.tyk-toggle--success-gradient .tyk-toggle__notch,
+.tyk-toggle--danger-gradient .tyk-toggle__notch,
+.tyk-toggle--warning-gradient .tyk-toggle__notch {
+  border-image: linear-gradient(to right, var(--toggle-notch-gradient-left-color), var(--toggle-notch-gradient-right-color), var(--toggle-notch-gradient-left-color)) 0 round;
+  background: transparent linear-gradient(to right, var(--toggle-notch-gradient-left-color), var(--toggle-notch-gradient-right-color), var(--toggle-notch-gradient-left-color));
+  background-origin: border-box;
+  background-clip: border-box;
+  background-size: 200% auto;
+  background-position: 0 0;
+  color: var(--toggle-notch-gradient-color);
+}
+
+.empty-toggle {
+  padding: 1px;
+}

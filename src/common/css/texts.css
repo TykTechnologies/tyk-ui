@@ -1,0 +1,5 @@
+.title-medium {
+  font-family: var(--font-family-medium);
+  color: var(--label-color);
+  font-size: var(--title-medium-font-size);
+}

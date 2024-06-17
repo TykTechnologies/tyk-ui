@@ -1,0 +1,40 @@
+:root {
+  --tyk-checkbox-theme-light-label-color: white;
+  --tyk-checkbox-theme-light-label-disabled-color: white;
+  --tyk-checkbox-theme-dark-label-color: var(--text-color);
+  --tyk-checkbox-theme-dark-label-disabled-color: var(--text-color);
+}
+
+.tyk-checkbox {
+  label {
+    --label-indent: 20px;
+
+    display: flex;
+    align-items: flex-start;
+    padding-inline-start: var(--label-indent);
+
+    input {
+      margin-inline-start: calc(-1 * var(--label-indent));
+      margin-block-start: 5px;
+    }
+  }
+}
+
+.tyk-checkbox--theme-light {
+  label {
+    color: var(--tyk-checkbox-theme-light-label-color);
+  }
+
+  &.tyk-checkbox--is-disabled {
+    label {
+      color: var(--tyk-checkbox-theme-light-label-disabled-color);
+    }
+  }
+}
+
+.tyk-checkbox--is-disabled {
+  label, p {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

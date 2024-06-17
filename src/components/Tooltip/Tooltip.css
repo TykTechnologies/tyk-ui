@@ -1,0 +1,47 @@
+:root {
+  --tooltip-max-width: 450px;
+}
+
+.tyk-tooltip {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-primary-light);
+  border: 2px solid var(--color-primary-base);
+  border-radius: var(--general-border-radius);
+  max-inline-size: var(--tooltip-max-width);
+  padding: var(--spacing-md);
+
+  > .tyk-icon:first-child {
+    inline-size: 32px;
+    block-size: 32px;
+    border-radius: 50%;
+    color: white;
+    background-color: var(--color-default-base-light);
+
+    &::before {
+      display: flex;
+      inline-size: 100%;
+      block-size: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  > .tyk-icon + .tyk-tooltip__content {
+    margin-inline-start: var(--spacing-md);
+  }
+
+  > .tyk-icon:last-child {
+    cursor: pointer;
+  }
+}
+
+.tyk-tooltip__content {
+  color: var(--color-default-dark);
+  word-break: break-word;
+  word-wrap: break-word;
+
+  + .tyk-icon {
+    margin-inline-start: var(--spacing-md);
+  }
+}

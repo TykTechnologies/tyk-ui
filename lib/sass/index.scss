@@ -1,13 +1,196 @@
-@import './common/sass/reset';
 @import './common/sass/mixins';
 @import './common/sass/variables';
-@import './common/sass/grid';
-@import './common/sass/fonts';
-@import './common/sass/fontawesome';
-@import './common/sass/tykon';
-@import './common/sass/typography';
-@import './common/sass/form';
-@import './common/sass/components';
-@import './common/sass/layout.scss';
-@import './common/sass/texts.scss';
-@import './utils/css-helpers/helpers.scss';
+
+:root {
+  --general-border-radius: #{$general-border-radius};
+  --general-border-width: #{$general-border-width};
+
+  @each $theme, $colors-map in $theme-colors {
+    @each $color-name, $color-value in $colors-map {
+      --color-#{$theme}-#{$color-name}: #{theme-color($theme, $color-name)};
+    }
+  }
+
+  --text-color: #{$text-color};
+  --label-color: #{$label-color};
+
+  --xs-line-height: #{$xs-line-height};
+  --sm-line-height: #{$sm-line-height};
+  --md-line-height: #{$md-line-height};
+  --lg-line-height: #{$lg-line-height};
+  --xl-line-height: #{$xl-line-height};
+  --xxl-line-height: #{$xxl-line-height};
+
+  --xs-font-size: #{$xs-font-size};
+  --sm-font-size: #{$sm-font-size};
+  --md-font-size: #{$md-font-size};
+  --lg-font-size: #{$lg-font-size};
+  --xl-font-size: #{$xl-font-size};
+  --xxl-font-size: #{$xxl-font-size};
+
+  --base-font-size: #{$base-font-size};
+  --base-line-height: #{$base-line-height};
+
+  @each $size, $value in $spacing {
+    --spacing-#{$size}: #{$value};
+  }
+
+  --grid-gutter: #{$grid-gutter};
+  --grid-max-width: #{$grid-max-width};
+  --grid-columns: #{$grid-columns};
+
+  --font-family-regular: #{$font-family-regular};
+  --font-family-medium: #{$font-family-medium};
+  --font-family-bold: #{$font-family-bold};
+
+  --headings-color: #{$headings-color};
+  --headings-font-family-regular: #{$headings-font-family-regular};
+  --headings-font-family-medium: #{$headings-font-family-medium};
+  --headings-font-family-bold: #{$headings-font-family-bold};
+
+  --headings-margin-bottom: #{$headings-margin-bottom};
+  --headings-font-family: #{$headings-font-family};
+  --headings-font-weight: #{$headings-font-weight};
+  --headings-line-height: #{$headings-line-height};
+
+  --form-group-margin-bottom: #{$form-group-margin-bottom};
+  --form-control-height: #{$form-control-height};
+  --form-control-padding-left: #{$form-control-padding-left};
+  --form-control-padding-right: #{$form-control-padding-right};
+  --form-control-padding-top: #{$form-control-padding-top};
+  --form-control-padding-bottom: #{$form-control-padding-bottom};
+  --form-control-addon-background-color: #{$form-control-addon-background-color};
+  --form-control-addon-padding-top: #{$form-control-addon-padding-top};
+  --form-control-addon-padding-bottom: #{$form-control-addon-padding-bottom};
+  --form-control-addon-padding-left: #{$form-control-addon-padding-left};
+  --form-control-addon-padding-right: #{$form-control-addon-padding-right};
+  --form-control-disabled-background-color: #{$form-control-disabled-background-color};
+  --form-control-border: #{$form-control-border};
+  --form-control-disabled-border: #{$form-control-disabled-border};
+  --form-control-placeholder-color: #{$form-control-placeholder-color};
+  --form-control-disabled-background-color: #{$form-control-disabled-background-color};
+  --form-control-disabled-color: #{$form-control-disabled-color};
+  --form-control-border-focus: #{$form-control-border-focus};
+  --form-control-placeholder-font-family: #{$form-control-placeholder-font-family};
+  --form-control-error-colour: #{$form-control-error-colour};
+  --form-default-color: #{$form-default-color};
+  --form-primary-color: #{$form-primary-color};
+  --form-success-color: #{$form-success-color};
+
+  --error-border: #{$error-border};
+  --error-border-left: #{$error-border-left};
+  --help-block-color: #{$help-block-color};
+  --help-block-font-style: #{$help-block-font-style};
+  --help-block-padding: #{$help-block-padding};
+  --error-message-padding: #{$error-message-padding};
+  --default-pill-background-color: #{$default-pill-background-color};
+  --default-pill-color: #{$default-pill-color};
+  --pill-margin: #{$pill-margin};
+  --default-outline-pill-box-shadow: #{$default-outline-pill-box-shadow};
+  --default-outline-pill-color: #{$default-outline-pill-color};
+
+  --title-medium-font-size: #{$title-medium-font-size};
+
+  --bottom-buffer-large: #{$bottom-buffer-large};
+  --bottom-buffer-medium: #{$bottom-buffer-medium};
+  --bottom-buffer-small: #{$bottom-buffer-small};
+  --top-buffer-large: #{$top-buffer-large};
+  --top-buffer-medium: #{$top-buffer-medium};
+  --top-buffer-small: #{$top-buffer-small};
+  --right-buffer-large: #{$right-buffer-large};
+  --right-buffer-medium: #{$right-buffer-medium};
+  --right-buffer-small: #{$right-buffer-small};
+  --left-buffer-large: #{$left-buffer-large};
+  --left-buffer-medium: #{$left-buffer-medium};
+  --left-buffer-small: #{$left-buffer-small};
+
+  --modal-z-index: #{$modal-z-index};
+
+  // FixedWrapper variables
+  --fixed-wrapper-top: #{$fixed-wrapper-top};
+  --fixed-wrapper-left: #{$fixed-wrapper-left};
+
+  // Message variables
+  --tyk-message-padding-top: #{$tyk-message-padding-top};
+  --tyk-message-padding-right: #{$tyk-message-padding-right};
+  --tyk-message-padding-bottom: #{$tyk-message-padding-bottom};
+  --tyk-message-padding-left: #{$tyk-message-padding-left};
+  --tyk-message-success-background: #{$tyk-message-success-background};
+  --tyk-message-success-border: #{$tyk-message-success-border};
+
+  // NavBar variables
+  --nav-bar-header-font-size: #{$nav-bar-header-font-size};
+  --nav-bar-background-color: #{$nav-bar-background-color};
+  --nav-bar-text-color: #{$nav-bar-text-color};
+  --nav-bar-height: #{$nav-bar-height};
+  --nav-bar-top-padding: #{$nav-bar-top-padding};
+  --nav-bar-bottom-padding: #{$nav-bar-bottom-padding};
+  --nav-bar-left-padding: #{$nav-bar-left-padding};
+  --nav-bar-right-padding: #{$nav-bar-right-padding};
+  --nav-bar-padding: #{$nav-bar-padding};
+
+  // Navigation variables
+  --navigation-background-color: #{$navigation-background-color};
+  --navigation-item-padding-y: #{$navigation-item-padding-y};
+  --navigation-item-padding-x: #{$navigation-item-padding-x};
+  --navigation-item-color: #{$navigation-item-color};
+  --navigation-item-hover-background-color: #{$navigation-item-hover-background-color};
+  --navigation-item-hover-color: #{$navigation-item-hover-color};
+  --navigation-item-active-background-color: #{$navigation-item-active-background-color};
+  --navigation-item-active-color: #{$navigation-item-active-color};
+
+  // Panel variables
+  --padding-y-panel-header: #{$padding-y-panel-header};
+  --padding-x-panel-header: #{$padding-x-panel-header};
+  --padding-panel-body: #{$padding-panel-body};
+  --panel-border-radius: #{$panel-border-radius};
+  --panel-default-border-bottom-color: #{$panel-default-border-bottom-color};
+  --panel-header-font-size: #{$panel-header-font-size};
+  --panel-primary-header-color: #{$panel-primary-header-color};
+  --panel-primary-body-color: #{$panel-primary-body-color};
+  --panel-primary-label-color: #{$panel-primary-label-color};
+  --panel-primary-border-color: #{$panel-primary-border-color};
+
+  // Sidebar variables
+  --sidebar-top: #{$sidebar-top};
+  --sidebar-height: #{$sidebar-height};
+  --sidebar-width: #{$sidebar-width};
+
+  // Table variables
+  --table-th-padding: #{$table-th-padding};
+  --table-td-padding-y: #{$table-td-padding-y};
+  --table-td-padding-x: #{$table-td-padding-x};
+  --table-first-last-padding: #{$table-first-last-padding};
+  --table-pagination-padding: #{$table-pagination-padding};
+
+  // Checkbox variables
+  --tyk-checkbox-theme-light-label-color: #{$tyk-checkbox-theme-light-label-color};
+  --tyk-checkbox-theme-light-label-disabled-color: #{$tyk-checkbox-theme-light-label-disabled-color};
+  --tyk-checkbox-theme-dark-label-color: #{$tyk-checkbox-theme-dark-label-color};
+  --tyk-checkbox-theme-dark-label-disabled-color: #{$tyk-checkbox-theme-dark-label-disabled-color};
+
+  // Combobox variables
+  --combobox-disabled-border: #{$combobox-disabled-border};
+
+  // Combobox2 variables
+  --tyk-combobox-list-item-disabled-color: #{$tyk-combobox-list-item-disabled-color};
+
+  // Dropdown variables
+  --tyk-dropdown-item-background: #{$tyk-dropdown-item-background};
+  --tyk-dropdown-item-background-hover: #{$tyk-dropdown-item-background-hover};
+  --tyk-dropdown-item-border-color: #{$tyk-dropdown-item-border-color};
+  --tyk-dropdown-item-text-color: #{$tyk-dropdown-item-text-color};
+  --tyk-dropdown-item-hover-text-color: #{$tyk-dropdown-item-hover-text-color};
+
+  // Radio variables
+  --tyk-radio-theme-light-label-color: #{$tyk-radio-theme-light-label-color};
+  --tyk-radio-theme-light-label-disabled-color: #{$tyk-radio-theme-light-label-disabled-color};
+  --tyk-radio-theme-dark-label-color: #{$tyk-radio-theme-dark-label-color};
+  --tyk-radio-theme-dark-label-disabled-color: #{$tyk-radio-theme-dark-label-disabled-color};
+
+  // Toggle variables
+  --toggle-list-background-color: #{$toggle-list-background-color};
+  --toggle-list-background-color-on-dark: #{$toggle-list-background-color-on-dark};
+  --toggle-label-font-size: #{$toggle-label-font-size};
+  --toggle-padding: #{$toggle-padding};
+}

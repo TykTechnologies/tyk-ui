@@ -1,0 +1,4 @@
+.tyk-select {
+  background: transparent url('./images/arrow_down.svg') no-repeat calc(100% - 15px) center;
+  background-size: var(--spacing-base) var(--spacing-base);
+}

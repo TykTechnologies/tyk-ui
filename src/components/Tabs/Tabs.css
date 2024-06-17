@@ -1,0 +1,58 @@
+:root {
+  --tabs-default-content-padding: 25px;
+  --tab-button-padding: var(--spacing-sm) 2px 3px 2px;
+  --tab-button-margin: 0;
+  --tabs-font-familly: var(--font-family-medium);
+  --tab-button-color: var(--text-color);
+  --tab-active-button-color: var(--text-color);
+  --tab-border-color: var(--color-success-base);
+}
+
+.tyk-tabs--default {
+  > ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+
+    li {
+      display: flex;
+      white-space: nowrap;
+      margin-inline-end: var(--tab-button-margin);
+
+      &:last-child {
+        margin-inline-end: 0;
+      }
+
+      &.active button,
+      button:hover {
+        border-block-end-color: var(--tab-border-color);
+        color: var(--tab-active-button-color);
+        opacity: 1;
+      }
+
+      button {
+        background: none;
+        border: none;
+        border-block-end: 4px solid transparent;
+        color: var(--tab-button-color);
+        cursor: pointer;
+        font-size: var(--sm-font-size);
+        font-family: var(--tabs-font-familly);
+        padding: var(--tab-button-padding);
+        margin-inline-end: var(--spacing-md);
+        transition: all .2s linear;
+        opacity: 0.7;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+.tyk-tab__content {
+  padding: var(--tabs-default-content-padding);
+}

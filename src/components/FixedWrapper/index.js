@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import debounce from '../../utils/debounce';
+
 /**
  * FixedWrapper component, keeps all its children in a fix position on the page,
  * even if the scroll position changes

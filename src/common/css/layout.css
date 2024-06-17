@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background-base);
+  color: var(--text-color);
+  font-size: var(--sm-font-size);
+  line-height: var(--sm-line-height);
+  font-family: var(--font-family-regular);
+}
+
+.tyk-main-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.tyk-main-content-wrapper {
+  flex: 1;
+}
+
+.well {
+  background: transparent;
+  border: var(--general-border-width) solid var(--color-default-light);
+  border-radius: var(--general-border-radius);
+  box-shadow: none;
+
+  &.has-error {
+    border-color: var(--color-danger-base);
+  }
+}

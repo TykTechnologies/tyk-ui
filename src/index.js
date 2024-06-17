@@ -1,12 +1,12 @@
-import './index.scss';
+import './index.css';
 
 // -- Components
 export { default as Accordion } from './components/Accordion';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as Card } from './components/Card';
-export { default as Collapsible } from './components/Collapsible';
 export { default as Chart } from './components/Chart';
+export { default as Collapsible } from './components/Collapsible';
 export { default as CopyToClipboard } from './components/CopyToClipboard';
 export { default as Confirm } from './components/Confirm';
 export { default as FixedWrapper } from './components/FixedWrapper';

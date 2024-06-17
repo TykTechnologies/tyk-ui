@@ -1,0 +1,147 @@
+.tyk-pill {
+  align-items: center;
+  border-radius: var(--general-border-radius);
+  display: inline-flex;
+  font-size: var(--xs-font-size);
+  line-height: 19px;
+  margin: var(--pill-margin);
+  padding-block: 6px;
+  padding-inline: var(--spacing-base);
+  font-family: var(--font-family-medium);
+
+  i {
+    font-size: var(--xs-font-size);
+  }
+
+  + .tyk-pill {
+    margin-inline-end: var(--spacing-sm);
+  }
+
+  button + span {
+    margin-inline-start: var(--spacing-sm);
+  }
+
+  span + button {
+    margin-inline-start: var(--spacing-sm);
+  }
+
+  &:first-child {
+    margin-inline-end: var(--spacing-sm);
+  }
+
+  &:last-child {
+    margin-inline-end: 0;
+  }
+}
+
+.tyk-pill--square {
+  border-radius: 8px;
+}
+
+.tyk-pill--default {
+  background-color: var(--default-pill-background-color);
+  color: var(--default-pill-color);
+
+  i {
+    color: var(--default-pill-color);
+  }
+}
+
+.tyk-pill--default-outline {
+  box-shadow: var(--default-outline-pill-box-shadow);
+  color: var(--text-color);
+
+  i {
+    color: var(--text-color);
+  }
+}
+
+.tyk-pill--primary {
+  background-color: var(--color-primary-base);
+  color: white;
+
+  i {
+    color: var(--default-pill-color);
+  }
+}
+
+.tyk-pill--primary-outline {
+  box-shadow: inset 0 0 0 2px var(--color-primary-base);
+  color: var(--text-color);
+
+  i {
+    color: var(--text-color);
+  }
+}
+
+.tyk-pill--success {
+  background-color: var(--color-success-base);
+  color: white;
+
+  i {
+    color: white;
+  }
+}
+
+.tyk-pill--success-outline {
+  box-shadow: inset 0 0 0 2px var(--color-success-base);
+  color: var(--text-color);
+
+  i {
+    color: var(--text-color);
+  }
+}
+
+.tyk-pill--danger {
+  background-color: var(--color-danger-base);
+  color: white;
+
+  i {
+    color: white;
+  }
+}
+
+.tyk-pill--danger-outline {
+  box-shadow: inset 0 0 0 2px var(--color-danger-base);
+  color: var(--text-color);
+
+  i {
+    color: var(--text-color);
+  }
+}
+
+.tyk-pill--warning {
+  background-color: var(--color-warning-base);
+  color: white;
+
+  i {
+    color: white;
+  }
+}
+
+.tyk-pill--warning-outline {
+  box-shadow: inset 0 0 0 2px var(--color-warning-base);
+  color: var(--text-color);
+
+  i {
+    color: var(--text-color);
+  }
+}
+
+.tyk-pill--info {
+  background-color: var(--color-info-base);
+  color: white;
+
+  i {
+    color: white;
+  }
+}
+
+.tyk-pill--info-outline {
+  box-shadow: inset 0 0 0 2px var(--color-info-base);
+  color: var(--text-color);
+
+  i {
+    color: var(--text-color);
+  }
+}

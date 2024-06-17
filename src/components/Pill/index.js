@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 /**
  * Pill
- *
  */
 function Pill(props) {
   const {

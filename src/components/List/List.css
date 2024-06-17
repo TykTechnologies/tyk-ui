@@ -1,0 +1,105 @@
+.tyk-list {
+  border: var(--general-border-width) solid var(--color-default-light);
+  border-radius: var(--general-border-radius);
+  font-size: var(--sm-font-size);
+  list-style-type: none;
+  margin: 0;
+  max-block-size: 191px;
+  padding: 0;
+  overflow: auto;
+
+  li {
+    border-block-end: 1px solid var(--color-default-light);
+    padding-block: var(--spacing-sm);
+    padding-inline: var(--spacing-md);
+    font-family: var(--font-family-medium);
+
+    &.tyk-list__item--selected {
+      background-color: var(--color-default-light);
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+.tyk-list--with-inline-label {
+  display: flex;
+
+  > label {
+    margin-inline-end: var(--spacing-md);
+  }
+}
+
+.tyk-list--default {
+  border-color: var(--color-default-light);
+}
+
+.tyk-list--primary {
+  border-color: var(--color-primary-base);
+
+  li {
+    border-color: var(--color-primary-light);
+    color: var(--text-color);
+
+    &.tyk-list__item--selected {
+      background-color: var(--color-primary-light);
+    }
+  }
+}
+
+.tyk-list--primary-light {
+  border-color: var(--color-primary-light);
+
+  li {
+    border-color: var(--color-primary-light);
+    color: var(--text-color);
+
+    &.tyk-list__item--selected {
+      background-color: var(--color-primary-light);
+    }
+  }
+}
+
+.tyk-list--success {
+  border-color: var(--color-success-base);
+  color: var(--color-success-base);
+
+  li {
+    border-color: var(--color-success-base);
+
+    &.tyk-list__item--selected {
+      background-color: var(--color-success-light);
+    }
+  }
+}
+
+.tyk-list--danger {
+  border-color: var(--color-danger-base);
+  color: var(--text-color);
+
+  li {
+    border-color: var(--color-danger-light);
+
+    &.tyk-list__item--selected {
+      background-color: var(--color-danger-light);
+    }
+  }
+}
+
+ul.tyk-list--inline {
+  align-items: center;
+  display: flex;
+
+  li {
+    padding-block: 0;
+    padding-inline: var(--spacing-sm);
+  }
+
+  &.tyk-list--with-separator {
+    li:not(:first-child) {
+      border-inline-start: 1px solid var(--color-default-base);
+    }
+  }
+}
