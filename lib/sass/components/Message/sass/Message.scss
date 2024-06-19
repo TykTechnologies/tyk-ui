@@ -15,6 +15,7 @@
   &__content {
     flex-grow: 1;
     margin-inline: map.get($spacing, 'md');
+    color: $tyk-message-default-text-color;
   }
 
   > .tyk-icon:first-child {
