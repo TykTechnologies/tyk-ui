@@ -25,9 +25,14 @@ function Icon({
 }
 
 Icon.propTypes = {
+  // Additional CSS classes to apply
   className: PropTypes.string,
+  // Font family to use. Default is 'fa'.
   family: PropTypes.string,
+  // Icon type to use
   type: PropTypes.string.isRequired,
+  // Icon weight to use. Only applicable for Font Awesome icons. Default is 'light'. Also supports 'solid'
+  weight: PropTypes.string
 };
 
 export default Icon;
