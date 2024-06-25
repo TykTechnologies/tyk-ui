@@ -5,15 +5,18 @@ function Icon({
   className,
   family,
   type,
+  weight,
   ...rest
 }) {
   function getCSSClasses() {
     const fontFamily = family || 'fa';
+    const fontWeight = fontFamily === 'fa' ? `fa-${weight || 'light'}` : '';
 
     return [
       'tyk-icon',
-      fontFamily,
+      fontFamily !== 'fa' && fontFamily,
       `${fontFamily}-${type}`,
+      fontWeight,
       className,
     ].filter(Boolean).join(' ');
   }
