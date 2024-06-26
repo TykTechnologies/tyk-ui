@@ -2,17 +2,25 @@ import React from 'react';
 import Icon from './index';
 
 describe('Icon', () => {
-  const faFamily = 'fa';
+  const faFamily = 'fa-light';
+  const faFamilySolid = 'fa-solid';
   const tykonFamily = 'tykon';
   const selectors = {
     icon: '.tyk-icon',
   };
 
-  it('renders an icon and the default family is "fa"', () => {
+  it('renders an icon and the default family is "fa-light"', () => {
     cy.mount(<Icon type="edit" />)
       .get(selectors.icon)
       .should('exist')
       .and('have.class', faFamily);
+  });
+
+  it('renders an icon and weight for fontawesome icons can be set', () => {
+    cy.mount(<Icon type="edit" weight="solid" />)
+      .get(selectors.icon)
+      .should('exist')
+      .and('have.class', faFamilySolid);
   });
 
   it('a different icon family can be specified', () => {

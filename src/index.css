@@ -2,7 +2,9 @@
 @import './common/css/variables.css';
 @import './common/css/grid.css';
 @import './common/css/fonts.css';
-@import './common/css/fontawesome.css';
+@import './common/css/fontawesome/light.css';
+@import './common/css/fontawesome/solid.css';
+@import './common/css/fontawesome/fontawesome.css';
 @import './common/css/tykon.css';
 @import './common/css/typography.css';
 @import './common/css/form.css';
