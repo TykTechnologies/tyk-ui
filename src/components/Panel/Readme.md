@@ -4,6 +4,26 @@
 ```js
 import Button from '../Button';
 <>
+<Panel>
+  <Panel.Header>Panel example (no theme)</Panel.Header>
+  <Panel.Body>
+    <label>label</label>
+    Panel body content
+  </Panel.Body>
+</Panel>
+<Panel collapsable theme="success" collapsibleIconPosition="left">
+  {
+    ({toggleCollapse}) => (
+      <>
+        <Panel.Header>Panel example</Panel.Header>
+        <Panel.Body>
+          <Button onClick={toggleCollapse} theme="primary">Collapse</Button>
+          Panel body content 222
+        </Panel.Body>
+      </>
+    )
+  }
+</Panel>
 <Panel theme="primary">
   <Panel.Header>Panel example</Panel.Header>
   <Panel.Body>

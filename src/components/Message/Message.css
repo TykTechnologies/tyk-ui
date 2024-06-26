@@ -97,6 +97,8 @@
 .tyk-message__content {
   flex-grow: 1;
   margin-inline: var(--spacing-md);
+  color: var(--tyk-message-default-text-color);
+  font-weight: bold;
 }
 
 .tyk-message--default {
