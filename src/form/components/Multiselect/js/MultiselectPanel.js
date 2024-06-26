@@ -87,7 +87,7 @@ function MultiselectPanel({
     <div className="tyk-multiselect__panel">
       <Input
         inputgroupaddonleft={
-          <Icon type="search" />
+          <Icon type="magnifying-glass" />
         }
         name="search"
         onChange={searchOnChange}

@@ -85,7 +85,7 @@ describe('Tooltip', () => {
       .find(`.${classes.iconHelp}`)
       .should('exist');
 
-    cy.mount(<Component render="hello" icon={<Icon family="tykon" type="check" />} />);
+    cy.mount(<Component render="hello" icon={<Icon type="check" />} />);
     cy.get(`.${classes.content}`)
       .trigger('mouseover');
 

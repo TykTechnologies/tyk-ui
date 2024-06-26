@@ -10,7 +10,7 @@ function Icon({
 }) {
   function getCSSClasses() {
     const fontFamily = family || 'fa';
-    const fontWeight = fontFamily === 'fa' ? `fa-${weight || 'light'}` : '';
+    const fontWeight = fontFamily === 'fa' ? `fa-${weight || 'regular'}` : '';
 
     return [
       'tyk-icon',
@@ -31,7 +31,7 @@ Icon.propTypes = {
   family: PropTypes.string,
   // Icon type to use
   type: PropTypes.string.isRequired,
-  // Icon weight to use. Only applicable for Font Awesome icons. Default is 'light'. Also supports 'solid'
+  // Icon weight to use. Only applicable for Font Awesome icons. Default is 'regular'. Also supports 'light' and 'solid'
   weight: PropTypes.string
 };
 
