@@ -33,7 +33,13 @@
     border: var(--general-border-width) solid var(--color-default-light);
     box-shadow: none;
   }
+}
 
+.tyk-panel--blank,
+.tyk-panel--primary,
+.tyk-panel--success,
+.tyk-panel--danger,
+.tyk-panel--warning {
   .tyk-panel__header {
     border: none;
     font-size: var(--lg-font-size);
