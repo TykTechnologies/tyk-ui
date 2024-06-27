@@ -589,7 +589,7 @@ class Combobox extends Component {
                         onClick={this.handlePillRemoveClick.bind(this, index)}
                         aria-label="remove"
                       >
-                        <Icon type="times" />
+                        <Icon type="xmark" />
                       </button>
                       <span>{ value.name }</span>
                     </li>
@@ -634,7 +634,7 @@ class Combobox extends Component {
                   {filteredValues.length > 0 && (
                     <Button
                       className="tyk-combobox--with-tags__button-down"
-                      iconType="arrow-down"
+                      iconType="chevron-down"
                       iconOnly
                       onClick={this.handleComboboxDropdownClick}
                     />
@@ -649,7 +649,7 @@ class Combobox extends Component {
                 onKeyDown={() => {}}
               >
                 { this.getComboboxDisplayData() }
-                <Icon family="tykon" type="arrowdown" />
+                <Icon type="chevron-down" />
               </li>
             )
         }

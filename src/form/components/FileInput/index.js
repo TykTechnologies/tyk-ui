@@ -95,7 +95,7 @@ function FileInput({
                 type="button"
                 aria-label="clear value"
               >
-                <Icon type="times" />
+                <Icon type="xmark" />
               </button>
             )
             : null

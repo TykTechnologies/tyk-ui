@@ -68,7 +68,7 @@ function Tooltip({
           <div className={classes} ref={tooltipRef}>
             {icon && (
               icon === true ? (
-                <Icon family="tykon" type="help" />
+                <Icon type="question" />
               ) : (
                 icon
               )
@@ -78,8 +78,7 @@ function Tooltip({
             </div>
             {closable && (
               <Icon
-                family="tykon"
-                type="x"
+                type="xmark"
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsActive(false);

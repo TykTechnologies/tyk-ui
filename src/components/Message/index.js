@@ -21,16 +21,16 @@ function Message({
     ].filter(Boolean).join(' ');
   }
 
-  const iconType = theme === 'success' ? 'check' : 'warning';
+  const iconType = theme === 'success' ? 'check' : 'exclamation';
 
   return (
     <div className={getCssClasses()}>
-      <Icon family="tykon" type={iconType} />
+      <Icon type={iconType} />
       <div className="tyk-message__content">
         { children }
       </div>
       {onClose && (
-        <Icon family="tykon" type="x" onClick={onClose} />
+        <Icon type="xmark" onClick={onClose} />
       )}
     </div>
   );

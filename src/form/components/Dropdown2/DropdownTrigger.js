@@ -16,8 +16,7 @@ function DropdownTrigger({
     !splitTrigger ? (
       <Button
         className="dropdown__trigger"
-        iconType="arrowdown"
-        iconFamily="tykon"
+        iconType="chevron-down"
         iconPosition="right"
         theme={theme}
         ref={ref}
@@ -35,8 +34,7 @@ function DropdownTrigger({
         </Button>
         <Button
           className="dropdown__trigger"
-          iconType="arrowdown"
-          iconFamily="tykon"
+          iconType="chevron-down"
           iconPosition="right"
           theme={theme}
           onClick={toggle}

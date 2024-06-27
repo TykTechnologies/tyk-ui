@@ -42,7 +42,7 @@ function FieldsList({
       <div className={`editable-list__item-cell editable-list__item-action ${readOnly && 'editable-list__item-action--read-only'}`}>
         <Button
           iconOnly
-          iconType="trash-alt"
+          iconType="trash"
           theme="primary-link"
           onClick={onDelete}
           disabled={readOnly || disabled}

@@ -20,7 +20,7 @@ export function HeaderCell({ column }) {
       {column.name}
       {column.sortable && (
         <span className="header-sort">
-          <Icon family="tykon" type="arrowsort" />
+          <Icon type="sort" />
         </span>
       )}
     </th>

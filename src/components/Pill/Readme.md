@@ -11,7 +11,7 @@ import Button from '../Button';
     Pill Two
   </Pill>
   <Pill theme="danger">
-    <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="times" size="fit" type="button" />
+    <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="xmark" size="fit" type="button" />
   </Pill>
   <Pill theme="warning">
     Pill Four
@@ -34,7 +34,7 @@ import Button from '../Button';
     Pill Two
   </Pill>
   <Pill theme="danger-outline">
-    <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="times" size="fit" type="button" />
+    <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="xmark" size="fit" type="button" />
   </Pill>
   <Pill theme="warning-outline">
     Pill Four
@@ -58,7 +58,7 @@ import Button from '../Button';
       Pill Two
     </Pill>
     <Pill theme="danger square">
-      <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="times" size="fit" type="button" />
+      <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="xmark" size="fit" type="button" />
     </Pill>
     <Pill theme="warning square">
       Pill Four
@@ -78,7 +78,7 @@ import Button from '../Button';
       Pill Two
     </Pill>
     <Pill theme="danger-outline square">
-      <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="times" size="fit" type="button" />
+      <span>Pill Three</span><Button noStyle={true} iconOnly={true} iconType="xmark" size="fit" type="button" />
     </Pill>
     <Pill theme="warning-outline square">
       Pill Four

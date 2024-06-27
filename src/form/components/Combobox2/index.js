@@ -348,8 +348,8 @@ function Combobox2({
 
   const renderIcon = useCallback(
     () => (expandMode
-      ? <Icon type={valuesExpanded ? 'compress-arrows-alt' : 'expand-arrows-alt'} />
-      : <Icon family="tykon" type="arrowdown" />
+      ? <Icon type={valuesExpanded ? 'chevron-down' : 'chevron-up'} />
+      : <Icon type="chevron-down" />
     ),
     [expandMode, valuesExpanded],
   );

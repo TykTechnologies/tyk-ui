@@ -2,14 +2,14 @@ import React from 'react';
 import Icon from './index';
 
 describe('Icon', () => {
-  const faFamily = 'fa-light';
+  const faFamily = 'fa-regular';
   const faFamilySolid = 'fa-solid';
   const tykonFamily = 'tykon';
   const selectors = {
     icon: '.tyk-icon',
   };
 
-  it('renders an icon and the default family is "fa-light"', () => {
+  it('renders an icon and the default family is "fa-regular"', () => {
     cy.mount(<Icon type="edit" />)
       .get(selectors.icon)
       .should('exist')

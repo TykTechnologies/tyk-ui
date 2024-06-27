@@ -19,7 +19,7 @@ import Row from '../../layout/Row';
         )}
       >
         <>
-        <Icon type="circle" className="text--success" />
+        <Icon type="circle-check" weight="solid" className="text--success" />
         <span className="left-buffer-small">Is Active</span>
         </>
       </Card.Header>
@@ -46,7 +46,7 @@ import Row from '../../layout/Row';
         )}
       >
         <>
-        <Icon type="circle" className="text--success" />
+        <Icon type="circle-check" weight="solid" className="text--success" />
         <span className="left-buffer-small">Is Active</span>
         </>
       </Card.Header>
@@ -76,7 +76,7 @@ import Row from '../../layout/Row';
         )}
       >
         <>
-        <Icon type="circle" className="text--success" />
+        <Icon type="circle-check" weight="solid" className="text--success" />
         <span className="left-buffer-small">Is Active</span>
         </>
       </Card.Header>
@@ -103,7 +103,7 @@ import Row from '../../layout/Row';
         )}
       >
         <>
-        <Icon type="circle" className="text--success" />
+        <Icon type="circle-check" weight="solid" className="text--success" />
         <span className="left-buffer-small">Is Active</span>
         </>
       </Card.Header>
@@ -173,7 +173,7 @@ import Row from '../../layout/Row';
         )}
       >
         <>
-        <Icon type="circle" className="text--success" />
+        <Icon type="circle-check" weight="solid" className="text--success" />
         <span className="left-buffer-small">Is Active</span>
         </>
       </Card.Header>

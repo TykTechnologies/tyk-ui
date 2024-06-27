@@ -36,8 +36,8 @@ function Modal({
 
   const themeIcon = {
     success: 'check',
-    warning: 'warning',
-    danger: 'delete',
+    warning: 'exclamation',
+    danger: 'exclamation',
   }[theme];
 
   return (
@@ -54,7 +54,7 @@ function Modal({
                 <div className="tyk-modal__content">
                   {theme !== 'none' && (
                     <div className="tyk-modal__theme-header">
-                      <Icon family="tykon" type={themeIcon} />
+                      <Icon type={themeIcon} />
                     </div>
                   )}
                   { children }
