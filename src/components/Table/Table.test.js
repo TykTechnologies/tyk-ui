@@ -6,8 +6,8 @@ describe('Table Component Rendering', () => {
   const selectors = {
     table: '.tyk-table',
     headerCell: '.tyk-table thead th',
-    sortIcon: '.tyk-table thead th .tykon-arrowsort',
-    sortIconClassName: '.tykon-arrowsort',
+    sortIcon: '.tyk-table thead th .fa-sort',
+    sortIconClassName: '.fa-sort',
     selectAllCheckbox: '.tyk-table thead input[type="checkbox"]',
     allRowCheckboxes: '.tyk-table tbody input[type="checkbox"]',
     row: '.tyk-table tbody tr',

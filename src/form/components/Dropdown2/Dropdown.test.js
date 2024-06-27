@@ -6,7 +6,7 @@ describe('Dropdown2', () => {
     buttonGroup: '.tyk-button-group',
     dropdownTrigger: '.dropdown__trigger',
     btn: '.tyk-button',
-    arrowIcon: '.tykon-arrowdown',
+    arrowIcon: '.fa-chevron-down',
     dropdownListWrapper: '.tyk-list',
   };
   it('renders by default a button with an arrow', () => {

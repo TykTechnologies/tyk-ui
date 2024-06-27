@@ -8,8 +8,8 @@ describe('Tooltip', () => {
     tooltipWrapper: 'tyk-tooltip__wrapper',
     tooltip: 'tyk-tooltip',
     content: 'tooltip-content',
-    iconHelp: 'tykon-help',
-    iconClose: 'tykon-x',
+    iconHelp: 'fa-question',
+    iconClose: 'fa-xmark',
   };
   function Component(props) {
     return (
@@ -91,7 +91,7 @@ describe('Tooltip', () => {
 
     cy.get(`.${classes.tooltip} .${classes.iconHelp}`)
       .should('not.exist')
-      .get(`.${classes.tooltip} .tykon-check`)
+      .get(`.${classes.tooltip} .fa-check`)
       .should('exist');
   });
 

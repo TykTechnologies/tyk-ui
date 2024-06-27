@@ -31,8 +31,8 @@ describe('Toast', () => {
     },
     icons: {
       icon: 'tyk-icon',
-      success: 'tykon-check',
-      warning: 'tykon-warning',
+      success: 'fa-check',
+      warning: 'fa-exclamation',
     },
   };
 
@@ -55,7 +55,7 @@ describe('Toast', () => {
   };
 
   it('should render toast components and remove it after the given delay', () => {
-    cy.mount(<Component onClick={() => toast.notify('demo', { delay: 150 })} />)
+    cy.mount(<Component onClick={() => toast.notify('demo', { delay: 350 })} />)
       .get('button')
       .click();
 

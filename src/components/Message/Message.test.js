@@ -15,7 +15,7 @@ describe('Message', () => {
   const noMarginClass = 'no-margin';
   const selectors = {
     message: '.tyk-message',
-    closeIcon: '.tyk-icon.tykon-x',
+    closeIcon: '.tyk-icon.fa-xmark',
   };
 
   it('renders the component with the info theme by default', () => {

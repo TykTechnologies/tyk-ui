@@ -17,7 +17,6 @@ function DropdownTrigger({
       <Button
         className="dropdown__trigger"
         iconType="chevron-down"
-        iconFamily="tykon"
         iconPosition="right"
         theme={theme}
         ref={ref}
@@ -36,7 +35,6 @@ function DropdownTrigger({
         <Button
           className="dropdown__trigger"
           iconType="chevron-down"
-          iconFamily="tykon"
           iconPosition="right"
           theme={theme}
           onClick={toggle}

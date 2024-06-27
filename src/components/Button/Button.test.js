@@ -36,7 +36,6 @@ describe('Button', () => {
         <Button
           theme="default"
           iconType="copy"
-          iconFamily="tykon"
           iconPosition="right"
         >
           {buttonText}
@@ -46,8 +45,7 @@ describe('Button', () => {
       .should('have.class', 'icon-right')
 
       .get('.tyk-icon')
-      .should('have.class', 'tykon')
-      .and('have.class', 'tykon-copy');
+      .and('have.class', 'fa-copy');
   });
 
   it('renders a custom "button"', () => {
