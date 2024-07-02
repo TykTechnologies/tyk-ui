@@ -35,7 +35,7 @@
   --label-color: var(--color-default-base);
 
   --xs-line-height: 16px;
-  --sm-line-height: 19px;
+  --sm-line-height: 20px;
   --md-line-height: 22px;
   --lg-line-height: 23px;
   --xl-line-height: 24px;
@@ -46,7 +46,7 @@
   --md-font-size: 16px;
   --lg-font-size: 18px;
   --xl-font-size: 20px;
-  --xxl-font-size: 25px;
+  --xxl-font-size: 32px;
 
   --base-font-size: var(--sm-font-size);
   --base-line-height: var(--sm-line-height);
@@ -55,9 +55,9 @@
   --spacing-sm: 10px;
   --spacing-base: 15px;
   --spacing-md: 20px;
-  --spacing-lg: 25px;
+  --spacing-lg: 24px;
   --spacing-xl: 30px;
-  --spacing-xxl: 40px;
+  --spacing-xxl: 36px;
 
   --grid-gutter: var(--spacing-md);
   --grid-max-width: calc(1200px + var(--grid-gutter) * 2);
@@ -71,18 +71,20 @@
   --font-inter-medium: 'Inter-Medium';
   --font-inter-regular: 'Inter-Regular';
   --font-inter-bold: 'Inter-Bold';
+  --font-inter-semi-bold: 'Inter-SemiBold';
 
-  --font-family-regular: 'OpenSans-regular';
-  --font-family-medium: 'OpenSans-SemiBold';
-  --font-family-bold: 'OpenSans-Bold';
+  --font-family-regular: var(--font-inter-regular);
+  --font-family-medium: var(--font-inter-medium);
+  --font-family-semi-bold: var(--font-inter-semi-bold);
+  --font-family-bold: var(--font-inter-bold);
 
   --headings-color: var(--color-default-base);
-  --headings-font-family-regular: 'smoolthan_regular';
-  --headings-font-family-medium: 'smoolthan_medium';
-  --headings-font-family-bold: 'smoolthan_bold';
+  --headings-font-family-regular: var(--font-inter-regular);
+  --headings-font-family-medium: var(--font-inter-medium);
+  --headings-font-family-bold: var(--font-inter-bold);
 
   --headings-margin-bottom: 15px;
-  --headings-font-family: var(--headings-font-family-medium);
+  --headings-font-family: var(--headings-font-family-bold);
   --headings-font-weight: 500;
   --headings-line-height: var(--base-line-height);
 

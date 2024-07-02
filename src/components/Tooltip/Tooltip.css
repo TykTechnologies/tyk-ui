@@ -8,6 +8,8 @@
   background-color: var(--color-primary-light);
   border: 2px solid var(--color-primary-base);
   border-radius: var(--general-border-radius);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-sm);
   max-inline-size: var(--tooltip-max-width);
   padding: var(--spacing-md);
 

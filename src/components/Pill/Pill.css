@@ -3,11 +3,11 @@
   border-radius: var(--general-border-radius);
   display: inline-flex;
   font-size: var(--xs-font-size);
-  line-height: 19px;
+  font-family: var(--font-family-regular);
+  line-height: var( --xs-line-height);
   margin: var(--pill-margin);
   padding-block: 6px;
   padding-inline: var(--spacing-base);
-  font-family: var(--font-family-medium);
 
   i {
     font-size: var(--xs-font-size);

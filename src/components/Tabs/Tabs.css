@@ -2,9 +2,8 @@
   --tabs-default-content-padding: 25px;
   --tab-button-padding: var(--spacing-sm) 2px 3px 2px;
   --tab-button-margin: 0;
-  --tabs-font-familly: var(--font-family-medium);
-  --tab-button-color: var(--text-color);
-  --tab-active-button-color: var(--text-color);
+  --tabs-font-familly: var(--font-family-regular);
+  --tabs-font-familly-active: var(--font-family-semi-bold);
   --tab-border-color: var(--color-success-base);
 }
 
@@ -28,7 +27,7 @@
       &.active button,
       button:hover {
         border-block-end-color: var(--tab-border-color);
-        color: var(--tab-active-button-color);
+        font-family: var(--tabs-font-familly-active);
         opacity: 1;
       }
 
@@ -36,9 +35,8 @@
         background: none;
         border: none;
         border-block-end: 4px solid transparent;
-        color: var(--tab-button-color);
         cursor: pointer;
-        font-size: var(--sm-font-size);
+        font-size: var(--xs-font-size);
         font-family: var(--tabs-font-familly);
         padding: var(--tab-button-padding);
         margin-inline-end: var(--spacing-md);

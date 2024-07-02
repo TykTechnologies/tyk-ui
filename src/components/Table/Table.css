@@ -16,9 +16,9 @@
   > thead th {
     border-inline-end: 1px solid var(--color-default-light);
     color: var(--text-color);
-    font-size: var(--sm-font-size);
+    font-size: var(--xs-font-size);
     line-height: var(--sm-line-height);
-    font-family: var(--font-family-bold);
+    font-family: var(--font-family-semi-bold);
     text-transform: uppercase;
     padding: var(--table-th-padding);
 
@@ -43,7 +43,7 @@
 
   > tbody td {
     border-inline-end: 1px solid var(--color-default-light);
-    font-size: var(--sm-font-size);
+    font-size: var(--xs-font-size);
     line-height: var(--sm-line-height);
     font-family: var(--font-family-regular);
     padding-block: var(--table-td-padding-y);

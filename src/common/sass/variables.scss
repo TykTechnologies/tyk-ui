@@ -54,7 +54,7 @@ $text-color: #505071 !default;
 $label-color: theme-color('default', 'base') !default;
 
 $xs-line-height: 16px;
-$sm-line-height: 19px;
+$sm-line-height: 20px;
 $md-line-height: 22px;
 $lg-line-height: 23px;
 $xl-line-height: 24px;
@@ -65,7 +65,7 @@ $sm-font-size: 14px;
 $md-font-size: 16px;
 $lg-font-size: 18px;
 $xl-font-size: 20px;
-$xxl-font-size: 25px;
+$xxl-font-size: 32px;
 
 $base-font-size: $sm-font-size !default;
 $base-line-height: $sm-line-height !default;
@@ -106,26 +106,28 @@ $spacing: (
   'sm': 10px,
   'base': 15px,
   'md': 20px,
-  'lg': 25px,
+  'lg': 24px,
   'xl': 30px,
-  'xxl': 40px
+  'xxl': 36px
 ) !default;
 
 $grid-gutter: map.get($spacing, 'md') !default;
 $grid-max-width: 1200px + ($grid-gutter * 2) !default;
 $grid-columns: 12 !default;
 
-$font-family-regular: 'OpenSans-regular' !default;
-$font-family-medium: 'OpenSans-SemiBold' !default;
-$font-family-bold: 'OpenSans-Bold' !default;
+$font-family-regular: 'Inter-Regular' !default;
+$font-family-medium: 'Inter-Medium' !default;
+$font-family-semi-bold: 'Inter-SemiBold' !default;
+$font-family-bold: 'Inter-Bold' !default;
 
 $headings-color: #36364C !default;
-$headings-font-family-regular: 'smoolthan_regular' !default;
-$headings-font-family-medium: 'smoolthan_medium' !default;
-$headings-font-family-bold: 'smoolthan_bold' !default;
+$headings-font-family-regular: 'Inter-Regular' !default;
+$headings-font-family-medium: 'Inter-Medium' !default;
+$headings-font-family-semi-bold: 'Inter-SemiBold' !default;
+$headings-font-family-bold: 'Inter-Bold' !default;
 
 $headings-margin-bottom: 15px !default;
-$headings-font-family: $headings-font-family-medium !default;
+$headings-font-family: $headings-font-family-bold !default;
 $headings-font-weight: 500 !default;
 $headings-line-height: $base-line-height !default;
 

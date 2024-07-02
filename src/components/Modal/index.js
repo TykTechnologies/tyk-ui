@@ -103,9 +103,9 @@ Modal.Header.propTypes = {
 Modal.Title = ({ children }) => {
   console.warn('%cModal.Title%c is deprecated.', 'font-weight: bold', '');
   return (
-    <h4 className="tyk-modal__title">
+    <h5 className="tyk-modal__title">
       { children }
-    </h4>
+    </h5>
   );
 };
 Modal.Title.propTypes = {
