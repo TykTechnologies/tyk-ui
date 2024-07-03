@@ -21,6 +21,10 @@
   line-height: var(--sm-line-height);
   white-space: nowrap;
 
+  .tyk-form-control--readonly {
+    font-family: var(--font-family-medium);
+  }
+
   &.block {
     margin-block-end: var(--spacing-md);
     inline-size: 100%;

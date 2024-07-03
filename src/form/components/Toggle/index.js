@@ -23,6 +23,8 @@ function Toggle({
   type,
   value,
   error,
+  enabledReadOnlyText = 'Enabled',
+  disabledReadOnlyText = 'Disabled',
 }) {
   const [selectedRef, setSelectedRef] = useState(null);
   const notchRef = useRef();
@@ -32,7 +34,8 @@ function Toggle({
     wrapperClassName,
     className,
     'tyk-toggle',
-    `tyk-toggle--disabled-${readOnly || disabled}`,
+    `tyk-toggle--readonly-${readOnly}`,
+    `tyk-toggle--disabled-${disabled}`,
     `tyk-toggle--${size || 'md'}`,
     `tyk-toggle--${theme}`,
     `tyk-toggle--${direction}`,
@@ -75,6 +78,13 @@ function Toggle({
     value,
   }), [disabled, readOnly, onItemSelected, separated, type, value]);
 
+  const getReadOnlyValue = () => {
+    if (typeof value === 'boolean') {
+      return value ? enabledReadOnlyText : disabledReadOnlyText;
+    }
+    return value;
+  };
+
   return (
     <>
       <div className={classes} ref={toggleRef}>
@@ -86,14 +96,19 @@ function Toggle({
               ? <label className="tyk-toggle__label" style={getLabelStyles()}>{label}</label>
               : null
           }
-          <ul className={`tyk-toggle__list tyk-toggle__list--${type} ${error && 'tyk-toggle__list--has-error'}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
-            { children }
-            {
-              type === 'multiple' && !separated
-                ? <li className="tyk-toggle__notch" ref={notchRef} style={positionNotch()} />
-                : null
-            }
-          </ul>
+          {!readOnly ?
+            <ul className={`tyk-toggle__list tyk-toggle__list--${type} ${error && 'tyk-toggle__list--has-error'}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
+              { children }
+              {
+                type === 'multiple' && !separated
+                  ? <li className="tyk-toggle__notch" ref={notchRef} style={positionNotch()} />
+                  : null
+              }
+            </ul>
+            : <div className="tyk-form-control--readonly">
+                {getReadOnlyValue()}
+              </div>
+          }
         </ToggleContext.Provider>
       </div>
       {
