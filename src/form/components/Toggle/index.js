@@ -154,6 +154,8 @@ Toggle.propTypes = {
   ]),
   onDark: PropTypes.bool,
   wrapperClassName: PropTypes.string,
+  enabledReadOnlyText: PropTypes.string,
+  disabledReadOnlyText: PropTypes.string,
 };
 
 Toggle.defaultProps = {
