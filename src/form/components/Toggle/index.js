@@ -79,9 +79,10 @@ function Toggle({
   }), [disabled, readOnly, onItemSelected, separated, type, value]);
 
   const getReadOnlyValue = () => {
-    if (typeof value === 'boolean') {
+    if(type !== 'multiple') {
       return value ? enabledReadOnlyText : disabledReadOnlyText;
     }
+
     return value;
   };
 
