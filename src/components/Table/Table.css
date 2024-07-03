@@ -21,6 +21,11 @@
     font-family: var(--font-family-semi-bold);
     text-transform: uppercase;
     padding: var(--table-th-padding);
+  
+    &.fit {
+      white-space: nowrap;
+      inline-size: 1%;
+    }
 
     &:last-child {
       border-inline-end: none;

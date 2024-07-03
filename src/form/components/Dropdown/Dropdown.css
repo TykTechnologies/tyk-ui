@@ -17,6 +17,7 @@
 
   label {
     display: block;
+    font-family: var(--font-family-bold);
   }
 
   &.theme-list .tyk-button {

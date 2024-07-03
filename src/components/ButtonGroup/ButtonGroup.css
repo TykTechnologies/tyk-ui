@@ -4,7 +4,7 @@
   vertical-align: middle;
 
   label {
-    font-family: var(--font-family-medium);
+    font-family: var(--font-family-bold);
   }
 
   + .tyk-button,

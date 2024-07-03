@@ -8,7 +8,7 @@
   --panel-border-radius: 0;
   --panel-default-border-bottom-color: var(--color-background-base);
   --panel-header-font-size: var(--base-font-size);
-  --panel-header-font-family: var(--font-family-medium);
+  --panel-header-font-family: var(--font-family-bold);
   --panel-primary-header-color: var(--color-primary-base);
   --panel-primary-body-color: white;
   --panel-primary-header-text-color: white;
