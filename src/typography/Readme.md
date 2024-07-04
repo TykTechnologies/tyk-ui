@@ -21,10 +21,9 @@
 ```js
 <h1>H1. Product Page Header</h1>
 <h2>H2. Form Section Header</h2>
-<h3 className="font-family-bold">H3. Name panel header</h3>
-<h3 className="font-family-medium">H3. Panel header</h3>
-<h4 className="font-family-medium">H4. Sub Panel Header</h4>
-<h5 className="font-family-bold text--uppercase">H5. Titles</h5>
+<h3>H3. Name panel header</h3>
+<h4>H4. Sub Panel Header</h4>
+<h5>H5. Titles</h5>
 <p>p.regular Regular font family paragraph</p>
 <p className="font-family-medium">p.medium Medium font family paragraph</p>
 <a>link medium</a>

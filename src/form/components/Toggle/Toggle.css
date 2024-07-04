@@ -7,7 +7,8 @@
   --toggle-top: 4px;
   --toggle-bottom: 4px;
   --toggle-label-font-size: var(--sm-font-size);
-  --toggle-label-font-family: var(--font-family-medium);
+  --toggle-label-font-family: var(--font-family-bold);
+  --toggle-inside-label-font-family: var(--font-family-medium);
   --toggle-label-color: var(--label-color);
   --toggle-padding: 0;
 }
@@ -19,6 +20,10 @@
   font-size: var(--sm-font-size);
   line-height: var(--sm-line-height);
   white-space: nowrap;
+
+  .tyk-form-control--readonly {
+    font-family: var(--font-family-medium);
+  }
 
   &.block {
     margin-block-end: var(--spacing-md);
@@ -299,7 +304,7 @@
 
   label {
     cursor: pointer;
-    font-family: var(--toggle-font-family);
+    font-family: var(--toggle-inside-label-font-family);
     position: relative;
     margin: 0;
     transition: all .2s ease;

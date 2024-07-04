@@ -161,7 +161,7 @@
   position: fixed;
   inset: 0;
   inline-size: 100%;
-  z-index: var(--modal-z-index) - 1;
+  z-index: calc(var(--modal-z-index) - 1);
 
   &.opened {
     display: block;

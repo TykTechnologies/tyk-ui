@@ -55,10 +55,10 @@ describe('Toggle', () => {
       .should('have.class', classes.disabled);
   });
 
-  it('in readOnly mode the component is disabled', () => {
+  it('in readOnly mode, and type single the component shows Enabled or Disabled status', () => {
     cy.mount(<Component readOnly />)
       .get(selectors.component)
-      .should('have.class', classes.disabled);
+      .should('contain', 'Enabled');
   });
 
   it('can render with error', () => {

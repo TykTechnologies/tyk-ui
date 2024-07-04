@@ -1,5 +1,5 @@
 :root {
-  --button-font-family: var(--font-family-bold);
+  --button-font-family: var(--font-family-medium);
   --button-border-radius: var(--spacing-md);
 
   --padding-y-button-sm: 3px;

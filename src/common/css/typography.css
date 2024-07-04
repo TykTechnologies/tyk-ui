@@ -1,7 +1,6 @@
 h1, h2, h3, h4, h5, h6 {
   margin-block-end: var(--headings-margin-bottom);
   font-family: var(--headings-font-family);
-  font-weight: var(--headings-font-weight);
   color: var(--headings-color);
 }
 
@@ -19,12 +18,12 @@ h1 {
 
 h2 {
   font-size: var(--xl-font-size);
-  line-height: var(--xl-line-height);
+  line-height: var(--lg-line-height);
 }
 
 h3 {
   font-size: var(--lg-font-size);
-  line-height: var(--lg-line-height);
+  line-height: var(--xl-line-height);
 }
 
 h4 {
@@ -34,7 +33,7 @@ h4 {
 
 h5 {
   font-size: var(--sm-font-size);
-  line-height: var(--sm-line-height);
+  line-height: var(--md-line-height);
 }
 
 h6 {
@@ -62,6 +61,7 @@ a:not(.tyk-button) {
   cursor: pointer;
   color: var(--text-color);
   font-family: var(--font-family-regular);
+  text-decoration: underline;
 
   &.link--bold {
     font-family: var(--font-family-bold);
@@ -77,15 +77,15 @@ a:not(.tyk-button) {
 }
 
 .font-family-regular {
-  font-family: var(--font-family-regular);
+  font-family: var(--font-family-regular) !important;
 }
 
 .font-family-medium {
-  font-family: var(--font-family-medium);
+  font-family: var(--font-family-medium) !important;
 }
 
 .font-family-bold {
-  font-family: var(--font-family-bold);
+  font-family: var(--font-family-bold) !important;
 }
 
 .heading-font-family-regular {
@@ -155,7 +155,6 @@ td.text-ellipsis {
 }
 
 .section-title {
-  font-family: var(--headings-font-family-bold);
   margin-block-end: 5px;
 
   .tyk-icon {
@@ -165,9 +164,6 @@ td.text-ellipsis {
 
 .sub-section-title {
   margin-block-end: 5px;
-  font-family: var(--font-family-medium);
-  font-size: var(--md-font-size);
-  line-height: var(--md-line-height);
 
   .tyk-icon {
     margin-inline-start: 5px;
@@ -176,9 +172,6 @@ td.text-ellipsis {
 
 .section-group-title {
   margin-block-end: 5px;
-  font-family: var(--font-family-bold);
-  font-size: var(--sm-font-size);
-  line-height: var(--sm-line-height);
   text-transform: uppercase;
 
   .tyk-icon {

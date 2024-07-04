@@ -44,6 +44,19 @@ class TestToggle extends Component {
               theme="primary"
               size="md"
               error="My error"
+              readOnly
+            >
+              <Toggle.Item
+                name="option"
+              />
+            </Toggle>
+            <Toggle
+              value={active}
+              onChange={this.toggleOnChange}
+              label="Is enabled?"
+              theme="primary"
+              size="md"
+              error="My error"
               onDark
             >
               <Toggle.Item
