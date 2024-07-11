@@ -1,8 +1,8 @@
 :root {
   --tyk-combobox-pill-background: #F0F0F0;
   --tyk-combobox-pill-color: var(--text-color);
-  --tyk-combobox-list-item-hover-color: var(--form-default-color);
-  --tyk-combobox-list-item-disabled-color: var(--form-default-color);
+  --tyk-combobox-list-item-hover-color: var(--color-secondary-extra-light);
+  --tyk-combobox-list-item-disabled-color: var(--color-background);
 }
 
 .tyk-combobox2 {
@@ -19,7 +19,7 @@
       cursor: not-allowed;
     }
 
-    .tyk-combobox2__current-values .tyk-pill--combobox button {
+    .tyk-combobox2__current-values .tyk-pill--secondary button {
       cursor: not-allowed;
     }
 
@@ -62,11 +62,8 @@
     transition: max-block-size 1s ease;
   }
 
-  .tyk-pill--combobox {
+  .tyk-pill--secondary {
     margin-block: 3px;
-    background-color: var(--tyk-combobox-pill-background);
-    border-radius: var(--spacing-sm);
-    color: var(--tyk-combobox-pill-color);
     padding-block: var(--spacing-xs);
     padding-inline: var(--spacing-sm);
     max-inline-size: 100%;
@@ -117,7 +114,7 @@
 }
 
 .tyk-combobox2__text-value {
-  font-family: var(--font-family-medium);
+  font-family: var(--font-family-regular);
   font-size: var(--sm-font-size);
   padding-block: 9px;
   padding-inline: 5px;
@@ -192,10 +189,10 @@
     li {
       display: flex;
       cursor: pointer;
-      padding-block: 9px;
+      padding-block: 12px;
       padding-inline: var(--spacing-md);
       transition: all .2s;
-      font-family: var(--font-family-medium);
+      font-family: var(--font-family-regular);
 
       &:hover,
       &.active {
@@ -207,11 +204,12 @@
         background-color: initial;
       }
 
-      + li {
+      /* + li {
         border-block-start: 1px solid var(--form-default-color);
-      }
+      } */
 
       i {
+        color: var(--color-info-base);
         margin-inline-end: var(--spacing-xs);
       }
 

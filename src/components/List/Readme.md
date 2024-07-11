@@ -1,7 +1,5 @@
 ```js
-<List
-  theme="primary-light"
->
+<List>
   <List.Item>item 1</List.Item>
   <List.Item>item 2</List.Item>
   <List.Item>item 3</List.Item>

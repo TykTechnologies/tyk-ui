@@ -4,34 +4,43 @@
   --tyk-message-padding-bottom: var(--spacing-md);
   --tyk-message-padding-left: var(--spacing-md);
   --tyk-message-border-radius: var(--general-border-radius);
-  --tyk-message-default-background: var(--color-primary-light);
-  --tyk-message-default-border: var(--color-default-dark);
-  --tyk-message-default-text-color: var(--color-default-dark);
-  --tyk-message-info-background: var(--color-info-light);
-  --tyk-message-info-border: var(--color-info-base);
-  --tyk-message-info-text-color: var(--color-info-base);
-  --tyk-message-success-background: var(--color-success-light);
-  --tyk-message-success-border: var(--color-success-dark);
-  --tyk-message-success-text-color: var(--color-success-dark);
-  --tyk-message-warning-background: var(--color-warning-light);
-  --tyk-message-warning-border: var(--color-warning-base);
-  --tyk-message-warning-text-color: var(--color-warning-dark);
+  
+  --tyk-message-secondary-background: var(--color-secondary-light);
+  --tyk-message-secondary-border: var(--color-secondary-dark);
+  --tyk-message-secondary-text-color: var(--color-text-base);
+  --tyk-message-secondary-icon-color: var(--color-secondary-extra-dark1);
+
+  --tyk-message-info-background: var(--color-info-extra-light);
+  --tyk-message-info-border: var(--color-info-light);
+  --tyk-message-info-text-color: var(--color-text-base);
+  --tyk-message-info-icon-color: var(--color-info-dark);
+
+  --tyk-message-success-background: var(--color-success-extra-light);
+  --tyk-message-success-border: var(--color-success-light);
+  --tyk-message-success-text-color: var(--color-text-base);
+  --tyk-message-success-icon-color: var(--color-success-dark);
+
+  --tyk-message-warning-background: var(--color-warning-extra-light);
+  --tyk-message-warning-border: var(--color-warning-light);
+  --tyk-message-warning-text-color: var(--color-text-base);
+  --tyk-message-warning-icon-color: var(--color-warning-dark);
+
   --tyk-message-danger-background: var(--color-danger-extra-light);
-  --tyk-message-danger-border: var(--color-danger-base);
-  --tyk-message-danger-text-color: var(--color-danger-dark);
+  --tyk-message-danger-border: var(--color-danger-light);
+  --tyk-message-danger-text-color: var(--color-text-base);
+  --tyk-message-danger-icon-color: var(--color-danger-dark);
 }
 
 .tyk-message {
   display: flex;
-  align-items: center;
+  align-items: start;
   border-radius: var(--tyk-message-border-radius);
   margin-block-end: var(--spacing-md);
   padding-block: var(--tyk-message-padding-top) var(--tyk-message-padding-bottom);
   padding-inline: var(--tyk-message-padding-left) var(--tyk-message-padding-right);
 
   > .tyk-icon:first-child {
-    inline-size: 32px;
-    block-size: 32px;
+    font-size: var(--xl-font-size);
     flex-shrink: 0;
     border-radius: 50%;
     color: white;
@@ -48,94 +57,50 @@
   > .tyk-icon:last-child {
     cursor: pointer;
   }
-
-  /* &--default {
-    @include message-variant(
-      $tyk-message-default-background,
-      $tyk-message-default-border,
-      $tyk-message-default-text-color
-    );
-
-    > .tyk-icon:first-child {
-      transform: rotate(180deg);
-    }
-  }
-
-  &--info {
-    @include message-variant(
-      $tyk-message-info-background,
-      $tyk-message-info-border,
-      $tyk-message-info-text-color
-    );
-  }
-
-  &--success {
-    @include message-variant(
-      $tyk-message-success-background,
-      $tyk-message-success-border,
-      $tyk-message-success-text-color
-    );
-  }
-
-  &--warning {
-    @include message-variant(
-      $tyk-message-warning-background,
-      $tyk-message-warning-border,
-      $tyk-message-warning-text-color
-    );
-  }
-
-  &--danger {
-    @include message-variant(
-      $tyk-message-danger-background,
-      $tyk-message-danger-border,
-      $tyk-message-danger-text-color
-    );
-  } */
 }
 
 .tyk-message__content {
   flex-grow: 1;
   margin-inline: var(--spacing-md);
-  color: var(--tyk-message-default-text-color);
   font-weight: bold;
 }
 
-.tyk-message--default {
-  --message-variant-background: var(--tyk-message-default-background);
-  --message-variant-border: var(--tyk-message-default-border);
-  --message-variant-color: var(--tyk-message-default-text-color);
-
-  > .tyk-icon:first-child {
-    transform: rotate(180deg);
-  }
+.tyk-message--secondary {
+  --message-variant-background: var(--tyk-message-secondary-background);
+  --message-variant-border: var(--tyk-message-secondary-border);
+  --message-variant-color: var(--tyk-message-secondary-text-color);
+  --message-variant-icon-color: var(--tyk-message-secondary-icon-color);
 }
 
 .tyk-message--info {
   --message-variant-background: var(--tyk-message-info-background);
   --message-variant-border: var(--tyk-message-info-border);
   --message-variant-color: var(--tyk-message-info-text-color);
+  --message-variant-icon-color: var(--tyk-message-info-icon-color);
 }
 
 .tyk-message--success {
   --message-variant-background: var(--tyk-message-success-background);
   --message-variant-border: var(--tyk-message-success-border);
   --message-variant-color: var(--tyk-message-success-text-color);
+  --message-variant-icon-color: var(--tyk-message-success-icon-color);
 }
 
 .tyk-message--warning {
   --message-variant-background: var(--tyk-message-warning-background);
   --message-variant-border: var(--tyk-message-warning-border);
   --message-variant-color: var(--tyk-message-warning-text-color);
+  --message-variant-icon-color: var(--tyk-message-warning-icon-color);
 }
 
 .tyk-message--danger {
   --message-variant-background: var(--tyk-message-danger-background);
   --message-variant-border: var(--tyk-message-danger-border);
   --message-variant-color: var(--tyk-message-danger-text-color);
+  --message-variant-icon-color: var(--tyk-message-danger-icon-color);
 }
 
-.tyk-message--default,
+.tyk-message--secondary,
 .tyk-message--info,
 .tyk-message--success,
 .tyk-message--warning,
@@ -145,6 +110,6 @@
   color: var(--message-variant-color);
 
   & > .tyk-icon:first-child {
-    background-color: var(--message-variant-border);
+    color: var(--message-variant-icon-color);
   }
 }

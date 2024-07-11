@@ -44,7 +44,7 @@
 }
 
 .disabled-section {
-  color: var(--color-default-light);
+  color: var(--color-text-light);
 }
 
 .top-buffer-large {

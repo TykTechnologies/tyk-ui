@@ -43,7 +43,7 @@ function FieldsList({
         <Button
           iconOnly
           iconType="trash"
-          theme="primary-link"
+          theme="secondary-link"
           onClick={onDelete}
           disabled={readOnly || disabled}
         />

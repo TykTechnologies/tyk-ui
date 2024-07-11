@@ -37,7 +37,7 @@ function DropdownItem(props) {
                       eventKey
                       && dropdownContext.selectedItem === eventKey
                       && dropdownContext.showCheckmark
-                        ? <Icon type="check" />
+                        ? <Icon type="check" className="tyk-dropdown__item-check" />
                         : null
                     }
                     <span>

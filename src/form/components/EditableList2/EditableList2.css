@@ -15,14 +15,15 @@
 }
 
 .editable-list__list {
-  border: var(--general-border-width) solid var(--color-default-light);
+  border: var(--general-border-width) solid var(--color-secondary-dark);
   border-radius: var(--general-border-radius);
   display: flex;
   flex-direction: column-reverse;
+  overflow: hidden;
 }
 
 .editable-list__item {
-  border-block-end: 1px solid var(--color-default-light);
+  border-block-end: 1px solid var(--color-secondary-dark);
   display: flex;
   flex-wrap: nowrap;
   inline-size: 100%;
@@ -33,12 +34,15 @@
 }
 
 .editable-list__item-header {
-  border-block-end: 1px solid var(--color-default-light);
+  background-color: var(--color-secondary-light);
+  border-block-end: 1px solid var(--color-secondary-dark);
+  border-start-end-radius: var(--general-border-radius);
+  border-start-start-radius: var(--general-border-radius);
   color: var(--text-color);
   font-size: var(--sm-font-size);
   line-height: var(--sm-line-height);
   font-family: var(--font-family-bold);
-  text-transform: uppercase;
+  text-transform: capitalize;
 
   .editable-list__item-cell {
     padding: 10px;
@@ -46,7 +50,7 @@
 }
 
 .editable-list__item-cell {
-  border-inline-start: 1px solid var(--color-default-light);
+  border-inline-start: 1px solid var(--color-secondary-dark);
   overflow: hidden;
   padding-block: 0;
   padding-inline: 10px;
@@ -161,7 +165,7 @@
 }
 
 .editable-list__item-action--read-only {
-  color: var(--color-default-light);
+  color: var(--color-text-light);
   align-items: center;
 
   .tyk-button {

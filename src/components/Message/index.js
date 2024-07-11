@@ -21,11 +21,17 @@ function Message({
     ].filter(Boolean).join(' ');
   }
 
-  const iconType = theme === 'success' ? 'check' : 'exclamation';
+  const iconType = {
+    'success': 'hexagon-check',
+    'danger': 'hexagon-exclamation',
+    'warning': 'triangle-exclamation',
+    'info': 'circle-exclamation',
+    'secondary': 'circle-exclamation',
+  }[theme];
 
   return (
     <div className={getCssClasses()}>
-      <Icon type={iconType} />
+      <Icon type={iconType} weight="solid" />
       <div className="tyk-message__content">
         { children }
       </div>

@@ -175,7 +175,7 @@ class Dropdown extends Component {
     } = this.props;
     let cssClasses = [wrapperClassName, 'tyk-dropdown'];
 
-    cssClasses.push(`theme-${btnTheme || 'default'}`);
+    cssClasses.push(`theme-${btnTheme || 'secondary'}`);
 
     if (className) {
       cssClasses = cssClasses.concat(className.split(' '));
@@ -307,7 +307,7 @@ class Dropdown extends Component {
             ? (
               <Button
                 className={`tyk-dropdown__trigger ${(opened) ? 'tyk-dropdown__trigger--opened ' : ' '} ${btnClassName}`}
-                theme={btnTheme || 'default'}
+                theme={btnTheme || 'secondary'}
                 onClick={this.toggleDropdown}
                 iconType={showDropdownIcon ? 'chevron-down' : null}
                 iconPosition="right"

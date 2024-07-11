@@ -3,8 +3,10 @@
   --tab-button-padding: var(--spacing-sm) 2px 3px 2px;
   --tab-button-margin: 0;
   --tabs-font-familly: var(--font-family-regular);
-  --tabs-font-familly-active: var(--font-family-semi-bold);
-  --tab-border-color: var(--color-success-base);
+  --tabs-font-familly-active: var(--font-family-regular);
+  --tab-border-color: var(--color-primary-base);
+  --tab-active-color: var(--color-primary-base);
+  --tab-hover-color: var(--color-text-dark);
 }
 
 .tyk-tabs--default {
@@ -24,9 +26,19 @@
         margin-inline-end: 0;
       }
 
-      &.active button,
-      button:hover {
+      &.active button {
         border-block-end-color: var(--tab-border-color);
+        color: var(--tab-active-color);
+        font-family: var(--tabs-font-familly-active);
+        opacity: 1;
+
+        &:hover {
+          color: var(--tab-active-color);
+        }
+      }
+
+      button:hover {
+        color: var(--tab-hover-color);
         font-family: var(--tabs-font-familly-active);
         opacity: 1;
       }
@@ -34,7 +46,8 @@
       button {
         background: none;
         border: none;
-        border-block-end: 4px solid transparent;
+        border-block-end: 1px solid transparent;
+        color: var(--text-color);
         cursor: pointer;
         font-size: var(--xs-font-size);
         font-family: var(--tabs-font-familly);

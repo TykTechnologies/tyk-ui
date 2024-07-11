@@ -1,8 +1,8 @@
 .tyk-card {
   background-color: white;
-  border: 1px solid var(--color-background-base);
+  border: 1px solid var(--color-secondary-dark);
   border-radius: 8px;
-  box-shadow: 2px 2px 3px var(--color-background-base);
+  box-shadow: 2px 2px 3px var(--color-secondary-base-dark);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -120,6 +120,6 @@
 .tyk-card__footer {
   display: flex;
   justify-content: end;
-  border-block-start: 1px solid var(--color-background-base);
+  border-block-start: 1px solid var(--color-secondary-dark);
   padding: var(--spacing-base);
 }

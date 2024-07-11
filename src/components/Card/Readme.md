@@ -30,8 +30,8 @@ import Row from '../../layout/Row';
         </Card.Summary>
       </Card.Body>
       <Card.Footer>
-        <Button theme="primary-outline rounded-corners" size="sm">Cancel</Button>
-        <Button theme="primary rounded-corners" size="sm">Submit</Button>
+        <Button theme="secondary-outline rounded-corners" size="sm">Cancel</Button>
+        <Button theme="secondary rounded-corners" size="sm">Submit</Button>
       </Card.Footer>
     </Card>
   </Column>
@@ -40,8 +40,8 @@ import Row from '../../layout/Row';
       <Card.Header
         right={(
           <>
-            <Pill theme="default square" className="no-margin-bottom">GraphQL</Pill>
-            <Pill theme="primary square" className="no-margin-bottom">OAS</Pill>
+            <Pill theme="secondary square" className="no-margin-bottom">GraphQL</Pill>
+            <Pill theme="secondary square" className="no-margin-bottom">OAS</Pill>
           </>
         )}
       >
@@ -60,8 +60,8 @@ import Row from '../../layout/Row';
         </Card.Summary>
       </Card.Body>
       <Card.Footer>
-        <Button theme="primary-outline rounded-corners" size="sm">Cancel</Button>
-        <Button theme="primary rounded-corners" size="sm">Submit</Button>
+        <Button theme="secondary-outline rounded-corners" size="sm">Cancel</Button>
+        <Button theme="secondary rounded-corners" size="sm">Submit</Button>
       </Card.Footer>
     </Card>
   </Column>
@@ -70,8 +70,8 @@ import Row from '../../layout/Row';
       <Card.Header
         right={(
           <>
-            <Pill theme="default square" className="no-margin-bottom">GraphQL</Pill>
-            <Pill theme="primary square" className="no-margin-bottom">OAS</Pill>
+            <Pill theme="secondary square" className="no-margin-bottom">GraphQL</Pill>
+            <Pill theme="secondary square" className="no-margin-bottom">OAS</Pill>
           </>
         )}
       >
@@ -87,8 +87,8 @@ import Row from '../../layout/Row';
         </Card.Summary>
       </Card.Body>
       <Card.Footer>
-        <Button theme="primary-outline rounded-corners" size="sm">Cancel</Button>
-        <Button theme="primary rounded-corners" size="sm">Submit</Button>
+        <Button theme="secondary-outline rounded-corners" size="sm">Cancel</Button>
+        <Button theme="secondary rounded-corners" size="sm">Submit</Button>
       </Card.Footer>
     </Card>
   </Column>
@@ -97,8 +97,8 @@ import Row from '../../layout/Row';
       <Card.Header
         right={(
           <>
-            <Pill theme="default square" className="no-margin-bottom">GraphQL</Pill>
-            <Pill theme="primary square" className="no-margin-bottom">OAS</Pill>
+            <Pill theme="secondary square" className="no-margin-bottom">GraphQL</Pill>
+            <Pill theme="secondary square" className="no-margin-bottom">OAS</Pill>
           </>
         )}
       >
@@ -114,8 +114,8 @@ import Row from '../../layout/Row';
         </Card.Summary>
       </Card.Body>
       <Card.Footer>
-        <Button theme="primary-outline rounded-corners" size="sm">Cancel</Button>
-        <Button theme="primary rounded-corners" size="sm">Submit</Button>
+        <Button theme="secondary-outline rounded-corners" size="sm">Cancel</Button>
+        <Button theme="secondary rounded-corners" size="sm">Submit</Button>
       </Card.Footer>
     </Card>
   </Column>
@@ -128,8 +128,8 @@ import Row from '../../layout/Row';
         </Card.Summary>
       </Card.Body>
       <Card.Footer>
-        <Button theme="primary-outline rounded-corners" size="sm">Cancel</Button>
-        <Button theme="primary rounded-corners" size="sm">Submit</Button>
+        <Button theme="secondary-outline rounded-corners" size="sm">Cancel</Button>
+        <Button theme="secondary rounded-corners" size="sm">Submit</Button>
       </Card.Footer>
     </Card>
   </Column>
@@ -184,8 +184,8 @@ import Row from '../../layout/Row';
         </Card.Summary>
       </Card.Body>
       <Card.Footer>
-        <Button theme="primary-outline rounded-corners" size="sm">Cancel</Button>
-        <Button theme="primary rounded-corners" size="sm">Submit</Button>
+        <Button theme="secondary-outline rounded-corners" size="sm">Cancel</Button>
+        <Button theme="secondary rounded-corners" size="sm">Submit</Button>
       </Card.Footer>
     </Card>
   </Column>
@@ -199,8 +199,8 @@ import Row from '../../layout/Row';
         </Card.TitleGroup>
       </Card.Body>
       <Card.Footer>
-        <Button theme="primary-outline rounded-corners" size="sm">Cancel</Button>
-        <Button theme="primary rounded-corners" size="sm">Submit</Button>
+        <Button theme="secondary-outline rounded-corners" size="sm">Cancel</Button>
+        <Button theme="secondary rounded-corners" size="sm">Submit</Button>
       </Card.Footer>
     </Card>
   </Column>

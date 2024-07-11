@@ -34,17 +34,16 @@
     .tyk-button {
       border-radius: 0;
 
+      &:hover {
+        z-index: 10;
+      }
+
       + .tyk-button {
-        margin-inline-start: 0;
+        margin-inline-start: calc(-1 * var(--general-border-width));
       }
 
       + .tyk-dropdown {
-        margin-inline-start: 0;
-      }
-
-      &:first-child {
-        border-start-start-radius: var(--spacing-md);
-        border-end-start-radius: var(--spacing-md);
+        margin-inline-start: calc(-1 * var(--general-border-width));
       }
 
       &:last-child {
@@ -54,6 +53,11 @@
         &.tyk-button--icon-only {
           inline-size: 42px;
         }
+      }
+
+      &:first-child {
+        border-start-start-radius: var(--spacing-md);
+        border-end-start-radius: var(--spacing-md);
       }
     }
   }

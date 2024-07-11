@@ -36,25 +36,25 @@
 
 .loading-bar:nth-child(1) {
   animation-delay: 0;
-  background-color: var(--color-success-base);
+  background-color: var(--color-primary-base);
   opacity: 1;
 }
 
 .loading-bar:nth-child(2) {
   animation-delay: 0.09s;
-  background-color: var(--color-success-base);
+  background-color: var(--color-primary-base);
   opacity: 0.80;
 }
 
 .loading-bar:nth-child(3) {
   animation-delay: .18s;
-  background-color: var(--color-success-base);
+  background-color: var(--color-primary-base);
   opacity: 0.60;
 }
 
 .loading-bar:nth-child(4) {
   animation-delay: .27s;
-  background-color: var(--color-success-base);
+  background-color: var(--color-primary-base);
   opacity: 0.40;
 }
 

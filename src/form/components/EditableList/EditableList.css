@@ -43,8 +43,8 @@
   background-color: white;
   border-start-start-radius: var(--general-border-radius);
   border-start-end-radius: var(--general-border-radius);
-  border: var(--general-border-width) solid var(--color-default-light);
-  border-block-end: 1px solid var(--color-default-light) !important;
+  border: var(--general-border-width) solid var(--color-secondary-dark);
+  border-block-end: 1px solid var(--color-secondary-dark) !important;
   color: var(--text-color) !important;
   font-family: var(--font-family-bold);
   margin-block-start: var(--spacing-sm);
@@ -86,11 +86,11 @@
   }
 
   li {
-    border-block-start: 1px solid var(--color-default-light);
+    border-block-start: 1px solid var(--color-secondary-dark);
     transition: all .2s linear;
 
     &.tyk-editable-list-item--inline {
-      background-color: var(--color-default-light);
+      background-color: var(--color-secondary-dark);
       border-radius: 25px;
       border: none;
       color: white;
@@ -176,14 +176,14 @@
 .tyk-editable-list-items.table {
   background-color: white;
   border-radius: var(--general-border-radius);
-  border: var(--general-border-width) solid var(--color-default-light);
+  border: var(--general-border-width) solid var(--color-secondary-dark);
   padding: 0 !important;
 
   li {
-    border-color: var(--color-default-light);
+    border-color: var(--color-secondary-dark);
 
     &:hover {
-      background: var(--color-background-light);
+      background-color: var(--color-secondary-extra-light);
     }
   }
 

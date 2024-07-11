@@ -13,8 +13,7 @@
 <h3 className="text--success">Heading three</h3>
 <h3 className="text--danger">Heading three</h3>
 <h3 className="text--warning">Heading three</h3>
-<h3 className="text--default">Heading three</h3>
-<h3 className="text--default-light">Heading three</h3>
+<h3>Heading three</h3>
 <h3 className="text--primary">Heading three</h3>
 ```
 **Dashboard Usage**

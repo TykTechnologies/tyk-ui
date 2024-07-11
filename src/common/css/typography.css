@@ -59,9 +59,21 @@ strong {
 
 a:not(.tyk-button) {
   cursor: pointer;
-  color: var(--text-color);
+  color: var(--color-info-base);
   font-family: var(--font-family-regular);
-  text-decoration: underline;
+
+  &:hover {
+    color: var(--color-info-dark);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: var(--color-primary-base);
+  }
+
+  &.disabled {
+    color: var(--color-text-light);
+  }
 
   &.link--bold {
     font-family: var(--font-family-bold);
@@ -124,14 +136,6 @@ a:not(.tyk-button) {
 
 .text--underline {
   text-decoration: underline;
-}
-
-.text--default-light {
-  color: var(--color-default-light) !important;
-}
-
-.text--default {
-  color: var(--color-default-base) !important;
 }
 
 .text--primary {

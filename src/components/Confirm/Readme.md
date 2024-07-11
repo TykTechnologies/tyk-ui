@@ -9,7 +9,7 @@ import Button from '../Button';
     (confirm) => (
       <Button
         onClick={confirm((event) => {console.log('Button clicked', event);})}
-        theme="default"
+        theme="secondary"
       >
         Confirm console log
       </Button>

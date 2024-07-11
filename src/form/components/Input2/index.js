@@ -11,7 +11,6 @@ function Input2({
   label,
   labelwidth,
   note,
-  theme,
   value,
   wrapperClassName = '',
   ...rest
@@ -55,14 +54,7 @@ function Input2({
   );
 
   const getCssClasses = () => {
-    const cssClasses = [wrapperClassName, 'tyk-form-group'];
-    const themes = theme ? theme.split(' ') : [];
-
-    if (themes.length) {
-      themes.forEach((iTheme) => {
-        cssClasses.push(`tyk-form-group--${iTheme}`);
-      });
-    }
+    const cssClasses = [wrapperClassName, 'tyk-form-group', 'tyk-form-group--default'];
 
     if (inputgroupaddonleft) {
       cssClasses.push('tyk-form-group--addon-left');
@@ -178,7 +170,6 @@ Input2.propTypes = {
   note: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  theme: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,

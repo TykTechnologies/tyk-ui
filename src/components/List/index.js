@@ -71,7 +71,7 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-  theme: 'default',
+  theme: 'secondary',
   style: {},
 };
 

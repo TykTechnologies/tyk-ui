@@ -40,6 +40,18 @@ class TestToggle extends Component {
             <Toggle
               value={active}
               onChange={this.toggleOnChange}
+              label="Disabled toggle"
+              theme="primary"
+              size="md"
+              disabled
+            >
+              <Toggle.Item
+                name="option"
+              />
+            </Toggle>
+            <Toggle
+              value={active}
+              onChange={this.toggleOnChange}
               label="Is enabled?"
               theme="primary"
               size="md"
@@ -109,7 +121,7 @@ class TestToggle extends Component {
             <Toggle
               value={active}
               onChange={this.toggleOnChange}
-              theme="primary-gradient"
+              theme="primary"
             >
               <Toggle.Item
                 label="Option"
@@ -120,7 +132,7 @@ class TestToggle extends Component {
             <Toggle
               value={active}
               onChange={this.toggleOnChange}
-              theme="success-gradient"
+              theme="success"
             >
               <Toggle.Item
                 label="Option"
@@ -131,7 +143,7 @@ class TestToggle extends Component {
             <Toggle
               value={active}
               onChange={this.toggleOnChange}
-              theme="danger-gradient"
+              theme="danger"
             >
               <Toggle.Item
                 label="Option"
@@ -142,7 +154,7 @@ class TestToggle extends Component {
             <Toggle
               value={active}
               onChange={this.toggleOnChange}
-              theme="warning-gradient"
+              theme="warning"
             >
               <Toggle.Item
                 label="Option"
@@ -159,7 +171,7 @@ class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
-              theme="success-gradient"
+              theme="primary"
               type="multiple"
               separated
               onDark
@@ -211,11 +223,11 @@ class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
-              theme="default"
+              theme="primary"
               type="multiple"
             >
               <Toggle.Item
-                label="short"
+                label="short one"
                 name="option"
                 value="option1"
               />
@@ -284,7 +296,7 @@ class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
-              theme="primary-gradient"
+              theme="primary"
               type="multiple"
             >
               <Toggle.Item
@@ -308,7 +320,7 @@ class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
-              theme="success-gradient"
+              theme="success"
               type="multiple"
             >
               <Toggle.Item
@@ -332,7 +344,7 @@ class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
-              theme="danger-gradient"
+              theme="danger"
               type="multiple"
               size="sm"
               onDark
@@ -358,7 +370,7 @@ class TestToggle extends Component {
             <Toggle
               value={activeMultiple}
               onChange={this.toggleMultipleOnChange}
-              theme="warning-gradient"
+              theme="warning"
               type="multiple"
               size="lg"
               onDark
@@ -386,13 +398,13 @@ class TestToggle extends Component {
                 label="Disabled toggle"
                 disabled
                 onChange={this.toggleMultipleOnChange}
-                theme="warning-gradient"
+                theme="warning"
                 type="multiple"
                 size="lg"
                 onDark
               >
                 <Toggle.Item
-                  label="short"
+                  label="short disabled"
                   name="option"
                   value="option1"
                 />
@@ -414,7 +426,7 @@ class TestToggle extends Component {
                 label="Read Only toggle"
                 readOnly
                 onChange={this.toggleMultipleOnChange}
-                theme="warning-gradient"
+                theme="warning"
                 type="multiple"
                 size="lg"
                 onDark

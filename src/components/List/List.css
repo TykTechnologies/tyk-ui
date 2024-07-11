@@ -1,6 +1,7 @@
 .tyk-list {
-  border: var(--general-border-width) solid var(--color-default-light);
+  border: var(--general-border-width) solid var(--color-secondary-dark);
   border-radius: var(--general-border-radius);
+  color: var(--text-color);
   font-size: var(--sm-font-size);
   list-style-type: none;
   margin: 0;
@@ -9,13 +10,13 @@
   overflow: auto;
 
   li {
-    border-block-end: 1px solid var(--color-default-light);
+    border-block-end: 1px solid var(--color-secondary-dark);
     padding-block: var(--spacing-sm);
     padding-inline: var(--spacing-md);
     font-family: var(--font-family-medium);
 
     &.tyk-list__item--selected {
-      background-color: var(--color-default-light);
+      background-color: var(--color-secondary-extra-light);
     }
 
     &:last-child {
@@ -32,8 +33,8 @@
   }
 }
 
-.tyk-list--default {
-  border-color: var(--color-default-light);
+.tyk-list--secondary {
+  border-color: var(--color-secondary-dark);
 }
 
 .tyk-list--primary {
@@ -99,7 +100,7 @@ ul.tyk-list--inline {
 
   &.tyk-list--with-separator {
     li:not(:first-child) {
-      border-inline-start: 1px solid var(--color-default-base);
+      border-inline-start: 1px solid var(--color-secondary-dark);
     }
   }
 }
