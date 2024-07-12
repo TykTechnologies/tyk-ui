@@ -2,6 +2,7 @@
 @import './common/sass/variables';
 
 :root {
+  --color-background: #{$color-background};
   --general-border-radius: #{$general-border-radius};
   --general-border-width: #{$general-border-width};
 
@@ -12,6 +13,7 @@
   }
 
   --text-color: #{$text-color};
+  --color-text-light: #{$text-light};
   --label-color: #{$label-color};
 
   --xs-line-height: #{$xs-line-height};

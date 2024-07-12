@@ -1,57 +1,56 @@
 @use 'sass:map';
 
+$color-background: #FCFCFC;
 $general-border-radius: 18px !default;
-$general-border-width: 2px !default;
+$general-border-width: 1px !default;
 
 $theme-colors: (
-  'default': (
-    'base': #36364C,
-    'base-light': #7A79A1,
-    'light': #C3C3E5,
-    'dark': #505071
-  ),
   'primary': (
-    'base': #A2A2CC,
-    'light': #EDEDF9,
-    'dark': #505071
+    'extra-light': #F6EFFF,
+    'light': #EBDFFE,
+    'base': #8438FA,
+    'dark': #6B2ECE,
+    'extra-dark': #5525AA
+  ),
+  'secondary': (
+    'extra-light': #F8F8F9,
+    'light': #F0F0F3,
+    'base': #EDEDF0,
+    'base-dark': #E6E6EA,
+    'dark': #D8D8DF,
+    'extra-dark': #9D9DAF,
+    'extra-dark1': #181834
   ),
   'success': (
-    'base': #00d9ba,
-    'light': #C2F2E9,
-    'dark': #00B798
-  ),
-  'info': (
-    'base': #82BBC6,
-    'light': #D3EBEF
+    'extra-light': #EEF8F1,
+    'light': #DDF1E2,
+    'base': #2BA84A,
+    'dark': #238741
   ),
   'danger': (
-    'base': #FF6C7D,
-    'extra-light': #F5CCD1,
-    'light': #FFBBC5,
-    'dark': #EA4766
+    'extra-light': #FCEFEC,
+    'light': #F9DDD8,
+    'base': #D82C0D,
+    'dark': #AE2410,
+    'extra-dark': #8B1D12
+  ),
+  'info': (
+    'extra-light': #EBF8FE,
+    'light': #D6F1FC,
+    'base': #00A6ED,
+    'dark': #0186C4
   ),
   'warning': (
-    'base': #D6B218,
-    'light': #FFE885,
-    'dark': #C58C11
-  ),
-  'foreground': (
-    'base': #393939,
-    'base-dark': #22272B,
-    'light': #5a5a68,
-    'dark': #161B20,
-    'extra-dark': #0A0D10
-  ),
-  'background': (
-    'base': #E1E1E1,
-    'light': #EDEDF9,
-    'dark': #43435B,
-    'extra-dark': #0A0D10
+    'extra-light': #FFFBF2,
+    'light': #FFF5E3,
+    'base': #FFC453,
+    'dark': #CC9D43
   )
 ) !default;
 
-$text-color: #505071 !default;
-$label-color: theme-color('default', 'base') !default;
+$text-color: #414160 !default;
+$text-light: #818198 !default;
+$label-color: #03031C !default;
 
 $xs-line-height: 16px;
 $sm-line-height: 20px;
@@ -120,7 +119,7 @@ $font-family-medium: 'Inter-Medium' !default;
 $font-family-semi-bold: 'Inter-SemiBold' !default;
 $font-family-bold: 'Inter-Bold' !default;
 
-$headings-color: #36364C !default;
+$headings-color: #03031C !default;
 $headings-font-family-regular: 'Inter-Regular' !default;
 $headings-font-family-medium: 'Inter-Medium' !default;
 $headings-font-family-semi-bold: 'Inter-SemiBold' !default;
@@ -142,29 +141,28 @@ $form-control-addon-padding-top: 10px !default;
 $form-control-addon-padding-bottom: 10px !default;
 $form-control-addon-padding-left: 10px !default;
 $form-control-addon-padding-right: 10px !default;
-$form-control-disabled-background-color: theme-color('background', 'light') !default;
-$form-control-border: $general-border-width solid theme-color('default', 'light') !default;
-$form-control-disabled-border: $general-border-width solid theme-color('default', 'light') !default;
+$form-control-border: $general-border-width solid theme-color('secondary', 'dark') !default;
+$form-control-disabled-border: $general-border-width solid theme-color('secondary', 'base-dark') !default;
 $form-control-placeholder-color: #A2A2CC !default;
-$form-control-disabled-background-color: theme-color('default', 'light') !default;
+$form-control-disabled-background-color: $color-background !default;
 $form-control-disabled-color: $text-color !default;
 $form-control-border-focus: 2px solid theme-color('success', 'base') !default;
 $form-control-placeholder-font-family: $font-family-medium !default;
 $form-control-error-colour: theme-color('danger', 'dark') !default;
-$form-default-color: theme-color('default', 'light') !default;
+$form-default-color: theme-color('secondary', 'dark') !default;
 $form-primary-color: theme-color('primary', 'base') !default;
 $form-success-color: theme-color('success', 'base') !default;
 
-$error-border: $general-border-width solid theme-color('danger', 'base') !default;
+$error-border: $general-border-width solid theme-color('danger', 'dark') !default;
 $error-border-left: 2px solid theme-color('danger', 'dark') !default;
-$help-block-color: theme-color('default', 'base') !default;
+$help-block-color: $text-color !default;
 $help-block-font-style: normal !default;
 $help-block-padding: 0 0 0 $form-control-padding-left !default;
 $error-message-padding: 0 0 0 $form-control-padding-left !default;
-$default-pill-background-color: theme-color('default', 'base') !default;
+$default-pill-background-color: theme-color('secondary', 'light') !default;
 $default-pill-color: white !default;
 $pill-margin: 0 0 10px 0 !default;
-$default-outline-pill-box-shadow: inset 0 0 0 2px theme-color('default', 'base');
+$default-outline-pill-box-shadow: inset 0 0 0 2px theme-color('secondary', 'dark');
 $default-outline-pill-color: $text-color;
 
 $title-medium-font-size: 16px;
@@ -200,7 +198,7 @@ $tyk-message-success-border: theme-color('success', 'dark') !default;
 // NavBar variables
 $nav-bar-header-font-size: text-scale('xxl') !default;
 $nav-bar-background-color: white !default;
-$nav-bar-text-color: theme-color('default', 'base') !default;
+$nav-bar-text-color: $text-color !default;
 $nav-bar-height: 92px !default;
 $nav-bar-top-padding: map.get($spacing, 'sm') !default;
 $nav-bar-bottom-padding: 0 !default;
@@ -223,7 +221,7 @@ $padding-y-panel-header: map.get($spacing, 'sm') !default;
 $padding-x-panel-header: 25px !default;
 $padding-panel-body: 25px !default;
 $panel-border-radius: 0 !default;
-$panel-default-border-bottom-color: theme-color('background', 'base') !default;
+$panel-default-border-bottom-color: theme-color('secondary', 'dark') !default;
 $panel-header-font-size: text-scale('base') !default;
 $panel-primary-header-color: theme-color('primary', 'base') !default;
 $panel-primary-body-color: white !default;
@@ -249,14 +247,14 @@ $tyk-checkbox-theme-dark-label-color: $text-color !default;
 $tyk-checkbox-theme-dark-label-disabled-color: $text-color !default;
 
 // Combobox variables
-$combobox-disabled-border: $general-border-width solid theme-color('default', 'light') !default;
+$combobox-disabled-border: $general-border-width solid theme-color('secondary', 'dark') !default;
 
 // Combobox2 variables
 $tyk-combobox-list-item-disabled-color: $form-default-color !default;
 
 // Dropdown variables
 $tyk-dropdown-item-background: white !default;
-$tyk-dropdown-item-background-hover: theme-color('background', 'light') !default;
+$tyk-dropdown-item-background-hover: theme-color('secondary', 'extra-light') !default;
 $tyk-dropdown-item-border-color: white !default;
 $tyk-dropdown-item-text-color: $text-color !default;
 $tyk-dropdown-item-hover-text-color: $text-color !default;
@@ -268,7 +266,7 @@ $tyk-radio-theme-dark-label-color: $text-color !default;
 $tyk-radio-theme-dark-label-disabled-color: $text-color !default;
 
 // Toggle variables
-$toggle-list-background-color: theme-color('background', 'light') !default;
+$toggle-list-background-color: $text-light !default;
 $toggle-list-background-color-on-dark: white !default;
 $toggle-label-font-size: text-scale('sm') !default;
 $toggle-padding: 0 !default;
