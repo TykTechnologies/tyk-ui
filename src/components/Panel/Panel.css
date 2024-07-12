@@ -20,8 +20,9 @@
 .tyk-panel {
   background: white;
   border-radius: var(--panel-border-radius);
+  border: 1px solid var(--color-secondary-dark);
   margin-block-end: 20px;
-  font-family: var(--font-family-medium);
+  font-family: var(--font-family-regular);
   position: relative;
 
   &.has-error,

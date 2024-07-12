@@ -18,7 +18,7 @@
 
 .tyk-nav-bar {
   align-items: center;
-  border: none;
+  border-bottom: var(--general-border-width) solid var(--color-secondary-dark);
   background-color: var(--nav-bar-background-color);
   font-family: var(--nav-bar-font-family);
   color: var(--nav-bar-text-color);

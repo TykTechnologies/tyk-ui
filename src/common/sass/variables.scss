@@ -143,7 +143,7 @@ $form-control-addon-padding-left: 10px !default;
 $form-control-addon-padding-right: 10px !default;
 $form-control-border: $general-border-width solid theme-color('secondary', 'dark') !default;
 $form-control-disabled-border: $general-border-width solid theme-color('secondary', 'base-dark') !default;
-$form-control-placeholder-color: #A2A2CC !default;
+$form-control-placeholder-color: --color-secondary--dark !default;
 $form-control-disabled-background-color: $color-background !default;
 $form-control-disabled-color: $text-color !default;
 $form-control-border-focus: 2px solid theme-color('success', 'base') !default;
