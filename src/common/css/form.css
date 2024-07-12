@@ -36,6 +36,10 @@
   }
 }
 
+.tyk-form-group--label-has-width {
+  display: flex;
+}
+
 .tyk-form-group--inline {
   align-items: stretch;
   display: flex;

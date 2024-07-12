@@ -204,10 +204,6 @@
         background-color: initial;
       }
 
-      /* + li {
-        border-block-start: 1px solid var(--form-default-color);
-      } */
-
       i {
         color: var(--color-info-base);
         margin-inline-end: var(--spacing-xs);

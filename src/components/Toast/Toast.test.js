@@ -31,8 +31,10 @@ describe('Toast', () => {
     },
     icons: {
       icon: 'tyk-icon',
-      success: 'fa-check',
-      warning: 'fa-exclamation',
+      info: 'fa-circle-exclamation',
+      danger: 'fa-hexagon-exclamation',
+      success: 'fa-hexagon-check',
+      warning: 'fa-triangle-exclamation',
     },
   };
 
@@ -87,7 +89,7 @@ describe('Toast', () => {
         .should('exist')
         .find(selectors.icons.icon)
         .should('exist')
-        .and('have.class', theme === 'success' ? classNames.icons.success : classNames.icons.warning)
+        .and('have.class', classNames.icons[theme])
         .closest(selectors.message)
         .find(selectors.messageContent)
         .should('exist')
