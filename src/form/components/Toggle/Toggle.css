@@ -56,7 +56,6 @@
   font-size: var(--toggle-label-font-size);
   padding: var(--toggle-padding);
   inline-size: 100%;
-  color: var(--toggle-label-color);
 }
 
 .tyk-toggle.inline-label .tyk-toggle__label {

@@ -21,7 +21,7 @@ body {
 
 .well {
   background: transparent;
-  border: var(--general-border-width) solid var(--color-default-light);
+  border: var(--general-border-width) solid var(--color-secondary-dark);
   border-radius: var(--general-border-radius);
   box-shadow: none;
 

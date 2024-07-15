@@ -34,6 +34,13 @@ import Dropdown from '../../form/components/Dropdown';
 <ButtonGroup
   label="Button Group"
 >
+  <Button theme="secondary">button 1</Button>
+  <Button theme="secondary">button 2</Button>
+  <Button theme="secondary">button 3</Button>
+</ButtonGroup>
+<ButtonGroup
+  label="Button Group"
+>
   <Button theme="primary">button 1</Button>
   <Button theme="primary">button 2</Button>
   <Button theme="primary">button 3</Button>  

@@ -5,7 +5,7 @@
   --padding-panel-body: 25px;
   --padding-x-right-panel-collapsable: 48px;
   --padding-x-left-panel-collapsable: var(--padding-x-right-panel-collapsable);
-  --panel-border-radius: 0;
+  --panel-border-radius: 8px;
   --panel-default-border-bottom-color: var(--color-secondary-dark);
   --panel-header-font-size: var(--base-font-size);
   --panel-header-font-family: var(--font-family-bold);
