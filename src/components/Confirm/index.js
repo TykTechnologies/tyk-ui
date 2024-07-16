@@ -68,7 +68,7 @@ function Confirm(props) {
           </Button>
           <Button
             onClick={confirm}
-            theme="success"
+            theme="primary"
           >
             {confirmBtnText}
           </Button>

@@ -146,7 +146,7 @@ $form-control-disabled-border: $general-border-width solid theme-color('secondar
 $form-control-placeholder-color: var(--color-text-ligth) !default;
 $form-control-disabled-background-color: $color-background !default;
 $form-control-disabled-color: $text-color !default;
-$form-control-border-focus: var(--form-control-border-focus) !default;
+$form-control-border-focus: $general-border-width solid theme-color('secondary', 'dark') !default;
 $form-control-placeholder-font-family: $font-family-regular !default;
 $form-control-error-colour: theme-color('danger', 'dark') !default;
 $form-default-color: theme-color('secondary', 'dark') !default;
@@ -154,7 +154,7 @@ $form-primary-color: theme-color('primary', 'base') !default;
 $form-success-color: theme-color('success', 'base') !default;
 
 $error-border: $general-border-width solid theme-color('danger', 'dark') !default;
-$error-border-left: var(--general-border-width) solid theme-color('danger', 'dark') !default;
+$error-border-left: $general-border-width solid theme-color('danger', 'dark') !default;
 $help-block-color: $text-color !default;
 $help-block-font-style: normal !default;
 $help-block-padding: 0 0 0 $form-control-padding-left !default;
