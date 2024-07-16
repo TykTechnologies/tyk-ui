@@ -204,7 +204,7 @@
         background-color: initial;
       }
 
-      i {
+      i.fa-check {
         color: var(--color-info-base);
         margin-inline-end: var(--spacing-xs);
       }
