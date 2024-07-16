@@ -7,6 +7,7 @@
   inline-size: 100%;
 
   /* FALLBACK FOR ANGULAR COMPONENTS */
+  .tyk-form-control,
   .input-group .input-group-addon + .form-control {
     border-width: 1px !important;
     border-inline-start: none !important;
@@ -16,6 +17,7 @@
     border-end-end-radius: 0 !important;
   }
 
+  .tyk-form-control,
   .input-group .input-group-addon {
     background: transparent !important;
     border-width: 1px !important;
@@ -53,11 +55,12 @@
 }
 
 .tyk-multiselect__header {
-  background-color: var(--color-default-base);
+  background-color: var(--color-secondary-light);
   border-start-start-radius: var(--general-border-radius);
   border-start-end-radius: var(--general-border-radius);
-  color: white;
+  color: var(--color-text-dark);
   display: flex;
+  font-family: var(--font-family-semi-bold);
   inline-size: 100%;
 
   > div {

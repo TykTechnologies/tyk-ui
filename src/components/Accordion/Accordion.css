@@ -63,7 +63,7 @@
 }
 
 .tyk-accordion__trigger--disabled {
-  color: var(--color-background-base);
+  color: var(--color-text-light);
 }
 
 .tyk-accordion__item-header.tyk-accordion__arrow-trigger {

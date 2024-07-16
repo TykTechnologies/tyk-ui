@@ -62,13 +62,13 @@ function Confirm(props) {
         <Modal.Footer>
           <Button
             onClick={cancel}
-            theme="default"
+            theme="secondary"
           >
             {cancelBtnText}
           </Button>
           <Button
             onClick={confirm}
-            theme="success"
+            theme="primary"
           >
             {confirmBtnText}
           </Button>

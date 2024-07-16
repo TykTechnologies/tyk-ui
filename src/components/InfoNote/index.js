@@ -5,11 +5,9 @@ import Message from '../Message';
 
 function InfoNote({ children }) {
   return (
-    <div className="tyk-info-note">
-      <Message theme="info">
-        { children }
-      </Message>
-    </div>
+    <Message theme="info">
+      { children }
+    </Message>
   );
 }
 

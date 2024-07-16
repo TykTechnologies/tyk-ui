@@ -314,7 +314,7 @@ class EditableListForm extends Component {
                     disabled={this.hasMainFormErrors(errors)}
                     className="tyk-editable-list__submit-btn"
                     onClick={this.submitForm}
-                    theme="default"
+                    theme="primary"
                     type="button"
                     size={displayType === 'inline' ? 'sm' : 'md'}
                   >

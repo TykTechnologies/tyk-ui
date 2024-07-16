@@ -1,7 +1,7 @@
 ```js
 import Button from '../Button';
 <div>
-  <Pill theme="default">
+  <Pill theme="secondary">
     PILLLLLLL
   </Pill>
   <Pill theme="primary">
@@ -24,7 +24,7 @@ import Button from '../Button';
 ```js
 import Button from '../Button';
 <div>
-  <Pill theme="default-outline">
+  <Pill theme="secondary-outline">
     PILLLLLLL
   </Pill>
   <Pill theme="primary-outline">
@@ -48,7 +48,7 @@ import Button from '../Button';
 import Button from '../Button';
 <>
   <div>
-    <Pill theme="default square">
+    <Pill theme="secondary square">
       PILLLLLLL
     </Pill>
     <Pill theme="primary square">
@@ -68,7 +68,7 @@ import Button from '../Button';
     </Pill>
   </div>
   <div>
-    <Pill theme="default-outline square">
+    <Pill theme="secondary-outline square">
       PILLLLLLL
     </Pill>
     <Pill theme="primary-outline square">

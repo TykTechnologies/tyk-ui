@@ -1,38 +1,50 @@
 :root {
   --general-border-radius: 18px;
-  --general-border-width: 2px;
+  --general-border-width: 1px;
 
-  --color-default-base: #36364C;
-  --color-default-base-light: #7A79A1;
-  --color-default-light: #C3C3E5;
-  --color-default-dark: #505071;
-  --color-primary-base: #A2A2CC;
-  --color-primary-light: #EDEDF9;
-  --color-primary-dark: #505071;
-  --color-success-base: #00d9ba;
-  --color-success-light: #C2F2E9;
-  --color-success-dark: #00B798;
-  --color-info-base: #82BBC6;
-  --color-info-light: #D3EBEF;
-  --color-danger-base: #FF6C7D;
-  --color-danger-extra-light: #F5CCD1;
-  --color-danger-light: #FFBBC5;
-  --color-danger-dark: #EA4766;
-  --color-warning-base: #D6B218;
-  --color-warning-light: #FFE885;
-  --color-warning-dark: #C58C11;
-  --color-foreground-base: #393939;
-  --color-foreground-base-dark: #22272B;
-  --color-foreground-light: #5a5a68;
-  --color-foreground-dark: #161B20;
-  --color-foreground-extra-dark: #0A0D10;
-  --color-background-base: #E1E1E1;
-  --color-background-light: #EDEDF9;
-  --color-background-dark: #43435B;
-  --color-background-extra-dark: #0A0D10;
+  --color-background: #FCFCFC;
 
-  --text-color: var(--color-default-dark);
-  --label-color: var(--color-default-base);
+  --color-primary-extra-light:#F6EFFF;
+  --color-primary-light:#EBDFFE;
+  --color-primary-base:#8438FA;
+  --color-primary-dark:#6B2ECE;
+  --color-primary-extra-dark:#5525AA;
+
+  --color-secondary-extra-light: #F8F8F9;
+  --color-secondary-light: #F0F0F3;
+  --color-secondary-base: #EDEDF0;
+  --color-secondary-base-dark: #E6E6EA;
+  --color-secondary-dark: #D8D8DF;
+  --color-secondary-extra-dark: #9D9DAF;
+  --color-secondary-extra-dark1: #181834;
+
+  --color-success-extra-light:#EEF8F1;
+  --color-success-light:#DDF1E2;
+  --color-success-base:#2BA84A;
+  --color-success-dark:#238741;
+
+  --color-danger-extra-light:#FCEFEC;
+  --color-danger-light:#F9DDD8;
+  --color-danger-base:#D82C0D;
+  --color-danger-dark:#AE2410;
+  --color-danger-extra-dark:#8B1D12;
+
+  --color-info-extra-light:#EBF8FE;
+  --color-info-light:#D6F1FC;
+  --color-info-base:#00A6ED;
+  --color-info-dark:#0186C4;
+
+  --color-warning-extra-light:#FFFBF2;
+  --color-warning-light:#FFF5E3;
+  --color-warning-base:#FFC453;
+  --color-warning-dark:#CC9D43;
+
+  --color-text-light:#818198;
+  --color-text-base:#414160;
+  --color-text-dark:#03031C;
+
+  --text-color: var(--color-text-base);
+  --label-color: var(--color-text-dark);
 
   --xs-line-height: 16px;
   --sm-line-height: 20px;
@@ -67,6 +79,7 @@
   --breakpoint-md: 1024px;
   --breakpoint-lg: 1248px;
 
+  --font-awesome: 'Font Awesome 6 Pro';
   --font-inter-light: 'Inter-Light';
   --font-inter-medium: 'Inter-Medium';
   --font-inter-regular: 'Inter-Regular';
@@ -78,7 +91,7 @@
   --font-family-semi-bold: var(--font-inter-semi-bold);
   --font-family-bold: var(--font-inter-bold);
 
-  --headings-color: var(--color-default-base);
+  --headings-color: var(--color-text-dark);
   --headings-font-family-regular: var(--font-inter-regular);
   --headings-font-family-medium: var(--font-inter-medium);
   --headings-font-family-bold: var(--font-inter-bold);
@@ -99,28 +112,30 @@
   --form-control-addon-padding-bottom: 10px;
   --form-control-addon-padding-left: 10px;
   --form-control-addon-padding-right: 10px;
-  --form-control-border: var(--general-border-width) solid var(--color-default-light);
-  --form-control-disabled-border: var(--general-border-width) solid var(--color-default-light);
-  --form-control-placeholder-color: var(--color-primary-base);
-  --form-control-disabled-background-color: var(--color-background-light);
-  --form-control-disabled-color:var(--text-color);
-  --form-control-border-focus: 2px solid var(--color-success-base);
-  --form-control-placeholder-font-family: var(--font-family-medium);
+  --form-control-error-background: var(--color-danger-extra-light);
+  --form-control-border: var(--general-border-width) solid var(--color-secondary-dark);
+  --form-control-disabled-border: var(--general-border-width) solid var(--color-secondary-base-dark);
+  --form-control-placeholder-color: var(--color-text-light);
+  --form-control-disabled-background-color: var(--color-background);
+  --form-control-disabled-color:var(--color-text-light);
+  --form-control-border-focus: var(--general-border-width) solid var(--color-secondary-extra-dark1);
+  --form-control-text-focus: var(--color-text-dark);
+  --form-control-placeholder-font-family: var(--font-family-regular);
   --form-control-error-colour: var(--color-danger-dark);
-  --form-default-color: var(--color-default-light);
+  --form-control-border-radius: 8px;
+  --form-default-color: var(--color-secondary-dark);
   --form-primary-color: var(--color-primary-base);
   --form-success-color: var(--color-success-base);
 
-  --error-border: var(--general-border-width) solid var(--color-danger-base);
-  --error-border-left: 2px solid var(--color-danger-dark);
-  --help-block-color: var(--color-default-base);
+  --error-border: var(--general-border-width) solid var(--color-danger-dark);
+  --error-border-left: var(--general-border-width) solid var(--color-danger-dark);
+  --help-block-color: var(--text-color);
   --help-block-font-style: normal;
-  --help-block-padding: 0 0 0 var(--form-control-padding-left);
-  --error-message-padding: 0 0 0 var(--form-control-padding-left);
-  --default-pill-background-color: var(--color-default-base);
+  --help-block-padding: 0 0 0 var(--spacing-xs);
+  --error-message-padding: 0 0 0 var(--spacing-xs);
+  --default-pill-background-color: var(--color-secondary-light);
   --default-pill-color: white;
   --pill-margin: 0 0 10px 0;
-  --default-outline-pill-box-shadow: inset 0 0 0 2px var(--color-default-base);
   --default-outline-pill-color: var(--text-color);
 
   --title-medium-font-size: 16px;

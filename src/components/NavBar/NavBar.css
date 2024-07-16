@@ -1,6 +1,6 @@
 :root {
   --nav-bar-background-color: white;
-  --nav-bar-text-color: var(--color-default-base);
+  --nav-bar-text-color: var(--text-color);
   --nav-bar-padding-left: 265px;
   --nav-bar-animate-left: 245px;
   --nav-bar-top-padding: var(--spacing-sm);
@@ -18,7 +18,7 @@
 
 .tyk-nav-bar {
   align-items: center;
-  border: none;
+  border-bottom: var(--general-border-width) solid var(--color-secondary-dark);
   background-color: var(--nav-bar-background-color);
   font-family: var(--nav-bar-font-family);
   color: var(--nav-bar-text-color);
@@ -41,7 +41,7 @@
   }
 
   h1 {
-    color: var(--nav-bar-text-color);
+    color: var(--headings-color);
   }
 
   h4 {
@@ -84,9 +84,14 @@
 
     .tyk-nav-bar__left {
       flex-grow: 1;
+
+      .tyk-tooltip__wrapper {
+        font-size: var(--xl-font-size);
+      }
     }
 
     .tyk-nav-bar__right {
+      color: var(--color-text-base);
       margin-inline-start: auto;
     }
   }
@@ -98,9 +103,16 @@
   flex-basis: 100%;
 
   a {
-    font-family: var(--font-family-bold);
+    font-family: var(--font-family-semi-bold);
     font-size: var(--xs-font-size);
     line-height: var(--xs-line-height);
     color: var(--text-color);
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      color: var(--color-text-dark);
+      text-decoration: none;
+    }
   }
 }

@@ -203,10 +203,10 @@ function DatePicker({
             </div>
           )
       }
-      <div className="tyk-form-control--readonly">
+      {readOnly && <div className="tyk-form-control--readonly">
         {readOnly && !value && '-'}
         {readOnly && value && flatpickr.formatDate(value, config.dateFormat || 'd/m/Y')}
-      </div>
+      </div>}
     </>
   );
 }

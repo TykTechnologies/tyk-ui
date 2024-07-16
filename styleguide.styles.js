@@ -5,16 +5,16 @@ const rhythm = (value = 1, unit = 'rem', basis = 1.5) => (
 );
 
 const colors = {
-  light: '#fff',
-  dark: '#36264C',
-  grey: '#7a898f',
-  lightGrey: '#aec0c6',
-  paleGrey: '#ededf9',
-  primary: '#505071',
-  secondary: '#ad29b6',
+  light: '#FCFCFC',
+  dark: '#181834',
+  grey: '#9D9DAF',
+  lightGrey: '#E6E6EA',
+  paleGrey: '#EDEDF0',
+  primary: '#5525AA',
+  secondary: '#2BA84A',
   tertiary: '#203a44',
-  danger: '#d9534f',
-  link: '#1673b1',
+  danger: '#AE2410',
+  link: '#00A6ED',
 };
 
 const theme = {

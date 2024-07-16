@@ -7,7 +7,7 @@ import Button from '../Button';
 const [toggle, setToggle] = useState(false);
 
 <>
-<Button theme="success" onClick={() => {setToggle(!toggle)}}>Collapse/Expand</Button>
+<Button theme="primary" onClick={() => {setToggle(!toggle)}}>Collapse/Expand</Button>
 <Collapsible
   collapsed={toggle}
 >

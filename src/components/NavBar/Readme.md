@@ -2,6 +2,7 @@
 import Tooltip from '../Tooltip';
 import Tabs from '../Tabs';
 import Button from '../Button';
+import Icon from '../Icon';
 <div style={{
   backgroundColor: "#EDEDF9"
 }}>
@@ -14,12 +15,7 @@ import Button from '../Button';
       render="prct"
       position="bottom"
     >
-      <Button
-        iconType="question"
-        iconPosition="left"
-        iconOnly
-        theme="primary"
-      />
+      <Icon type="circle-question" weight="solid"/>
     </Tooltip>
   }
   right={
@@ -31,7 +27,7 @@ import Button from '../Button';
         Delete
       </Button>
       <Button
-        theme="success"
+        theme="primary"
       >
         Update
       </Button>
@@ -50,12 +46,7 @@ import Button from '../Button';
       render="prct"
       position="bottom"
     >
-      <Button
-        iconType="question"
-        iconPosition="left"
-        iconOnly
-        theme="primary"
-      />
+      <Icon type="circle-question" weight="solid"/>
     </Tooltip>
   }
   right={
@@ -67,7 +58,7 @@ import Button from '../Button';
         Delete
       </Button>
       <Button
-        theme="success"
+        theme="primary"
       >
         Update
       </Button>
@@ -87,12 +78,7 @@ import Button from '../Button';
       render="prct"
       position="bottom"
     >
-      <Button
-        iconType="question"
-        iconPosition="left"
-        iconOnly
-        theme="primary"
-      />
+      <Icon type="circle-question" weight="solid"/>
     </Tooltip>
   }
   
@@ -105,7 +91,7 @@ import Button from '../Button';
         Delete
       </Button>
       <Button
-        theme="success"
+        theme="primary"
       >
         Update
       </Button>
@@ -145,7 +131,7 @@ import Button from '../Button';
         Delete
       </Button>
       <Button
-        theme="success"
+        theme="primary"
       >
         Update
       </Button>

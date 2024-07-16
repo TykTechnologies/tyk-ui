@@ -4,7 +4,7 @@
 
   /* Deprecated Modal.Header and Modal.Title */
   --tyk-modal-header-padding: var(--spacing-lg);
-  --tyk-modal-borders-color: var(--color-background-light);
+  --tyk-modal-borders-color: var(--color-secondary-dark);
 
   /* End of deprecated styles */
 }
@@ -20,7 +20,7 @@
   z-index: -1;
 
   .tyk-panel {
-    border: var(--general-border-width) solid var(--color-background-dark);
+    border: var(--general-border-width) solid var(--color-secondary-dark);
     box-shadow: none;
   }
 
@@ -155,7 +155,7 @@
 }
 
 .tyk-modal__backdrop {
-  background-color: var(--color-default-dark);
+  background-color: var(--color-secondary-base-dark);
   border: none;
   display: none;
   position: fixed;

@@ -1,6 +1,6 @@
 :root {
   --toggle-font-family: var(--font-family-bold);
-  --toggle-list-background-color: var(--color-background-light);
+  --toggle-list-background-color: var(--color-text-light);
   --toggle-list-text-color: white;
   --toggle-list-background-color-on-dark: white;
   --toggle-list-text-color-on-dark: var(--text-color);
@@ -9,7 +9,7 @@
   --toggle-label-font-size: var(--sm-font-size);
   --toggle-label-font-family: var(--font-family-bold);
   --toggle-inside-label-font-family: var(--font-family-medium);
-  --toggle-label-color: var(--label-color);
+  --toggle-label-color: white;
   --toggle-padding: 0;
 }
 
@@ -56,7 +56,6 @@
   font-size: var(--toggle-label-font-size);
   padding: var(--toggle-padding);
   inline-size: 100%;
-  color: var(--toggle-label-color);
 }
 
 .tyk-toggle.inline-label .tyk-toggle__label {
@@ -198,85 +197,11 @@
   color: white;
 }
 
-.tyk-toggle--primary-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
-.tyk-toggle--primary-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
-  border-image: linear-gradient(to right, var(--color-primary-base), var(--color-primary-dark), var(--color-primary-base)) 0 round;
-  background: transparent linear-gradient(to right, var(--color-primary-base), var(--color-primary-dark), var(--color-primary-base));
-  background-origin: border-box;
-  background-clip: border-box;
-  background-size: 200% auto;
-  background-position: 0 0;
-  color: white;
-
-  span {
-    color: white;
-  }
-}
-
-.tyk-toggle--success-gradient .tyk-toggle__item--active span {
-  color: white;
-}
-
-.tyk-toggle--success-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
-.tyk-toggle--success-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
-  border-image: linear-gradient(to right, var(--color-success-base), var(--color-success-dark), var(--color-success-base)) 0 round;
-  background: transparent linear-gradient(to right, var(--color-success-base), var(--color-success-dark), var(--color-success-base));
-  background-origin: border-box;
-  background-clip: border-box;
-  background-size: 200% auto;
-  background-position: 0 0;
-  color: white;
-
-  span {
-    color: white;
-  }
-}
-
-
-.tyk-toggle--danger-gradient .tyk-toggle__item--active span {
-  color: white;
-}
-
-.tyk-toggle--danger-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
-.tyk-toggle--danger-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
-  border-image: linear-gradient(to right, var(--color-danger-base), var(--color-danger-dark), var(--color-danger-base)) 0 round;
-  background: transparent linear-gradient(to right, var(--color-danger-base), var(--color-danger-dark), var(--color-danger-base));
-  background-origin: border-box;
-  background-clip: border-box;
-  background-size: 200% auto;
-  background-position: 0 0;
-  color: white;
-
-  span {
-    color: white;
-  }
-}
-
-
-.tyk-toggle--warning-gradient .tyk-toggle__item--active span {
-  color: white;
-}
-
-.tyk-toggle--warning-gradient .tyk-toggle__list--single .tyk-toggle__item--active,
-.tyk-toggle--warning-gradient .tyk-toggle__list--separated .tyk-toggle__item--active {
-  border-image: linear-gradient(to right, var(--color-warning-light), var(--color-warning-base), var(--color-warning-light)) 0 round;
-  background: transparent linear-gradient(to right, var(--color-warning-light), var(--color-warning-base), var(--color-warning-light));
-  background-origin: border-box;
-  background-clip: border-box;
-  background-size: 200% auto;
-  background-position: 0 0;
-  color: var(--text-color);
-
-  span {
-    color: white;
-  }
-}
-
 .tyk-toggle__item {
   color: var(--toggle-list-text-color);
   text-transform: uppercase;
   z-index: 2;
-  border: 2px solid transparent;
+  border: var(--general-border-width) solid transparent;
 
   &:first-child {
     border-start-start-radius: 25px;
@@ -304,6 +229,7 @@
 
   label {
     cursor: pointer;
+    color: var(--toggle-label-color);
     font-family: var(--toggle-inside-label-font-family);
     position: relative;
     margin: 0;
@@ -331,7 +257,7 @@
 }
 
 .tyk-toggle--on-dark .tyk-toggle__item-notch--single {
-  background: var(--color-background-light);
+  background: var(--color-secondary-base);
 }
 
 .tyk-toggle--sm label {
@@ -425,10 +351,10 @@
 }
 
 .tyk-toggle--primary .tyk-toggle__notch {
-  --toggle-notch-background: var(--primary-base);
+  --toggle-notch-background: var(--color-primary-base);
   --toggle-notch-border: transparent;
   --toggle-notch-color: white;
-  --toggle-notch-hover-background: var(--primary-base);
+  --toggle-notch-hover-background: var(--color-primary-base);
   --toggle-notch-hover-color: white;
 }
 

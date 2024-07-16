@@ -34,7 +34,7 @@ describe('Button', () => {
     cy
       .mount(
         <Button
-          theme="default"
+          theme="secondary"
           iconType="copy"
           iconPosition="right"
         >
@@ -53,7 +53,7 @@ describe('Button', () => {
     cy
       .mount(
         <Button
-          theme="default"
+          theme="secondary"
           customButton={<span>{customButtonText}</span>}
         >
           {buttonText}
@@ -68,7 +68,7 @@ describe('Button', () => {
     cy
       .mount(
         <Button
-          theme="default"
+          theme="secondary"
           href={url}
         >
           {buttonText}
@@ -86,7 +86,7 @@ describe('Button', () => {
     cy
       .mount(
         <Button
-          theme="default"
+          theme="secondary"
           onClick={onClick}
         >
           {buttonText}
@@ -106,7 +106,7 @@ describe('Button', () => {
     cy
       .mount(
         <Button
-          theme="default"
+          theme="secondary"
           disabled
           onClick={onClick}
         >

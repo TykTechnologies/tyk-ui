@@ -36,17 +36,17 @@
     font-size: var(--sm-font-size);
     font-family: var(--font-family-bold);
     cursor: pointer;
-    color: var(--color-default-base);
+    color: var(--color-text-dark);
     margin-inline-start: -1px;
     padding: var(--pagination-button-padding);
 
     &:hover {
-      background-color: var(--color-success-light);
+      background-color: var(--color-primary-light);
     }
   }
 
   .active button {
-    background-color: var(--color-success-base);
+    background-color: var(--color-primary-base);
     color: white;
   }
 }

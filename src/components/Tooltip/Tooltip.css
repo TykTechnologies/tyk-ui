@@ -5,9 +5,10 @@
 .tyk-tooltip {
   display: flex;
   align-items: center;
-  background-color: var(--color-primary-light);
-  border: 2px solid var(--color-primary-base);
+  background-color: var(--color-secondary-extra-dark1);
+  border: var(--general-border-width) solid var(--color-secondary-dark);
   border-radius: var(--general-border-radius);
+  color: white;
   font-size: var(--font-size-xs);
   line-height: var(--line-height-sm);
   max-inline-size: var(--tooltip-max-width);
@@ -18,7 +19,7 @@
     block-size: 32px;
     border-radius: 50%;
     color: white;
-    background-color: var(--color-default-base-light);
+    background-color: var(--color-text-light);
 
     &::before {
       display: flex;
@@ -39,7 +40,7 @@
 }
 
 .tyk-tooltip__content {
-  color: var(--color-default-dark);
+  color: white;
   word-break: break-word;
   word-wrap: break-word;
 

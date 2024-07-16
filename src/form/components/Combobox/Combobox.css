@@ -1,7 +1,7 @@
 :root {
   --tyk-combobox-pill-background: #F0F0F0;
   --tyk-combobox-pill-color: var(--text-color);
-  --combobox-disabled-border: var(--general-border-width) solid var(--color-default-light);
+  --combobox-disabled-border: var(--general-border-width) solid var(--color-secondary-dark);
   --form-control-placeholder-color: var(--text-color);
 }
 

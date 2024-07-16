@@ -1,6 +1,6 @@
 :root {
-  --table-th-padding: var(--spacing-base) var(--spacing-sm);
-  --table-td-padding-y: var(--spacing-xs);
+  --table-th-padding: var(--spacing-xs) var(--spacing-sm);
+  --table-td-padding-y: var(--spacing-sm);
   --table-td-padding-x: var(--spacing-sm);
   --table-first-last-padding: 20px;
   --table-pagination-padding: var(--spacing-md) 25px;
@@ -14,13 +14,16 @@
   inline-size: 100%;
 
   > thead th {
-    border-inline-end: 1px solid var(--color-default-light);
-    color: var(--text-color);
+    background-color: var(--color-secondary-light);
+    border-inline-end: 1px solid var(--color-secondary-dark);
+    color: var(--color-text-dark);
     font-size: var(--xs-font-size);
     line-height: var(--sm-line-height);
     font-family: var(--font-family-semi-bold);
-    text-transform: uppercase;
+    text-transform: capitalize;
     padding: var(--table-th-padding);
+    vertical-align: middle;
+    white-space: nowrap;
   
     &.fit {
       white-space: nowrap;
@@ -37,17 +40,17 @@
 
     .tyk-button {
       background: none;
-      color: var(--color-default-base);
+      color: var(--color-text-dark);
       padding: 0;
     }
   }
 
   > tbody tr:hover {
-    background: rgba(var(--color-background-light) / 40%);
+    background: var(--color-secondary-extra-light);
   }
 
   > tbody td {
-    border-inline-end: 1px solid var(--color-default-light);
+    border-inline-end: 1px solid var(--color-secondary-dark);
     font-size: var(--xs-font-size);
     line-height: var(--sm-line-height);
     font-family: var(--font-family-regular);
@@ -62,6 +65,22 @@
     &.fit {
       white-space: nowrap;
       inline-size: 1%;
+    }
+
+    .tyk-form-group {
+      margin-bottom: 0;
+
+      .tyk-form-control {
+        margin-top: 0;
+      }
+    }
+
+    .tyk-checkbox {
+      margin: 0;
+
+      label {
+        padding: 0;
+      }
     }
 
     input:not([type='checkbox'], [type='radio']) {
@@ -83,7 +102,7 @@
   }
 
   tbody > tr {
-    border-block-start: 1px solid var(--color-default-light);
+    border-block-start: 1px solid var(--color-secondary-dark);
     transition: all .4s linear;
     border-radius: var(--general-border-radius);
 
@@ -128,7 +147,7 @@
 }
 
 .tyk-table__wrapper {
-  border: var(--general-border-width) solid var(--color-default-light);
+  border: var(--general-border-width) solid var(--color-secondary-dark);
   border-radius: var(--general-border-radius);
   overflow: auto;
 
@@ -150,7 +169,7 @@
 
   label {
     font-size: var(--sm-font-size);
-    text-transform: uppercase;
+    text-transform: capitalize;
   }
 }
 

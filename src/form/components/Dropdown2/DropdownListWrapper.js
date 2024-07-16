@@ -23,7 +23,6 @@ function DropdownListWrapper({
         style={{
           ...maxWidth && { maxWidth },
         }}
-        theme="primary"
       >
         { children }
       </List>

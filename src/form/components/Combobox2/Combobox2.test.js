@@ -122,7 +122,7 @@ describe('Combobox2', () => {
   });
 
   it('valueOverflow controls the display of the values on single or multiple lines', () => {
-    const singleHeight = 32;
+    const singleHeight = 34;
     function Comp() {
       const [valueOverflow, setValueOverflow] = useState('multiple');
       return (

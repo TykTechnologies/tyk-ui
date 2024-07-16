@@ -5,8 +5,8 @@
   --padding-panel-body: 25px;
   --padding-x-right-panel-collapsable: 48px;
   --padding-x-left-panel-collapsable: var(--padding-x-right-panel-collapsable);
-  --panel-border-radius: 0;
-  --panel-default-border-bottom-color: var(--color-background-base);
+  --panel-border-radius: 8px;
+  --panel-default-border-bottom-color: var(--color-secondary-dark);
   --panel-header-font-size: var(--base-font-size);
   --panel-header-font-family: var(--font-family-bold);
   --panel-primary-header-color: var(--color-primary-base);
@@ -20,8 +20,9 @@
 .tyk-panel {
   background: white;
   border-radius: var(--panel-border-radius);
+  border: 1px solid var(--color-secondary-dark);
   margin-block-end: 20px;
-  font-family: var(--font-family-medium);
+  font-family: var(--font-family-regular);
   position: relative;
 
   &.has-error,
@@ -30,7 +31,7 @@
   }
 
   .tyk-panel {
-    border: var(--general-border-width) solid var(--color-default-light);
+    border: var(--general-border-width) solid var(--color-secondary-dark);
     box-shadow: none;
   }
 }
@@ -61,7 +62,7 @@
     padding-block: var(--padding-y-blank-panel-header);
     padding-inline: var(--padding-x-panel-header);
     background-color: white;
-    color: var(--color-default-base);
+    color: var(--text-color);
   }
 }
 
@@ -199,7 +200,7 @@
 
 .tyk-panel__footer {
   align-items: center;
-  border-block-start: 1px solid var(--color-background-light);
+  border-block-start: 1px solid var(-color-secondary-dark);
   display: flex;
   justify-content: flex-end;
   padding: var(--spacing-lg);

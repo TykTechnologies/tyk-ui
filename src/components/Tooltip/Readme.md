@@ -20,7 +20,7 @@ Using string as render props
 
 Using JSX as render props
 ```js
-<Tooltip render={<div>Hello</div>}>
+<Tooltip render={<div>Hello <a>World</a></div>}>
   Hover Over Me 2
 </Tooltip>
 ```
@@ -99,7 +99,7 @@ const Example = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button theme="primary-outline" onClick={() => setShowModal(false)}>Close</Button>
-          <Button theme="success" onClick={() => setShowModal(false)}>Save</Button>
+          <Button theme="primary" onClick={() => setShowModal(false)}>Save</Button>
         </Modal.Footer>
       </Modal>
     </>

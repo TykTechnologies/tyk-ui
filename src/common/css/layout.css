@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: var(--color-background-base);
+  background-color: var(--color-background);
   color: var(--text-color);
   font-size: var(--sm-font-size);
   line-height: var(--sm-line-height);
@@ -21,7 +21,7 @@ body {
 
 .well {
   background: transparent;
-  border: var(--general-border-width) solid var(--color-default-light);
+  border: var(--general-border-width) solid var(--color-secondary-dark);
   border-radius: var(--general-border-radius);
   box-shadow: none;
 

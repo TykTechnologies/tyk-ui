@@ -9,8 +9,8 @@ describe('ButtonGroup', () => {
     cy
       .mount(
         <ButtonGroup className="foo bar">
-          <Button theme="default">button 1</Button>
-          <Button theme="default">button 2</Button>
+          <Button theme="secondary">button 1</Button>
+          <Button theme="secondary">button 2</Button>
         </ButtonGroup>,
       )
       .get(wrapperSelector)
@@ -24,8 +24,8 @@ describe('ButtonGroup', () => {
     cy
       .mount(
         <ButtonGroup className="foo bar" label={labelText}>
-          <Button theme="default">button 1</Button>
-          <Button theme="default">button 2</Button>
+          <Button theme="secondary">button 1</Button>
+          <Button theme="secondary">button 2</Button>
         </ButtonGroup>,
       )
       .get(wrapperSelector)

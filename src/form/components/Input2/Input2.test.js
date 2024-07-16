@@ -2,16 +2,16 @@ import React from 'react';
 import Input2 from './index';
 
 describe('Input2', () => {
-  it('sets theme classes and input value', () => {
+  it('has only default value regardless of the theme set', () => {
     cy.mount(
       <Input2
-        theme="default rounded-corners"
+        theme="primary rounded-corners"
         value="my value"
         wrapperClassName="myclass"
       />,
     );
 
-    cy.get('.myclass.tyk-form-group--default.tyk-form-group--rounded-corners')
+    cy.get('.myclass.tyk-form-group--default')
       .get('input')
       .should('have.value', 'my value');
   });

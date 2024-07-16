@@ -106,7 +106,7 @@ function Value(props) {
     return (
       <Pill
         key={v.id}
-        theme="combobox"
+        theme="secondary"
       >
         <button
           type="button"

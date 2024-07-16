@@ -38,110 +38,110 @@
   border-radius: 8px;
 }
 
-.tyk-pill--default {
-  background-color: var(--default-pill-background-color);
-  color: var(--default-pill-color);
+.tyk-pill--secondary {
+  background-color: var(--color-secondary-light);
+  color: var(--color-text-base);
 
   i {
-    color: var(--default-pill-color);
+    color: var(--color-text-base);
   }
 }
 
-.tyk-pill--default-outline {
-  box-shadow: var(--default-outline-pill-box-shadow);
-  color: var(--text-color);
+.tyk-pill--secondary-outline {
+  box-shadow: inset 0 0 0 var(--general-border-width) var(--color-secondary-dark);
+  color: var(--color-text-base);
 
   i {
-    color: var(--text-color);
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--primary {
-  background-color: var(--color-primary-base);
-  color: white;
+  background-color: var(--color-primary-light);
+  color: var(--color-text-dark);
 
   i {
-    color: var(--default-pill-color);
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--primary-outline {
-  box-shadow: inset 0 0 0 2px var(--color-primary-base);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 var(--general-border-width) var(--color-primary-base);
+  color: var(--color-text-base);
 
   i {
-    color: var(--text-color);
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--success {
-  background-color: var(--color-success-base);
-  color: white;
+  background-color: var(--color-success-light);
+  color: var(--color-text-base);
 
   i {
-    color: white;
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--success-outline {
-  box-shadow: inset 0 0 0 2px var(--color-success-base);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 var(--general-border-width) var(--color-success-base);
+  color: var(--color-text-base);
 
   i {
-    color: var(--text-color);
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--danger {
-  background-color: var(--color-danger-base);
-  color: white;
+  background-color: var(--color-danger-light);
+  color: var(--color-text-base);
 
   i {
-    color: white;
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--danger-outline {
-  box-shadow: inset 0 0 0 2px var(--color-danger-base);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 var(--general-border-width) var(--color-danger-base);
+  color: var(--color-text-base);
 
   i {
-    color: var(--text-color);
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--warning {
-  background-color: var(--color-warning-base);
-  color: white;
+  background-color: var(--color-warning-light);
+  color: var(--color-text-base);
 
   i {
-    color: white;
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--warning-outline {
-  box-shadow: inset 0 0 0 2px var(--color-warning-base);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 var(--general-border-width) var(--color-warning-base);
+  color: var(--color-text-base);
 
   i {
-    color: var(--text-color);
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--info {
-  background-color: var(--color-info-base);
-  color: white;
+  background-color: var(--color-info-light);
+  color: var(--color-text-base);
 
   i {
-    color: white;
+    color: var(--color-text-base);
   }
 }
 
 .tyk-pill--info-outline {
-  box-shadow: inset 0 0 0 2px var(--color-info-base);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 var(--general-border-width) var(--color-info-base);
+  color: var(--color-text-base);
 
   i {
-    color: var(--text-color);
+    color: var(--color-text-base);
   }
 }
