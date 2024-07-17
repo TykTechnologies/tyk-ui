@@ -155,7 +155,7 @@
 }
 
 .tyk-modal__backdrop {
-  background-color: var(--color-secondary-base-dark);
+  background-color: var(--color-secondary-extra-dark1);
   border: none;
   display: none;
   position: fixed;
