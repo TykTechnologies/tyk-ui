@@ -105,10 +105,10 @@
   cursor: pointer;
   color: var(--tyk-dropdown-item-text-color);
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
   padding-block: 7px;
   padding-inline: 24px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   text-decoration: none;
   inline-size: 100%;
 
