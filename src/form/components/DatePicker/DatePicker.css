@@ -28,5 +28,5 @@
 }
 
 .flatpickr-day.inRange {
-  box-shadow: -5px 0 0 var(--color-primary-light),5px 0 0 var(--color-primary-light);
+  box-shadow: -5px 0 0 var(--color-primary-light),5px 0 0 var(--color-primary-light) !important;
 }

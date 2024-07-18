@@ -18,7 +18,7 @@ h1 {
 
 h2 {
   font-size: var(--xl-font-size);
-  line-height: var(--lg-line-height);
+  line-height: var(--xl-line-height);
 }
 
 h3 {
@@ -28,12 +28,12 @@ h3 {
 
 h4 {
   font-size: var(--md-font-size);
-  line-height: var(--md-line-height);
+  line-height: var(--sm-line-height);
 }
 
 h5 {
   font-size: var(--sm-font-size);
-  line-height: var(--md-line-height);
+  line-height: var(--sm-line-height);
 }
 
 h6 {
@@ -176,7 +176,7 @@ td.text-ellipsis {
 
 .section-group-title {
   margin-block-end: 5px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 
   .tyk-icon {
     margin-inline-start: 5px;

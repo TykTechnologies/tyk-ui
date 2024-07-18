@@ -30,6 +30,10 @@
     .tyk-combobox2__entry-field {
       background-color: transparent;
       cursor: not-allowed;
+
+      &.disabled {
+        color: var(--form-control-disabled-color);
+      }
     }
   }
 
