@@ -9,8 +9,7 @@ import { createPortal } from 'react-dom';
 import { useRevealPanelService } from './js/RevealPanelService';
 
 function RevealPanelHeaderLeft({ children }) {
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{children}</>;
+  return children;
 }
 
 RevealPanelHeaderLeft.propTypes = {
@@ -18,8 +17,7 @@ RevealPanelHeaderLeft.propTypes = {
 };
 
 function RevealPanelHeaderRight({ children }) {
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{children}</>;
+  return children;
 }
 
 RevealPanelHeaderRight.propTypes = {
@@ -28,7 +26,7 @@ RevealPanelHeaderRight.propTypes = {
 
 const mergeClasses = (...classNames) => classNames.map((it) => (it || '').trim()).filter(Boolean).join(' ');
 
-function RevealPanel({
+const RevealPanel = forwardRef(({
   children,
   height,
   onHeightChange = null,
@@ -40,8 +38,7 @@ function RevealPanel({
   contentClassName,
   gutterClassName,
   wrapperClassName,
-// eslint-disable-next-line consistent-return
-}, ref) {
+}, ref) => {
   const panelRef = useRef(null);
   const gutterRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -124,23 +121,25 @@ function RevealPanel({
   if (parentSelector) {
     return createPortal(element, document.querySelector(parentSelector));
   }
-}
+
+  return null;
+});
 
 RevealPanel.propTypes = {
-  children: PropTypes.instanceOf({}),
+  children: PropTypes.node,
   height: PropTypes.string,
   onHeightChange: PropTypes.func,
   onDragStart: PropTypes.func,
   onDragEnd: PropTypes.func,
   parentSelector: PropTypes.string,
-  style: PropTypes.instanceOf({}),
-  contentStyle: PropTypes.instanceOf({}),
+  style: PropTypes.instanceOf(Object),
+  contentStyle: PropTypes.instanceOf(Object),
   contentClassName: PropTypes.string,
   gutterClassName: PropTypes.string,
   wrapperClassName: PropTypes.string,
 };
-const TempRevealPanel = forwardRef(RevealPanel);
-TempRevealPanel.HeaderLeft = RevealPanelHeaderLeft;
-TempRevealPanel.HeaderRight = RevealPanelHeaderRight;
 
-export default TempRevealPanel;
+RevealPanel.HeaderLeft = RevealPanelHeaderLeft;
+RevealPanel.HeaderRight = RevealPanelHeaderRight;
+
+export default RevealPanel;

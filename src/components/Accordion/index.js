@@ -8,7 +8,7 @@ import AccordionContext from './js/AccordionContext';
 function Accordion({
   className,
   children,
-  usearrowastrigger,
+  usearrowastrigger = false,
   arrow = { position: 'right', expandToContent: false },
 }) {
   const classes = [
@@ -43,10 +43,6 @@ Accordion.propTypes = {
     position: PropTypes.oneOf(['left', 'right']),
     expandToContent: PropTypes.bool,
   }),
-};
-
-Accordion.defaultProps = {
-  usearrowastrigger: false,
 };
 
 // For Readme.md : Start

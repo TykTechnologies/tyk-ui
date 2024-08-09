@@ -2,7 +2,7 @@
   --tyk-combobox-pill-background: #F0F0F0;
   --tyk-combobox-pill-color: var(--text-color);
   --tyk-combobox-list-item-hover-color: var(--color-secondary-extra-light);
-  --tyk-combobox-list-item-disabled-color: var(--color-background);
+  --tyk-combobox-list-item-disabled-color: var(--form-control-disabled-color);
 }
 
 .tyk-combobox2 {
@@ -160,7 +160,7 @@
   transform: rotate(180deg);
 }
 
-.tyk-form-group--rounded-corners .tyk-combobox2-disabled-overlay {
+.tyk-combobox2-disabled-overlay {
   border-radius: calc(var(--general-border-radius) - 2px);
 }
 
@@ -169,11 +169,8 @@
   flex-direction: column;
   border: var(--general-border-width) solid var(--form-default-color);
   background-color: white;
-
-  &.tyk-form-group--rounded-corners {
-    border-radius: var(--general-border-radius);
-    z-index: 1081;
-  }
+  border-radius: var(--general-border-radius);
+  z-index: 1081;
 
   .tyk-combobox2__combobox-search {
     background-color: white;

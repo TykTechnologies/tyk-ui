@@ -86,6 +86,10 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
   if (Object.hasOwn(componentProps, 'className') && componentProps.className === undefined) delete componentProps.className;
   if (Object.hasOwn(componentProps, 'children') && componentProps.children === undefined) delete componentProps.children;
 
+  if (Component.name === 'Combobox2') {
+    delete field.onBlur;
+  }
+
   return (
     <Component
       {...field}

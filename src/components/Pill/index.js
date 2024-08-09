@@ -8,7 +8,7 @@ function Pill(props) {
   const {
     children,
     className,
-    theme,
+    theme = 'default',
   } = props;
 
   const getCssClasses = () => {
@@ -39,10 +39,6 @@ Pill.propTypes = {
   className: PropTypes.string,
   /** Theme that can be applied to a Pill */
   theme: PropTypes.string,
-};
-
-Pill.defaultProps = {
-  theme: 'default',
 };
 
 export default Pill;

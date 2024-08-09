@@ -41,7 +41,6 @@ function loadMore(p) {
     loadMore,
     pageNumber: state.currentPage
   }}
-  theme="default rounded-corners"
 />
 ```
 ```js
@@ -61,7 +60,6 @@ function loadMore(p) {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
   required
 />
@@ -83,7 +81,6 @@ function loadMore(p) {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default  rounded-corners"
   placeholder="Please select a value"
   labelwidth="40%"
 />
@@ -105,7 +102,6 @@ function loadMore(p) {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default  rounded-corners"
   placeholder="Please select a value"
   selectAll={{
     label: 'Select everything',
@@ -130,7 +126,6 @@ function loadMore(p) {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default  rounded-corners"
   placeholder="Please select a value"
   selectAll={{
     render: (isAllSelected, sendMessage) => (
@@ -161,7 +156,6 @@ function loadMore(p) {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default  rounded-corners"
   placeholder="Please select a value"
   selectAll={{
     label: 'Clear Filter',
@@ -188,7 +182,6 @@ function loadMore(p) {
   multiple={ true }
   max={3}
   name="combobox"
-  theme="default  rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -221,7 +214,6 @@ function loadMore(p) {
     tags={true}
     name="combobox"
     placeholder="Please select a value"
-    theme="default rounded-corners"
     expandMode={true}
   />
 </>
@@ -243,7 +235,6 @@ function loadMore(p) {
   tags={ true }
   tagSeparators={[' ', 'Enter', ':', '@']}
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -264,7 +255,6 @@ function loadMore(p) {
   label="Combobox don't allow custom tags"
   tags={ true }
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -285,7 +275,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
         <a
           className={getListItemCssClasses(value, index)}
           onClick={handleListItemClick.bind(null, index)}
-          key={index} key={value.id}
+          key={value.id}
         >
           {value.name}
         </a>
@@ -310,7 +300,6 @@ const CustomComponent = React.forwardRef((props, ref) => {
   label="Combobox custom List element"
   tags={ true }
   name="combobox"
-  theme="default inline rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -331,7 +320,6 @@ const CustomComponent = React.forwardRef((props, ref) => {
   label="Custom Search Combobox"
   multiple={ true }
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -352,7 +340,6 @@ const CustomComponent = React.forwardRef((props, ref) => {
   label="Disabled Combobox"
   multiple={ true }
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -374,7 +361,6 @@ const CustomComponent = React.forwardRef((props, ref) => {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -395,7 +381,6 @@ const CustomComponent = React.forwardRef((props, ref) => {
   name="combobox"
   onChange={ (e) => { console.log(e); }}
   note="Some note on the combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -404,7 +389,7 @@ const CustomComponent = React.forwardRef((props, ref) => {
 import Icon from '../../../components/Icon';
 <Combobox2
   renderValue={(value) => (
-    <div style={{ marginRight: '15px', marginTop: '7px' }}>
+    <div key={value.id} style={{ marginRight: '15px', marginTop: '7px' }}>
       <Icon
         family="tykon"
         type={value.type}
@@ -430,7 +415,6 @@ import Icon from '../../../components/Icon';
     { id: 'api13', name: 'API 13', type:'users'}
   ]}
   label="Combobox with custom value renderer"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -439,7 +423,7 @@ import Icon from '../../../components/Icon';
 import Icon from '../../../components/Icon';
 <Combobox2
   renderListItem={(value, { sendMessage }) => (
-    <li onClick={() => sendMessage('value.select', { item: value })}>
+    <li key={value.id} onClick={() => sendMessage('value.select', { item: value })}>
       { 'custom: ' + value.name + (value.selected ? ' (SELECTED)' : '') }
     </li>
   )}
@@ -461,7 +445,6 @@ import Icon from '../../../components/Icon';
     { id: 'api13', name: 'API 13', type:'users'}
   ]}
   label="Combobox with custom list item renderer"
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -486,6 +469,7 @@ import Icon from '../../../components/Icon';
         <ul>
           {values.map(item => (
             <li
+              key={item.id}
               style={{
                 fontWeight: item.selected ? 'bold' : 'normal',
               }}
@@ -519,7 +503,6 @@ import Icon from '../../../components/Icon';
   label="Combobox with custom list renderer"
   name="combobox"
   onChange={ (e) => { console.log(e); }}
-  theme="default rounded-corners"
   placeholder="Please select a value"
 />
 ```
@@ -532,7 +515,6 @@ import Icon from '../../../components/Icon';
   tags={ true }
   tagSeparators={[' ', 'Enter', ':', '@']}
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />
@@ -547,7 +529,6 @@ import Icon from '../../../components/Icon';
   label="Validate that a tag is a number before adding the value"
   multiple
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />
@@ -566,7 +547,6 @@ import Icon from '../../../components/Icon';
   label="Read only mode multiple"
   multiple
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />
@@ -585,7 +565,6 @@ import Icon from '../../../components/Icon';
   label="Read only mode tags"
   tags
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />
@@ -601,7 +580,6 @@ import Icon from '../../../components/Icon';
   label="Read only mode single"
   tags
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />
@@ -616,7 +594,6 @@ import Icon from '../../../components/Icon';
   label="Read only mode no value"
   tags
   name="combobox"
-  theme="default rounded-corners"
   placeholder="Please select a value"
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />

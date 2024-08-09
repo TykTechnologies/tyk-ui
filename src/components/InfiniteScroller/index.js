@@ -9,7 +9,7 @@ import Loader from '../Loader';
 
 function InfiniteScroller({
   children,
-  hasMore,
+  hasMore = true,
   initialLoad,
   loadMore,
   pageNumber,
@@ -115,10 +115,6 @@ InfiniteScroller.propTypes = {
   pageNumber: PropTypes.number,
   loadMore: PropTypes.func,
   refChild: PropTypes.instanceOf(Object),
-};
-
-InfiniteScroller.defaultProps = {
-  hasMore: true,
 };
 
 export default InfiniteScroller;

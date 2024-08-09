@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import ToggleContext from './ToggleContext';
 import ToggleItem from './ToggleItem';
 
-function ToggleItemWrapper({ children, ...rest }, ref) {
+// eslint-disable-next-line arrow-body-style
+const ToggleItemWrapper = forwardRef(({ children, ...rest }, ref) => {
   return (
     <ToggleContext.Consumer>
       {(context) => (
@@ -14,7 +15,7 @@ function ToggleItemWrapper({ children, ...rest }, ref) {
       )}
     </ToggleContext.Consumer>
   );
-}
+});
 
 ToggleItemWrapper.propTypes = {
   children: PropTypes.oneOfType([
@@ -25,4 +26,4 @@ ToggleItemWrapper.propTypes = {
   ]),
 };
 
-export default forwardRef(ToggleItemWrapper);
+export default ToggleItemWrapper;

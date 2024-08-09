@@ -13,7 +13,10 @@ function CardSummary({
 }
 
 CardSummary.propTypes = {
-  maxLines: PropTypes.number,
+  maxLines: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.node,

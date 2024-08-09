@@ -5,7 +5,7 @@ import Button from '../Button';
 import Modal from '../Modal';
 
 /**
- * Confirm component can be used to open a dialog (<Modal />) before a specific action
+ * Confirm component can be used to open a dialog (Modal) before a specific action
  */
 function Confirm(props) {
   const {

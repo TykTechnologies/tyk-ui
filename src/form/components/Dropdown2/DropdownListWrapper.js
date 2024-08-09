@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import FloatingContainer from '../../../components/FloatingContainer';
 import List from '../../../components/List';
 
-function DropdownListWrapper({
+const DropdownListWrapper = forwardRef(({
   children,
   element,
   maxWidth,
-}, ref) {
+}, ref) => { // eslint-disable-line arrow-body-style
   return (
     <FloatingContainer
       element={element}
@@ -28,7 +28,7 @@ function DropdownListWrapper({
       </List>
     </FloatingContainer>
   );
-}
+});
 
 DropdownListWrapper.propTypes = {
   element: PropTypes.shape({
@@ -43,4 +43,4 @@ DropdownListWrapper.propTypes = {
   maxWidth: PropTypes.string,
 };
 
-export default forwardRef(DropdownListWrapper);
+export default DropdownListWrapper;

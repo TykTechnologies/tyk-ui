@@ -258,6 +258,7 @@ Tabs.propTypes = {
     PropTypes.node,
     PropTypes.element,
     PropTypes.string,
+    PropTypes.func,
   ]),
   hideTabContent: PropTypes.bool,
   id: PropTypes.string,

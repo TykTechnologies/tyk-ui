@@ -6,7 +6,7 @@ import Icon from '../Icon';
 /**
  * Button component.
  */
-function Button(props, ref) {
+const Button = forwardRef((props, ref) => {
   const {
     customButton,
     children,
@@ -22,8 +22,8 @@ function Button(props, ref) {
     onClick,
     noStyle,
     size,
-    theme,
-    type,
+    theme = '',
+    type = 'button',
     ...rest
   } = props;
 
@@ -115,7 +115,7 @@ function Button(props, ref) {
   return (
     getButtonType()
   );
-}
+});
 
 Button.propTypes = {
   /**
@@ -169,9 +169,4 @@ Button.propTypes = {
   size: PropTypes.string,
 };
 
-Button.defaultProps = {
-  theme: '',
-  type: 'button',
-};
-
-export default forwardRef(Button);
+export default Button;

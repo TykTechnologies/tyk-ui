@@ -18,7 +18,6 @@
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
-  inline={ true }
   theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
 />
