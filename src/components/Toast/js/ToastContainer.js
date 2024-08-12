@@ -47,7 +47,7 @@ function ToastContainer(props) {
                 options={messages[msgID].options}
                 // eslint-disable-next-line react/jsx-no-bind
                 onClose={onMessageClosed.bind(null, msgID)}
-                index={msgID}
+                index={Number(msgID)}
                 // eslint-disable-next-line react/no-array-index-key
                 key={msgID}
               >

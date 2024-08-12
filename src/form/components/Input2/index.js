@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-function Input2({
+const Input2 = forwardRef(({
   error,
   onChange,
   readOnly,
@@ -14,7 +14,7 @@ function Input2({
   value,
   wrapperClassName = '',
   ...rest
-}, ref) {
+}, ref) => {
   const inputRef = useRef();
 
   useImperativeHandle(ref, () => ({
@@ -140,7 +140,7 @@ function Input2({
       }
     </div>
   );
-}
+});
 
 Input2.propTypes = {
   disabled: PropTypes.bool,
@@ -167,7 +167,10 @@ Input2.propTypes = {
   ]),
   labelwidth: PropTypes.string,
   name: PropTypes.string,
-  note: PropTypes.string,
+  note: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   value: PropTypes.oneOfType([
@@ -177,4 +180,4 @@ Input2.propTypes = {
   wrapperClassName: PropTypes.string,
 };
 
-export default forwardRef(Input2);
+export default Input2;

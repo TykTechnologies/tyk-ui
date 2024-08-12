@@ -8,7 +8,7 @@ import debounce from '../../utils/debounce';
  * even if the scroll position changes
  * i.e: The top navigation bar of a page sits within FixedWrapper component
  */
-function FixedWrapper({ children, className, showShadow }) {
+function FixedWrapper({ children, className = '', showShadow }) {
   const fixedWrapperRef = useRef(null);
 
   const attachShadow = useCallback(() => {
@@ -56,10 +56,6 @@ FixedWrapper.propTypes = {
    * is being displayed when scroll happens
    */
   showShadow: PropTypes.bool,
-};
-
-FixedWrapper.defaultProps = {
-  className: '',
 };
 
 export default FixedWrapper;

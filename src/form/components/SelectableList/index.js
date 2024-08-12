@@ -8,13 +8,13 @@ import Icon from '../../../components/Icon';
 function SelectableList(props) {
   const {
     checkboxalticon,
-    items,
+    items = [],
     itemTemplate,
-    value,
+    value = [],
     noItemsMessage = 'No items in the list',
     onChange,
     theme,
-    primaryKey,
+    primaryKey = 'id',
     wrapperClassName = '',
   } = props;
 
@@ -120,12 +120,6 @@ SelectableList.propTypes = {
   ]),
   theme: PropTypes.string,
   wrapperClassName: PropTypes.string,
-};
-
-SelectableList.defaultProps = {
-  items: [],
-  primaryKey: 'id',
-  value: [],
 };
 
 export default SelectableList;

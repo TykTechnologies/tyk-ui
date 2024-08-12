@@ -16,7 +16,11 @@ import { tableContext } from './tableContext';
  */
 
 function Table({
-  value, onChange, noDataMessage, loading, infiniteScrolling,
+  value,
+  onChange = null,
+  noDataMessage = 'No Data Available',
+  loading = false,
+  infiniteScrolling = false,
 }) {
   const [state, setState] = useState(null);
   const [onChangeMsg, setOnChangeMsg] = useState('api');
@@ -158,7 +162,7 @@ Table.propTypes = {
         /** Just renders cell data of type strings */
         PropTypes.string,
         /** Render cell of elements (eg. Input / Button) */
-        PropTypes.element,
+        PropTypes.elementType,
         /** Render a custom function/component */
         PropTypes.func,
       ]),
@@ -188,19 +192,12 @@ Table.propTypes = {
   }).isRequired,
   /** Callback executed with message and value when there are changes on table */
   onChange: PropTypes.func,
-  /** Renders a <Message /> component with the given message when `config.rows` is empty */
+  /** Renders a Message component with the given message when `config.rows` is empty */
   noDataMessage: PropTypes.string,
   /** Show placeholder loader */
   loading: PropTypes.bool,
   /** Adds infinite scroller on page and calls `onChange` with `pagination.change` message */
   infiniteScrolling: PropTypes.bool,
-};
-
-Table.defaultProps = {
-  loading: false,
-  infiniteScrolling: false,
-  noDataMessage: 'No Data Available',
-  onChange: null,
 };
 
 export default Table;

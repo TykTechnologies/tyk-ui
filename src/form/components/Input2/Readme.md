@@ -5,7 +5,6 @@
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
-  theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
   value="prct"
 />
@@ -18,7 +17,6 @@
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
-  theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
   value="prct"
 />
@@ -30,7 +28,6 @@
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
-  theme="default rounded-corners"
   onChange={ (e) => { console.log(e); }}
   value="prct"
   readOnly
@@ -43,19 +40,6 @@
   note="Some helpful message to be displayed on this Input"
   placeholder="Please type something"
   type="text"
-  inline={ true }
-  theme="default rounded-corners"
-  onChange={ (e) => { console.log(e); }}
-/>
-```
-```js
-
-<Input2
-  label="Inline default theme input"
-  name="input"
-  placeholder="Please type something"
-  type="text"
-  theme="default rounded-corners inline"
   onChange={ (e) => { console.log(e); }}
 />
 ```
@@ -69,7 +53,6 @@
   placeholder="Please type something"
   type="text"
   onChange={ (e) => { console.log(e); }}
-  theme="rounded-corners"
 />
 ```
 ```js
@@ -81,7 +64,6 @@
   placeholder="Please type something"
   type="text"
   onChange={ (e) => { console.log(e); }}
-  theme="rounded-corners"
 />
 
 ```
@@ -97,7 +79,6 @@ import Icon from '../../../components/Icon';
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
-    theme="default rounded-corners"
   />
 
   <Input2
@@ -111,7 +92,6 @@ import Icon from '../../../components/Icon';
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
-    theme="rounded-corners"
   />
 
   <Input2
@@ -125,7 +105,6 @@ import Icon from '../../../components/Icon';
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
-    theme="rounded-corners"
   />
   <Input2
     inputgroupaddonright={
@@ -136,7 +115,6 @@ import Icon from '../../../components/Icon';
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
-    theme="default rounded-corners"
   />
   <Input2
     inputgroupaddonright={
@@ -148,7 +126,6 @@ import Icon from '../../../components/Icon';
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
-    theme="default rounded-corners"
   />
   <Input2
     inputgroupaddonleft={
@@ -160,7 +137,6 @@ import Icon from '../../../components/Icon';
     placeholder="Please type something"
     type="text"
     onChange={ (e) => { console.log(e); }}
-    theme="default rounded-corners"
   />
 </div>
 ```

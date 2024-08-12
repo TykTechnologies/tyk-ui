@@ -1,14 +1,12 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-function ButtonGroup({ className, children, label }, ref) {
-  return (
-    <div ref={ref} className={`tyk-button-group__wrapper ${className}`}>
-      {Boolean(label) && <label>{label}</label>}
-      <div className="tyk-button-group">{children}</div>
-    </div>
-  );
-}
+const ButtonGroup = forwardRef(({ className, children, label }, ref) => (
+  <div ref={ref} className={`tyk-button-group__wrapper ${className}`}>
+    {Boolean(label) && <label>{label}</label>}
+    <div className="tyk-button-group">{children}</div>
+  </div>
+));
 
 ButtonGroup.propTypes = {
   children: PropTypes.oneOfType([
@@ -17,8 +15,8 @@ ButtonGroup.propTypes = {
     PropTypes.element,
     PropTypes.string,
   ]),
-  className: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  label: PropTypes.string,
 };
 
-export default forwardRef(ButtonGroup);
+export default ButtonGroup;

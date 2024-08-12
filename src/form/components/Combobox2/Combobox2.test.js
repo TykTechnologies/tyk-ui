@@ -25,7 +25,7 @@ describe('Combobox2', () => {
     checkIcon: 'fa-check',
   };
 
-  it('renders the basics: value, values (selectable items), label, label width, placeholder, note, error, themes', () => {
+  it('renders the basics: value, values (selectable items), label, label width, placeholder, note, error', () => {
     const selectedItem = items.find(({ id }) => id === 'item2');
     const placeholder = 'combobox placeholder';
     const note = 'Something to be aware of';
@@ -41,14 +41,10 @@ describe('Combobox2', () => {
         labelwidth={labelWidth}
         note={note}
         error={error}
-        theme="default inline rounded-corners"
       />,
     );
 
     cy.get(`.${classes.component}`)
-      .should('have.class', 'tyk-form-group--default')
-      .and('have.class', 'tyk-form-group--inline')
-      .and('have.class', 'tyk-form-group--rounded-corners')
       .and('have.class', 'has-error');
 
     cy.get(`.${classes.textValue}`)
@@ -276,8 +272,8 @@ describe('Combobox2', () => {
         values={items}
         value={['item1', 'item3']}
         multiple
-        renderValue={(v) => <span className="custom-value">{v.name}</span>}
-        renderListItem={(i) => <span className="custom-item">{i.name}</span>}
+        renderValue={(v) => <span key={v.name} className="custom-value">{v.name}</span>}
+        renderListItem={(i) => <span key={i.name} className="custom-item">{i.name}</span>}
       />,
     );
 

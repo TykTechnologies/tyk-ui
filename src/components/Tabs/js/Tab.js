@@ -74,6 +74,4 @@ Tab.propTypes = {
   id: PropTypes.string,
 };
 
-Tab.defaultProps = {};
-
 export default Tab;

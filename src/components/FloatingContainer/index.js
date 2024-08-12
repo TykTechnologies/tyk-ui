@@ -11,7 +11,7 @@ const VIEWPORT_INITIAL_PADDING = 5;
  * It displays a container relative to another element.
  * Meant to be used for dropdowns, tooltips, and other similar components.
  */
-function FloatingContainer({
+const FloatingContainer = forwardRef(({
   element,
   size = 'auto',
   forceDisplay = 'auto',
@@ -21,7 +21,7 @@ function FloatingContainer({
   className,
   children,
   infiniteScrollerConfig,
-}, ref) {
+}, ref) => {
   const localRef = useRef(null);
   const floatingContainerRef = ref || localRef;
   const contentWrapperRef = useRef(null);
@@ -149,7 +149,7 @@ function FloatingContainer({
     </div>,
     document.querySelector('body'),
   );
-}
+});
 
 FloatingContainer.propTypes = {
   /** A DOM element that the floating container will be displayed relative to. */
@@ -187,13 +187,14 @@ FloatingContainer.propTypes = {
    * If there is space on both sides of the axis preffer this side.
    */
   preferredPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  children: PropTypes.node,
   /**
    * Configuration object that will be passed to the infinite scroller component.
    */
   infiniteScrollerConfig: PropTypes.instanceOf(Object),
 };
 
-export default forwardRef(FloatingContainer);
+export default FloatingContainer;
 
 function getDisplayForVertical({
   preferredPosition, hasTopSpace, hasBottomSpace, topSpace, bottomSpace,

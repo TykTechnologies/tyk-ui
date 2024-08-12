@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function ListItem(props) {
   const {
-    className,
+    className = '',
     children,
     selected,
   } = props;
@@ -24,10 +24,6 @@ ListItem.propTypes = {
   ]),
   className: PropTypes.string,
   selected: PropTypes.bool,
-};
-
-ListItem.defaultProps = {
-  className: '',
 };
 
 export default ListItem;

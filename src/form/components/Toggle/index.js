@@ -11,16 +11,16 @@ function Toggle({
   disabled,
   readOnly,
   size,
-  theme,
-  direction,
+  theme = 'primary',
+  direction = 'row',
   onDark,
   wrapperClassName = '',
   onChange,
   labelwidth,
   label,
-  separated,
+  separated = false,
   children,
-  type,
+  type = 'single',
   value,
   error,
   enabledReadOnlyText = 'Enabled',
@@ -79,7 +79,7 @@ function Toggle({
   }), [disabled, readOnly, onItemSelected, separated, type, value]);
 
   const getReadOnlyValue = () => {
-    if(type !== 'multiple') {
+    if (type !== 'multiple') {
       return value ? enabledReadOnlyText : disabledReadOnlyText;
     }
 
@@ -97,7 +97,7 @@ function Toggle({
               ? <label className="tyk-toggle__label" style={getLabelStyles()}>{label}</label>
               : null
           }
-          {!readOnly ?
+          {!readOnly ? (
             <ul className={`tyk-toggle__list tyk-toggle__list--${type} ${error && 'tyk-toggle__list--has-error'}  tyk-toggle__list--${separated ? 'separated' : 'not-separated'}`}>
               { children }
               {
@@ -106,10 +106,11 @@ function Toggle({
                   : null
               }
             </ul>
-            : <div className="tyk-form-control--readonly">
-                {getReadOnlyValue()}
-              </div>
-          }
+          ) : (
+            <div className="tyk-form-control--readonly">
+              {getReadOnlyValue()}
+            </div>
+          )}
         </ToggleContext.Provider>
       </div>
       {
@@ -156,13 +157,6 @@ Toggle.propTypes = {
   wrapperClassName: PropTypes.string,
   enabledReadOnlyText: PropTypes.string,
   disabledReadOnlyText: PropTypes.string,
-};
-
-Toggle.defaultProps = {
-  separated: false,
-  theme: 'primary',
-  type: 'single',
-  direction: 'row',
 };
 
 Toggle.Item = ToggleItemWrapper;

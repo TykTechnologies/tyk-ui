@@ -181,7 +181,7 @@ function Value(props) {
 Value.propTypes = {
   value: PropTypes.instanceOf(Array),
   max: PropTypes.number,
-  tags: PropTypes.instanceOf(Array),
+  tags: PropTypes.bool,
   tagSeparators: PropTypes.instanceOf(Array),
   addTagOnBlur: PropTypes.bool,
   placeholder: PropTypes.string,

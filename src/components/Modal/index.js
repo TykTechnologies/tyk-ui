@@ -97,7 +97,12 @@ Modal.Header = ({ children }) => {
   );
 };
 Modal.Header.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
 };
 /* eslint-disable-next-line */
 Modal.Title = ({ children }) => {
@@ -114,6 +119,7 @@ Modal.Title.propTypes = {
 
 Modal.propTypes = {
   children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
     PropTypes.element,
     PropTypes.node,
     PropTypes.string,

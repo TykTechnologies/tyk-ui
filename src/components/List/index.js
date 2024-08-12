@@ -8,8 +8,8 @@ function List(props) {
     children,
     label,
     labelwidth,
-    theme,
-    style,
+    theme = 'secondary',
+    style = {},
   } = props;
 
   const getCssClasses = () => {
@@ -68,11 +68,6 @@ List.propTypes = {
   labelwidth: PropTypes.string,
   theme: PropTypes.string,
   style: PropTypes.instanceOf(Object),
-};
-
-List.defaultProps = {
-  theme: 'secondary',
-  style: {},
 };
 
 List.Item = ListItem;

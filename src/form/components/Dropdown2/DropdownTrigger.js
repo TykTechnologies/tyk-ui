@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import Button from '../../../components/Button';
 import ButtonGroup from '../../../components/ButtonGroup';
 
-function DropdownTrigger({
+const DropdownTrigger = forwardRef(({
   title,
   theme = 'primary',
   splitTrigger,
   toggle,
   onTriggerClick,
   value,
-}, ref) {
+}, ref) => { // eslint-disable-line arrow-body-style
   return (
     !splitTrigger ? (
       <Button
@@ -43,16 +43,13 @@ function DropdownTrigger({
       </ButtonGroup>
     )
   );
-}
+});
 
 DropdownTrigger.propTypes = {
   title: PropTypes.string,
   theme: PropTypes.string,
   splitTrigger: PropTypes.bool,
   toggle: PropTypes.func,
-  dropdownRef: PropTypes.shape({
-    current: PropTypes.instanceOf(Element),
-  }).isRequired,
   onTriggerClick: PropTypes.func,
   value: PropTypes.oneOfType([
     PropTypes.string,
@@ -60,4 +57,4 @@ DropdownTrigger.propTypes = {
   ]),
 };
 
-export default forwardRef(DropdownTrigger);
+export default DropdownTrigger;

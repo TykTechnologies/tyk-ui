@@ -7,12 +7,15 @@ import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
 import ItemTrigger from './AccordionItemTrigger';
 
-function AccordionItem({
-  collapsed: collapsedProp,
-  children,
-  className,
-  disabled,
-}, ref) {
+const AccordionItem = forwardRef((
+  {
+    collapsed: collapsedProp = false,
+    children,
+    className,
+    disabled,
+  },
+  ref,
+) => {
   const { arrow } = useContext(AccordionContext);
   const [collapsed, setCollapsed] = useState(collapsedProp);
 
@@ -49,7 +52,7 @@ function AccordionItem({
       </AccordionItemContext.Provider>
     </div>
   );
-}
+});
 
 AccordionItem.propTypes = {
   children: PropTypes.oneOfType([
@@ -63,8 +66,4 @@ AccordionItem.propTypes = {
   disabled: PropTypes.bool,
 };
 
-AccordionItem.defaultProps = {
-  collapsed: false,
-};
-
-export default forwardRef(AccordionItem);
+export default AccordionItem;

@@ -26,7 +26,6 @@ function Combobox2({
   max: maxProp,
   multiple = false,
   placeholder = '',
-  theme,
   note = '',
   error = '',
   disabled = false,
@@ -77,17 +76,11 @@ function Combobox2({
   const [valuesExpanded, setValuesExpanded] = useState(false);
   const [localValidationError, setLocalValidationError] = useState('');
 
-  function getThemeClasses() {
-    const themes = theme ? theme.split(' ') : [];
-    return themes.map((iTheme) => `tyk-form-group--${iTheme}`);
-  }
-
   function getCssClasses() {
     return [
       wrapperClassName,
       'tyk-form-group',
       'tyk-combobox2',
-      ...getThemeClasses(),
       (error || localValidationError) && 'has-error',
       labelwidth && 'tyk-form-group--label-has-width',
       disabled && 'disabled',
@@ -462,7 +455,7 @@ function Combobox2({
             <FloatingContainer
               element={comboboxControlRef}
               size="matchElement"
-              className={`tyk-combobox2__combobox-dropdown tyk-form-group ${getThemeClasses().join(' ')}`}
+              className="tyk-combobox2__combobox-dropdown tyk-form-group"
               ref={dropdownRef}
               displayAxis="vertical"
               {...floatingContainerConfig}
@@ -563,7 +556,6 @@ Combobox2.propTypes = {
   /** If set to true a tag will be created whenever the component loses focus
    *  and there is something typed in. */
   addTagOnBlur: PropTypes.bool,
-  theme: PropTypes.string,
   /** The value of the component. It can be a string, an array,
    *  or an object with an `id` property. */
   value: PropTypes.oneOfType([
