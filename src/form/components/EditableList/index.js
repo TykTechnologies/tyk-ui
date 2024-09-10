@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
 
-import format from 'date-fns/format';
-import isDate from 'date-fns/isDate';
+import { format, isDate } from 'date-fns';
 
 import EditableListForm from './js/EditableListForm';
 import Column from '../../../layout/Column';
