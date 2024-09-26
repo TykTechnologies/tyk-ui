@@ -43,6 +43,12 @@
   --color-text-base:#414160;
   --color-text-dark:#03031C;
 
+  --color-icon-neutral-inactive: #656582;
+  --color-text-informative-default: #023056;
+  --color-text-success-default: #0E3129;
+  --color-text-warning-default: #473717;
+  --color-text-critical-default: #3E0E18;
+
   --text-color: var(--color-text-base);
   --label-color: var(--color-text-dark);
 

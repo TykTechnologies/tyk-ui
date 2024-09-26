@@ -10,30 +10,42 @@ import Icon from '../Icon';
  * consider using `toast` instead
  */
 function Message({
-  children, theme, onClose, noMargin, className,
+  children,
+  title,
+  theme: themeProp,
+  onClose,
+  noMargin,
+  className,
 }) {
+  const themes = ['info', 'success', 'warning', 'danger'];
+  const theme = themes.includes(themeProp) ? themeProp : 'info';
+
   function getCssClasses() {
     return [
       'tyk-message',
-      `tyk-message--${theme || 'info'}`,
+      `tyk-message--${theme}`,
       noMargin && 'no-margin',
       className,
     ].filter(Boolean).join(' ');
   }
 
   const iconType = {
-    'success': 'hexagon-check',
-    'danger': 'hexagon-exclamation',
-    'warning': 'triangle-exclamation',
-    'info': 'circle-exclamation',
-    'secondary': 'circle-exclamation',
+    info: 'circle-exclamation',
+    success: 'hexagon-check',
+    warning: 'triangle-exclamation',
+    danger: 'hexagon-exclamation',
   }[theme];
 
   return (
     <div className={getCssClasses()}>
       <Icon type={iconType} weight="solid" />
       <div className="tyk-message__content">
-        { children }
+        {title && (
+          <div className="tyk-message__title">
+            {title}
+          </div>
+        )}
+        {children}
       </div>
       {onClose && (
         <Icon type="xmark" onClick={onClose} />
@@ -46,6 +58,11 @@ Message.propTypes = {
   /** Set theme for message (eg. default, success, danger, etc) */
   theme: PropTypes.string,
   children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.string,
+  ]),
+  title: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.node,
     PropTypes.string,
