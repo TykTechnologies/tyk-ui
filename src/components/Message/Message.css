@@ -9,25 +9,25 @@
   --tyk-message-info-border: var(--color-info-light);
   --tyk-message-info-title-color: var(--color-text-informative-default);
   --tyk-message-info-text-color: var(--color-text-base);
-  --tyk-message-info-icon-color: var(--color-info-dark);
+  --tyk-message-info-icon-color: var(--color-info-base);
 
   --tyk-message-success-background: var(--color-success-extra-light);
   --tyk-message-success-border: var(--color-success-light);
   --tyk-message-success-title-color: var(--color-text-success-default);
   --tyk-message-success-text-color: var(--color-text-base);
-  --tyk-message-success-icon-color: var(--color-success-dark);
+  --tyk-message-success-icon-color: var(--color-success-base);
 
   --tyk-message-warning-background: var(--color-warning-extra-light);
   --tyk-message-warning-border: var(--color-warning-light);
   --tyk-message-warning-title-color: var(--color-text-warning-default);
   --tyk-message-warning-text-color: var(--color-text-base);
-  --tyk-message-warning-icon-color: var(--color-warning-dark);
+  --tyk-message-warning-icon-color: var(--color-warning-base);
 
   --tyk-message-danger-background: var(--color-danger-extra-light);
   --tyk-message-danger-border: var(--color-danger-light);
   --tyk-message-danger-title-color: var(--color-text-critical-default);
   --tyk-message-danger-text-color: var(--color-text-base);
-  --tyk-message-danger-icon-color: var(--color-danger-dark);
+  --tyk-message-danger-icon-color: var(--color-danger-base);
 }
 
 .tyk-message {
