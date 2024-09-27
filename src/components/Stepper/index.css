@@ -23,7 +23,6 @@
 }
 
 .step-number {
-    /* background-color: var(--color-secondary-dark); */
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -40,13 +39,7 @@
     background-color: var(--color-secondary-dark);
 }
 
-.step.active .step-number {
-    /* background-color: var(--color-primary-base); */
-    /* color:var(--color-secondary-extra-dark); */
-}
-
 .step.completed .step-number {
-    /* background-color: var(--color-success-base); */
     color: var(--color-success-base);
     border-color: var(--color-success-base);
 }
