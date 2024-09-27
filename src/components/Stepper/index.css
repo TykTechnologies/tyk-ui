@@ -1,0 +1,75 @@
+.wizard-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.step {
+    display: flex;
+    margin-bottom: 20px;
+
+}
+
+.step-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.step-number {
+    /* background-color: var(--color-secondary-dark); */
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border: 1px solid var(--color-secondary-dark);
+}
+
+.step-line {
+    width: 1px;
+    flex-grow: 1;
+    background-color: var(--color-secondary-dark);
+}
+
+.step.active .step-number {
+    /* background-color: var(--color-primary-base); */
+    /* color:var(--color-secondary-extra-dark); */
+}
+
+.step.completed .step-number {
+    /* background-color: var(--color-success-base); */
+    color: var(--color-success-base);
+    border-color: var(--color-success-base);
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.step-content h3 {
+    margin: 0 0 5px 0;
+}
+
+.step-content p {
+    margin: 0 0 10px 0;
+}
+
+.step-component {
+    margin-top: 10px;
+    padding: 15px;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: right;
+    margin-top: 20px;
+}
