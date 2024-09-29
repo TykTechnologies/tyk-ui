@@ -1,34 +1,33 @@
 :root {
-  --tyk-message-padding-top: var(--spacing-md);
-  --tyk-message-padding-right: var(--spacing-md);
-  --tyk-message-padding-bottom: var(--spacing-md);
-  --tyk-message-padding-left: var(--spacing-md);
+  --tyk-message-padding-top: 16px;
+  --tyk-message-padding-right: 16px;
+  --tyk-message-padding-bottom: 16px;
+  --tyk-message-padding-left: 16px;
   --tyk-message-border-radius: var(--general-border-radius);
-  
-  --tyk-message-secondary-background: var(--color-secondary-light);
-  --tyk-message-secondary-border: var(--color-secondary-dark);
-  --tyk-message-secondary-text-color: var(--color-text-base);
-  --tyk-message-secondary-icon-color: var(--color-secondary-extra-dark1);
 
   --tyk-message-info-background: var(--color-info-extra-light);
   --tyk-message-info-border: var(--color-info-light);
+  --tyk-message-info-title-color: var(--color-text-informative-default);
   --tyk-message-info-text-color: var(--color-text-base);
-  --tyk-message-info-icon-color: var(--color-info-dark);
+  --tyk-message-info-icon-color: var(--color-info-base);
 
   --tyk-message-success-background: var(--color-success-extra-light);
   --tyk-message-success-border: var(--color-success-light);
+  --tyk-message-success-title-color: var(--color-text-success-default);
   --tyk-message-success-text-color: var(--color-text-base);
-  --tyk-message-success-icon-color: var(--color-success-dark);
+  --tyk-message-success-icon-color: var(--color-success-base);
 
   --tyk-message-warning-background: var(--color-warning-extra-light);
   --tyk-message-warning-border: var(--color-warning-light);
+  --tyk-message-warning-title-color: var(--color-text-warning-default);
   --tyk-message-warning-text-color: var(--color-text-base);
-  --tyk-message-warning-icon-color: var(--color-warning-dark);
+  --tyk-message-warning-icon-color: var(--color-warning-base);
 
   --tyk-message-danger-background: var(--color-danger-extra-light);
   --tyk-message-danger-border: var(--color-danger-light);
+  --tyk-message-danger-title-color: var(--color-text-critical-default);
   --tyk-message-danger-text-color: var(--color-text-base);
-  --tyk-message-danger-icon-color: var(--color-danger-dark);
+  --tyk-message-danger-icon-color: var(--color-danger-base);
 }
 
 .tyk-message {
@@ -40,10 +39,12 @@
   padding-inline: var(--tyk-message-padding-left) var(--tyk-message-padding-right);
 
   > .tyk-icon:first-child {
-    font-size: var(--xl-font-size);
+    font-size: var(--md-font-size);
     flex-shrink: 0;
     border-radius: 50%;
     color: white;
+    margin-inline-start: 2px;
+    margin-block-start: 2px;
 
     &::before {
       display: flex;
@@ -56,25 +57,39 @@
 
   > .tyk-icon:last-child {
     cursor: pointer;
+    color: var(--color-icon-neutral-inactive);
   }
 }
 
 .tyk-message__content {
   flex-grow: 1;
-  margin-inline: var(--spacing-md);
-  font-weight: bold;
+  margin-inline: 16px;
+  font-size: var(--xs-font-size);
+
+  .tyk-button {
+    margin-block-start: 8px;
+
+    + .tyk-button {
+      margin-inline-start: 8px;
+    }
+  }
+
+  > *,
+  a {
+    font-size: inherit;
+  }
 }
 
-.tyk-message--secondary {
-  --message-variant-background: var(--tyk-message-secondary-background);
-  --message-variant-border: var(--tyk-message-secondary-border);
-  --message-variant-color: var(--tyk-message-secondary-text-color);
-  --message-variant-icon-color: var(--tyk-message-secondary-icon-color);
+.tyk-message__title {
+  font-size: var(--sm-font-size);
+  font-weight: 600;
+  margin-block-end: 8px;
 }
 
 .tyk-message--info {
   --message-variant-background: var(--tyk-message-info-background);
   --message-variant-border: var(--tyk-message-info-border);
+  --message-variant-title-color: var(--tyk-message-info-title-color);
   --message-variant-color: var(--tyk-message-info-text-color);
   --message-variant-icon-color: var(--tyk-message-info-icon-color);
 }
@@ -82,6 +97,7 @@
 .tyk-message--success {
   --message-variant-background: var(--tyk-message-success-background);
   --message-variant-border: var(--tyk-message-success-border);
+  --message-variant-title-color: var(--tyk-message-success-title-color);
   --message-variant-color: var(--tyk-message-success-text-color);
   --message-variant-icon-color: var(--tyk-message-success-icon-color);
 }
@@ -89,6 +105,7 @@
 .tyk-message--warning {
   --message-variant-background: var(--tyk-message-warning-background);
   --message-variant-border: var(--tyk-message-warning-border);
+  --message-variant-title-color: var(--tyk-message-warning-title-color);
   --message-variant-color: var(--tyk-message-warning-text-color);
   --message-variant-icon-color: var(--tyk-message-warning-icon-color);
 }
@@ -96,6 +113,7 @@
 .tyk-message--danger {
   --message-variant-background: var(--tyk-message-danger-background);
   --message-variant-border: var(--tyk-message-danger-border);
+  --message-variant-title-color: var(--tyk-message-danger-title-color);
   --message-variant-color: var(--tyk-message-danger-text-color);
   --message-variant-icon-color: var(--tyk-message-danger-icon-color);
 }
@@ -111,5 +129,9 @@
 
   & > .tyk-icon:first-child {
     color: var(--message-variant-icon-color);
+  }
+
+  .tyk-message__title {
+    color: var(--message-variant-title-color);
   }
 }
