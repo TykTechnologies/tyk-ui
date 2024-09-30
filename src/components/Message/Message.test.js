@@ -16,6 +16,7 @@ describe('Message', () => {
   const selectors = {
     message: '.tyk-message',
     closeIcon: '.tyk-icon.fa-xmark',
+    title: '.tyk-message__title',
   };
 
   it('renders the component with the info theme by default', () => {
@@ -29,6 +30,13 @@ describe('Message', () => {
     cy.mount(<Component theme="success" />)
       .get(selectors.message)
       .should('have.class', successThemeClass);
+  });
+
+  it('can be rendered with a title', () => {
+    const title = 'Banner title';
+    cy.mount(<Component theme="success" title={title} />)
+      .get(selectors.title)
+      .should('exist');
   });
 
   it('can be rendered with no margins', () => {
