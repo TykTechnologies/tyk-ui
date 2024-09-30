@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Button from "../Button";
-import Icon from "../Icon";
+import StepIndicator from "./js/StepIndicator";
+import StepContent from "./js/StepContent";
+import NavigationButtons from "./js/NavigationButtons";
 
 const Stepper = ({
   steps,
@@ -35,48 +36,33 @@ const Stepper = ({
   const isLastStep = currentStep === steps.length - 1;
 
   return (
-    <div className="Stepper-container">
-      <div className="steps-container">
-        {steps.map((step, index) => {
-          const isStepComplete = index < currentStep;
-          return (
-            <div
-              key={index}
-              className={`step ${index === currentStep ? "active" : ""} ${
-                isStepComplete ? "completed" : ""
-              }`}
+    <div className="tyk-stepper">
+      <div className="Stepper-container">
+        <div className="steps-container">
+          {steps.map((step, index) => (
+            <StepContent
+              key={step.title || index}
+              step={step}
+              index={index}
+              currentStep={currentStep}
             >
-              <div className="step-indicator">
-                <div className={`step-number`}>
-                  {isStepComplete ? <Icon type="check" /> : index + 1}
-                </div>
-                {index < steps.length - 1 && <div className="step-line"></div>}
-              </div>
-              <div className="step-content">
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-                {index === currentStep && (
-                  <div className="step-component">{step.component}</div>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      <div className="navigation-buttons">
-        {currentStep >= 1 && (
-          <Button theme="secondary" onClick={handleBack}>
-            Back
-          </Button>
-        )}
-        &nbsp;
-        <Button
-          theme="primary"
-          onClick={isLastStep ? onFinish : handleNext}
-          disabled={isDisableFinish && isLastStep}
-        >
-          {isLastStep ? finishBtnText : "Continue"}
-        </Button>
+              <StepIndicator
+                index={index}
+                currentStep={currentStep}
+                stepsLength={steps.length}
+              />
+            </StepContent>
+          ))}
+        </div>
+        <NavigationButtons
+          currentStep={currentStep}
+          isLastStep={isLastStep}
+          isDisableFinish={isDisableFinish}
+          handleBack={handleBack}
+          handleNext={handleNext}
+          onFinish={onFinish}
+          finishBtnText={finishBtnText}
+        />
       </div>
     </div>
   );
