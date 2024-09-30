@@ -9,6 +9,7 @@ const NavigationButtons = ({
   handleNext,
   onFinish,
   finishBtnText,
+  isAllowNext
 }) => {
   return (
     <div className="navigation-buttons">
@@ -21,7 +22,7 @@ const NavigationButtons = ({
       <Button
         theme="primary"
         onClick={isLastStep ? onFinish : handleNext}
-        disabled={isDisableFinish && isLastStep}
+        disabled={!isAllowNext || isDisableFinish && isLastStep}
       >
         {isLastStep ? finishBtnText : "Continue"}
       </Button>

@@ -9,6 +9,7 @@ const Stepper = ({
   onFinish = () => {},
   onStepChange = () => {},
   finishBtnText = "Finish",
+  error,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -37,7 +38,7 @@ const Stepper = ({
 
   return (
     <div className="tyk-stepper">
-      <div className="Stepper-container">
+      <div className="stepper-container">
         <div className="steps-container">
           {steps.map((step, index) => (
             <StepContent
@@ -45,6 +46,7 @@ const Stepper = ({
               step={step}
               index={index}
               currentStep={currentStep}
+              error={error}
             >
               <StepIndicator
                 index={index}
@@ -58,6 +60,7 @@ const Stepper = ({
           currentStep={currentStep}
           isLastStep={isLastStep}
           isDisableFinish={isDisableFinish}
+          isAllowNext={!error}
           handleBack={handleBack}
           handleNext={handleNext}
           onFinish={onFinish}

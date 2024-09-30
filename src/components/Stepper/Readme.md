@@ -1,12 +1,17 @@
-```js
 
-const DefaultStepContent = ({ title }) => (
+
+```jsx
+import React, { useState } from "react";
+import Message from "../Message"
+
+// Default content for each step
+const DefaultStepContent = ({ title, onChange }) => (
   <div>
-    <h4>{title}</h4>
     <p>Hello {title}</p>
   </div>
 );
 
+// Define the steps for the stepper
 const steps = [
   {
     title: 'Step 1',
@@ -25,9 +30,25 @@ const steps = [
   },
 ];
 
-<Stepper 
-  steps={steps} 
-  onFinish={() => console.log("LAST STEP")}
-  onStepChange={(s) => console.log("STEP CHANGED", s)}
-/>
-```
+const StepperExample = () => {
+  const [error, setError] = useState(null);
+  const errorMessage = <Message theme="danger">ERROR</Message>
+
+  return (
+    <Stepper 
+      steps={steps} 
+      onFinish={() => console.log("LAST STEP")}
+      onStepChange={(step) => {
+        console.log("STEP CHANGED", step);
+        if (step.title === "Step 2") {
+          setError("Step 2 error");
+        } else {
+          setError(null);
+        }
+      }}
+      error={error ? errorMessage : null}
+    />
+  );
+};
+
+<StepperExample />

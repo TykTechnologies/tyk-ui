@@ -7,7 +7,6 @@
     .step {
         display: flex;
         margin-bottom: 20px;
-
     }
 
     .step-indicator {
@@ -60,5 +59,11 @@
         display: flex;
         justify-content: right;
         margin-top: 20px;
+    }
+
+    .error-step {
+        border: 1px solid var(--color-danger-dark);
+        border-radius: var(--form-control-border-radius);
+        padding: 5px;
     }
 }
