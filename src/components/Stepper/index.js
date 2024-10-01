@@ -49,9 +49,11 @@ const Stepper = ({
               error={error}
             >
               <StepIndicator
-                index={index}
+                isActive={index === currentStep}
                 currentStep={currentStep}
                 stepsLength={steps.length}
+                error={error}
+                index={index}
               />
             </StepContent>
           ))}

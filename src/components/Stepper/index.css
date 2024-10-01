@@ -63,7 +63,6 @@
 
     .error-step {
         border: 1px solid var(--color-danger-dark);
-        border-radius: var(--form-control-border-radius);
-        padding: 5px;
+        color: var(--color-danger-dark);
     }
 }

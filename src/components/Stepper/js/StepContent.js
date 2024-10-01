@@ -16,7 +16,7 @@ const StepContent = ({ step, index, currentStep, children, error }) => {
   return (
     <div className={getStepClassName()}>
       {children}
-      <div className={`step-content ${error && isActive ? "error-step" : ""}`}>
+      <div className={`step-content`}>
         <h3>{step.title}</h3>
         <p>{step.description}</p>
         {index === currentStep && <div>{error}</div>}
