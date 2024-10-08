@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import PropTypes from 'prop-types';
 import { StepperProvider } from "./StepperContext";
 import StepList from "./js/StepList";
 import StepperButtons from "./js/StepperButtons";
@@ -49,10 +50,6 @@ export const Step = ({ children }) => {
 
 Stepper.Step = Step;
 
-export default Stepper;
-
-
-import PropTypes from 'prop-types';
 
 Stepper.propTypes = {
   /**
@@ -86,3 +83,6 @@ Stepper.defaultProps = {
 Step.propTypes = {
   children: PropTypes.node.isRequired
 };
+
+
+export default Stepper;
