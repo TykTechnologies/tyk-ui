@@ -9,7 +9,7 @@ const StepList = () => {
     <div>
       {steps.map((step, index) => (
         <StepItem
-          key={index}
+          key={step}
           step={step}
           index={index}
           isActive={index === activeStep}
