@@ -28,6 +28,7 @@ export { default as TextEllipsis } from './components/TextEllipsis';
 export { default as toast } from './components/Toast';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Table } from './components/Table';
+export { default as Stepper } from './components/Stepper';
 
 // -- Layout
 export { default as Column } from './layout/Column';
