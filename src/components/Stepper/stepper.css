@@ -1,0 +1,93 @@
+.stepper-container {
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: white;
+    border: 1.5px solid var(--color-secondary-dark);
+}
+
+.stepper-line {
+    position: absolute;
+    left: 15px;
+    margin-top: 10px;
+    height: 100%;
+    width: 1px;
+    background: var(--color-secondary-dark);
+    ;
+}
+
+.step-container {
+    display: flex;
+    position: relative;
+    margin: 10px;
+}
+
+.step-container:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-base);
+    margin-right: 15px;
+    flex-shrink: 0;
+    z-index: 1;
+    border: 1.5px solid var(--color-secondary-dark);
+    background-color: white;
+}
+
+.step-content {
+    flex: 1;
+    padding-bottom: 20px;
+}
+
+.step-title {
+    margin: 0 0 5px 0;
+}
+
+.step-description {
+    margin: 0;
+}
+
+.stepper-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+}
+
+
+.error-message {
+    margin: 5px 0;
+    color: var(--color-danger-base);
+}
+
+.step-error .step-number {
+    border: 1px solid var(--color-danger-base);
+    color: var(--color-danger-base);
+    font-weight: bold;
+    box-shadow: 0 0 5px var(--color-danger-base), 0 0 5px var(--color-danger-base);
+}
+
+
+.step-number.completed {
+    border: 1px solid var(--color-success-base);
+    color: var(--color-success-base);
+    font-weight: bold;
+    box-shadow: 0 0 5px var(--color-success-base), 0 0 5px var(--color-success-base);
+}
+
+.step-number.active {
+    border: 1px solid var(--color-success-base);
+    color: var(--color-success-base);
+    font-weight: bold;
+    box-shadow: 0 0 5px var(--color-success-base), 0 0 5px var(--color-success-base);
+}
