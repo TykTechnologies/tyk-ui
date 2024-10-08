@@ -50,3 +50,39 @@ export const Step = ({ children }) => {
 Stepper.Step = Step;
 
 export default Stepper;
+
+
+import PropTypes from 'prop-types';
+
+Stepper.propTypes = {
+  /**
+   * The steps of the stepper. Should be Stepper.Step components.
+   */
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element
+  ]).isRequired,
+  
+  /**
+   * Function to be called when the stepper is finished.
+   */
+  onFinish: PropTypes.func.isRequired,
+  
+  /**
+   * Function to validate each step. Should return true if valid, false otherwise.
+   */
+  stepValidator: PropTypes.func,
+  
+  /**
+   * Error message to display when a step is invalid.
+   */
+  stepErrMessage: PropTypes.string
+};
+
+Stepper.defaultProps = {
+  stepErrMessage: 'ERROR'
+};
+
+Step.propTypes = {
+  children: PropTypes.node.isRequired
+};
