@@ -24,6 +24,7 @@
 @import '../../components/Tabs/Tabs.css';
 @import '../../components/Toast/Toast.css';
 @import '../../components/Tooltip/Tooltip.css';
+@import '../../components/Stepper/stepper.css';
 
 /* -- Form Components */
 @import '../../form/components/Combobox2/Combobox.css';
