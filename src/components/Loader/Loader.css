@@ -1,3 +1,8 @@
+:root {
+  --loader-size: 16px;
+  --loader-color: var(--color-primary-base);
+}
+
 .tyk-loading__wrapper {
   background: rgba(255 255 255 / 60%);
   position: absolute;
@@ -5,69 +10,117 @@
   z-index: 99;
 }
 
-.loader-wrapper {
-  min-block-size: 100px;
-  position: relative;
-}
-
 .loading {
-  position: absolute;
-  inset-block-start: calc(50% - var(--spacing-sm));
-  inset-inline-start: 50%;
+  inline-size: var(--loader-size);
+  block-size: var(--loader-size);
+  box-sizing: border-box;
+
+  &.absolute {
+    position: absolute;
+    inset-inline-start: calc(50% - var(--loader-size) / 2);
+    inset-block-start: calc(50% - var(--loader-size) / 2);
+  }
 
   &.relative {
-    inset-inline-start: auto;
-    padding: 25px;
     position: relative;
-    text-align: center;
-    inset-block-start: auto;
+    inset-inline-start: auto;
+    margin-inline: auto;
+  }
+}
+
+.loader-type-circular {
+  --loader-thickness: calc(var(--loader-size) / 6);
+
+  animation: loader-spin 1.5s linear infinite;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--loader-color);
     inline-size: 100%;
+    padding: var(--loader-thickness);
+    border-radius: 50%;
+    mask:
+      conic-gradient(#0000, #000) subtract,
+      linear-gradient(#000 0 0) content-box;
+    box-sizing: border-box;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inline-size: var(--loader-thickness);
+    background: var(--loader-color);
+    aspect-ratio: 1;
+    inset-block-start: 0;
+    inset-inline-start: calc(50% - var(--loader-thickness) / 2);
+    border-radius: 50%;
+  }
+
+  &.loader-size-small {
+    --loader-size: 16px;
+  }
+
+  &.loader-size-big {
+    --loader-size: 80px;
   }
 }
 
-.loading-bar {
-  display: inline-block;
-  inline-size: 4px;
-  block-size: var(--spacing-md);
-  border-radius: 4px;
-  animation: loading 1s ease-in-out infinite;
-  margin-inline-start: 2px;
+@keyframes loader-spin {
+  to {
+    transform: rotate(1turn);
+  }
 }
 
-.loading-bar:nth-child(1) {
-  animation-delay: 0;
-  background-color: var(--color-primary-base);
-  opacity: 1;
+.loader-type-linear {
+  --height: 10px;
+
+  display: flex;
+  position: relative;
+  inline-size: 100%;
+  block-size: var(--height);
+  background-color: transparent;
+  border-radius: calc(var(--height) / 2);
+  border: 2px solid var(--color-secondary-base);
+  color: white;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    block-size: calc(100% - 4px);
+    border-radius: calc(var(--height) / 2);
+    background: linear-gradient(91.13deg, #03031C 14.54%, var(--color-primary-base) 92.52%, var(--color-primary-light) 107.54%);
+  }
+
+  &.is-loaded::before {
+    inset-inline-start: 2px;
+    inline-size: calc(100% - 4px);
+  }
+
+  &:not(.is-loaded)::before {
+    animation-name: loader-linear-animation;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
 }
 
-.loading-bar:nth-child(2) {
-  animation-delay: 0.09s;
-  background-color: var(--color-primary-base);
-  opacity: 0.80;
-}
-
-.loading-bar:nth-child(3) {
-  animation-delay: .18s;
-  background-color: var(--color-primary-base);
-  opacity: 0.60;
-}
-
-.loading-bar:nth-child(4) {
-  animation-delay: .27s;
-  background-color: var(--color-primary-base);
-  opacity: 0.40;
-}
-
-@keyframes loading {
+@keyframes loader-linear-animation {
   0% {
-    transform: scale(1);
+    inset-inline-start: 2px;
+    inline-size: 2px;
   }
 
-  20% {
-    transform: scale(1, 2.2);
+  25% {
+    inset-inline-start: 33%;
+    inline-size: 33%;
   }
 
-  40% {
-    transform: scale(1);
+  50% {
+    inset-inline-start: calc(100% - 2px);
+    inline-size: 0;
   }
 }
