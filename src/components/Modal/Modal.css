@@ -1,14 +1,4 @@
-:root {
-  --tyk-modal-body-padding: var(--spacing-lg);
-  --tyk-modal-footer-padding: var(--spacing-lg);
-  --tyk-modal-header-padding: var(--spacing-lg);
-  --tyk-modal-borders-color: var(--color-secondary-dark);
-}
-
 .tyk-modal {
-  --theme-header-height: 15px;
-  --theme-header-icon-size: 65px;
-
   align-items: center;
   pointer-events: none;
   position: fixed;
