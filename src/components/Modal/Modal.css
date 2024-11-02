@@ -90,7 +90,7 @@
 }
 
 .tyk-modal__content {
-  background-color: var(--tyk-modal-background-color, pink);
+  background-color: var(--tyk-modal-background-color);
   border: 2px solid var(--tyk-modal-border-color);
   border-radius: 8px;
   padding-block: 16px;
