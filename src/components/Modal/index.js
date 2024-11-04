@@ -6,6 +6,8 @@ import { CSSTransition } from 'react-transition-group';
 import Icon from '../Icon';
 import ModalFooter from './js/ModalFooter';
 import ModalBody from './js/ModalBody';
+import ModalHeader from './js/ModalHeader';
+import ModalTitle from './js/ModalTitle';
 
 /**
  * Modals add dialogs confirmation boxes, notifications, or completely custom content
@@ -14,31 +16,33 @@ import ModalBody from './js/ModalBody';
  */
 function Modal({
   children,
-  theme = 'none',
+  theme: themeProp = 'default',
   disableCloseCommands = false,
   opened = false,
-  onClose = () => {},
+  onClose,
   size = 'md',
   className = '',
   showBackdrop = true,
   ...restProps
 }) {
+  const theme = ['success', 'warning', 'danger', 'info'].includes(themeProp) ? themeProp : 'default';
   const modalClasses = [
     'tyk-modal',
     `tyk-modal--theme-${theme}`,
     opened && 'opened',
   ].concat(className.split(' ')).filter(Boolean).join(' ');
 
+  const themeIcon = {
+    info: 'circle-info',
+    success: 'hexagon-check',
+    warning: 'triangle-exclamation',
+    danger: 'hexagon-exclamation',
+  }[theme];
+
   const backdropClasses = [
     'tyk-modal__backdrop',
     opened && 'opened',
   ].filter(Boolean).join(' ');
-
-  const themeIcon = {
-    success: 'check',
-    warning: 'exclamation',
-    danger: 'exclamation',
-  }[theme];
 
   return (
     <>
@@ -52,12 +56,13 @@ function Modal({
             <div className={modalClasses} {...restProps}>
               <div className={`tyk-modal__dialog tyk-modal--${size}`}>
                 <div className="tyk-modal__content">
-                  {theme !== 'none' && (
-                    <div className="tyk-modal__theme-header">
-                      <Icon type={themeIcon} />
-                    </div>
+                  {themeIcon && (
+                    <Icon type={themeIcon} weight="solid" className="tyk-modal__theme-icon" />
                   )}
                   { children }
+                  {!disableCloseCommands && onClose && (
+                    <Icon type="xmark" className="tyk-modal__close-icon" onClick={onClose} />
+                  )}
                 </div>
               </div>
             </div>
@@ -73,7 +78,7 @@ function Modal({
         >
           <button
             className={backdropClasses}
-            onClick={() => !disableCloseCommands && onClose()}
+            onClick={() => !disableCloseCommands && onClose?.()}
             onKeyDown={() => {}}
             type="button"
             aria-label="Close"
@@ -85,38 +90,6 @@ function Modal({
   );
 }
 
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;
-/* eslint-disable-next-line */
-Modal.Header = ({ children }) => {
-  console.warn('%cModal.Header%c is deprecated.', 'font-weight: bold', '');
-  return (
-    <div className="tyk-modal__header">
-      { children }
-    </div>
-  );
-};
-Modal.Header.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.element,
-    PropTypes.node,
-    PropTypes.string,
-  ]),
-};
-/* eslint-disable-next-line */
-Modal.Title = ({ children }) => {
-  console.warn('%cModal.Title%c is deprecated.', 'font-weight: bold', '');
-  return (
-    <h5 className="tyk-modal__title">
-      { children }
-    </h5>
-  );
-};
-Modal.Title.propTypes = {
-  children: PropTypes.element,
-};
-
 Modal.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -125,7 +98,7 @@ Modal.propTypes = {
     PropTypes.string,
   ]),
   className: PropTypes.string,
-  /** one of "success", "warning", "danger", "none"; default is "none" */
+  /** one of "success", "warning", "danger", "info", "default"; default is "default" */
   theme: PropTypes.string,
   /** If set on true, the Modal won't close when clicking on the overlay or by pressing ESC key */
   disableCloseCommands: PropTypes.bool,
@@ -137,5 +110,10 @@ Modal.propTypes = {
   size: PropTypes.string,
   showBackdrop: PropTypes.bool,
 };
+
+Modal.Header = ModalHeader;
+Modal.Title = ModalTitle;
+Modal.Body = ModalBody;
+Modal.Footer = ModalFooter;
 
 export default Modal;

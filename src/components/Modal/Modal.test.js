@@ -19,7 +19,7 @@ describe('Modal', () => {
   const cssClasses = {
     tykModal: 'tyk-modal',
     opened: 'opened',
-    themeNone: 'tyk-modal--theme-none',
+    themeDefault: 'tyk-modal--theme-default',
     modalDialog: 'tyk-modal__dialog',
     themeSuccess: 'tyk-modal--theme-success',
     backDrop: 'tyk-modal__backdrop',
@@ -39,7 +39,7 @@ describe('Modal', () => {
       .should('exist')
       .and('have.class', cssClasses.tykModal)
       .and('have.class', cssClasses.opened)
-      .and('have.class', cssClasses.themeNone);
+      .and('have.class', cssClasses.themeDefault);
   });
 
   it('the modal is not rendered when opened is set to false ', () => {
@@ -117,24 +117,5 @@ describe('Modal', () => {
       .get(selectors.modalDialog)
       .should('exist')
       .and('have.class', cssClasses.widthLg);
-  });
-
-  it('console warns a message if Modal.Header or Modal.Title is used', () => {
-    cy.window()
-      .its('console')
-      .then((console) => cy.spy(console, 'warn').as('warn'));
-
-    cy.mount(
-      <Component opened theme="success">
-        <Modal.Header>
-          <Modal.Title>modal title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>modal body</Modal.Body>
-      </Component>,
-    )
-      .get('@warn')
-      .then((warn) => {
-        expect(warn).to.be.calledTwice;
-      });
   });
 });
