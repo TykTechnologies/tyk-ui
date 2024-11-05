@@ -142,7 +142,6 @@ class Combobox extends Component {
   }
 
   handleListItemClick(index) {
-    // eslint-disable-next-line react/destructuring-assignment
     const clickedValue = this.props.values[index];
     if (clickedValue.disabled) return;
 
@@ -443,7 +442,6 @@ class Combobox extends Component {
     return selectedValues;
   }
 
-  // eslint-disable-next-line react/no-unused-class-component-methods
   manageSelectedValues(index) {
     const { stateSelectedValues } = this.state;
     const { multiple, onChange, max } = this.props;
@@ -544,7 +542,6 @@ class Combobox extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  // eslint-disable-next-line react/no-unused-class-component-methods
   reset() {
     const { multiple, tags, value } = this.props;
 
@@ -740,7 +737,6 @@ class Combobox extends Component {
           </div>
         </div>
         {
-          // eslint-disable-next-line no-nested-ternary
           !CustomListComponent
             ? opened && filteredValues.length
               ? ReactDOM.createPortal(
@@ -752,12 +748,9 @@ class Combobox extends Component {
               <CustomListComponent
                 ref={this.valuesListRef}
                 className={this.getComboboxListCssClass()}
-                // eslint-disable-next-line react/jsx-no-bind
                 getListItemCssClasses={this.getListItemCssClasses.bind(this)}
-                // eslint-disable-next-line react/jsx-no-bind
                 getSelectedIndex={this.getSelectedIndex.bind(this)}
                 filteredValues={filteredValues}
-                // eslint-disable-next-line react/jsx-no-bind
                 handleListItemClick={this.handleListItemClick.bind(this)}
               />
             )

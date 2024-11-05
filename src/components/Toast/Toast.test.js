@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toast from './index';
 
-/* eslint-disable react/destructuring-assignment */
 function Component(props) {
   return props.children || <button type="button" onClick={props.onClick}>Show Toast</button>;
 }

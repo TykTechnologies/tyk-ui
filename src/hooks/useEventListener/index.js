@@ -9,14 +9,12 @@ const useEventListener = (eventName, handler, element) => {
   useEffect(() => {
     const isSupported = element?.addEventListener;
     if (!isSupported) {
-      // eslint-disable-next-line consistent-return
       return;
     }
 
     const eventListener = (event) => savedHandler.current(event);
     element.addEventListener(eventName, eventListener);
 
-    // eslint-disable-next-line consistent-return
     return () => {
       element.removeEventListener(eventName, eventListener);
     };

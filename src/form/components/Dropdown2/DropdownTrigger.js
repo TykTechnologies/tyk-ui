@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import Button from '../../../components/Button';
 import ButtonGroup from '../../../components/ButtonGroup';
 
-const DropdownTrigger = forwardRef(({
+const DropdownTrigger = forwardRef(function DropdownTrigger({
   title,
   theme = 'primary',
   splitTrigger,
   toggle,
   onTriggerClick,
   value,
-}, ref) => { // eslint-disable-line arrow-body-style
+}, ref) {
   return (
     !splitTrigger ? (
       <Button

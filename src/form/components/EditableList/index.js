@@ -325,9 +325,7 @@ class EditableList extends Component {
                     disabled={disabled}
                     displayType={config.displayType}
                     components={clonedComponents}
-                    // eslint-disable-next-line react/jsx-no-bind
                     onSubmit={this.handleItemUpdate.bind(this, index)}
-                    // eslint-disable-next-line react/jsx-no-bind
                     validate={this.isInList.bind(this, index)}
                     validationmessage="This value is already in the list"
                   />
@@ -348,7 +346,6 @@ class EditableList extends Component {
             ? (
               <EditableList
                 disabled={disabled}
-                // eslint-disable-next-line react/jsx-no-bind
                 onChange={this.handleChildrenOnChange.bind(this, index)}
                 config={config.children.config}
                 value={value[index]?.children || []}
@@ -424,7 +421,6 @@ class EditableList extends Component {
           errorPersist={!!(error)}
           noLabels={config.noLabels}
           onSubmit={this.handleFormSubmit}
-          // eslint-disable-next-line react/jsx-no-bind
           validate={this.isInList.bind(this, -1)}
           validationmessage="This value is already in the list"
           getMainFormButtonWidth={this.getMainFormButtonWidth}

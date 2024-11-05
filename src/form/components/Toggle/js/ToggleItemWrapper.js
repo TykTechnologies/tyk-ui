@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import ToggleContext from './ToggleContext';
 import ToggleItem from './ToggleItem';
 
-// eslint-disable-next-line arrow-body-style
-const ToggleItemWrapper = forwardRef(({ children, ...rest }, ref) => {
+const ToggleItemWrapper = forwardRef(function ToggleItemWrapper({ children, ...rest }, ref) {
   return (
     <ToggleContext.Consumer>
       {(context) => (

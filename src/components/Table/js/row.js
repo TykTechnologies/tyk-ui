@@ -9,7 +9,6 @@ export function Row({ row, index }) {
   const { columns, selectable } = state;
 
   const SelectableCheckbox = useCallback(() => (
-    // eslint-disable-next-line jsx-a11y/control-has-associated-label
     <td>
       <Checkbox
         value={row.selected}

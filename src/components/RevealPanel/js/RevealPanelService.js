@@ -133,7 +133,6 @@ class RevealPanelService {
     this.setHeight(`${finalHeight}px`, 'mousemove');
   }
 
-  // eslint-disable-next-line class-methods-use-this
   notifyListeners(list, value) {
     if (list && Array.isArray(list) && list.length) {
       list.forEach((fn) => {
@@ -144,14 +143,12 @@ class RevealPanelService {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   addListener(list, listener) {
     if (list && Array.isArray(list) && typeof listener === 'function') {
       list.push(listener);
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   removeListener(list, listener) {
     if (list && Array.isArray(list) && typeof listener === 'function' && list.length) {
       const index = list.indexOf(listener);
@@ -172,10 +169,8 @@ class RevealPanelService {
     this.notifyListeners(this.#onDragStartCallbacks, this.getHeight());
   }
 
-  // eslint-disable-next-line class-methods-use-this
   isPrimaryMouseButtonDown(e) {
     const flags = e.buttons !== undefined ? e.buttons : e.which;
-    // eslint-disable-next-line no-bitwise
     const isDown = flags === 1;
     return isDown;
   }

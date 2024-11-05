@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export function Cell({ col, row }) {
   if (!row.values[col.id]) {
-    return <td />; // eslint-disable-line jsx-a11y/control-has-associated-label
+    return <td />;
   }
 
   if (col.type === 'string') {

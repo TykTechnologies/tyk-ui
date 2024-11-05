@@ -7,7 +7,7 @@ import AccordionContext from './AccordionContext';
 import AccordionItemContext from './AccordionItemContext';
 import ItemTrigger from './AccordionItemTrigger';
 
-const AccordionItem = forwardRef((
+const AccordionItem = forwardRef(function AccordionItem (
   {
     collapsed: collapsedProp = false,
     children,
@@ -15,7 +15,7 @@ const AccordionItem = forwardRef((
     disabled,
   },
   ref,
-) => {
+) {
   const { arrow } = useContext(AccordionContext);
   const [collapsed, setCollapsed] = useState(collapsedProp);
 

@@ -21,7 +21,6 @@ function FieldsList({
           const tempField = typeof field === 'function' ? field(rowIndex, index) : field;
           return (
             <div
-              /* eslint-disable-next-line react/no-array-index-key */
               key={`${rowIndex}-${index}`}
               className={`editable-list__item-cell editable-list__item--size-${fields[index]?.size || 12}`}
             >
@@ -29,7 +28,6 @@ function FieldsList({
                 {...tempField?.props}
                 label=""
                 value={value[index]}
-                /* eslint-disable-next-line */
                 onChange={onChange.bind(null, index)}
                 error={errors?.[index]}
                 disabled={disabled || tempField?.props?.disabled}

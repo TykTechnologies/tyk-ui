@@ -92,7 +92,6 @@ function CodeEditor(props) {
           editorProps={{ $blockScrolling: true }}
           readOnly={readOnly || disabled}
           onLoad={(editorInstance) => {
-            // eslint-disable-next-line
             editorInstance.container.style.resize = 'both';
             // mouseup = css resize end
             document.addEventListener('mouseup', () => (

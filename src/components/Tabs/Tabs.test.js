@@ -5,7 +5,6 @@ import Tabs from './index';
 function Component(props) {
   return (
     <Tabs {...props}>
-      {/* eslint-disable-next-line react/prop-types, react/destructuring-assignment */}
       {props.children || (
         <>
           <Tabs.Tab

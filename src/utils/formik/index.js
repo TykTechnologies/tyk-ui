@@ -16,7 +16,7 @@ function debounce(f, limit) {
   };
 }
 
-/* eslint-disable react/prop-types, react/function-component-definition */
+/* eslint-disable react/prop-types, react/display-name */
 /**
  * A wrapper function that "prepares" a tyk-ui form component to be used with the formik library.
  * It handles things like setting the value of the component, change events, error state,
@@ -77,7 +77,6 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
     setMyValue(field.value);
   }, [field.value]);
 
-  // eslint-disable-next-line no-param-reassign
   if (form.status?.disabled) properties.disabled = true;
 
   const componentProps = { ...properties };

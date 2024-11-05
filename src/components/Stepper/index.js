@@ -1,15 +1,15 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { StepperProvider } from "./StepperContext";
-import StepList from "./js/StepList";
-import StepperButtons from "./js/StepperButtons";
-import "./stepper.css";
+import { StepperProvider } from './StepperContext';
+import StepList from './js/StepList';
+import StepperButtons from './js/StepperButtons';
+import './stepper.css';
 
-export const Stepper = ({
+const Stepper = ({
   children,
   onFinish,
   stepValidator,
-  stepErrMessage = "ERROR",
+  stepErrMessage = 'ERROR',
 }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({});
@@ -17,7 +17,7 @@ export const Stepper = ({
 
   const steps = useMemo(() => {
     return React.Children.toArray(children).filter(
-      (child) => child.type.name === "Step"
+      (child) => child.type.name === 'Step'
     );
   }, [children]);
 
@@ -59,17 +59,17 @@ Stepper.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.element
   ]).isRequired,
-  
+
   /**
    * Function to be called when the stepper is finished.
    */
   onFinish: PropTypes.func.isRequired,
-  
+
   /**
    * Function to validate each step. Should return true if valid, false otherwise.
    */
   stepValidator: PropTypes.func,
-  
+
   /**
    * Error message to display when a step is invalid.
    */

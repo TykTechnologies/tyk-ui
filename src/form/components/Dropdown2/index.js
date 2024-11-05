@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useDropdown from './useDropdown';
 import DropdownTrigger from './DropdownTrigger';
 import DropdownListWrapper from './DropdownListWrapper';
-import DropdownItem from './DropdowItem';
+import DropdownItem from './DropdownItem';
 import { DropdownContext } from './useDrodpownContext';
 
 function Dropdown2({

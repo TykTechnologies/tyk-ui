@@ -73,7 +73,6 @@ function SelectableList(props) {
           )
           : items.map((item, index) => (
             <List.Item
-              /* eslint-disable react/no-array-index-key */
               key={index}
               className={getListItemCssClassName(value.includes(item[primaryKey]))}
             >
@@ -84,7 +83,6 @@ function SelectableList(props) {
                 <input
                   type="checkbox"
                   checked={isChecked(value, item[primaryKey])}
-                  /* eslint-disable-next-line react/jsx-no-bind */
                   onChange={handleOnSelect.bind(item)}
                   value={item[primaryKey]}
                 />

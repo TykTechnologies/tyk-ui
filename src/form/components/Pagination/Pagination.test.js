@@ -3,7 +3,6 @@ import Pagination from './index';
 
 const totalNrOfPages = 10;
 
-// eslint-disable-next-line react/prop-types
 function Component(props) {
   return (
     <Pagination totalNrOfPages={totalNrOfPages} {...props} />

@@ -23,7 +23,6 @@ function DropdownItem({
 
 DropdownItem.propTypes = {
   children: PropTypes.node,
-  // eslint-disable-next-line
   value: PropTypes.any,
 };
 

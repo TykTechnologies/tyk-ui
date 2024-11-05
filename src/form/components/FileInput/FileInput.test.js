@@ -67,7 +67,6 @@ describe('FileInput', () => {
       }
       return (
         <FileInput
-          // eslint-disable-next-line react/jsx-no-bind
           onChange={onComponentChange}
         />
       );

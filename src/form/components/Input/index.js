@@ -32,7 +32,6 @@ class Input extends Component {
     } = this.props;
 
     if (!isfield && prevProps.value !== value) {
-      /* eslint-disable react/no-did-update-set-state */
       this.setState({
         stateValue: value,
       }, () => {
@@ -157,7 +156,7 @@ class Input extends Component {
 
   getInputComponent() {
     const {
-      isfield, onChange, value, ...rest
+      isfield, value, ...rest
     } = this.props;
     const { stateValue } = this.state;
     return (
@@ -171,7 +170,6 @@ class Input extends Component {
     );
   }
 
-  // eslint-disable-next-line react/no-unused-class-component-methods
   reset() {
     const { initValue } = this.state;
 

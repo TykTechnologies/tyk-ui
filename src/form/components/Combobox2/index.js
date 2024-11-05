@@ -381,7 +381,6 @@ function Combobox2({
     const updateScroll = () => {
       valuesElement.scrollTop = valuesElement.scrollHeight;
     };
-    /* eslint-disable-next-line no-undef */
     const mobserver = new MutationObserver(updateScroll);
     const robserver = new ResizeObserver(updateScroll);
 

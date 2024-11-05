@@ -1,13 +1,14 @@
-import React from "react";
-import Stepper from "./index";
+import React from 'react';
+import Stepper from './index';
 
+/* eslint-disable-next-line react/prop-types */
 function StepperComponent({ validator, onFinish: mockOnFinish }) {
   const onFinish = () => {
-    console.log("Stepper finished");
+    console.log('Stepper finished');
   };
 
   const stepValidator = (stepId) => {
-    return stepId !== "step2";
+    return stepId !== 'step2';
   };
 
   return (
@@ -31,78 +32,78 @@ function StepperComponent({ validator, onFinish: mockOnFinish }) {
   );
 }
 
-describe("Stepper", () => {
-  it("should render the initial step correctly", () => {
+describe('Stepper', () => {
+  it('should render the initial step correctly', () => {
     cy.mount(<StepperComponent />)
-      .get(".step-container")
-      .should("have.length", 3)
-      .get(".step-number.active")
-      .should("contain", "1")
-      .get(".step-title")
+      .get('.step-container')
+      .should('have.length', 3)
+      .get('.step-number.active')
+      .should('contain', '1')
+      .get('.step-title')
       .first()
-      .should("have.text", "Step 1");
+      .should('have.text', 'Step 1');
   });
 
-  it("should navigate to the next step when Continue is clicked", () => {
+  it('should navigate to the next step when Continue is clicked', () => {
     cy.mount(<StepperComponent />)
-      .get(".stepper-buttons button")
-      .contains("Continue")
+      .get('.stepper-buttons button')
+      .contains('Continue')
       .click()
-      .get(".step-number.active")
-      .should("contain", "2");
+      .get('.step-number.active')
+      .should('contain', '2');
   });
 
-  it("should show error message when validation fails", () => {
+  it('should show error message when validation fails', () => {
     cy.mount(<StepperComponent />)
-      .get(".stepper-buttons button")
-      .contains("Continue")
+      .get('.stepper-buttons button')
+      .contains('Continue')
       .click()
-      .get(".stepper-buttons button")
-      .contains("Continue")
+      .get('.stepper-buttons button')
+      .contains('Continue')
       .click()
-      .get(".error-message")
-      .should("be.visible")
-      .and("have.text", "Validation failed");
+      .get('.error-message')
+      .should('be.visible')
+      .and('have.text', 'Validation failed');
   });
 
-  it("should allow navigation back to previous step", () => {
+  it('should allow navigation back to previous step', () => {
     cy.mount(<StepperComponent />)
-      .get(".stepper-buttons button")
-      .contains("Continue")
+      .get('.stepper-buttons button')
+      .contains('Continue')
       .click()
-      .get(".stepper-buttons button")
-      .contains("Back")
+      .get('.stepper-buttons button')
+      .contains('Back')
       .click()
-      .get(".step-number.active")
-      .should("contain", "1");
+      .get('.step-number.active')
+      .should('contain', '1');
   });
 
-  it("should mark completed steps correctly", () => {
+  it('should mark completed steps correctly', () => {
     cy.mount(<StepperComponent />)
-      .get(".stepper-buttons button")
-      .contains("Continue")
+      .get('.stepper-buttons button')
+      .contains('Continue')
       .click()
-      .get(".step-number.completed")
-      .should("have.length", 1)
-      .and("contain", "1");
+      .get('.step-number.completed')
+      .should('have.length', 1)
+      .and('contain', '1');
   });
 
-  it("should show Finish button on last step", () => {
-    const onFinish = cy.stub().as("onFinish");
+  it('should show Finish button on last step', () => {
+    const onFinish = cy.stub().as('onFinish');
     cy.mount(<StepperComponent validator={() => true} onFinish={onFinish} />)
-      .get(".stepper-buttons button")
-      .contains("Continue")
+      .get('.stepper-buttons button')
+      .contains('Continue')
       .click()
-      .get(".stepper-buttons button")
-      .contains("Continue")
+      .get('.stepper-buttons button')
+      .contains('Continue')
       .click()
-      .get(".stepper-buttons button")
-      .contains("Finish")
-      .should("be.visible")
+      .get('.stepper-buttons button')
+      .contains('Finish')
+      .should('be.visible')
       .click()
       .get('button:contains("Finish")')
       .click()
-      .get("@onFinish")
-      .should("have.been.called");
+      .get('@onFinish')
+      .should('have.been.called');
   });
 });

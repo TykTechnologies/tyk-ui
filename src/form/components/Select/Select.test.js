@@ -13,7 +13,6 @@ const options = [
   { id: 'apieight', name: 'API eight' },
 ];
 
-// eslint-disable-next-line react/prop-types
 function Component(props) {
   return (
     <Select options={options} {...props} />

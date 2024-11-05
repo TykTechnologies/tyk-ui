@@ -282,7 +282,6 @@ function Chart({
 
     setTykChartInstance(echarts.init(chartWrapperRef.current));
 
-    // eslint-disable-next-line consistent-return
     return () => {
       if (tykChartInstance) {
         tykChartInstance.dispose();
