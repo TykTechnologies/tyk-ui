@@ -26,7 +26,7 @@ RevealPanelHeaderRight.propTypes = {
 
 const mergeClasses = (...classNames) => classNames.map((it) => (it || '').trim()).filter(Boolean).join(' ');
 
-const RevealPanel = forwardRef(({
+const RevealPanel = forwardRef(function RevealPanel({
   children,
   height,
   onHeightChange = null,
@@ -38,7 +38,7 @@ const RevealPanel = forwardRef(({
   contentClassName,
   gutterClassName,
   wrapperClassName,
-}, ref) => {
+}, ref) {
   const panelRef = useRef(null);
   const gutterRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -60,7 +60,6 @@ const RevealPanel = forwardRef(({
     panelService.on('onDragEnd', onDragEnd);
     panelService.setHeight(height, 'initialize');
 
-    // eslint-disable-next-line consistent-return
     return () => {
       panelService.unbindEvents();
     };

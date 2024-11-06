@@ -88,7 +88,6 @@ describe('Collapsible', () => {
       .contains('large')
       .click();
 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
       .get(wrapperSelector)
       .invoke('height')
@@ -98,7 +97,6 @@ describe('Collapsible', () => {
       .contains('small')
       .click();
 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(200)
       .get(wrapperSelector)
       .invoke('height')

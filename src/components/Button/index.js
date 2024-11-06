@@ -6,7 +6,7 @@ import Icon from '../Icon';
 /**
  * Button component.
  */
-const Button = forwardRef((props, ref) => {
+const Button = forwardRef(function Button(props, ref) {
   const {
     customButton,
     children,
@@ -92,13 +92,12 @@ const Button = forwardRef((props, ref) => {
       );
     } else {
       buttonType = (
-        // eslint-disable-next-line react/button-has-type
         <button
           id={id}
           className={getCssClasses()}
           disabled={disabled}
           onClick={onClick}
-          type={type || 'button'} // eslint-disable-line react/button-has-type
+          type={type || 'button'}
           ref={ref}
           {...rest}
         >

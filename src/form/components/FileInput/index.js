@@ -12,7 +12,6 @@ function FileInput({
   label,
   note,
   accept,
-  value,
   onChange,
   ...rest
 }) {

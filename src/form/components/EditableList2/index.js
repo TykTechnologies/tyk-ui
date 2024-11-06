@@ -8,7 +8,6 @@ import validateValues from './validate-values';
 import withValidation from './with-validation';
 
 let id = 1;
-/* eslint-disable-next-line */
 const getUID = prefix => `${prefix}-${id++}`;
 
 /**
@@ -102,15 +101,12 @@ function EditableList2({
         <ul className="editable-list__list">
           {(value || [[]]).map((v, i) => (
             <FieldsList
-              /* eslint-disable-next-line */
               key={v.id || i}
               rowIndex={i}
               disabled={disabled}
               readOnly={readOnly}
               fields={fields}
-              /* eslint-disable-next-line */
               onChange={updateRowValue.bind(null, i)}
-              /* eslint-disable-next-line */
               onDelete={deleteRow.bind(null, i)}
               value={v}
               errors={internalErrors?.[i]}

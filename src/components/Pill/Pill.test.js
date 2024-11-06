@@ -5,7 +5,6 @@ import Pill from './index';
 function Component(props) {
   return (
     <Pill {...props}>
-      {/* eslint-disable-next-line react/prop-types, react/destructuring-assignment */}
       {props.children || (
         <div>Demo</div>
       )}

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import FloatingContainer from '../../../components/FloatingContainer';
 import List from '../../../components/List';
 
-const DropdownListWrapper = forwardRef(({
+const DropdownListWrapper = forwardRef(function DropdownListWrapper({
   children,
   element,
   maxWidth,
-}, ref) => { // eslint-disable-line arrow-body-style
+}, ref) {
   return (
     <FloatingContainer
       element={element}

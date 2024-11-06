@@ -520,7 +520,6 @@ describe('Combobox2', () => {
       cy.get(`.${classes.entryField}`)
         .blur();
 
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(1000)
         .get('.tyk-pill:last-of-type')
         .should('have.text', item.name);

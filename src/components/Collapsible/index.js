@@ -18,7 +18,6 @@ function Collapsible({
   const collapseWrapper = useRef(null);
   const refContainerSize = useComponentSize(contentContainer);
   const [contentContainerStyle, setContentContainerStyle] = useState({
-    // eslint-disable-next-line
     height: (collapsed) ? 0 : 'auto',
   });
 

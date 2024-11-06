@@ -281,15 +281,12 @@ class EditableListForm extends Component {
             {
               components.map((component, index) => {
                 const ComponentName = component.name;
-                const {
-                  onChange, value, ...rest
-                } = component.props;
+                const { value, ...rest } = component.props;
 
                 return (
                   <Column size={`md-${component.size || '12'} lg-${component.size || '12'}`} key={component.props.name}>
                     <ComponentName
                       disabled={disabled || component.props.disabled}
-                      // eslint-disable-next-line react/jsx-no-bind
                       onChange={this.handleOnChange.bind(this, component, index)}
                       {...rest}
                       label={displayType === 'inline' ? '' : component.props.label}

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-// eslint-disable-next-line react/function-component-definition
+/* eslint-disable-next-line react/display-name */
 const withValidation = (Component) => ({
   onChange, // eslint-disable-line react/prop-types
   validate, // eslint-disable-line react/prop-types
@@ -9,7 +9,6 @@ const withValidation = (Component) => ({
 }) => {
   const [internalError, setInternalError] = useState(null);
   const onFieldChange = useCallback((event) => {
-    /* eslint-disable-next-line */
     const value = event?.target
       ? ['radio', 'checkbox'].includes(event.target.type)
         ? event.target.checked

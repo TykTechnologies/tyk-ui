@@ -45,7 +45,7 @@ describe('Tooltip', () => {
       cy.get(`.${classes.content}`)
         .trigger('mouseover');
 
-      return cy // eslint-disable-line cypress/no-unnecessary-waiting
+      return cy
         .get(`.${classes.floatingContainer}`)
         .wait(500)
         .invoke('offset')

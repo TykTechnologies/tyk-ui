@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types, react/jsx-no-constructed-context-values */
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import AccordionContext from './AccordionContext';

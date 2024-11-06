@@ -168,11 +168,11 @@
   padding: var(--error-message-padding);
   position: relative;
 
-  &:before { 
+  &::before {
     content: "\f06a";
     color: var(--color-danger-base);
     font-family: var(--font-awesome);
-    font-weight: 300; 
+    font-weight: 300;
     margin-inline-end: 5px;
     display: inline-block;
   }

@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const Input2 = forwardRef(({
+const Input2 = forwardRef(function Input2({
   error,
   onChange,
   readOnly,
@@ -14,7 +14,7 @@ const Input2 = forwardRef(({
   value,
   wrapperClassName = '',
   ...rest
-}, ref) => {
+}, ref) {
   const inputRef = useRef();
 
   useImperativeHandle(ref, () => ({

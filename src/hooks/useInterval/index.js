@@ -8,7 +8,6 @@ export default function useInterval(callback, delay, ...args) {
     savedCallback.current = callback;
   }, [callback]);
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     function tick() {
       savedCallback.current(...args);

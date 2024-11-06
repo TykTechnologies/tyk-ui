@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useStepper } from '../StepperContext';
 import StepNumber from './StepNumber';
 
@@ -16,7 +17,7 @@ const StepItem = ({
   return (
     <div className="tyk-stepper">
       <div className={`step-container ${hasError ? 'step-error' : ''}`}>
-        {!isLastStep && <div className={`stepper-line `} />}
+        {!isLastStep && <div className="stepper-line" />}
         <StepNumber
           number={index + 1}
           isCompleted={isCompleted}
@@ -32,6 +33,15 @@ const StepItem = ({
       </div>
     </div>
   );
+};
+
+StepItem.propTypes = {
+  step: PropTypes.instanceOf(Object),
+  index: PropTypes.number,
+  isActive: PropTypes.bool,
+  isCompleted: PropTypes.bool,
+  hasError: PropTypes.bool,
+  isLastStep: PropTypes.bool
 };
 
 export default StepItem;

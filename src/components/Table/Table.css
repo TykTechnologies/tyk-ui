@@ -24,7 +24,7 @@
     padding: var(--table-th-padding);
     vertical-align: middle;
     white-space: nowrap;
-  
+
     &.fit {
       white-space: nowrap;
       inline-size: 1%;
@@ -68,10 +68,10 @@
     }
 
     .tyk-form-group {
-      margin-bottom: 0;
+      margin-block-end: 0;
 
       .tyk-form-control {
-        margin-top: 0;
+        margin-block-start: 0;
       }
     }
 

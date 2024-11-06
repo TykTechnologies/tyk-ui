@@ -11,7 +11,7 @@ const VIEWPORT_INITIAL_PADDING = 5;
  * It displays a container relative to another element.
  * Meant to be used for dropdowns, tooltips, and other similar components.
  */
-const FloatingContainer = forwardRef(({
+const FloatingContainer = forwardRef(function FloatingContainer({
   element,
   size = 'auto',
   forceDisplay = 'auto',
@@ -21,7 +21,7 @@ const FloatingContainer = forwardRef(({
   className,
   children,
   infiniteScrollerConfig,
-}, ref) => {
+}, ref) {
   const localRef = useRef(null);
   const floatingContainerRef = ref || localRef;
   const contentWrapperRef = useRef(null);
@@ -42,8 +42,8 @@ const FloatingContainer = forwardRef(({
     const hasBottomSpace = bottomSpace > container.scrollHeight;
     const hasLeftSpace = leftSpace > container.offsetWidth;
     const hasRightSpace = rightSpace > container.offsetWidth;
-    const positionedVerticallyFitsInViewport = left + target.offsetWidth / 2 - container.offsetWidth / 2 > 0; // eslint-disable-line max-len
-    const positionedHorizontallyFitsInViewport = top + target.offsetHeight / 2 - container.scrollHeight / 2 > 0; // eslint-disable-line max-len
+    const positionedVerticallyFitsInViewport = left + target.offsetWidth / 2 - container.offsetWidth / 2 > 0;
+    const positionedHorizontallyFitsInViewport = top + target.offsetHeight / 2 - container.scrollHeight / 2 > 0;
 
     if (
       displayAxis === 'vertical'

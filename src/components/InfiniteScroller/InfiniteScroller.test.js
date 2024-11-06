@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import React, { useRef } from 'react';
 import InfiniteScroller from './index';
 
@@ -55,7 +54,6 @@ describe('InfiniteScroller', () => {
       .get(selectors.wrapper)
       .scrollTo(0, 10);
 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(500)
       .get('@loadMore')
       .should('not.be.called');
@@ -63,7 +61,6 @@ describe('InfiniteScroller', () => {
     cy.get(selectors.wrapper)
       .scrollTo('bottom');
 
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(500)
       .get('@loadMore')
       .should('be.called');

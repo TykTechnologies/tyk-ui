@@ -42,7 +42,6 @@ function Select(props) {
     }
   }, [onBlur]);
 
-  // eslint-disable-next-line arrow-body-style
   const getSelectError = useCallback(() => {
     return (error && error !== 'true' && error !== 'false')
       ? (

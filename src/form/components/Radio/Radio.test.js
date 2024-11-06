@@ -1,7 +1,6 @@
 import React from 'react';
 import Radio from './index';
 
-// eslint-disable-next-line react/prop-types
 function Component(props) {
   return (
     <Radio {...props} />

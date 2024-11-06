@@ -4,7 +4,7 @@ import Modal from './index';
 function Component(props) {
   return (
     <Modal {...props}>
-      {/* eslint-disable-next-line react/prop-types, react/destructuring-assignment */}
+      {/* eslint-disable-next-line react/prop-types */}
       {props.children || (
         <>
           <Modal.Body>Demo</Modal.Body>

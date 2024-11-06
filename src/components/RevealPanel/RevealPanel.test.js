@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types, react/jsx-no-constructed-context-values */
 import React from 'react';
 import RevealPanel from './index';
 

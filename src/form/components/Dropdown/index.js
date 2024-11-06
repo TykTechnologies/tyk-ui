@@ -325,7 +325,6 @@ class Dropdown extends Component {
           opened
             ? ReactDOM.createPortal(
               <DropdownContext.Provider
-                // eslint-disable-next-line react/jsx-no-constructed-context-values
                 value={{
                   onSelectItem: this.onSelectItem,
                   selectedItem,

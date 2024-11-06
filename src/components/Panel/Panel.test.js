@@ -5,7 +5,6 @@ import Panel from './index';
 function Component(props) {
   return (
     <Panel {...props}>
-      {/* eslint-disable-next-line react/prop-types, react/destructuring-assignment */}
       {props.children || (
         <>
           <Panel.Header>Header</Panel.Header>

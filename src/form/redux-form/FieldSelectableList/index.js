@@ -18,6 +18,7 @@ class FieldSelectableList extends Component {
   }
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { children, ...props } = this.props;
 
     return (
