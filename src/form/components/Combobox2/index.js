@@ -38,6 +38,7 @@ function Combobox2({
   CustomListComponent,
   onBeforeChange = () => true,
   onChange = () => {},
+  onBlur = () => {},
   floatingContainerConfig,
   expandMode,
   infiniteScrollerConfig,
@@ -405,6 +406,7 @@ function Combobox2({
       ref={rootRef}
       tabIndex={disabled ? '-1' : '0'}
       onClickCapture={onClickCapture}
+      onBlurCapture={onBlur}
       {...restProps}
       className={getCssClasses()}
     >
@@ -546,6 +548,7 @@ Combobox2.propTypes = {
    * The callback is called with two arguments: 1) the previous value, 2) the next value */
   onBeforeChange: PropTypes.func,
   onChange: PropTypes.func,
+  onBlur: PropTypes.func,
   placeholder: PropTypes.string,
   /** Enables the display of values as `Pill` components that can be
    *  removed without opening the dropdown. */
