@@ -188,6 +188,9 @@ function Combobox2({
       }
     } else if (value.length < max) {
       finalValue = [...value, val];
+      console.log('IFRIM', values);
+      console.log('IFRIM2', Array.isArray(values));
+      console.log('IFRIM3', values.with);
       selectedValues = values.with(valIndex, { ...val, selected: true });
     } else if (max === 1) {
       finalValue = [val];
