@@ -65,7 +65,7 @@ const wrapper = (Component, options) => ({ field, form, ...properties }) => {
         properties.onChange(newValue);
       }
       field.onChange({ target: { name: field.name, value: newValue, ...onChangeProps } });
-      if (form.validateOnBlur && Component.name === 'Combobox2') setTimeout(() => form.setFieldTouched(field.name));
+      if (form.validateOnBlur && ['Combobox2', 'EditableList2'].includes(Component.name) ) setTimeout(() => form.setFieldTouched(field.name));
     });
     setMyValue(newValue);
   };
