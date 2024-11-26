@@ -282,7 +282,6 @@ function Chart({
 
     setTykChartInstance(echarts.init(chartWrapperRef.current));
 
-    // eslint-disable-next-line consistent-return
     return () => {
       if (tykChartInstance) {
         tykChartInstance.dispose();
@@ -335,7 +334,7 @@ function Chart({
       )
     ) {
       tykChartInstance.clear();
-      tykChartInstance.setOption(buildChartOptions(type, option, series));
+      tykChartInstance.setOption(buildChartOptions(type, option, series), { notMerge: true });
       tykChartInstance.dispatchAction({
         type: 'takeGlobalCursor',
         key: 'dataZoomSelect',
