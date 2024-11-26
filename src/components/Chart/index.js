@@ -334,7 +334,7 @@ function Chart({
       )
     ) {
       tykChartInstance.clear();
-      tykChartInstance.setOption(buildChartOptions(type, option, series));
+      tykChartInstance.setOption(buildChartOptions(type, option, series), { notMerge: true });
       tykChartInstance.dispatchAction({
         type: 'takeGlobalCursor',
         key: 'dataZoomSelect',
