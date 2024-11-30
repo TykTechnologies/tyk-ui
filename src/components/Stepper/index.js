@@ -1,15 +1,16 @@
-import React, { useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { StepperProvider } from './StepperContext';
-import StepList from './js/StepList';
-import StepperButtons from './js/StepperButtons';
-import './stepper.css';
+import React, { useState, useMemo } from "react";
+import PropTypes from "prop-types";
+import { StepperProvider } from "./StepperContext";
+import StepList from "./js/StepList";
+import StepperButtons from "./js/StepperButtons";
+import "./stepper.css";
 
 const Stepper = ({
   children,
   onFinish,
   stepValidator,
-  stepErrMessage = 'ERROR',
+  stepErrMessage = "ERROR",
+  orientation = "vertical",
 }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({});
@@ -17,7 +18,7 @@ const Stepper = ({
 
   const steps = useMemo(() => {
     return React.Children.toArray(children).filter(
-      (child) => child.type.name === 'Step'
+      (child) => child.type.name === "Step"
     );
   }, [children]);
 
@@ -32,13 +33,17 @@ const Stepper = ({
     stepErrMessage,
     validationAttempted,
     setValidationAttempted,
+    orientation,
   };
 
   return (
     <StepperProvider value={contextValue}>
-      <div className="stepper-container">
+      <div className={`stepper-container stepper-${orientation}`}>
         <StepList />
-        <StepperButtons />
+        <div className="stepper-content-wrapper">
+          {orientation === "horizontal" && steps[activeStep]}
+          <StepperButtons />
+        </div>
       </div>
     </StepperProvider>
   );
@@ -50,39 +55,24 @@ export const Step = ({ children }) => {
 
 Stepper.Step = Step;
 
-
 Stepper.propTypes = {
-  /**
-   * The steps of the stepper. Should be Stepper.Step components.
-   */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element
+    PropTypes.element,
   ]).isRequired,
-
-  /**
-   * Function to be called when the stepper is finished.
-   */
   onFinish: PropTypes.func.isRequired,
-
-  /**
-   * Function to validate each step. Should return true if valid, false otherwise.
-   */
   stepValidator: PropTypes.func,
-
-  /**
-   * Error message to display when a step is invalid.
-   */
-  stepErrMessage: PropTypes.string
+  stepErrMessage: PropTypes.string,
+  orientation: PropTypes.oneOf(["horizontal", "vertical"]),
 };
 
 Stepper.defaultProps = {
-  stepErrMessage: 'ERROR'
+  stepErrMessage: "ERROR",
+  orientation: "vertical",
 };
 
 Step.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
-
 
 export default Stepper;
