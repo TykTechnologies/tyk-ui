@@ -11,10 +11,15 @@ const Stepper = ({
   stepValidator,
   stepErrMessage = "ERROR",
   orientation = "vertical",
+  contentHeight = "200px",
+  nextBtnTxt = "Continue",
+  finishBtnTxt = "Finish",
+  backBtnTxt = "Back",
 }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({});
   const [validationAttempted, setValidationAttempted] = useState(false);
+  const isHorizontal = orientation === "horizontal";
 
   const steps = useMemo(() => {
     return React.Children.toArray(children).filter(
@@ -41,8 +46,27 @@ const Stepper = ({
       <div className={`stepper-container stepper-${orientation}`}>
         <StepList />
         <div className="stepper-content-wrapper">
-          {orientation === "horizontal" && steps[activeStep]}
-          <StepperButtons />
+          {isHorizontal && (
+            <div
+              className="no-scrollbar"
+              style={
+                isHorizontal
+                  ? {
+                      height: contentHeight,
+                      maxHeight: contentHeight,
+                      overflow: "scroll",
+                    }
+                  : {}
+              }
+            >
+              {isHorizontal && steps[activeStep]}
+            </div>
+          )}
+          <StepperButtons
+            nextBtnTxt={nextBtnTxt}
+            finishBtnTxt={finishBtnTxt}
+            backBtnTxt={backBtnTxt}
+          />
         </div>
       </div>
     </StepperProvider>
@@ -75,6 +99,10 @@ Stepper.propTypes = {
    * Error message to display when a step is invalid.
    */
   stepErrMessage: PropTypes.string,
+  /**
+   * height of the content (for horizontal stepper)
+   */
+  contentHeight: PropTypes.string,
   /**
    * Stepper orientation
    */

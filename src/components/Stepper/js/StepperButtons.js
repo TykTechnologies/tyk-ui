@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../../Button';
 import { useStepper } from '../StepperContext';
 
-const StepperButtons = () => {
+const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
   const {
     activeStep,
     steps,
@@ -47,11 +47,11 @@ const StepperButtons = () => {
     <div className="stepper-buttons">
       {activeStep > 0 && (
         <Button onClick={goToPreviousStep} theme="secondary">
-          Back
+          {backBtnTxt}
         </Button>
       )}
       <Button onClick={goToNextStep} theme="primary">
-        {isLastStep ? 'Finish' : 'Continue'}
+        {isLastStep ? finishBtnTxt : nextBtnTxt}
       </Button>
     </div>
   );
