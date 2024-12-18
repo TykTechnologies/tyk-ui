@@ -2,17 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const StepNumber = ({ number, isCompleted, isActive, hasError }) => {
-  const classNames = ['step-number'];
+  const classNames = [
+    'step-number',
+    isCompleted ? 'completed' : '',
+    isActive ? 'active' : '',
+    hasError ? 'error' : ''
+  ].filter(Boolean).join(' ');
 
-  if (hasError) {
-    classNames.push('error');
-  } else if (isCompleted) {
-    classNames.push('completed');
-  } else if (isActive) {
-    classNames.push('active');
-  }
-
-  return <div className={classNames.join(' ')}>{hasError ? '!' : number}</div>;
+  return (
+    <div className={classNames}>
+      <span>{hasError ? '!' : number}</span>
+    </div>
+  );
 };
 
 StepNumber.propTypes = {

@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../Button';
 import { useStepper } from '../StepperContext';
 
-const StepperButtons = () => {
+const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
   const {
     activeStep,
     steps,
@@ -47,14 +48,20 @@ const StepperButtons = () => {
     <div className="stepper-buttons">
       {activeStep > 0 && (
         <Button onClick={goToPreviousStep} theme="secondary">
-          Back
+          {backBtnTxt}
         </Button>
       )}
       <Button onClick={goToNextStep} theme="primary">
-        {isLastStep ? 'Finish' : 'Continue'}
+        {isLastStep ? finishBtnTxt : nextBtnTxt}
       </Button>
     </div>
   );
+};
+
+StepperButtons.propTypes = {
+  nextBtnTxt: PropTypes.string.isRequired,
+  finishBtnTxt: PropTypes.string.isRequired,
+  backBtnTxt: PropTypes.string.isRequired
 };
 
 export default StepperButtons;
