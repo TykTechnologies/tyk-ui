@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../Button';
 import { useStepper } from '../StepperContext';
 
@@ -55,6 +56,12 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
       </Button>
     </div>
   );
+};
+
+StepperButtons.propTypes = {
+  nextBtnTxt: PropTypes.string.isRequired,
+  finishBtnTxt: PropTypes.string.isRequired,
+  backBtnTxt: PropTypes.string.isRequired
 };
 
 export default StepperButtons;

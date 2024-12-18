@@ -52,10 +52,10 @@ const Stepper = ({
               style={
                 isHorizontal && contentHeight
                   ? {
-                      height: contentHeight,
-                      maxHeight: contentHeight,
-                      overflow: "scroll",
-                    }
+                    height: contentHeight,
+                    maxHeight: contentHeight,
+                    overflow: "scroll",
+                  }
                   : {}
               }
             >
@@ -107,6 +107,9 @@ Stepper.propTypes = {
    * Stepper orientation
    */
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
+  nextBtnTxt: PropTypes.string,
+  finishBtnTxt: PropTypes.string,
+  backBtnTxt: PropTypes.string,
 };
 
 Stepper.defaultProps = {

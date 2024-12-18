@@ -1,6 +1,6 @@
-import React from 'react';
-import { useStepper } from '../StepperContext';
-import StepItem from './StepItem';
+import React from "react";
+import { useStepper } from "../StepperContext";
+import StepItem from "./StepItem";
 
 const StepList = () => {
   const { steps, activeStep, errors, orientation } = useStepper();

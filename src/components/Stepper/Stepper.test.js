@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Stepper from './index';
 
-/* eslint-disable-next-line react/prop-types */
 
 function StepperComponent({ 
   validator, 
