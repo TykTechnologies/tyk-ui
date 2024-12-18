@@ -158,4 +158,87 @@ describe('Card', () => {
       .and('have.class', cssClasses.card)
       .and('have.class', customClass);
   });
+
+  
+
+  describe('Card - Selected and Selectable', () => {
+    const cssClassesSelected = {
+      selected: 'tyk-card--selected',
+      selectable: 'tyk-card--selectable',
+    };
+  
+    const selectors = {
+      card: `.${cssClasses.card}`,
+      selected: `.${cssClassesSelected.selected}`,
+      selectable: `.${cssClassesSelected.selectable}`,
+    };
+  
+    it('should render with the "selected" class when selected prop is true', () => {
+      cy.mount(
+        <Card selected>
+          <Card.Body>
+            <Card.Title>Selected Card</Card.Title>
+          </Card.Body>
+        </Card>,
+      )
+        .get(selectors.card)
+        .should('exist')
+        .and('have.class', cssClassesSelected.selected);
+    });
+  
+    it('should not render the "selected" class when selected prop is false', () => {
+      cy.mount(
+        <Card>
+          <Card.Body>
+            <Card.Title>Not Selected Card</Card.Title>
+          </Card.Body>
+        </Card>,
+      )
+        .get(selectors.card)
+        .should('exist')
+        .and('not.have.class', cssClassesSelected.selected);
+    });
+  
+    it('should render with the "selectable" class when onSelect prop is provided', () => {
+      cy.mount(
+        <Card onSelect={() => {}}>
+          <Card.Body>
+            <Card.Title>Selectable Card</Card.Title>
+          </Card.Body>
+        </Card>,
+      )
+        .get(selectors.card)
+        .should('exist')
+        .and('have.class', cssClassesSelected.selectable);
+    });
+  
+    it('should not render the "selectable" class when onSelect prop is not provided', () => {
+      cy.mount(
+        <Card>
+          <Card.Body>
+            <Card.Title>Not Selectable Card</Card.Title>
+          </Card.Body>
+        </Card>,
+      )
+        .get(selectors.card)
+        .should('exist')
+        .and('not.have.class', cssClassesSelected.selectable);
+    });
+  
+    it('should trigger onSelect callback when selectable card is clicked', () => {
+      const onSelectSpy = cy.spy().as('onSelectSpy');
+  
+      cy.mount(
+        <Card onSelect={onSelectSpy}>
+          <Card.Body>
+            <Card.Title>Selectable Card</Card.Title>
+          </Card.Body>
+        </Card>,
+      )
+        .get(selectors.card)
+        .click();
+  
+      cy.get('@onSelectSpy').should('have.been.calledOnce');
+    });
+  });
 });

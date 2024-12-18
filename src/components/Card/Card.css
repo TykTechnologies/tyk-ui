@@ -8,6 +8,14 @@
   overflow: hidden;
 }
 
+.tyk-card--selectable {
+  cursor: pointer;
+}
+
+.tyk-card--selected {
+  border: 1px solid var(--color-primary-base);
+}
+
 .tyk-card__header {
   align-items: center;
   display: flex;
