@@ -11,7 +11,7 @@ const Stepper = ({
   stepValidator,
   stepErrMessage = "ERROR",
   orientation = "vertical",
-  contentHeight = "200px",
+  contentHeight,
   nextBtnTxt = "Continue",
   finishBtnTxt = "Finish",
   backBtnTxt = "Back",
@@ -50,7 +50,7 @@ const Stepper = ({
             <div
               className="no-scrollbar"
               style={
-                isHorizontal
+                isHorizontal && contentHeight
                   ? {
                       height: contentHeight,
                       maxHeight: contentHeight,
