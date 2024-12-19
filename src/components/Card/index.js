@@ -12,10 +12,22 @@ import CardTitleIcon from './CardTitleIcon';
 function Card({
   className = '',
   height = 'auto',
+  onSelect,
+  selected,
   children,
 }) {
+
   return (
-    <div style={{ height }} className={`tyk-card ${className}`}>
+    <div
+      style={{ height }}
+      className={
+        `tyk-card
+         ${selected ? 'tyk-card--selected' : ''}
+         ${onSelect ? 'tyk-card--selectable' : ''}
+         ${className || ''}`
+      }
+      {...(onSelect ? { onClick: onSelect } : {})}
+    >
       {children}
     </div>
   );
