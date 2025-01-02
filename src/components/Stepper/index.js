@@ -96,6 +96,10 @@ Stepper.propTypes = {
   /**
    * Function to validate each step. Should return true if valid, false otherwise.
    */
+  onChange: PropTypes.func,
+  /**
+   * Callback triggered on step change.
+   */
   stepValidator: PropTypes.func,
   /**
    * Error message to display when a step is invalid.
