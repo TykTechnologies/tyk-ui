@@ -18,6 +18,7 @@ const ExampleStepper = () => {
       stepValidator={validateStep}
       stepErrMessage="Please complete all required fields before proceeding."
       onChange={(step) => console.log("Step Changed : ", step)}
+      onSkip={(step) => console.log("SKIP", step)}
     >
       <Stepper.Step id="personal-info" title="Step-1">
         <input type="text" placeholder="Full Name" />

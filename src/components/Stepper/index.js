@@ -14,8 +14,10 @@ const Stepper = ({
   contentHeight,
   nextBtnTxt = "Continue",
   finishBtnTxt = "Finish",
+  skipBtnTxt = "Skip",
   backBtnTxt = "Back",
-  onChange = () => {}
+  onChange = () => {},
+  onSkip = null,
 }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({});
@@ -41,6 +43,7 @@ const Stepper = ({
     validationAttempted,
     setValidationAttempted,
     orientation,
+    onSkip
   };
 
   return (
@@ -68,6 +71,7 @@ const Stepper = ({
             nextBtnTxt={nextBtnTxt}
             finishBtnTxt={finishBtnTxt}
             backBtnTxt={backBtnTxt}
+            skipBtnTxt={skipBtnTxt}
           />
         </div>
       </div>
@@ -99,6 +103,10 @@ Stepper.propTypes = {
   onChange: PropTypes.func,
   /**
    * Callback triggered on step change.
+   */
+  onSkip: PropTypes.func,
+  /**
+   * Callback triggered on step skip.
    */
   stepValidator: PropTypes.func,
   /**

@@ -1,9 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Button from '../../Button';
-import { useStepper } from '../StepperContext';
+import React from "react";
+import PropTypes from "prop-types";
+import Button from "../../Button";
+import { useStepper } from "../StepperContext";
 
-const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
+const StepperButtons = ({
+  nextBtnTxt,
+  finishBtnTxt,
+  backBtnTxt,
+  skipBtnTxt,
+}) => {
   const {
     activeStep,
     steps,
@@ -11,9 +16,10 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
     setErrors,
     onFinish,
     onChange,
+    onSkip,
     stepValidator,
     stepErrMessage,
-    setValidationAttempted
+    setValidationAttempted,
   } = useStepper();
 
   const isLastStep = activeStep === steps.length - 1;
@@ -34,7 +40,7 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
     } else {
       setErrors((prev) => ({
         ...prev,
-        [activeStep]: stepErrMessage
+        [activeStep]: stepErrMessage,
       }));
     }
   };
@@ -47,8 +53,19 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
     }
   };
 
+  const onSkipStep = () => {
+    onSkip(steps[activeStep]?.props?.id);
+  };
+
   return (
     <div className="stepper-buttons">
+      {onSkip && (
+        <div className="skip-btn">
+          <Button onClick={onSkipStep} theme="secondary-outline">
+            {skipBtnTxt}
+          </Button>
+        </div>
+      )}
       {activeStep > 0 && (
         <Button onClick={goToPreviousStep} theme="secondary">
           {backBtnTxt}
@@ -64,7 +81,7 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
 StepperButtons.propTypes = {
   nextBtnTxt: PropTypes.string.isRequired,
   finishBtnTxt: PropTypes.string.isRequired,
-  backBtnTxt: PropTypes.string.isRequired
+  backBtnTxt: PropTypes.string.isRequired,
 };
 
 export default StepperButtons;
