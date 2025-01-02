@@ -82,6 +82,7 @@ StepperButtons.propTypes = {
   nextBtnTxt: PropTypes.string.isRequired,
   finishBtnTxt: PropTypes.string.isRequired,
   backBtnTxt: PropTypes.string.isRequired,
+  skipBtnTxt: PropTypes.string.isRequired,
 };
 
 export default StepperButtons;

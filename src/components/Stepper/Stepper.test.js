@@ -1,11 +1,10 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import Stepper from './index';
-
 
 function StepperComponent({ 
   validator, 
   onFinish: mockOnFinish,
+  onSkip: mockOnSkip,
   orientation = 'vertical'
 }) {
   const onFinish = () => {
@@ -23,6 +22,7 @@ function StepperComponent({
         stepValidator={validator || stepValidator}
         stepErrMessage="Validation failed"
         orientation={orientation}
+        onSkip={mockOnSkip}
       >
         <Stepper.Step id="step1" title="Step 1" description="First step">
           Step 1 content
@@ -103,8 +103,47 @@ describe('Stepper Component', () => {
     });
   });
 
-  describe('Vertical Orientation', () => {
+  describe('Skip Functionality', () => {
+    it('should render skip button when onSkip prop is provided', () => {
+      const onSkip = cy.stub().as('onSkip');
+      cy.mount(<StepperComponent onSkip={onSkip} />)
+        .get('.skip-btn button')
+        .should('exist')
+        .and('contain', 'Skip');
+    });
 
+    it('should not render skip button when onSkip prop is not provided', () => {
+      cy.mount(<StepperComponent />)
+        .get('.skip-btn')
+        .should('not.exist');
+    });
+
+    it('should call onSkip with current step id when skip button is clicked', () => {
+      const onSkip = cy.stub().as('onSkip');
+      cy.mount(<StepperComponent onSkip={onSkip} />)
+        .get('.skip-btn button')
+        .click()
+        .get('@onSkip')
+        .should('have.been.calledWith', 'step1');
+    });
+
+    it('should allow skipping multiple steps', () => {
+      const onSkip = cy.stub().as('onSkip');
+      cy.mount(<StepperComponent onSkip={onSkip} validator={() => true} />)
+        .get('.skip-btn button')
+        .click()
+        .get('.stepper-buttons button')
+        .contains('Continue')
+        .click()
+        .get('.skip-btn button')
+        .click()
+        .get('@onSkip')
+        .should('have.been.calledTwice')
+        .and('have.been.calledWith', 'step2');
+    });
+  });
+
+  describe('Vertical Orientation', () => {
     it('should show green connecting line for completed steps', () => {
       cy.mount(<StepperComponent orientation="vertical" validator={() => true} />)
         .get('.stepper-buttons button')
@@ -119,7 +158,7 @@ describe('Stepper Component', () => {
     it('should render in horizontal layout', () => {
       cy.mount(<StepperComponent orientation="horizontal" />)
         .get('.step-list-horizontal')
-        .should('exist')
+        .should('exist');
     });
 
     it('should show progress line below step numbers', () => {
@@ -150,5 +189,4 @@ describe('Stepper Component', () => {
         .should('contain', 'Step 2 content');
     });
   });
-
 });
