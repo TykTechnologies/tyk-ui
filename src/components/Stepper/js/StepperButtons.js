@@ -10,6 +10,7 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
     setActiveStep,
     setErrors,
     onFinish,
+    onChange,
     stepValidator,
     stepErrMessage,
     setValidationAttempted
@@ -25,6 +26,7 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
       if (activeStep < steps.length - 1) {
         setActiveStep((prev) => prev + 1);
         setErrors((prev) => ({ ...prev, [activeStep]: null }));
+        onChange(steps[activeStep]?.props?.id);
       } else if (activeStep === steps.length - 1) {
         onFinish();
       }
@@ -41,6 +43,7 @@ const StepperButtons = ({nextBtnTxt, finishBtnTxt, backBtnTxt}) => {
     if (activeStep > 0) {
       setActiveStep((prev) => prev - 1);
       setValidationAttempted(false);
+      onChange(steps[activeStep]?.props?.id);
     }
   };
 

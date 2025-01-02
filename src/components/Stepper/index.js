@@ -15,6 +15,7 @@ const Stepper = ({
   nextBtnTxt = "Continue",
   finishBtnTxt = "Finish",
   backBtnTxt = "Back",
+  onChange = () => {}
 }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({});
@@ -34,6 +35,7 @@ const Stepper = ({
     setErrors,
     steps,
     onFinish,
+    onChange,
     stepValidator,
     stepErrMessage,
     validationAttempted,

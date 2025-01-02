@@ -17,6 +17,7 @@ const ExampleStepper = () => {
       onFinish={handleFinish}
       stepValidator={validateStep}
       stepErrMessage="Please complete all required fields before proceeding."
+      onChange={(step) => console.log("Step Changed : ", step)}
     >
       <Stepper.Step id="personal-info" title="Step-1">
         <input type="text" placeholder="Full Name" />
@@ -62,6 +63,7 @@ const ExampleStepper = () => {
       backBtnTxt="Previous"
       nextBtnTxt="Next"
       finishBtnTxt="Done"
+      onChange={(step) => console.log("Step Changed : ", step)}
     >
         <Stepper.Step id="personal-info" title="Step-1">
           <input type="text" placeholder="Full Name" />
