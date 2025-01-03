@@ -2,7 +2,9 @@ import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import { StepperProvider } from "./StepperContext";
 import StepList from "./js/StepList";
-import StepperButtons from "./js/StepperButtons";
+import { DefaultButtons } from "./js/StepperButtons";
+import Buttons from "./js/Buttons";
+import Step from "./js/Step";
 import "./stepper.css";
 
 const Stepper = ({
@@ -14,18 +16,34 @@ const Stepper = ({
   contentHeight,
   nextBtnTxt = "Continue",
   finishBtnTxt = "Finish",
+  skipBtnTxt = "Skip",
   backBtnTxt = "Back",
+  onChange = () => {},
+  onSkip = null,
 }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [errors, setErrors] = useState({});
   const [validationAttempted, setValidationAttempted] = useState(false);
   const isHorizontal = orientation === "horizontal";
 
-  const steps = useMemo(() => {
-    return React.Children.toArray(children).filter(
-      (child) => child.type.name === "Step"
-    );
-  }, [children]);
+  const { steps, buttons } = useMemo(() => {
+    const children_array = React.Children.toArray(children);
+    return {
+      steps: children_array.filter(
+        (child) => child.type.displayName === "StepperStep"
+      ),
+      buttons: children_array.find(
+        (child) => child.type.displayName === "StepperButtons"
+      ) || (
+        <DefaultButtons
+          nextBtnTxt={nextBtnTxt}
+          finishBtnTxt={finishBtnTxt}
+          backBtnTxt={backBtnTxt}
+          skipBtnTxt={skipBtnTxt}
+        />
+      ),
+    };
+  }, [children, nextBtnTxt, finishBtnTxt, backBtnTxt, skipBtnTxt]);
 
   const contextValue = {
     activeStep,
@@ -34,11 +52,13 @@ const Stepper = ({
     setErrors,
     steps,
     onFinish,
+    onChange,
     stepValidator,
     stepErrMessage,
     validationAttempted,
     setValidationAttempted,
     orientation,
+    onSkip,
   };
 
   return (
@@ -52,32 +72,25 @@ const Stepper = ({
               style={
                 isHorizontal && contentHeight
                   ? {
-                    height: contentHeight,
-                    maxHeight: contentHeight,
-                    overflow: "scroll",
-                  }
+                      height: contentHeight,
+                      maxHeight: contentHeight,
+                      overflow: "scroll",
+                    }
                   : {}
               }
             >
               {isHorizontal && steps[activeStep]}
             </div>
           )}
-          <StepperButtons
-            nextBtnTxt={nextBtnTxt}
-            finishBtnTxt={finishBtnTxt}
-            backBtnTxt={backBtnTxt}
-          />
+          {buttons}
         </div>
       </div>
     </StepperProvider>
   );
 };
 
-export const Step = ({ children }) => {
-  return <>{children}</>;
-};
-
 Stepper.Step = Step;
+Stepper.Buttons = Buttons;
 
 Stepper.propTypes = {
   /**
@@ -93,6 +106,14 @@ Stepper.propTypes = {
   onFinish: PropTypes.func.isRequired,
   /**
    * Function to validate each step. Should return true if valid, false otherwise.
+   */
+  onChange: PropTypes.func,
+  /**
+   * Callback triggered on step change.
+   */
+  onSkip: PropTypes.func,
+  /**
+   * Callback triggered on step skip.
    */
   stepValidator: PropTypes.func,
   /**
@@ -115,10 +136,6 @@ Stepper.propTypes = {
 Stepper.defaultProps = {
   stepErrMessage: "ERROR",
   orientation: "vertical",
-};
-
-Step.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Stepper;

@@ -2,9 +2,7 @@
     margin-block: 0;
     margin-inline: auto;
     padding: 20px;
-    border-radius: 8px;
     background: white;
-    border: 1.5px solid var(--color-secondary-dark);
 }
 
 
@@ -16,7 +14,10 @@
 .step-list-horizontal {
     display: flex;
     padding-bottom: 5px;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: white;
 }
 
 .step-list-horizontal::after {
@@ -188,6 +189,10 @@
     padding-top: 20px;
     margin-top: 20px;
     border-top: 1.5px solid var(--color-secondary-dark);
+    gap: 8px;
+    .skip-btn {
+        margin-right: auto;
+    }
 }
 
 
