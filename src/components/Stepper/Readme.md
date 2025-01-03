@@ -1,3 +1,79 @@
+## Custom buttons using Render Props method
+```jsx
+import React from "react";
+import Button from "../Button";
+import Confirm from "../Confirm";
+import Stepper from "./index";
+
+const MyStepperComponent = () => {
+  const handleFinish = () => {
+    console.log("Finished!");
+  };
+
+  const validateStep = (stepId) => {
+    return true;
+  };
+
+  return (
+    <Stepper onFinish={handleFinish} stepValidator={validateStep}>
+      <Stepper.Step
+        title="Step 1"
+        description="First step"
+        id="step1"
+      ></Stepper.Step>
+
+      <Stepper.Step
+        title="Step 2"
+        description="Second step"
+        id="step2"
+      ></Stepper.Step>
+
+      <Stepper.Buttons>
+        {({ goToNextStep, goToPreviousStep, isLastStep, activeStep, stepId }) => (
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "flex-end",
+              gap: "8px",
+              marginLeft: 0,
+            }}
+          >
+      {   stepId !== 'step2' &&    <Confirm
+              title="Console log"
+              description="Are u sure u want to console log?"
+            >
+              {(confirm) => (
+                <Button
+                  onClick={confirm((event) => {
+                    console.log("Button clicked", {event, activeStep, stepId});
+                  })}
+                  theme="secondary"
+                >
+                  Skip (Confirm)
+                </Button>
+              )}
+            </Confirm>}
+
+            {activeStep > 0 && (
+              <Button onClick={goToPreviousStep} theme="secondary">
+                Back
+              </Button>
+            )}
+            <Button onClick={goToNextStep} theme="primary">
+              {isLastStep ? "Complete" : "Next"}
+            </Button>
+          </div>
+        )}
+      </Stepper.Buttons>
+    </Stepper>
+  );
+};
+
+<MyStepperComponent />;
+```
+
+## Vertical Stepper
 
 ```jsx
 import React from 'react';
@@ -42,6 +118,7 @@ const ExampleStepper = () => {
 <ExampleStepper />
 ```
 
+## Horizontal Stepper
 ```jsx
 import React from "react";
 import Stepper from "./index.js";
