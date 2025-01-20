@@ -28,7 +28,6 @@
     }
 
     .tyk-combobox2__entry-field {
-      background-color: transparent;
       cursor: not-allowed;
 
       &.disabled {
@@ -102,6 +101,7 @@
 }
 
 .tyk-combobox2__entry-field {
+  background-color: transparent;
   border: none;
   line-height: 30px;
 
