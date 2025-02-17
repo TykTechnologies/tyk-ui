@@ -39,13 +39,12 @@ function InfiniteScroller({
     );
   }, [containerRef, refChildSize.height]);
 
-  const loadMoreData = useCallback(() => {
+  const loadMoreData = useCallback(async () => {
     if (hasMore && typeof loadMore === 'function') {
-      loadMore(pageNumber + 1);
       setShowLoader(true);
-    } else {
-      setShowLoader(false);
+      await loadMore(pageNumber + 1);
     }
+    // setShowLoader(false);
   }, [hasMore, pageNumber]);
 
   const prevPageNumber = usePrevious(pageNumber);
@@ -97,7 +96,7 @@ function InfiniteScroller({
         { children }
       </div>
       {showLoader && (
-        <Loader position="absolute" />
+        <Loader size="small" position="absolute" />
       )}
     </div>
   );
