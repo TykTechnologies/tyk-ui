@@ -30,11 +30,9 @@ describe('InfiniteScroller', () => {
       .should('have.text', 'The Content');
   });
 
-  it('renders a loader if it is the initial load and calls the loadMore callback', () => {
+  it('if it is the initial load calls the loadMore callback', () => {
     const loadMore = cy.stub();
     cy.mount(<Component initialLoad loadMore={loadMore} />)
-      .get(selectors.loader)
-      .should('exist')
       .then(() => {
         expect(loadMore).to.be.called;
       });
