@@ -44,7 +44,7 @@ function InfiniteScroller({
       setShowLoader(true);
       await loadMore(pageNumber + 1);
     }
-    // setShowLoader(false);
+    setShowLoader(false);
   }, [hasMore, pageNumber]);
 
   const prevPageNumber = usePrevious(pageNumber);
