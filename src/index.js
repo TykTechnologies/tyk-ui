@@ -29,6 +29,7 @@ export { default as toast } from './components/Toast';
 export { default as Tooltip } from './components/Tooltip';
 export { default as Table } from './components/Table';
 export { default as Stepper } from './components/Stepper';
+export { default as UrlBuilder } from './components/UrlBuilder';
 
 // -- Layout
 export { default as Column } from './layout/Column';
