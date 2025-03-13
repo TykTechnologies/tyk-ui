@@ -1,53 +1,60 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProgressBar = (props) => {
-  const {
-    value,
-    max,
-    theme,
-    size,
-    label,
-    showPercentage,
-    percentagePosition,
-    percentageText,
-    className,
-    id,
-    ...rest
-  } = props;
-
+const ProgressBar = ({
+  value,
+  max = 100,
+  theme = "primary",
+  size = "md",
+  label,
+  showPercentage = false,
+  percentagePosition = "bottom",
+  formatPercentage,
+  showBottomLabel,
+  formatBottomLabel,
+  className,
+  id,
+  ...rest
+}) => {
   const percentage = Math.min(Math.max(0, (value / max) * 100), 100);
+  const percentageValue = Math.round(percentage);
 
-  const getCssClasses = () => {
-    const cssClasses = ["tyk-progress-bar"].concat(
-      className ? className.split(" ") : []
-    );
-    const sizeClass = size
-      ? `tyk-progress-bar--${size}`
-      : "tyk-progress-bar--md";
-    const themeClass = theme
-      ? `tyk-progress-bar--${theme}`
-      : "tyk-progress-bar--primary";
+  const getCssClasses = () =>
+    [
+      "tyk-progress-bar",
+      className,
+      `tyk-progress-bar--${size}`,
+      `tyk-progress-bar--${theme}`,
+    ]
+      .filter(Boolean)
+      .join(" ");
 
-    cssClasses.push(sizeClass);
-    cssClasses.push(themeClass);
+  const defaultPercentageFormatter = (value) => `${value}%`;
 
-    return cssClasses.join(" ");
+  const defaultBottomLabelFormatter = (value) => `${value}%`;
+
+  const getPercentageText = () => {
+    if (typeof formatPercentage === "function") {
+      return formatPercentage(percentageValue);
+    }
+    return defaultPercentageFormatter(percentageValue);
+  };
+
+  const getBottomLabelText = () => {
+    if (typeof formatBottomLabel === "function") {
+      return formatBottomLabel(percentageValue);
+    }
+    return defaultBottomLabelFormatter(percentageValue);
   };
 
   const renderPercentage = () => {
     if (!showPercentage) return null;
 
-    const percentageValue = Math.round(percentage);
-    const text = percentageText
-      ? percentageText.replace("{value}", percentageValue)
-      : `${percentageValue}%`;
-
     return (
       <div
         className={`tyk-progress-bar__percentage tyk-progress-bar__percentage--${percentagePosition}`}
       >
-        {text}
+        {getPercentageText()}
       </div>
     );
   };
@@ -69,6 +76,11 @@ const ProgressBar = (props) => {
         </div>
       </div>
       {percentagePosition === "bottom" && renderPercentage()}
+      {showBottomLabel && (
+        <div className="tyk-progress-bar__bottom-label">
+          {getBottomLabelText()}
+        </div>
+      )}
     </div>
   );
 };
@@ -103,10 +115,19 @@ ProgressBar.propTypes = {
    */
   percentagePosition: PropTypes.oneOf(["top", "bottom", "inside"]),
   /**
-   * Custom text format for the percentage. Use {value} as a placeholder for the percentage value.
-   * Example: "{value}% complete"
+   * Function to format the percentage text. Receives the percentage value and should return a string.
+   * Example: (value) => `${value}% complete`
    */
-  percentageText: PropTypes.string,
+  formatPercentage: PropTypes.func,
+  /**
+   * Display a label under the progress bar
+   */
+  showBottomLabel: PropTypes.bool,
+  /**
+   * Function to format the bottom label text. Receives the percentage value and should return a string.
+   * Example: (value) => `${value}% compliant`
+   */
+  formatBottomLabel: PropTypes.func,
   /**
    * Additional CSS classes
    */
@@ -115,14 +136,6 @@ ProgressBar.propTypes = {
    * ID attribute
    */
   id: PropTypes.string,
-};
-
-ProgressBar.defaultProps = {
-  max: 100,
-  theme: "primary",
-  size: "md",
-  showPercentage: false,
-  percentagePosition: "bottom",
 };
 
 export default ProgressBar;
