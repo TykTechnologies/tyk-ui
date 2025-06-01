@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
@@ -25,6 +25,8 @@ function Modal({
   showBackdrop = true,
   ...restProps
 }) {
+  const modalRef = useRef();
+  const backdropRef = useRef();
   const theme = ['success', 'warning', 'danger', 'info'].includes(themeProp) ? themeProp : 'default';
   const modalClasses = [
     'tyk-modal',
@@ -52,8 +54,9 @@ function Modal({
             in={opened}
             timeout={100}
             classNames="appear"
+            nodeRef={modalRef}
           >
-            <div className={modalClasses} {...restProps}>
+            <div className={modalClasses} {...restProps} ref={modalRef}>
               <div className={`tyk-modal__dialog tyk-modal--${size}`}>
                 <div className="tyk-modal__content">
                   {themeIcon && (
@@ -75,8 +78,10 @@ function Modal({
           in={opened}
           timeout={100}
           classNames="fade"
+          nodeRef={backdropRef}
         >
           <button
+            ref={backdropRef}
             className={backdropClasses}
             onClick={() => !disableCloseCommands && onClose?.()}
             onKeyDown={() => {}}

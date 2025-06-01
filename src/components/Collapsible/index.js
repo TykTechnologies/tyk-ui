@@ -62,6 +62,7 @@ function Collapsible({
       in={!collapsed}
       timeout={0}
       classNames="collapse"
+      nodeRef={collapseWrapper}
     >
       <div
         className="collapse-wrapper"
