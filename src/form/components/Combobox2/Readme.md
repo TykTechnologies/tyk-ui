@@ -43,6 +43,35 @@ function loadMore(p) {
   }}
 />
 ```
+
+Search with tags 
+
+```js
+<Combobox2
+  values={[
+    { id: '', name: "None" },
+    { id: 'apione', name: 'API one'},
+    { id: 'apitwo', name: 'API two'},
+    { id: 'apithree', name: 'API three'},
+    { id: 'apifour', name: 'API four'},
+    { id: 'apifive', name: 'API five'},
+    { id: 'apisix', name: 'API six'},
+    { id: 'apiseven', name: 'API seven'},
+    { id: 'apieight', name: 'API eight'}
+  ]}
+  label="Combobox Search with tags"
+  name="combobox"
+  onChange={ (e) => { console.log(e); }}
+  note="Some note on the combobox"
+  placeholder="Please select a value"
+  multiple
+  tags
+  allowCustomValues={false}
+  showSearch
+  addTagOnBlur
+  required
+/>
+```
 ```js
 <Combobox2
   values={[

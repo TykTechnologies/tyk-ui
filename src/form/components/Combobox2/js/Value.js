@@ -17,12 +17,19 @@ function Value(props) {
     focus,
     onMessage: sendMessage,
     readOnly,
+    searchValue,
   } = props;
   const INPUT_MIN_WIDTH = 60;
   const inputRef = useRef(null);
   const dummyElementRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const [inputWidth, setInputWidth] = useState(`${INPUT_MIN_WIDTH + 10}px`);
+
+  useEffect(() => {
+    if (searchValue === '' && inputValue !== '') {
+      setInputValue('');
+    }
+  }, [searchValue, inputValue]);
 
   function entryFieldOnChange(val) {
     if (tagSeparators.some((ts) => val.slice(-1) === ts)) return;
@@ -191,6 +198,7 @@ Value.propTypes = {
   focus: PropTypes.bool,
   onMessage: PropTypes.func,
   readOnly: PropTypes.bool,
+  searchValue: PropTypes.string,
 };
 
 export default Value;
