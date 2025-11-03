@@ -478,6 +478,86 @@ describe('Combobox2', () => {
       .should('have.length', 0);
   });
 
+  it('can select filtered items with mouse click when using tags', () => {
+    cy.mount(
+      <Combobox2
+        values={items}
+        value={[]}
+        tags
+        addTagOnBlur
+      />,
+    );
+
+    cy.get(`.${classes.entryField}`)
+      .type('Item2');
+
+    cy.get(`.${classes.dropdownList} li`)
+      .should('have.length', 1)
+      .and('contain.text', 'Item2');
+
+    cy.get(`.${classes.dropdownList} li:first`)
+      .trigger('mousedown');
+
+    cy.get(`.${classes.tag}`)
+      .should('have.length', 1)
+      .and('contain.text', 'Item2');
+
+    cy.get(`.${classes.entryField}`)
+      .should('have.value', '');
+  });
+
+  it('clears search input after selecting an item with mouse when using tags', () => {
+    cy.mount(
+      <Combobox2
+        values={items}
+        value={[]}
+        tags
+        addTagOnBlur
+      />,
+    );
+
+    cy.get(`.${classes.entryField}`)
+      .type('Item3');
+
+    cy.get(`.${classes.dropdownList} li:first`)
+      .trigger('mousedown');
+
+    cy.get(`.${classes.entryField}`)
+      .should('have.value', '');
+
+    cy.get(`.${classes.entryField}`)
+      .type('Item4');
+
+    cy.get(`.${classes.dropdownList} li:first`)
+      .trigger('mousedown');
+
+    cy.get(`.${classes.tag}`)
+      .should('have.length', 2);
+    cy.get(`.${classes.entryField}`)
+      .should('have.value', '');
+  });
+
+  it('handles select-all with mousedown event', () => {
+    cy.mount(
+      <Combobox2
+        values={items}
+        value={[]}
+        tags
+        selectAll
+      />,
+    );
+
+    cy.get(`.${classes.entryField}`)
+      .focus();
+
+    cy.get(`.${classes.dropdownList}`)
+      .contains('Select All')
+      .trigger('mousedown');
+
+    cy.get(`.${classes.tag}`)
+      .should('have.length', items.length);
+  });
+
   describe('does not update value if onBeforeChange returns falsy values', () => {
     it('when selecting a value', () => {
       const previousItem = items[0];

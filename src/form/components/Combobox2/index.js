@@ -280,6 +280,7 @@ function Combobox2({
     if (message === 'input.enter') {
       if (activeItem) {
         selectValue(activeItem);
+        updateSearchValue('');
       } else if (tagSeparators.includes('Enter')) {
         addTag(data);
         updateSearchValue('');
@@ -311,7 +312,10 @@ function Combobox2({
   const onMessage = useCallback((message, data) => {
     if (message.startsWith('tag.')) onTagMessage(message.slice(4), data);
 
-    if (message === 'value.select') selectValue(data.item);
+    if (message === 'value.select') {
+      selectValue(data.item);
+      if (tags && searchValue) updateSearchValue('');
+    }
 
     if (message === 'value.select-all') selectAllValues(data);
 
@@ -337,6 +341,8 @@ function Combobox2({
     closeDropdown,
     moveUpActiveItem,
     moveDownActiveItem,
+    tags,
+    searchValue,
   ]);
 
   const renderIcon = useCallback(
@@ -436,6 +442,7 @@ function Combobox2({
                 focus={isOpened}
                 onMessage={onMessage}
                 readOnly={readOnly}
+                searchValue={searchValue}
               />
             </div>
             {displayDropdownTrigger && (

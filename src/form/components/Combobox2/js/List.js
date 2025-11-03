@@ -36,7 +36,12 @@ function List(props) {
           item.disabled && 'disabled',
           activeItem && item.id === activeItem.id && 'active',
         ].filter(Boolean).join(' ')}
-        onClick={() => !item.disabled && sendMessage('value.select', { item })}
+        onMouseDown={(e) => {
+          if (!item.disabled) {
+            e.preventDefault();
+            sendMessage('value.select', { item });
+          }
+        }}
         onKeyDown={() => {}}
       >
         {item.selected && <Icon type="check" />}
@@ -67,7 +72,10 @@ function List(props) {
     }
     return (
       <li
-        onClick={() => sendMessage('value.select-all', mode === 'select' ? !isAllSelected : isNoneSelected)}
+        onMouseDown={(e) => {
+          e.preventDefault();
+          sendMessage('value.select-all', mode === 'select' ? !isAllSelected : isNoneSelected);
+        }}
         onKeyDown={() => {}}
       >
         {(mode === 'select' ? isAllSelected : isNoneSelected) && <Icon type="check" />}
