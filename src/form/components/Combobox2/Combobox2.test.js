@@ -630,4 +630,265 @@ describe('Combobox2', () => {
         .should('have.text', item.name);
     });
   });
+
+  describe('onSearch prop for server-side search', () => {
+    it('does not call onSearch on mount', () => {
+      const onSearchSpy = cy.spy().as('onSearchSpy');
+
+      cy.mount(
+        <Combobox2
+          values={items}
+          value=""
+          onSearch={onSearchSpy}
+          showSearch
+        />,
+      );
+
+      cy.get('@onSearchSpy').should('not.have.been.called');
+    });
+
+    it('calls onSearch when user types in tag mode', () => {
+      const onSearchSpy = cy.spy().as('onSearchSpy');
+
+      cy.mount(
+        <Combobox2
+          values={items}
+          value={[]}
+          tags
+          onSearch={onSearchSpy}
+        />,
+      );
+
+      cy.get(`.${classes.entryField}`)
+        .type('test');
+
+      cy.wait(350);
+
+      cy.get('@onSearchSpy').should('have.been.calledOnce');
+      cy.get('@onSearchSpy').should('have.been.calledWith', 'test');
+    });
+
+    it('calls onSearch when user types with showSearch enabled', () => {
+      const onSearchSpy = cy.spy().as('onSearchSpy');
+
+      cy.mount(
+        <Combobox2
+          values={items}
+          value=""
+          onSearch={onSearchSpy}
+          showSearch
+        />,
+      );
+
+      cy.get(`.${classes.trigger}`)
+        .click();
+
+      cy.get(`.${classes.searchField} input`)
+        .type('search');
+
+      cy.get('@onSearchSpy').should('have.been.calledOnce');
+      cy.get('@onSearchSpy').should('have.been.calledWith', 'search');
+    });
+
+    it('debounces onSearch calls correctly', () => {
+      const onSearchSpy = cy.spy().as('onSearchSpy');
+
+      cy.mount(
+        <Combobox2
+          values={items}
+          value={[]}
+          tags
+          onSearch={onSearchSpy}
+        />,
+      );
+
+      cy.get(`.${classes.entryField}`)
+        .type('a');
+
+      cy.wait(100);
+
+      cy.get(`.${classes.entryField}`)
+        .type('b');
+
+      cy.wait(100);
+
+      cy.get(`.${classes.entryField}`)
+        .type('c');
+
+      cy.get('@onSearchSpy').should('not.have.been.called');
+
+      cy.wait(350);
+
+      cy.get('@onSearchSpy').should('have.been.calledOnce');
+      cy.get('@onSearchSpy').should('have.been.calledWith', 'abc');
+    });
+
+    it('calls onSearch with empty string when search is cleared after searching', () => {
+      const onSearchSpy = cy.spy().as('onSearchSpy');
+
+      cy.mount(
+        <Combobox2
+          values={items}
+          value={[]}
+          tags
+          onSearch={onSearchSpy}
+        />,
+      );
+
+      cy.get(`.${classes.entryField}`)
+        .type('test');
+
+      cy.wait(350);
+
+      cy.get('@onSearchSpy').should('have.been.calledWith', 'test');
+
+      cy.get(`.${classes.entryField}`)
+        .clear();
+
+      cy.wait(350);
+
+      cy.get('@onSearchSpy').should('have.been.calledWith', '');
+    });
+
+    it('does not perform client-side filtering when onSearch is provided', () => {
+      function Comp() {
+        const [searchResults, setSearchResults] = useState(items);
+
+        const handleSearch = (searchTerm) => {
+          if (!searchTerm) {
+            setSearchResults(items);
+          } else {
+            setSearchResults(items.filter((item) => item.name === searchTerm));
+          }
+        };
+
+        return (
+          <Combobox2
+            values={searchResults}
+            value={[]}
+            tags
+            onSearch={handleSearch}
+          />
+        );
+      }
+
+      cy.mount(<Comp />);
+
+      cy.get(`.${classes.entryField}`)
+        .type('Item2');
+
+      cy.wait(350);
+
+      cy.get(`.${classes.dropdownList} li`)
+        .should('have.length', 1)
+        .and('contain.text', 'Item2');
+    });
+
+    it('works correctly with multiple value updates', () => {
+      function Comp() {
+        const [searchResults, setSearchResults] = useState(items);
+
+        const handleSearch = (searchTerm) => {
+          if (!searchTerm) {
+            setSearchResults(items);
+          } else {
+            setSearchResults(
+              items.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase())),
+            );
+          }
+        };
+
+        return (
+          <Combobox2
+            values={searchResults}
+            value=""
+            onSearch={handleSearch}
+            showSearch
+          />
+        );
+      }
+
+      cy.mount(<Comp />);
+
+      cy.get(`.${classes.trigger}`)
+        .click();
+
+      cy.get(`.${classes.dropdownList} li`)
+        .should('have.length', items.length);
+
+      cy.get(`.${classes.searchField} input`)
+        .type('item2');
+
+      cy.wait(350);
+
+      cy.get(`.${classes.dropdownList} li`)
+        .should('have.length', 1)
+        .and('contain.text', 'Item2');
+
+      cy.get(`.${classes.searchField} input`)
+        .clear();
+
+      cy.wait(350);
+
+      cy.get(`.${classes.dropdownList} li`)
+        .should('have.length', items.length);
+    });
+
+    it('maintains backward compatibility - works without onSearch prop', () => {
+      cy.mount(
+        <Combobox2
+          values={items}
+          value=""
+          showSearch
+        />,
+      );
+
+      cy.get(`.${classes.trigger}`)
+        .click();
+
+      cy.get(`.${classes.dropdownList} li`)
+        .should('have.length', items.length);
+
+      cy.get(`.${classes.searchField} input`)
+        .type('Item2');
+
+      cy.get(`.${classes.dropdownList} li`)
+        .should('have.length', 1)
+        .and('contain.text', 'Item2');
+    });
+
+    it('handles rapid typing and clearing correctly', () => {
+      const onSearchSpy = cy.spy().as('onSearchSpy');
+
+      cy.mount(
+        <Combobox2
+          values={items}
+          value={[]}
+          tags
+          onSearch={onSearchSpy}
+        />,
+      );
+
+      cy.get(`.${classes.entryField}`)
+        .type('test');
+
+      cy.wait(350);
+
+      cy.get('@onSearchSpy').should('have.been.calledWith', 'test');
+
+      cy.get(`.${classes.entryField}`)
+        .clear();
+
+      cy.wait(350);
+
+      cy.get('@onSearchSpy').should('have.been.calledWith', '');
+
+      cy.get(`.${classes.entryField}`)
+        .type('new');
+
+      cy.wait(350);
+
+      cy.get('@onSearchSpy').should('have.been.calledWith', 'new');
+    });
+  });
 });
