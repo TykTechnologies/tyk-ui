@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import Icon from '../../../components/Icon';
 import FloatingContainer from '../../../components/FloatingContainer';
+import debounce from '../../../utils/debounce';
 
 import Value from './js/Value';
 import List from './js/List';
@@ -38,6 +39,7 @@ function Combobox2({
   CustomListComponent,
   onBeforeChange = () => true,
   onChange = () => {},
+  onSearch,
   floatingContainerConfig,
   expandMode,
   infiniteScrollerConfig,
@@ -76,6 +78,22 @@ function Combobox2({
   const [valuesExpanded, setValuesExpanded] = useState(false);
   const [localValidationError, setLocalValidationError] = useState('');
 
+  const onSearchRef = useRef(onSearch);
+  const hasSearchedRef = useRef(false);
+  
+  onSearchRef.current = onSearch;
+
+  // Create stable debounced search function
+  const debouncedOnSearchRef = useRef();
+  if (!debouncedOnSearchRef.current) {
+    debouncedOnSearchRef.current = debounce((searchTerm) => {
+      if (onSearchRef.current) {
+        hasSearchedRef.current = true;
+        onSearchRef.current(searchTerm);
+      }
+    }, 300);
+  }
+
   function getCssClasses() {
     return [
       wrapperClassName,
@@ -89,6 +107,12 @@ function Combobox2({
   }
 
   function getFilteredValues() {
+    // If onSearch is provided, skip client-side filtering
+    // Backend filtering will be handled by the parent component
+    if (onSearch) {
+      return values;
+    }
+    
     const defaultFn = (v, s) => v?.name?.toLowerCase()?.includes(s);
     const fn = matchItemFn || defaultFn;
     const filteredValues = values.filter((v) => fn(v, searchValue.toLowerCase()));
@@ -399,6 +423,14 @@ function Combobox2({
     };
   });
 
+  useEffect(() => {
+    if (onSearchRef.current) {
+      if (searchValue || hasSearchedRef.current) {
+        debouncedOnSearchRef.current(searchValue);
+      }
+    }
+  }, [searchValue]);
+
   const filteredValues = getFilteredValues();
   const currentValuesClasses = [
     'tyk-combobox2__current-values',
@@ -553,6 +585,9 @@ Combobox2.propTypes = {
    * The callback is called with two arguments: 1) the previous value, 2) the next value */
   onBeforeChange: PropTypes.func,
   onChange: PropTypes.func,
+  /** Callback function for backend search. Called with the search term as the user types.
+   * The parent component should update the `values` prop based on the search results. */
+  onSearch: PropTypes.func,
   placeholder: PropTypes.string,
   /** Enables the display of values as `Pill` components that can be
    *  removed without opening the dropdown. */
