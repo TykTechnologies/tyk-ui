@@ -627,3 +627,53 @@ import Icon from '../../../components/Icon';
   validateOnChange={(values, lastValue) => {console.log(lastValue, !isNaN(lastValue.id)); return !isNaN(lastValue.id) ? undefined : 'Added value is not a number'}}
 />
 ```
+
+#### Combobox with dynamic server side search using `onSearch`
+
+```js
+import { useState, useEffect } from 'react';
+
+const [posts, setPosts] = useState([]);
+const [loading, setLoading] = useState(false);
+const [selectedPost, setSelectedPost] = useState(null);
+
+// Load initial posts on mount
+useEffect(() => {
+  fetchPosts('');
+}, []);
+
+async function fetchPosts(searchTerm) {
+  setLoading(true);
+  try {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${searchTerm}`);
+    const data = await response.json();
+    
+    setPosts(data.map(post => ({
+      id: post.id,
+      name: post.title,
+      body: post.body
+    })));
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+  } finally {
+    setLoading(false);
+  }
+}
+
+<Combobox2
+  values={posts.length > 0 ? posts : [
+   {id: 201, name: '201'},
+   {id: 'aaa', name: 'AAA'}
+  ]}
+  value={selectedPost}
+  label="Search Posts (Backend Search)"
+  placeholder="Type to search posts..."
+  onChange={(selected) => {
+    console.log('Selected:', selected);
+    setSelectedPost(selected);
+  }}
+  onSearch={fetchPosts}
+  note={loading ? 'Loading...' : 'Search results will be fetched from the backend'}
+  showSearch
+/>
+```
