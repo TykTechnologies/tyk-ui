@@ -81,10 +81,6 @@ function Combobox2({
   const onSearchRef = useRef(onSearch);
   const hasSearchedRef = useRef(false);
   
-  useEffect(() => {
-    onSearchRef.current = onSearch;
-  }, [onSearch]);
-
   // Create stable debounced search function
   const debouncedOnSearchRef = useRef();
   if (!debouncedOnSearchRef.current) {
