@@ -7,6 +7,7 @@ export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as Card } from './components/Card';
 export { default as Chart } from './components/Chart';
 export { default as Collapsible } from './components/Collapsible';
+export { default as CollapsibleList } from './components/CollapsibleList';
 export { default as CopyToClipboard } from './components/CopyToClipboard';
 export { default as Confirm } from './components/Confirm';
 export { default as FixedWrapper } from './components/FixedWrapper';

@@ -1,0 +1,49 @@
+.tyk-collapsible-list {
+  width: 100%;
+}
+
+.tyk-collapsible-list__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tyk-collapsible-list__item {
+  padding: 0;
+  margin: 0;
+}
+
+.tyk-collapsible-list__item-wrapper {
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+}
+
+.tyk-collapsible-list__item-wrapper--visible {
+  max-height: 1000px;
+  opacity: 1;
+  margin-bottom: 0;
+}
+
+.tyk-collapsible-list__item-wrapper--hidden {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+.tyk-collapsible-list__item-wrapper--animated.tyk-collapsible-list__item-wrapper--visible {
+  animation: tykCollapsibleListSlideDown 0.3s ease-in-out;
+}
+
+@keyframes tykCollapsibleListSlideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
