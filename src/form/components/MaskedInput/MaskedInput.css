@@ -2,7 +2,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--text-color, #666);
+  color: var(--text-color);
   padding: 0 var(--form-control-addon-padding-right, 10px) 0 var(--form-control-addon-padding-left, 10px);
   display: flex;
   align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .tyk-masked-input__toggle:hover {
-  color: var(--color-primary-base, #333);
+  color: var(--color-primary-base);
 }
 
 .tyk-masked-input__toggle:disabled {
