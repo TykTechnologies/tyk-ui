@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from '../../../components/Icon';
-import MaskSecret from '../../../components/MaskSecret';
-import './Input.css';
-
 class Input extends Component {
   static getAddon(content) {
     return (
@@ -23,11 +19,9 @@ class Input extends Component {
     this.state = {
       initValue: value,
       stateValue: value,
-      showPassword: false,
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
-    this.togglePasswordVisibility = this.togglePasswordVisibility.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -63,12 +57,6 @@ class Input extends Component {
     } else {
       onChange(inputValue);
     }
-  }
-
-  togglePasswordVisibility() {
-    this.setState(prevState => ({
-      showPassword: !prevState.showPassword,
-    }));
   }
 
   getLabelStyles() {
@@ -168,41 +156,18 @@ class Input extends Component {
 
   getInputComponent() {
     const {
-      isfield, value, type, ...rest
+      isfield, value, ...rest
     } = this.props;
-    const { stateValue, showPassword } = this.state;
-
-    const resolvedType = (type === 'password' && showPassword) ? 'text' : type;
-
-    const inputEl = (
+    const { stateValue } = this.state;
+    return (
       <input
         autoComplete="off"
         className="tyk-form-control"
         {...rest}
-        type={resolvedType}
         onChange={this.handleOnChange}
         value={(isfield) ? value : stateValue}
       />
     );
-
-    if (type === 'password') {
-      return (
-        <div className="tyk-form-control__password-wrapper">
-          { inputEl }
-          <button
-            type="button"
-            className="tyk-form-control__password-toggle"
-            onClick={this.togglePasswordVisibility}
-            aria-label={showPassword ? 'Hide password' : 'Show password'}
-            disabled={rest.disabled}
-          >
-            <Icon type={showPassword ? 'eye-slash' : 'eye'} />
-          </button>
-        </div>
-      );
-    }
-
-    return inputEl;
   }
 
   reset() {
@@ -221,7 +186,6 @@ class Input extends Component {
       inputgroupaddonright,
       note,
       readOnly,
-      type,
       value,
     } = this.props;
 
@@ -250,15 +214,9 @@ class Input extends Component {
             { this.getInputError() }
           </div>
         )}
-        {readOnly && (
-          type === 'password' ? (
-            <div className="tyk-form-control--readonly">
-              <MaskSecret value={value} />
-            </div>
-          ) : (
-            <div className="tyk-form-control--readonly">{value || '-'}</div>
-          )
-        )}
+        {
+          readOnly && <div className="tyk-form-control--readonly">{value || '-'}</div>
+        }
       </div>
     );
   }
@@ -294,7 +252,6 @@ Input.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   theme: PropTypes.string,
-  type: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
