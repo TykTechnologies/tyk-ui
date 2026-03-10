@@ -1,4 +1,3 @@
-```js
 <Input
   label="This is a demo Input"
   name="input"
@@ -117,4 +116,3 @@ import Icon from '../../../components/Icon';
     theme="default rounded-corners"
   />
 </div>
-```
