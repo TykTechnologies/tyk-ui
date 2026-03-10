@@ -228,11 +228,10 @@ describe('Input', () => {
       );
 
       cy.get('input').should('not.exist');
-      cy.get('.tyk-form-control--password-readonly').should('exist');
-      cy.get('.tyk-form-control--password-readonly span')
-        .should('have.text', '•••••••••');
-      cy.get('.tyk-form-control__password-toggle')
-        .should('have.attr', 'aria-label', 'Show password');
+      cy.get('.tyk-mask-secret').should('exist');
+      cy.get('.tyk-mask-secret__value').should('have.text', '•••••••••');
+      cy.get('.tyk-mask-secret__toggle')
+        .should('have.attr', 'aria-label', 'Show secret');
     });
 
     it('reveals the password value in readonly mode when the toggle is clicked', () => {
@@ -245,12 +244,11 @@ describe('Input', () => {
         />,
       );
 
-      cy.get('.tyk-form-control__password-toggle').click();
+      cy.get('.tyk-mask-secret__toggle').click();
 
-      cy.get('.tyk-form-control--password-readonly span')
-        .should('have.text', 'secret123');
-      cy.get('.tyk-form-control__password-toggle')
-        .should('have.attr', 'aria-label', 'Hide password');
+      cy.get('.tyk-mask-secret__value').should('have.text', 'secret123');
+      cy.get('.tyk-mask-secret__toggle')
+        .should('have.attr', 'aria-label', 'Hide secret');
     });
 
     it('shows a dash in readonly mode when value is empty', () => {
@@ -262,9 +260,8 @@ describe('Input', () => {
         />,
       );
 
-      cy.get('.tyk-form-control--password-readonly span')
-        .should('have.text', '-');
-      cy.get('.tyk-form-control__password-toggle').should('not.exist');
+      cy.get('.tyk-mask-secret__value').should('have.text', '-');
+      cy.get('.tyk-mask-secret__toggle').should('not.exist');
     });
   });
 });

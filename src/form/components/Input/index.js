@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Icon from '../../../components/Icon';
+import MaskSecret from '../../../components/MaskSecret';
 import './Input.css';
 
 class Input extends Component {
@@ -223,7 +224,6 @@ class Input extends Component {
       type,
       value,
     } = this.props;
-    const { showPassword } = this.state;
 
     return (
       <div className={this.getCssClasses()}>
@@ -252,20 +252,8 @@ class Input extends Component {
         )}
         {readOnly && (
           type === 'password' ? (
-            <div className="tyk-form-control--readonly tyk-form-control--password-readonly">
-              <span>
-                {showPassword ? (value || '-') : (value ? '•'.repeat(String(value).length) : '-')}
-              </span>
-              {value && (
-                <button
-                  type="button"
-                  className="tyk-form-control__password-toggle"
-                  onClick={this.togglePasswordVisibility}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                >
-                  <Icon type={showPassword ? 'eye-slash' : 'eye'} />
-                </button>
-              )}
+            <div className="tyk-form-control--readonly">
+              <MaskSecret value={value} />
             </div>
           ) : (
             <div className="tyk-form-control--readonly">{value || '-'}</div>

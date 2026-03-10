@@ -36,12 +36,3 @@
   cursor: not-allowed;
 }
 
-.tyk-form-control--password-readonly {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tyk-form-control--password-readonly .tyk-form-control__password-toggle {
-  position: static;
-}
