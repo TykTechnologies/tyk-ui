@@ -118,3 +118,60 @@ import Icon from '../../../components/Icon';
   />
 </div>
 ```
+
+### Password input
+
+When `type="password"` is set, the component automatically renders a toggle button inside the field. Clicking the eye icon reveals the password; clicking it again masks it.
+
+```js
+<Input
+  label="Password"
+  name="password"
+  placeholder="Enter your password"
+  type="password"
+  theme="default rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
+<Input
+  label="Password (inline)"
+  name="password"
+  placeholder="Enter your password"
+  type="password"
+  theme="default rounded-corners inline"
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
+<Input
+  disabled
+  label="Password (disabled)"
+  name="password"
+  placeholder="Enter your password"
+  type="password"
+  theme="default rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
+<Input
+  error="Password is required"
+  label="Password (with error)"
+  name="password"
+  placeholder="Enter your password"
+  type="password"
+  theme="default rounded-corners"
+  onChange={ (e) => { console.log(e); }}
+/>
+```
+```js
+<Input
+  label="Password (readonly)"
+  name="password"
+  type="password"
+  value="mysecretpassword"
+  theme="default rounded-corners"
+  readOnly
+/>
+```

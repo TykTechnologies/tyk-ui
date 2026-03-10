@@ -1,0 +1,47 @@
+.tyk-form-control__password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.tyk-form-control__password-wrapper .tyk-form-control {
+  padding-inline-end: 40px;
+  width: 100%;
+}
+
+.tyk-form-control__password-toggle {
+  position: absolute;
+  inset-inline-end: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color, #666);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.tyk-form-control__password-toggle:focus {
+  outline: none;
+}
+
+.tyk-form-control__password-toggle:hover {
+  color: var(--color-primary-base, #333);
+}
+
+.tyk-form-control__password-toggle:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tyk-form-control--password-readonly {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tyk-form-control--password-readonly .tyk-form-control__password-toggle {
+  position: static;
+}

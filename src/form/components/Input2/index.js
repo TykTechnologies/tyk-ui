@@ -1,5 +1,10 @@
-import React, { useImperativeHandle, useRef, forwardRef } from 'react';
+import React, {
+  useImperativeHandle, useRef, useState, forwardRef,
+} from 'react';
 import PropTypes from 'prop-types';
+
+import Icon from '../../../components/Icon';
+import './Input2.css';
 
 const Input2 = forwardRef(function Input2({
   error,
@@ -12,10 +17,12 @@ const Input2 = forwardRef(function Input2({
   labelwidth,
   note,
   value,
+  type,
   wrapperClassName = '',
   ...rest
 }, ref) {
   const inputRef = useRef();
+  const [showPassword, setShowPassword] = useState(false);
 
   useImperativeHandle(ref, () => ({
     focus: () => {
@@ -79,16 +86,42 @@ const Input2 = forwardRef(function Input2({
     onChange(e, e.target.value);
   };
 
+  const resolvedType = (type === 'password' && showPassword) ? 'text' : type;
+
   const getInputElement = () => (
     <input
       autoComplete="off"
       className="tyk-form-control"
       {...rest}
+      type={resolvedType}
       onChange={handleOnChange}
       value={value}
       ref={inputRef}
     />
   );
+
+  const getInputComponent = () => {
+    const inputEl = getInputElement();
+
+    if (type === 'password') {
+      return (
+        <div className="tyk-form-control__password-wrapper">
+          { inputEl }
+          <button
+            type="button"
+            className="tyk-form-control__password-toggle"
+            onClick={() => setShowPassword((prev) => !prev)}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+            disabled={rest.disabled}
+          >
+            <Icon type={showPassword ? 'eye-slash' : 'eye'} />
+          </button>
+        </div>
+      );
+    }
+
+    return inputEl;
+  };
 
   const getInputGroupAddon = () => (
     <div className="tyk-input-group">
@@ -97,7 +130,7 @@ const Input2 = forwardRef(function Input2({
           ? getAddon(inputgroupaddonleft)
           : null
       }
-      { getInputElement() }
+      { getInputComponent() }
       {
         inputgroupaddonright
           ? getAddon(inputgroupaddonright)
@@ -121,7 +154,7 @@ const Input2 = forwardRef(function Input2({
           {
             inputgroupaddonleft || inputgroupaddonright
               ? getInputGroupAddon()
-              : getInputElement()
+              : getInputComponent()
           }
           {
             note
@@ -131,13 +164,29 @@ const Input2 = forwardRef(function Input2({
           { getInputError() }
         </div>
       )}
-      {
-        readOnly && (
+      {readOnly && (
+        type === 'password' ? (
+          <div className="tyk-form-control--readonly tyk-form-control--password-readonly">
+            <span>
+              {showPassword ? (value || '-') : (value ? '•'.repeat(String(value).length) : '-')}
+            </span>
+            {value && (
+              <button
+                type="button"
+                className="tyk-form-control__password-toggle"
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                <Icon type={showPassword ? 'eye-slash' : 'eye'} />
+              </button>
+            )}
+          </div>
+        ) : (
           <div className="tyk-form-control--readonly">
             {value || '-'}
           </div>
         )
-      }
+      )}
     </div>
   );
 });
@@ -173,6 +222,7 @@ Input2.propTypes = {
   ]),
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  type: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,

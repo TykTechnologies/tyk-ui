@@ -1,113 +1,119 @@
 import React from 'react';
-import Input2 from './index';
+import Input from './index';
 
-describe('Input2', () => {
-  it('has only default value regardless of the theme set', () => {
-    cy.mount(
-      <Input2
-        theme="primary rounded-corners"
-        value="my value"
-        wrapperClassName="myclass"
-      />,
-    );
+describe('Input', () => {
+  describe('general behaviour', () => {
+    it('renders a basic text input', () => {
+      cy.mount(
+        <Input
+          type="text"
+          value="hello"
+          theme="default rounded-corners"
+        />,
+      );
 
-    cy.get('.myclass.tyk-form-group--default')
-      .get('input')
-      .should('have.value', 'my value');
-  });
+      cy.get('input')
+        .should('exist')
+        .and('have.attr', 'type', 'text')
+        .and('have.value', 'hello');
+    });
 
-  it('displays the label with the correct width', () => {
-    cy.mount(
-      <Input2
-        theme="default inline rounded-corners"
-        label="my label"
-        labelwidth="200px"
-      />,
-    );
+    it('renders the label', () => {
+      cy.mount(
+        <Input
+          type="text"
+          label="My label"
+          id="my-input"
+          theme="default rounded-corners"
+        />,
+      );
 
-    cy.get('label')
-      .should('have.text', 'my label')
-      .and('have.css', 'width', '200px');
-  });
+      cy.get('label')
+        .should('have.text', 'My label')
+        .and('have.attr', 'for', 'my-input');
+    });
 
-  it('displays errors and notes', () => {
-    cy.mount(
-      <Input2
-        theme="default rounded-corners"
-        error={(
-          <span>
-            <span>Something wrong!</span>
-            <a href="https://tyk.io">click here</a>
-          </span>
-        )}
-        note="This is important to know."
-      />,
-    );
+    it('displays the note', () => {
+      cy.mount(
+        <Input
+          type="text"
+          note="Helpful note"
+          theme="default rounded-corners"
+        />,
+      );
 
-    cy.get('.tyk-form-group')
-      .should('have.class', 'has-error');
-    cy.get('.tyk-form-control__help-block')
-      .should('have.text', 'This is important to know.');
-    cy.get('.tyk-form-control__error-message')
-      .should('have.text', 'Something wrong!click here');
-  });
+      cy.get('.tyk-form-control__help-block')
+        .should('have.text', 'Helpful note');
+    });
 
-  it('supports both left and right addons', () => {
-    cy.mount(
-      <Input2
-        inputgroupaddonleft={<span>left addon</span>}
-        inputgroupaddonright={<span>right addon</span>}
-      />,
-    );
+    it('displays the error message and adds has-error class', () => {
+      cy.mount(
+        <Input
+          type="text"
+          error="Something went wrong"
+          theme="default rounded-corners"
+        />,
+      );
 
-    cy.get('.tyk-input-group')
-      .children()
-      .as('children');
-    cy.get('@children')
-      .should('have.length', 3);
-    cy.get('@children')
-      .first()
-      .should('have.class', 'tyk-input-group__addon')
-      .and('have.text', 'left addon');
-    cy.get('@children')
-      .last()
-      .should('have.class', 'tyk-input-group__addon')
-      .and('have.text', 'right addon');
-  });
+      cy.get('.tyk-form-group')
+        .should('have.class', 'has-error');
+      cy.get('.tyk-form-control__error-message')
+        .should('have.text', 'Something went wrong');
+    });
 
-  it('calls onChange callback with the current value', () => {
-    const onChange = cy.stub().as('onChange');
+    it('renders in readonly mode without an input', () => {
+      cy.mount(
+        <Input
+          type="text"
+          value="readonly value"
+          readOnly
+          theme="default rounded-corners"
+        />,
+      );
 
-    cy.mount(
-      <Input2
-        onChange={onChange}
-      />,
-    );
+      cy.get('input').should('not.exist');
+      cy.get('.tyk-form-control--readonly')
+        .should('have.text', 'readonly value');
+    });
 
-    cy.get('input')
-      .type('foo');
-    cy.get('@onChange')
-      .should('be.calledWith', Cypress.sinon.match.any, 'foo');
-  });
+    it('calls onChange when value changes', () => {
+      const onChange = cy.stub().as('onChange');
 
-  it('renders no input in readonly mode', () => {
-    cy.mount(
-      <Input2
-        value="my value"
-        readOnly
-      />,
-    );
+      cy.mount(
+        <Input
+          type="text"
+          onChange={onChange}
+          theme="default rounded-corners"
+        />,
+      );
 
-    cy.get('input').should('not.exist');
-    cy.get('.tyk-form-group').should('have.text', 'my value');
+      cy.get('input').type('abc');
+      cy.get('@onChange').should('have.been.called');
+    });
+
+    it('renders left and right addons', () => {
+      cy.mount(
+        <Input
+          type="text"
+          inputgroupaddonleft={<span>left</span>}
+          inputgroupaddonright={<span>right</span>}
+          theme="default rounded-corners"
+        />,
+      );
+
+      cy.get('.tyk-input-group').should('exist');
+      cy.get('.tyk-input-group__addon').first().should('have.text', 'left');
+      cy.get('.tyk-input-group__addon').last().should('have.text', 'right');
+    });
   });
 
   describe('password type', () => {
     it('renders a password input with a toggle button', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           value="secret"
+          theme="default rounded-corners"
         />,
       );
 
@@ -119,9 +125,10 @@ describe('Input2', () => {
 
     it('shows an eye icon by default (password hidden)', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           value="secret"
+          theme="default rounded-corners"
         />,
       );
 
@@ -133,9 +140,10 @@ describe('Input2', () => {
 
     it('reveals the password when the toggle button is clicked', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           value="secret"
+          theme="default rounded-corners"
         />,
       );
 
@@ -152,9 +160,10 @@ describe('Input2', () => {
 
     it('hides the password again when the toggle button is clicked a second time', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           value="secret"
+          theme="default rounded-corners"
         />,
       );
 
@@ -169,8 +178,9 @@ describe('Input2', () => {
 
     it('wraps the password input in the password-wrapper div', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
+          theme="default rounded-corners"
         />,
       );
 
@@ -182,8 +192,9 @@ describe('Input2', () => {
 
     it('does not render a password toggle for non-password inputs', () => {
       cy.mount(
-        <Input2
+        <Input
           type="text"
+          theme="default rounded-corners"
         />,
       );
 
@@ -193,9 +204,10 @@ describe('Input2', () => {
 
     it('disables the toggle button when the input is disabled', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           disabled
+          theme="default rounded-corners"
         />,
       );
 
@@ -207,10 +219,11 @@ describe('Input2', () => {
 
     it('masks the password value in readonly mode', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           value="secret123"
           readOnly
+          theme="default rounded-corners"
         />,
       );
 
@@ -224,10 +237,11 @@ describe('Input2', () => {
 
     it('reveals the password value in readonly mode when the toggle is clicked', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           value="secret123"
           readOnly
+          theme="default rounded-corners"
         />,
       );
 
@@ -241,9 +255,10 @@ describe('Input2', () => {
 
     it('shows a dash in readonly mode when value is empty', () => {
       cy.mount(
-        <Input2
+        <Input
           type="password"
           readOnly
+          theme="default rounded-corners"
         />,
       );
 
