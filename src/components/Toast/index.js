@@ -12,6 +12,8 @@ import ToastContainer from './js/ToastContainer';
  */
 class ToastCreator {
   constructor() {
+    this.defaultOptions = {};
+    this.themeOptions = {};
     const el = document.createElement('div');
     el.className = 'tyk-toast';
     document.body.appendChild(el);
@@ -23,9 +25,24 @@ class ToastCreator {
     this.createNotification = fn;
   };
 
+  configure(options) {
+    const { themes = {}, general = {} } = options
+
+    this.defaultOptions = { ...this.defaultOptions, ...general }
+    Object.keys(themes).forEach(theme => {
+      this.themeOptions[theme] = {
+        ...(this.themeOptions[theme] || {}),
+        ...themes[theme]
+      }
+    })
+  }
+
   notify(message, options) {
+    const themeDefaults = this.themeOptions[options.theme] || {}
+    const finalOptions = { ...this.defaultOptions, ...themeDefaults, ...options };
+
     if (this.createNotification) {
-      this.createNotification(message, options);
+      this.createNotification(message, finalOptions)
     }
   }
 
