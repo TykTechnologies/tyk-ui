@@ -78,7 +78,7 @@ class ToastCreator {
     }
   }
 
-  notify(message, options) {
+  notify(message, options = {}) {
     const themeDefaults = this.themeOptions[options.theme] || {}
     const finalOptions = { ...this.defaultOptions, ...themeDefaults, ...options };
 
