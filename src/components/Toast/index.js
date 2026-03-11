@@ -14,18 +14,30 @@ class ToastCreator {
   constructor() {
     this.defaultOptions = {};
     this.themeOptions = {};
+    this.placement = { from: 'bottom', align: 'center' };
+
     const el = document.createElement('div');
     el.className = 'tyk-toast';
     document.body.appendChild(el);
-    const root = createRoot(el);
-    root.render(<ToastContainer notify={this.bindNotify} />);
+    this.root = createRoot(el);
+
+    this.renderContainer();
+  }
+
+  renderContainer() {
+    this.root.render(
+      <ToastContainer
+        placement={this.placement}
+        notify={this.bindNotify}
+      />
+    );
   }
 
   bindNotify = (fn) => {
     this.createNotification = fn;
   };
 
-  configure(options) {
+  configure(options = {}) {
     const { themes = {}, general = {} } = options
 
     this.defaultOptions = { ...this.defaultOptions, ...general }
@@ -35,6 +47,16 @@ class ToastCreator {
         ...themes[theme]
       }
     })
+
+    const { placement = {} }  = general;
+
+    const from = placement.from || this.placement.from;
+    const align = placement.align || this.placement.align;
+
+    if (from !== this.placement.from || align !== this.placement.align) {
+      this.placement = { from, align };
+      this.renderContainer();
+    }
   }
 
   notify(message, options) {
