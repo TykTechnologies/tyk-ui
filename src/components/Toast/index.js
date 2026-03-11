@@ -102,6 +102,24 @@ class ToastCreator {
   info(message, options) {
     this.notify(message, { ...options, theme: 'info' });
   }
+
+  reset() {
+    this.defaultOptions = {};
+    this.themeOptions = {};
+    this.placement = { from: 'bottom', align: 'center' };
+
+    if (this.root) {
+      this.root.unmount();
+      const el = document.querySelector('.tyk-toast');
+      if (el) el.remove();
+    }
+
+    const newEl = document.createElement('div');
+    newEl.className = 'tyk-toast';
+    document.body.appendChild(newEl);
+    this.root = createRoot(newEl);
+    this.renderContainer();
+  }
 }
 
 const toast = new ToastCreator();
