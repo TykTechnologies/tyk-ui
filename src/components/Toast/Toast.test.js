@@ -390,6 +390,35 @@ describe('Toast', () => {
     });
   });
 
+  describe('Theme method edge cases', () => {
+    it('should handle theme methods with undefined options', () => {
+      const onClick = () => toast.success(defaultMessageValue, undefined);
+
+      cy.mount(<Component onClick={onClick} />);
+      cy.get('button').click();
+
+      cy.get(selectors.message).and('have.class', classNames.theme.success);
+    });
+
+    it('should handle theme methods with null options', () => {
+      const onClick = () => toast.danger(defaultMessageValue, null);
+
+      cy.mount(<Component onClick={onClick} />);
+      cy.get('button').click();
+
+      cy.get(selectors.message).and('have.class', classNames.theme.danger);
+    });
+
+    it('should override theme when passed in options to theme methods', () => {
+      const onClick = () => toast.success(defaultMessageValue, { theme: 'danger' });
+
+      cy.mount(<Component onClick={onClick} />);
+      cy.get('button').click();
+
+      cy.get(selectors.message).should('have.class', classNames.theme.success);
+    });
+  });
+
   it('should render toast components and remove it after the given delay', () => {
     cy.mount(<Component onClick={() => toast.notify('demo', { delay: 350 })} />)
       .get('button')
