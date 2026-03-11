@@ -2,14 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import toast from "./index";
 
-// INFO: TEST CASES:
-// 1. When the general.delay is provided and theme delay is empty, general delay is used
-// 2. When the general.delay is provided and theme delay is provided, theme delay takes presedence
-// 3. When notify is called with different options it doesn't override the default values but its used
-// 3. When placement is not provided, bottom center is used
-// 4. When placement provided with invalid values, default values are used
-
-
 function Component(props) {
   return props.children || <button type="button" onClick={props.onClick}>Show Toast</button>;
 }
@@ -286,6 +278,115 @@ describe('Toast', () => {
       cy.tick(500);
 
       cy.get(selectors.message).should('not.exist');
+    });
+  });
+
+  describe('General config - placement', () => {
+    it('should use general.placement when provided', () => {
+      toast.configure({
+        general: {
+          placement: { from: 'top', align: 'right' }
+        }
+      });
+
+      const onClick = () => toast.notify(defaultMessageValue);
+
+      cy.mount(<Component onClick={onClick} />);
+      cy.get('button').click();
+
+      cy.get(selectors.toastContainer)
+        .should('have.class', classNames.placement['top-right']);
+    });
+
+    it('should support all valid placement combinations', () => {
+      const placements = [
+        { from: 'top', align: 'center', expected: 'top-center' },
+        { from: 'top', align: 'right', expected: 'top-right' },
+        { from: 'bottom', align: 'center', expected: 'bottom-center' },
+        { from: 'bottom', align: 'right', expected: 'bottom-right' }
+      ];
+
+      placements.forEach(({ from, align, expected }) => {
+        it(`should support placement: ${expected}`, () => {
+          toast.configure({
+            general: { placement: { from, align } }
+          });
+
+          const onClick = () => toast.notify(`${expected} message`);
+          cy.mount(<Component onClick={onClick} />);
+          cy.get('button').click();
+
+          cy.get(selectors.toastContainer)
+            .should('have.class', classNames.placement[expected]);
+        });
+      });
+    });
+  });
+
+  describe('Placement edge cases - invalid values', () => {
+    it('should fallback to "bottom" when invalid "from" value is provided', () => {
+      cy.spy(console, 'warn').as('consoleWarn');
+
+      toast.configure({
+        general: {
+          placement: { from: 'invalid', align: 'center' }
+        }
+      });
+
+      const onClick = () => toast.notify(defaultMessageValue);
+
+      cy.mount(<Component onClick={onClick} />);
+      cy.get('button').click();
+
+      cy.get(selectors.toastContainer)
+        .should('have.class', classNames.placement['bottom-center']);
+
+      cy.get('@consoleWarn').should('be.calledWith',
+        '[Tyk UI Toast] Invalid placement.from: "invalid". Allowed values are: bottom, top. Falling back to "bottom".'
+      );
+    });
+
+    it('should fallback to "center" when invalid "align" value is provided', () => {
+      cy.spy(console, 'warn').as('consoleWarn');
+
+      toast.configure({
+        general: {
+          placement: { from: 'top', align: 'invalid' }
+        }
+      });
+
+      const onClick = () => toast.notify(defaultMessageValue);
+
+      cy.mount(<Component onClick={onClick} />);
+      cy.get('button').click();
+
+      cy.get(selectors.toastContainer)
+        .should('have.class', classNames.placement['top-center']);
+
+      cy.get('@consoleWarn').should('be.calledWith',
+        '[Tyk UI Toast] Invalid placement.align: "invalid". Allowed values are: right, center. Falling back to "center".'
+      );
+    });
+
+    it('should fallback to defaults when both placement values are invalid', () => {
+      cy.spy(console, 'warn').as('consoleWarn');
+
+      toast.configure({
+        general: {
+          placement: { from: 'invalid', align: 'invalid' }
+        }
+      });
+
+      const onClick = () => toast.notify(defaultMessageValue);
+
+      cy.mount(<Component onClick={onClick} />)
+        .get('button')
+        .click();
+
+      cy.get(selectors.toastContainer)
+        .should('have.class', classNames.placement['bottom-center']);
+
+      cy.get('@consoleWarn').should('have.callCount', 2);
     });
   });
 
