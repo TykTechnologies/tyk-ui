@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import toast from "./index";
+import React from 'react';
+import PropTypes from 'prop-types';
+import toast from './index';
 
 function Component(props) {
   return props.children || <button type="button" onClick={props.onClick}>Show Toast</button>;
