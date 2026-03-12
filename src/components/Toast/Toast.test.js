@@ -281,44 +281,26 @@ describe('Toast', () => {
     });
   });
 
-  describe('General config - placement', () => {
-    it('should use general.placement when provided', () => {
-      toast.configure({
-        general: {
-          placement: { from: 'top', align: 'right' }
-        }
-      });
+  describe('General configuration - placement', () => {
+    const placements = [
+      { from: 'top', align: 'center', expected: 'top-center' },
+      { from: 'top', align: 'right', expected: 'top-right' },
+      { from: 'bottom', align: 'center', expected: 'bottom-center' },
+      { from: 'bottom', align: 'right', expected: 'bottom-right' }
+    ];
 
-      const onClick = () => toast.notify(defaultMessageValue);
-
-      cy.mount(<Component onClick={onClick} />);
-      cy.get('button').click();
-
-      cy.get(selectors.toastContainer)
-        .should('have.class', classNames.placement['top-right']);
-    });
-
-    it('should support all valid placement combinations', () => {
-      const placements = [
-        { from: 'top', align: 'center', expected: 'top-center' },
-        { from: 'top', align: 'right', expected: 'top-right' },
-        { from: 'bottom', align: 'center', expected: 'bottom-center' },
-        { from: 'bottom', align: 'right', expected: 'bottom-right' }
-      ];
-
-      placements.forEach(({ from, align, expected }) => {
-        it(`should support placement: ${expected}`, () => {
-          toast.configure({
-            general: { placement: { from, align } }
-          });
-
-          const onClick = () => toast.notify(`${expected} message`);
-          cy.mount(<Component onClick={onClick} />);
-          cy.get('button').click();
-
-          cy.get(selectors.toastContainer)
-            .should('have.class', classNames.placement[expected]);
+    placements.forEach(({ from, align, expected }) => {
+      it(`should support placement: ${expected}`, () => {
+        toast.configure({
+          general: { placement: { from, align } }
         });
+
+        const onClick = () => toast.notify(`${expected} message`);
+        cy.mount(<Component onClick={onClick} />);
+        cy.get('button').click();
+
+        cy.get(selectors.toastContainer)
+          .should('have.class', classNames.placement[expected]);
       });
     });
   });
@@ -409,7 +391,7 @@ describe('Toast', () => {
       cy.get(selectors.message).and('have.class', classNames.theme.danger);
     });
 
-    it('should override theme when passed in options to theme methods', () => {
+    it('should ignore theme in options when using a theme-specific method', () => {
       const onClick = () => toast.success(defaultMessageValue, { theme: 'danger' });
 
       cy.mount(<Component onClick={onClick} />);
