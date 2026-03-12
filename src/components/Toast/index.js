@@ -124,6 +124,7 @@ class ToastCreator {
 
     const newEl = document.createElement('div');
     newEl.className = 'tyk-toast';
+    this.el = newEl;
     document.body.appendChild(newEl);
     this.root = createRoot(newEl);
     this.renderContainer();
