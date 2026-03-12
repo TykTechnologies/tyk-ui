@@ -2,8 +2,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ToastContainer from './js/ToastContainer';
 
-const VALID_FROM = ["bottom", "top"]
-const VALID_ALIGN = ["right", "center"]
+export const RESET = Symbol('reset');
+
+const VALID_FROM = ["bottom", "top"];
+const VALID_ALIGN = ["right", "center"];
 
 /**
  * Toast is a service that displays dialogs on the screen.
@@ -43,7 +45,8 @@ class ToastCreator {
     this.createNotification = fn;
   };
 
-  configure(options = {}) {
+  configure(options) {
+    options = options || {}
     const { themes = {}, general = {} } = options
 
     this.defaultOptions = { ...this.defaultOptions, ...general }
@@ -81,7 +84,9 @@ class ToastCreator {
     }
   }
 
-  notify(message, options = {}) {
+  notify(message, options) {
+    options = options || {};
+
     const themeDefaults = this.themeOptions[options.theme] || {}
     const finalOptions = { ...this.defaultOptions, ...themeDefaults, ...options };
 
@@ -106,7 +111,7 @@ class ToastCreator {
     this.notify(message, { ...options, theme: 'info' });
   }
 
-  reset() {
+  [RESET]() {
     this.defaultOptions = {};
     this.themeOptions = {};
     this.placement = { from: 'bottom', align: 'center' };

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import toast from './index';
+import toast, { RESET as INTERNAL_RESET } from './index';
 
 function Component(props) {
   return props.children || <button type="button" onClick={props.onClick}>Show Toast</button>;
@@ -70,7 +70,7 @@ describe('Toast', () => {
   };
 
   beforeEach(() => {
-    toast.reset();
+    toast[INTERNAL_RESET]();
   });
 
   describe('Default behavior (no configuration)', () => {
