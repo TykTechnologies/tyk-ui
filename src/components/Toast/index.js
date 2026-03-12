@@ -20,34 +20,13 @@ const VALID_ALIGN = ["right", "center"];
  */
 class ToastCreator {
   constructor() {
-    this.defaultOptions = {};
-    this.themeOptions = {};
-    this.placement = { from: 'bottom', align: 'center' };
-
-    const el = document.createElement('div');
-    el.className = 'tyk-toast';
-    this.el = el;
-    document.body.appendChild(this.el);
-    this.root = createRoot(this.el);
-
-    this.renderContainer();
+    this._setupDefaults();
+    this._initializeContainer();
   }
 
-  renderContainer() {
-    this.root.render(
-      <ToastContainer
-        placement={this.placement}
-        notify={this.bindNotify}
-      />
-    );
-  }
-
-  bindNotify = (fn) => {
-    this.createNotification = fn;
-  };
 
   configure(options) {
-    options = options || {}
+    options = options ?? {}
     const { themes = {}, general = {} } = options
 
     this.defaultOptions = { ...this.defaultOptions, ...general }
@@ -80,13 +59,14 @@ class ToastCreator {
     }
 
     if (shouldRerender) {
-      // Using setTimeout to avoid the React "triggering nested component updates" warning
+      // Using setTimeout  to ensure the re-render happens after the current React execution context 
+      // to avoid "nested update" warnings.
       setTimeout(() => this.renderContainer(), 0);
     }
   }
 
   notify(message, options) {
-    options = options || {};
+    options = options ?? {};
 
     const themeDefaults = this.themeOptions[options.theme] || {}
     const finalOptions = { ...this.defaultOptions, ...themeDefaults, ...options };
@@ -113,20 +93,41 @@ class ToastCreator {
   }
 
   [RESET]() {
-    this.defaultOptions = {};
-    this.themeOptions = {};
-    this.placement = { from: 'bottom', align: 'center' };
-
     if (this.root) {
       this.root.unmount();
       if (this.el) this.el.remove();
     }
 
-    const newEl = document.createElement('div');
-    newEl.className = 'tyk-toast';
-    this.el = newEl;
-    document.body.appendChild(newEl);
-    this.root = createRoot(newEl);
+    this._setupDefaults();
+    this._initializeContainer();
+  }
+
+  renderContainer() {
+    this.root.render(
+      <ToastContainer
+        placement={this.placement}
+        notify={this.bindNotify}
+      />
+    );
+  }
+
+  bindNotify = (fn) => {
+    this.createNotification = fn;
+  };
+
+  _setupDefaults() {
+    this.defaultOptions = {};
+    this.themeOptions = {};
+    this.placement = { from: 'bottom', align: 'center' };
+  }
+
+  _initializeContainer() {
+    const el = document.createElement('div');
+    el.className = 'tyk-toast';
+    this.el = el;
+    document.body.appendChild(this.el);
+    this.root = createRoot(this.el);
+
     this.renderContainer();
   }
 }
