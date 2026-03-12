@@ -6,12 +6,15 @@ const VALID_FROM = ["bottom", "top"]
 const VALID_ALIGN = ["right", "center"]
 
 /**
- * Toast is a service that displays dialogs
- * on the bottom right part of the screen.
+ * Toast is a service that displays dialogs on the screen.
  *
- * The dialogs can have one of the Tyk UI themes, so that
- * it would match it's purpose (i.e success message, error message)
+ * By default, dialogs are positioned at the bottom-center, but this can be
+ * globally configured. Dialogs support standard Tyk UI themes (success,
+ * danger, warning, info) to convey different intents.
  *
+ * @note `placement` is a container-level configuration. It must be set globally
+ * via `toast.configure({ general: { placement: ... } })` and cannot be
+ * overridden on a per-theme or per-message basis.
  */
 class ToastCreator {
   constructor() {
