@@ -52,7 +52,7 @@ class ToastCreator {
     this.defaultOptions = { ...this.defaultOptions, ...general }
     Object.keys(themes).forEach(theme => {
       this.themeOptions[theme] = {
-        ...(this.themeOptions[theme] || {}),
+        ...this.themeOptions[theme],
         ...themes[theme]
       }
     })
