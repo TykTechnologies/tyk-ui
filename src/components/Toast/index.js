@@ -26,8 +26,9 @@ class ToastCreator {
 
     const el = document.createElement('div');
     el.className = 'tyk-toast';
-    document.body.appendChild(el);
-    this.root = createRoot(el);
+    this.el = el;
+    document.body.appendChild(this.el);
+    this.root = createRoot(this.el);
 
     this.renderContainer();
   }
@@ -118,8 +119,7 @@ class ToastCreator {
 
     if (this.root) {
       this.root.unmount();
-      const el = document.querySelector('.tyk-toast');
-      if (el) el.remove();
+      if (this.el) this.el.remove();
     }
 
     const newEl = document.createElement('div');
