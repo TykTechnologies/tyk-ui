@@ -9,7 +9,9 @@ function ToastContainer(props) {
   const [messages, setMessages] = useState({});
   const {
     notify,
+    placement,
   } = props;
+  const containerClassName = `tyk-toast__container tyk-toast__container--${placement.from}-${placement.align}`;
 
   const updateNotifications = (message, options) => {
     const msgID = Math.floor(Math.random() * 1000000);
@@ -38,7 +40,7 @@ function ToastContainer(props) {
   };
 
   return (
-    <div className="tyk-toast__container">
+    <div className={containerClassName}>
       {
         Object.keys(messages).map((msgID) => (
           messages[msgID]
@@ -61,6 +63,10 @@ function ToastContainer(props) {
 
 ToastContainer.propTypes = {
   notify: PropTypes.func,
+  placement: PropTypes.shape({
+    from: PropTypes.oneOf(['bottom', 'top']).isRequired,
+    align: PropTypes.oneOf(['center', 'right']).isRequired
+  }).isRequired
 };
 
 export default ToastContainer;
