@@ -2,20 +2,28 @@ name: Validate PR against Jira
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, edited]
+    types: [opened, synchronize, reopened, edited, labeled]
 
 concurrency:
   group: jira-validator-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
+  dep-guard:
+    uses: TykTechnologies/github-actions/.github/workflows/dependency-guard.yml@42304edda365365e0a887cf018d8edc34b960b82  # main
+    permissions:
+      contents: read
+
   validate:
+    needs: [dep-guard]
     if: ${{ !github.event.pull_request.draft }}
     runs-on: ubuntu-latest
     steps:
       - name: Validate Jira ticket
-        uses: TykTechnologies/jira-linter@main
+        uses: TykTechnologies/jira-linter@38a9cabef56171c4e52ea698fa7be3db5fca3a49  # main
         with:
           jira-base-url: 'https://tyktech.atlassian.net'
           jira-api-token: ${{ secrets.JIRA_TOKEN }}
-
