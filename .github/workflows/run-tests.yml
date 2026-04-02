@@ -3,11 +3,20 @@
 name: Run Tests
 
 on:
-  - pull_request
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+
+permissions:
+  contents: read
 
 jobs:
-  test:
+  dep-guard:
+    uses: TykTechnologies/github-actions/.github/workflows/dependency-guard.yml@42304edda365365e0a887cf018d8edc34b960b82  # main
+    permissions:
+      contents: read
 
+  test:
+    needs: [dep-guard]
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -16,15 +25,15 @@ jobs:
         node-version: [20.x]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # v4
       with:
         fetch-depth: 0
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
       with:
         node-version: ${{ matrix.node-version }}
     - name: cache node modules
-      uses: actions/cache@v4
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830  # v4
       with:
         path: node_modules
         key: ${{ runner.os }}-test-${{ hashFiles('**/package-lock.json') }}
@@ -32,13 +41,13 @@ jobs:
           ${{ runner.os }}-test-${{ matrix.node-version }}
           ${{ runner.os }}-
     - name: install
-      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm install --force
+      run: npm config set //registry.npmjs.org/:_authToken "${{ secrets. NPM_TOKEN }}" && npm ci --ignore-scripts && npm install esbuild@0.21.5
     - name: cypress install
       run: npx cypress install
     - name: test
       run: npm test
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
+      uses: sonarsource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e  # master
       with:
         projectBaseDir: .
         args: >
