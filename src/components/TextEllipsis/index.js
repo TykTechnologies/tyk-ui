@@ -1,22 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Tooltip from '../Tooltip';
+import React from "react";
+import PropTypes from "prop-types";
+import Tooltip from "../Tooltip";
 /**
  * TextEllipsis component helps you to hide a part of a text,
  * but displaying it when it's being hovered.
  * The entire text is displayed with the help of Tooltip component
  */
 
-function TextEllipsis({ text, limit, position }) {
+function TextEllipsis({ text, limit, position, truncateFrom = "end" }) {
+  if (text.length <= limit) {
+    return text;
+  }
+
+  let displayText;
+
+  if (truncateFrom === "start") {
+    displayText = `...${text.substring(text.length - limit)}`;
+  } else {
+    displayText = `${text.substring(0, limit)}...`;
+  }
+
   return (
-    text.length > limit
-      ? (
-        <Tooltip render={text} position={position}>
-          {text.substring(0, limit)}
-          ...
-        </Tooltip>
-      )
-      : text
+    <Tooltip render={text} position={position}>
+      {displayText}
+    </Tooltip>
   );
 }
 
@@ -27,6 +34,8 @@ TextEllipsis.propTypes = {
   limit: PropTypes.number,
   /** tooltip position */
   position: PropTypes.string,
+  /** Where to truncate text from - 'end' (default) shows beginning of text, 'start' shows end of text */
+  truncateFrom: PropTypes.oneOf(["end", "start"]),
 };
 
 export default TextEllipsis;
