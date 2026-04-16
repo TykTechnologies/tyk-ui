@@ -7,7 +7,7 @@ import Tooltip from "../Tooltip";
  * The entire text is displayed with the help of Tooltip component
  */
 
-function TextEllipsis({ text, limit, position, truncateFrom = "end" }) {
+function TextEllipsis({ className, text, limit, position, truncateFrom = "end" }) {
   if (text.length <= limit) {
     return text;
   }
@@ -21,13 +21,14 @@ function TextEllipsis({ text, limit, position, truncateFrom = "end" }) {
   }
 
   return (
-    <Tooltip render={text} position={position}>
+    <Tooltip className={className} render={text} position={position}>
       {displayText}
     </Tooltip>
   );
 }
 
 TextEllipsis.propTypes = {
+  className: PropTypes.string,
   /** Text to be shrinked by TextEllipsis */
   text: PropTypes.string,
   /** Number of characters that TextEllipsis would leave visible */
