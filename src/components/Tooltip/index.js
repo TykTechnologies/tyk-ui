@@ -9,6 +9,7 @@ import Icon from '../Icon';
 function Tooltip({
   render,
   className,
+  overlayClassName,
   children,
   position = 'auto',
   style,
@@ -60,6 +61,7 @@ function Tooltip({
       {children}
       {isActive && (
         <FloatingContainer
+          className={overlayClassName}
           element={wrapperRef}
           forceDisplay={position}
           preferredPosition="top"
@@ -107,6 +109,7 @@ Tooltip.propTypes = {
   ]),
   /** additional tooltip classes */
   className: PropTypes.string,
+  overlayClassName: PropTypes.string,
   /** if `true` displays the "question mark" icon;
    * optionally you can pass a different icon
   */

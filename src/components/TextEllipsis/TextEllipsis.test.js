@@ -1,6 +1,7 @@
 import React from "react";
 import TextEllipsis from "./index";
 
+/* eslint-disable react/prop-types */
 function Component({ truncateFrom = "end" }) {
   return (
     <div
