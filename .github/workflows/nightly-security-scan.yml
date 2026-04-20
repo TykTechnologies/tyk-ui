@@ -1,0 +1,183 @@
+name: Nightly Security Scan
+
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+  checks: write
+  statuses: write
+
+jobs:
+  osv-scan:
+    name: OSV-Scanner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: System Cleanup
+        run: sudo rm -rf /usr/local/bin/* /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+
+      - name: Run OSV-Scanner
+        id: osv-scan
+        uses: google/osv-scanner-action/osv-scan@c51854704019a247608d928f370c98740469d4b5 # v2.3.5
+        with:
+          scan-args: -r --format json --output osv-results.json .
+        continue-on-error: true
+
+      - name: Generate CVE Report
+        id: report
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ ! -f osv-results.json ]; then
+            echo "osv-results.json not found"
+            echo ":warning: OSV-Scanner failed to produce results" > osv-summary.txt
+            exit 0
+          fi
+
+          # Count vulnerabilities by severity from OSV JSON
+          CRITICAL=$(jq '[.results[].packages[]?.vulnerabilities[]? | select(.database_specific.severity == "CRITICAL")] | length' osv-results.json || echo 0)
+          HIGH=$(jq '[.results[].packages[]?.vulnerabilities[]? | select(.database_specific.severity == "HIGH")] | length' osv-results.json || echo 0)
+          MEDIUM=$(jq '[.results[].packages[]?.vulnerabilities[]? | select(.database_specific.severity == "MEDIUM")] | length' osv-results.json || echo 0)
+          LOW=$(jq '[.results[].packages[]?.vulnerabilities[]? | select(.database_specific.severity == "LOW")] | length' osv-results.json || echo 0)
+
+          # Helper function to generate lines for a specific severity in the format expected by the CVE-Processor
+          generate_lines() {
+            local sev=$1
+            jq -r --arg sev "$sev" '
+              .results[]? | 
+              .packages[]? as $pkg | 
+              ($pkg.vulnerabilities // [])[]? |
+              select(.database_specific.severity == $sev) |
+              "- (\(.id)) (score: \(.database_specific.cvss.score // .database_specific.cvss3_score // 0), affects: \($pkg.package.name)@\($pkg.package.version), fixed: \([.affected[]?.ranges[]?.events[]?.fixed | select(. != null)] | unique | join(",") // "unknown")): \(.summary // .details | split("\n")[0] | sub("^[ ]+"; ""))"
+            ' osv-results.json | sort -u
+          }
+
+          {
+            echo "# CVE Report: tykio/${{ github.event.repository.name }}:path-based"
+            echo ""
+            echo "| Severity | Count |"
+            echo "|----------|-------|"
+            echo "| Critical | $CRITICAL |"
+            echo "| High     | $HIGH |"
+            echo "| Medium   | $MEDIUM |"
+            echo "| Low      | $LOW |"
+            echo ""
+            echo "## Critical CVEs"
+            generate_lines CRITICAL
+            echo ""
+            echo "## High CVEs"
+            generate_lines HIGH
+            echo ""
+            echo "## Medium CVEs"
+            generate_lines MEDIUM
+            echo ""
+            echo "## Low CVEs"
+            generate_lines LOW
+          } > report.md
+
+          # Create Check Run via GitHub API to embed the report in the Actions UI
+          CHECK_URL=$(jq -n \
+            --arg name "Scan Report - tykio/${{ github.event.repository.name }}:path-based" \
+            --arg sha "${{ github.sha }}" \
+            --arg title "CVE Scan results - tykio/${{ github.event.repository.name }}:path-based" \
+            --arg text "$(cat report.md)" \
+            '{
+              name: $name,
+              head_sha: $sha,
+              status: "completed",
+              conclusion: "neutral",
+              output: {title: $title, summary: "", text: $text}
+            }' | gh api repos/${{ github.repository }}/check-runs --input - --jq '.html_url')
+          
+          echo "url=$CHECK_URL" >> "$GITHUB_OUTPUT"
+
+          pad_count() {
+            printf '%2s' "$1" | sed 's/ / /g'
+          }
+
+          SLACK_SUMMARY=":red_circle: Critical: $(pad_count "$CRITICAL")  :large_orange_circle: High: $(pad_count "$HIGH")  :large_yellow_circle: Medium: $(pad_count "$MEDIUM")  :white_circle: Low: $(pad_count "$LOW")  ${{ github.repository }} (path-based)"
+          
+          # Store summary and URL for the notification job
+          echo "$SLACK_SUMMARY" > osv-summary.txt
+          echo "$CHECK_URL" >> osv-summary.txt
+          
+          {
+            echo "### Nightly Path-Based Scan Summary (OSV)"
+            echo "| Severity | Count |"
+            echo "|----------|-------|"
+            echo "| Critical | $CRITICAL |"
+            echo "| High     | $HIGH |"
+            echo "| Medium   | $MEDIUM |"
+            echo "| Low      | $LOW |"
+            echo ""
+            echo "[View Detailed Report]($CHECK_URL)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload OSV Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: osv-results
+          path: osv-results.json
+
+      - name: Upload OSV Summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: osv-summary
+          path: osv-summary.txt
+
+  s1-scan:
+    name: SentinelOne CNS Scan
+    uses: TykTechnologies/github-actions/.github/workflows/s1-cns-scan.yml@d3fa20888fa2878e877e22bb7702141217290e7c # main
+    permissions:
+      contents: read
+    with:
+      iac_enabled: false
+      tag: service:vulnscan
+      scope_type: ACCOUNT
+    secrets:
+      S1_API_TOKEN: ${{ secrets.S1_API_TOKEN }}
+      CONSOLE_URL: ${{ secrets.S1_CONSOLE_URL }}
+      SCOPE_ID: ${{ secrets.S1_SCOPE_ID }}
+
+  notify-complete:
+    name: Notify Slack on completion
+    runs-on: ubuntu-latest
+    needs: [osv-scan, s1-scan]
+    if: always()
+    steps:
+      - name: Download OSV Summary
+        uses: actions/download-artifact@v4
+        with:
+          name: osv-summary
+          ignore-any-missing-artifacts: true
+
+      - name: Post to Slack
+        if: env.SLACK_BOT_TOKEN != ''
+        uses: slackapi/slack-github-action@af78098f536edbc4de71162a307590698245be95 # v3.0.1
+        with:
+          method: chat.postMessage
+          payload: |
+            {
+              "channel": "${{ secrets.CVE_SLACK_CHANNEL }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Nightly Path-Based CVE Scan: ${{ github.repository }}*\n$(head -n 1 osv-summary.txt || echo ':warning: Summary not found')\n<$(tail -n 1 osv-summary.txt)|Full CVE Report>"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
