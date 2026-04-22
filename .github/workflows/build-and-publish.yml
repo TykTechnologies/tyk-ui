@@ -18,11 +18,19 @@ jobs:
         node-version: [16.x]
 
     steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
+        with:
+          app-id: ${{ secrets.PROBE_APP_ID }}
+          private-key: ${{ secrets.PROBE_APP_PRIVATE_KEY }}
+          owner: TykTechnologies
+
       - name: Checkout repo
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744  # v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.TYK_UI_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
       - name: Use node ${{ matrix.node-version }}
         uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610  # v3
         with:
