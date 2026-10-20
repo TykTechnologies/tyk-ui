@@ -10,6 +10,31 @@ import Button from '@tyk-technologies/tyk-ui/src/components/Button';
 
 ---
 
+### Props Reference
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `children` | `node` | — | Content of the button (text, elements, or icons). |
+| `theme` | `string` | `''` | Theme style variant (see Themes below). |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'fit'` | `'md'` | Size of the button. |
+| `type` | `'button' \| 'submit' \| 'reset'` | `'button'` | HTML button type attribute (ignored when `href` is passed). |
+| `disabled` | `boolean` | `false` | Disables the button and prevents interaction. |
+| `href` | `string` | — | When provided, renders the component as an `<a>` tag with navigation. |
+| `onClick` | `function` | — | Callback invoked when the button is clicked: `(event) => void`. |
+| `iconType` | `string` | — | Icon name passed to the internal `Icon` component. |
+| `iconFamily` | `string` | — | Icon family for the icon component (`'tykon'` or FontAwesome). |
+| `iconPosition` | `'left' \| 'right'` | `'left'` | Placement of the icon relative to the label. |
+| `iconOnly` | `boolean` | `false` | Applies icon-only padding and styling when no label is present. |
+| `display` | `string` | `''` | Layout display mode (e.g., `'block'` or `'inline'`). |
+| `noStyle` | `boolean` | `false` | Strips default button styling while preserving behavior. |
+| `customButton` | `element` | — | Clones and renders a custom React element with button classes and state applied. |
+| `className` | `string` | `''` | Additional custom CSS classes. |
+| `id` | `string` | — | HTML `id` attribute. |
+| `ref` | `ref` | — | Forwarded ref to the underlying DOM node (`<button>` or `<a>`). |
+| `...rest` | `any` | — | Any other standard HTML attributes passed to the element. |
+
+---
+
 ### Themes & Variants
 
 Buttons support three visual styles across six semantic themes, plus a `noStyle` bare variant:
@@ -346,6 +371,9 @@ Destructive operations permanently alter or delete data and require deliberate v
   - Indicates that an action cannot currently be performed (e.g., required form fields are missing, or user lacks role permissions).
   - **UX Caution:** Disabled buttons suppress pointer events and keyboard focus, preventing screen reader users from discovering the button or understanding why it is inactive.
   - **Best Practice:** When disabling an action, pair the button with an explanation (such as a `Tooltip`, `InfoNote`, or helper text) clarifying the prerequisite needed to enable it. Alternatively, keep the button interactive and display inline validation messages when clicked if the prerequisite is non-obvious.
+- **Loading & Asynchronous Tasks:**
+  - Disable buttons during in-flight asynchronous operations to prevent duplicate submissions or duplicate API requests.
+  - Provide immediate feedback during async tasks, such as showing an inline loading spinner or updating button text (e.g., "Saving...") so users know their action is being processed.
 
 #### 7. Do's and Don'ts
 
