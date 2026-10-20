@@ -269,9 +269,104 @@ By default, buttons render as `inline-block` elements. To render a full-width bl
 
 ---
 
-### Best Practices & Accessibility
+### UX Guidelines & Best Practices
 
-1. **Visual Hierarchy:** Use only one `primary` button per view or form to clearly guide users toward the principal action. Secondary and outline variants should be used for supporting or cancel actions.
-2. **Destructive Actions:** Use `danger` or `danger-outline` for destructive operations such as deleting resources, typically accompanied by a confirmation prompt.
-3. **Icon-only Buttons:** Always include an accessible label via `title` or `aria-label` when using `iconOnly`, so screen readers can describe the button's action.
-4. **Semantics:** Use standard `Button` (with `onClick`) for page actions that mutate state or trigger dialogs. Use `href` (or `customButton` with router links) for navigational transitions.
+To ensure consistent user experiences and accessible interfaces across all Tyk applications, adhere to the following design and interaction guidelines when using `Button`.
+
+#### 1. Hierarchy & Visual Prominence
+
+Buttons must establish a clear visual hierarchy that guides users toward the intended action:
+
+- **Primary (`theme="primary"`):**
+  - **Single Primary Rule:** Use at most **one primary button per view, page header, form, or dialog**. The primary button represents the dominant, decisive action (e.g., "Create API", "Save Changes", "Deploy").
+  - Multiple primary buttons create visual noise, cause decision fatigue, and dilute the prominence of key workflows.
+- **Secondary / Outline (`theme="secondary"` or `*-outline`):**
+  - Use for secondary or alternative actions supporting the primary goal (e.g., "Cancel", "Back", "Save as Draft", "Export").
+  - Outline buttons provide clear interaction boundaries without competing visually with the primary action.
+- **Link (`theme="*-link"`):**
+  - Use for tertiary, low-emphasis actions or non-critical secondary utilities (e.g., "View Details", "Learn More", "Reset to Default").
+  - Ideal for dense lists, table cells, or inline card actions where filled or bordered buttons produce excessive clutter.
+- **No-Style (`noStyle`):**
+  - Reserved for custom interactive wrappers, embedded toolbar icons, or specialized layout controls that require native button accessibility without Tyk UI default button chrome.
+
+#### 2. Action Semantics vs. Navigation Semantics
+
+Selecting the correct semantic element ensures accessibility, keyboard navigability, and native browser behavior:
+
+- **Triggering an Action (Use standard `<Button>` with `onClick`):**
+  - Use when the interaction executes logic, alters application state, submits form data (`type="submit"`), or toggles an interface element (opening a modal, drawer, or dropdown).
+  - Screen readers identify this as a "button", and keyboard users can trigger it with both `Enter` and `Space`.
+- **Navigating to a URL (Use `href` or `customButton`):**
+  - Use `href` when navigating to an external website, document, or non-SPA page.
+  - Use `customButton` (e.g., wrapping React Router's `<Link>` or `<NavLink>`) for single-page application client-side route transitions.
+  - Screen readers announce this as a "link", keyboard users activate it using `Enter`, and browser behaviors such as "Open in new tab" (middle-click / Cmd-click) function as expected.
+  - **Rule:** Never use a button with an `onClick` handler that calls `window.location` or history methods when a link is semantically appropriate.
+
+#### 3. Destructive Actions
+
+Destructive operations permanently alter or delete data and require deliberate visual signaling:
+
+- **Visual Variant:**
+  - Use `theme="danger"` for irreversible, critical actions (e.g., "Delete API", "Revoke Certificate", "Drop Database").
+  - Use `theme="danger-outline"` for low-risk, reversible removals (e.g., "Remove Tag", "Clear Filter").
+- **Confirmation Patterns:**
+  - Critical destructive operations should **never** execute immediately on a single click without confirmation.
+  - Pair destructive buttons with a confirmation prompt (such as Tyk UI's `Confirm` or `Modal` component) requiring the user to verify their intent.
+  - In confirmation dialogs, style the final confirmation action with `theme="danger"` and the abort action with `theme="secondary-outline"` or `theme="secondary-link"`.
+- **Layout Placement:**
+  - In form footers or dialog action bars, physically separate destructive buttons from positive confirmation buttons (e.g., placing the destructive button on the left edge and the save/cancel actions on the right edge) to prevent accidental misclicks.
+
+#### 4. Sizing & Layout Spacing
+
+- **Size Variants:**
+  - **`size="md"` (Default):** Standard sizing for most UI contexts: page forms, modal dialog footers, cards, and page toolbars.
+  - **`size="sm"`:** Compact sizing designed for dense tables, table row action menus, filter bars, and card headers where space is limited.
+  - **`size="lg"`:** Large sizing intended for high-impact landing areas, hero banners, setup wizards, or primary onboarding flows.
+  - **`size="fit"`:** Shrinks the button padding strictly to fit its content, useful inside constrained controls or embedded widgets.
+- **Consistency & Alignment:**
+  - Keep button sizes uniform within the same container or action bar. Never mix `sm` and `lg` buttons in the same button group or form footer.
+  - Provide adequate spacing between adjacent buttons (recommended `8px` or `12px` gap) to avoid accidental misclicks, particularly on touch devices. Group cohesive actions with `ButtonGroup`.
+  - For mobile views or narrow modal sidebars, set `display="block"` so buttons expand full-width and provide comfortable touch targets.
+
+#### 5. Icon Usage & Accessibility
+
+- **Icon Placement:**
+  - **`iconPosition="left"` (Default):** Recommended for action buttons where the icon reinforces the verb or object (e.g., `plus` for "Add Endpoint", `trash` for "Delete", `check` for "Save"). Icons on the left aid quick visual scanning.
+  - **`iconPosition="right"`:** Recommended for directional navigation or continuation actions (e.g., `chevron-right` for "Next Step", `arrow-up-right-from-square` for external links).
+- **Icon-Only Buttons (`iconOnly`):**
+  - **Mandatory Accessible Label:** Whenever `iconOnly` is enabled, you **must** supply a descriptive label via `title` or `aria-label` (e.g., `<Button iconOnly iconType="trash" title="Delete API" aria-label="Delete API" />`). Screen readers cannot interpret an icon without text, leading to unannounced, inaccessible buttons.
+  - **Clarity:** Only use `iconOnly` for well-established, unambiguous conventions (e.g., search, edit, delete, copy, settings, close). For complex or proprietary actions, always pair the icon with visible text.
+  - **Tooltips:** In desktop interfaces, wrapping `iconOnly` buttons with a `Tooltip` enhances usability by providing visible hover and focus context.
+
+#### 6. States & Feedback
+
+- **Interactive Feedback:**
+  - Tyk UI buttons include built-in hover, active, and focus styles. Always preserve focus rings for keyboard navigation to comply with WCAG 2.1 (Focus Visible).
+- **Disabled State (`disabled`):**
+  - Indicates that an action cannot currently be performed (e.g., required form fields are missing, or user lacks role permissions).
+  - **UX Caution:** Disabled buttons suppress pointer events and keyboard focus, preventing screen reader users from discovering the button or understanding why it is inactive.
+  - **Best Practice:** When disabling an action, pair the button with an explanation (such as a `Tooltip`, `InfoNote`, or helper text) clarifying the prerequisite needed to enable it. Alternatively, keep the button interactive and display inline validation messages when clicked if the prerequisite is non-obvious.
+
+#### 7. Do's and Don'ts
+
+| Do | Don't |
+| :--- | :--- |
+| **Do** limit each screen or dialog to a single `primary` button. | **Don't** use multiple `primary` buttons on the same screen, which creates visual noise. |
+| **Do** write action-oriented button labels starting with a verb (e.g., "Create API", "Save Changes", "Delete User"). | **Don't** use ambiguous or generic labels like "OK", "Click Here", or "Yes". |
+| **Do** always provide `title` or `aria-label` when using `iconOnly` buttons. | **Don't** render `iconOnly` buttons without accessible text for screen readers. |
+| **Do** require explicit confirmation (modal or prompt) for irreversible destructive actions using `theme="danger"`. | **Don't** perform permanent deletions immediately on click without confirmation. |
+| **Do** use `href` or `customButton` (React Router `<Link>`) for page transitions and external URLs. | **Don't** trigger page navigation via `onClick` handlers on standard buttons. |
+| **Do** maintain consistent button sizes (`sm`, `md`, or `lg`) across related action groups. | **Don't** mix disparate button sizes within the same toolbar or form footer. |
+| **Do** explain why an action is disabled via helper text or tooltips. | **Don't** leave users guessing why a button is disabled without contextual guidance. |
+
+---
+
+### References & Related Components
+
+- [ButtonGroup](#/Components/ButtonGroup) - Component for grouping related action buttons horizontally.
+- [Icon](#/Components/Icon) - Icon component utilized by Button for rendering icons.
+- [Confirm](#/Components/Confirm) - Confirmation dialog component recommended for destructive button actions.
+- [Modal](#/Components/Modal) - Modal dialog component for confirmations and multi-step workflows.
+- [Tooltip](#/Components/Tooltip) - Contextual hover tooltip recommended for `iconOnly` and disabled buttons.
+- [WAI-ARIA Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button/) - W3C ARIA accessibility guidelines for button widgets.
+
