@@ -25,4 +25,30 @@ describe('CoopyToClipboard', () => {
     cy.contains(displayText).should('exist').click();
     cy.get('span.dummy').invoke('text').should('eq', textToCopy);
   });
+
+  it('copies once per click on a Button, not again for every key pressed while it has focus', () => {
+    const onCopy = cy.stub().as('onCopy');
+    cy.mount(
+      <CopyToClipboard copy="boooo" display="COPY" element={Button} onCopy={onCopy} />,
+    );
+
+    cy.contains('COPY').click();
+    cy.get('@onCopy').should('have.been.calledOnce');
+    cy.focused().type('abc');
+    cy.get('@onCopy').should('have.been.calledOnce');
+  });
+
+  it('copies on Enter and Space for an element that is not a button, and ignores other keys', () => {
+    const onCopy = cy.stub().as('onCopy');
+    cy.mount(
+      <CopyToClipboard copy="boooo" display="COPY" element="span" tabIndex={0} onCopy={onCopy} />,
+    );
+
+    cy.contains('COPY').focus().type('a');
+    cy.get('@onCopy').should('not.have.been.called');
+    cy.focused().type('{enter}');
+    cy.get('@onCopy').should('have.been.calledOnce');
+    cy.focused().type(' ');
+    cy.get('@onCopy').should('have.been.calledTwice');
+  });
 });
