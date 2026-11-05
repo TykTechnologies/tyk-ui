@@ -558,6 +558,73 @@ describe('Combobox2', () => {
       .should('have.length', items.length);
   });
 
+  describe('select all in a single-select', () => {
+    const singleSelectItems = items.slice(0, 3);
+    const placeholder = 'Filter by item';
+    const allLabel = 'All items';
+
+    const openDropdown = () => cy.get(`.${classes.trigger}`).click();
+    const getAllOption = () => cy.get(`.${classes.dropdownList}`).contains(allLabel);
+    const expectPlaceholder = () => cy
+      .get(`.${classes.textValue}`)
+      .should('have.class', 'is-placeholder')
+      .and('have.text', placeholder);
+
+    it('clears the value when the "unselect" item is chosen, also with more values than max', () => {
+      cy.mount(
+        <Combobox2
+          values={singleSelectItems}
+          value={singleSelectItems[0].id}
+          placeholder={placeholder}
+          onChange={cy.stub().as('onChange')}
+          selectAll={{ label: allLabel, mode: 'unselect', show: 'notSameState' }}
+        />,
+      );
+
+      cy.get(`.${classes.textValue}`)
+        .should('have.text', singleSelectItems[0].name);
+
+      openDropdown();
+      getAllOption().click();
+
+      expectPlaceholder();
+      cy.get('@onChange').should('have.been.calledOnceWith', null);
+
+      openDropdown();
+      cy.get(`.${classes.dropdownList}`).should('not.contain', allLabel);
+      cy.get(`.${classes.dropdownList} li .${classes.checkIcon}`).should('not.exist');
+
+      cy.get(`.${classes.dropdownList} li[title="${singleSelectItems[2].name}"]`).click();
+      cy.get(`.${classes.textValue}`)
+        .should('have.text', singleSelectItems[2].name);
+
+      openDropdown();
+      getAllOption().click();
+
+      expectPlaceholder();
+      cy.get('@onChange').should('have.been.calledThrice');
+      cy.get('@onChange').its('lastCall.args').should('deep.equal', [null]);
+    });
+
+    it('still does not select all values when they exceed max', () => {
+      cy.mount(
+        <Combobox2
+          values={singleSelectItems}
+          value=""
+          placeholder={placeholder}
+          onChange={cy.stub().as('onChange')}
+          selectAll={{ label: allLabel, mode: 'select', show: 'always' }}
+        />,
+      );
+
+      openDropdown();
+      getAllOption().click();
+
+      expectPlaceholder();
+      cy.get('@onChange').should('not.have.been.called');
+    });
+  });
+
   describe('does not update value if onBeforeChange returns falsy values', () => {
     it('when selecting a value', () => {
       const previousItem = items[0];
