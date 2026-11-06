@@ -229,7 +229,8 @@ function Combobox2({
   }
 
   function selectAllValues(selected) {
-    if (values.length > max) return;
+    // Only selecting can exceed max; clearing ("unselect" mode) is always allowed.
+    if (selected && values.length > max) return;
     const newValue = selected ? [...values] : [];
 
     if (!onBeforeChange(value, newValue)) return;
