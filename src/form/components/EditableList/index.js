@@ -18,6 +18,10 @@ class EditableList extends Component {
       tempValue = itemValue;
     }
 
+    if (typeof itemValue === 'number' || typeof itemValue === 'boolean') {
+      tempValue = String(itemValue);
+    }
+
     if (Object.prototype.toString.call(itemValue) === '[object Object]') {
       tempValue = itemValue.name;
     }
