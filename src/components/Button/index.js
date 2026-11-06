@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 
 /**
- * Button component.
+ * The Button component represents an interactive element that triggers an action,
+ * navigates to a link when `href` is supplied, or wraps a custom component (such as a router Link).
+ * It supports multiple themes, sizes, icons, and states.
  */
 const Button = forwardRef(function Button(props, ref) {
   const {
@@ -118,53 +120,78 @@ const Button = forwardRef(function Button(props, ref) {
 
 Button.propTypes = {
   /**
-  * Content of a button. Can be a DOM element or a React component
-  */
+   * Content of the button. Can be text, a DOM element, or a React component
+   */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
     PropTypes.element,
     PropTypes.string,
   ]),
+  /**
+   * Custom React element to clone and render with button styles and state (e.g. router Link)
+   */
   customButton: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
     PropTypes.element,
   ]),
+  /**
+   * Additional CSS classes to apply to the button
+   */
   className: PropTypes.string,
   /**
-  * Display type: inline/block. Default is inline
-  */
+   * Display type: 'inline' or 'block'. Default is 'inline'
+   */
   display: PropTypes.string,
   /**
-  * Sets the button disabled state
-  */
+   * Sets the button to disabled state
+   */
   disabled: PropTypes.bool,
   /**
-  * Having this property set the button will become a link
-  */
+   * HTML id attribute for the button or link element
+   */
   id: PropTypes.string,
+  /**
+   * When provided, renders the button as an anchor `<a>` element linking to this URL
+   */
   href: PropTypes.string,
-  iconPosition: PropTypes.string, // left or right
+  /**
+   * Position of the icon relative to the label: 'left' or 'right'. Default is 'left'
+   */
+  iconPosition: PropTypes.string,
+  /**
+   * Icon font family to use: 'tykon' or FontAwesome (default)
+   */
   iconFamily: PropTypes.string,
+  /**
+   * Whether the button contains only an icon without label text
+   */
   iconOnly: PropTypes.bool,
+  /**
+   * Name/type of the icon to display (e.g. 'check', 'copy', 'plus', 'trash')
+   */
   iconType: PropTypes.string,
+  /**
+   * Removes default button styling (borders, background)
+   */
   noStyle: PropTypes.bool,
   /**
-  * Callback function, called when the button si clicked
-  */
+   * Callback function called when the button is clicked
+   */
   onClick: PropTypes.func,
   /**
-  * Describes the appearence of the button (ex: primary, danger, primary-outline etc.)
-  */
+   * Visual theme variant: solid ('primary', 'secondary', 'danger', 'success', 'info', 'warning'),
+   * outline ('primary-outline', ...), or link ('primary-link', ...)
+   */
   theme: PropTypes.string,
   /**
-  * Type of the button (ex: button, submit etc.)
-  */
+   * HTML type attribute for the button element ('button', 'submit', 'reset'). Default is 'button'
+   */
   type: PropTypes.string,
   /**
-  * Describes the size of the button (sm, md, lg). Default one is md
-  */
+   * Size of the button: 'sm', 'md', 'lg', or 'fit'. Default is 'md'
+   */
   size: PropTypes.string,
 };
 
