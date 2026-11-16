@@ -28,9 +28,21 @@ function CopyToClipboard(props) {
     toast.success(message);
   }, [onCopy, txtRef]);
 
+  // Buttons and links already turn Enter (and Space) into a click, and the element keeps focus
+  // after it, so copying on every key release repeated the copy and its toast for any key.
+  const handleKeyUp = useCallback((event) => {
+    if (['BUTTON', 'A'].includes(event.currentTarget.tagName)) {
+      return;
+    }
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick();
+    }
+  }, [handleClick]);
+
   return (
     <>
-      <props.element onClick={handleClick} onKeyUp={handleClick} {...props}>
+      <props.element onClick={handleClick} onKeyUp={handleKeyUp} {...props}>
         {children || display}
       </props.element>
       {!window.navigator.clipboard ? (
