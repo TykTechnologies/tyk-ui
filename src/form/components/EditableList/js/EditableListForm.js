@@ -70,6 +70,15 @@ class EditableListForm extends Component {
     ) {
       state.mainFormValue = EditableListForm.getMainFormValue(propsComponents);
       state.components = propsComponents;
+
+      // A field with its own onChange bypasses handleOnChange, so a duplicate
+      // error from the last submit has to be cleared here once the values change.
+      if (prevState.mainError) {
+        state.mainError = null;
+        state.errors = Object.fromEntries(
+          Object.entries(prevState.errors).filter(([, fieldError]) => fieldError !== 'true'),
+        );
+      }
     }
 
     return state;
